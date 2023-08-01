@@ -309,6 +309,7 @@
 \newcommand{\Anpolarity}{{\mathbb{A}}}
 \newcommand{\ypolar}{{\pm}}
 \newcommand{\npolar}{0}
+\newcommand{\lenpol}[1]{\name{len}(#1)}
 
 % type theory
 
@@ -535,7 +536,11 @@
 \newcommand{\eeedge}{\mathrel{\div}}
 \newcommand{\pth}{\asymp} % \path is taken by tikz
 \newcommand{\bridge}{\frown}
-\newcommand{\jet}{\curvearrowright}
+\newcommand{\jet}{\rightarrowtriangle}%{\curvearrowright}
+\newcommand{\tej}{\leftarrowtriangle}%{\curvearrowright}
+	%\newcommand{\curvearrowboth}{\mathrel{\mathrlap{\curvearrowleft}\mkern2.2mu {\curvearrowright}}}
+\newcommand{\equijet}{\leftrightarrowtriangle}
+\newcommand{\ripple}{\mathrel{\bowtie}}
 
 \newcommand{\brefl}[1][]{\mathrm{refl}_{#1}}
 

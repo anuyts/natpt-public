@@ -14,6 +14,8 @@
 %\newcommand{\todo}[1]{\textbf{\red{*}}\marginpar{\red{#1}}}
 %\renewcommand{\todoi}[1]{\par \textbf{\red{#1}} \par}
 
+%\usepackage{graphicx}
+%\usepackage{mathtools}
 %\usepackage{amsmath}
 %\usepackage{amssymb}
 %\usepackage{thmtools}
@@ -25,7 +27,7 @@
 \usepackage{xcolor}
 \usepackage{xypic}
 	\CompileMatrices
-%\usepackage{stmaryrd}
+\usepackage{stmaryrd}
 %\usepackage{epstopdf}
 %\usepackage{array}
 %\usepackage[normalem]{ulem}
@@ -65,9 +67,9 @@
 In RelDTT, modes were natural numbers (minus one) expressing the number of available relations.
 In NatPT, we will specify for each of these relations whether it is directed or not.
 \begin{definition} \label{def:anpolarity}
-	An anpolarity\footnote{`An' is Latin for `whether'.} is an element of the set $\Anpolarity := \accol{\ypolar, \npolar}$.
+	An \textbf{anpolarity}\footnote{`An' is Latin for `whether', as in `Nescio an polare sit,' meaning `I do not know whether it is polar'.} is an element of the set $\Anpolarity := \accol{\ypolar, \npolar}$.
 \end{definition}
-\noindent As our set of modes, we take $\List\,\Anpolarity$.
+\noindent As our set of modes, we take $\List\,\Anpolarity$. If $\vec a \in \List\,\Anpolarity$, we write $\lenpol{\vec a}$ for its length.
 
 \begin{remark}
 	We note that it is always possible to restrict our mode theory, by discarding modes but keeping the same modalities and 2-cells between remaining modes.
@@ -89,6 +91,37 @@ In NatPT, we will specify for each of these relations whether it is directed or 
 	\end{itemize}
 	We will occasionally discuss these subtheories. By considering all of $\List\,\Anpolarity$ in the current paper, we maintain generality.
 \end{remark}
+
+\subsection{Jet Sets}
+\begin{definition} \label{def:jetset}
+	Let $\vec a$ be a mode. A \textbf{jet set of mode $\vec a$} is a set $X$ equipped with $\lenpol{\vec a}$ (proof-irrelevant) pre-orders $\jet_i$ where
+	\begin{itemize}
+		\item $0 \leq i < \lenpol{\vec a}$ is called the \textbf{degree} and
+		\item $\jet_i$ is called the \textbf{$i$-jet relation}
+	\end{itemize}
+	such that
+	\begin{itemize}
+		\item when $a_i = \npolar$, then $\jet_i$ is an equivalence relation (i.e.\ symmetric), in which case we will denote it as $\bridge_i$ and call it the \textbf{$i$-edge relation} (notwithstanding that we still consider it a special case of a jet relation),
+		\item $x \jet_i y$ implies both $x \jet_{i+1} y$ and $x \tej_{i+1} y$ whenever $0 \leq i < i+1 < \lenpol{\vec a}$.
+	\end{itemize}
+	A \textbf{morphism} of jet sets of mode $\vec a$ is a function that preserves all the jet and edge relations.
+\end{definition}
+\begin{proposition}
+	Let $X$ be a jet set of mode $\vec a$ and $0 \leq i < j < \lenpol{\vec a}$.
+	Then the double category whose objects are elements of $X$, morphisms are (unique) proofs of $x \jet_i y$, pro-arrows are (unique) proofs of $x \jet_{j} y$ and squares are elements of the unit type, is a pro-arrow equipment.
+\end{proposition}
+\begin{proof}
+	The existence of companions and conjoints is trivial.
+\end{proof}
+\begin{definition}
+	We define the
+	\begin{itemize}
+		\item \textbf{$i$-equijet relation} $\equijet_i$ as the symmetric interior of $\jet_i$, i.e.\ $x \equijet_i y$ if and only if $x \jet_i y$ and $x \tej_i y$;
+		\item \textbf{$i$-ripple relation} $\ripple_i$ as the symmetric transitive closure of $\jet_i$.
+	\end{itemize}
+\end{definition}
+It is immediately clear that for nonpolar degrees, the jet/edge, equijet and ripple relations coincide.
+In general, we can observe that $x \ripple_i y$ implies $x \equijet_j y$ for $i < j$.
 
 \bibliographystyle{alphaurl}
 \bibliography{../relyoneda-refs.bib}
