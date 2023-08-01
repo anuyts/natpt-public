@@ -6,6 +6,7 @@
   - C^op x C
   - mixed-variant id
   - your discussion with Thorsten in Vienna
+  - Jesper says you should explain this afterwards
   
 * Recaps
   - presheaves
@@ -13,6 +14,7 @@
   - presheaf models of TT
   - lifting functors
   - MTT
+  - pro-arrow equipments
 
 * Base categories
   - Degrees of relatedness
