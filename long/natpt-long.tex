@@ -59,8 +59,36 @@
 
 \pagebreak
 
-\section{The basis}
+\section{Base Categories and Modes}
 
+\subsection{Modes are Anpolarity Lists}
+In RelDTT, modes were natural numbers (minus one) expressing the number of available relations.
+In NatPT, we will specify for each of these relations whether it is directed or not.
+\begin{definition} \label{def:anpolarity}
+	An anpolarity\footnote{`An' is Latin for `whether'.} is an element of the set $\Anpolarity := \accol{\ypolar, \npolar}$.
+\end{definition}
+\noindent As our set of modes, we take $\List\,\Anpolarity$.
+
+\begin{remark}
+	We note that it is always possible to restrict our mode theory, by discarding modes but keeping the same modalities and 2-cells between remaining modes.
+	We could decide to restrict to any of the following subsets of modes:
+	\begin{itemize}
+		\item Modes of the form $[\ypolar]^*$, i.e.\ where all degrees are polar,
+		\item Modes of the form $([\npolar] | [\npolar, \ypolar])^*$, i.e.\ where we think of a level as containing a path relation and optionally a weaker jet relation,
+		\begin{itemize}
+			\item Modes of the form $[\npolar, \ypolar]^*$ where the presence of a jet relation at each level is required,
+		\end{itemize}
+		\item Modes of the form $([\npolar] | [\ypolar, \npolar])^*$, i.e.\ where we think of a level as containing a bridge relation and optionally a stronger jet relation,
+		\begin{itemize}
+			\item Modes of the form $[\ypolar, \npolar]^*$ where the presence of a jet relation at each level is required,
+		\end{itemize}
+		\item Modes of the form $([\npolar, \npolar] | [\npolar, \ypolar, \npolar])^*$, i.e.\ where we think of a level as containing a path relation and a weaker bridge relation and optionally, in between, a jet relation,
+		\begin{itemize}
+			\item Modes of the form $[\npolar, \ypolar, \npolar]^*$ where the presence of a jet relation at each level is required.
+		\end{itemize}
+	\end{itemize}
+	We will occasionally discuss these subtheories. By considering all of $\List\,\Anpolarity$ in the current paper, we maintain generality.
+\end{remark}
 
 \bibliographystyle{alphaurl}
 \bibliography{../relyoneda-refs.bib}
