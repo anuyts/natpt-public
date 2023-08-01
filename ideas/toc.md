@@ -1,6 +1,6 @@
 * Intro
   - Challenge (WriterT stuff)
-  - overview (like for Ackermann)
+  - overview
   
 * Things that don't work
   - C^op x C

@@ -1,2 +1,1 @@
-# natpt-public
-Naturality Pretype Theory
+# Naturality Pretype Theory
