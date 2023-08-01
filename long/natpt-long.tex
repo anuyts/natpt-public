@@ -122,6 +122,56 @@ In NatPT, we will specify for each of these relations whether it is directed or 
 \end{definition}
 It is immediately clear that for nonpolar degrees, the jet/edge, equijet and ripple relations coincide.
 In general, we can observe that $x \ripple_i y$ implies $x \equijet_j y$ for $i < j$.
+So for mode $[\ypolar, \ypolar, \npolar]$, we get
+\[
+\xymatrix{
+	& 
+	\jet_0
+		\ar@{:>}[rd]
+	&&& 
+	\jet_1 
+		\ar@{:>}[rd]
+	&&& 
+	\jet_2 
+		\ar@{<:>}[rd]
+	\\
+	\equijet_0
+		\ar@{:>}[ru]
+		\ar@{:>}[rd]
+	&&
+	\ripple_0
+		\ar@{:>}[r]
+	&
+	\equijet_1
+		\ar@{:>}[ru]
+		\ar@{:>}[rd]
+	&&
+	\ripple_1
+		\ar@{:>}[r]
+	&
+	\equijet_2
+		\ar@{<:>}[ru]
+		\ar@{<:>}[rd]
+	&
+	\bridge_2
+		\ar@{<:>}[l]
+		\ar@{<:>}[u]
+		\ar@{<:>}[r]
+		\ar@{<:>}[d]
+	&
+	\ripple_2
+	\\
+	& 
+	\tej_0 
+		\ar@{:>}[ru]
+	&&& 
+	\tej_1 
+		\ar@{:>}[ru]
+	&&& 
+	\tej_2 
+		\ar@{<:>}[ru]
+}
+\]
 
 \bibliographystyle{alphaurl}
 \bibliography{../relyoneda-refs.bib}
