@@ -94,36 +94,40 @@ In NatPT, we will specify for each of these relations whether it is directed or 
 
 \subsection{Jet Sets}
 \begin{definition} \label{def:jetset}
-	Let $\vec a$ be a mode. A \textbf{jet set of mode $\vec a$} is a set $X$ equipped with $\lenpol{\vec a}$ (proof-irrelevant) pre-orders $\jet_i$ where
+	Let $\vec a$ be a mode. A \textbf{jet set of mode $\vec a$} is a set $X$ equipped with $\lenpol{\vec a}$ (proof-irrelevant%
+	\footnote{So these relations are functions $X \to X \to \Prop$ where $\Prop$ is a universe of $h$-propositions \cite{hottbook}. In most applications, these relations will be decidable, but we do not require this.}%
+	) relations $\jet_i$ where
 	\begin{itemize}
 		\item $0 \leq i < \lenpol{\vec a}$ is called the \textbf{degree} and
 		\item $\jet_i$ is called the \textbf{$i$-jet relation}
 	\end{itemize}
 	such that
 	\begin{itemize}
-		\item when $a_i = \npolar$, then $\jet_i$ is an equivalence relation (i.e.\ symmetric), in which case we will denote it as $\edge_i$ and call it the \textbf{$i$-edge relation} (notwithstanding that we still consider it a special case of a jet relation),
+		\item when $a_i = \npolar$, then $\jet_i$ is symmetric, in which case we will denote it as $\edge_i$ and call it the \textbf{$i$-edge relation} (notwithstanding that we still consider it a special case of a jet relation),
 		\item $x \jet_i y$ implies both $x \jet_{i+1} y$ and $x \tej_{i+1} y$ whenever $0 \leq i < i+1 < \lenpol{\vec a}$.
 	\end{itemize}
 	A \textbf{morphism} of jet sets of mode $\vec a$ is a function that preserves all the jet and edge relations.
 	
 	The category of jet sets of mode $\vec a$ is called $\jetset{\vec a}$.
+	
+	A jet set is called \textbf{transitive} if each of the $i$-jet relations is transitive (i.e. a pre-order and, if $i = \npolar$, an equivalence relation).
 \end{definition}
 \begin{proposition}
-	Let $X$ be a jet set of mode $\vec a$ and $0 \leq i < j < \lenpol{\vec a}$.
+	Let $X$ be a transitive jet set of mode $\vec a$ and $0 \leq i < j < \lenpol{\vec a}$.
 	Then the double category whose objects are elements of $X$, morphisms are (unique) proofs of $x \jet_i y$, pro-arrows are (unique) proofs of $x \jet_{j} y$ and squares are elements of the unit type, is a pro-arrow equipment \cite{nlab:proarrow,proarrow1,proarrow2}\todo{Refer to dedicated section instead.}.
 \end{proposition}
 \begin{proof}
-	The existence of companions and conjoints is trivial.
+	It is clearly a double category. The existence of companions and conjoints is trivial.
 \end{proof}
 \begin{definition}
 	We define the
 	\begin{itemize}
 		\item \textbf{$i$-equijet relation} $\equijet_i$ as the symmetric interior of $\jet_i$, i.e.\ $x \equijet_i y$ if and only if $x \jet_i y$ and $x \tej_i y$;
-		\item \textbf{$i$-ripple relation} $\ripple_i$ as the symmetric transitive closure of $\jet_i$.
+		\item \textbf{$i$-infrajet relation} $\infrajet_i$ as the symmetric closure of $\jet_i$, i.e.\ $x \equijet_i y$ if and only if $x \jet_i y$ or $x \tej_i y$.
 	\end{itemize}
 \end{definition}
-It is immediately clear that for nonpolar degrees, the jet/edge, equijet and ripple relations coincide.
-In general, we can observe that $x \ripple_i y$ implies $x \equijet_j y$ for $i < j$.
+It is immediately clear that for nonpolar degrees, the jet/edge, equijet and infrajet relations coincide.
+In general, we can observe that $x \infrajet_i y$ implies $x \equijet_j y$ for $i < j$.
 So for mode $[\ypolar, \ypolar, \npolar]$, we get
 \[
 \xymatrix{
@@ -141,14 +145,14 @@ So for mode $[\ypolar, \ypolar, \npolar]$, we get
 		\ar@{:>}[ru]
 		\ar@{:>}[rd]
 	&&
-	\ripple_0
+	\infrajet_0
 		\ar@{:>}[r]
 	&
 	\equijet_1
 		\ar@{:>}[ru]
 		\ar@{:>}[rd]
 	&&
-	\ripple_1
+	\infrajet_1
 		\ar@{:>}[r]
 	&
 	\equijet_2
@@ -161,7 +165,7 @@ So for mode $[\ypolar, \ypolar, \npolar]$, we get
 		\ar@{<:>}[r]
 		\ar@{<:>}[d]
 	&
-	\ripple_2.
+	\infrajet_2.
 	\\
 	& 
 	\tej_0 
@@ -191,7 +195,7 @@ We have $\Op_i \circ \Op_i = \Id$ and if $a_i = \npolar$ then $\Op_i = \Id$.
 	\end{itemize}
 	If $a_i = \npolar$ then $\rival{\jet_i} = \rival{\equijet_i} =: \rival{\edge_i}$ is called the \textbf{$i$-edge interval}.
 \end{definition}
-Note that it would be meaningless to define an $i$-ripple interval in the same way.
+Note that it would be meaningless to define an $i$-infrajet interval in the same way.
 
 \subsection{Jet Cubes}
 Out of the category of jet sets, we will carve the category of jet cubes, in such a way that the category of jet cubes of mode $[\ypolar]$ is isomorphic to the twisted cube category \cite{pinyo-twisted}.
