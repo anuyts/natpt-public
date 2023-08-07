@@ -165,6 +165,7 @@
 \newcommand{\simplex}[1]{\brac{#1}}
 
 \newcommand{\cubecat}{{\name{Cube}}}
+\newcommand{\namedcubecat}{{\name{NCube}}}
 	\newcommand{\affine}{\Box}
 \newcommand{\twistedcubecat}{{\name{TwCube}}}
 \newcommand{\cchmcat}{{\name{CCHM}}}
@@ -207,6 +208,9 @@
 \newcommand{\Prof}{{\name{Prof}}}
 	\newcommand{\proto}{\nrightarrow}
 \newcommand{\Eqmnt}{{\name{Eqmnt}}}
+\newcommand{\Kleisli}{{\name{Kl}}}
+\newcommand{\inKleisli}[1]{{\overline{#1}}}
+\newcommand{\fin}{^{\name{fin}}}
 
 \newcommand{\twisted}[1]{\name{Tw}(#1)}
 	\newcommand{\twistobj}[3]{(#1 \xrightarrow{#3} #2)}
@@ -227,6 +231,12 @@
 	\newcommand{\getdmp}{\ssearrow}
 \newcommand{\morm}{{\name{mor}}}
 \newcommand{\dmpm}{{\name{dmp}}}
+
+\newcommand{\bipointed}{{\name{Pt}_2}}
+\newcommand{\bipointedsym}{{\name{IPt}_2}}
+\newcommand{\distlattice}{\name{dL}}
+\newcommand{\demorgan}{\name{dM}}
+\newcommand{\booleanalg}{\name{Boo}}
 
 \newcommand{\catC}{{\cat C}}
 \newcommand{\catD}{{\cat D}}
@@ -688,7 +698,7 @@
 \newcommand{\transppsh}[2]{\modpsh{\transpsym}{#1}{#2}}
 
 \newcommand{\sumbin}{\mathop{\angle}}
-\newcommand{\freshbin}{\mathop{\fresh}}
+\newcommand{\freshbin}{\mathrel{\#}}
 \newcommand{\lollibin}{\multimap}
 \newcommand{\transpbin}{\between}
 \newcommand{\wknbin}{\mathop{\ddagger}}
