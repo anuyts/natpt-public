@@ -247,6 +247,7 @@ A morphism $\vfi : (i_0 : \IX, \ldots, i_{n-1} : \IX) \to (j_0 : \IX, \ldots, j_
 The morphism $\vfi$ will also be denoted as $(j_0 \psub \vfi / j_0, \ldots, j_{m-1} \psub \vfi / j_{m-1})$.
 The situation in $\cubecat_M$ is the same except that we now regard the names $i_k$ as de Bruijn indices.
 
+\todoi{$M$ is a \textbf{quotient of} a container monad.}
 If $M$ is a \emph{container} monad \cite{container-combinatorics}, i.e. a monad whose underlying functor is a container functor \cite{containers} of the form $MX = \Sigma(s : S).(P(s) \to X)$, then we define $M^\# X$ as the set of \emph{affine} expressions $\Sigma(s : S).(P(s) \hookrightarrow X)$, which is an endofunctor on the category $\Set^{\hookrightarrow}$ of sets and injective functions.
 
 We say that $(s, f), (s', f') \in M^\# X$ are \textbf{mutually fresh}, denoted $(s, f) \freshbin (s', f')$, if $f(P(s))$ and $f'(P(s'))$ are disjoint.
@@ -280,6 +281,9 @@ This way, we get -- among others -- the following cube categories:
 	\item[$\cubecat_{\booleanalg}$] A cube category very similar to the CCHM one, but we have $(i \wedge \lnot i / j) = (0/j) : (i : \IX) \to (j : \IX)$ and $(i \vee \lnot i / j) = (1/j) : (i : \IX) \to (j : \IX)$.
 \end{enumerate}
 We remark that $\cubecat^\affine_{\demorgan}$ and $\cubecat^\affine_{\booleanalg}$ should be isomorphic as the additional law of boolean algebras w.r.t.\ de Morgan algebras only affects non-affine expressions.
+
+\todoi{Map them to corner maps}
+\todoi{Given that elements of the free boolean algebra can be uniquely written in full disjunctive normal form, it is clear that the free boolean algebra is the set of truth tables. Then the mapping to corner maps is fully faithful.}
 
 \subsection{Jet Cubes Old}
 \todoi{This is all wrong: there is no symmetry, no degradation and no connections/companions/conjoints.}
