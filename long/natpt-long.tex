@@ -233,6 +233,8 @@ We introduce a family of cube categories with one flavour of dimension. Fix a mo
 	\item The monad $\demorgan$ that sends a set $X$ to the carrier of the free de Morgan algebra over $X$;
 	\item The monad $\booleanalg$ that sends a set $X$ to the carrier of the free boolean algebra over $X$.
 \end{itemize}
+
+\subsubsection{Cartesian Cubes}
 \begin{definition}
 	We construct the \textbf{(named) category of cartesian $M$-cubes} $\cubecat_M$ (and $\namedcubecat_M$ resp.) stepwise:
 	\begin{itemize}
@@ -246,6 +248,31 @@ Objects of $\namedcubecat_M$ will be denoted as tuples of names $(i_0 : \IX, \ld
 A morphism $\vfi : (i_0 : \IX, \ldots, i_{n-1} : \IX) \to (j_0 : \IX, \ldots, j_{m-1} : \IX)$ is then a function sending each $j_k$ to an expression $j_k \psub{\vfi} \in M\accol{i_0, \ldots, i_{n-1}}$.
 The morphism $\vfi$ will also be denoted as $(j_0 \psub \vfi / j_0, \ldots, j_{m-1} \psub \vfi / j_{m-1})$.
 The situation in $\cubecat_M$ is the same except that we now regard the names $i_k$ as de Bruijn indices.
+
+\subsubsection{Affine Cubes}
+Let $M$ be specified by a syntactic algebraic theory $\theA$ \cite{manes-book,adamek-book,keml-diagrams}.
+A syntactic algebraic theory specifies a set of operations $S$, assigns to each operation $s : S$ an arity $P(s)$ which is again a set, and subjects these to a set of axioms.%
+\footnote{We use `syntactic algebraic theory' to refer to the syntactic presentation as described here, and `monad' and `Lawvere theory' to refer to the less syntactic objects they specify.
+%There seems to be disagreement on the terminology.
+%Syntactic algebraic theories (a.k.a. presentations of algebraic theories \cite{manes-book,keml-diagrams}) give rise to a monad and a Lawvere category (a.k.a. Lawvere theory or algebraic theory \cite{manes-book}).
+%Depending on your definition of a Lawvere theory, the monadic presentation and the Lawvere theory may be interderivable; in turn, they give rise to a category of algebras.
+%Neither of these two steps reflects equivalence, so we truly have three different notions, and there is disagreement which one the term `algebraic theory' refers to \cite{adamek-book}.
+%
+%Different syntactic algebraic theories may have the same category of models, in which case they are called \emph{Morita equivalent} \cite[ch.\ 15]{adamek-book}. We can thus distinguish algebraic theories by their syntactic presentation or consider them up to Morita equivalence. We will use \emph{syntactic algebraic theory} in the former case and \emph{monadic/Lawverian algebraic theory} in the latter case. Some authors insist on the usage of the word `presentation' for the former case \cite{manes-book}, or call the latter case `algebraic categories' \cite{adamek-book}, while the term `algebraic theories' seems to be in use for either case.
+}
+The pair $(S, P)$ is a container \cite{containers} which specifies a container functor (a.k.a.\ polynomial functor) $FX = \Sigma(s : S).(P(s) \to X)$ on $\Set$.
+A free monad $F^*$ over this functor $F$ exists and satisfies the fixpoint equation $F^* X \cong X \uplus F F^* X$.
+The axioms determine an equivalence relation $\sim_X$ on $F^* X$ such that $M X := F^* X/\sim_X$ is again a monad.
+
+We remark that the free monad $F^*$ over a container functor $F$ is again a container functor, i.e.\ there exists a container $(S^*, P^*)$ such that
+\[
+	F^* X = \Sigma(s : S^*).(P^*(s) \to X)
+\]
+specifies the free monad over $F$.
+A monad that is a container functor, such as $F^*$, is called a container monad \cite{container-combinatorics}.
+
+We can now define $M^\# X$ as the quotiented set of \emph{affine} expressions $\Sigma(s : S^*).(P^*(s) \hookrightarrow X) / \sim_X$, which is an endofunctor on the category $\Set^{\hookrightarrow}$ of sets and injective functions.
+
 
 \todoi{$M$ is a \textbf{quotient of} a container monad.}
 If $M$ is a \emph{container} monad \cite{container-combinatorics}, i.e. a monad whose underlying functor is a container functor \cite{containers} of the form $MX = \Sigma(s : S).(P(s) \to X)$, then we define $M^\# X$ as the set of \emph{affine} expressions $\Sigma(s : S).(P(s) \hookrightarrow X)$, which is an endofunctor on the category $\Set^{\hookrightarrow}$ of sets and injective functions.
@@ -267,6 +294,7 @@ We construct the \textbf{(named) category of affine $M$-cubes $\cubecat_M^\affin
 \end{definition}
 Objects will be represented as for the cartesian cube categories.
 
+\subsubsection{Examples}
 This way, we get -- among others -- the following cube categories:
 \begin{enumerate}
 	\item[$\cubecat_{\bipointed}$] The cartesian cube category.
