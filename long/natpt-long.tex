@@ -225,21 +225,24 @@ Note that it would be meaningless to define an $i$-infrajet interval in the same
 \todoi{Should there be a prism functor for $\rival{\equijet_i}$?}
 
 \subsection{Intermezzo: Cube Categories}
-We introduce a family of cube categories with one flavour of dimension. Fix a monad $M$ on $\Set$, which typically will be one of the following:
-\begin{itemize}
-	\item The `exception' monad $\bipointed$ that sends a set $X$ to $X \uplus \accol{0,1}$, which is the carrier of the free bipointed set over $X$;
-	\item The monad $\bipointedsym$ that sends a set $X$ to $X \uplus \set{\lnot x}{x \in X} \uplus \accol{0, 1}$, which is the carrier of the free [bipointed set equipped with an involution $\lnot$ that swaps $0$ and $1$] over $X$;
-	\item The monad $\distlattice$ that sends a set $X$ to the carrier of the free distributive lattice over $X$;
-	\item The monad $\demorgan$ that sends a set $X$ to the carrier of the free de Morgan algebra over $X$;
-	\item The monad $\booleanalg$ that sends a set $X$ to the carrier of the free boolean algebra over $X$.
-\end{itemize}
+We introduce a family of cube categories with one flavour of dimension. Fix a monad $M$ on $\Set$.
+\begin{example} \label{ex:cube-monads}
+	Typically $M$ will be one of the following:
+	\begin{itemize}
+		\item The `exception' monad $\bipointed$ that sends a set $X$ to $X \uplus \accol{0,1}$, which is the carrier of the free bipointed set over $X$;
+		\item The monad $\bipointedsym$ that sends a set $X$ to $X \uplus \set{\lnot x}{x \in X} \uplus \accol{0, 1}$, which is the carrier of the free [bipointed set equipped with an involution $\lnot$ that swaps $0$ and $1$] over $X$;
+		\item The monad $\distlattice$ that sends a set $X$ to the carrier of the free distributive lattice over $X$;
+		\item The monad $\demorgan$ that sends a set $X$ to the carrier of the free de Morgan algebra over $X$;
+		\item The monad $\booleanalg$ that sends a set $X$ to the carrier of the free boolean algebra over $X$.
+	\end{itemize}
+\end{example}
 
 \subsubsection{Cartesian Cubes}
 \begin{definition}
 	We construct the \textbf{(named) category of cartesian $M$-cubes} $\cubecat_M$ (and $\namedcubecat_M$ resp.) stepwise:
 	\begin{itemize}
 		\item The Kleisli category $\Kleisli(M)$ of $M$ has objects $\inKleisli{X}$ where $X$ is a set, and its morphisms $\inKleisli f : \inKleisli X \to \inKleisli Y$ are functions $f : X \to MY$.
-		\item Of this, we take the opposite $\Kleisli(M)\op$.
+		\item Of this, we take the opposite $\Kleisli(M)\op$. (This is the Lawvere theory corresponding to the monad $M$.)
 		\item We define $\namedcubecat_M$ as the full subcategory of $\Kleisli(M)\op$ on finite sets.
 		\item We define $\cubecat_M$ as a designate skeleton of $\namedcubecat_M$, e.g.\ the full subcategory of $\namedcubecat_M$ on sets of the form $\accol{0, \ldots, n-1}$ with $n \geq 0$.
 	\end{itemize}
@@ -250,8 +253,12 @@ The morphism $\vfi$ will also be denoted as $(j_0 \psub \vfi / j_0, \ldots, j_{m
 The situation in $\cubecat_M$ is the same except that we now regard the names $i_k$ as de Bruijn indices.
 
 \subsubsection{Affine Cubes}
-Let $M$ be specified by a syntactic algebraic theory $\theA$ \cite{manes-book,adamek-book,keml-diagrams}.
-A syntactic algebraic theory specifies a set of operations $S$, assigns to each operation $s : S$ an arity $P(s)$ which is again a set, and subjects these to a set of axioms.%
+If $T$ is a \emph{container} monad \cite{container-combinatorics}, i.e. a monad whose underlying functor is a container functor \cite{containers} of the form $TX = \Sigma(s : S).(P(s) \to X)$, then we define $T^\# X$ as the set of \emph{affine} expressions $\Sigma(s : S).(P(s) \hookrightarrow X)$, which is an endofunctor on the category $\Set^{\hookrightarrow}$ of sets and injective functions.
+If $M$ is merely a \emph{quotient} of a container monad, i.e. $M$ is of the form $MX = TX/\sim_X$ with $T$ as above, then we define $M^\# X$ as the set of equivalence classes with an affine representant.
+
+\begin{remark}
+An important source of monads such as $M$ are monads specified by a syntactic algebraic theory \cite{manes-book,adamek-book,keml-diagrams}.
+A syntactic algebraic theory specifies a set of operations $S_0$, assigns to each operation $s : S_0$ an arity $P_0(s)$ which is again a set, and subjects these to a set of axioms.%
 \footnote{We use `syntactic algebraic theory' to refer to the syntactic presentation as described here, and `monad' and `Lawvere theory' to refer to the less syntactic objects they specify.
 %There seems to be disagreement on the terminology.
 %Syntactic algebraic theories (a.k.a. presentations of algebraic theories \cite{manes-book,keml-diagrams}) give rise to a monad and a Lawvere category (a.k.a. Lawvere theory or algebraic theory \cite{manes-book}).
@@ -260,36 +267,30 @@ A syntactic algebraic theory specifies a set of operations $S$, assigns to each 
 %
 %Different syntactic algebraic theories may have the same category of models, in which case they are called \emph{Morita equivalent} \cite[ch.\ 15]{adamek-book}. We can thus distinguish algebraic theories by their syntactic presentation or consider them up to Morita equivalence. We will use \emph{syntactic algebraic theory} in the former case and \emph{monadic/Lawverian algebraic theory} in the latter case. Some authors insist on the usage of the word `presentation' for the former case \cite{manes-book}, or call the latter case `algebraic categories' \cite{adamek-book}, while the term `algebraic theories' seems to be in use for either case.
 }
-The pair $(S, P)$ is a container \cite{containers} which specifies a container functor (a.k.a.\ polynomial functor) $FX = \Sigma(s : S).(P(s) \to X)$ on $\Set$.
+The container $(S_0, P_0)$ specifies a container functor $FX = \Sigma(s : S_0).(P_0(s) \to X)$ on $\Set$.
 A free monad $F^*$ over this functor $F$ exists and satisfies the fixpoint equation $F^* X \cong X \uplus F F^* X$.
-The axioms determine an equivalence relation $\sim_X$ on $F^* X$ such that $M X := F^* X/\sim_X$ is again a monad.
-
-We remark that the free monad $F^*$ over a container functor $F$ is again a container functor, i.e.\ there exists a container $(S^*, P^*)$ such that
-\[
-	F^* X = \Sigma(s : S^*).(P^*(s) \to X)
-\]
+We remark that the free monad $F^*$ over a container functor $F$ is again a container functor, i.e.\ there exists a container $(S, P)$ such that
+$F^* X = \Sigma(s : S).(P(s) \to X)$
 specifies the free monad over $F$.
-A monad that is a container functor, such as $F^*$, is called a container monad \cite{container-combinatorics}.
+The axioms determine an equivalence relation $\sim_X$ on $F^* X$ such that $M X := F^* X/\sim_X$ is again a monad.
+This situation applies to each of the monads in \cref{ex:cube-monads}.
 
-We can now define $M^\# X$ as the quotiented set of \emph{affine} expressions $\Sigma(s : S^*).(P^*(s) \hookrightarrow X) / \sim_X$, which is an endofunctor on the category $\Set^{\hookrightarrow}$ of sets and injective functions.
+In fact, often the quotient can be taken already at the level of the container, so that there exists a container $(S', P')$ such that $MX \cong \Sigma(s : S').(P'(s) \to X)$.
+\end{remark}
 
-
-\todoi{$M$ is a \textbf{quotient of} a container monad.}
-If $M$ is a \emph{container} monad \cite{container-combinatorics}, i.e. a monad whose underlying functor is a container functor \cite{containers} of the form $MX = \Sigma(s : S).(P(s) \to X)$, then we define $M^\# X$ as the set of \emph{affine} expressions $\Sigma(s : S).(P(s) \hookrightarrow X)$, which is an endofunctor on the category $\Set^{\hookrightarrow}$ of sets and injective functions.
-
-We say that $(s, f), (s', f') \in M^\# X$ are \textbf{mutually fresh}, denoted $(s, f) \freshbin (s', f')$, if $f(P(s))$ and $f'(P(s'))$ are disjoint.
-
-We call the monad $(M, \eta, \mu)$ \textbf{affine} if $\eta_X : X \to MX$ lands in $M^\# X$ for all $X$ and $\mu_X : MMX \to MX$ restricted to $(MM)^\# X$ (note that container functors are closed under composition) lands in $M^\# X$.
+We say that $(s, f), (s', f') \in T^\# X$ are \textbf{mutually fresh}, denoted $(s, f) \freshbin (s', f')$, if $f(P(s))$ and $f'(P(s'))$ are disjoint.
+Elements of $M^\# X$ are mutually fresh if they have mutually fresh representants.
+We call the monad $(T, \eta, \mu)$ \textbf{affine} if $\eta_X : X \to TX$ lands in $T^\# X$ for all $X$ and $\mu_X : TTX \to TX$ restricted to $(TT)^\# X$ (note that container functors are closed under composition) lands in $T^\# X$; and similar for $M$.
 
 \begin{definition}
-Let $M$ be an affine container monad.
+Let $M$ be a quotient of a container monad, and let it be affine.
 We construct the \textbf{(named) category of affine $M$-cubes $\cubecat_M^\affine$} (and $\namedcubecat_M^\affine$ resp.) stepwise:
 \begin{itemize}
 	\item The affine Kleisli category $\Kleisli^\#(M)$ has objects $\inKleisli{X}$ where $X$ is a set, and its morphisms $\inKleisli f : \inKleisli X \to \inKleisli Y$ are functions $f : X \to M^\#Y$ such that for any $x \neq x'$ in $X$, we have $f(x) \freshbin f(x')$.
 	Identity and composition are well-defined because $M$ is affine.
 	\item Of this, we take the opposite $\Kleisli^\#(M)\op$.
-		\item We define $\namedcubecat_M^\affine$ as the full subcategory of $\Kleisli^\#(M)\op$ on finite sets.
-		\item We define $\cubecat_M^\affine$ as a designate skeleton of $\namedcubecat^\affine_M$, e.g.\ the full subcategory of $\namedcubecat^\affine_M$ on sets of the form $\accol{0, \ldots, n-1}$ with $n \geq 0$.
+	\item We define $\namedcubecat_M^\affine$ as the full subcategory of $\Kleisli^\#(M)\op$ on finite sets.
+	\item We define $\cubecat_M^\affine$ as a designate skeleton of $\namedcubecat^\affine_M$, e.g.\ the full subcategory of $\namedcubecat^\affine_M$ on sets of the form $\accol{0, \ldots, n-1}$ with $n \geq 0$.
 \end{itemize}
 \end{definition}
 Objects will be represented as for the cartesian cube categories.
@@ -312,6 +313,43 @@ We remark that $\cubecat^\affine_{\demorgan}$ and $\cubecat^\affine_{\booleanalg
 
 \todoi{Map them to corner maps}
 \todoi{Given that elements of the free boolean algebra can be uniquely written in full disjunctive normal form, it is clear that the free boolean algebra is the set of truth tables. Then the mapping to corner maps is fully faithful.}
+
+\subsubsection{The Endpoint Model}
+We remarked above that $\catL := \Kleisli(M)\op$ is the Lawvere category of $M$.
+It is known then (see e.g.\ \cite{keml-diagrams}), that the Eilenberg-Moore category of $M$ (which is the category of Eilenberg-Moore algebras of $M$) is equivalent to the category of product-preserving functors $\catL \to \Set$.
+Such functors are fully determined by the image of the singleton set (as every set is a coproduct of singletons and the Kleisli-category retains coproducts) and that image will be exactly the carrier of the corresponding Eilenberg-Moore algebra.
+
+It is clear that both the cartesian and affine (named) cube categories are subcategories of $\catL$.
+As such, any $M$-algebra induces a functor $\catL \to \Set$ and hence a functor from any of the $M$-cube categories to $\Set$.
+
+We are interested, in particular, in $M$-algebra structures on the set of endpoints $\accol{0, 1}$.
+Each of the monads in \cref{ex:cube-monads} has an obvious such algebra structure.
+Thus, we get functors from each of the corresponding cube categories to $\Set$,
+sending $(i_0 : \IX, \ldots, i_{n-1} : \IX)$ to $\accol{0, 1}^{\accol{i_0, \ldots, i_{n-1}}}$.
+We will denote each of those functors as $\EP$.
+
+Recall that a morphism $\vfi : (i_0 : \IX, \ldots, i_{n-1} : \IX) \to (j_0 : \IX, \ldots, j_{m-1} : \IX)$ assigns to each $j$ a value $j\psub \vfi$ in $M \accol{i_0, \ldots, i_{n-1}}$, the free $M$-algebra over $\accol{i_0, \ldots, i_{n-1}}$.
+The function $\EP(\vfi)$ is defined by
+\[
+	\EP(\vfi)
+	\paren{ v^{\accol{i_0, \ldots, i_{n-1}} \to \accol{0, 1}} }
+	(j)
+	= \alpha\paren{ M(v)(j \psub \vfi) },
+\]
+where $\alpha : M\accol{0, 1} \to \accol{0, 1}$ is the algebra structure on $\accol{0, 1}$.
+Using the operation $\bindop^\alpha : MX \to (X \to \accol{0, 1}) \to \accol{0, 1} : \hat x \mapsto f \mapsto \alpha (Mf(\hat x))$, we can write this as $\EP(\vfi)(v)(j) = j \psub \vfi \bindop^\alpha v$.
+
+\begin{proposition}
+	The functor $\EP : \cubecat_\booleanalg \to \Set$ is fully faithful.
+\end{proposition}
+\begin{proof}
+	We need to show that any function $f : \accol{0, 1}^{\accol{i_0, \ldots, i_{n-1}}} \to \accol{0, 1}^{\accol{j_0, \ldots, j_{m-1}}}$
+	can be obtained as some $\EP(\vfi)$ with $\vfi : (i_0 : \IX, \ldots, i_{n-1} : \IX) \to (j_0 : \IX, \ldots, j_{m-1} : \IX)$.
+	We remark that such a function $f$ in fact consists of $m$ truth tables in $n$ boolean variables.
+	From the full disjunctive normal form, it is clear that elements of the free boolean algebra are in 1-1 correspondence with truth tables.
+	Concretely, for each $j$, define $j \psub \vfi$ to be the element of $\booleanalg \accol{i_0, \ldots, i_{n-1}}$ corresponding to the truth table $f(\loch, j)$.
+	Then $j \psub \vfi \bindop^\alpha v$ will evaluate $j \psub \vfi$ after replacing each variable $i$ with its value $v(i)$, yielding the value $f(v, j)$ prescribed by the truth table $f(\loch, j)$.
+\end{proof}
 
 \subsection{Jet Cubes Old}
 \todoi{This is all wrong: there is no symmetry, no degradation and no connections/companions/conjoints.}
