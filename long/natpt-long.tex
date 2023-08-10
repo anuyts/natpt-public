@@ -247,10 +247,10 @@ We introduce a family of cube categories with one flavour of dimension. Fix a mo
 		\item We define $\cubecat_M$ as a designate skeleton of $\namedcubecat_M$, e.g.\ the full subcategory of $\namedcubecat_M$ on sets of the form $\accol{0, \ldots, n-1}$ with $n \geq 0$.
 	\end{itemize}
 \end{definition}
-Objects of $\namedcubecat_M$ will be denoted as tuples of names $(i_0 : \IX, \ldots, i_{n-1} : \IX)$ where $\IX$ is meaningless but conveys the intuition that we regard $i_k$ as a value ranging over the interval (the cube given by the singleton object).
-A morphism $\vfi : (i_0 : \IX, \ldots, i_{n-1} : \IX) \to (j_0 : \IX, \ldots, j_{m-1} : \IX)$ is then a function sending each $j_k$ to an expression $j_k \psub{\vfi} \in M\accol{i_0, \ldots, i_{n-1}}$.
-The morphism $\vfi$ will also be denoted as $(j_0 \psub \vfi / j_0, \ldots, j_{m-1} \psub \vfi / j_{m-1})$.
-The situation in $\cubecat_M$ is the same except that we now regard the names $i_k$ as de Bruijn indices.
+Objects of $\namedcubecat_M$ will be denoted as tuples of names $(\dm{i}_0 : \IX, \ldots, \dm{i}_{n-1} : \IX)$ where $\IX$ is meaningless but conveys the intuition that we regard $\dm{i}_k$ as a value ranging over the interval (the cube given by the singleton object).
+A morphism $\vfi : (\dm{i}_0 : \IX, \ldots, \dm{i}_{n-1} : \IX) \to (\dm{j}_0 : \IX, \ldots, \dm{j}_{m-1} : \IX)$ is then a function sending each $\dm{j}_k$ to an expression $\dm{j}_k \psub{\vfi} \in M\accol{\dm{i}_0, \ldots, \dm{i}_{n-1}}$.
+The morphism $\vfi$ will also be denoted as $(\dm{j}_0 \psub \vfi / \dm{j}_0, \ldots, \dm{j}_{m-1} \psub \vfi / \dm{j}_{m-1})$.
+The situation in $\cubecat_M$ is the same except that we now regard the names $\dm{i}_k$ as de Bruijn indices.
 
 \subsubsection{Affine Cubes}
 If $T$ is a \emph{container} monad \cite{container-combinatorics}, i.e. a monad whose underlying functor is a container functor \cite{containers} of the form $TX = \Sigma(s : S).(P(s) \to X)$, then we define $T^\# X$ as the set of \emph{affine} expressions $\Sigma(s : S).(P(s) \hookrightarrow X)$, which is an endofunctor on the category $\Set^{\hookrightarrow}$ of sets and injective functions.
@@ -299,15 +299,15 @@ Objects will be represented as for the cartesian cube categories.
 This way, we get -- among others -- the following cube categories:
 \begin{enumerate}
 	\item[$\cubecat_{\bipointed}$] The cartesian cube category.
-	A morphism $\vfi : V \to W$ sends every dimension $j \in W$ to $j \psub \vfi \in V \cup \accol{0, 1}$.
+	A morphism $\vfi : V \to W$ sends every dimension $\dm{j} \in W$ to $\dm{j} \psub \vfi \in V \cup \accol{0, 1}$.
 	Its cubes have diagonals.
 	\item[$\cubecat^\affine_{\bipointed}$] The affine cube category.
-	A morphism $\vfi : V \to W$ sends every dimension $j \in W$ to $j \psub \vfi \in V \cup \accol{0, 1}$, such that if $j\psub \vfi = j' \psub \vfi \in V$ then $j = j'$.
+	A morphism $\vfi : V \to W$ sends every dimension $\dm{j} \in W$ to $\dm{j} \psub \vfi \in V \cup \accol{0, 1}$, such that if $\dm{j}\psub \vfi = \dm{j}' \psub \vfi \in V$ then $\dm{j} = \dm{j}'$.
 	Its cubes have no diagonals.
-	\item[$\cubecat_{\bipointedsym}$] The symmetric cartesian cube category. We have a negation/involution/symmetry $(\lnot i / j) : (i : \IX) \to (j : \IX)$.
-	\item[$\cubecat_{\distlattice}$] The cartesian cube category with connections. We have morphisms $(i \vee j / k), (i \wedge j / k) : (i : \IX, j : \IX) \to (k : \IX)$. There are no symmetries
-	\item[$\cubecat_{\demorgan}$] The CCHM cube category, which combines symmetries and connections \cite{cubical}. We have $(i \wedge \lnot i / j) \neq (0/j) : (i : \IX) \to (j : \IX)$ and $(i \vee \lnot i / j) \neq (1/j) : (i : \IX) \to (j : \IX)$.
-	\item[$\cubecat_{\booleanalg}$] A cube category very similar to the CCHM one, but we have $(i \wedge \lnot i / j) = (0/j) : (i : \IX) \to (j : \IX)$ and $(i \vee \lnot i / j) = (1/j) : (i : \IX) \to (j : \IX)$.
+	\item[$\cubecat_{\bipointedsym}$] The symmetric cartesian cube category. We have a negation/involution/symmetry $(\lnot \dm{i} / \dm{j}) : (\dm i : \IX) \to (\dm{j} : \IX)$.
+	\item[$\cubecat_{\distlattice}$] The cartesian cube category with connections. We have morphisms $(\dm i \vee \dm{j} / \dm k), (\dm i \wedge \dm{j} / \dm k) : (\dm i : \IX, \dm{j} : \IX) \to (\dm k : \IX)$. There are no symmetries
+	\item[$\cubecat_{\demorgan}$] The CCHM cube category, which combines symmetries and connections \cite{cubical}. We have $(\dm i \wedge \lnot \dm i / \dm j) \neq (0/\dm j) : (\dm i : \IX) \to (\dm j : \IX)$ and $(\dm i \vee \lnot \dm i / \dm j) \neq (1/\dm j) : (\dm i : \IX) \to (\dm j : \IX)$.
+	\item[$\cubecat_{\booleanalg}$] A cube category very similar to the CCHM one, but we have $(\dm i \wedge \lnot \dm i / \dm j) = (0/\dm j) : (\dm i : \IX) \to (\dm j : \IX)$ and $(\dm i \vee \lnot \dm i / \dm j) = (1/\dm j) : (\dm i : \IX) \to (\dm j : \IX)$.
 \end{enumerate}
 We remark that $\cubecat^\affine_{\demorgan}$ and $\cubecat^\affine_{\booleanalg}$ should be isomorphic as the additional law of boolean algebras w.r.t.\ de Morgan algebras only affects non-affine expressions.
 
@@ -325,30 +325,30 @@ As such, any $M$-algebra induces a functor $\catL \to \Set$ and hence a functor 
 We are interested, in particular, in $M$-algebra structures on the set of endpoints $\accol{0, 1}$.
 Each of the monads in \cref{ex:cube-monads} has an obvious such algebra structure.
 Thus, we get functors from each of the corresponding cube categories to $\Set$,
-sending $(i_0 : \IX, \ldots, i_{n-1} : \IX)$ to $\accol{0, 1}^{\accol{i_0, \ldots, i_{n-1}}}$.
+sending $(\dm{i}_0 : \IX, \ldots, \dm{i}_{n-1} : \IX)$ to $\accol{0, 1}^{\accol{\dm{i}_0, \ldots, \dm{i}_{n-1}}}$.
 We will denote each of those functors as $\EP$.
 
-Recall that a morphism $\vfi : (i_0 : \IX, \ldots, i_{n-1} : \IX) \to (j_0 : \IX, \ldots, j_{m-1} : \IX)$ assigns to each $j$ a value $j\psub \vfi$ in $M \accol{i_0, \ldots, i_{n-1}}$, the free $M$-algebra over $\accol{i_0, \ldots, i_{n-1}}$.
+Recall that a morphism $\vfi : (\dm{i}_0 : \IX, \ldots, \dm{i}_{n-1} : \IX) \to (\dm{j}_0 : \IX, \ldots, \dm{j}_{m-1} : \IX)$ assigns to each $\dm j$ a value $\dm j\psub \vfi$ in $M \accol{\dm{i}_0, \ldots, \dm{i}_{n-1}}$, the free $M$-algebra over $\accol{\dm{i}_0, \ldots, \dm{i}_{n-1}}$.
 The function $\EP(\vfi)$ is defined by
 \[
 	\EP(\vfi)
-	\paren{ v^{\accol{i_0, \ldots, i_{n-1}} \to \accol{0, 1}} }
-	(j)
-	= \alpha\paren{ M(v)(j \psub \vfi) },
+	\paren{ v^{\accol{\dm{i}_0, \ldots, \dm{i}_{n-1}} \to \accol{0, 1}} }
+	(\dm j)
+	= \alpha\paren{ M(v)(\dm j \psub \vfi) },
 \]
 where $\alpha : M\accol{0, 1} \to \accol{0, 1}$ is the algebra structure on $\accol{0, 1}$.
-Using the operation $\bindop^\alpha : MX \to (X \to \accol{0, 1}) \to \accol{0, 1} : \hat x \mapsto f \mapsto \alpha (Mf(\hat x))$, we can write this as $\EP(\vfi)(v)(j) = j \psub \vfi \bindop^\alpha v$.
+Using the operation $\bindop^\alpha : MX \to (X \to \accol{0, 1}) \to \accol{0, 1} : \hat x \mapsto f \mapsto \alpha (Mf(\hat x))$, we can write this as $\EP(\vfi)(v)(\dm j) = \dm j \psub \vfi \bindop^\alpha v$.
 
 \begin{proposition}
 	The functor $\EP : \cubecat_\booleanalg \to \Set$ is fully faithful.
 \end{proposition}
 \begin{proof}
-	We need to show that any function $f : \accol{0, 1}^{\accol{i_0, \ldots, i_{n-1}}} \to \accol{0, 1}^{\accol{j_0, \ldots, j_{m-1}}}$
-	can be obtained as some $\EP(\vfi)$ with $\vfi : (i_0 : \IX, \ldots, i_{n-1} : \IX) \to (j_0 : \IX, \ldots, j_{m-1} : \IX)$.
+	We need to show that any function $f : \accol{0, 1}^{\accol{\dm{i}_0, \ldots, \dm{i}_{n-1}}} \to \accol{0, 1}^{\accol{\dm{j}_0, \ldots, \dm{j}_{m-1}}}$
+	can be obtained as some $\EP(\vfi)$ with $\vfi : (\dm{i}_0 : \IX, \ldots, \dm{i}_{n-1} : \IX) \to (\dm{j}_0 : \IX, \ldots, \dm{j}_{m-1} : \IX)$.
 	We remark that such a function $f$ in fact consists of $m$ truth tables in $n$ boolean variables.
 	From the full disjunctive normal form, it is clear that elements of the free boolean algebra are in 1-1 correspondence with truth tables.
-	Concretely, for each $j$, define $j \psub \vfi$ to be the element of $\booleanalg \accol{i_0, \ldots, i_{n-1}}$ corresponding to the truth table $f(\loch, j)$.
-	Then $j \psub \vfi \bindop^\alpha v$ will evaluate $j \psub \vfi$ after replacing each variable $i$ with its value $v(i)$, yielding the value $f(v, j)$ prescribed by the truth table $f(\loch, j)$.
+	Concretely, for each $\dm j$, define $\dm j \psub \vfi$ to be the element of $\booleanalg \accol{\dm{i}_0, \ldots, \dm{i}_{n-1}}$ corresponding to the truth table $f(\loch, \dm j)$.
+	Then $\dm j \psub \vfi \bindop^\alpha v$ will evaluate $\dm j \psub \vfi$ after replacing each variable $\dm i$ with its value $v(\dm i)$, yielding the value $f(v, \dm j)$ prescribed by the truth table $f(\loch, \dm j)$.
 \end{proof}
 
 \subsection{Jet Cubes}
