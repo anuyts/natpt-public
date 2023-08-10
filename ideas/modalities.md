@@ -7,7 +7,7 @@ We have the following chains of adjoints:
 
 ### Change of anpolarity
 - loc @ n
-- forget @ n
+- forgetsym @ n
 - core @ n
 
 ### Omission & insertion
@@ -23,3 +23,33 @@ We have the following chains of adjoints:
   - = omission @ n+1 if n is symmetric
 - discrete insertion @ n+1 (if n and n+1 are symmetric)
 - ...
+
+## General modalities
+Modality from a to b is a certain mapping
+`{=, jet_0, ..., jet_bmax} -> {=, equijet/jet/ripple_0, ..., equijet/jet/ripple_amax, top}`.
+
+It is central if:
+
+- it preserves `=` (does not quotient)
+- it does not mention equijet
+- it does not mention ripple
+- it does not mention top
+
+It is left/right if its right/left adjoint is central.
+
+### INTRACTABLE
+It is left if:
+
+- it does not mention ripple
+- it does not mention top
+- it does not forget the last relation
+- it does not fully forget symmetry of a relation which it does retain
+
+It is right if:
+
+- it preserves `=` (does not quotient)
+- it does not mention equijet
+- it does not mention `=` other than as the image of `=`
+- it does not fully forget symmetry of a relation which it does retain
+- it does not forget jet_n unless the previous retained relation is symmetric ...
+
