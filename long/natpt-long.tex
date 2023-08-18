@@ -540,7 +540,7 @@ Preservation:
 	}{}
 \]
 
-Companion: \todoi{Either here or in conjunction/disjunction, we have to allow for more complicated expressions}
+Companion: \todoi{Don't use the shape, use the localization! Everywhere!}
 \[
 	\inference{
 		\vfi : \shp^\ypolar_i(\shp^\ypolar_j U, V) \to W
@@ -613,10 +613,12 @@ Positive disjunction and negative conjunction (affine):
 \]
 Note: the start of the Hamiltonian path of a twisted cube always has coordinates $(1, \ldots, 1, 0)$.
 
+\todoi{I think we can do any left associative series of conjunctions/disjunctions.}
+
 \todoi{Connections:
 \begin{itemize}
 	\item Affine: traverse the boolean algebra syntax tree and analyze where the last variable is.
-	\item Cartesian: regard it as an arbitrary truth table and spell it as $\dm i \mathbin ? \dm j \mathbin \dm k$. This should be an increasing function of $\dm i$, i.e.\ $\dm k \Rightarrow \dm j$. Moreover, $\dm j$ should be covariant and $\dm k$ contravariant. (Your twisted prisms still don't have diagonals, but that's ok since the entire expression concerns one codomain dimension.)
+	\item Cartesian: regard it as an arbitrary truth table and spell it as $\dm i \mathbin ? \dm j \mathbin : \dm k$. This should be an increasing function of $\dm i$, i.e.\ $\dm k \Rightarrow \dm j$. Moreover, $\dm j$ should be covariant and $\dm k$ contravariant. (Your twisted prisms still don't have diagonals, but that's ok since the entire expression concerns one codomain dimension.)
 \end{itemize}
 }
 
