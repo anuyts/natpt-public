@@ -480,6 +480,7 @@ Note that the twisted prism functor takes the opposite of its input jet set/cube
 	\end{itemize}
 \end{remark}
 
+Zero:
 \[
 	\inference{
 		\vfi : V \to \Op_i(W)
@@ -490,14 +491,16 @@ Note that the twisted prism functor takes the opposite of its input jet set/cube
 	\inference{
 		\vfi : V \to W
 	}{
-		(\vfi, 1/\dm i) : V \to (W, i : \rival{\jet_i})
+		(\vfi, 0/\dm i) : V \to (W, i : \rival{\tej_i})
 	}{}
 \]
+
+One:
 \[
 	\inference{
 		\vfi : V \to W
 	}{
-		(\vfi, 0/\dm i) : V \to (W, i : \rival{\tej_i})
+		(\vfi, 1/\dm i) : V \to (W, i : \rival{\jet_i})
 	}{}
 	\qquad
 	\inference{
@@ -505,7 +508,9 @@ Note that the twisted prism functor takes the opposite of its input jet set/cube
 	}{
 		(\vfi, 1/\dm i) : V \to (W, i : \rival{\tej_i})
 	}{}
-\]
+\],
+
+Negation/involution/symmetry:
 \[
 	\inference{
 		(\vfi, t) : V \to (W, i : \rival{\jet_i})
@@ -519,6 +524,101 @@ Note that the twisted prism functor takes the opposite of its input jet set/cube
 		(\vfi, \lnot t/\dm i) : V \to (W, i : \rival{\jet_i})
 	}{}
 \]
+
+Preservation:
+\[
+	\inference{
+		\vfi : V \to W
+	}{
+		(\vfi, \dm i / \dm i) : (V, \dm i : \rival{\jet_i}) \to (W, \dm i : \rival{\jet_i})
+	}{}
+	\qquad
+	\inference{
+		\vfi : V \to W
+	}{
+		(\vfi, \dm i / \dm i) : (V, \dm i : \rival{\tej_i}) \to (W, \dm i : \rival{\tej_i})
+	}{}
+\]
+
+Companion: \todoi{Either here or in conjunction/disjunction, we have to allow for more complicated expressions}
+\[
+	\inference{
+		\vfi : \shp^\ypolar_i(\shp^\ypolar_j U, V) \to W
+	}{
+		(\vfi, \dm j / \dm i) : (U, \dm j : \rival{\jet_j}, V) \to (W, \dm i : \rival{\jet_i})
+	}{$j > i$}
+\]
+\[
+	\inference{
+		\vfi : \shp^\ypolar_i(\shp^\ypolar_j U, V) \to W
+	}{
+		(\vfi, \dm j / \dm i) : (U, \dm j : \rival{\tej_j}, V) \to (W, \dm i : \rival{\tej_i})
+	}{$j > i$}
+\]
+
+Conjoint:
+\[
+	\inference{
+		\vfi : \shp^\ypolar_i(\shp^\ypolar_j U, V) \to W
+	}{
+		(\vfi, \dm j / \dm i) : (U, \dm j : \rival{\tej_j}, V) \to (W, \dm i : \rival{\jet_i})
+	}{$j > i$}
+\]
+\[
+	\inference{
+		\vfi : \shp^\ypolar_i(\shp^\ypolar_j U, V) \to W
+	}{
+		(\vfi, \dm j / \dm i) : (U, \dm j : \rival{\jet_j}, V) \to (W, \dm i : \rival{\tej_i})
+	}{$j > i$}
+\]
+
+Positive conjunction and negative disjunction (affine):
+\[
+	\inference{
+		(\vfi, t_1/\dm i_1, \ldots, t_n/\dm i_n) : V \to (W, \dm i_1 : \rival{\jet_i}, \ldots, \dm i_n : \rival{\jet_i})
+		\qquad
+		\dom(\vfi) = \shp^\ypolar_i V
+	}{
+		(\vfi, t_1 \wedge \ldots \wedge t_n/\dm i) : V \to (W, \dm i : \rival{\jet_i})
+	}{$\booleanalg$, $\affine$}
+\]
+\[
+	\inference{
+		(\vfi, t_1/\dm i_1, \ldots, t_n/\dm i_n) : V \to (W, \dm i_1 : \rival{\tej_i}, \ldots, \dm i_n : \rival{\tej_i})
+		\qquad
+		\dom(\vfi) = \shp^\ypolar_i V
+	}{
+		(\vfi, t_1 \vee \ldots \vee t_n/\dm i) : V \to (W, \dm i : \rival{\tej_i})
+	}{$\booleanalg$, $\affine$}
+\]
+
+Positive disjunction and negative conjunction (affine):
+\[
+	\inference{
+		(\vfi, t_1/\dm i_1, \ldots, t_n/\dm i_n) : V \to (W, \dm i_1 : \rival{\tej_i}, \ldots, \dm i_{n-1} : \rival{\tej_i}, \dm i_n : \rival{\jet_i})
+		\qquad
+		\dom(\vfi) = \shp^\ypolar_i V
+	}{
+		(\vfi, t_1 \vee \ldots \vee t_n/\dm i) : V \to (W, \dm i : \rival{\jet_i})
+	}{$\booleanalg$, $\affine$}
+\]
+\[
+	\inference{
+		(\vfi, t_1/\dm i_1, \ldots, t_n/\dm i_n) : V \to (W, \dm i_1 : \rival{\jet_i}, \ldots, \dm i_{n-1} : \rival{\jet_i}, \dm i_n : \rival{\tej_i})
+		\qquad
+		\dom(\vfi) = \shp^\ypolar_i V
+	}{
+		(\vfi, t_1 \wedge \ldots \wedge t_n/\dm i) : V \to (W, \dm i : \rival{\tej_i})
+	}{$\booleanalg$, $\affine$}
+\]
+Note: the start of the Hamiltonian path of a twisted cube always has coordinates $(1, \ldots, 1, 0)$.
+
+\todoi{Connections:
+\begin{itemize}
+	\item Affine: traverse the boolean algebra syntax tree and analyze where the last variable is.
+	\item Cartesian: regard it as an arbitrary truth table and spell it as $\dm i \mathbin ? \dm j \mathbin \dm k$. This should be an increasing function of $\dm i$, i.e.\ $\dm k \Rightarrow \dm j$. Moreover, $\dm j$ should be covariant and $\dm k$ contravariant. (Your twisted prisms still don't have diagonals, but that's ok since the entire expression concerns one codomain dimension.)
+\end{itemize}
+}
 
 \todoi{Conjecture: $\jetcubeaff{\bipointedsym}{[\ypolar]}$ is the twisted cube category \cite{pinyo-twisted}. Symmetries zijn nodig om aan 0-kant te embedden. Moogt ook cartesians pakken, want hebt toch geen diagonalen.}
 \todoi{Use: $\jetcubeaff{\booleanalg}{\vec a}$ of $\jetcubecart{\booleanalg}{\vec a}$}
