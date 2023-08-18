@@ -40,6 +40,7 @@
 \newtheorem{axiom}[theorem]{Axiom}
 \newtheorem{flaw}[theorem]{Flaw}
 \newtheorem{abomination}[theorem]{Abomination}
+\newtheorem{convention}[theorem]{Convention}
 
 \newenvironment{framefig}{\begin{figure}[htbp] \begin{oframed}}{\end{oframed} \end{figure}}
 %\newcommand{\interruptframefig}{\end{figure} \begin{figure}[htbp] \ContinuedFloat}
@@ -168,14 +169,18 @@
 \newcommand{\cubecat}{{\name{Cube}}}
 \newcommand{\namedcubecat}{{\name{NCube}}}
 	\newcommand{\affine}{\Box}
+	\newcommand{\cartes}{\boxslash}
 \newcommand{\twistedcubecat}{{\name{TwCube}}}
 \newcommand{\cchmcat}{{\name{CCHM}}}
 
 \newcommand{\jetset}[1]{\name{JetSet}\paren{#1}}
 \newcommand{\jetcube}[1]{\name{JetCube}\paren{#1}}
-\newcommand{\jetcubeaff}[2]{\name{JetCube}^\affine_{#1}\paren{#2}}
-\newcommand{\jetcubecart}[2]{\name{JetCube}_{#1}\paren{#2}}
+\newcommand{\jetcubeopt}[3]{\name{JetCube}^{#1}_{#2}\paren{#3}}
+\newcommand{\jetcubeaff}[2]{\jetcubeopt{\affine}{#1}{#2}}
+\newcommand{\jetcubecart}[2]{\jetcubeopt{\cartes}{#1}{#2}}
 	\newcommand{\erasejc}[1]{\floor{#1}}
+\newcommand{\pjetcube}[1]{\name{PJetCube}\paren{#1}}
+\newcommand{\pjetcubeopt}[3]{\name{PJetCube}^{#1}_{#2}\paren{#3}}
 
 \newcommand{\clockcat}{{\name{Clock}}}
 \newcommand{\clocksym}{{\text{\clock}}}
