@@ -479,6 +479,7 @@ Note that the twisted prism functor takes the opposite of its input jet set/cube
 		\item We do not see any advantage of $\demorgan$ over $\booleanalg$. In particular, we want $\EP$ to be faithful.
 	\end{itemize}
 \end{remark}
+\todoi{Define $\shp_i$ and $\shp_i^\ypolar$}
 
 Zero:
 \[
@@ -572,46 +573,57 @@ Conjoint:
 	}{$j > i$}
 \]
 
-Positive conjunction and negative disjunction (affine):
+Forward conjunction and backward disjunction:
 \[
 	\inference{
-		(\vfi, t_1/\dm i_1, \ldots, t_n/\dm i_n) : V \to (W, \dm i_1 : \rival{\jet_i}, \ldots, \dm i_n : \rival{\jet_i})
+		(\vfi, s/\dm i, t/\dm j) : V \to (W, \dm i : \rival{\jet_i}, \dm j : \rival{\jet_i})
 		\qquad
 		\dom(\vfi) = \shp^\ypolar_i V
 	}{
-		(\vfi, t_1 \wedge \ldots \wedge t_n/\dm i) : V \to (W, \dm i : \rival{\jet_i})
-	}{$\booleanalg$, $\affine$}
+		(\vfi, s \wedge t/\dm k) : V \to (W, \dm k : \rival{\jet_i})
+	}{$\booleanalg$}
 \]
 \[
 	\inference{
-		(\vfi, t_1/\dm i_1, \ldots, t_n/\dm i_n) : V \to (W, \dm i_1 : \rival{\tej_i}, \ldots, \dm i_n : \rival{\tej_i})
+		(\vfi, s/\dm i, t/\dm j) : V \to (W, \dm i : \rival{\tej_i}, \dm j : \rival{\tej_i})
 		\qquad
 		\dom(\vfi) = \shp^\ypolar_i V
 	}{
-		(\vfi, t_1 \vee \ldots \vee t_n/\dm i) : V \to (W, \dm i : \rival{\tej_i})
-	}{$\booleanalg$, $\affine$}
+		(\vfi, s \vee t/\dm k) : V \to (W, \dm k : \rival{\tej_i})
+	}{$\booleanalg$}
 \]
 
-Positive disjunction and negative conjunction (affine):
+Forward disjunction and backward conjunction:
 \[
 	\inference{
-		(\vfi, t_1/\dm i_1, \ldots, t_n/\dm i_n) : V \to (W, \dm i_1 : \rival{\tej_i}, \ldots, \dm i_{n-1} : \rival{\tej_i}, \dm i_n : \rival{\jet_i})
+		(\vfi, s/\dm i, t/\dm j) : V \to (W, \dm i : \rival{\tej_i}, \dm j : \rival{\jet_i})
 		\qquad
 		\dom(\vfi) = \shp^\ypolar_i V
 	}{
-		(\vfi, t_1 \vee \ldots \vee t_n/\dm i) : V \to (W, \dm i : \rival{\jet_i})
-	}{$\booleanalg$, $\affine$}
+		(\vfi, s \vee t/\dm k) : V \to (W, \dm k : \rival{\jet_i})
+	}{$\booleanalg$}
 \]
 \[
 	\inference{
-		(\vfi, t_1/\dm i_1, \ldots, t_n/\dm i_n) : V \to (W, \dm i_1 : \rival{\jet_i}, \ldots, \dm i_{n-1} : \rival{\jet_i}, \dm i_n : \rival{\tej_i})
+		(\vfi, s/\dm i, t/\dm j) : V \to (W, \dm i : \rival{\jet_i}, \dm j : \rival{\tej_i})
 		\qquad
 		\dom(\vfi) = \shp^\ypolar_i V
 	}{
-		(\vfi, t_1 \wedge \ldots \wedge t_n/\dm i) : V \to (W, \dm i : \rival{\tej_i})
-	}{$\booleanalg$, $\affine$}
+		(\vfi, s \wedge t/\dm k) : V \to (W, \dm k : \rival{\tej_i})
+	}{$\booleanalg$}
 \]
 Note: the start of the Hamiltonian path of a twisted cube always has coordinates $(1, \ldots, 1, 0)$.
+
+Truth table (cartesian):
+\[
+	\inference{
+		(\vfi, s_1/\dm i_1, \ldots, s_n/\dm i_n) : V \to (W, \dm i_1 : \rival{\edge_i}, \ldots, \dm i_n : \rival{\edge_i})
+		\\
+		t[x_1, \ldots, x_n] \in \booleanalg \accol{x_1, \ldots, x_n}
+	}{
+		(\vfi, t[s_1, \ldots, s_n] / \dm i) : V \to (W, \dm i : \rival{\edge_i})
+	}{$\booleanalg$, $\cartes$}
+\]
 
 \todoi{I think we can do any left associative series of conjunctions/disjunctions.}
 
