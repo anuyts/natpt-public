@@ -438,7 +438,6 @@ Using the operation $\bindop^\alpha : MX \to (X \to \accol{0, 1}) \to \accol{0, 
 	Let $\vec a$ be a mode and $\eps \in \accol{\affine, \cartes}$.
 	We define the category $\jetcubeopt{\eps}{M}{\vec a}$ (or $\ojetcubeopt{\eps}{M}{\vec a}$) of \textbf{(opposable) affine/cartesian jet $M$-cubes of mode $\vec a$} as the full subcategory of $\cubecat^\eps_M \times_\Set \jetset{\vec a}$ on (opposable) jet cubes, as justified by \cref{thm:jet-cube-pullback}.
 \end{definition}
-\todoi{TODO}
 %\begin{definition} \label{def:jet-cube-cat}
 %	Let $\vec a$ be a mode and $\eps \in \accol{\affine, \cartes}$.
 %	We define the category $\jetcubeopt{\eps}{M}{\vec a}$ of \textbf{affine/cartesian jet $M$-cubes of mode $\vec a$} as the category
@@ -465,7 +464,7 @@ Using the operation $\bindop^\alpha : MX \to (X \to \accol{0, 1}) \to \accol{0, 
 %	\end{itemize}
 %\end{definition}
 \begin{definition} \label{def:prism-cube}
-	Let $\vec a$ be a mode, $\eps \in \accol{\affine, \cartes}$ and $i < \lenpol{\vec a}$. We define the \textbf{$i$-twisted prism functor $\loch \multip (\dm i : \rival{\jet_i}) : \jetcubeopt{\eps}{M}{\vec a} \to \jetcubeopt{\eps}{M}{\vec a}$} as follows:\footnote{We still think of $\dm i$ as a De Bruijn index.}
+	Let $\vec a$ be a mode, $\eps \in \accol{\affine, \cartes}$ and $i < \lenpol{\vec a}$. We define the \textbf{$i$-twisted prism functor $\loch \multip (\dm i : \rival{\jet_i}) : \jetcubeopt{\eps}{M}{\vec a} \to \jetcubeopt{\eps}{M}{\vec a}$} on jet cubes as follows:\footnote{We still think of $\dm i$ as a De Bruijn index.}
 	\begin{itemize}
 		\item The object $W$ is sent to $(W, \dm i : \rival{\jet_i})$.
 		\item The morphism $\vfi : V \to W$ is sent to the morphism $\vfi \multip (\dm i : \rival{\jet_i})$ such that
@@ -475,10 +474,17 @@ Using the operation $\bindop^\alpha : MX \to (X \to \accol{0, 1}) \to \accol{0, 
 			\item $\JEP(\vfi \multip (\dm i : \rival{\jet_i})) = \JEP(\vfi) \multip \rival{\jet_i}$.
 		\end{itemize}
 	\end{itemize}
-	If $a_i = \npolar$, then we call this simply the \textbf{$i$-prism functor $\loch \multip (\dm i : \rival{\edge_i})$.}
+	If $a_i = \npolar$, then we call this simply the \textbf{$i$-prism functor} $\loch \multip (\dm i : \rival{\edge_i}) : \jetcubeopt{\eps}{M}{\vec a} \to \jetcubeopt{\eps}{M}{\vec a}$.
+	
+	We similarly define, on opposable jet cubes:
+	\begin{itemize}
+		\item the $i$-twisted prism functor $\loch \multip (\dm i : \rival{\jet_i}) : \jetcubeopt{\eps}{M}{\vec a} \to \jetcubeopt{\eps}{M}{\vec a}$ when $a_i = \ypolar$,
+		\item the opposite $i$-twisted prism functor $\loch \multip (\dm i : \rival{\tej_i}) : \jetcubeopt{\eps}{M}{\vec a} \to \jetcubeopt{\eps}{M}{\vec a}$ when $a_i = \ypolar$,
+		\item the $i$-prism functor $\loch \multip (\dm i : \rival{\edge_i}) : \jetcubeopt{\eps}{M}{\vec a} \to \jetcubeopt{\eps}{M}{\vec a}$ when $a_i = \npolar$.
+	\end{itemize}
 \end{definition}
 \begin{proposition} \label{thm:prism-commute}
-	Twisted prism functors for different dimensions commute.
+	((Opposable) twisted) prism functors for different dimensions commute.
 \end{proposition}
 \begin{proof}
 	On jet-erased cubes, we have an isomorphism
