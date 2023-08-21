@@ -411,37 +411,59 @@ Using the operation $\bindop^\alpha : MX \to (X \to \accol{0, 1}) \to \accol{0, 
 		(\erasejc{W}, i : \IX).
 	\]
 \end{definition}
-\begin{corollary}
-	For any (opposable) jet cube $W$, the carrier of $\JEP(W)$ is $\EP(\erasejc{W})$. \qed
-\end{corollary}
-
-\subsubsection{Jet Cube Morphisms}
-\todoi{TODO}
-\begin{definition} \label{def:jet-cube-cat}
-	Let $\vec a$ be a mode and $\eps \in \accol{\affine, \cartes}$.
-	We define the category $\jetcubeopt{\eps}{M}{\vec a}$ of \textbf{affine/cartesian jet $M$-cubes of mode $\vec a$} as the category
-	\begin{itemize}
-		\item whose objects are jet cubes of mode $\vec a$,
-		\item whose Hom-sets are given by the pullback
-		\begin{equation}
+\begin{corollary} \label{thm:jet-cube-pullback}
+	For any (opposable) jet cube $W$, the carrier of $\JEP(W)$ is $\EP(\erasejc{W})$.
+	Thus, every (opposable) jet cube determines an object of the following strict pullback of categories:
+	\[
 			\xymatrix{
-				\Hom_{\jetcubeopt{\eps}{M}{\vec a}}(V, W)
+				\cubecat^\eps_M \times_\Set \jetset{\vec a}
 					\ar@{.>}[rr]^{\JEP}
 					\ar@{.>}[d]_{\erasejc{\loch}}
 					\xydrcorner
 				&&
-				\Hom_{\jetset{\vec a}}(\JEP(V), \JEP(W))
+				\jetset{\vec a}
 					\ar[d]^U
 				\\
-				\Hom_{\cubecat^\eps_M}(\erasejc V, \erasejc W)
+				\cubecat^\eps_M
 					\ar[rr]_{\EP}
 				&&
-				\Hom_{\Set}(\EP(\erasejc V), \EP(\erasejc W)),
+				\Set,
 			}
-		\end{equation}
-		i.e.\ they are morphisms between cubes that respect the jet relations on endpoints.
-	\end{itemize}
+	\]
+	It is straightforward to see that this object is uniquely determined. \qed
+\end{corollary}
+
+\subsubsection{Jet Cube Categories}
+\begin{definition} \label{def:jet-cube-cat}
+	Let $\vec a$ be a mode and $\eps \in \accol{\affine, \cartes}$.
+	We define the category $\jetcubeopt{\eps}{M}{\vec a}$ (or $\ojetcubeopt{\eps}{M}{\vec a}$) of \textbf{(opposable) affine/cartesian jet $M$-cubes of mode $\vec a$} as the full subcategory of $\cubecat^\eps_M \times_\Set \jetset{\vec a}$ on (opposable) jet cubes, as justified by \cref{thm:jet-cube-pullback}.
 \end{definition}
+\todoi{TODO}
+%\begin{definition} \label{def:jet-cube-cat}
+%	Let $\vec a$ be a mode and $\eps \in \accol{\affine, \cartes}$.
+%	We define the category $\jetcubeopt{\eps}{M}{\vec a}$ of \textbf{affine/cartesian jet $M$-cubes of mode $\vec a$} as the category
+%	\begin{itemize}
+%		\item whose objects are jet cubes of mode $\vec a$,
+%		\item whose Hom-sets are given by the pullback
+%		\begin{equation}
+%			\xymatrix{
+%				\Hom_{\jetcubeopt{\eps}{M}{\vec a}}(V, W)
+%					\ar@{.>}[rr]^{\JEP}
+%					\ar@{.>}[d]_{\erasejc{\loch}}
+%					\xydrcorner
+%				&&
+%				\Hom_{\jetset{\vec a}}(\JEP(V), \JEP(W))
+%					\ar[d]^U
+%				\\
+%				\Hom_{\cubecat^\eps_M}(\erasejc V, \erasejc W)
+%					\ar[rr]_{\EP}
+%				&&
+%				\Hom_{\Set}(\EP(\erasejc V), \EP(\erasejc W)),
+%			}
+%		\end{equation}
+%		i.e.\ they are morphisms between cubes that respect the jet relations on endpoints.
+%	\end{itemize}
+%\end{definition}
 \begin{definition} \label{def:prism-cube}
 	Let $\vec a$ be a mode, $\eps \in \accol{\affine, \cartes}$ and $i < \lenpol{\vec a}$. We define the \textbf{$i$-twisted prism functor $\loch \multip (\dm i : \rival{\jet_i}) : \jetcubeopt{\eps}{M}{\vec a} \to \jetcubeopt{\eps}{M}{\vec a}$} as follows:\footnote{We still think of $\dm i$ as a De Bruijn index.}
 	\begin{itemize}
