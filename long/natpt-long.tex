@@ -574,15 +574,15 @@ One:
 Negation/involution/symmetry:
 \[
 	\inference{
-		(\vfi, t) : V \to (W, i : \rival{\jet_i})
-	}{
-		(\vfi, \lnot t/\dm i) : V \to (W, i : \rival{\tej_i})
-	}{}
-	\qquad
-	\inference{
 		(\vfi, t) : V \to (W, i : \rival{\tej_i})
 	}{
 		(\vfi, \lnot t/\dm i) : V \to (W, i : \rival{\jet_i})
+	}{}
+	\qquad
+	\inference{
+		(\vfi, t) : V \to (W, i : \rival{\jet_i})
+	}{
+		(\vfi, \lnot t/\dm i) : V \to (W, i : \rival{\tej_i})
 	}{}
 \]
 
@@ -695,6 +695,9 @@ Truth table (cartesian):
 	}{$\booleanalg$, $\cartes$}
 \]
 
+\todoi{Use rule names (zero:bck etc)}
+\todoi{Soundness}
+\todoi{Completeness}
 \todoi{Use $\jetcubeaff{\booleanalg}{\vec a}$ or $\jetcubecart{\booleanalg}{\vec a}$}
 
 \subsection{Jet Cubes Old}
