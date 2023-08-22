@@ -208,7 +208,7 @@ We have $\Op_i \circ \Op_i = \Id$ and if $a_i = \npolar$ then $\Op_i = \Id$.
 		\item $x \edge_i^{\Fsym_i X} y$ if and only if $x \infrajet_i^X y$,
 		\item $x \edge_i^{\Csym_i X} y$ if and only if $x \equijet_i^X y$.
 	\end{itemize}
-	We have $\Fsym_i \circ \Usym_i = \Csym_i \circ \Usym_i = \Id$, so that $\Usym_i \circ \Fsym_i$ is an idempotent monad and $\Usym_i \circ \Csym_i$ is an idempotent comonad.
+	We have $\Fsym_i \circ \Usym_i = \Csym_i \circ \Usym_i = \Id$, so that $\UFsym_i := \Usym_i \circ \Fsym_i$ is an idempotent monad and $\UCsym_i := \Usym_i \circ \Csym_i$ is an idempotent comonad.
 \end{corollary}
 
 \subsection{Intervals and Prisms}
@@ -474,6 +474,7 @@ Note that a $\vec b$-jet-cube is uniquely in the image of $\Usymcube_i$ if it do
 	The functors $\Fsym_i$, $\loch \multip \rival{\jet_i}$ and $\loch \multip \rival{\edge_i}$ lift to both forward and trioriented jet-$M$-cube categories.
 	The functors $\Op_i$, $\Usym_i$ and $\loch \multip \rival{\tej_i}$ lift to trioriented jet-$M$-cube categories.
 	We denote the resulting functors as $\Fsymcube_i$, $\loch \multip (\dm i : \rival{\jet_i})$, $\loch \multip (\dm i : \rival{\edge_i})$, $\Opcube_i$, $\Usymcube_i$ and $\loch \multip (\dm i : \rival{\tej_i})$, where each time $\dm i$ represents a bound De Bruijn index.
+	We have $\Fsymcube_i \dashv \Usymcube_i$ and thus an idempotent monad $\UFsymcube_i := \Usymcube_i \circ \Fsymcube_i$.
 \end{proposition}
 \begin{proof}
 	The functors $\Fsym_i$, $\Op_i$ and $\Usym_i$ have no effect on the carrier, so they certainly lift to $\cubecat_M^\eps$, hence to the pullback $\cubecat_M^\eps \times_\Set \jetset{\vec a}$.
@@ -482,7 +483,12 @@ Note that a $\vec b$-jet-cube is uniquely in the image of $\Usymcube_i$ if it do
 		\item $\Op_i$ lifts to trioriented jet cubes by reversing the \emph{last} occurrence of either $\jet_i$ or $\tej_i$ (\cref{thm:twisted-prism-op}).
 		\item $\Usym_i$ lifts to jet cubes as the operation $\Usymcube_i$ already introduced in \cref{def:sym-forget-cube}.
 	\end{itemize}
-	The various prism functor multiply the carrier with $\accol{0, 1}$ and thus lift over $\EP$ to the affine/cartesian cube category by multiplying with $(\dm i : \IX)$.
+	To prove $\Fsymcube \dashv \Usymcube$, we need to build unit and co-unit natural transformations.
+	Since the categories of forward/trioriented jet cubes are fully faithful subcategories of the pullback $\cubecat_M^\eps \times_\Set \jetset{\vec a}$, it suffices to build them there.
+	They were already established in $\jetset{\vec a}$ by \cref{def:sym-free,def:sym-cofree}.
+	As they reduce to the identity unit and co-unit of $\Id \dashv \Id$ for the carriers, they trivially lift to $\cubecat_M^\eps$.
+	
+	The various prism functors multiply the carrier with $\accol{0, 1}$ and thus lift over $\EP$ to the affine/cartesian cube category by multiplying with $(\dm i : \IX)$.
 	Hence, they also lift to the pullback $\cubecat_M^\eps \times_\Set \jetset{\vec a}$.
 	Each of them lifts to trioriented jet cubes, and the twisted prism functor also to forward jet cubes, by appending the symbol concerned.
 \end{proof}
@@ -519,8 +525,13 @@ Note that a $\vec b$-jet-cube is uniquely in the image of $\Usymcube_i$ if it do
 \subsubsection{A Calculus of Opposable Jet Cube Morphisms}
 In this section, we develop a calculus that inductively generates the morphisms of the category $\trijetcubeopt{\eps}{M}{\vec a}$ and therefore also those of its full subcategory $\jetcubeopt{\eps}{M}{\vec a}$.
 
+Since the forgetful functor $U : \jetset{\vec a} \to \Set$ is faithful, so is $\erasejc \loch : \trijetcubeopt{\eps}{M}{\vec a}$.
+As such, we can regard `being a morphism of (forward/trioriented) jet cubes' as a proof-irrelevant property of morphisms of cubes, which we will therefore use as preterms.
+Our calculus will therefore feature a single judgement $\vfi : V \to W$ meaning that the morphism $\vfi : \erasejc V \to \erasejc W$ is in fact a morphism of jet cubes.
+Soundness of the calculus will be the property that the judgement's meaning actually holds when the judgement is derivable, whereas completeness means that the judgement is derivable when its meaning is true.
+
 \begin{convention}
-	When presenting the calculus, with permission from \cref{thm:prism-commute}, we will order the dimensions of an opposable jet cube by \emph{decreasing} degree.
+	When presenting the calculus, with permission from \cref{thm:cube-commute}, we will order the dimensions of an opposable jet cube by \emph{decreasing} degree.
 \end{convention}
 \begin{remark}
 	We will only consider the monads $\bipointedsym$ and $\booleanalg$ because:
@@ -529,7 +540,6 @@ In this section, we develop a calculus that inductively generates the morphisms 
 		\item We do not see any advantage of $\demorgan$ over $\booleanalg$. In particular, we want $\EP$ to be faithful.
 	\end{itemize}
 \end{remark}
-\todoi{Define $\shp_i$ and $\shp_i^\ypolar$. But $\shp_i$ is not even a functor for $i \neq 0$. So we will include an equijet interval.}
 
 Zero:
 \[
@@ -591,17 +601,26 @@ Preservation:
 	}{}
 \]
 
+Symmetrization (needed when you encounter $\rival{\equijet_i}$):
+\[
+	\inference{
+		\vfi : \Fsymcube_i V \to W
+	}{
+		\vfi : V \to \Usymcube_i W
+	}{}
+\]
+
 Companion:
 \[
 	\inference{
-		\vfi : \shp^\ypolar_i(\shp^\ypolar_j U, V) \to W
+		\vfi : \UFsymcube_i(\UFsymcube_j U, V) \to W
 	}{
 		(\vfi, \dm j / \dm i) : (U, \dm j : \rival{\jet_j}, V) \to (W, \dm i : \rival{\jet_i})
 	}{$j > i$}
 \]
 \[
 	\inference{
-		\vfi : \shp^\ypolar_i(\shp^\ypolar_j U, V) \to W
+		\vfi : \UFsymcube_i(\UFsymcube_j U, V) \to W
 	}{
 		(\vfi, \dm j / \dm i) : (U, \dm j : \rival{\tej_j}, V) \to (W, \dm i : \rival{\tej_i})
 	}{$j > i$}
@@ -610,14 +629,14 @@ Companion:
 Conjoint:
 \[
 	\inference{
-		\vfi : \shp^\ypolar_i(\shp^\ypolar_j U, V) \to W
+		\vfi : \UFsymcube_i(\UFsymcube_j U, V) \to W
 	}{
 		(\vfi, \dm j / \dm i) : (U, \dm j : \rival{\tej_j}, V) \to (W, \dm i : \rival{\jet_i})
 	}{$j > i$}
 \]
 \[
 	\inference{
-		\vfi : \shp^\ypolar_i(\shp^\ypolar_j U, V) \to W
+		\vfi : \UFsymcube_i(\UFsymcube_j U, V) \to W
 	}{
 		(\vfi, \dm j / \dm i) : (U, \dm j : \rival{\jet_j}, V) \to (W, \dm i : \rival{\tej_i})
 	}{$j > i$}
@@ -628,7 +647,7 @@ Forward conjunction and backward disjunction:
 	\inference{
 		(\vfi, s/\dm i, t/\dm j) : V \to (W, \dm i : \rival{\jet_i}, \dm j : \rival{\jet_i})
 		\qquad
-		\dom(\vfi) = \shp^\ypolar_i V
+		\dom(\vfi) = \UFsymcube_i V
 	}{
 		(\vfi, s \wedge t/\dm k) : V \to (W, \dm k : \rival{\jet_i})
 	}{$\booleanalg$}
@@ -637,18 +656,18 @@ Forward conjunction and backward disjunction:
 	\inference{
 		(\vfi, s/\dm i, t/\dm j) : V \to (W, \dm i : \rival{\tej_i}, \dm j : \rival{\tej_i})
 		\qquad
-		\dom(\vfi) = \shp^\ypolar_i V
+		\dom(\vfi) = \UFsymcube_i V
 	}{
 		(\vfi, s \vee t/\dm k) : V \to (W, \dm k : \rival{\tej_i})
 	}{$\booleanalg$}
 \]
 
-Forward disjunction and backward conjunction:
+Forward disjunction and backward conjunction:\footnote{It may be helpful to note that the start of the Hamiltonian path of a forward jet cube always has coordinates $(1, \ldots, 1, 0)$.}
 \[
 	\inference{
 		(\vfi, s/\dm i, t/\dm j) : V \to (W, \dm i : \rival{\tej_i}, \dm j : \rival{\jet_i})
 		\qquad
-		\dom(\vfi) = \shp^\ypolar_i V
+		\dom(\vfi) = \UFsymcube_i V
 	}{
 		(\vfi, s \vee t/\dm k) : V \to (W, \dm k : \rival{\jet_i})
 	}{$\booleanalg$}
@@ -657,12 +676,11 @@ Forward disjunction and backward conjunction:
 	\inference{
 		(\vfi, s/\dm i, t/\dm j) : V \to (W, \dm i : \rival{\jet_i}, \dm j : \rival{\tej_i})
 		\qquad
-		\dom(\vfi) = \shp^\ypolar_i V
+		\dom(\vfi) = \UFsymcube_i V
 	}{
 		(\vfi, s \wedge t/\dm k) : V \to (W, \dm k : \rival{\tej_i})
 	}{$\booleanalg$}
 \]
-Note: the start of the Hamiltonian path of a twisted cube always has coordinates $(1, \ldots, 1, 0)$.
 
 Truth table (cartesian):
 \[
@@ -677,18 +695,7 @@ Truth table (cartesian):
 	}{$\booleanalg$, $\cartes$}
 \]
 
-\todoi{I think we can do any left associative series of conjunctions/disjunctions.}
-
-\todoi{Connections:
-\begin{itemize}
-	\item Affine: traverse the boolean algebra syntax tree and analyze where the last variable is.
-	\item Cartesian: regard it as an arbitrary truth table and spell it as $\dm i \mathbin ? \dm j \mathbin : \dm k$. This should be an increasing function of $\dm i$, i.e.\ $\dm k \Rightarrow \dm j$. Moreover, $\dm j$ should be covariant and $\dm k$ contravariant. (Your twisted prisms still don't have diagonals, but that's ok since the entire expression concerns one codomain dimension.)
-\end{itemize}
-}
-
-\todoi{Conjecture: $\jetcubeaff{\bipointedsym}{[\ypolar]}$ is the twisted cube category \cite{pinyo-twisted}. Symmetries zijn nodig om aan 0-kant te embedden. Moogt ook cartesians pakken, want hebt toch geen diagonalen.}
-\todoi{Use: $\jetcubeaff{\booleanalg}{\vec a}$ of $\jetcubecart{\booleanalg}{\vec a}$}
-\todoi{Twisted prism functors at different degrees commute.}
+\todoi{Use $\jetcubeaff{\booleanalg}{\vec a}$ or $\jetcubecart{\booleanalg}{\vec a}$}
 
 \subsection{Jet Cubes Old}
 \todoi{This is all wrong: there is no symmetry, no degradation and no connections/companions/conjoints.}
@@ -743,6 +750,7 @@ Again, every jet cube morphism can be generated by the above steps in only a sin
 \end{proof}
 
 \subsection{Comparison to Pinyo and Kraus's Twisted Cube Category}
+\todoi{Conjecture: $\jetcubeaff{\bipointedsym}{[\ypolar]}$ is the twisted cube category \cite{pinyo-twisted}. Symmetries zijn nodig om aan 0-kant te embedden. Moogt ook cartesians pakken, want hebt toch geen diagonalen.}
 \todoi{Compare to all the different cube categories they have, I think I have them all included.}
 In this section, we discuss how our approach reduces to Pinyo and Kraus's \cite{pinyo-twisted} when $\vec a = [\ypolar]$.
 $\jetset{[\ypolar]}$ is the category of proof-irrelevant reflexive graphs.
