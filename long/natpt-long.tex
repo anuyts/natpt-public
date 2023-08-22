@@ -486,78 +486,34 @@ Note that a $\vec b$-jet-cube is uniquely in the image of $\Usymcube_i$ if it do
 	Hence, they also lift to the pullback $\cubecat_M^\eps \times_\Set \jetset{\vec a}$.
 	Each of them lifts to trioriented jet cubes, and the twisted prism functor also to forward jet cubes, by appending the symbol concerned.
 \end{proof}
-%\begin{definition} \label{def:jet-cube-cat}
-%	Let $\vec a$ be a mask and $\eps \in \accol{\affine, \cartes}$.
-%	We define the category $\jetcubeopt{\eps}{M}{\vec a}$ of \textbf{affine/cartesian jet $M$-cubes of mask $\vec a$} as the category
+%\begin{definition} \label{def:prism-cube}
+%	Let $\vec a$ be a mask, $\eps \in \accol{\affine, \cartes}$ and $i < \lenpol{\vec a}$. We define the \textbf{$i$-twisted-prism functor $\loch \multip (\dm i : \rival{\jet_i}) : \jetcubeopt{\eps}{M}{\vec a} \to \jetcubeopt{\eps}{M}{\vec a}$} on jet cubes as follows:\footnote{We still think of $\dm i$ as a De Bruijn index.}
 %	\begin{itemize}
-%		\item whose objects are jet cubes of mask $\vec a$,
-%		\item whose Hom-sets are given by the pullback
-%		\begin{equation}
-%			\xymatrix{
-%				\Hom_{\jetcubeopt{\eps}{M}{\vec a}}(V, W)
-%					\ar@{.>}[rr]^{\JEP}
-%					\ar@{.>}[d]_{\erasejc{\loch}}
-%					\xydrcorner
-%				&&
-%				\Hom_{\jetset{\vec a}}(\JEP(V), \JEP(W))
-%					\ar[d]^U
-%				\\
-%				\Hom_{\cubecat^\eps_M}(\erasejc V, \erasejc W)
-%					\ar[rr]_{\EP}
-%				&&
-%				\Hom_{\Set}(\EP(\erasejc V), \EP(\erasejc W)),
-%			}
-%		\end{equation}
-%		i.e.\ they are morphisms between cubes that respect the jet relations on endpoints.
+%		\item The object $W$ is sent to $(W, \dm i : \rival{\jet_i})$.
+%		\item The morphism $\vfi : V \to W$ is sent to the morphism $\vfi \multip (\dm i : \rival{\jet_i})$ such that
+%		\begin{itemize}
+%			\item If $\eps = \affine$ then $\erasejc{\vfi \multip (\dm i : \rival{\jet_i})} = \erasejc \vfi * (\dm i : \IX)$,
+%			\item If $\eps = \cartes$ then $\erasejc{\vfi \multip (\dm i : \rival{\jet_i})} = \erasejc \vfi \times (\dm i : \IX)$,
+%			\item $\JEP(\vfi \multip (\dm i : \rival{\jet_i})) = \JEP(\vfi) \multip \rival{\jet_i}$.
+%		\end{itemize}
+%	\end{itemize}
+%	If $a_i = \npolar$, then we call this simply the \textbf{$i$-prism functor} $\loch \multip (\dm i : \rival{\edge_i}) : \jetcubeopt{\eps}{M}{\vec a} \to \jetcubeopt{\eps}{M}{\vec a}$.
+%	
+%	We similarly define, on opposable jet cubes:
+%	\begin{itemize}
+%		\item the $i$-twisted-prism functor $\loch \multip (\dm i : \rival{\jet_i}) : \jetcubeopt{\eps}{M}{\vec a} \to \jetcubeopt{\eps}{M}{\vec a}$ when $a_i = \ypolar$,
+%		\item the opposite $i$-twisted-prism functor $\loch \multip (\dm i : \rival{\tej_i}) : \jetcubeopt{\eps}{M}{\vec a} \to \jetcubeopt{\eps}{M}{\vec a}$ when $a_i = \ypolar$,
+%		\item the $i$-prism functor $\loch \multip (\dm i : \rival{\edge_i}) : \jetcubeopt{\eps}{M}{\vec a} \to \jetcubeopt{\eps}{M}{\vec a}$ when $a_i = \npolar$.
 %	\end{itemize}
 %\end{definition}
-\begin{definition} \label{def:prism-cube}
-	Let $\vec a$ be a mask, $\eps \in \accol{\affine, \cartes}$ and $i < \lenpol{\vec a}$. We define the \textbf{$i$-twisted-prism functor $\loch \multip (\dm i : \rival{\jet_i}) : \jetcubeopt{\eps}{M}{\vec a} \to \jetcubeopt{\eps}{M}{\vec a}$} on jet cubes as follows:\footnote{We still think of $\dm i$ as a De Bruijn index.}
-	\begin{itemize}
-		\item The object $W$ is sent to $(W, \dm i : \rival{\jet_i})$.
-		\item The morphism $\vfi : V \to W$ is sent to the morphism $\vfi \multip (\dm i : \rival{\jet_i})$ such that
-		\begin{itemize}
-			\item If $\eps = \affine$ then $\erasejc{\vfi \multip (\dm i : \rival{\jet_i})} = \erasejc \vfi * (\dm i : \IX)$,
-			\item If $\eps = \cartes$ then $\erasejc{\vfi \multip (\dm i : \rival{\jet_i})} = \erasejc \vfi \times (\dm i : \IX)$,
-			\item $\JEP(\vfi \multip (\dm i : \rival{\jet_i})) = \JEP(\vfi) \multip \rival{\jet_i}$.
-		\end{itemize}
-	\end{itemize}
-	If $a_i = \npolar$, then we call this simply the \textbf{$i$-prism functor} $\loch \multip (\dm i : \rival{\edge_i}) : \jetcubeopt{\eps}{M}{\vec a} \to \jetcubeopt{\eps}{M}{\vec a}$.
-	
-	We similarly define, on opposable jet cubes:
-	\begin{itemize}
-		\item the $i$-twisted-prism functor $\loch \multip (\dm i : \rival{\jet_i}) : \jetcubeopt{\eps}{M}{\vec a} \to \jetcubeopt{\eps}{M}{\vec a}$ when $a_i = \ypolar$,
-		\item the opposite $i$-twisted-prism functor $\loch \multip (\dm i : \rival{\tej_i}) : \jetcubeopt{\eps}{M}{\vec a} \to \jetcubeopt{\eps}{M}{\vec a}$ when $a_i = \ypolar$,
-		\item the $i$-prism functor $\loch \multip (\dm i : \rival{\edge_i}) : \jetcubeopt{\eps}{M}{\vec a} \to \jetcubeopt{\eps}{M}{\vec a}$ when $a_i = \npolar$.
-	\end{itemize}
-\end{definition}
-\begin{proposition} \label{thm:prism-commute}
-	((Opposable) twisted) prism functors for different degrees commute.
+\begin{proposition} \label{thm:cube-commute}
+	Any two functors on jet cubes concerned in \cref{thm:lift-to-jet-cubes}, instantiated on different degrees, commute.
+	In other words, the natural transformation given in \cref{thm:commute} lifts to (forward/trioriented) jet cubes when the associated functors lift.
 \end{proposition}
 \begin{proof}
-	On jet-erased cubes, we have an isomorphism
-	\begin{description}
-		\item[\framebox{$\eps = \affine$}] $(\dm i/\dm i, \dm j/\dm j) \quad:\quad \loch * (\dm i : \IX) * (\dm j : \IX) \quad\cong\quad \loch * (\dm j : \IX) * (\dm i : \IX)$,
-		\item[\framebox{$\eps = \cartes$}] $(\dm i/\dm i, \dm j/\dm j) \quad:\quad \loch \times (\dm i : \IX) \times (\dm j : \IX) \quad\cong\quad \loch \times (\dm j : \IX) \times (\dm i : \IX)$.
-	\end{description}
-	One easily checks that this isomorphism respects the jet relations.
-\end{proof}
-\begin{proposition}
-	The involution $\Op_i : \jetset{\vec a} \to \jetset{\vec a}$ lifts to an involution $\Opcube_i : \trijetcubeopt{\eps}{M}{\vec a} \to \trijetcubeopt{\eps}{M}{\vec a}$ which turns around the last arrow of degree $i$.
-\end{proposition}
-\begin{proof}
-	The functor $\Op_i$ is clearly defined on the pullback $\cubecat^\eps_M \times_\Set \jetset{\vec a}$, so we need to prove that it sends opposable jet cubes to opposable jet cubes.
-
-	If $a_i = \npolar$, then $\Op_i = \Id$ trivially lifts as the identity functor.
-	Since in that case $\rival{\jet_i}$ and $\rival{\tej_i}$ both mean $\rival{\edge_i}$, turning around the last arrow of degree $i$ is also the identity functor.
-	
-	If $a_i = \ypolar$, it is easy to see that $\Op_i$ commutes with twisted prism functors (on jet sets) for different degrees. When it meets a twisted prism functor of the same degree, it reverses the direction of the arrow (\cref{thm:twisted-prism-op}):
-	\[
-		\Op_i(X \multip \rival{\jet_i}) = X \multip \rival{\tej_i},
-		\qquad
-		\Op_i(X \multip \rival{\tej_i}) = X \multip \rival{\jet_i}.
-	\]
-	It is then easy to see that $\Opcube_i$ acts on opposable jet cubes by reversing the last arrow of degree $i$.
+	Since the categories of forward/trioriented jet cubes are fully faithful subcategories of the pullback $\cubecat_M^\eps \times_\Set \jetset{\vec a}$, it suffices to prove the natural isomorphism there.
+	The isomorphism was already established in $\jetset{\vec a}$ by \cref{thm:commute}, and the effect on the carrier is either nothing (when at most one prism functor is involved) or swapping components (when both functors are prism functors).
+	These isomorphisms lift to $\cubecat_M^\eps$.
 \end{proof}
 
 \subsubsection{A Calculus of Opposable Jet Cube Morphisms}
