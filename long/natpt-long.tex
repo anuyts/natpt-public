@@ -528,7 +528,14 @@ Note that a $\vec b$-jet-cube is uniquely in the image of $\Usymcube_i$ if it do
 	The isomorphism was already established in $\jetset{\vec a}$ by \cref{thm:commute}, and the effect on the carrier is either nothing (when at most one prism functor is involved) or swapping components (when both functors are prism functors).
 	These isomorphisms lift to $\cubecat_M^\eps$.
 \end{proof}
-\begin{theorem}
+\begin{remark} \label{rem:two-monads}
+	As of this point we will only be interested in the monads $\bipointedsym$ and $\booleanalg$ because:
+	\begin{itemize}
+		\item We need involutions in order to be able to work with the source-side of the twisted prism, ruling out $\bipointed$ and $\distlattice$.
+		\item We do not see any advantage of $\demorgan$ over $\booleanalg$. In particular, we want $\EP$ to be faithful.
+	\end{itemize}
+\end{remark}
+\begin{theorem} \label{thm:affine-automatic}
 	Assuming the law of excluded middle for the affineness predicate on cube morphisms, we have isomorphisms of categories\footnote{Depending on the formalization, possibly even equalities.}
 	\[
 		\trijetcubeopt \affine \bipointedsym {\vec a} \cong \trijetcubeopt \cartes \bipointedsym {\vec a},
@@ -609,26 +616,26 @@ which collapses five consecutive points of the Hamiltonian path and is a legitim
 		&&& (1, 1).
 	}
 \]
+Such morphisms are not assumed in the definition of pro-arrow equipments, so we wish to exclude these.
+For this reason, we will no longer be interested in cartesian jet-$\booleanalg$-cubes.
+By \cref{thm:affine-automatic}, we are also no longer interested in cartesian jet-$\bipointedsym$-cubes.
+In short then, by \cref{rem:two-monads}:
+\begin{remark} \label{rem:no-cartesian}
+	We are no longer interested in cartesian jet cubes.
+\end{remark}
 
 \subsubsection{A Calculus of Trioriented Jet Cube Morphisms}
-In this section, we develop a calculus that inductively generates the morphisms of the category $\trijetcubeopt{\eps}{M}{\vec a}$ and therefore also those of its full subcategory $\jetcubeopt{\eps}{M}{\vec a}$.
+In this section, we develop a calculus that inductively generates the morphisms of the category \linebreak $\trijetcubeopt{\affine}{M}{\vec a}$ and therefore also those of its full subcategory $\jetcubeopt{\affine}{M}{\vec a}$.
 
-Since the forgetful functor $U : \jetset{\vec a} \to \Set$ is faithful, so is $\erasejc \loch : \trijetcubeopt{\eps}{M}{\vec a}$.
+Since the forgetful functor $U : \jetset{\vec a} \to \Set$ is faithful, so is $\erasejc \loch : \trijetcubeopt{\affine}{M}{\vec a}$.
 As such, we can regard `being a morphism of (forward/trioriented) jet cubes' as a proof-irrelevant property of morphisms of cubes, which we will therefore use as preterms.
 Our calculus will therefore feature a single judgement $\vfi : V \to W$ meaning that the morphism $\vfi : \erasejc V \to \erasejc W$ is in fact a morphism of jet cubes.
 Soundness of the calculus will be the property that the judgement's meaning actually holds when the judgement is derivable, whereas completeness means that the judgement is derivable when its meaning is true.
-We do not have to bother with an equational theory, as we can simply inherit it from $\cubecat_M^\eps$.
+We do not have to bother with an equational theory, as we can simply inherit it from $\cubecat_M^\affine$.
 
 \begin{convention} \label{conv:sort-cubes}
 	When presenting the calculus, with permission from \cref{thm:cube-commute}, we will order the dimensions of a (forward/trioriented) jet cube by \emph{decreasing} degree.
 \end{convention}
-\begin{remark}
-	We will only consider the monads $\bipointedsym$ and $\booleanalg$ because:
-	\begin{itemize}
-		\item We need involutions in order to be able to work with the source-side of the twisted prism,
-		\item We do not see any advantage of $\demorgan$ over $\booleanalg$. In particular, we want $\EP$ to be faithful.
-	\end{itemize}
-\end{remark}
 \begin{figure} \label{fig:calculus}
 	\[
 		\inferencel{zero:fwd}{
@@ -766,25 +773,25 @@ We do not have to bother with an equational theory, as we can simply inherit it 
 			\sez (\vfi, s \wedge t/\dm k) : V \to (W, \dm k : \rival{\tej_i})
 		}{$\booleanalg$}
 	\]
-	\[
-		\inferencel{truth-table}{
-			a_i = \npolar
-			\qquad
-			\vec t[x_1, \ldots, x_n] \in (\booleanalg \accol{x_1, \ldots, x_n})^m
-			\\
-			\phantom{a_i = \npolar}
-			\qquad
-			\text{$\vec t : \accol{0, 1}^n \to \accol{0, 1}^m$ is non-expansive w.r.t.\ $\ell^1$-distance}
-			\\
-			\sez (\vfi, s_1/\dm i_1, \ldots, s_n/\dm i_n) : V \to (W, \dm i_1 : \rival{\edge_i}, \ldots, \dm i_n : \rival{\edge_i})
-		}{
-			\sez (\vfi, t_1[s_1, \ldots, s_n] / \dm j_1, \ldots, t_m[s_1, \ldots, s_n]) / \dm j_m) : V \to (W, \dm j_1 : \rival{\edge_i}, \ldots, \dm j_m : \rival{\edge_i})
-		}{$\booleanalg$, $\cartes$}
-	\]
+%	\[
+%		\inferencel{truth-table}{
+%			a_i = \npolar
+%			\qquad
+%			\vec t[x_1, \ldots, x_n] \in (\booleanalg \accol{x_1, \ldots, x_n})^m
+%			\\
+%			\phantom{a_i = \npolar}
+%			\qquad
+%			\text{$\vec t : \accol{0, 1}^n \to \accol{0, 1}^m$ is non-expansive w.r.t.\ $\ell^1$-distance}
+%			\\
+%			\sez (\vfi, s_1/\dm i_1, \ldots, s_n/\dm i_n) : V \to (W, \dm i_1 : \rival{\edge_i}, \ldots, \dm i_n : \rival{\edge_i})
+%		}{
+%			\sez (\vfi, t_1[s_1, \ldots, s_n] / \dm j_1, \ldots, t_m[s_1, \ldots, s_n]) / \dm j_m) : V \to (W, \dm j_1 : \rival{\edge_i}, \ldots, \dm j_m : \rival{\edge_i})
+%		}{$\booleanalg$, $\cartes$}
+%	\]
 	\caption{A calculus of trioriented jet cube morphisms}
 \end{figure}
 \begin{definition} \label{def:calculus}
-	For $M \in \accol{\bipointedsym, \booleanalg}$, $\eps \in \accol{\affine, \cartes}$, any mask $\vec a$ and for any two objects $V, W \in \Obj(\jetcubeopt M \eps {\vec a})$, we define a proof-irrelevant predicate on morphisms $\vfi : \erasejc V \to \erasejc W$, denoted $\sez \vfi : V \to W$, inductively generated by the inference rules in \cref{fig:calculus} subject to \cref{conv:sort-cubes}.
+	For $M \in \accol{\bipointedsym, \booleanalg}$, any mask $\vec a$ and for any two objects $V, W \in \Obj(\jetcubeopt \affine M {\vec a})$, we define a proof-irrelevant predicate on morphisms $\vfi : \erasejc V \to \erasejc W$, denoted $\sez \vfi : V \to W$, inductively generated by the inference rules in \cref{fig:calculus} subject to \cref{conv:sort-cubes}.
 \end{definition}
 We discuss these inference rules one by one.
 We can substitute the last variable with an endpoint. If this end point is at the last dimension's source side, then the rest of the morphism lands in the $i$-opposite of $W$ (\ruleref{zero:fwd}, \ruleref{one:bck}), otherwise it lands in $W$ itself (\ruleref{one:fwd}, \ruleref{zero:bck}).
@@ -803,7 +810,7 @@ This turns our last dimension into $\dm i : \rival{\edge_i}$ which is a special 
 We can substitute the last variable with an expression of a weaker (higher) degree in either direction.
 Inspired by \cref{thm:jetset-equipment}, we choose to use terminology from pro-arrow equipments and refer to this action as creating a companion when the direction of the arrow remains the same (\ruleref{companion:fwd}, \ruleref{companion:bck}), and a conjoint when it reverses (\ruleref{conjoint:fwd}, \ruleref{conjoint:bck}).
 Some measures of caution need to be taken however, which we consider in the case of \ruleref{companion:fwd}, where we wish to derive $(\vfi, \dm j / \dm i) : (U, \dm j : \rival{\jet_j}, V) \to (W, \dm i : \rival{\jet_i})$.
-First of all, regardless of whether $\eps = \affine$ or $\eps = \cartes$, we note that $\JEP$ realizes cubes by applying twisted prism functors to jet sets, and these twisted prism functors do not generate diagonals (\cref{def:prism}). Thus, we need to make sure that $\vfi$ does not use the variable $\dm j$, so we will have $\vfi : (\erasejc{U}, \erasejc{V}) \to \erasejc{W}$.
+\todoi{Edit} First of all, regardless of whether $\eps = \affine$ or $\eps = \cartes$, we note that $\JEP$ realizes cubes by applying twisted prism functors to jet sets, and these twisted prism functors do not generate diagonals (\cref{def:prism}). Thus, we need to make sure that $\vfi$ does not use the variable $\dm j$, so we will have $\vfi : (\erasejc{U}, \erasejc{V}) \to \erasejc{W}$.
 Now let us look at what happens when we set $\dm i$ and $\dm j$ to $0$ or to $1$:
 \[
 	\xymatrix{
@@ -828,7 +835,7 @@ Now let us look at what happens when we set $\dm i$ and $\dm j$ to $0$ or to $1$
 \]
 So $\vfi$ needs to be both a morphism of jet cubes from $(U, V)$ to $W$ and from $(\Opcube_j(U), V)$ to $\Opcube_i(W)$ or equivalently from $\Opcube_i(\Opcube_j(U), V)$ to $W$. This can be achieved by asking that $\vfi$ starts from \linebreak $\UFsym_i(\UFsym_j(U), V)$, which can be thought of as a join of $(U, V)$ and $\Opcube_i(\Opcube_j(U), V)$.
 
-The last five rules involve conjunction and disjunction (together called connections) and only apply if $M = \booleanalg$, as $\bipointedsym$ does not provide these operations.
+The last four rules involve conjunction and disjunction (together called connections) and only apply if $M = \booleanalg$, as $\bipointedsym$ does not provide these operations.
 For rules allow us to substitute the last variable with a connection.
 The directions of the arrows in \ruleref{conj:fwd} and \ruleref{disj:fwd} can be understood by simply drawing jet squares and their images:
 \[
@@ -999,23 +1006,23 @@ The cube $\erasejc U$ arose as the part of $\erasejc V$ not used by $s$ and $t$,
 			\]
 			In each case, we get $s(\vec v) \wedge t(\vec v) \jet_i s(\vec v') \wedge t(\vec v')$ in $\rival{\jet_i}$, and thus the required jet between the images $(f_0, s(\vec v) \wedge t(\vec v)) \jet_i (f_0, s(\vec v') \wedge t(\vec v'))$.
 		\end{itemize}
-		Soundness of \ruleref{disj:bck}, \ruleref{disj:fwd} and \ruleref{conj:bck} is proven analogously, but with a different case analysis in the table.
+		Soundness of \ruleref{disj:bck}, \ruleref{disj:fwd} and \ruleref{conj:bck} is proven analogously, but with a different case analysis in the table. \qedhere
 		
-		\item We prove soundness of \ruleref{truth-table} by postcomposition with a jet cube morphism that erases to $(\id, \vec t[\vec{\dm i}]/\vec{\dm j}) : (W, \dm i_1 : \rival{\edge_i}, \ldots, \dm i_n : \rival{\edge_i}) \to (W, \dm j_1 : \rival{\edge_i}, \ldots, \dm j_m : \rival{\edge_i})$, i.e. we prove that $\EP(\id, \vec t[\vec{\dm i}]/\vec{\dm j}) : (\vec w, \vec u) \mapsto (\vec w, \vec t(\vec u))$ is a jet set morphism $\JEP(W, \dm i_1 : \rival{\edge_i}, \ldots, \dm i_n : \rival{\edge_i}) \to \JEP(W, \dm j_1 : \rival{\edge_i}, \ldots, \dm j_m : \rival{\edge_i})$.
-		
-		Assume we have $(\vec w, \vec u) \jet_j (\vec w', \vec u')$ in the domain.
-		Then there are two possibilities:
-		\begin{itemize}
-			\item $\vec u = \vec u'$ and $(\vec w, \vec u) \jet_j (\vec w', \vec u)$.
-			The latter implies $\vec w \jet_j \vec w'$ in $\JEP(W)$ even if $j = i$ because $a_i = \npolar$.
-			In that case, we have $(\vec w, \vec t(\vec u)) \jet_j (\vec w', \vec t(\vec u))$.
-			\item $i = j$, $\vec w = \vec w'$ and $\vec u \edge_i \vec u'$ in $\JEP(U)$. The latter implies that the $\ell^1$-distance $d^1(\vec u, \vec u') \leq 1$, hence $d^1(\vec t(\vec u), \vec t(\vec u')) \leq 1$, hence $\vec t(\vec u) \edge_i \vec t(\vec u')$, so that $(\vec w, \vec t(\vec u)) \edge_i (\vec w, \vec t(\vec u'))$. \qedhere
-		\end{itemize}
+%		\item We prove soundness of \ruleref{truth-table} by postcomposition with a jet cube morphism that erases to $(\id, \vec t[\vec{\dm i}]/\vec{\dm j}) : (W, \dm i_1 : \rival{\edge_i}, \ldots, \dm i_n : \rival{\edge_i}) \to (W, \dm j_1 : \rival{\edge_i}, \ldots, \dm j_m : \rival{\edge_i})$, i.e. we prove that $\EP(\id, \vec t[\vec{\dm i}]/\vec{\dm j}) : (\vec w, \vec u) \mapsto (\vec w, \vec t(\vec u))$ is a jet set morphism $\JEP(W, \dm i_1 : \rival{\edge_i}, \ldots, \dm i_n : \rival{\edge_i}) \to \JEP(W, \dm j_1 : \rival{\edge_i}, \ldots, \dm j_m : \rival{\edge_i})$.
+%		
+%		Assume we have $(\vec w, \vec u) \jet_j (\vec w', \vec u')$ in the domain.
+%		Then there are two possibilities:
+%		\begin{itemize}
+%			\item $\vec u = \vec u'$ and $(\vec w, \vec u) \jet_j (\vec w', \vec u)$.
+%			The latter implies $\vec w \jet_j \vec w'$ in $\JEP(W)$ even if $j = i$ because $a_i = \npolar$.
+%			In that case, we have $(\vec w, \vec t(\vec u)) \jet_j (\vec w', \vec t(\vec u))$.
+%			\item $i = j$, $\vec w = \vec w'$ and $\vec u \edge_i \vec u'$ in $\JEP(U)$. The latter implies that the $\ell^1$-distance $d^1(\vec u, \vec u') \leq 1$, hence $d^1(\vec t(\vec u), \vec t(\vec u')) \leq 1$, hence $\vec t(\vec u) \edge_i \vec t(\vec u')$, so that $(\vec w, \vec t(\vec u)) \edge_i (\vec w, \vec t(\vec u'))$.
+%		\end{itemize}
 	\end{itemize}
 \end{proof}
 
 \begin{theorem}[Completeness]
-	For any morphism $\vfi : V \to W$ in $\jetcube \eps M {\vec a}$, we have $\sez \erasejc \vfi : V \to W$.
+	For any morphism $\vfi : V \to W$ in $\jetcube \affine M {\vec a}$, we have $\sez \erasejc \vfi : V \to W$.
 \end{theorem}
 \begin{proof}
 	\todoi{Prove}
