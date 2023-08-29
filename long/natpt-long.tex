@@ -609,6 +609,19 @@ We do not have to bother with an equational theory, as we can simply inherit it 
 		}{}
 	\]
 	\[
+		\inferencel{wkn:fwd}{
+			\sez \vfi : \UFsymcube_i(V) \to W
+		}{
+			\sez (\vfi, \dm i / \novar) : (V, \dm i : \rival{\jet_i})
+		}{}
+		\qquad
+		\inferencel{wkn:bck}{
+			\sez \vfi : \UFsymcube_i(V) \to W
+		}{
+			\sez (\vfi, \dm i / \novar) : (V, \dm i : \rival{\jet_i})
+		}{}
+	\]
+	\[
 		\inferencel{companion:fwd}{
 			\sez \vfi : \UFsymcube_i(\UFsymcube_j U, V) \to W
 			\qquad
@@ -699,6 +712,10 @@ We can apply an involution to the last variable, provided that we turn around it
 
 We can apply the (opposite) $i$-twisted prism functor to a morphism (\ruleref{prism:fwd}, \ruleref{prism:bck}).
 
+We can weaken w.r.t.\ the last dimension (\ruleref{wkn:fwd}, \ruleref{wkn:bck}), but some caution is required. At the source-side of the last dimension, we find $\Opcube_i(V)$, whereas at the target-side we have $V$.
+Thus, $\vfi$ needs to be a morphism of jet cubes from $\Opcube_i(V) \to W$ as well as from $V \to W$.
+This can be achieved by asking that $\vfi$ starts from $\UFsymcube_i(V)$, which can be thought of as a join of $\Opcube_i(V)$ and $V$.
+
 If the last dimension of our target cube is of the form $\dm i : \rival{\equijet_i}$, then we know that our cube is in the image of $\Usymcube_i$, and we can proceed using the adjunction $\Fsymcube_i \dashv \Usymcube_i$ (\ruleref{symmetrize}).
 This turns our last dimension into $\dm i : \rival{\edge_i}$ which is a special case of both $\dm i : \rival{\jet_i}$ and $\dm i : \rival{\tej_i}$, so we can proceed by using the \textsc{fwd} and \textsc{bck} rules of the calculus.
 
@@ -728,7 +745,7 @@ Now let us look at what happens when we set $\dm i$ and $\dm j$ to $0$ or to $1$
 			\ar[u]_{(1/\dm i)}
 	}
 \]
-So $\vfi$ needs to be both a morphism of jet cubes from $(U, V)$ to $W$ and from $(\Opcube_j(U), V)$ to $\Opcube_i(W)$ or equivalently from $\Opcube_i(\Opcube_j(U), V)$ to $W$. This can be achieved by asking that $\vfi$ starts from $\UFsym_i(\UFsym_j(U), V)$, which can be thought of as a join of $(U, V)$ and $\Opcube_i(\Opcube_j(U), V)$.
+So $\vfi$ needs to be both a morphism of jet cubes from $(U, V)$ to $W$ and from $(\Opcube_j(U), V)$ to $\Opcube_i(W)$ or equivalently from $\Opcube_i(\Opcube_j(U), V)$ to $W$. This can be achieved by asking that $\vfi$ starts from \linebreak $\UFsym_i(\UFsym_j(U), V)$, which can be thought of as a join of $(U, V)$ and $\Opcube_i(\Opcube_j(U), V)$.
 
 The last five rules involve conjunction and disjunction (together called connections) and only apply if $M = \booleanalg$, as $\bipointedsym$ does not provide these operations.
 For rules allow us to substitute the last variable with a connection.
@@ -820,6 +837,7 @@ Finally, at symmetric degrees, if we have connections and a cartesian cube categ
 	((\dm i \vee \dm j) \wedge \lnot(\dm i \wedge \dm j)/\dm k) : (\dm i : \rival{\edge_i}, \dm j : \rival{\edge_i}) \to (\dm k : \rival{\edge_i}).
 \]
 To fix this, we just throw in all truth tables that actually amount to a graph morphism between the corresponding hypercubes, which can alternatively be phrased as being non-expansive with respect to the $\ell^1$-distance.
+Note that we need cartesianness already to simply use a boolean expression as general as $t$ in a cube morphism, i.e.\ in order to even build the preterm we are talking about.
 
 \begin{theorem}[Soundness]
 	If a morphism $\vfi : \erasejc V \to \erasejc W$ satisfies the predicate $\sez \vfi : V \to W$ from \cref{def:calculus}, then it actually arises as the image $\vfi = \erasejc{\hat \vfi}$ of a morphism $\hat \vfi : V \to W$.
@@ -847,6 +865,15 @@ To fix this, we just throw in all truth tables that actually amount to a graph m
 		\item Soundness of \ruleref{prism:fwd} and \ruleref{prism:bck} was already established by \cref{thm:lift-to-jet-cubes}.
 		
 		\item Soundness of \ruleref{symmetrize} follows from the adjunction established in \cref{thm:lift-to-jet-cubes}.
+		
+		\item We prove soundness of \ruleref{wkn:fwd} by precomposition with a jet cube morphism that erases to $(\id, \dm i / \novar) : (V, \dm i : \rival{\jet_i}) \to \UFsym_i V$.
+		Thus, we need to prove that $\EP(\id, \dm i / \novar) : (\vec v, w) \mapsto \vec v$ is a jet set morphism $\JEP(V, \dm i : \rival{\jet_i}) = \JEP(V) \multip \rival{\jet_i} \to \JEP(\UFsymcube_i(V))$.
+		Let $(\vec v, w) \jet_j (\vec v', w')$ in $\JEP(V) \multip \rival{\jet_i}$.
+		Then there are two possibilities:
+		\begin{itemize}
+			\item $w = w'$ and $(\vec v, w) \jet_j (\vec v', w)$. The latter implies $\vec v \jet_j \vec v'$ in $JEP(V)$ if $j \neq i$ and $\vec v \infrajet_i \vec v'$ if $j = i$. Moving to $\JEP(\UFsymcube_i(V))$, we get $\vec v \jet_j \vec v'$ in all cases, as required.
+			\item $j = i$, $\vec v = \vec v'$ and $w \jet_i w'$. In this case we trivially have $\vec v \jet_j \vec v$ in $\JEP(\UFsymcube_i(V))$.
+		\end{itemize}
 		
 		\item For \ruleref{companion:fwd}, let $\hat \vfi : \UFsymcube_i(\UFsymcube_j U, V) \to W$ be a jet cube morphism.
 		Then $f := \JEP(\hat \vfi)$ is a jet set morphism $\JEP(\UFsymcube_i(\UFsymcube_j U, V)) \to \JEP(W)$.
