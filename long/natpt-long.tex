@@ -528,6 +528,87 @@ Note that a $\vec b$-jet-cube is uniquely in the image of $\Usymcube_i$ if it do
 	The isomorphism was already established in $\jetset{\vec a}$ by \cref{thm:commute}, and the effect on the carrier is either nothing (when at most one prism functor is involved) or swapping components (when both functors are prism functors).
 	These isomorphisms lift to $\cubecat_M^\eps$.
 \end{proof}
+\begin{theorem}
+	Assuming the law of excluded middle for the affineness predicate on cube morphisms, we have isomorphisms of categories\footnote{Depending on the formalization, possibly even equalities.}
+	\[
+		\trijetcubeopt \affine \bipointedsym {\vec a} \cong \trijetcubeopt \cartes \bipointedsym {\vec a},
+		\qquad \qquad
+		\jetcubeopt \affine \bipointedsym {\vec a} \cong \jetcubeopt \cartes \bipointedsym {\vec a},
+	\]
+	which act as the identity on objects.
+\end{theorem}
+\begin{proof}
+	Since the forward jet cube categories are full subcategories of the trioriented ones, it suffices to prove the first isomorphism.
+	There, it is immediately clear that $\trijetcubeopt \affine \bipointedsym {\vec a}$ is a subcategory of $\trijetcubeopt \cartes \bipointedsym {\vec a}$.
+	So we need to show that any morphism in $\trijetcubeopt \cartes \bipointedsym {\vec a}$ is in fact affine.
+	Take such a morphism $\hat \vfi : V \to W$ (write $\vfi = \erasejc{\hat \vfi}$) and assume it is not affine.
+	Since $\bipointedsym$ only has nullary and unary operations, this means that $W$ has dimensions $\dm i$ and $\dm j$ such that $\dm i \psub \vfi$ and $\dm j \psub \vfi$ are not mutually fresh, meaning that $V$ has some dimension $\dm k$ such that $\dm i \psub \vfi, \dm j \psub \vfi \in \accol{\dm k, \lnot \dm k}$.
+	Then $\JEP(\hat \vfi)$ cannot be a jet set morphism as $\JEP(W)$ has no diagonals. This is a contradiction.
+\end{proof}
+Note that the situation is not so simple for $\booleanalg$.
+For example, at symmetric degrees, $\jetcubeopt \cartes \booleanalg{\vec a}$ features the `exclusive or' operation
+\[
+	((\dm i \vee \dm j) \wedge \lnot(\dm i \wedge \dm j)/\dm k) : (\dm i : \rival{\edge_i}, \dm j : \rival{\edge_i}) \to (\dm k : \rival{\edge_i})
+\]
+which cannot be constructed in $\jetcubeopt \affine \booleanalg{\vec a}$.
+More startlingly, even at directed degrees, we have operations such as the following:
+\[
+	(\dm i \wedge \dm j/\dm p, \dm j \wedge \dm k/\dm q) : (\dm i : \rival{\jet_i}, \dm j : \rival{\jet_i}, \dm k : \rival{\jet_i}) \to (\dm p : \rival{\jet_i}, \dm q : \rival{\jet_i}),
+\]
+which collapses five consecutive points of the Hamiltonian path and is a legitimate jet cube morphism:
+\[
+	\xymatrix{
+		(1, 0, 0)
+			\ar[rrr]
+		&&& (1, 0, 1)
+			\ar[ld]
+			\ar@{.>}[ddd]
+		\\
+		& (0, 0, 0)
+			\ar[lu]
+			\ar@{.>}[r]
+		& (0, 0, 1)
+			\ar[d]
+		\\
+		& (0, 1, 0)
+			\ar[u]
+			\ar@{.>}[r]
+		& (0, 1, 1)
+			\ar[rd]
+		\\
+		(1, 1, 0)
+			\ar[ru]
+			\ar@{.>}[uuu]
+			\ar@{.>}[rrr]
+			\ar@{}[rrrdd]|{\rotatebox{270}{$\mapsto$}}
+		&&& (1, 1, 1)
+		\\
+		\\
+		(0, 0)
+			\ar@{=}[rrr]
+		&&& (0, 0)
+			\ar@{=}[ld]
+			\ar@{.>}[ddd]
+		\\
+		& (0, 0)
+			\ar@{=}[lu]
+			\ar@{:}[r]
+		& (0, 0)
+			\ar[d]
+		\\
+		& (0, 0)
+			\ar@{=}[u]
+			\ar@{.>}[r]
+		& (0, 1)
+			\ar[rd]
+		\\
+		(1, 0)
+			\ar[ru]
+			\ar@{.>}[uuu]
+			\ar@{.>}[rrr]
+		&&& (1, 1).
+	}
+\]
 
 \subsubsection{A Calculus of Trioriented Jet Cube Morphisms}
 In this section, we develop a calculus that inductively generates the morphisms of the category $\trijetcubeopt{\eps}{M}{\vec a}$ and therefore also those of its full subcategory $\jetcubeopt{\eps}{M}{\vec a}$.
@@ -831,13 +912,6 @@ For example, in \ruleref{conj:fwd}, assume that $s = \dm i$ and $t = \dm j$ and 
 \]
 Again, we see that $\vfi : \erasejc U \to \erasejc W$ needs to be a morphism of jet cubes both from $\Opcube_i(U) \to \Opcube_i(W)$ (or equivalently from $U \to W$) and from $U \to \Opcube_i(W)$ (or equivalently from $\Opcube_i(U) \to W$). Again, we let $\vfi$ depart from their join $\UFsymcube_i(U)$.
 The cube $\erasejc U$ arose as the part of $\erasejc V$ not used by $s$ and $t$, so in the typing rule we can simply use $\UFsymcube_i(V)$ (this will be formalized in \todo{Refer to soundness and completeness theorems}).
-
-Finally, at symmetric degrees, if we have connections and a cartesian cube category, then there are truth tables that produce valid morphisms $\JEP(V) \to \JEP(W)$ but that cannot be derived by our calculus so far due to its affine discipline, such as the `exclusive or' operation
-\[
-	((\dm i \vee \dm j) \wedge \lnot(\dm i \wedge \dm j)/\dm k) : (\dm i : \rival{\edge_i}, \dm j : \rival{\edge_i}) \to (\dm k : \rival{\edge_i}).
-\]
-To fix this, we just throw in all truth tables that actually amount to a graph morphism between the corresponding hypercubes, which can alternatively be phrased as being non-expansive with respect to the $\ell^1$-distance.
-Note that we need cartesianness already to simply use a boolean expression as general as $t$ in a cube morphism, i.e.\ in order to even build the preterm we are talking about.
 
 \begin{theorem}[Soundness]
 	If a morphism $\vfi : \erasejc V \to \erasejc W$ satisfies the predicate $\sez \vfi : V \to W$ from \cref{def:calculus}, then it actually arises as the image $\vfi = \erasejc{\hat \vfi}$ of a morphism $\hat \vfi : V \to W$.
