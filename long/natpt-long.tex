@@ -644,34 +644,30 @@ We do not have to bother with an equational theory, as we can simply inherit it 
 	\]
 	\[
 		\inferencel{conj:fwd}{
+			\sez \vfi : \UFsymcube_i V \to W \\
 			\sez (\vfi, s/\dm i, t/\dm j) : V \to (W, \dm i : \rival{\jet_i}, \dm j : \rival{\jet_i})
-			\\
-			\dom(\vfi) = \UFsymcube_i V
 		}{
 			\sez (\vfi, s \wedge t/\dm k) : V \to (W, \dm k : \rival{\jet_i})
 		}{$\booleanalg$}
 		\qquad
 		\inferencel{disj:bck}{
+			\sez \vfi : \UFsymcube_i V \to W \\
 			\sez (\vfi, s/\dm i, t/\dm j) : V \to (W, \dm i : \rival{\tej_i}, \dm j : \rival{\tej_i})
-			\\
-			\dom(\vfi) = \UFsymcube_i V
 		}{
 			\sez (\vfi, s \vee t/\dm k) : V \to (W, \dm k : \rival{\tej_i})
 		}{$\booleanalg$}
 	\]
 	\[
 		\inferencel{disj:fwd}{
+			\sez \vfi : \UFsymcube_i V \to W \\
 			\sez (\vfi, s/\dm i, t/\dm j) : V \to (W, \dm i : \rival{\tej_i}, \dm j : \rival{\jet_i})
-			\\
-			\dom(\vfi) = \UFsymcube_i V
 		}{
 			\sez (\vfi, s \vee t/\dm k) : V \to (W, \dm k : \rival{\jet_i})
 		}{$\booleanalg$}
 	\qquad
 		\inferencel{conj:bck}{
+			\sez \vfi : \UFsymcube_i V \to W \\
 			\sez (\vfi, s/\dm i, t/\dm j) : V \to (W, \dm i : \rival{\jet_i}, \dm j : \rival{\tej_i})
-			\\
-			\dom(\vfi) = \UFsymcube_i V
 		}{
 			\sez (\vfi, s \wedge t/\dm k) : V \to (W, \dm k : \rival{\tej_i})
 		}{$\booleanalg$}
@@ -684,7 +680,7 @@ We do not have to bother with an equational theory, as we can simply inherit it 
 			\\
 			\phantom{a_i = \npolar}
 			\qquad
-			\text{$\vec t : \accol{0, 1}^n \to \accol{0, 1}^m$ is non-expansive w.r.t.\ $\lVert \ldots \rVert_1$}
+			\text{$\vec t : \accol{0, 1}^n \to \accol{0, 1}^m$ is non-expansive w.r.t.\ $\ell^1$-distance}
 			\\
 			\sez (\vfi, s_1/\dm i_1, \ldots, s_n/\dm i_n) : V \to (W, \dm i_1 : \rival{\edge_i}, \ldots, \dm i_n : \rival{\edge_i})
 		}{
@@ -823,7 +819,7 @@ Finally, at symmetric degrees, if we have connections and a cartesian cube categ
 \[
 	((\dm i \vee \dm j) \wedge \lnot(\dm i \wedge \dm j)/\dm k) : (\dm i : \rival{\edge_i}, \dm j : \rival{\edge_i}) \to (\dm k : \rival{\edge_i}).
 \]
-To fix this, we just throw in all truth tables that actually amount to a graph morphism between the corresponding hypercubes, which can alternatively be phrased as being non-expansive with respect to the $\ell^1$-norm.
+To fix this, we just throw in all truth tables that actually amount to a graph morphism between the corresponding hypercubes, which can alternatively be phrased as being non-expansive with respect to the $\ell^1$-distance.
 
 \begin{theorem}[Soundness]
 	If a morphism $\vfi : \erasejc V \to \erasejc W$ satisfies the predicate $\sez \vfi : V \to W$ from \cref{def:calculus}, then it actually arises as the image $\vfi = \erasejc{\hat \vfi}$ of a morphism $\hat \vfi : V \to W$.
@@ -872,9 +868,49 @@ To fix this, we just throw in all truth tables that actually amount to a graph m
 			Then we have the required jet between the images $(f(\vec u, \vec v), w) \jet_k (f(\vec u', \vec v), w)$.
 		\end{itemize}
 		Soundness of \ruleref{companion:bck}, \ruleref{conjoint:fwd} and \ruleref{conjoint:bck} is proven almost identically.
+		
+		\item For \ruleref{conj:fwd}, assume given a jet cube morphism $\hat \vfi : \UFsymcube_i V \to W$ (write $\vfi = \erasejc{\hat \vfi}$ and $\EP(\vfi) = f$) and boolean expressions $s$ and $t$ such that $\EP(\vfi, s/\dm i, t/\dm j)$ is a jet set morphism $\JEP(V) \to \JEP(W, \dm i : \rival{\jet_i}, \dm j : \rival{\jet_i}) = \JEP(W) \multip \rival{\jet_i} \multip \rival{\jet_i}$.
+		We show that $\EP(\vfi, s \wedge t / \dm k)$ is a jet set morphism $\JEP(V) \to \JEP(W, \dm k : \rival{\jet_i}) = \JEP(W) \multip \rival{\jet_i}$.
+		Assume we have $v \jet_k v'$ in $\JEP(V)$. Then because $\EP(\vfi, s/\dm i, t/\dm j)$ is a jet set morphism, we are in one of the following situations:
+		\begin{itemize}
+			\item $s(\vec v) = s(\vec v') =: s_0$ and $t(\vec v) = t(\vec v') =: t_0$ and $(f(\vec v), s_0, t_0) \jet_k (f(\vec v'), s_0, t_0)$.
+			The latter implies that $f(\vec v) \jet_k f(\vec v')$ if $k \neq i$.
+			On the other hand, if $k = i$ then because $\hat \vfi : \UFsymcube_i V \to W$ is a jet cube morphism, we know that $f(\vec v) \equijet_i f(\vec v')$.
+			In any case, we get the required jet between the images $(f(\vec v), s_0 \wedge t_0) \jet_k (f(\vec v'), s_0 \wedge t_0)$.
+			
+			\item $k = i$, $f(\vec v) = f(\vec v') = f_0$ and $(s(\vec v), t(\vec v)) \jet_i (s(\vec v'), t(\vec v'))$ in $\rival{\jet_i} \multip \rival{\jet_i}$.
+			The latter implies that exactly one row of the following table applies:
+			\[
+				\begin{array}{c | c | c c}
+					(s(\vec v), t(\vec v))
+					& (s(\vec v'), t(\vec v'))
+					& s(\vec v) \wedge t(\vec v)
+					& s(\vec v') \wedge t(\vec v')
+					\\ \hline
+					(1, 0) & (0, 0) & 0 & 0
+					\\
+					(0, 1) & (1, 1) & 0 & 1
+					\\
+					(0, 0) & (0, 1) & 0 & 0
+					\\
+					(1, 0) & (1, 1) & 0 & 1
+				\end{array}
+			\]
+			In each case, we get $s(\vec v) \wedge t(\vec v) \jet_i s(\vec v') \wedge t(\vec v')$ in $\rival{\jet_i}$, and thus the required jet between the images $(f_0, s(\vec v) \wedge t(\vec v)) \jet_i (f_0, s(\vec v') \wedge t(\vec v'))$.
+		\end{itemize}
+		Soundness of \ruleref{disj:bck}, \ruleref{disj:fwd} and \ruleref{conj:bck} is proven analogously, but with a different case analysis in the table.
+		
+		\item We prove soundness of \ruleref{truth-table} by postcomposition with a jet cube morphism that erases to $(\id, \vec t[\vec{\dm i}]/\vec{\dm j}) : (W, \dm i_1 : \rival{\edge_i}, \ldots, \dm i_n : \rival{\edge_i}) \to (W, \dm j_1 : \rival{\edge_i}, \ldots, \dm j_m : \rival{\edge_i})$, i.e. we prove that $\EP(\id, \vec t[\vec{\dm i}]/\vec{\dm j}) : (\vec w, \vec u) \mapsto (\vec w, \vec t(\vec u))$ is a jet set morphism $\JEP(W, \dm i_1 : \rival{\edge_i}, \ldots, \dm i_n : \rival{\edge_i}) \to \JEP(W, \dm j_1 : \rival{\edge_i}, \ldots, \dm j_m : \rival{\edge_i})$.
+		
+		Assume we have $(\vec w, \vec u) \jet_j (\vec w', \vec u')$ in the domain.
+		Then there are two possibilities:
+		\begin{itemize}
+			\item $\vec u = \vec u'$ and $(\vec w, \vec u) \jet_j (\vec w', \vec u)$.
+			The latter implies $\vec w \jet_j \vec w'$ in $\JEP(W)$ even if $j = i$ because $a_i = \npolar$.
+			In that case, we have $(\vec w, \vec t(\vec u)) \jet_j (\vec w', \vec t(\vec u))$.
+			\item $i = j$, $\vec w = \vec w'$ and $\vec u \edge_i \vec u'$ in $\JEP(U)$. The latter implies that the $\ell^1$-distance $d^1(\vec u, \vec u') \leq 1$, hence $d^1(\vec t(\vec u), \vec t(\vec u')) \leq 1$, hence $\vec t(\vec u) \edge_i \vec t(\vec u')$, so that $(\vec w, \vec t(\vec u)) \edge_i (\vec w, \vec t(\vec u'))$. \qedhere
+		\end{itemize}
 	\end{itemize}
-	
-	\todoi{Prove}
 \end{proof}
 
 \begin{theorem}[Completeness]
