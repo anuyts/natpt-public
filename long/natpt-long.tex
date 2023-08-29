@@ -577,13 +577,13 @@ We do not have to bother with an equational theory, as we can simply inherit it 
 	\]
 	\[
 		\inferencel{inv:fwd}{
-			\sez (\vfi, t) : V \to (W, i : \rival{\tej_i})
+			\sez (\vfi, t/\dm i) : V \to (W, i : \rival{\tej_i})
 		}{
 			\sez (\vfi, \lnot t/\dm i) : V \to (W, i : \rival{\jet_i})
 		}{}
 		\qquad
 		\inferencel{inv:bck}{
-			\sez (\vfi, t) : V \to (W, i : \rival{\jet_i})
+			\sez (\vfi, t/\dm i) : V \to (W, i : \rival{\jet_i})
 		}{
 			\sez (\vfi, \lnot t/\dm i) : V \to (W, i : \rival{\tej_i})
 		}{}
@@ -829,6 +829,51 @@ To fix this, we just throw in all truth tables that actually amount to a graph m
 	If a morphism $\vfi : \erasejc V \to \erasejc W$ satisfies the predicate $\sez \vfi : V \to W$ from \cref{def:calculus}, then it actually arises as the image $\vfi = \erasejc{\hat \vfi}$ of a morphism $\hat \vfi : V \to W$.
 \end{theorem}
 \begin{proof}
+	Note that what really needs to be proven is that $\sez \vfi : V \to W$ implies that $\EP(\vfi)$, which a priori is a function from the set $\EP(\erasejc V) = U(\JEP(V))$ to $\EP(\erasejc W) = U(\JEP(W))$, is in fact a morphism of jet sets $\JEP(V) \to \JEP(W)$.
+	We prove this, of course, by induction on the derivation of the inductive predicate.
+	
+	\begin{itemize}
+		\item For \ruleref{zero:fwd}, \ruleref{one:bck}, \ruleref{one:fwd} and \ruleref{zero:bck}, this follows immediately from \cref{def:prism}.
+		
+		\item For \ruleref{inv:fwd}, by postcomposition, it suffices to show that $\zeta : (\id_W, \lnot \dim i / \dim i) : \erasejc{(W, i : \rival{\tej_i})} \to \erasejc{(W, i : \rival{\jet_i})}$ is a morphism of jet cubes, i.e.\ that $\EP(\zeta) : (\vec w, u) \mapsto (\vec w, \lnot u)$ is a morphism of jet sets $\JEP(W) \multip \rival{\tej_i} \to \JEP(W) \multip \rival{\jet_i}$.
+		
+		Let $(\vec w, u) \jet_j (\vec w', u')$ in $\JEP(W) \multip \rival{\tej_i}$. Then by \cref{def:prism} of the opposite $i$-twisted prism, there are 3 possibilities:
+		\begin{itemize}
+			\item We have $u = u' = 0$ and $\vec w \jet_j \vec w'$ in $\JEP(W)$.
+			In that case, we also have the required jet between the images $(\vec w, 1) \jet_j (\vec w', 1)$ in $\JEP(W) \multip \rival{\jet_i}$.
+			\item We have $u = u' = 1$ and $\vec w \jet_j \vec w'$ in $\Op_i(\JEP(W))$.
+			In that case, we also have the required jet between the images $(\vec w, 0) \jet_j (\vec w', 0)$ in $\JEP(W) \multip \rival{\jet_i}$.
+			\item We have $j = i$, $u = 1$, $u' = 0$ and $\vec w = \vec w'$.
+			In that case, we also have the required jet between the images $(\vec w, 0) \jet_i (\vec w, 1)$ in $\JEP(W) \multip \rival{\jet_i}$.
+		\end{itemize}
+		The proof of soundness of \ruleref{inv:bck} is analogous.
+		
+		\item Soundness of \ruleref{prism:fwd} and \ruleref{prism:bck} was already established by \cref{thm:lift-to-jet-cubes}.
+		
+		\item Soundness of \ruleref{symmetrize} follows from the adjunction established in \cref{thm:lift-to-jet-cubes}.
+		
+		\item For \ruleref{companion:fwd}, let $\hat \vfi : \UFsymcube_i(\UFsymcube_j U, V) \to W$ be a jet cube morphism.
+		Then $f := \JEP(\hat \vfi)$ is a jet set morphism $\JEP(\UFsymcube_i(\UFsymcube_j U, V)) \to \JEP(W)$.
+		We need to show that $g : (\vec u, w, \vec v) \mapsto (f(\vec u, \vec v), w)$ is a jet set morphism $\JEP(U, \dm j : \rival{\jet_j}, V) \to \JEP(W, \dm i : \rival{\jet_i}) = \JEP(W) \multip \rival{\jet_i}$.
+		
+		Assume we have $(\vec u, w, \vec v) \jet_k (\vec u', w', \vec v')$ in $\JEP(U, \dm j : \rival{\jet_j}, V)$.
+		By induction on $V$, one can show that we are in one of the following situations:
+		\begin{itemize}
+			\item $\vec u = \vec u'$, $w = w'$ and $(\vec u, \vec v) \jet_k (\vec u, \vec v')$ in $\JEP(U, V)$.
+			The fact that $f$ is a jet set morphism implies that $f(\vec u, \vec v) \jet_k f(\vec u, \vec v')$ and even $f(\vec u, \vec v) \equijet_i f(\vec u, \vec v')$ if $k = i$.
+			Then we have the required jet between the images $(f(\vec u, \vec v), w) \jet_k (f(\vec u, \vec v'), w)$ in $\JEP(W) \multip \rival{\jet_i}$, where if $k = i$ we use the forward part of the equijet if $w = 1$ and the backward part if $w = 0$.
+			
+			\item $k = j$, $\vec u = \vec u'$, $\vec v = \vec v'$ and $\accol{w, w'} = \accol{0, 1}$. In that case, we have the required jet between the images $(f(\vec u, \vec v), w) \jet_j (f(\vec u, \vec v), w')$ because we have $(f(\vec u, \vec v), w) \infrajet_i (f(\vec u, \vec v), w')$ and $i < j$.
+			
+			\item $w = w'$, $\vec v = \vec v'$ and $(\vec u, w, \vec v) \jet_k (\vec u', w, \vec v)$ in $\JEP(U, \dm j : \rival{\jet_j}, V)$.
+			The latter implies $(\vec u, \vec v) \jet_k (\vec u', \vec v)$ in $\JEP(U, V)$ if $k \neq j$ and $(\vec u, \vec v) \infrajet_j (\vec u', \vec v)$ if $k = j$.
+			Moving to \linebreak $\JEP(\UFsymcube_i(\UFsymcube_j U, V))$, the $j$-infrajet for $k = j$ turns into a $j$-equijet and the $i$-jet for $k = i$ turns into an $i$-equijet.
+			Thus, we conclude, in any case, that $f(\vec u, \vec v) \jet_k f(\vec u', \vec v)$ in $\JEP(W)$, and even $f(\vec u, \vec v) \equijet_i f(\vec u', \vec v)$ if $k = i$.
+			Then we have the required jet between the images $(f(\vec u, \vec v), w) \jet_k (f(\vec u', \vec v), w)$.
+		\end{itemize}
+		Soundness of \ruleref{companion:bck}, \ruleref{conjoint:fwd} and \ruleref{conjoint:bck} is proven almost identically.
+	\end{itemize}
+	
 	\todoi{Prove}
 \end{proof}
 
