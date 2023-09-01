@@ -569,6 +569,16 @@
 
 % reldtt
 
+	% defining \leftrightarrowstriangle and \rightleftarrowstriangle
+	% https://tex.stackexchange.com/a/694740/43137
+	
+	\newcommand{\rightleftarrowstriangle}{\mathrel{\mathchoice
+	    {\ooalign{\raisebox{-.35ex}{$\leftarrowtriangle$}\cr\raisebox{.35ex}{$\rightarrowtriangle$}\cr}}
+	    {\ooalign{\raisebox{-.35ex}{$\leftarrowtriangle$}\cr\raisebox{.35ex}{$\rightarrowtriangle$}\cr}}
+	    {\ooalign{\raisebox{-.25ex}{$\scriptstyle\leftarrowtriangle$}\cr\raisebox{.25ex}{$\scriptstyle\rightarrowtriangle$}\cr}}
+	    {\ooalign{\raisebox{-.2ex}{$\scriptscriptstyle\leftarrowtriangle$}\cr\raisebox{.2ex}{$\scriptscriptstyle\rightarrowtriangle$}\cr}}
+	}}
+
 \newcommand{\RelDTT}{RelDTT}
 \newcommand{\RelDTTLock}{RelDTT$_{\locksym}$}
 \newcommand{\RelMTT}{RelMTT}
@@ -587,7 +597,8 @@
 \newcommand{\tej}{\leftarrowtriangle}%{\curvearrowright}
 	%\newcommand{\curvearrowboth}{\mathrel{\mathrlap{\curvearrowleft}\mkern2.2mu {\curvearrowright}}}
 \newcommand{\equijet}{\leftrightarrowtriangle}
-\newcommand{\infrajet}{\mathrel{\bowtie}}
+%\newcommand{\infrajet}{\mathrel{\bowtie}}
+\newcommand{\infrajet}{\rightleftarrowstriangle}
 
 \newcommand{\rival}[1]{\pparen{#1}}
 
