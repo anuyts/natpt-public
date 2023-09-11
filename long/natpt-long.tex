@@ -724,17 +724,18 @@ We do not have to bother with an equational theory, as we can simply inherit it 
 		}{}
 	\]
 	\[
-		\inferencel{wkn:fwd}{
-			\sez \vfi : \UFsymcube_i(V) \to W
+		\inferencel{wkn}{
+			\sez \vfi : \UFsymcube_i(V) \to W \qquad
+			R \in \accol{\jet, \tej, \equijet}
 		}{
-			\sez (\vfi, \dm i / \novar) : (V, \dm i : \rival{\jet_i}) \to W
+			\sez (\vfi, \dm i / \novar) : (V, \dm i : \rival{R_i}) \to W
 		}{}
-		\qquad
-		\inferencel{wkn:bck}{
-			\sez \vfi : \UFsymcube_i(V) \to W
-		}{
-			\sez (\vfi, \dm i / \novar) : (V, \dm i : \rival{\jet_i}) \to W
-		}{}
+%		\qquad
+%		\inferencel{wkn:bck}{
+%			\sez \vfi : \UFsymcube_i(V) \to W
+%		}{
+%			\sez (\vfi, \dm i / \novar) : (V, \dm i : \rival{\jet_i}) \to W
+%		}{}
 	\]
 	\[
 		\inferencel{exchange}{
@@ -854,7 +855,7 @@ We can apply an involution to the last variable, provided that we turn around it
 
 We can apply the (opposite) $i$-twisted prism functor to a morphism (\ruleref{prism:fwd}, \ruleref{prism:bck}).
 
-We can weaken w.r.t.\ the last dimension (\ruleref{wkn:fwd}, \ruleref{wkn:bck}), but some caution is required. At the source-side of the last dimension, we find $\Opcube_i(V)$, whereas at the target-side we have $V$.
+We can weaken w.r.t.\ the last dimension (\ruleref{wkn}), but some caution is required. At the source-side of the last dimension, we find $\Opcube_i(V)$, whereas at the target-side we have $V$. (In the case of an equijet dimension, both are equal.)
 Thus, $\vfi$ needs to be a morphism of jet cubes from $\Opcube_i(V) \to W$ as well as from $V \to W$.
 This can be achieved by asking that $\vfi$ starts from $\UFsymcube_i(V)$, which can be thought of as a join of $\Opcube_i(V)$ and $V$.
 
@@ -1008,12 +1009,14 @@ The cube $\erasejc U$ arose as the part of $\erasejc V$ not used by $s$ and $t$,
 		
 		\item Soundness of \ruleref{symmetrize} follows from the adjunction established in \cref{thm:lift-to-jet-cubes}.
 		
-		\item We prove soundness of \ruleref{wkn:fwd} by precomposition with a jet cube morphism that erases to $(\id, \dm i / \novar) : (V, \dm i : \rival{\jet_i}) \to \UFsym_i V$.
-		Thus, we need to prove that $\EP(\id, \dm i / \novar) : (\vec v, w) \mapsto \vec v$ is a jet set morphism $\JEP(V, \dm i : \rival{\jet_i}) = \JEP(V) \multip \rival{\jet_i} \to \JEP(\UFsymcube_i(V))$.
-		Let $(\vec v, w) \jet_j (\vec v', w')$ in $\JEP(V) \multip \rival{\jet_i}$.
+		\item We prove soundness of \ruleref{wkn} by precomposition with a jet cube morphism that erases to $(\id, \dm i / \novar) : (V, \dm i : \rival{R_i}) \to \UFsym_i V$.
+		Thus, we need to prove that $\EP(\id, \dm i / \novar) : (\vec v, w) \mapsto \vec v$ is a jet set morphism $\JEP(V, \dm i : \rival{R_i})
+		%= \JEP(V) \multip \rival{\jet_i}
+		\to \JEP(\UFsymcube_i(V))$.
+		Let $(\vec v, w) \jet_j (\vec v', w')$ in $\JEP(V, \dm i : \rival{R_i})$.
 		Then there are two possibilities:
 		\begin{itemize}
-			\item $w = w'$ and $(\vec v, w) \jet_j (\vec v', w)$. The latter implies $\vec v \jet_j \vec v'$ in $JEP(V)$ if $j \neq i$ and $\vec v \infrajet_i \vec v'$ if $j = i$. Moving to $\JEP(\UFsymcube_i(V))$, we get $\vec v \jet_j \vec v'$ in all cases, as required.
+			\item $w = w'$ and $(\vec v, w) \jet_j (\vec v', w)$. The latter implies $\vec v \jet_j \vec v'$ in $\JEP(V)$ if $j \neq i$ and $\vec v \infrajet_i \vec v'$ if $j = i$. Moving to $\JEP(\UFsymcube_i(V))$, we get $\vec v \jet_j \vec v'$ in all cases, as required.
 			\item $j = i$, $\vec v = \vec v'$ and $w \jet_i w'$. In this case we trivially have $\vec v \jet_j \vec v$ in $\JEP(\UFsymcube_i(V))$.
 		\end{itemize}
 		
@@ -1038,7 +1041,7 @@ The cube $\erasejc U$ arose as the part of $\erasejc V$ not used by $s$ and $t$,
 			Thus, we conclude, in any case, that $f(\vec u, \vec v) \jet_k f(\vec u', \vec v)$ in $\JEP(W)$, and even $f(\vec u, \vec v) \equijet_i f(\vec u', \vec v)$ if $k = i$.
 			Then we have the required jet between the images $(f(\vec u, \vec v), w) \jet_k (f(\vec u', \vec v), w)$.
 		\end{itemize}
-		Soundness of \ruleref{companion:bck}, \ruleref{conjoint:fwd} and \ruleref{conjoint:bck} is proven almost identically.
+		Soundness of \ruleref{companion:bck}, \ruleref{conjoint:fwd},\ruleref{conjoint:bck}, \ruleref{equicompanion:fwd} and \ruleref{equicompanion:bck} is proven almost identically, where it may be enlightening to remark that in the equicompanion rules, we know that $\UFsymcube_j(U) = U$.
 		
 		\item For \ruleref{conj:fwd}, assume given a jet cube morphism $\hat \vfi : \UFsymcube_i V \to W$ (write $\vfi = \erasejc{\hat \vfi}$ and $\EP(\vfi) = f$) and boolean expressions $s$ and $t$ such that $\EP(\vfi, s/\dm i, t/\dm j)$ is a jet set morphism $\JEP(V) \to \JEP(W, \dm i : \rival{\jet_i}, \dm j : \rival{\jet_i}) = \JEP(W) \multip \rival{\jet_i} \multip \rival{\jet_i}$.
 		We show that $\EP(\vfi, s \wedge t / \dm k)$ is a jet set morphism $\JEP(V) \to \JEP(W, \dm k : \rival{\jet_i}) = \JEP(W) \multip \rival{\jet_i}$.
@@ -1100,64 +1103,124 @@ The cube $\erasejc U$ arose as the part of $\erasejc V$ not used by $s$ and $t$,
 	
 	In the remaining case, the last variable in $W$ is not an equijet dimension at a directed degree, i.e.\ it is of the form $\dm i : \rival{\jet_i}$ or $\dm i : \rival{\tej_i}$.
 	
+	If the last variable in $V$ is of degree strictly lower than $\dm i$, then in order to be a jet set morphism, $\JEP(\hat \vfi)$ cannot depend on that variable, so we can invoke \ruleref{wkn} until the last variable in $V$ is of degree at least $i$. We do not resort to the induction hypothesis but proceed below.
+	
 %	If $a_i = \npolar$, then we use \ruleref{exchange} (which is sound by \cref{thm:calculus-sound}) to reorder the variables of degree $i$ in $W$, and immediately proceed with the algorithm below.
 %	We put constants last. Before that, if existent, we put the sole variable $\dm k_1$ such that $e_{\dm k_1}$ mentions the last variable of degree $i$ in $V$.
 %	Before that, we put, if existent, the sole variable $\dm k_2$ such that $e_{\dm k_2}$ mentions the second to last variable of degree $i$ in $V$. Etc.
 	
 	We proceed by inspecting $e_{\dm i}$.
 	
-	If [$\dm i : \rival{\jet_i}$ and $e_{\dm i} = 0$] or [$\dm i : \rival{\tej_i}$ and $e_{\dm i} = 1$], then $\vfi$ being a jet cube morphism $V \to W = (U, \dm i : \_)$ (equivalently: $\EP(\vfi)$ being a jet set morphism $\JEP(V) \to \JEP(W)$) is equivalent to $(\novar / \dm i) \circ \vfi$ being a jet cube morphism $V \to \Opcube_i(U)$, so we can apply \ruleref{zero:fwd} or \ruleref{one:bck}.
-	
-	If [$\dm i : \rival{\jet_i}$ and $e_{\dm i} = 1$] or [$\dm i : \rival{\tej_i}$ and $e_{\dm i} = 0$], then $\vfi$ being a jet cube morphism $V \to W = (U, \dm i : \_)$ (equivalently: $\EP(\vfi)$ being a jet set morphism $\JEP(V) \to \JEP(W)$) is equivalent to $(\novar / \dm i) \circ \vfi$ being a jet cube morphism $V \to U$, so we can apply \ruleref{one:fwd} or \ruleref{zero:bck}.
-	
-	If $\dm i : \rival{\jet_i}$ and $e_{\dm i} = \lnot \dm j$, then $\vfi$ being a jet cube morphism $V \to W = (U, \dm i : \rival{\jet_i})$ is equivalent to $(\lnot \dm i / \dm i) \circ \vfi$ being a jet cube morphism $V \to (U, \dm i : \rival{\tej_i})$, so we can apply \ruleref{inv:fwd}.
-	Similarly, if $\dm i : \rival{\tej_i}$ and $e_{\dm i} = \lnot \dm j$, we can apply \ruleref{inv:bck}.
-	
-	If $\dm i : \rival{\jet_i}$ and $e_{\dm i} = \dm j$ where $V$ specifies that $\dm j$ has degree $j$, then we know that $\vfi = (\chi, \dm j / \dm i)$ is a jet cube morphism $V = (V_0, \dm j : \rival{R_j}, V_1) \to W = (U, \dm i : \rival{\jet_i})$ for some $R \in \accol{\jet, \tej, \equijet}$.
-	We have the following commutative diagram in the category of \emph{jet cubes} and \emph{cube morphisms between erased jet cubes}:
-	\[
-		\xymatrix{
-			(\Opcube_j(V_0), V_1)
-				\ar[d]_{(0/\dm j)}
-				\ar@{.>}[rr]^\chi
-			&&
-			\Opcube_i(U)
-				\ar[d]^{(0/\dm i)}
-			\\
-			(V_0, \dm j : \rival{R_j}, V_1)
-				\ar[rr]_{\vfi (\chi, \dm j / \dm i)}
-			&& (U, \dm i : \rival{\jet_i})
-			\\
-			(V_0, V_1)
-				\ar[u]^{(1/\dm j)}
-				\ar@{.>}[rr]_\chi
-			&&
-			U
-				\ar[u]_{(1/\dm i)}
-		}
-	\]
-	We note that the non-dashed arrows are all jet cube morphisms, and the vertical arrows all yield full jet set morphisms (\cref{def:full-jetsethom}).
-	This implies that the dashed arrows also lift to jet set morphisms, i.e.\ are jet cube morphisms.
-	Then $\chi$ is both a jet cube morphism $(V_0, V_1) \to U$ and $\Opcube_i(\Opcube_j(V_0), V_1) \to U$.
 	\begin{itemize}
-		\item If $j = i$, then $R = {\jet}$, all variables in $V_1$ have degree $i$ and $\chi$ is both a jet cube morphism $(V_0, V_1) \to U$ and $(V_0, \Opcube_i(V_1)) \to U$.
-		This implies that $\EP(\vfi)$ sends every $i$-jet of the form $(\vec v_0, r, \vec v_1) \jet_i (\vec v_0, r, \vec v_1')$ (and hence every such $i$-infrajet) to an $i$-equijet $(\EP(\chi)(\vec v_0, \vec v_1), r) \equijet_i (\EP(\chi)(\vec v_0, \vec v'_1), r)$ in $\JEP(U, \dm i : \rival{\jet_i})$.
+		\item If [$\dm i : \rival{\jet_i}$ and $e_{\dm i} = 0$] or [$\dm i : \rival{\tej_i}$ and $e_{\dm i} = 1$], then $\vfi$ being a jet cube morphism $V \to W = (U, \dm i : \_)$ (equivalently: $\EP(\vfi)$ being a jet set morphism $\JEP(V) \to \JEP(W)$) is equivalent to $(\novar / \dm i) \circ \vfi$ being a jet cube morphism $V \to \Opcube_i(U)$, so we can apply \ruleref{zero:fwd} or \ruleref{one:bck}.
+		
+		\item If [$\dm i : \rival{\jet_i}$ and $e_{\dm i} = 1$] or [$\dm i : \rival{\tej_i}$ and $e_{\dm i} = 0$], then $\vfi$ being a jet cube morphism $V \to W = (U, \dm i : \_)$ (equivalently: $\EP(\vfi)$ being a jet set morphism $\JEP(V) \to \JEP(W)$) is equivalent to $(\novar / \dm i) \circ \vfi$ being a jet cube morphism $V \to U$, so we can apply \ruleref{one:fwd} or \ruleref{zero:bck}.
+		
+		\item If $\dm i : \rival{\jet_i}$ and $e_{\dm i} = \lnot \dm j$, then $\vfi$ being a jet cube morphism $V \to W = (U, \dm i : \rival{\jet_i})$ is equivalent to $(\lnot \dm i / \dm i) \circ \vfi$ being a jet cube morphism $V \to (U, \dm i : \rival{\tej_i})$, so we can apply \ruleref{inv:fwd}.
+		Similarly, if $\dm i : \rival{\tej_i}$ and $e_{\dm i} = \lnot \dm j$, we can apply \ruleref{inv:bck}.
+		
+		\item If $\dm i : \rival{\jet_i}$ ($\dm i : \rival{\tej_i}$ is handled analogously) and $e_{\dm i} = \dm j$ where $V$ specifies that $\dm j$ has degree $j$, then we know that $\vfi = (\chi, \dm j / \dm i)$ is a jet cube morphism $V = (V_0, \dm j : \rival{R_j}, V_1) \to W = (U, \dm i : \rival{\jet_i})$ for some $R \in \accol{\jet, \tej, \equijet}$.
+		We have the following commutative diagram in the category of \emph{jet cubes} and \emph{cube morphisms between erased jet cubes}:
+		\[
+			\xymatrix{
+				(\Opcube_j(V_0), V_1)
+					\ar[d]_{(0/\dm j)}
+					\ar@{.>}[rr]^\chi
+				&&
+				\Opcube_i(U)
+					\ar[d]^{(0/\dm i)}
+				\\
+				(V_0, \dm j : \rival{R_j}, V_1)
+					\ar[rr]_{\vfi (\chi, \dm j / \dm i)}
+				&& (U, \dm i : \rival{\jet_i})
+				\\
+				(V_0, V_1)
+					\ar[u]^{(1/\dm j)}
+					\ar@{.>}[rr]_\chi
+				&&
+				U
+					\ar[u]_{(1/\dm i)}
+			}
+		\]
+		We note that the non-dashed arrows are all jet cube morphisms, and the vertical arrows all yield full jet set morphisms (\cref{def:full-jetsethom}).
+		This implies that the dashed arrows also lift to jet set morphisms, i.e.\ are jet cube morphisms.
+		Then $\chi$ is both a jet cube morphism $(V_0, V_1) \to U$ and $\Opcube_i(\Opcube_j(V_0), V_1) \to U$.
 		\begin{itemize}
-			\item If $a_i = \ypolar$, then all $i$-equijets in $\JEP(U, \dm i : \rival{\jet_i})$ are reflexive and all elements of the form $(\vec v_0, r, \vec v_1)$ for fixed $\vec v_0$ and $r$ but variable $\vec v_1$ are $i$-infrajet-connected, so this means that $\EP(\chi)(\vec v_0, \vec v_1)$ is independent of $V_1$.
-			Then $\chi$ cannot mention any variables from $V_1$.
+			\item If $j = i$, then $R = {\jet}$, all variables in $V_1$ have degree $i$ and $\chi$ is both a jet cube morphism $(V_0, V_1) \to U$ and $(V_0, \Opcube_i(V_1)) \to U$.
+			This implies that $\EP(\vfi)$ sends every $i$-jet of the form $(\vec v_0, r, \vec v_1) \jet_i (\vec v_0, r, \vec v_1')$ (and hence every such $i$-infrajet) to an $i$-equijet $(\EP(\chi)(\vec v_0, \vec v_1), r) \equijet_i (\EP(\chi)(\vec v_0, \vec v'_1), r)$ in $\JEP(U, \dm i : \rival{\jet_i})$.
 			\begin{itemize}
-				\item If $V_1$ contains any variables, then we can apply \ruleref{wkn:fwd}.
-				\item Otherwise, we can apply \ruleref{prism:fwd}.
+				\item If $a_i = \ypolar$, then all $i$-equijets in $\JEP(U, \dm i : \rival{\jet_i})$ are reflexive and all elements of the form $(\vec v_0, r, \vec v_1)$ for fixed $\vec v_0$ and $r$ but variable $\vec v_1$ are $i$-infrajet-connected, so this means that $\EP(\chi)(\vec v_0, \vec v_1)$ is independent of $V_1$.
+				Then $\chi$ cannot mention any variables from $V_1$.
+				\begin{itemize}
+					\item If $V_1$ contains any variables, then we can apply \ruleref{wkn}.
+					\item Otherwise, we can apply \ruleref{prism:fwd}.
+				\end{itemize}
+				
+				\item If $a_i = \npolar$, then we can use \ruleref{exchange} to create a morphism from $(V_0, V_1, \dm j : \rival{\edge_i})$ instead, which can be done using \ruleref{prism:fwd} (or equivalently \ruleref{prism:bck}).
 			\end{itemize}
 			
-			\item If $a_i = \npolar$, then we can use \ruleref{exchange} to create a morphism from $(V_0, V_1, \dm j : \rival{\edge_i})$ instead, which can be done using \ruleref{prism:fwd} (or equivalently \ruleref{prism:bck}).
+			If $j > i$, then $\chi$ is necessarily a jet cube morphism $\UFsymcube_i(\UFsymcube_j(V_0), V_1) \to U$, so we can apply \ruleref{companion:fwd}, \ruleref{conjoint:fwd} or \ruleref{equicompanion:fwd}, depending on $R$.
+			Note that if $R = {\equijet}$, then $\UFsymcube_j(V_0) = V_0$, justifying the premise of \ruleref{equicompanion:fwd}.
 		\end{itemize}
 		
-		If $j > i$, then $\chi$ is necessarily a jet cube morphism $\UFsymcube_i(\UFsymcube_j(V_0), V_1) \to U$, so we can apply \ruleref{companion:fwd}, \ruleref{conjoint:fwd} or \ruleref{equicompanion:fwd}, depending on $R$.
-		Note that if $R = {\equijet}$, then $\UFsymcube_j(V_0) = V_0$.
+		\item We have now covered all cases for the monad $\bipointedsym$.
+		In the remaining cases, $e_{\dm i}$ contains conjunction or disjunction symbols.
+		If $\dm i : \rival{\tej_i}$, we apply \ruleref{inv:fwd} and do not resort to the induction hypothesis but proceed below.
+		We now assume that $\dm i : \rival{\jet_i}$.
+		\begin{itemize}
+			\item Assume $a_i = \ypolar$ and $V$ contains non-equijet variables of degree $i$.
+			Let $\dm k$ be the last variable of $V$.
+			Then we show that $e_{\dm i}$ is of one of the following forms:
+			\begin{itemize}
+				\item $s \wedge t$ or $s \vee t$ where $s$ does not mention non-equijet variables of degree $i$,
+				\item $\dm k' \wedge t$ or $\dm k' \vee t$ where $\dm k' = \dm k$ if $\dm k : \rival{\jet_i}$ and $\dm k' = \lnot \dm k$ if $\dm k : \rival{\tej_i}$.
+			\end{itemize}
+			\todoi{Show this}
+			
+			\item If $a_i = \npolar$ or all variables of degree $i$ in $V$ are equijet variables, then $V = \UFsym_i V$.
+			\todoi{Prove this case.}
+		\end{itemize}
+		
+		\item \todoi{Old version}
+		
+		If $\dm i : \rival{\jet_i}$ and $e_{\dm i} = s \wedge t$, then by the fact that $e_{\dm i}$ is the output of a reduction process, we know that $s$ and $t$ are not constants.
+		By affinity, we know that $s$ depends on variables $\dm j_1, \ldots, \dm j_m$ (which we gather in the set $J$) and $t$ depends on \emph{different} variables $\dm k_1, \ldots, \dm k_n$ (which we gather in $K$).
+		Furthermore, writing $\vfi = (\chi, s \wedge t / \dm i) : V \to W = (U, s \wedge t / \dm i)$, we know that $\chi$ depends again on different variables $\dm l_1, \ldots, \dm l_p$ (which we gather in $L$).
+		Since each of these variables in $J$ occur at most (and without loss of generality, exactly) once (possibly under a negation) in the leaves of the syntax tree of $s$, there exist constant assignments $\vec \zeta^0/\vec{\dm j}$ and $\vec \zeta^1/\vec{\dm j}$ that make $s$ reduce to 0 and to 1, respectively.
+		These constant assignments can be constructively chosen so that they differ by a single bit, which we do.%
+		\footnote{Start from assignments $\vec \theta^0/\vec{\dm j}$ and $\vec \theta^1/\vec{\dm j}$ that differ by zero or more bits and yield different outcomes for $s$.
+		Toggle bits in $\vec \theta^0$ until you get $\vec \theta^1$.
+		As soon as $s[\vec \theta/\vec{\dm j}]$ flips, return the last two assignments encountered.
+		When you reach $\vec \theta^1$ and have not returned anything yet, you have a contradiction.}
+		Pick similar assignments for $\vec \kappa^0/\vec{\dm k}$ and $\vec \kappa^1/\vec{\dm k}$ for $t$.
+	
+		We will now prove simultaneously that
+		\begin{itemize}
+			\item $\chi$ is a jet cube morphism $\UFsym_i V \to U$,
+			\item $(\chi, s / \dm j, t / \dm k)$ is a jet cube morphism $V \to (U, \dm j : \rival{\jet_i}, \dm k : \rival{\jet_i})$,
+		\end{itemize}
+		so that we can apply \ruleref{conj:fwd}.
+		
+		Pick a jet $\vec v \jet_j \vec v'$ in $V$. Writing $g = \EP(\chi)$, we need to prove that
+		\begin{itemize}
+			\item $g(\vec v) \jet_j g(\vec v')$ if $j \neq i$ and $g(\vec v) \equijet_i g(\vec v')$ if $j = i$,
+			\item $(g(\vec v), s[\vec v], t[\vec v]) \jet_j (g(\vec v'), s[\vec v'], t[\vec v'])$.
+		\end{itemize}
+		If $\vec v = \vec v'$, then this is trivial.
+		Otherwise, these vectors differ by a single bit, which concerns a variable $\dm h$ that is found in exactly one of the sets $J$, $K$ or $L$.
+		\begin{description}
+			\item[\framebox{$\dm h \in K$}] Then $g(\vec v) = g(\vec v') =: g_0$ and $s[\vec v] = s[\vec v'] =: s_0$.
+			Define $\vec w$ and $\vec w'$ by overriding $\vec v$ and $\vec v'$ with $\vec \zeta^1$.
+			Then $\vec w \infrajet_j \vec w'$, $g(\vec w) = g(\vec w') = g_0$, $s[\vec w] = s[\vec w'] = 1$, $t[\vec w] = t[\vec v]$ and $t[\vec w'] = t[\vec v']$.
+			Write $\jet'$ for the specific direction such that $\vec w \jet'_j \vec w'$, and $\tej'$ for its opposite.
+			Since $\vfi$ is a jet cube morphism, writing $f = \EP(\vfi)$, we get
+			\[
+				f(\vec w) = (g_0, 1 \wedge t[\vec v]) \jet'_j (g_0, 1 \wedge t[\vec v']) = f(\vec w').
+			\]
+			This implies that $t[\vec v] \jet'_j t[\vec v']$ in $\rival{\jet_i}$.
+		\end{description}
+		\todoi{Owv conditie op $\vfi$ en owv normaliteit normal form moet ge wel $n$-aire conjuncties/disjuncties beschouwen.}
 	\end{itemize}
-
-	\todoi{Finish proof}
 \end{proof}
 
 \todoi{Use $\jetcubeaff{\booleanalg}{\vec a}$ or $\jetcubecart{\booleanalg}{\vec a}$}

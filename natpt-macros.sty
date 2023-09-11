@@ -572,12 +572,30 @@
 	% defining \leftrightarrowstriangle and \rightleftarrowstriangle
 	% https://tex.stackexchange.com/a/694740/43137
 	
-	\newcommand{\rightleftarrowstriangle}{\mathrel{\mathchoice
-	    {\ooalign{\raisebox{-.35ex}{$\leftarrowtriangle$}\cr\raisebox{.35ex}{$\rightarrowtriangle$}\cr}}
-	    {\ooalign{\raisebox{-.35ex}{$\leftarrowtriangle$}\cr\raisebox{.35ex}{$\rightarrowtriangle$}\cr}}
-	    {\ooalign{\raisebox{-.25ex}{$\scriptstyle\leftarrowtriangle$}\cr\raisebox{.25ex}{$\scriptstyle\rightarrowtriangle$}\cr}}
-	    {\ooalign{\raisebox{-.2ex}{$\scriptscriptstyle\leftarrowtriangle$}\cr\raisebox{.2ex}{$\scriptscriptstyle\rightarrowtriangle$}\cr}}
+	%\newcommand{\stackedarrowstriangle}[2]{\Bowtie}
+	\newcommand{\stackedarrowstriangle}[2]{\mathrel{\mathchoice
+		{\mathrlap{\raisebox{.35ex}{$#1$}}\raisebox{-.35ex}{$#2$}}
+		{\mathrlap{\raisebox{.35ex}{$#1$}}\raisebox{-.35ex}{$#2$}}
+		{\mathrlap{\raisebox{.25ex}{$\scriptstyle#1$}}\raisebox{-.25ex}{$\scriptstyle#2$}}
+		{\mathrlap{\raisebox{.2ex}{$\scriptscriptstyle#1$}}\raisebox{-.2ex}{$\scriptscriptstyle#2$}}
 	}}
+%	\newcommand{\stackedarrowstriangle}[2]{\mathpalette\superimpose{{\raisebox{.2ex}{#1}}{\raisebox{-.2ex}{#2}}}}
+%	\newcommand{\stackedarrowstriangle}[2]{\mathrel{\mathchoice
+%	    {\ooalign{\raisebox{-.35ex}{$#2$}\cr\raisebox{.35ex}{$#1$}\cr}}
+%	    {\ooalign{\raisebox{-.35ex}{$#2$}\cr\raisebox{.35ex}{$#1$}\cr}}
+%	    {\ooalign{\raisebox{-.25ex}{$\scriptstyle#2$}\cr\raisebox{.25ex}{$\scriptstyle#1$}\cr}}
+%	    {\ooalign{\raisebox{-.2ex}{$\scriptscriptstyle#2$}\cr\raisebox{.2ex}{$\scriptscriptstyle#1$}\cr}}
+%	}}
+	
+	\newcommand{\rightleftarrowstriangle}{\stackedarrowstriangle{\rightarrowtriangle}{\leftarrowtriangle}}
+	\newcommand{\leftrightarrowstriangle}{\stackedarrowstriangle{\leftarrowtriangle}{\rightarrowtriangle}}
+	
+%	\newcommand{\rightleftarrowstriangle}{\mathrel{\mathchoice
+%	    {\ooalign{\raisebox{-.35ex}{$\leftarrowtriangle$}\cr\raisebox{.35ex}{$\rightarrowtriangle$}\cr}}
+%	    {\ooalign{\raisebox{-.35ex}{$\leftarrowtriangle$}\cr\raisebox{.35ex}{$\rightarrowtriangle$}\cr}}
+%	    {\ooalign{\raisebox{-.25ex}{$\scriptstyle\leftarrowtriangle$}\cr\raisebox{.25ex}{$\scriptstyle\rightarrowtriangle$}\cr}}
+%	    {\ooalign{\raisebox{-.2ex}{$\scriptscriptstyle\leftarrowtriangle$}\cr\raisebox{.2ex}{$\scriptscriptstyle\rightarrowtriangle$}\cr}}
+%	}}
 
 \newcommand{\RelDTT}{RelDTT}
 \newcommand{\RelDTTLock}{RelDTT$_{\locksym}$}
@@ -599,6 +617,7 @@
 \newcommand{\equijet}{\leftrightarrowtriangle}
 %\newcommand{\infrajet}{\mathrel{\bowtie}}
 \newcommand{\infrajet}{\rightleftarrowstriangle}
+\newcommand{\infratej}{\leftrightarrowstriangle}
 
 \newcommand{\rival}[1]{\pparen{#1}}
 
