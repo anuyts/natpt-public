@@ -121,7 +121,11 @@ In NatPT, we will specify for each of these relations whether it is directed or 
 	A \textbf{morphism} of $\vec a$-jet-sets is a function that preserves all the jet and edge relations.
 	
 	The category of $\vec a$-jet-sets is called $\jetset{\vec a}$.
-	
+\end{definition}
+\begin{definition} \label{def:full-jetsethom}
+	A jet set morphism is called \textbf{full} if it reflects all jet relations.
+\end{definition}
+\begin{definition} \label{def:transitive-jetset}
 	A jet set is called \textbf{transitive} if each of the $i$-jet relations is transitive (i.e. a pre-order and, if $i = \npolar$, an equivalence relation).
 \end{definition}
 \begin{proposition} \label{thm:jetset-equipment}
@@ -642,7 +646,7 @@ Soundness (\cref{thm:calculus-sound}) of the calculus will be the property that 
 We do not have to bother with an equational theory, as we can simply inherit it from $\cubecat_M^\affine$.
 
 \begin{convention} \label{conv:sort-cubes}
-	When presenting the calculus, with permission from \cref{thm:cube-commute}, we will order the dimensions of a (forward/trioriented) jet cube by \emph{decreasing} degree.
+	When presenting the calculus, as justified by \cref{thm:cube-commute} (1.), we will order the dimensions of a (forward/trioriented) jet cube by \emph{decreasing} degree.
 \end{convention}
 \begin{figure} \label{fig:calculus}
 	\[
@@ -725,9 +729,9 @@ We do not have to bother with an equational theory, as we can simply inherit it 
 	\]
 	\[
 		\inferencel{exchange}{
-			\sez \vfi : V \to (W, \dm j : \rival{\edge_i}, U, \dm i : \rival{\edge_i})
+			\sez \vfi : V \to (W, \dm j : \rival{\edge_i}, U_1, \dm i : \rival{\edge_i}, U_2)
 		}{
-			\sez \vfi : V \to (W, \dm i : \rival{\edge_i}, U, \dm j : \rival{\edge_i})
+			\sez \vfi : V \to (W, \dm i : \rival{\edge_i}, U_1, \dm j : \rival{\edge_i}, U_2)
 		}{}
 	\]
 	\[
@@ -829,7 +833,7 @@ Thus, $\vfi$ needs to be a morphism of jet cubes from $\Opcube_i(V) \to W$ as we
 This can be achieved by asking that $\vfi$ starts from $\UFsymcube_i(V)$, which can be thought of as a join of $\Opcube_i(V)$ and $V$.
 
 We can exchange variables of the same symmetric degree $i$ (\ruleref{exchange}).
-Note that \cref{conv:sort-cubes} implies that all variables in $U$ are also of degree $i$.
+Note that \cref{conv:sort-cubes} implies that all variables in $U_1$ and $U_2$ are also of type $\rival{\edge_i}$.
 
 If the last dimension of our target cube is of the form $\dm i : \rival{\equijet_i}$, then we know that our cube is in the image of $\Usymcube_i$, and we can proceed using the adjunction $\Fsymcube_i \dashv \Usymcube_i$ (\ruleref{symmetrize}).
 This turns our last dimension into $\dm i : \rival{\edge_i}$ which is a special case of both $\dm i : \rival{\jet_i}$ and $\dm i : \rival{\tej_i}$, so we can proceed by using the \textsc{fwd} and \textsc{bck} rules of the calculus.
@@ -1053,21 +1057,84 @@ The cube $\erasejc U$ arose as the part of $\erasejc V$ not used by $s$ and $t$,
 \end{proof}
 
 \begin{theorem}[Completeness] \label{thm:calculus-complete}
-	For any morphism $\hat \vfi : V \to W$ in $\jetcubeopt \affine M {\vec a}$, writing $\vfi = \erasejc{\hat \vfi}$, we have $\sez \vfi : V \to W$.
+	For any morphism $\hat \vfi : V \to W$ in $\jetcubeopt \affine M {\vec a}$ between cubes compliant to \cref{conv:sort-cubes}, writing $\vfi = \erasejc{\hat \vfi}$, we have $\sez \vfi : V \to W$.
 \end{theorem}
 \begin{proof}
-	We prove this by induction on the number of variables in $W$, still applying \cref{conv:sort-cubes}.
+	First, note that $\vfi$ assigns to each variable $\dm k$ in $W$ an boolean expression over the variables in $V$.
+	After pushing down negations, eliminating double negations, and simplifying conjunctions and disjunctions with $0$ and $1$, we obtain an expression $e_{\dm k}$ that is either $0$, $1$ or a binary tree with $\vee$ and $\wedge$ in the nodes and (negations of) variables of $V$ in the leaves.
+
+	We prove completeness by induction on the number of nodes and leaves in $(e_{\dm k})_{\dm k \in W}$.
+	
 	If $W = ()$, then use \ruleref{terminal}.
+	
 	If $a_i = \ypolar$ and the last variable in $W$ is $\dm i : \rival{\equijet_i}$, then $W$ is of the form $\Usymcube_i(U)$ and there will be a corresponding morphism $\Fsymcube_i(V) \to U$ and we can use the rule \ruleref{symmetrize}.
+	
 	In the remaining case, the last variable in $W$ is not an equijet dimension at a directed degree, i.e.\ it is of the form $\dm i : \rival{\jet_i}$ or $\dm i : \rival{\tej_i}$.
 	
-	We proceed by inspecting $\dm i \psub \vfi$.
-	By definition of $\cubecat_M^\affine$, it can be written as an affine boolean expression.
-	After pushing down negations, eliminating double negations, and simplifying conjunctions and disjunctions with $0$ and $1$, we obtain an expression $e$ that is either $0$, $1$ or a binary tree with $\vee$ and $\wedge$ in the nodes and (negations of) variables of $V$ in the leaves.
+	If $a_i = \npolar$, then we use \ruleref{exchange} (which is sound by \cref{thm:calculus-sound}) to reorder the variables of degree $i$ in $W$, and immediately proceed with the algorithm below.
+	We put constants last. Before that, if existent, we put the sole variable $\dm k_1$ such that $e_{\dm k_1}$ mentions the last variable of degree $i$ in $V$.
+	Before that, we put, if existent, the sole variable $\dm k_2$ such that $e_{\dm k_2}$ mentions the second to last variable of degree $i$ in $V$. Etc.
 	
-	If [$\dm i : \rival{\jet_i}$ and $t = 0$] or [$\dm i : \rival{\tej_i}$ and $t = 1$], then $\vfi : V \to W = (U, \dm i : \_)$ being a jet cube morphism (equivalently: $\EP(\vfi)$ being a jet set morphism) is equivalent to $(\novar / \dm i) \circ \vfi : V \to \Opcube_i(U)$ being a jet cube morphism, so we can apply \ruleref{zero:fwd} or \ruleref{one:bck}.
+	We proceed by inspecting $e_{\dm i}$.
 	
-	If [$\dm i : \rival{\jet_i}$ and $t = 1$] or [$\dm i : \rival{\tej_i}$ and $t = 0$], then $\vfi : V \to W = (U, \dm i : \_)$ being a jet cube morphism (equivalently: $\EP(\vfi)$ being a jet set morphism) is equivalent to $(\novar / \dm i) \circ \vfi : V \to U$ being a jet cube morphism, so we can apply \ruleref{one:fwd} or \ruleref{zero:bck}.
+	If [$\dm i : \rival{\jet_i}$ and $e_{\dm i} = 0$] or [$\dm i : \rival{\tej_i}$ and $e_{\dm i} = 1$], then $\vfi$ being a jet cube morphism $V \to W = (U, \dm i : \_)$ (equivalently: $\EP(\vfi)$ being a jet set morphism $\JEP(V) \to \JEP(W)$) is equivalent to $(\novar / \dm i) \circ \vfi$ being a jet cube morphism $V \to \Opcube_i(U)$, so we can apply \ruleref{zero:fwd} or \ruleref{one:bck}.
+	
+	If [$\dm i : \rival{\jet_i}$ and $e_{\dm i} = 1$] or [$\dm i : \rival{\tej_i}$ and $e_{\dm i} = 0$], then $\vfi$ being a jet cube morphism $V \to W = (U, \dm i : \_)$ (equivalently: $\EP(\vfi)$ being a jet set morphism $\JEP(V) \to \JEP(W)$) is equivalent to $(\novar / \dm i) \circ \vfi$ being a jet cube morphism $V \to U$, so we can apply \ruleref{one:fwd} or \ruleref{zero:bck}.
+	
+	If $\dm i : \rival{\jet_i}$ and $e_{\dm i} = \lnot \dm j$, then $\vfi$ being a jet cube morphism $V \to W = (U, \dm i : \rival{\jet_i})$ is equivalent to $(\lnot \dm i / \dm i) \circ \vfi$ being a jet cube morphism $V \to (U, \dm i : \rival{\tej_i})$, so we can apply \ruleref{inv:fwd}.
+	Similarly, if $\dm i : \rival{\tej_i}$ and $e_{\dm i} = \lnot \dm j$, we can apply \ruleref{inv:bck}.
+	
+	If $\dm i : \rival{\jet i}$ and $e_{\dm i} = \dm j$ where $V$ specifies that $\dm j$ has degree $j$, then we know that $\vfi = (\chi, \dm j / \dm i)$ is a jet cube morphism $V = (V_0, \dm j : \rival{R_j}, V_1) \to W = (U, \dm i : \rival{\jet_i})$ for some $R \in \accol{\jet, \tej, \equijet}$.
+	We have the following commutative diagram in the category of \emph{jet cubes} and \emph{cube morphisms between erased jet cubes}:
+	\[
+		\xymatrix{
+			(\Opcube_j(V_0), V_1)
+				\ar[d]_{(0/\dm j)}
+				\ar@{.>}[rr]^\chi
+			&&
+			\Opcube_i(U)
+				\ar[d]^{(0/\dm i)}
+			\\
+			(V_0, \dm j : \rival{R_j}, V_1)
+				\ar[rr]_{\vfi (\chi, \dm j / \dm i)}
+			&& (U, \dm i : \rival{\jet_i})
+			\\
+			(V_0, V_1)
+				\ar[u]^{(1/\dm j)}
+				\ar@{.>}[rr]_\chi
+			&&
+			U
+				\ar[u]_{(1/\dm i)}
+		}
+	\]
+	We note that the non-dashed arrows are all jet cube morphisms, and the vertical arrows all yield full jet set morphisms (\cref{def:full-jetsethom}).
+	This implies that the dashed arrows also lift to jet set morphisms, i.e.\ are jet cube morphisms.
+	Then $\chi$ is both a jet cube morphism $(V_0, V_1) \to U$ and $\Opcube_i(\Opcube_j(V_0), V_1) \to U$.
+	\begin{itemize}
+		\item If $j = i$, then $R = {\jet}$ and $\chi$ is both a jet cube morphism $(V_0, V_1) \to U$ and $(V_0, \Opcube_i(V_1)) \to U$.
+		This implies that $\EP(\vfi)$ sends every $i$-jet of the form $(\vec v_0, r, \vec v_1) \jet_i (\vec v_0, r, \vec v_1')$ (and hence every such $i$-infrajet) to an $i$-equijet $(\EP(\chi)(\vec v_0, \vec v_1), r) \equijet_i (\EP(\chi)(\vec v_0, \vec v'_1), r)$ in $\JEP(U, \dm i : \rival{\jet_i})$.
+		\begin{itemize}
+			\item If $a_i = \ypolar$, then all $i$-equijets in $\JEP(U, \dm i : \rival{\jet_i})$ are reflexive and all elements of the form $(\vec v_0, r, \vec v_1)$ for fixed $\vec v_0$ and $r$ but variable $\vec v_1$ are $i$-infrajet-connected, so this means that $\EP(\chi)(\vec v_0, \vec v_1)$ is independent of $V_1$.
+			Then $\chi$ cannot mention any variables from $V_1$.
+			\begin{itemize}
+				\item If $V_1$ contains any variables, then we can apply \ruleref{wkn:fwd}.
+				\item Otherwise, we can apply \ruleref{prism:fwd}.
+			\end{itemize}
+			
+			\item If $a_i = \npolar$, then by the reordering applied before, we know that $\dm j$ is the last variable in $V$, so we can apply \ruleref{prism:fwd} (or equivalently \ruleref{prism:bck}).
+		\end{itemize}
+		
+		If $j > i$, then $\chi$ is necessarily a jet cube morphism 
+	\end{itemize}
+	
+	
+	
+	there are several possibilities:
+	\begin{itemize}
+		\item If $j = i$ and $a_i = \ypolar$, then clearly we must have $\dm j : \rival{\jet_i}$, i.e.\ $\dm j$ is a jet variable (and not a reverse jet or equijet variable).
+		We first show that $\dm j$ must be the last variable of $V$.
+		A priori, we know that $\vfi = (\chi, \dm j / \dm i)$ is a jet cube morphism $V = (V_0, \dm j : \rival{\jet_i}, V_1) \to W = (U, \dm i : \rival{\jet_i})$.
+	\end{itemize}
 
 	\todoi{Finish proof}
 	
