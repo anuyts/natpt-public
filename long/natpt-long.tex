@@ -778,6 +778,23 @@ We do not have to bother with an equational theory, as we can simply inherit it 
 		}{}
 	\]
 	\[
+		\inferencel{equicompanion:fwd}{
+			\sez \vfi : \UFsymcube_i(U, V) \to W
+			\qquad
+			j > i
+		}{
+			\sez (\vfi, \dm j / \dm i) : (U, \dm j : \rival{\equijet_j}, V) \to (W, \dm i : \rival{\jet_i})
+		}{}
+		\qquad
+		\inferencel{equicompanion:bck}{
+			\sez \vfi : \UFsymcube_i(U, V) \to W
+			\qquad
+			j > i
+		}{
+			\sez (\vfi, \dm j / \dm i) : (U, \dm j : \rival{\equijet_j}, V) \to (W, \dm i : \rival{\tej_i})
+		}{}
+	\]
+	\[
 		\inferencel{conj:fwd}{
 			\sez \vfi : \UFsymcube_i V \to W \\
 			\sez (\vfi, s/\dm i, t/\dm j) : V \to (W, \dm i : \rival{\jet_i}, \dm j : \rival{\jet_i})
@@ -847,8 +864,9 @@ Note that \cref{conv:sort-cubes} implies that all variables in $U_1$ and $U_2$ a
 If the last dimension of our target cube is of the form $\dm i : \rival{\equijet_i}$, then we know that our cube is in the image of $\Usymcube_i$, and we can proceed using the adjunction $\Fsymcube_i \dashv \Usymcube_i$ (\ruleref{symmetrize}).
 This turns our last dimension into $\dm i : \rival{\edge_i}$ which is a special case of both $\dm i : \rival{\jet_i}$ and $\dm i : \rival{\tej_i}$, so we can proceed by using the \textsc{fwd} and \textsc{bck} rules of the calculus.
 
-We can substitute the last variable with an expression of a weaker (higher) degree in either direction.
+We can substitute the last variable with an expression of a weaker (higher) degree in either direction (or both).
 Inspired by \cref{thm:jetset-equipment}, we choose to use terminology from pro-arrow equipments and refer to this action as creating a companion when the direction of the arrow remains the same (\ruleref{companion:fwd}, \ruleref{companion:bck}), and a conjoint when it reverses (\ruleref{conjoint:fwd}, \ruleref{conjoint:bck}).
+We also allow equijet variables of higher degrees (\ruleref{equicompanion:fwd}, \ruleref{equicompanion:bck}).
 Some measures of caution need to be taken however, which we consider in the case of \ruleref{companion:fwd}, where we wish to derive $(\vfi, \dm j / \dm i) : (U, \dm j : \rival{\jet_j}, V) \to (W, \dm i : \rival{\jet_i})$.
 First of all, we need to enforce affineness and make sure that $\vfi$ does not use the variable $\dm j$, so we will have $\vfi : (\erasejc{U}, \erasejc{V}) \to \erasejc{W}$.
 Now let us look at what happens when we set $\dm i$ and $\dm j$ to $0$ or to $1$:
@@ -960,6 +978,7 @@ For example, in \ruleref{conj:fwd}, assume that $s = \dm i$ and $t = \dm j$ and 
 Again, we see that $\vfi : \erasejc U \to \erasejc W$ needs to be a morphism of jet cubes both from $\Opcube_i(U) \to \Opcube_i(W)$ (or equivalently from $U \to W$) and from $U \to \Opcube_i(W)$ (or equivalently from $\Opcube_i(U) \to W$). Again, we let $\vfi$ depart from their join $\UFsymcube_i(U)$.
 The cube $\erasejc U$ arose as the part of $\erasejc V$ not used by $s$ and $t$, so in the typing rule we can simply use $\UFsymcube_i(V)$ (this will be formalized in \cref{thm:calculus-sound,thm:calculus-complete}).
 
+\paragraph{Soundness}
 \begin{theorem}[Soundness] \label{thm:calculus-sound}
 	If a morphism $\vfi : \erasejc V \to \erasejc W$ satisfies the predicate $\sez \vfi : V \to W$ from \cref{def:calculus}, then it actually arises as the image $\vfi = \erasejc{\hat \vfi}$ of a morphism $\hat \vfi : V \to W$.
 \end{theorem}
@@ -1065,6 +1084,7 @@ The cube $\erasejc U$ arose as the part of $\erasejc V$ not used by $s$ and $t$,
 	\end{itemize}
 \end{proof}
 
+\paragraph{Completeness}
 \begin{theorem}[Completeness] \label{thm:calculus-complete}
 	For any morphism $\hat \vfi : V \to W$ in $\jetcubeopt \affine M {\vec a}$ between cubes compliant to \cref{conv:sort-cubes}, writing $\vfi = \erasejc{\hat \vfi}$, we have $\sez \vfi : V \to W$.
 \end{theorem}
@@ -1080,9 +1100,9 @@ The cube $\erasejc U$ arose as the part of $\erasejc V$ not used by $s$ and $t$,
 	
 	In the remaining case, the last variable in $W$ is not an equijet dimension at a directed degree, i.e.\ it is of the form $\dm i : \rival{\jet_i}$ or $\dm i : \rival{\tej_i}$.
 	
-	If $a_i = \npolar$, then we use \ruleref{exchange} (which is sound by \cref{thm:calculus-sound}) to reorder the variables of degree $i$ in $W$, and immediately proceed with the algorithm below.
-	We put constants last. Before that, if existent, we put the sole variable $\dm k_1$ such that $e_{\dm k_1}$ mentions the last variable of degree $i$ in $V$.
-	Before that, we put, if existent, the sole variable $\dm k_2$ such that $e_{\dm k_2}$ mentions the second to last variable of degree $i$ in $V$. Etc.
+%	If $a_i = \npolar$, then we use \ruleref{exchange} (which is sound by \cref{thm:calculus-sound}) to reorder the variables of degree $i$ in $W$, and immediately proceed with the algorithm below.
+%	We put constants last. Before that, if existent, we put the sole variable $\dm k_1$ such that $e_{\dm k_1}$ mentions the last variable of degree $i$ in $V$.
+%	Before that, we put, if existent, the sole variable $\dm k_2$ such that $e_{\dm k_2}$ mentions the second to last variable of degree $i$ in $V$. Etc.
 	
 	We proceed by inspecting $e_{\dm i}$.
 	
@@ -1093,7 +1113,7 @@ The cube $\erasejc U$ arose as the part of $\erasejc V$ not used by $s$ and $t$,
 	If $\dm i : \rival{\jet_i}$ and $e_{\dm i} = \lnot \dm j$, then $\vfi$ being a jet cube morphism $V \to W = (U, \dm i : \rival{\jet_i})$ is equivalent to $(\lnot \dm i / \dm i) \circ \vfi$ being a jet cube morphism $V \to (U, \dm i : \rival{\tej_i})$, so we can apply \ruleref{inv:fwd}.
 	Similarly, if $\dm i : \rival{\tej_i}$ and $e_{\dm i} = \lnot \dm j$, we can apply \ruleref{inv:bck}.
 	
-	If $\dm i : \rival{\jet i}$ and $e_{\dm i} = \dm j$ where $V$ specifies that $\dm j$ has degree $j$, then we know that $\vfi = (\chi, \dm j / \dm i)$ is a jet cube morphism $V = (V_0, \dm j : \rival{R_j}, V_1) \to W = (U, \dm i : \rival{\jet_i})$ for some $R \in \accol{\jet, \tej, \equijet}$.
+	If $\dm i : \rival{\jet_i}$ and $e_{\dm i} = \dm j$ where $V$ specifies that $\dm j$ has degree $j$, then we know that $\vfi = (\chi, \dm j / \dm i)$ is a jet cube morphism $V = (V_0, \dm j : \rival{R_j}, V_1) \to W = (U, \dm i : \rival{\jet_i})$ for some $R \in \accol{\jet, \tej, \equijet}$.
 	We have the following commutative diagram in the category of \emph{jet cubes} and \emph{cube morphisms between erased jet cubes}:
 	\[
 		\xymatrix{
@@ -1120,7 +1140,7 @@ The cube $\erasejc U$ arose as the part of $\erasejc V$ not used by $s$ and $t$,
 	This implies that the dashed arrows also lift to jet set morphisms, i.e.\ are jet cube morphisms.
 	Then $\chi$ is both a jet cube morphism $(V_0, V_1) \to U$ and $\Opcube_i(\Opcube_j(V_0), V_1) \to U$.
 	\begin{itemize}
-		\item If $j = i$, then $R = {\jet}$ and $\chi$ is both a jet cube morphism $(V_0, V_1) \to U$ and $(V_0, \Opcube_i(V_1)) \to U$.
+		\item If $j = i$, then $R = {\jet}$, all variables in $V_1$ have degree $i$ and $\chi$ is both a jet cube morphism $(V_0, V_1) \to U$ and $(V_0, \Opcube_i(V_1)) \to U$.
 		This implies that $\EP(\vfi)$ sends every $i$-jet of the form $(\vec v_0, r, \vec v_1) \jet_i (\vec v_0, r, \vec v_1')$ (and hence every such $i$-infrajet) to an $i$-equijet $(\EP(\chi)(\vec v_0, \vec v_1), r) \equijet_i (\EP(\chi)(\vec v_0, \vec v'_1), r)$ in $\JEP(U, \dm i : \rival{\jet_i})$.
 		\begin{itemize}
 			\item If $a_i = \ypolar$, then all $i$-equijets in $\JEP(U, \dm i : \rival{\jet_i})$ are reflexive and all elements of the form $(\vec v_0, r, \vec v_1)$ for fixed $\vec v_0$ and $r$ but variable $\vec v_1$ are $i$-infrajet-connected, so this means that $\EP(\chi)(\vec v_0, \vec v_1)$ is independent of $V_1$.
@@ -1130,29 +1150,14 @@ The cube $\erasejc U$ arose as the part of $\erasejc V$ not used by $s$ and $t$,
 				\item Otherwise, we can apply \ruleref{prism:fwd}.
 			\end{itemize}
 			
-			\item If $a_i = \npolar$, then by the reordering applied before, we know that $\dm j$ is the last variable in $V$, so we can apply \ruleref{prism:fwd} (or equivalently \ruleref{prism:bck}).
+			\item If $a_i = \npolar$, then we can use \ruleref{exchange} to create a morphism from $(V_0, V_1, \dm j : \rival{\edge_i})$ instead, which can be done using \ruleref{prism:fwd} (or equivalently \ruleref{prism:bck}).
 		\end{itemize}
 		
-		If $j > i$, then $\chi$ is necessarily a jet cube morphism 
-	\end{itemize}
-	
-	
-	
-	there are several possibilities:
-	\begin{itemize}
-		\item If $j = i$ and $a_i = \ypolar$, then clearly we must have $\dm j : \rival{\jet_i}$, i.e.\ $\dm j$ is a jet variable (and not a reverse jet or equijet variable).
-		We first show that $\dm j$ must be the last variable of $V$.
-		A priori, we know that $\vfi = (\chi, \dm j / \dm i)$ is a jet cube morphism $V = (V_0, \dm j : \rival{\jet_i}, V_1) \to W = (U, \dm i : \rival{\jet_i})$.
+		If $j > i$, then $\chi$ is necessarily a jet cube morphism $\UFsymcube_i(\UFsymcube_j(V_0), V_1) \to U$, so we can apply \ruleref{companion:fwd}, \ruleref{conjoint:fwd} or \ruleref{equicompanion:fwd}, depending on $R$.
+		Note that if $R = {\equijet}$, then $\UFsymcube_j(V_0) = V_0$.
 	\end{itemize}
 
 	\todoi{Finish proof}
-	
-	\todoi{Old, remove}
-	
-	Let $i$ be the degree of the last variable of $W$, and write $W_i$ for the trailing sublist of $W$ of all variables of degree $i$, and $W_{>i}$ for the initial sublist of $W$ of all variables of degree greater than $i$, so $W = (W_{>i}, W_i)$.
-	We clearly have $(W_{>i}/\novar) : W \to W_i$ and $(W_{>i}/\novar) \circ \vfi : V \to W_i$.
-	
-	\todoi{You know that $\dm i \psub \vfi$ is a boolean expression, so you can just case analyze over it. Affineness means that what you do on the rest of $W$ is independent of what influences $\dm i$, so that justifies taking the symclosure.}
 \end{proof}
 
 \todoi{Use $\jetcubeaff{\booleanalg}{\vec a}$ or $\jetcubecart{\booleanalg}{\vec a}$}
