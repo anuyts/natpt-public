@@ -268,14 +268,13 @@ Note that in both instances, we take the opposite at the source-side of the jet 
 \begin{corollary} \label{thm:twisted-prism-op}
 	We have $\loch \multip \rival{\tej_i} = \Op_i(\loch \multip \rival{\jet_i})$. \qed
 \end{corollary}
-\begin{corollary} \label{thm:commute}
-	\begin{enumerate}
-		\item Let $F_i$ be a functor between jet set categories of any of the following forms: $\Op_i$, $\Fsym_i$, $\Usym_i$, $\Csym_i$, $\loch \multip \rival{\jet_i}$, $\loch \multip \rival{\tej_i}$, $\loch \multip \rival{\edge_i}$.
-		Let $G_j$ be a functor between jet set categories also of one of these forms, but for a different degree $j$.
-		Then $F_i$ and $G_j$ commute, i.e.\ there is a natural isomorphism $F_i G_j \cong G_j F_i$.
-		
-		\item The functor $\loch \multip \rival{\edge_i}$ commutes with itself, i.e. $(x, v, w) \mapsto (x, w, v)$ is a natural automorphism of $\loch \multip \rival{\edge_i} \multip \rival{\edge_i}$. \qed
-	\end{enumerate}
+\begin{corollary} \label{thm:commute-diff-degree}
+	Let $F_i$ be a functor between jet set categories of any of the following forms: $\Op_i$, $\Fsym_i$, $\Usym_i$, $\Csym_i$, $\loch \multip \rival{\jet_i}$, $\loch \multip \rival{\tej_i}$, $\loch \multip \rival{\edge_i}$.
+	Let $G_j$ be a functor between jet set categories also of one of these forms, but for a different degree $j$.
+	Then $F_i$ and $G_j$ commute, i.e.\ there is a natural isomorphism $F_i G_j \cong G_j F_i$.
+\end{corollary}
+\begin{corollary} \label{thm:commute-symmetric}
+The functor $\loch \multip \rival{\edge_i}$ commutes with itself, i.e. $(x, v, w) \mapsto (x, w, v)$ is a natural automorphism of $\loch \multip \rival{\edge_i} \multip \rival{\edge_i}$. \qed
 \end{corollary}
 
 \subsection{Intermezzo: Cube Categories} \label{sec:cubes}
@@ -527,18 +526,21 @@ Note that a $\vec b$-jet-cube is uniquely in the image of $\Usymcube_i$ if it do
 %		\item the $i$-prism functor $\loch \multip (\dm i : \rival{\edge_i}) : \jetcubeopt{\eps}{M}{\vec a} \to \jetcubeopt{\eps}{M}{\vec a}$ when $a_i = \npolar$.
 %	\end{itemize}
 %\end{definition}
-\begin{proposition} \label{thm:cube-commute}
-	\begin{enumerate}
-		\item Any two functors on jet cubes concerned in \cref{thm:lift-to-jet-cubes}, instantiated on different degrees, commute.
-	In other words, the natural transformation given in \cref{thm:commute} (1.) lifts to (forward/trioriented) jet cubes when the associated functors lift.
-	
-		\item Moreover, the functor $\loch \multip (\dm i : \rival{\edge_i})$ commutes with itself, i.e.\ the natural automorphism given in \cref{thm:commute} (2.) lifts to (forward/trioriented) jet cubes as $(\dm i / \dm i, \dm j / \dm j) : \loch \multip (\dm i : \rival{\edge_i}) \multip (\dm j : \rival{\edge_i}) \cong \loch \multip (\dm j : \rival{\edge_i}) \multip (\dm i : \rival{\edge_i})$.
-	\end{enumerate}
+\begin{proposition} \label{thm:cube-commute-diff-degree}
+	Any two functors on jet cubes concerned in \cref{thm:lift-to-jet-cubes}, instantiated on different degrees, commute.
+	In other words, the natural transformation given in \cref{thm:commute-diff-degree} lifts to (forward/trioriented) jet cubes when the associated functors lift.
 \end{proposition}
 \begin{proof}
 	Since the categories of forward/trioriented jet cubes are fully faithful subcategories of the pullback $\cubecat_M^\eps \times_\Set \jetset{\vec a}$, it suffices to prove the natural isomorphism there.
-	The isomorphism was already established in $\jetset{\vec a}$ by \cref{thm:commute}, and the effect on the carrier is either nothing (when at most one prism functor is involved) or swapping components (when both functors are prism functors).
+	The isomorphism was already established in $\jetset{\vec a}$ by \cref{thm:commute-diff-degree}, and the effect on the carrier is either nothing (when at most one prism functor is involved) or swapping components (when both functors are prism functors).
 	These isomorphisms lift to $\cubecat_M^\eps$.
+\end{proof}
+\begin{proposition} \label{thm:cube-commute-symmetric}
+	The functor $\loch \multip (\dm i : \rival{\edge_i})$ commutes with itself, i.e.\ the natural automorphism given in \cref{thm:commute-symmetric} lifts to (forward/trioriented) jet cubes as $(\dm i / \dm i, \dm j / \dm j) : \loch \multip (\dm i : \rival{\edge_i}) \multip (\dm j : \rival{\edge_i}) \cong \loch \multip (\dm j : \rival{\edge_i}) \multip (\dm i : \rival{\edge_i})$.
+\end{proposition}
+\begin{proof}
+	Analogous to the proof of \cref{thm:cube-commute-diff-degree}.
+	The isomorphism was already established in $\jetset{\vec a}$ by \cref{thm:commute-symmetric}, and the effect on the carrier is swapping components, which lifts to $\cubecat_M^\eps$.
 \end{proof}
 \begin{remark} \label{rem:two-monads}
 	As of this point we will only be interested in the monads $\bipointedsym$ and $\booleanalg$ because:
@@ -646,7 +648,7 @@ Soundness (\cref{thm:calculus-sound}) of the calculus will be the property that 
 We do not have to bother with an equational theory, as we can simply inherit it from $\cubecat_M^\affine$.
 
 \begin{convention} \label{conv:sort-cubes}
-	When presenting the calculus, as justified by \cref{thm:cube-commute} (1.), we will order the dimensions of a (forward/trioriented) jet cube by \emph{decreasing} degree.
+	When presenting the calculus, as justified by \cref{thm:cube-commute-diff-degree}, we will order the dimensions of a (forward/trioriented) jet cube by \emph{decreasing} degree.
 \end{convention}
 \begin{figure} \label{fig:calculus}
 	\[
@@ -996,7 +998,7 @@ The cube $\erasejc U$ arose as the part of $\erasejc V$ not used by $s$ and $t$,
 			\item $j = i$, $\vec v = \vec v'$ and $w \jet_i w'$. In this case we trivially have $\vec v \jet_j \vec v$ in $\JEP(\UFsymcube_i(V))$.
 		\end{itemize}
 		
-		\item Soundness of \ruleref{exchange} follows from \cref{thm:cube-commute} (2.).
+		\item Soundness of \ruleref{exchange} follows from \cref{thm:cube-commute-symmetric}.
 		
 		\item For \ruleref{companion:fwd}, let $\hat \vfi : \UFsymcube_i(\UFsymcube_j U, V) \to W$ be a jet cube morphism.
 		Then $f := \JEP(\hat \vfi)$ is a jet set morphism $\JEP(\UFsymcube_i(\UFsymcube_j U, V)) \to \JEP(W)$.
