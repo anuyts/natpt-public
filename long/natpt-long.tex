@@ -265,9 +265,13 @@ Note that in both instances, we take the opposite at the source-side of the jet 
 	We have $\loch \multip \rival{\tej_i} = \Op_i(\loch \multip \rival{\jet_i})$. \qed
 \end{corollary}
 \begin{corollary} \label{thm:commute}
-	Let $F_i$ be a functor between jet set categories of any of the following forms: $\Op_i$, $\Fsym_i$, $\Usym_i$, $\Csym_i$, $\loch \multip \rival{\jet_i}$, $\loch \multip \rival{\tej_i}$, $\loch \multip \rival{\edge_i}$.
-	Let $G_j$ be a functor between jet set categories also of one of these forms, but for a different degree $j$.
-	Then $F_i$ and $G_j$ commute, i.e.\ there is a natural isomorphism $F_i G_j \cong G_j F_i$. \qed
+	\begin{enumerate}
+		\item Let $F_i$ be a functor between jet set categories of any of the following forms: $\Op_i$, $\Fsym_i$, $\Usym_i$, $\Csym_i$, $\loch \multip \rival{\jet_i}$, $\loch \multip \rival{\tej_i}$, $\loch \multip \rival{\edge_i}$.
+		Let $G_j$ be a functor between jet set categories also of one of these forms, but for a different degree $j$.
+		Then $F_i$ and $G_j$ commute, i.e.\ there is a natural isomorphism $F_i G_j \cong G_j F_i$.
+		
+		\item The functor $\loch \multip \rival{\edge_i}$ commutes with itself, i.e. $(x, v, w) \mapsto (x, w, v)$ is a natural automorphism of $\loch \multip \rival{\edge_i} \multip \rival{\edge_i}$. \qed
+	\end{enumerate}
 \end{corollary}
 
 \subsection{Intermezzo: Cube Categories} \label{sec:cubes}
@@ -520,8 +524,12 @@ Note that a $\vec b$-jet-cube is uniquely in the image of $\Usymcube_i$ if it do
 %	\end{itemize}
 %\end{definition}
 \begin{proposition} \label{thm:cube-commute}
-	Any two functors on jet cubes concerned in \cref{thm:lift-to-jet-cubes}, instantiated on different degrees, commute.
-	In other words, the natural transformation given in \cref{thm:commute} lifts to (forward/trioriented) jet cubes when the associated functors lift.
+	\begin{enumerate}
+		\item Any two functors on jet cubes concerned in \cref{thm:lift-to-jet-cubes}, instantiated on different degrees, commute.
+	In other words, the natural transformation given in \cref{thm:commute} (1.) lifts to (forward/trioriented) jet cubes when the associated functors lift.
+	
+		\item Moreover, the functor $\loch \multip (\dm i : \rival{\edge_i})$ commutes with itself, i.e.\ the natural automorphism given in \cref{thm:commute} (2.) lifts to (forward/trioriented) jet cubes as $(\dm i / \dm i, \dm j / \dm j) : \loch \multip (\dm i : \rival{\edge_i}) \multip (\dm j : \rival{\edge_i}) \cong \loch \multip (\dm j : \rival{\edge_i}) \multip (\dm i : \rival{\edge_i})$.
+	\end{enumerate}
 \end{proposition}
 \begin{proof}
 	Since the categories of forward/trioriented jet cubes are fully faithful subcategories of the pullback $\cubecat_M^\eps \times_\Set \jetset{\vec a}$, it suffices to prove the natural isomorphism there.
@@ -629,8 +637,8 @@ In this section, we develop a calculus that inductively generates the morphisms 
 
 Since the forgetful functor $U : \jetset{\vec a} \to \Set$ is faithful, so is $\erasejc \loch : \trijetcubeopt{\affine}{M}{\vec a}$.
 As such, we can regard `being a morphism of (forward/trioriented) jet cubes' as a proof-irrelevant property of morphisms of cubes, which we will therefore use as preterms.
-Our calculus will therefore feature a single judgement $\vfi : V \to W$ meaning that the morphism $\vfi : \erasejc V \to \erasejc W$ is in fact a morphism of jet cubes.
-Soundness of the calculus will be the property that the judgement's meaning actually holds when the judgement is derivable, whereas completeness means that the judgement is derivable when its meaning is true.
+Our calculus will therefore feature a single judgement $\sez \vfi : V \to W$ meaning that the morphism $\vfi : \erasejc V \to \erasejc W$ is in fact a morphism of jet cubes.
+Soundness (\cref{thm:calculus-sound}) of the calculus will be the property that the judgement's meaning actually holds when the judgement is derivable, whereas completeness (\cref{thm:calculus-complete}) means that the judgement is derivable when its meaning is true.
 We do not have to bother with an equational theory, as we can simply inherit it from $\cubecat_M^\affine$.
 
 \begin{convention} \label{conv:sort-cubes}
@@ -706,13 +714,20 @@ We do not have to bother with an equational theory, as we can simply inherit it 
 		\inferencel{wkn:fwd}{
 			\sez \vfi : \UFsymcube_i(V) \to W
 		}{
-			\sez (\vfi, \dm i / \novar) : (V, \dm i : \rival{\jet_i})
+			\sez (\vfi, \dm i / \novar) : (V, \dm i : \rival{\jet_i}) \to W
 		}{}
 		\qquad
 		\inferencel{wkn:bck}{
 			\sez \vfi : \UFsymcube_i(V) \to W
 		}{
-			\sez (\vfi, \dm i / \novar) : (V, \dm i : \rival{\jet_i})
+			\sez (\vfi, \dm i / \novar) : (V, \dm i : \rival{\jet_i}) \to W
+		}{}
+	\]
+	\[
+		\inferencel{exchange}{
+			\sez \vfi : V \to (W, \dm j : \rival{\edge_i}, U, \dm i : \rival{\edge_i})
+		}{
+			\sez \vfi : V \to (W, \dm i : \rival{\edge_i}, U, \dm j : \rival{\edge_i})
 		}{}
 	\]
 	\[
@@ -812,6 +827,9 @@ We can apply the (opposite) $i$-twisted prism functor to a morphism (\ruleref{pr
 We can weaken w.r.t.\ the last dimension (\ruleref{wkn:fwd}, \ruleref{wkn:bck}), but some caution is required. At the source-side of the last dimension, we find $\Opcube_i(V)$, whereas at the target-side we have $V$.
 Thus, $\vfi$ needs to be a morphism of jet cubes from $\Opcube_i(V) \to W$ as well as from $V \to W$.
 This can be achieved by asking that $\vfi$ starts from $\UFsymcube_i(V)$, which can be thought of as a join of $\Opcube_i(V)$ and $V$.
+
+We can exchange variables of the same symmetric degree $i$ (\ruleref{exchange}).
+Note that \cref{conv:sort-cubes} implies that all variables in $U$ are also of degree $i$.
 
 If the last dimension of our target cube is of the form $\dm i : \rival{\equijet_i}$, then we know that our cube is in the image of $\Usymcube_i$, and we can proceed using the adjunction $\Fsymcube_i \dashv \Usymcube_i$ (\ruleref{symmetrize}).
 This turns our last dimension into $\dm i : \rival{\edge_i}$ which is a special case of both $\dm i : \rival{\jet_i}$ and $\dm i : \rival{\tej_i}$, so we can proceed by using the \textsc{fwd} and \textsc{bck} rules of the calculus.
@@ -966,6 +984,8 @@ The cube $\erasejc U$ arose as the part of $\erasejc V$ not used by $s$ and $t$,
 			\item $w = w'$ and $(\vec v, w) \jet_j (\vec v', w)$. The latter implies $\vec v \jet_j \vec v'$ in $JEP(V)$ if $j \neq i$ and $\vec v \infrajet_i \vec v'$ if $j = i$. Moving to $\JEP(\UFsymcube_i(V))$, we get $\vec v \jet_j \vec v'$ in all cases, as required.
 			\item $j = i$, $\vec v = \vec v'$ and $w \jet_i w'$. In this case we trivially have $\vec v \jet_j \vec v$ in $\JEP(\UFsymcube_i(V))$.
 		\end{itemize}
+		
+		\item Soundness of \ruleref{exchange} follows from \cref{thm:cube-commute} (2.).
 		
 		\item For \ruleref{companion:fwd}, let $\hat \vfi : \UFsymcube_i(\UFsymcube_j U, V) \to W$ be a jet cube morphism.
 		Then $f := \JEP(\hat \vfi)$ is a jet set morphism $\JEP(\UFsymcube_i(\UFsymcube_j U, V)) \to \JEP(W)$.
