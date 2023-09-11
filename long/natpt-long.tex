@@ -707,6 +707,13 @@ We do not have to bother with an equational theory, as we can simply inherit it 
 			\sez (\vfi, \dm i / \dm i) : (V, \dm i : \rival{\tej_i}) \to (W, \dm i : \rival{\tej_i})
 		}{}
 	\]
+%	\[
+%		\inferencel{prism:sym}{
+%			\sez \vfi : (U, V) \to W
+%		}{
+%			\sez (\vfi, \dm i / \dm i) : (U, \dm i : \rival{\edge_i}, V) \to (W, \dm i : \rival{\edge_i})
+%		}{}
+%	\]
 	\[
 		\inferencel{symmetrize}{
 			\sez \vfi : \Fsymcube_i V \to W
@@ -729,9 +736,9 @@ We do not have to bother with an equational theory, as we can simply inherit it 
 	\]
 	\[
 		\inferencel{exchange}{
-			\sez \vfi : V \to (W, \dm j : \rival{\edge_i}, U_1, \dm i : \rival{\edge_i}, U_2)
+			\sez \vfi : (V, \dm j : \rival{\edge_i}, U_1, \dm i : \rival{\edge_i}, U_2) \to W
 		}{
-			\sez \vfi : V \to (W, \dm i : \rival{\edge_i}, U_1, \dm j : \rival{\edge_i}, U_2)
+			\sez \vfi : (V, \dm i : \rival{\edge_i}, U_1, \dm j : \rival{\edge_i}, U_2) \to W
 		}{}
 	\]
 	\[
