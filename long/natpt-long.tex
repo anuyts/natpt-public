@@ -1175,8 +1175,21 @@ The cube $\erasejc U$ arose as the part of $\erasejc V$ not used by $s$ and $t$,
 		
 		\item We have now covered all cases for the monad $\bipointedsym$.
 		In the remaining cases, $e_{\dm i}$ contains conjunction or disjunction symbols.
-		If $\dm i : \rival{\tej_i}$, we apply \ruleref{inv:fwd} and push down the introduced negation, after which we do not resort to the induction hypothesis but proceed below.\footnote{Alternatively, we could adapt the proof below to the case where $\dm i : \rival{\tej_i}$.}
+		If $\dm i : \rival{\tej_i}$, we apply \ruleref{inv:fwd} and push down the introduced negation, after which we do not resort to the induction hypothesis but proceed below.\footnote{Alternatively, we could duplicate and adapt the proof below and the lemmas on which it relies to the case where $\dm i : \rival{\tej_i}$.}
 		We now assume that $\dm i : \rival{\jet_i}$.
+		
+		Weakening over all variables but $\dm i$ yields a jet cube morphism $V \to (\dm i : \rival{\jet_i})$ to which we can apply \cref{thm:char-jet-cube-to-line},
+		concluding that $\dm i \psub \vfi$ is of the form prescribed there.
+		Since we have already dealt with constants and (negations of) variables, the remaining cases are:
+		\begin{itemize}
+			\item $e$ is of the form $s \mathrel{R} \lnot^p \dm k$ where $\dm k$ is the last $i$-directed variable of $V$ and $R \in \accol{{\vee}, {\wedge}}$.
+			It is easy to see that the last operand must be $\dm k'$ which we define to be equal to $\dm k$ if $\dm k : \rival{\jet_i}$ and $\lnot \dm k$ if $\dm k : \rival{\tej_i}$.
+		\end{itemize}
+		\todoi{Your lemmas don't cover symmetric degrees!! But these are easy.}
+		\todoi{Shouldn't you reduce to $(\vfi, s)$ and $(\vfi, t)$?}
+		
+		
+		\todoi{Old stuff}
 		\begin{itemize}
 			\item If $V$ has $i$-directed variables (\cref{def:symmetric-var}), then $a_i = \ypolar$ and the last variable $\dm k$ of $V$ is a non-equijet variable of degree $i$.
 			We show that $e_{\dm i}$ is of one of the following forms:
@@ -1307,7 +1320,7 @@ Note that $t \mathrel{R} c$ is either equal to $t$ or to $c$.
 	Write $\dm j_k'$ to mean $\dm j_k$ if $\dm j_k : \rival{\jet_i}$ and to mean $\lnot \dm j_k$ if $\dm j_k : \rival{\tej_i}$.
 	Write $U$ for the $i$-directed part of $V$ and note that any assignment of bits to all $i$-symmetric variables yields a morphism $U \to V$ which necessarily satisfies \cref{thm:char-twisted-cube-to-line}.
 	
-	We prove the induction step again by induction, now on the number of leaves of $e$.
+	We prove the induction step again by induction, now on the height of the syntax tree of $e$.
 	
 	\begin{itemize}
 		\item We claim that if $\dm j_n$ and $\dm j_{k}$ occur in different children of the root node of $e$, then $\dm j'_n$ is a direct child of $e$.
