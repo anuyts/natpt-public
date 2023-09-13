@@ -671,39 +671,39 @@ We do not have to bother with an equational theory, as we can simply inherit it 
 		\inferencel{zero:fwd}{
 			\sez \vfi : V \to \Opcube_i(W)
 		}{
-			\sez (\vfi, 0/\dm i) : V \to (W, i : \rival{\jet_i})
+			\sez (\vfi, 0/\dm i) : V \to (W, \dm i : \rival{\jet_i})
 		}{}
 		\qquad
 		\inferencel{one:bck}{
 			\sez \vfi : V \to \Opcube_i(W)
 		}{
-			\sez (\vfi, 1/\dm i) : V \to (W, i : \rival{\tej_i})
+			\sez (\vfi, 1/\dm i) : V \to (W, \dm i : \rival{\tej_i})
 		}{}
 	\]
 	\[
 		\inferencel{one:fwd}{
 			\sez \vfi : V \to W
 		}{
-			\sez (\vfi, 1/\dm i) : V \to (W, i : \rival{\jet_i})
+			\sez (\vfi, 1/\dm i) : V \to (W, \dm i : \rival{\jet_i})
 		}{}
 		\qquad
 		\inferencel{zero:bck}{
 			\sez \vfi : V \to W
 		}{
-			\sez (\vfi, 0/\dm i) : V \to (W, i : \rival{\tej_i})
+			\sez (\vfi, 0/\dm i) : V \to (W, \dm i : \rival{\tej_i})
 		}{}
 	\]
 	\[
 		\inferencel{inv:fwd}{
-			\sez (\vfi, t/\dm i) : V \to (W, i : \rival{\tej_i})
+			\sez (\vfi, t/\dm i) : V \to (W, \dm i : \rival{\tej_i})
 		}{
-			\sez (\vfi, \lnot t/\dm i) : V \to (W, i : \rival{\jet_i})
+			\sez (\vfi, \lnot t/\dm i) : V \to (W, \dm i : \rival{\jet_i})
 		}{}
 		\qquad
 		\inferencel{inv:bck}{
-			\sez (\vfi, t/\dm i) : V \to (W, i : \rival{\jet_i})
+			\sez (\vfi, t/\dm i) : V \to (W, \dm i : \rival{\jet_i})
 		}{
-			\sez (\vfi, \lnot t/\dm i) : V \to (W, i : \rival{\tej_i})
+			\sez (\vfi, \lnot t/\dm i) : V \to (W, \dm i : \rival{\tej_i})
 		}{}
 	\]
 	\[
@@ -1186,7 +1186,7 @@ The cube $\erasejc U$ arose as the part of $\erasejc V$ not used by $s$ and $t$,
 			It is easy to see that the last operand must be $\dm k'$ which we define to be equal to $\dm k$ if $\dm k : \rival{\jet_i}$ and $\lnot \dm k$ if $\dm k : \rival{\tej_i}$.
 		\end{itemize}
 		\todoi{Your lemmas don't cover symmetric degrees!! But these are easy.}
-		\todoi{Shouldn't you reduce to $(\vfi, s)$ and $(\vfi, t)$?}
+		\todoi{Shouldn't you reduce to $(\vfi, s)$ and $(\vfi, t)$? Do you need a cofibration for $s$?}
 		
 		
 		\todoi{Old stuff}
