@@ -1178,12 +1178,27 @@ The cube $\erasejc U$ arose as the part of $\erasejc V$ not used by $s$ and $t$,
 		If $\dm i : \rival{\tej_i}$, we apply \ruleref{inv:fwd} and push down the introduced negation, after which we do not resort to the induction hypothesis but proceed below.\footnote{Alternatively, we could duplicate and adapt the proof below and the lemmas on which it relies to the case where $\dm i : \rival{\tej_i}$.}
 		We now assume that $\dm i : \rival{\jet_i}$.
 		
-		Weakening over all variables but $\dm i$ yields a jet cube morphism $V \to (\dm i : \rival{\jet_i})$ to which we can apply \cref{thm:char-jet-cube-to-line},
-		concluding that $\dm i \psub \vfi$ is of the form prescribed there.
-		Since we have already dealt with constants and (negations of) variables, the remaining cases are:
+		\todoi{Lemma: When a variable of the domain is used at a lower degree in the codomain, or not at all, then all variables of the same degree to its left can be promoted to equijet variables. Proof: weaken the codomain over all variables of lower degree.}
+		
 		\begin{itemize}
-			\item $e$ is of the form $s \mathrel{R} \lnot^p \dm k$ where $\dm k$ is the last $i$-directed variable of $V$ and $R \in \accol{{\vee}, {\wedge}}$.
-			It is easy to see that the last operand must be $\dm k'$ which we define to be equal to $\dm k$ if $\dm k : \rival{\jet_i}$ and $\lnot \dm k$ if $\dm k : \rival{\tej_i}$.
+			\item We first treat the case where $a_i = \npolar$.
+			Let $\vfi = (\chi, s \mathrel R t/\dm i)$ where $R \in \accol{{\vee}, {\wedge}}$ and $W = (U, \dm i : \rival{\jet_i})$.
+			We claim that if $\vfi$ is a jet cube morphism, then so are $(\chi, s/\dm i)$ and $(\chi, t/\dm i)$.
+			Indeed, assume $s$ depends on the variables $\dm j_1, \ldots, \dm j_n$.
+			Take a bit assignment $\vec v/\vec{\dm j}$ such that $s[\vec v/\vec{\dm j}]$ equals $0$ if $R = {\vee}$ and $1$ if $R = {\wedge}$.
+			Then $\dm i \psub \vfi \psub{\vec v/\vec{\dm j}} = (s \mathrel R t)\psub{\vec v/\vec{\dm j}} = t \psub{\vec v/\vec{\dm j}}$, which thanks to affineness just equals $t$.
+			By removing $\vec{\dm j}$ from $V$ and taking opposites in all the right places, we obtain a jet cube $V_1$ such that $(\vec v/\vec{\dm j}) : V_1 \to V$ is a jet cube morphism.
+			
+			\item \todoi{Directed case.}
+			\todoi{We do have to consider $e$ up to boolean equality}
+			
+			Weakening over all variables but $\dm i$ yields a jet cube morphism $V \to (\dm i : \rival{\jet_i})$ to which we can apply \cref{thm:char-jet-cube-to-line},
+			concluding that $\dm i \psub \vfi$ is of the form prescribed there.
+			Since we have already dealt with constants and (negations of) variables, the remaining cases are:
+			\begin{itemize}
+				\item $e$ is of the form $s \mathrel{R} \lnot^p \dm k$ where $\dm k$ is the last $i$-directed variable of $V$ and $R \in \accol{{\vee}, {\wedge}}$.
+				It is easy to see that the last operand must be $\dm k'$ which we define to be equal to $\dm k$ if $\dm k : \rival{\jet_i}$ and $\lnot \dm k$ if $\dm k : \rival{\tej_i}$.
+			\end{itemize}
 		\end{itemize}
 		\todoi{Your lemmas don't cover symmetric degrees!! But these are easy.}
 		\todoi{Shouldn't you reduce to $(\vfi, s)$ and $(\vfi, t)$? Do you need a cofibration for $s$?}
@@ -1272,7 +1287,7 @@ Note that $t \mathrel{R} c$ is either equal to $t$ or to $c$.
 \begin{proof}
 	We prove this by induction on $n$.
 	If $n = 0$ then $\dm i \psub \vfi$ is necessarily a constant.
-	Assume $n > 0$.
+	Assume $n > 0$, implying that $a_i = \ypolar$.
 	The jet set $\JEP(V)$ has $2^n$ elements and a unique Hamiltonian path of $i$-jets.
 	$f := \JEP(\vfi)$ sends this Hamiltonian path to $\JEP(\dm i : \rival{\jet_i}) = \accol{0 \jet_i 1}$.
 	Thus, $f$ is entirely determined by the step in the Hamiltonian path where the image of $f$ flips from $0$ to $1$.
@@ -1295,7 +1310,7 @@ Note that $t \mathrel{R} c$ is either equal to $t$ or to $c$.
 	\end{itemize}
 \end{proof}
 \begin{lemma} \label{thm:char-jet-cube-to-line}
-	In $\trijetcubeopt \affine \booleanalg {\vec a}$, consider $\vfi : V \to (\dm i : \rival{\jet_i})$.
+	In $\trijetcubeopt \affine \booleanalg {\vec a}$ where $a_i = \ypolar$, consider $\vfi : V \to (\dm i : \rival{\jet_i})$.
 	Write $\dm j_1, \ldots, \dm j_n$ for the $i$-directed variables of $V$.
 	Then $\vfi$ does not depend on variables of degree lower than $i$, nor on $i$-equijet variables of $V$.
 	Moreover, $\dm i \psub{\vfi}$ is of the form
