@@ -1101,17 +1101,37 @@ The cube $\erasejc U$ arose as the part of $\erasejc V$ not used by $s$ and $t$,
 Proving completeness for the $\bipointedsym$ monad is fairly straightforward,
 but for the cases involving connections (conjunctions and disjunctions), we need a couple of helper lemmas.
 
-\begin{definition}
+\begin{definition} \label{def:reduction}
 	Boolean terms $t \in \booleanalg(X)$ are equivalence classes $t = [e]$ of boolean expressions $e$, which can be regarded as abstract syntax trees.
 	We define two reduction algorithms that reduce an expression $e$ to $e'$ such that $[e] = [e']$.
 	\begin{itemize}
-		\item By \textbf{reduction}, we mean the process of pushing all negations to the leaves, eliminating double negations, and simplifying conjunctions/disjunctions with the constants $0$ and $1$.
-		The outcome is either a constant, or a binary tree whose nodes are labelled with $\vee$ or $\wedge$ and whose leaves are (negations of) elements of $X$.
+		\item By \textbf{(basic) reduction}, we mean the process of pushing all negations to the leaves, eliminating double negations, and simplifying conjunctions/disjunctions with the constants $0$ and $1$.
+		The outcome is either a constant, or a binary tree whose nodes are labelled with $\vee$ or $\wedge$ and whose leaves are (negations of) elements of $X$ (called \textbf{variables} in this setting).
 		\item For \textbf{associative reduction}, we first apply reduction and subsequently merge nodes with the same label.
-		The outcome is either a constant or a tree whose nodes are alternatingly (as we climb the tree) labeled with $\vee$ and $\wedge$ (the root can have either) and whose leaves are (negations of) elements of $X$.
+		The outcome is either a constant or a tree whose nodes are alternatingly (as we climb the tree) labeled with $\vee$ and $\wedge$ (the root can have either) and whose leaves are (negations of) variables.
 		Every node has finitely many children and at least 2.
 	\end{itemize}
 \end{definition}
+\begin{lemma} \label{thm:boolexp-to-const-assignment}
+	For every $t \in \booleanalg^\#(X)$ with non-constant reduction $e$ and $c \in \accol{0, 1}$, there exists a bit assignment $\sigma : X \to \accol{0, 1}$ such that $t[\sigma] = c$.
+\end{lemma}
+\begin{proof}
+	By induction on the height of $e$.
+\end{proof}
+\begin{lemma} \label{thm:boolexp-to-var-assignment}
+	For every $t \in \booleanalg^\#(X)$ with reduction $e$ that has a leaf $\tilde x \in \accol{x,\lnot x}$ where $x \in X$, there exists a bit assignment $\sigma : X \setminus \accol x \to \accol{0, 1}$ such that $t[\sigma] = \tilde x$.
+\end{lemma}
+\begin{proof}
+	By induction on the height of the tree.
+	It is clear that $e$ is no constant, since it mentions $x$.
+	If the tree is a leaf, we are done.
+	If $e$ is a conjunction, then for every operand $d$ not depending on $x$, choose an assignment $\sigma$ for that operand's dependencies such that $[d][\sigma] = 1$.
+	For the sole operand mentioning $x$, apply the induction hypothesis.
+	For disjunctions, we proceed dually.
+\end{proof}
+\begin{corollary} \label{thm:reduction-minimal-deps}
+	If the (basic/associative) reduction of $t$ is $e$ and $e$ depends on $x$, then every expression representing $t$ depends on $x$. \qedhere
+\end{corollary}
 
 \begin{lemma} \label{thm:left-of-companion-conjoint}
 	In $\trijetcubeopt \affine M {\vec a}$ with $M \in \accol{\bipointedsym, \booleanalg}$,
