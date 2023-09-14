@@ -1277,11 +1277,11 @@ The cube $\erasejc U$ arose as the part of $\erasejc V$ not used by $s$ and $t$,
 \end{proof}
 \begin{lemma} \label{thm:char-twisted-cube-to-line}
 	In $\trijetcubeopt \eps \booleanalg {\vec a}$ with $\eps \in \accol{\affine, \cartes}$, let $V$ be a jet cube with only $i$-directed variables called (from left to right) $\dm j_1, \ldots, \dm j_n$, and consider $\vfi : V \to (\dm i : \rival{\jet_i})$.
-	Then $\dm i \psub{\vfi}$ is of the form
+	Then $\dm i \psub{\vfi}$ is either a constant or of the form
 	\[
-		\dm i \psub{\vfi} = (\ldots((\lnot^{p_1} \dm j_1 \mathrel{R_1} \lnot^{p_2} \dm j_2) \mathrel{R_2} \lnot^{p_3} \dm j_3) \ldots \mathrel{R_{n-1}} \lnot^{p_n} \dm j_n) \mathrel{R_n} c
+		\dm i \psub{\vfi} = (\ldots((\lnot^{p_1} \dm j_1 \mathrel{R_1} \lnot^{p_2} \dm j_2) \mathrel{R_2} \lnot^{p_3} \dm j_3) \ldots) \mathrel{R_{n-1}} \lnot^{p_n} \dm j_n
 	\]
-	with $c, p_k \in \accol{0, 1}$ and $R_k \in \accol{{\vee}, {\wedge}, K}$ where we define $x \mathrel K y := y$.
+	with $p_k \in \accol{0, 1}$ and $R_k \in \accol{{\vee}, {\wedge}, K}$ where we define $x \mathrel K y := y$.
 \end{lemma}
 Note that $t \mathrel{R} c$ is either equal to $t$ or to $c$.
 \begin{proof}
@@ -1317,7 +1317,7 @@ Note that $t \mathrel{R} c$ is either equal to $t$ or to $c$.
 	\[
 		\dm i \psub{\vfi} = h_n(\ldots h_3(h_2(h_1(\lnot^{p_1} \dm j_1) \mathrel{R_1} \lnot^{p_2} \dm j_2) \mathrel{R_2} \lnot^{p_3} \dm j_3) \ldots \mathrel{R_{n-1}} \lnot^{p_n} \dm j_n)
 	\]
-	with $c, p_k \in \accol{0, 1}$ and $R_k \in \accol{{\vee}, {\wedge}, K}$ where we define $x \mathrel K y := y$, and every $h_k$ is a composition of functions of the form $\loch \mathrel{S} t$ with $t$ any affine boolean expression mentioning only $i$-symmetric variables and $S \in \accol{{\vee}, {\wedge}, K}$.
+	with $p_k \in \accol{0, 1}$ and $R_k \in \accol{{\vee}, {\wedge}, K}$ where we define $x \mathrel K y := y$, and every $h_k$ is a composition of functions of the form $\loch \mathrel{S} t$ with $t$ any affine boolean expression mentioning only $i$-symmetric variables and $S \in \accol{{\vee}, {\wedge}, K}$.
 \end{lemma}
 \begin{proof}
 	First of all, the $i$-equijet relation as well as all $\ell$-jet relations for $\ell < i$ are reflexive in $\JEP(\dm i : \rival{\jet_i}) = \accol{0 \jet_i 1}$, so that $\JEP(\vfi)$ must be constant on $i$-equijet- or $\ell$-jet-connected components, implying that $\vfi$ cannot depend on those variables.
