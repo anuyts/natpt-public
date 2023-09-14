@@ -648,7 +648,7 @@ In short then, by \cref{rem:two-monads}:
 	We are no longer interested in cartesian jet cubes.
 \end{remark}
 
-\subsubsection{A Calculus of Trioriented Jet Cube Morphisms}
+\subsection{A Calculus of Trioriented Jet Cube Morphisms}
 In this section, we develop a calculus that inductively generates the morphisms of the category \linebreak $\trijetcubeopt{\affine}{M}{\vec a}$ and therefore also those of its full subcategory $\jetcubeopt{\affine}{M}{\vec a}$.
 
 Since the forgetful functor $U : \jetset{\vec a} \to \Set$ is faithful, so is $\erasejc \loch : \trijetcubeopt{\affine}{M}{\vec a}$.
@@ -989,7 +989,7 @@ For example, in \ruleref{conj:fwd}, assume that $s = \dm i$ and $t = \dm j$ and 
 Again, we see that $\vfi : \erasejc U \to \erasejc W$ needs to be a morphism of jet cubes both from $\Opcube_i(U) \to \Opcube_i(W)$ (or equivalently from $U \to W$) and from $U \to \Opcube_i(W)$ (or equivalently from $\Opcube_i(U) \to W$). Again, we let $\vfi$ depart from their join $\UFsymcube_i(U)$.
 The cube $\erasejc U$ arose as the part of $\erasejc V$ not used by $s$ and $t$, so in the typing rule we can simply use $\UFsymcube_i(V)$ (this will be formalized in \cref{thm:calculus-sound,thm:calculus-complete}).
 
-\paragraph{Soundness}
+\subsubsection{Soundness}
 \begin{theorem}[Soundness] \label{thm:calculus-sound}
 	If a morphism $\vfi : \erasejc V \to \erasejc W$ satisfies the predicate $\sez \vfi : V \to W$ from \cref{def:calculus}, then it actually arises as the image $\vfi = \erasejc{\hat \vfi}$ of a morphism $\hat \vfi : V \to W$.
 \end{theorem}
@@ -1097,9 +1097,9 @@ The cube $\erasejc U$ arose as the part of $\erasejc V$ not used by $s$ and $t$,
 	\end{itemize}
 \end{proof}
 
-\paragraph{Completeness}
+\subsubsection{Boolean Lemmas for Completeness}
 Proving completeness for the $\bipointedsym$ monad is fairly straightforward,
-but for the cases involving connections (conjunctions and disjunctions), we need a couple of helper lemmas.
+but for the cases involving connections (conjunctions and disjunctions), we need a couple of helper lemmas involving boolean terms.
 
 \begin{definition} \label{def:reduction}
 	Boolean terms $t \in \booleanalg(X)$ are equivalence classes $t = [e]$ of boolean expressions $e$, which can be regarded as abstract syntax trees.
@@ -1263,8 +1263,7 @@ We will only use this lemma when $\eps = \affine$.
 	If $n = 0$, then $\dm i \psub \vfi = h_n(\_)$ with $h_n(x) = \_ \mathrel K t$ where $t = \dm i \psub \vfi$ does not mention any $i$-directed variables.
 	
 	Let $n > 0$.
-	We reduce $\dm i \psub \vfi$ to an expression $e$ by pushing down all negations, simplifying all conjunctions and disjunctions with constants, and using associativity to flatten conjunctions and disjunctions.
-	Thus, the syntax tree of $e$ has a variable finite branching factor, nodes labelled alternatingly with $\vee$ and $\wedge$, and leaves labelled with (negations of) variables from $V$.
+	We reduce $\dm i \psub \vfi$ to an expression $e$ by associative reduction (\cref{def:reduction})
 	Write $\dm j_k'$ to mean $\dm j_k$ if $\dm j_k : \rival{\jet_i}$ and to mean $\lnot \dm j_k$ if $\dm j_k : \rival{\tej_i}$.
 	Write $U$ for the $i$-directed part of $V$ and note that any assignment of bits to all $i$-symmetric variables yields a morphism $U \to V$ which necessarily satisfies \cref{thm:char-twisted-cube-to-line}.
 	
@@ -1284,7 +1283,7 @@ We will only use this lemma when $\eps = \affine$.
 		Then we can choose a bit-assignment of all $i$-symmetric variables that makes $\dm j_n$ disappear in $t$, but does not make any of the other $i$-directed variables (which occur in other children of $e$) disappear.
 		It is clear that we can accomplish this on a per-child-of-$e$ basis.
 		Of course $t$ will reduce to a constant, so we need to make sure that this constant is not $0$ if $e$ is a conjunction, or $1$ if it is a disjunction.
-		However, if $e$ is a conjunction, then $t$ is a disjunction, and we can set the operand that does not contain $\dm j_n$ to 1. The dual holds if $e$ is a disjunction.
+		However, if $e$ is a conjunction, then $t$ is a disjunction, and we can set an operand that does not contain $\dm j_n$ to 1. The dual holds if $e$ is a disjunction.
 		We now obtain a boolean expression that is not of the form described in \cref{thm:char-twisted-cube-to-line}, which is a contradiction.
 		
 		\item In the case described in the previous bullet point, we conclude that $e$ is of the form $s \mathrel{R} \dm j_n'$ with ${R} \in \accol{{\vee}, {\wedge}}$ (and $s$ may further use the same symbol $R$ in its root node).
@@ -1301,14 +1300,15 @@ We will only use this lemma when $\eps = \affine$.
 		By the inner induction hypothesis, $t$ is of the required form, and therefore so is $e$. \qedhere
 	\end{itemize}
 \end{proof}
+
+\subsubsection{Completeness}
 \begin{theorem}[Completeness] \label{thm:calculus-complete}
 	For $M \in \accol{\bipointedsym, \booleanalg}$ and any morphism $\hat \vfi : V \to W$ in $\trijetcubeopt \affine M {\vec a}$ between cubes compliant to \cref{conv:sort-cubes}, writing $\vfi = \erasejc{\hat \vfi}$, we have $\sez \vfi : V \to W$.
 \end{theorem}
 \begin{proof}
-	First, note that $\vfi$ assigns to each variable $\dm k$ in $W$ an boolean expression over the variables in $V$.
-	After pushing down negations, eliminating double negations, and simplifying conjunctions and disjunctions with $0$ and $1$, we obtain an expression $e_{\dm k}$ that is either $0$, $1$ or a binary tree with $\vee$ and $\wedge$ in the nodes and (negations of) variables of $V$ in the leaves.
+	For each variable $\dm k$ in $W$, let $e_{\dm k}$ be the reduction of $\dm k \psub{\vfi}$.
 
-	We prove completeness by induction on the number of nodes and leaves in $(e_{\dm k})_{\dm k \in W}$.
+	We prove completeness by induction on the number of nodes and leaves in the tuple $(e_{\dm k})_{\dm k \in W}$.
 	
 	If $W = ()$, then use \ruleref{terminal}.
 	
