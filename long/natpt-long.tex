@@ -1101,6 +1101,18 @@ The cube $\erasejc U$ arose as the part of $\erasejc V$ not used by $s$ and $t$,
 Proving completeness for the $\bipointedsym$ monad is fairly straightforward,
 but for the cases involving connections (conjunctions and disjunctions), we need a couple of helper lemmas.
 
+\begin{definition}
+	Boolean terms $t \in \booleanalg(X)$ are equivalence classes $t = [e]$ of boolean expressions $e$, which can be regarded as abstract syntax trees.
+	We define two reduction algorithms that reduce an expression $e$ to $e'$ such that $[e] = [e']$.
+	\begin{itemize}
+		\item By \textbf{reduction}, we mean the process of pushing all negations to the leaves, eliminating double negations, and simplifying conjunctions/disjunctions with the constants $0$ and $1$.
+		The outcome is either a constant, or a binary tree whose nodes are labelled with $\vee$ or $\wedge$ and whose leaves are (negations of) elements of $X$.
+		\item For \textbf{associative reduction}, we first apply reduction and subsequently merge nodes with the same label.
+		The outcome is either a constant or a tree whose nodes are alternatingly (as we climb the tree) labeled with $\vee$ and $\wedge$ (the root can have either) and whose leaves are (negations of) elements of $X$.
+		Every node has finitely many children and at least 2.
+	\end{itemize}
+\end{definition}
+
 \begin{lemma} \label{thm:left-of-companion-conjoint}
 	In $\trijetcubeopt \affine M {\vec a}$ with $M \in \accol{\bipointedsym, \booleanalg}$,
 	%assuming \cref{conv:sort-cubes},
@@ -1117,6 +1129,8 @@ but for the cases involving connections (conjunctions and disjunctions), we need
 We remark that this lemma is vacuous if $a_i = \npolar$ or $P = {\equijet}$.
 
 In words, the lemma says: When a variable of the domain of a jet cube morphism is used at a lower degree in the codomain, or not at all, then that variable and all variables of the same degree to its left can be promoted to equijet variables.
+
+In practice, we will only use this lemma for $M = \booleanalg$.
 \begin{proof}
 	Let $W'$ be the cube obtained from $W$ by simply deleting all variables of degree $i$ or lower.
 	Then the weakening morphism $\pi : W \to W'$ is a jet cube morphism.
@@ -1169,7 +1183,7 @@ In words, the lemma says: When a variable of the domain of a jet cube morphism i
 		\item[\framebox{$\dm k \in V_1$}] Then $\vec v \jet_j \vec v'$ holds in $V$ and is therefore preserved by $f = \EP(\vfi)$. \qedhere
 	\end{description}
 \end{proof}
-\begin{lemma}
+\begin{lemma} \label{thm:left-of-connection}
 	In $\trijetcubeopt \affine \booleanalg {\vec a}$, let $\hat \vfi : V \to W$ be a jet cube morphism and write $\vfi = \erasejc{\hat \vfi}$.
 	Let $W = (W_0, \dm i : \rival{Q_i}, W_1)$ with $Q \in \accol{\jet, \tej}$ and $a_i = \ypolar$.
 	\todoi{Continue}
@@ -1182,7 +1196,7 @@ In words, the lemma says: When a variable of the domain of a jet cube morphism i
 	\]
 	with $p_k \in \accol{0, 1}$ and $R_k \in \accol{{\vee}, {\wedge}, K}$ where we define $x \mathrel K y := y$.
 \end{lemma}
-Note that $t \mathrel{R} c$ is either equal to $t$ or to $c$.
+We will only use this lemma when $\eps = \affine$.
 \begin{proof}
 	We prove this by induction on $n$.
 	If $n = 0$ then $\dm i \psub \vfi$ is necessarily a constant.
