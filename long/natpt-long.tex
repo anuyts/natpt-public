@@ -805,6 +805,7 @@ We do not have to bother with an equational theory, as we can simply inherit it 
 			\sez (\vfi, \dm j / \dm i) : (U, \dm j : \rival{\equijet_j}, V) \to (W, \dm i : \rival{\tej_i})
 		}{}
 	\]
+	\todoi{Merge 3 rules into `concursor'}
 	\[
 		\inferencel{conj:fwd}{
 			\sez \vfi : \UFsymcube_i V \to W \\
@@ -835,6 +836,12 @@ We do not have to bother with an equational theory, as we can simply inherit it 
 			\sez (\vfi, s \wedge t/\dm k) : V \to (W, \dm k : \rival{\tej_i})
 		}{$\booleanalg$}
 	\]
+	\todoi{Have several versions
+	\begin{itemize}
+		\item Connection with concursor; symmetrize everything at current degree (for purely $i$-symmetric connections), appropriately symmetrize lower degree.
+		\item Connection with current degree; symmetrize everything at current degree.
+	\end{itemize}
+	}
 %	\[
 %		\inferencel{truth-table}{
 %			a_i = \npolar
@@ -1097,10 +1104,11 @@ The cube $\erasejc U$ arose as the part of $\erasejc V$ not used by $s$ and $t$,
 	\end{itemize}
 \end{proof}
 
-\subsubsection{Boolean Lemmas for Completeness}
+\subsubsection{Lemmas for Completeness}
 Proving completeness for the $\bipointedsym$ monad is fairly straightforward,
-but for the cases involving connections (conjunctions and disjunctions), we need a couple of helper lemmas involving boolean terms.
+but for the cases involving connections (conjunctions and disjunctions), we need a couple of helper lemmas.
 
+\paragraph{Boolean reduction}
 \begin{definition} \label{def:reduction}
 	Boolean terms $t \in \booleanalg(X)$ are equivalence classes $t = [e]$ of boolean expressions $e$, which can be regarded as abstract syntax trees.
 	We define two reduction algorithms that reduce an expression $e$ to $e'$ such that $[e] = [e']$.
@@ -1133,6 +1141,7 @@ but for the cases involving connections (conjunctions and disjunctions), we need
 	If the (basic/associative) reduction of $t$ is $e$ and $e$ depends on $x$, then every expression representing $t$ depends on $x$. \qedhere
 \end{corollary}
 
+\paragraph{Understanding jet cube morphisms}
 \begin{lemma} \label{thm:left-of-companion-conjoint}
 	In $\trijetcubeopt \affine M {\vec a}$ with $M \in \accol{\bipointedsym, \booleanalg}$,
 	%assuming \cref{conv:sort-cubes},
@@ -1212,6 +1221,7 @@ In practice, we will only use this lemma for $M = \booleanalg$.
 	Define $\tilde V = (\UFsym_i V_0, \dm j_1 : \rival{P_i^1}, V_1, \ldots, \dm j_n : \rival{P_i^n}, V_n)$.
 	Then $\vfi$ is a jet cube morphism $\tilde V \to W$.
 \end{lemma}
+\todoi{Remove $W_1$, then you can also prove this for one or zero dependencies.}
 Note in advance that \cref{thm:char-twisted-cube-to-line} will tell us that $\dm j_1, \ldots, \dm j_n$ are necessarily the \emph{last} $n$ variables of degree $i$ occurring in $V$. Neither lemma relies on the other.
 \begin{proof}
 	Let $\dm k_1, \ldots, \dm k_m$ be all \emph{other} variables that $e$ depends on.
@@ -1265,6 +1275,7 @@ Note in advance that \cref{thm:char-twisted-cube-to-line} will tell us that $\dm
 	\begin{itemize}
 		\item If $\dm h \in W_1$, then we know that $\dm j_1 \veebar \ldots \veebar \dm j_n$ is not a constant,
 		\item If $\dm h \in W_0$, then we know that $\dm j_1 \veebar \ldots \veebar \dm j_n$ is not equal to $[e] = \dm i \psub{\vfi}$, which is an affine boolean expression that cannot possibly express an exclusive disjunction of more than 1 variable.
+		\todoi{This is also not possible if $m \neq 0$ and $j \leq 1$.}
 	\end{itemize}
 	Yet, we also know that $\chi$ is a jet cube morphism for any assignment $(\vec \zeta, \vec \kappa)$.
 	Hence, we can conclude that we have $g(\vec w) \equijet_i g(\vec w')$.
