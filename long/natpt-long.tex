@@ -1142,7 +1142,7 @@ but for the cases involving connections (conjunctions and disjunctions), we need
 \end{corollary}
 
 \paragraph{Understanding jet cube morphisms}
-\begin{lemma} \label{thm:left-of-companion-conjoint}
+\begin{lemma} \label{thm:left-of-concursor}
 	In $\trijetcubeopt \affine M {\vec a}$ with $M \in \accol{\bipointedsym, \booleanalg}$,
 	%assuming \cref{conv:sort-cubes},
 	the following holds:
@@ -1188,9 +1188,9 @@ In practice, we will only use this lemma for $M = \booleanalg$.
 	where the black arrows are known to be jet cube morphisms, and hence the dotted arrows are also jet cube morphisms as jet cube morphisms compose.
 	Thus, $\rho$ is both a jet cube morphism $(\Opcube_j V_0, V_1) \to W'$ and $(V_0, V_1) \to W'$, hence it is a jet cube morphism $(\UFsymcube_j V_0, V_1) \to W'$.
 	
-	We now show that $\vfi$ is a jet cube morphism $\tilde V \to W$, i.e.\ that $f := \EP(\vfi)$ is a jet cube morphism $\JEP(\tilde V) \to \JEP(W)$.
+	We now show that $\vfi$ is a jet cube morphism $\tilde V \to W$, i.e.\ that $f := \EP(\vfi)$ is a jet set morphism $\JEP(\tilde V) \to \JEP(W)$.
 	Pick a jet $\vec v = (\vec v_0, u, \vec v_1) \jet_k \vec v' = (\vec v_0', u', \vec v_1')$ in $\tilde V$; we show that $f(\vec v) \jet_k f(\vec v')$.
-	If $k \neq j$, then this is also a jet in $V$ and therefore preserved by $f$.
+	If $k \neq j$, then $\vec v \jet_k \vec v'$ is also a jet in $V$ and therefore preserved by $f$.
 	Thus, we can assume that $k = j$.
 	If $\vec v = \vec v'$, then preservation is trivial, so we assume $\vec v \neq \vec v'$
 	Let $\dm k$ be the unique variable where they differ.
@@ -1202,8 +1202,8 @@ In practice, we will only use this lemma for $M = \booleanalg$.
 		So we assume that $\vfi$ depends on $\dm k$; let $\dm l$ be the variable such that $\dm l \psub \vfi$ depends on $\dm k$.
 		\begin{itemize}
 			\item If $\dm l$ is of degree $\ell \leq i < j$, then $f(\vec v) \infrajet_j f(\vec v')$ is only possible if $f(\vec v) \infrajet_\ell f(\vec v')$ which implies $f(\vec v) \equijet_j f(\vec v')$.
-			\item If $\dm l$ is of degree $\ell > i$, then we have $\EP(\rho)(\vec v_0, \vec v_1) \overset{\neq}{\equijet}_j \EP(\rho)(\vec v_0', \vec v_1)$.
-			Since $\EP(\rho) = \EP(\pi) \circ \EP(\vfi)$ and the parts projected out by $\EP(\pi)$ are identical, we have $f(\vec v) \equijet_j f(\vec v')$.
+			\item If $\dm l$ is of degree $\ell > i$, then we have $\EP(\rho)(\vec v_0, \vec v_1) \overset{\neq}{\equijet}_j \EP(\rho)(\vec v_0', \vec v_1)$ because $\rho$ is a jet cube morphism $(\UFsymcube_j V_0, V_1) \to W'$.
+			Since $\EP(\rho) = \EP(\pi) \circ \EP(\vfi) \circ \EP(c/\dm j)$ for any $c \in \accol{0, 1}$ and the components forgotten by $\EP(\pi)$ are identical and include any dependency on $\dm j$, we have $f(\vec v) \equijet_j f(\vec v')$.
 		\end{itemize}
 		
 		\item[\framebox{$\dm k = \dm j$}] In this case, we have $\vec v_0 = \vec v_0'$, $\vec v_1 = \vec v_1'$, and $\vec v \infrajet_j \vec v'$ in $V$.
