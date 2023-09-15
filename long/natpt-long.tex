@@ -1140,6 +1140,9 @@ but for the cases involving connections (conjunctions and disjunctions), we need
 \begin{corollary} \label{thm:reduction-minimal-deps}
 	If the (basic/associative) reduction of $t$ is $e$ and $e$ depends on $x$, then every expression representing $t$ depends on $x$. \qedhere
 \end{corollary}
+\begin{definition} \label{def:in-connection}
+	If an affine boolean term $t \in \booleanalg^\#(X)$ reduces to $e$ which depends on $x, y \in X$, then we say that $x$ and $y$ are \textbf{in conjunction/disjunction in $e$} if the closest common parent node of (the negation of) $x$ and (the negation of) $y$ is labelled with a conjunction/disjunction.
+\end{definition}
 
 \paragraph{Understanding jet cube morphisms}
 \begin{lemma} \label{thm:left-of-concursor}
@@ -1222,7 +1225,7 @@ In practice, we will only use this lemma for $M = \booleanalg$.
 \end{lemma}
 We will only use this lemma when $\eps = \affine$.
 \begin{proof}
-	We assume $P = \jet$, the proof for $P = \tej$ is analogous.
+	We assume $P = {\jet}$, the proof for $P = {\tej}$ is analogous.
 
 	We prove this by induction on $n$.
 	If $n = 0$ then $\dm i \psub \vfi$ is necessarily a constant.
@@ -1283,38 +1286,53 @@ We will only use this lemma when $\eps = \affine$.
 	with $p_k \in \accol{0, 1}$ and $\opA_k \in \accol{{\vee}, {\wedge}, {\opK}}$ where we define $x \opK y := y$, and every $h_k$ is a composition of functions of the form $\loch \opB t$ with $t$ any affine boolean expression mentioning only $i$-symmetric variables and ${\opB} \in \accol{{\vee}, {\wedge}, {\opK}}$.
 \end{lemma}
 \begin{proof}
+	We assume $P = {\jet}$, the proof for $P = {\tej}$ is analogous.
+
 	First of all, the $i$-equijet relation as well as all $\ell$-jet relations for $\ell < i$ are reflexive in $\JEP(\dm i : \rival{\jet_i}) = \accol{0 \jet_i 1}$, so that $\JEP(\vfi)$ must be constant on $i$-equijet- or $\ell$-jet-connected components, implying that $\vfi$ cannot depend on those variables.
 	Then $\vfi$ factors over the map $\chi : V \to W$ that weakens over all those variables.
 	($\JEP(\chi)$ is the map that quotients out the $i$-equijet and therefore also the $\ell$-jet relations for $\ell < i$.)
 	Thus, without loss of generality, we can assume that $V$ contains no variables of degree lower than $i$, and no $i$-equijet variables.
-	Then the $i$-directed variables in $V$ are the last ones.
+	Moreover, applying \cref{conv:sort-cubes}, we can assume that the $i$-directed variables in $V$ are the last ones.
 	
 	We prove the rest of the theorem by induction on $n$, the number of $i$-directed variables in $V$.
-	If $n = 0$, then $\dm i \psub \vfi = h_n(\_)$ with $h_n(x) = \_ \opK t$ where $t = \dm i \psub \vfi$ does not mention any $i$-directed variables.
+	If $n = 0$, then $\dm i \psub \vfi = t = \_ \opK t$ where $t$ does not mention any $i$-directed variables.
 	
 	Let $n > 0$.
-	We reduce $\dm i \psub \vfi$ to an expression $e$ by associative reduction (\cref{def:reduction})
+	We reduce $\dm i \psub \vfi$ to an expression $e$ by associative reduction (\cref{def:reduction}).
 	Write $\dm j_k'$ to mean $\dm j_k$ if $\dm j_k : \rival{\jet_i}$ and to mean $\lnot \dm j_k$ if $\dm j_k : \rival{\tej_i}$.
-	Write $U$ for the $i$-directed part of $V$ and note that any assignment of bits to all $i$-symmetric variables yields a morphism $U \to V$ which necessarily satisfies \cref{thm:char-twisted-cube-to-line}.
+	Write $U$ for the $i$-directed part of $V$ and note that any assignment of bits to all $i$-symmetric variables yields a jet cube morphism $U \to V$ which necessarily satisfies \cref{thm:char-twisted-cube-to-line}.
 	
 	We prove the induction step again by induction, now on the height of the syntax tree of $e$.
 	
 	\begin{itemize}
 		\item We claim that if $\dm j_n$ and $\dm j_{k}$ occur in different children of the root node of $e$, then $\dm j'_n$ is a direct child of $e$.
 		
-		Let $t$ be the child of $e$ mentioning $\dm j_n$.
-		It suffices to show that $t$ does not mention any other variables.
+		Let the root node of $e$ be a conjunction (disjunction), and let $t$ be the child of $e$ mentioning $\dm j_n$.
 		
-		Assume $t$ mentions another $i$-directed variable.
-		Thanks to affineness, we can choose a bit-assignment of all $i$-symmetric variables such that no $i$-directed variable disappears (set them to 1 in conjunctions and to 0 in disjunctions).
-		This yields a boolean expression that is not of the form described in \cref{thm:char-twisted-cube-to-line}, which is a contradiction.
+		First of all, note that there exists an assignment of all $i$-symmetric variables in $t$ that makes none of the $i$-directed variables disappear.
+		The result should reduce to something satisfying \cref{thm:char-twisted-cube-to-line}.
+		Then this is only possible if any two $i$-directed variables in $t$ are also in conjunction (disjunction), so that the parentheses can be moved around.
 		
-		Assume $t$ mentions an $i$-symmetric variable.
-		Then we can choose a bit-assignment of all $i$-symmetric variables that makes $\dm j_n$ disappear in $t$, but does not make any of the other $i$-directed variables (which occur in other children of $e$) disappear.
-		It is clear that we can accomplish this on a per-child-of-$e$ basis.
-		Of course $t$ will reduce to a constant, so we need to make sure that this constant is not $0$ if $e$ is a conjunction, or $1$ if it is a disjunction.
-		However, if $e$ is a conjunction, then $t$ is a disjunction, and we can set an operand that does not contain $\dm j_n$ to 1. The dual holds if $e$ is a disjunction.
-		We now obtain a boolean expression that is not of the form described in \cref{thm:char-twisted-cube-to-line}, which is a contradiction.
+		We know that if $\dm j'_n$ is not a direct child of $e$, then it must depend on other variables and the root node of $t$ is a disjunction (conjunction).
+		If one of the immediate operands $s$ of $t$ depends on $\dm j_n$,
+		then any other operand $r$ of $t$ can only depend on $i$-symmetric variables, as $\dm j_n$ is in conjunction (disjunction) with all $i$-directed variables in $t$.
+		Then for every $r$ (and in particular for some $r$) there exists a bit assignment of its dependencies that makes $r$ reduce to $1$ ($0$), such that the entire disjunction (conjunction) $t$ reduces to $1$ ($0$).
+		In all other direct operands of $e$, we can choose bit assignments of $i$-symmetric variables that make no $i$-directed variables disappear.
+		Then $e$ will reduce to an expression containing $\dm j_k$ but not $\dm j_n$, in violation of \cref{thm:char-twisted-cube-to-line}.
+		
+%		\todoi{The reasoning below is not good enough.}
+%		
+%		Assume $t$ mentions an $i$-symmetric variable.
+%		Then we can choose a bit-assignment of all $i$-symmetric variables that makes $\dm j_n$ disappear in $t$, but does not make any of the other $i$-directed variables appearing in other children of $e$ disappear.
+%		It is clear that we can accomplish this on a per-child-of-$e$ basis.
+%		Of course $t$ will reduce to a constant, so we need to make sure that this constant is not $0$ if $e$ is a conjunction, or $1$ if it is a disjunction.
+%		However, if $e$ is a conjunction, then $t$ is a disjunction, and we can set an operand that does not contain $\dm j_n$ to 1. The dual holds if $e$ is a disjunction.
+%		We now obtain a boolean expression that is not of the form described in \cref{thm:char-twisted-cube-to-line}, which is a contradiction.
+%		
+%		Assume $t$ mentions another $i$-directed variable.
+%		Thanks to affineness, we can choose a bit-assignment of all $i$-symmetric variables such that no $i$-directed variable disappears (set them to 1 in conjunctions and to 0 in disjunctions).
+%		This yields a boolean expression that is not of the form described in \cref{thm:char-twisted-cube-to-line}, which is a contradiction.
+%		\todoi{Not necessarily!}
 		
 		\item In the case described in the previous bullet point, we conclude that $e$ is of the form $s \opA \dm j_n'$ with ${\opA} \in \accol{{\vee}, {\wedge}}$ (and $s$ may further use the same symbol $R$ in its root node).
 		Write $V = (V', \dm j_n : \_)$.
