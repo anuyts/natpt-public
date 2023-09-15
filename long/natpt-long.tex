@@ -1214,19 +1214,18 @@ In practice, we will only use this lemma for $M = \booleanalg$.
 \end{proof}
 \begin{lemma} \label{thm:left-of-connection}
 	In $\trijetcubeopt \affine \booleanalg {\vec a}$, let $\hat \vfi : V \to W$ be a jet cube morphism and write $\vfi = \erasejc{\hat \vfi}$.
-	Let $W = (W_0, \dm i : \rival{Q_i}, W_1)$ with $Q \in \accol{\jet, \tej}$ and $a_i = \ypolar$.
-	Let $e$ be the reduction of $\dm i \psub \vfi$ and let $\dm j_1, \ldots, \dm j_n$ be all the variables of degree $i$ that $e$ depends on.
-	Assume $n \geq 2$.
-	Let $V = (V_0, \dm j_1 : \rival{P_i^1}, V_1, \ldots, \dm j_n : \rival{P_i^n}, V_n)$, where each $P^1, \ldots, P^n \in \accol{\jet, \tej, \equijet}$.
-	Define $\tilde V = (\UFsym_i V_0, \dm j_1 : \rival{P_i^1}, V_1, \ldots, \dm j_n : \rival{P_i^n}, V_n)$.
+	Let $W = (W_0, \dm i : \rival{Q_i})$ with $Q \in \accol{\jet, \tej}$ and $a_i = \ypolar$.
+	Let $e$ be the reduction of $\dm i \psub \vfi$ and let $\dm j_1, \ldots, \dm j_n$ ($n \geq 0$) be all the variables of degree $i$ that $e$ depends on.
+	\todoi{Must be at least 2 variables.}
+	Let $V = (V_0, \dm j_1 : \rival{P_i^1}, V_1, \ldots, V_{n-1}, \dm j_n : \rival{P_i^n}, V_n)$, where each $P^1, \ldots, P^n \in \accol{\jet, \tej, \equijet}$.
+	Define $\tilde V = (\UFsym_i V_0, \dm j_1 : \rival{P_i^1}, \UFsym_i V_1, \ldots, \UFsym_i V_{n-1}, \dm j_n : \rival{P_i^n}, V_n)$, i.e.\ every variable of degree $i$ to the left of $\dm j_n$ gets promoted to an equijet variable.
 	Then $\vfi$ is a jet cube morphism $\tilde V \to W$.
 \end{lemma}
-\todoi{Remove $W_1$, then you can also prove this for one or zero dependencies.}
 Note in advance that \cref{thm:char-twisted-cube-to-line} will tell us that $\dm j_1, \ldots, \dm j_n$ are necessarily the \emph{last} $n$ variables of degree $i$ occurring in $V$. Neither lemma relies on the other.
 \begin{proof}
 	Let $\dm k_1, \ldots, \dm k_m$ be all \emph{other} variables that $e$ depends on.
 	For $c \in \accol{0, 1}$, let $A_c$ be the set of all $(\vec \zeta, \vec \kappa) \in \accol{0, 1}^{n+m}$ such that $\dm i \psub{\vfi} \psub{\vec \zeta / \vec{\dm j}, \vec \kappa / \vec{\dm k}} = c$.
-	Let $U$ be the (normal) cube obtained from $\erasejc{V}$ by removing all dependencies of $e$.
+	Let $U$ be the (ordinary) cube obtained from $\erasejc{V}$ by removing all dependencies of $e$.
 	Then for any $(\vec \zeta, \vec \kappa) \in \accol{0, 1}^{n+m}$, by applying cube opposite functors in all the right places, there is a jet cube $U_{(\vec \zeta, \vec \kappa)}$ such that $\erasejc{U_{(\vec \zeta, \vec \kappa)}} = U$ and $(\vec \zeta / \vec{\dm j}, \vec \kappa / \vec{\dm k}) : U_{(\vec \zeta, \vec \kappa)} \to V$ is a jet cube morphism.
 	
 	Then in the category of \emph{jet cubes} and \emph{cube morphisms between their erasures}, for any $(\vec \zeta, \vec \kappa) \in A_c$, we obtain a commutative diagram
@@ -1252,7 +1251,7 @@ Note in advance that \cref{thm:char-twisted-cube-to-line} will tell us that $\dm
 	Let $\vec v \jet_k \vec v'$ in $\tilde V$.
 	We prove that $f(\vec v) \jet_k f(\vec v')$ where $f = \EP(\vfi)$.
 	If $\vec v = \vec v'$ then this is trivial, so let $\dm l$ be the variable where they differ.
-	If $k \neq i$ or $\dm l \not\in V_0$ then we have $\vec v \jet_k \vec v'$ in $V$ so this is preserved by $f$.
+	If $k \neq i$ or $\dm l \in V_n$ then we have $\vec v \jet_k \vec v'$ in $V$ so this is preserved by $f$.
 	
 	Assume $k = i$ and $\dm l \in V_0$, which implies that $\dm l$ is not a dependency of $e$.
 	This implies that $e \psub{\vec v} = e \psub{\vec v'} =: c$, or differently put $\dm i \psub{f(\vec v)} = \dm i \psub{f(\vec v')} = c$.
