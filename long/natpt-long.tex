@@ -1351,27 +1351,30 @@ We will only use this lemma when $\eps = \affine$.
 \begin{lemma} \label{thm:left-of-connection}
 	In $\trijetcubeopt \affine \booleanalg {\vec a}$, let $\hat \vfi : V \to W$ be a jet cube morphism and write $\vfi = \erasejc{\hat \vfi}$.
 	Let $W = (W_0, \dm i : \rival{Q_i})$ with $Q \in \accol{\jet, \tej}$ and $a_i = \ypolar$.
-	Let $e$ be the reduction of $\dm i \psub \vfi$ and let $\dm j_1, \ldots, \dm j_n$ ($n \geq 0$) be all the variables of degree $i$ that $e$ depends on.
-	\todoi{Must be at least 2 variables.}
-	Let $V = (V_0, \dm j_1 : \rival{P_i^1}, V_1, \ldots, V_{n-1}, \dm j_n : \rival{P_i^n}, V_n)$, where each $P^1, \ldots, P^n \in \accol{\jet, \tej, \equijet}$.
-	Define $\tilde V = (\UFsym_i V_0, \dm j_1 : \rival{P_i^1}, \UFsym_i V_1, \ldots, \UFsym_i V_{n-1}, \dm j_n : \rival{P_i^n}, V_n)$, i.e.\ every variable of degree $i$ to the left of $\dm j_n$ gets promoted to an equijet variable.
+	Let $e$ be the reduction of $\dm i \psub \vfi$ and let $\dm j_1, \ldots, \dm j_n$ ($n \geq 0$) be all the variables of degree $i$ that $e$ depends on, and $\dm k_1, \ldots, \dm k_m$ ($m \geq 0$) all the other variables that $e$ depends on.
+	Assume $m+n \geq 2$.
+	By \cref{thm:char-jet-cube-to-line}, we know that $\dm j_1, \ldots, \dm j_n$ these are the \emph{last} $n$ variables of degree $i$ in $V$.
+	Order $V$ by \cref{conv:sort-cubes}, and write $V = (V_0, \dm j_1 : \rival{P^1_i}, \ldots, \dm j_n : \rival{P^n_i}, V_1)$ so that all variables in $V_0$ have degree at least (at the strongest) $i$ and all variables in $V_1$ have degree strictly less (stronger) than $i$.
+	Here, each $P^1, \ldots, P^n \in \accol{\jet, \tej, \equijet}$.
+	Define $\tilde V = (\UFsym_i V_0, \dm j_1 : \rival{P^1_i}, \ldots, \dm j_n : \rival{P^n_i}, V_n)$, i.e.\ every variable of degree $i$ to the left of $\dm j_1$ gets promoted to an equijet variable.
 	Then $\vfi$ is a jet cube morphism $\tilde V \to W$.
 \end{lemma}
-Note in advance that \cref{thm:char-twisted-cube-to-line} will tell us that $\dm j_1, \ldots, \dm j_n$ are necessarily the \emph{last} $n$ variables of degree $i$ occurring in $V$. Neither lemma relies on the other.
+The lemma allows $P^1, \ldots, P^n \in \accol{\jet, \tej, \equijet}$, but it is easy to see that $\vfi$ being a jet cube morphism (equivalently, $\EP(\vfi)$ being a jet set) implies $P^1, \ldots, P^n \in \accol{\jet, \tej}$.
+Similarly, it is clear that $\dm k_1, \ldots, \dm k_m$ all occur in $V_0$ as they cannot have degree less (stronger) than $i$.
 \begin{proof}
-	Let $\dm k_1, \ldots, \dm k_m$ be all \emph{other} variables that $e$ depends on.
-	For $c \in \accol{0, 1}$, let $A_c$ be the set of all $(\vec \zeta, \vec \kappa) \in \accol{0, 1}^{n+m}$ such that $\dm i \psub{\vfi} \psub{\vec \zeta / \vec{\dm j}, \vec \kappa / \vec{\dm k}} = c$.
+	%Let $\dm k_1, \ldots, \dm k_m$ be all \emph{other} variables that $e$ depends on.
+	For $c \in \accol{0, 1}$, let $A_c$ be the set of all $(\vec \kappa, \vec \zeta) \in \accol{0, 1}^{m+n}$ such that $\dm i \psub{\vfi} \psub{\vec \kappa / \vec{\dm k}, \vec \zeta / \vec{\dm j}} = c$.
 	Let $U$ be the (ordinary) cube obtained from $\erasejc{V}$ by removing all dependencies of $e$.
-	Then for any $(\vec \zeta, \vec \kappa) \in \accol{0, 1}^{n+m}$, by applying cube opposite functors in all the right places, there is a jet cube $U_{(\vec \zeta, \vec \kappa)}$ such that $\erasejc{U_{(\vec \zeta, \vec \kappa)}} = U$ and $(\vec \zeta / \vec{\dm j}, \vec \kappa / \vec{\dm k}) : U_{(\vec \zeta, \vec \kappa)} \to V$ is a jet cube morphism.
+	Then for any $(\vec \kappa, \vec \zeta) \in \accol{0, 1}^{m+n}$, by applying cube opposite functors in all the right places, there is a jet cube $U_{(\vec \kappa, \vec \zeta)}$ such that $\erasejc{U_{(\vec \kappa, \vec \zeta)}} = U$ and $(\vec \kappa / \vec{\dm k}, \vec \zeta / \vec{\dm j}) : U_{(\vec \kappa, \vec \zeta)} \to V$ is a jet cube morphism.
 	
-	Then in the category of \emph{jet cubes} and \emph{cube morphisms between their erasures}, for any $(\vec \zeta, \vec \kappa) \in A_c$, we obtain a commutative diagram
+	Then in the category of \emph{jet cubes} and \emph{cube morphisms between their erasures}, for any $(\vec \kappa, \vec \zeta) \in A_c$, we obtain a commutative diagram
 	\[
 		\xymatrix{
-			U_{(\vec \zeta, \vec \kappa)}
-				\ar[d]_{(\vec \zeta / \vec{\dm j}, \vec \kappa / \vec{\dm k})}
+			U_{(\vec \kappa, \vec \zeta)}
+				\ar[d]_{(\vec \kappa / \vec{\dm k}, \vec \zeta / \vec{\dm j})}
 				\ar@{.>}[rr]^\chi
 			&&
-			((\Opcube_i)^{1-c}(W_0), W_1)
+			(\Opcube_i)^{1-c}(W_0)
 				\ar[d]^{(c/\dm i)}
 			\\
 			V
@@ -1380,41 +1383,42 @@ Note in advance that \cref{thm:char-twisted-cube-to-line} will tell us that $\dm
 			W
 		}
 	\]
-	where all the black lines are jet cube morphisms and the cube morphism $\chi$ is defined as $(\dm i / \novar) \circ \vfi \circ (\vec \zeta / \vec{\dm j}, \vec \kappa / \vec{\dm k})$, which thanks to afineness does not depend on our choice of $(\vec \zeta, \vec \kappa)$, nor even on $c$.
+	where all the black lines are jet cube morphisms and the cube morphism $\chi$ is defined as $(\dm i / \novar) \circ \vfi \circ (\vec \kappa / \vec{\dm k}, \vec \zeta / \vec{\dm j})$, which thanks to afineness does not depend on our choice of $(\vec \kappa, \vec \zeta)$, nor even on $c$.
 	Commutativity of the diagram and the fact that $\JEP(c/\dm i)$ is a full jet set morphism, imply that $\chi$, too, is a jet cube morphism.
 	
 	We now show that $\vfi$ is a jet cube morphsim $\tilde V \to W$.
 	Let $\vec v \jet_k \vec v'$ in $\tilde V$.
 	We prove that $f(\vec v) \jet_k f(\vec v')$ where $f = \EP(\vfi)$.
 	If $\vec v = \vec v'$ then this is trivial, so let $\dm l$ be the variable where they differ.
-	If $k \neq i$ or $\dm l \in V_n$ then we have $\vec v \jet_k \vec v'$ in $V$ so this is preserved by $f$.
+	If $k \neq i$ or $\dm l \not\in V_0$ then we have $\vec v \jet_k \vec v'$ in $V$ so this is preserved by $f$.
 	
 	Assume $k = i$ and $\dm l \in V_0$, which implies that $\dm l$ is not a dependency of $e$.
 	This implies that $e \psub{\vec v} = e \psub{\vec v'} =: c$, or differently put $\dm i \psub{f(\vec v)} = \dm i \psub{f(\vec v')} = c$.
 	We have $\vec v \infrajet_i \vec v'$ in $V$, say $\vec v \mathrel{S}_i \vec v'$ where $S \in \accol{\jet, \tej}$.
 	This is preserved by $f$, so $f(\vec v) \mathrel{S}_i f(\vec v')$.
-	Because $(c/\dm i)$ is a full jet set morphism, writing $p = \EP(\dm i / \novar)$, we can conclude that $p(f(\vec v)) \mathrel{S}_i p(f(\vec v'))$ in $((\Opcube_i)^{1-c}(W_0), W_1)$.
-	Let $\vec u$ and $\vec u'$ be bit-assignments to the variables in $U$ obtained by projecting out all bits assigned to the dependencies of $e$ in the vectors $\vec v$ and $\vec v'$, and let $\vec \zeta$ and $\vec \kappa$ be the bits thus forgotten (which are the same for $\vec v$ and $\vec w$).
-	Thus, $\vec v = \EP(\vec \zeta/\vec{\dm j}, \vec \kappa/\vec{\dm k})(\vec w)$ and similar for $\vec v'$.
-	Writing $g = \EP(\chi)$, this implies that $p(f(\vec v)) = g(\vec w)$ and similar for $\vec v'$.
-	Thus, we have $g(\vec w) \mathrel S_i g(\vec w')$ in $((\Opcube_i)^{1-c}(W_0), W_1)$.
+	Because $(c/\dm i)$ is a full jet set morphism, writing $p = \EP(\dm i / \novar)$, we can conclude that $p(f(\vec v)) \mathrel{S}_i p(f(\vec v'))$ in $(\Opcube_i)^{1-c}(W_0)$.
+	
+	Let $\vec u$ and $\vec u'$ be bit-assignments to the variables in $U$ obtained by projecting out all bits assigned to the dependencies of $e$ in the vectors $\vec v$ and $\vec v'$, and let $\vec \zeta$ and $\vec \kappa$ be the bits thus forgotten (which are the same for $\vec v$ and $\vec v'$).
+	Thus, $\vec v = \EP(\vec \zeta/\vec{\dm j}, \vec \kappa/\vec{\dm k})(\vec u)$ and similar for $\vec v'$.
+	Writing $g = \EP(\chi)$, this implies that $p(f(\vec v)) = g(\vec u)$ and $p(f(\vec v')) = g(\vec u')$.
+	Thus, we have $g(\vec u) \mathrel S_i g(\vec u')$ in $(\Opcube_i)^{1-c}(W_0)$.
 	
 	If $\vfi$ does not depend on $\dm l$, then we have nothing to prove,
 	so let $\dm h$ be the variable of $W$ such that $\dm h \psub \vfi$ depends on $\dm l$. Note that $\dm h \neq \dm i$.
-	\begin{itemize}
-		\item If $\dm h \in W_1$, then we have $g(\vec w) \mathrel S_i g(\vec w')$ in $(W_0, W_1)$.
-		\item If $\dm h \in W_0$, then the direction of the jet between $g(\vec w)$ and $g(\vec w')$ in $(W_0, W_1)$ flips with $c = e \psub{\vec v}$, which is a function of $(\vec \zeta, \vec \kappa)$.
-	\end{itemize}
-	On the other hand, looking at the direction of the jet between $\vec w$ and $\vec w'$, we see that this flips with the $\dm j_1 \veebar \ldots \veebar \dm j_n$, the exclusive disjunction of all dependencies of $e$ of degree $i$, which all appear to the right of $\dm l$.
-	We remark, thus, that there are assignments $(\vec \zeta, \vec \kappa)$ for which the jets between $\vec w$ and $\vec w'$ on one hand, and between $g(\vec w)$ and $g(\vec w')$ are aligned, and others for which they are opposed. Indeed:
-	\begin{itemize}
-		\item If $\dm h \in W_1$, then we know that $\dm j_1 \veebar \ldots \veebar \dm j_n$ is not a constant,
-		\item If $\dm h \in W_0$, then we know that $\dm j_1 \veebar \ldots \veebar \dm j_n$ is not equal to $[e] = \dm i \psub{\vfi}$, which is an affine boolean expression that cannot possibly express an exclusive disjunction of more than 1 variable.
-		\todoi{This is also not possible if $m \neq 0$ and $j \leq 1$.}
-	\end{itemize}
-	Yet, we also know that $\chi$ is a jet cube morphism for any assignment $(\vec \zeta, \vec \kappa)$.
-	Hence, we can conclude that we have $g(\vec w) \equijet_i g(\vec w')$.
-	Composing with $\EP(c/\dm i)$ yields $f(\vec v) \equijet_i f(\vec v')$.
+%	\begin{itemize}
+%		\item If $\dm h \in W_1$, then we have $g(\vec w) \mathrel S_i g(\vec w')$ in $(W_0, W_1)$.
+%		\item If $\dm h \in W_0$, then the direction of the jet between $g(\vec w)$ and $g(\vec w')$ in $(W_0, W_1)$ flips with $c = e \psub{\vec v}$, which is a function of $(\vec \kappa, \vec \zeta)$.
+%	\end{itemize}
+	We remark that the direction of the jet between $g(\vec u)$ and $g(\vec u')$ in $(\Opcube_i)^{1-c}(W_0)$ flips with $c = e \psub{\vec v}$, which is a function of $(\vec \kappa, \vec \zeta)$.
+	
+	On the other hand, looking at the direction of the jet between $\vec u$ and $\vec u'$ in $U_{(\vec \kappa, \vec \zeta)}$, we see that this flips with the $\dm j_1 \veebar \ldots \veebar \dm j_n$, the exclusive disjunction of all dependencies of $e$ of degree $i$, which all appear to the right of $\dm l$.
+	Now if $m+n \geq 2$, then it is impossible that the affine boolean expression $e \in \booleanalg^\#(\accol{\dm k_1, \ldots, \dm k_m, \dm j_1, \ldots, \dm j_n})$ which is in a reduced state and therefore truly depends on each of the mentioned variables, yields the exact same truth table as $\dm j_1 \veebar \ldots \veebar \dm j_n$.
+	
+	Thus, fixing $\vec u$ and $\vec u'$ and varying $(\vec \kappa, \vec \zeta)$, we see that there are assignments $(\vec \kappa, \vec \zeta)$ for which the jets between $\vec u$ and $\vec u'$ in $U_{(\vec \kappa, \vec \zeta)}$ on one hand, and between $g(\vec u)$ and $g(\vec u')$ in $(\Opcube_i)^{1-c}(W_0)$ are aligned, and others for which they are opposed.
+	Pick an assignment $(\vec \kappa', \vec \zeta')$ for which they are opposed.
+	We also know that $\chi$ is a jet cube morphism for any assignment $(\vec \kappa, \vec \zeta)$, and in particular for $(\vec \kappa', \vec \zeta')$.
+	Thus, $\chi$ provides us the jet pointing the other way, and we can conclude that $g(\vec u) \equijet_i g(\vec u')$.
+	Composing with $\EP(c/\dm i)$ for our original $c$ yields $f(\vec v) \equijet_i f(\vec v')$.
 \end{proof}
 
 \subsubsection{Completeness}
