@@ -1273,12 +1273,12 @@ We will only use this lemma when $\eps = \affine$.
 	\end{itemize}
 \end{proof}
 \begin{lemma} \label{thm:char-jet-cube-to-line}
-	In $\trijetcubeopt \affine \booleanalg {\vec a}$ where $a_i = \ypolar$, consider $\vfi : V \to (\dm i : \rival{\jet_i})$.
+	In $\trijetcubeopt \affine \booleanalg {\vec a}$ where $a_i = \ypolar$, consider $\vfi : V \to (\dm i : \rival{P_i})$ with $P \in \accol{\jet, \tej}$.
 	Write $\dm j_1, \ldots, \dm j_n$ for the $i$-directed variables of $V$.
-	Then $\vfi$ does not depend on variables of degree lower than $i$, nor on $i$-equijet variables of $V$.
+	Then $\vfi$ does not depend on variables of degree lower (stronger) than $i$, nor on $i$-equijet variables of $V$.
 	Moreover, $\dm i \psub{\vfi}$ is of the form
 	\[
-		\dm i \psub{\vfi} = h_n(\ldots h_3(h_2(h_1(\lnot^{p_1} \dm j_1) \mathrel{R_1} \lnot^{p_2} \dm j_2) \mathrel{R_2} \lnot^{p_3} \dm j_3) \ldots \mathrel{R_{n-1}} \lnot^{p_n} \dm j_n)
+		\dm i \psub{\vfi} = h_n(h_{n-1}(\ldots h_3(h_2(h_1(\lnot^{p_1} \dm j_1) \mathrel{R_1} \lnot^{p_2} \dm j_2) \mathrel{R_2} \lnot^{p_3} \dm j_3) \ldots ) \mathrel{R_{n-1}} \lnot^{p_n} \dm j_n)
 	\]
 	with $p_k \in \accol{0, 1}$ and $R_k \in \accol{{\vee}, {\wedge}, K}$ where we define $x \mathrel K y := y$, and every $h_k$ is a composition of functions of the form $\loch \mathrel{S} t$ with $t$ any affine boolean expression mentioning only $i$-symmetric variables and $S \in \accol{{\vee}, {\wedge}, K}$.
 \end{lemma}
