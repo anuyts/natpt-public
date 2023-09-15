@@ -1216,9 +1216,9 @@ In practice, we will only use this lemma for $M = \booleanalg$.
 	In $\trijetcubeopt \eps \booleanalg {\vec a}$ with $\eps \in \accol{\affine, \cartes}$, let $V$ be a jet cube with only $i$-directed variables called (from left to right) $\dm j_1, \ldots, \dm j_n$, and consider $\vfi : V \to (\dm i : \rival{P_i})$ with $P \in \accol{\jet, \tej}$.
 	Then $\dm i \psub{\vfi}$ is either a constant or of the form
 	\[
-		\dm i \psub{\vfi} = (\ldots((\lnot^{p_1} \dm j_1 \mathrel{R_1} \lnot^{p_2} \dm j_2) \mathrel{R_2} \lnot^{p_3} \dm j_3) \ldots) \mathrel{R_{n-1}} \lnot^{p_n} \dm j_n
+		\dm i \psub{\vfi} = (\ldots((\lnot^{p_1} \dm j_1 \opA_1 \lnot^{p_2} \dm j_2) \opA_2 \lnot^{p_3} \dm j_3) \ldots) \opA_{n-1} \lnot^{p_n} \dm j_n
 	\]
-	with $p_k \in \accol{0, 1}$ and $R_k \in \accol{{\vee}, {\wedge}, K}$ where we define $x \mathrel K y := y$.
+	with $p_k \in \accol{0, 1}$ and $\opA_k \in \accol{{\vee}, {\wedge}, {\opK}}$ where we define $x \opK y := y$.
 \end{lemma}
 We will only use this lemma when $\eps = \affine$.
 \begin{proof}
@@ -1233,9 +1233,9 @@ We will only use this lemma when $\eps = \affine$.
 	Write $\dm j_k'$ to mean $\dm j_k$ if $\dm j_k : \rival{\jet_i}$ and to mean $\lnot \dm j_k$ if $\dm j_k : \rival{\tej_i}$.
 	There are 5 possible scenarios:
 	\begin{itemize}
-		\item The entire path is sent to $0$. Then $\dm i \psub \vfi = 1 = \_ \mathrel K 0$.
-		\item The entire path is sent to $1$. Then $\dm i \psub \vfi = 1 = \_ \mathrel K 1$.
-		\item The first half of the path is sent to $0$, the second half is sent to $1$. Then $\dm i \psub \vfi = \dm j_n' = \_ \mathrel K \dm j_n'$.
+		\item The entire path is sent to $0$. Then $\dm i \psub \vfi = 1 = \_ \opK 0$.
+		\item The entire path is sent to $1$. Then $\dm i \psub \vfi = 1 = \_ \opK 1$.
+		\item The first half of the path is sent to $0$, the second half is sent to $1$. Then $\dm i \psub \vfi = \dm j_n' = \_ \opK \dm j_n'$.
 		\item The output of $f$ flips somewhere in the first half of the path.
 		Then $\dm i \psub \vfi = s \vee \dm j_n'$ for some boolean expression $s$ depending on $\dm j_1, \ldots, \dm j_{n-1}$.
 		Write $V = (U, \dm j_n : \_)$.
@@ -1278,9 +1278,9 @@ We will only use this lemma when $\eps = \affine$.
 	Then $\vfi$ does not depend on variables of degree lower (stronger) than $i$, nor on $i$-equijet variables of $V$.
 	Moreover, $\dm i \psub{\vfi}$ is of the form
 	\[
-		\dm i \psub{\vfi} = h_n(h_{n-1}(\ldots h_3(h_2(h_1(\lnot^{p_1} \dm j_1) \mathrel{R_1} \lnot^{p_2} \dm j_2) \mathrel{R_2} \lnot^{p_3} \dm j_3) \ldots ) \mathrel{R_{n-1}} \lnot^{p_n} \dm j_n)
+		\dm i \psub{\vfi} = h_n(h_{n-1}(\ldots h_3(h_2(h_1(\lnot^{p_1} \dm j_1) \opA_1 \lnot^{p_2} \dm j_2) \opA_2 \lnot^{p_3} \dm j_3) \ldots ) \opA_{n-1} \lnot^{p_n} \dm j_n)
 	\]
-	with $p_k \in \accol{0, 1}$ and $R_k \in \accol{{\vee}, {\wedge}, K}$ where we define $x \mathrel K y := y$, and every $h_k$ is a composition of functions of the form $\loch \mathrel{S} t$ with $t$ any affine boolean expression mentioning only $i$-symmetric variables and $S \in \accol{{\vee}, {\wedge}, K}$.
+	with $p_k \in \accol{0, 1}$ and $\opA_k \in \accol{{\vee}, {\wedge}, {\opK}}$ where we define $x \opK y := y$, and every $h_k$ is a composition of functions of the form $\loch \opB t$ with $t$ any affine boolean expression mentioning only $i$-symmetric variables and ${\opB} \in \accol{{\vee}, {\wedge}, {\opK}}$.
 \end{lemma}
 \begin{proof}
 	First of all, the $i$-equijet relation as well as all $\ell$-jet relations for $\ell < i$ are reflexive in $\JEP(\dm i : \rival{\jet_i}) = \accol{0 \jet_i 1}$, so that $\JEP(\vfi)$ must be constant on $i$-equijet- or $\ell$-jet-connected components, implying that $\vfi$ cannot depend on those variables.
@@ -1290,7 +1290,7 @@ We will only use this lemma when $\eps = \affine$.
 	Then the $i$-directed variables in $V$ are the last ones.
 	
 	We prove the rest of the theorem by induction on $n$, the number of $i$-directed variables in $V$.
-	If $n = 0$, then $\dm i \psub \vfi = h_n(\_)$ with $h_n(x) = \_ \mathrel K t$ where $t = \dm i \psub \vfi$ does not mention any $i$-directed variables.
+	If $n = 0$, then $\dm i \psub \vfi = h_n(\_)$ with $h_n(x) = \_ \opK t$ where $t = \dm i \psub \vfi$ does not mention any $i$-directed variables.
 	
 	Let $n > 0$.
 	We reduce $\dm i \psub \vfi$ to an expression $e$ by associative reduction (\cref{def:reduction})
@@ -1316,17 +1316,17 @@ We will only use this lemma when $\eps = \affine$.
 		However, if $e$ is a conjunction, then $t$ is a disjunction, and we can set an operand that does not contain $\dm j_n$ to 1. The dual holds if $e$ is a disjunction.
 		We now obtain a boolean expression that is not of the form described in \cref{thm:char-twisted-cube-to-line}, which is a contradiction.
 		
-		\item In the case described in the previous bullet point, we conclude that $e$ is of the form $s \mathrel{R} \dm j_n'$ with ${R} \in \accol{{\vee}, {\wedge}}$ (and $s$ may further use the same symbol $R$ in its root node).
+		\item In the case described in the previous bullet point, we conclude that $e$ is of the form $s \opA \dm j_n'$ with ${\opA} \in \accol{{\vee}, {\wedge}}$ (and $s$ may further use the same symbol $R$ in its root node).
 		Write $V = (V', \dm j_n : \_)$.
 		\begin{itemize}
-			\item If $R = \vee$, then we know that $\vfi \circ (0/\dm j_n) = (s/\dm i)$ is a jet cube morphism $\Opcube_i V' \to (\dm i : \rival{\jet_i})$.
+			\item If $\opA = \vee$, then we know that $\vfi \circ (0/\dm j_n) = (s/\dm i)$ is a jet cube morphism $\Opcube_i V' \to (\dm i : \rival{\jet_i})$.
 			Then by the outer induction hypothesis, $s$ is of the required form, and therefore so is $e$.
-			\item If $R = \wedge$, then we know that $\vfi \circ (1/\dm j_n) = (s/\dm i)$ is a jet cube morphism $V' \to (\dm i : \rival{\jet_i})$.
+			\item If $\opA = \wedge$, then we know that $\vfi \circ (1/\dm j_n) = (s/\dm i)$ is a jet cube morphism $V' \to (\dm i : \rival{\jet_i})$.
 			Then by the outer induction hypothesis, $s$ is of the required form, and therefore so is $e$.
 		\end{itemize}
 		
 		\item In the remaining case, all $i$-directed variables occur in the same child $t$ of $e$, if at all.
-		Thus, $e$ is of the form $t \mathrel{R} s$ with $R \in \accol{{\vee}, {\wedge}, K}$ and $s$ depending only on $i$-symmetric variables and possibly using $R$ again in its root node.
+		Thus, $e$ is of the form $t \opA s$ with $\opA \in \accol{{\vee}, {\wedge}, {\opK}}$ and $s$ depending only on $i$-symmetric variables and possibly using $\opA$ again in its root node.
 		By the inner induction hypothesis, $t$ is of the required form, and therefore so is $e$. \qedhere
 	\end{itemize}
 \end{proof}
@@ -1481,11 +1481,11 @@ Note in advance that \cref{thm:char-twisted-cube-to-line} will tell us that $\dm
 		
 		\begin{itemize}
 			\item We first treat the case where $a_i = \npolar$.
-			Let $\vfi = (\chi, s \mathrel R t/\dm i)$ where $R \in \accol{{\vee}, {\wedge}}$ and $W = (U, \dm i : \rival{\jet_i})$.
+			Let $\vfi = (\chi, s \opA t/\dm i)$ where $\opA \in \accol{{\vee}, {\wedge}}$ and $W = (U, \dm i : \rival{\jet_i})$.
 			We claim that if $\vfi$ is a jet cube morphism, then so are $(\chi, s/\dm i)$ and $(\chi, t/\dm i)$.
 			Indeed, assume $s$ depends on the variables $\dm j_1, \ldots, \dm j_n$.
-			Take a bit assignment $\vec v/\vec{\dm j}$ such that $s[\vec v/\vec{\dm j}]$ equals $0$ if $R = {\vee}$ and $1$ if $R = {\wedge}$.
-			Then $\dm i \psub \vfi \psub{\vec v/\vec{\dm j}} = (s \mathrel R t)\psub{\vec v/\vec{\dm j}} = t \psub{\vec v/\vec{\dm j}}$, which thanks to affineness just equals $t$.
+			Take a bit assignment $\vec v/\vec{\dm j}$ such that $s[\vec v/\vec{\dm j}]$ equals $0$ if $\opA = {\vee}$ and $1$ if $\opA = {\wedge}$.
+			Then $\dm i \psub \vfi \psub{\vec v/\vec{\dm j}} = (s \opA t)\psub{\vec v/\vec{\dm j}} = t \psub{\vec v/\vec{\dm j}}$, which thanks to affineness just equals $t$.
 			By removing $\vec{\dm j}$ from $V$ and taking opposites in all the right places, we obtain a jet cube $V_1$ such that $(\vec v/\vec{\dm j}) : V_1 \to V$ is a jet cube morphism.
 			
 			\item \todoi{Directed case.}
@@ -1495,7 +1495,7 @@ Note in advance that \cref{thm:char-twisted-cube-to-line} will tell us that $\dm
 			concluding that $\dm i \psub \vfi$ is of the form prescribed there.
 			Since we have already dealt with constants and (negations of) variables, the remaining cases are:
 			\begin{itemize}
-				\item $e$ is of the form $s \mathrel{R} \lnot^p \dm k$ where $\dm k$ is the last $i$-directed variable of $V$ and $R \in \accol{{\vee}, {\wedge}}$.
+				\item $e$ is of the form $s \opA \lnot^p \dm k$ where $\dm k$ is the last $i$-directed variable of $V$ and $\opA \in \accol{{\vee}, {\wedge}}$.
 				It is easy to see that the last operand must be $\dm k'$ which we define to be equal to $\dm k$ if $\dm k : \rival{\jet_i}$ and $\lnot \dm k$ if $\dm k : \rival{\tej_i}$.
 			\end{itemize}
 		\end{itemize}
