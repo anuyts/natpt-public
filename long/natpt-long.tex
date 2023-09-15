@@ -755,57 +755,91 @@ We do not have to bother with an equational theory, as we can simply inherit it 
 		}{}
 	\]
 	\[
-		\inferencel{companion:fwd}{
+		\inferencel{concursor:fwd}{
+			P \in \left\{
+				\begin{array}{c l}
+					\jet & \text{(`companion')}, \\
+					\tej & \text{(`conjoint')}, \\
+					\equijet & \text{(`equiconcursor')},
+				\end{array}
+			\right\}
+			\\
+			\\
 			\sez \vfi : \UFsymcube_i(\UFsymcube_j U, V) \to W
 			\qquad
 			j > i
 		}{
-			\sez (\vfi, \dm j / \dm i) : (U, \dm j : \rival{\jet_j}, V) \to (W, \dm i : \rival{\jet_i})
+			\sez (\vfi, \dm j / \dm i) : (U, \dm j : \rival{P_j}, V) \to (W, \dm i : \rival{\jet_i})
 		}{}
 		\qquad
-		\inferencel{companion:bck}{
+		\inferencel{concursor:bck}{
+			P \in \left\{
+				\begin{array}{c l}
+					\tej & \text{(`companion')}, \\
+					\jet & \text{(`conjoint')}, \\
+					\equijet & \text{(`equiconcursor')},
+				\end{array}
+			\right\}
+			\\
+			\\
 			\sez \vfi : \UFsymcube_i(\UFsymcube_j U, V) \to W
 			\qquad
 			j > i
 		}{
-			\sez (\vfi, \dm j / \dm i) : (U, \dm j : \rival{\tej_j}, V) \to (W, \dm i : \rival{\tej_i})
+			\sez (\vfi, \dm j / \dm i) : (U, \dm j : \rival{P_j}, V) \to (W, \dm i : \rival{\tej_i})
 		}{}
 	\]
-	\[
-		\inferencel{conjoint:fwd}{
-			\sez \vfi : \UFsymcube_i(\UFsymcube_j U, V) \to W
-			\qquad
-			j > i
-		}{
-			\sez (\vfi, \dm j / \dm i) : (U, \dm j : \rival{\tej_j}, V) \to (W, \dm i : \rival{\jet_i})
-		}{}
-		\qquad
-		\inferencel{conjoint:bck}{
-			\sez \vfi : \UFsymcube_i(\UFsymcube_j U, V) \to W
-			\qquad
-			j > i
-		}{
-			\sez (\vfi, \dm j / \dm i) : (U, \dm j : \rival{\jet_j}, V) \to (W, \dm i : \rival{\tej_i})
-		}{}
-	\]
-	\[
-		\inferencel{equicompanion:fwd}{
-			\sez \vfi : \UFsymcube_i(U, V) \to W
-			\qquad
-			j > i
-		}{
-			\sez (\vfi, \dm j / \dm i) : (U, \dm j : \rival{\equijet_j}, V) \to (W, \dm i : \rival{\jet_i})
-		}{}
-		\qquad
-		\inferencel{equicompanion:bck}{
-			\sez \vfi : \UFsymcube_i(U, V) \to W
-			\qquad
-			j > i
-		}{
-			\sez (\vfi, \dm j / \dm i) : (U, \dm j : \rival{\equijet_j}, V) \to (W, \dm i : \rival{\tej_i})
-		}{}
-	\]
-	\todoi{Merge 3 rules into `concursor'}
+%	\[
+%		\inferencel{companion:fwd}{
+%			\sez \vfi : \UFsymcube_i(\UFsymcube_j U, V) \to W
+%			\qquad
+%			j > i
+%		}{
+%			\sez (\vfi, \dm j / \dm i) : (U, \dm j : \rival{\jet_j}, V) \to (W, \dm i : \rival{\jet_i})
+%		}{}
+%		\qquad
+%		\inferencel{companion:bck}{
+%			\sez \vfi : \UFsymcube_i(\UFsymcube_j U, V) \to W
+%			\qquad
+%			j > i
+%		}{
+%			\sez (\vfi, \dm j / \dm i) : (U, \dm j : \rival{\tej_j}, V) \to (W, \dm i : \rival{\tej_i})
+%		}{}
+%	\]
+%	\[
+%		\inferencel{conjoint:fwd}{
+%			\sez \vfi : \UFsymcube_i(\UFsymcube_j U, V) \to W
+%			\qquad
+%			j > i
+%		}{
+%			\sez (\vfi, \dm j / \dm i) : (U, \dm j : \rival{\tej_j}, V) \to (W, \dm i : \rival{\jet_i})
+%		}{}
+%		\qquad
+%		\inferencel{conjoint:bck}{
+%			\sez \vfi : \UFsymcube_i(\UFsymcube_j U, V) \to W
+%			\qquad
+%			j > i
+%		}{
+%			\sez (\vfi, \dm j / \dm i) : (U, \dm j : \rival{\jet_j}, V) \to (W, \dm i : \rival{\tej_i})
+%		}{}
+%	\]
+%	\[
+%		\inferencel{equicompanion:fwd}{
+%			\sez \vfi : \UFsymcube_i(U, V) \to W
+%			\qquad
+%			j > i
+%		}{
+%			\sez (\vfi, \dm j / \dm i) : (U, \dm j : \rival{\equijet_j}, V) \to (W, \dm i : \rival{\jet_i})
+%		}{}
+%		\qquad
+%		\inferencel{equicompanion:bck}{
+%			\sez \vfi : \UFsymcube_i(U, V) \to W
+%			\qquad
+%			j > i
+%		}{
+%			\sez (\vfi, \dm j / \dm i) : (U, \dm j : \rival{\equijet_j}, V) \to (W, \dm i : \rival{\tej_i})
+%		}{}
+%	\]
 	\[
 		\inferencel{conj:fwd}{
 			\sez \vfi : \UFsymcube_i V \to W \\
@@ -882,10 +916,9 @@ Note that \cref{conv:sort-cubes} implies that all variables in $U_1$ and $U_2$ a
 If the last dimension of our target cube is of the form $\dm i : \rival{\equijet_i}$, then we know that our cube is in the image of $\Usymcube_i$, and we can proceed using the adjunction $\Fsymcube_i \dashv \Usymcube_i$ (\ruleref{symmetrize}).
 This turns our last dimension into $\dm i : \rival{\edge_i}$ which is a special case of both $\dm i : \rival{\jet_i}$ and $\dm i : \rival{\tej_i}$, so we can proceed by using the \textsc{fwd} and \textsc{bck} rules of the calculus.
 
-We can substitute the last variable with an expression of a weaker (higher) degree in either direction (or both).
-Inspired by \cref{thm:jetset-equipment}, we choose to use terminology from pro-arrow equipments and refer to this action as creating a companion when the direction of the arrow remains the same (\ruleref{companion:fwd}, \ruleref{companion:bck}), and a conjoint when it reverses (\ruleref{conjoint:fwd}, \ruleref{conjoint:bck}).
-We also allow equijet variables of higher degrees (\ruleref{equicompanion:fwd}, \ruleref{equicompanion:bck}).
-Some measures of caution need to be taken however, which we consider in the case of \ruleref{companion:fwd}, where we wish to derive $(\vfi, \dm j / \dm i) : (U, \dm j : \rival{\jet_j}, V) \to (W, \dm i : \rival{\jet_i})$.
+We can substitute the last variable with a variable of a weaker (higher) degree in either direction (or both).
+Inspired by \cref{thm:jetset-equipment}, we choose to use terminology from pro-arrow equipments and refer to this action as creating a companion when the direction of the arrow remains the same, and a conjoint when it reverses; we introduce the term \textbf{concursor} as the common generalization of companions, conjoints, and their symmetric counterpart \textbf{equiconcursors} (\ruleref{concursor:fwd}, \ruleref{concursor:bck}).
+Some measures of caution need to be taken however, which we consider in the case of forward companions (\ruleref{concursor:fwd}), where we wish to derive $(\vfi, \dm j / \dm i) : (U, \dm j : \rival{\jet_j}, V) \to (W, \dm i : \rival{\jet_i})$.
 First of all, we need to enforce affineness and make sure that $\vfi$ does not use the variable $\dm j$, so we will have $\vfi : (\erasejc{U}, \erasejc{V}) \to \erasejc{W}$.
 Now let us look at what happens when we set $\dm i$ and $\dm j$ to $0$ or to $1$:
 \[
