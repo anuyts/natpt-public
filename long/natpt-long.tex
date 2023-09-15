@@ -1213,7 +1213,7 @@ In practice, we will only use this lemma for $M = \booleanalg$.
 	\end{description}
 \end{proof}
 \begin{lemma} \label{thm:char-twisted-cube-to-line}
-	In $\trijetcubeopt \eps \booleanalg {\vec a}$ with $\eps \in \accol{\affine, \cartes}$, let $V$ be a jet cube with only $i$-directed variables called (from left to right) $\dm j_1, \ldots, \dm j_n$, and consider $\vfi : V \to (\dm i : \rival{\jet_i})$.
+	In $\trijetcubeopt \eps \booleanalg {\vec a}$ with $\eps \in \accol{\affine, \cartes}$, let $V$ be a jet cube with only $i$-directed variables called (from left to right) $\dm j_1, \ldots, \dm j_n$, and consider $\vfi : V \to (\dm i : \rival{P_i})$ with $P \in \accol{\jet, \tej}$.
 	Then $\dm i \psub{\vfi}$ is either a constant or of the form
 	\[
 		\dm i \psub{\vfi} = (\ldots((\lnot^{p_1} \dm j_1 \mathrel{R_1} \lnot^{p_2} \dm j_2) \mathrel{R_2} \lnot^{p_3} \dm j_3) \ldots) \mathrel{R_{n-1}} \lnot^{p_n} \dm j_n
@@ -1222,27 +1222,53 @@ In practice, we will only use this lemma for $M = \booleanalg$.
 \end{lemma}
 We will only use this lemma when $\eps = \affine$.
 \begin{proof}
+	We assume $P = \jet$, the proof for $P = \tej$ is analogous.
+
 	We prove this by induction on $n$.
 	If $n = 0$ then $\dm i \psub \vfi$ is necessarily a constant.
 	Assume $n > 0$, implying that $a_i = \ypolar$.
 	The jet set $\JEP(V)$ has $2^n$ elements and a unique Hamiltonian path of $i$-jets.
-	$f := \JEP(\vfi)$ sends this Hamiltonian path to $\JEP(\dm i : \rival{\jet_i}) = \accol{0 \jet_i 1}$.
+	The function $f := \JEP(\vfi)$ sends this Hamiltonian path to a path in $\JEP(\dm i : \rival{\jet_i}) = \accol{0 \jet_i 1}$.
 	Thus, $f$ is entirely determined by the step in the Hamiltonian path where the image of $f$ flips from $0$ to $1$.
 	Write $\dm j_k'$ to mean $\dm j_k$ if $\dm j_k : \rival{\jet_i}$ and to mean $\lnot \dm j_k$ if $\dm j_k : \rival{\tej_i}$.
 	There are 5 possible scenarios:
 	\begin{itemize}
 		\item The entire path is sent to $0$. Then $\dm i \psub \vfi = 1 = \_ \mathrel K 0$.
 		\item The entire path is sent to $1$. Then $\dm i \psub \vfi = 1 = \_ \mathrel K 1$.
-		\item The first half of the path is sent to $0$, the second half is sent to $1$. Then $\dm i \psub \vfi = \dm j_n' = (\_ \mathrel K \dm j_n') \wedge 1$.
+		\item The first half of the path is sent to $0$, the second half is sent to $1$. Then $\dm i \psub \vfi = \dm j_n' = \_ \mathrel K \dm j_n'$.
 		\item The output of $f$ flips somewhere in the first half of the path.
 		Then $\dm i \psub \vfi = s \vee \dm j_n'$ for some boolean expression $s$ depending on $\dm j_1, \ldots, \dm j_{n-1}$.
-		Write $V = (U, \dm j : \_)$.
-		Then we have $(s/\dm i) : \Opcube_i U \to (\dm i : \rival{\jet_i})$, such that $\JEP(s/\dm i)$ is essentially the restriction of $f$ to the first half of the Hamiltonian path.
+		Write $V = (U, \dm j_n : \_)$.
+		Then we have $(s/\dm i) : \Opcube_i U \to (\dm i : \rival{\jet_i})$, such that $\JEP(s/\dm i)$ is essentially the restriction of $f$ to the first half of the Hamiltonian path as is evident from the following commutative diagram:
+		\[
+			\xymatrix{
+				\Opcube_i U
+					\ar[rr]^{(s/\dm i)}
+					\ar[rd]_{(0/\dm j_n)}
+				&&
+				(\dm i : \rival{\jet_i}).
+				\\
+				& V = (U, \dm j_n : \_)
+					\ar[ru]_{(s \vee \dm j_n / \dm i)}
+			}
+		\]
 		By the induction hypothesis, $s$ is of the prescribed form, and therefore so is $\dm i \psub \vfi$.
 		\item The output of $f$ flips somewhere in the second half of the path.
 		Then $\dm i \psub \vfi = s \wedge \dm j_n'$ for some boolean expression $s$ depending on $\dm j_1, \ldots, \dm j_{n-1}$.
 		Write $V = (U, \dm j : \_)$.
-		Then we have $(s/\dm i) : U \to (\dm i : \rival{\jet_i})$, such that $\JEP(s/\dm i)$ is essentially the restriction of $f$ to the second half of the Hamiltonian path.
+		Then we have $(s/\dm i) : U \to (\dm i : \rival{\jet_i})$, such that $\JEP(s/\dm i)$ is essentially the restriction of $f$ to the second half of the Hamiltonian path as is evident from the following commutative diagram:
+		\[
+			\xymatrix{
+				U
+					\ar[rr]^{(s/\dm i)}
+					\ar[rd]_{(1/\dm j_n)}
+				&&
+				(\dm i : \rival{\jet_i}).
+				\\
+				& V = (U, \dm j_n : \_)
+					\ar[ru]_{(s \wedge \dm j_n / \dm i)}
+			}
+		\]
 		By the induction hypothesis, $s$ is of the prescribed form, and therefore so is $\dm i \psub \vfi$. \qedhere
 	\end{itemize}
 \end{proof}
