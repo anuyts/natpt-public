@@ -1307,16 +1307,16 @@ We will only use this lemma when $\eps = \affine$.
 	\begin{itemize}
 		\item We claim that if $\dm j_n$ and $\dm j_{k}$ occur in different children of the root node of $e$, then $\dm j'_n$ is a direct child of $e$.
 		
-		Let the root node of $e$ be a conjunction (disjunction), and let $t$ be the child of $e$ mentioning $\dm j_n$.
+		Let the root node of $e$ be labelled with $\opA$, where $\accol{(\opA, \absorbA), (\opZ, \absorbZ)} = \accol{(\vee, 1), (\wedge, 0)}$, and let $t$ be the child of $e$ mentioning $\dm j_n$.
 		
 		First of all, note that there exists an assignment of all $i$-symmetric variables in $t$ that makes none of the $i$-directed variables disappear.
 		The result should reduce to something satisfying \cref{thm:char-twisted-cube-to-line}.
-		Then this is only possible if any two $i$-directed variables in $t$ are also in conjunction (disjunction), so that the parentheses can be moved around.
+		Then this is only possible if any two $i$-directed variables in $t$ are also in $\opA$-connection (\cref{def:in-connection}), so that the parentheses can be moved around.
 		
-		We know that if $\dm j'_n$ is not a direct child of $e$, then it must depend on other variables and the root node of $t$ is a disjunction (conjunction).
+		We know that if $\dm j'_n$ is not a direct child of $e$, then it must depend on other variables and the root node of $t$ is labelled with $\opZ$.
 		If one of the immediate operands $s$ of $t$ depends on $\dm j_n$,
-		then any other operand $r$ of $t$ can only depend on $i$-symmetric variables, as $\dm j_n$ is in conjunction (disjunction) with all $i$-directed variables in $t$.
-		Then for every $r$ (and in particular for some $r$) there exists a bit assignment of its dependencies that makes $r$ reduce to $1$ ($0$), such that the entire disjunction (conjunction) $t$ reduces to $1$ ($0$).
+		then any other operand $r$ of $t$ can only depend on $i$-symmetric variables, as $\dm j_n$ is in $\opA$-connection with all $i$-directed variables in $t$.
+		Then for every $r$ (and in particular for some $r$) there exists a bit assignment of its dependencies that makes $r$ reduce to $\absorbZ$, such that all of $t$ reduces to $\absorbZ$, and gets ignored as an operand of $e$.
 		In all other direct operands of $e$, we can choose bit assignments of $i$-symmetric variables that make no $i$-directed variables disappear.
 		Then $e$ will reduce to an expression containing $\dm j_k$ but not $\dm j_n$, in violation of \cref{thm:char-twisted-cube-to-line}.
 		
