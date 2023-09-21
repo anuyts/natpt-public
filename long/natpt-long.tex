@@ -756,39 +756,50 @@ We do not have to bother with an equational theory, as we can simply inherit it 
 		}{}
 	\]
 	\[
-		\inferencel{concursor:fwd}{
-			P \in \left\{
-				\begin{array}{c l}
-					\jet & \text{(`companion')}, \\
-					\tej & \text{(`conjoint')}, \\
-					\equijet & \text{(`equiconcursor')},
-				\end{array}
-			\right\}
-			\\
-			\\
-			\sez \vfi : \UFsymcube_i(\UFsymcube_j U, V) \to W
+		\inferencel{concursor}{
+			P \in \accol{\jet, \tej, \equijet}
+			\qquad
+			Q \in \accol{\jet, \tej}
 			\qquad
 			j > i
-		}{
-			\sez (\vfi, \dm j / \dm i) : (U, \dm j : \rival{P_j}, V) \to (W, \dm i : \rival{\jet_i})
-		}{}
-		\qquad
-		\inferencel{concursor:bck}{
-			P \in \left\{
-				\begin{array}{c l}
-					\tej & \text{(`companion')}, \\
-					\jet & \text{(`conjoint')}, \\
-					\equijet & \text{(`equiconcursor')},
-				\end{array}
-			\right\}
-			\\
 			\\
 			\sez \vfi : \UFsymcube_i(\UFsymcube_j U, V) \to W
-			\qquad
-			j > i
 		}{
-			\sez (\vfi, \dm j / \dm i) : (U, \dm j : \rival{P_j}, V) \to (W, \dm i : \rival{\tej_i})
+			\sez (\vfi, \dm j / \dm i) : (U, \dm j : \rival{P_j}, V) \to (W, \dm i : \rival{Q_i})
 		}{}
+%		\inferencel{concursor:fwd}{
+%			P \in \left\{
+%				\begin{array}{c l}
+%					\jet & \text{(`companion')}, \\
+%					\tej & \text{(`conjoint')}, \\
+%					\equijet & \text{(`equiconcursor')},
+%				\end{array}
+%			\right\}
+%			\\
+%			\\
+%			\sez \vfi : \UFsymcube_i(\UFsymcube_j U, V) \to W
+%			\qquad
+%			j > i
+%		}{
+%			\sez (\vfi, \dm j / \dm i) : (U, \dm j : \rival{P_j}, V) \to (W, \dm i : \rival{\jet_i})
+%		}{}
+%		\qquad
+%		\inferencel{concursor:bck}{
+%			P \in \left\{
+%				\begin{array}{c l}
+%					\tej & \text{(`companion')}, \\
+%					\jet & \text{(`conjoint')}, \\
+%					\equijet & \text{(`equiconcursor')},
+%				\end{array}
+%			\right\}
+%			\\
+%			\\
+%			\sez \vfi : \UFsymcube_i(\UFsymcube_j U, V) \to W
+%			\qquad
+%			j > i
+%		}{
+%			\sez (\vfi, \dm j / \dm i) : (U, \dm j : \rival{P_j}, V) \to (W, \dm i : \rival{\tej_i})
+%		}{}
 	\]
 %	\[
 %		\inferencel{companion:fwd}{
