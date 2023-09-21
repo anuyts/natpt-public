@@ -438,7 +438,7 @@ Using the operation $\bindop^\alpha : MX \to (X \to \accol{0, 1}) \to \accol{0, 
 	Thus, if $\dm i$ is $i$-directed, then $a_i = \ypolar$ and $\dm i : \rival{\jet_i}$ or $\dm i : \rival{\tej_i}$.
 \end{definition}
 \begin{definition} \label{def:sym-forget-cube}
-	Let $\vec a \sqsubset \vec b$. For any trioriented $\vec a$-jet-cube $W$, we define the trioriented $\vec b$-jet-cube $\Usymcube_i W$ by replacing every occurrence of $\edge_i$ with $\equijet_i$.
+	Let $\vec a \sqsubset_i \vec b$. For any trioriented $\vec a$-jet-cube $W$, we define the trioriented $\vec b$-jet-cube $\Usymcube_i W$ by replacing every occurrence of $\edge_i$ with $\equijet_i$.
 \end{definition}
 Note that a $\vec b$-jet-cube is uniquely in the image of $\Usymcube_i$ if it does not feature the symbols $\jet_i$ and $\tej_i$.
 \begin{definition} \label{def:jep}
@@ -750,9 +750,9 @@ We do not have to bother with an equational theory, as we can simply inherit it 
 %		}{}
 		\qquad
 		\inferencel{exchange}{
-			\sez \vfi : (V, \dm j : \rival{\edge_i}, U_1, \dm i : \rival{\edge_i}, U_2) \to W
+			\sez \vfi : (V, \dm j : \rival{\equijet_i}, U_1, \dm i : \rival{\equijet_i}, U_2) \to W
 		}{
-			\sez \vfi : (V, \dm i : \rival{\edge_i}, U_1, \dm j : \rival{\edge_i}, U_2) \to W
+			\sez \vfi : (V, \dm i : \rival{\equijet_i}, U_1, \dm j : \rival{\equijet_i}, U_2) \to W
 		}{}
 	\]
 	\[
@@ -980,6 +980,12 @@ We do not have to bother with an equational theory, as we can simply inherit it 
 %		}{$\booleanalg$}
 	\]
 	\[
+		\inferencel{exchange:sym}{
+			\sez \vfi : (V, \dm j : \rival{\edge_i}, U_1, \dm i : \rival{\edge_i}, U_2) \to W
+		}{
+			\sez \vfi : (V, \dm i : \rival{\edge_i}, U_1, \dm j : \rival{\edge_i}, U_2) \to W
+		}{}
+		\qquad
 		\inferencel{conn:sym}{
 			\opA \in \accol{{\vee}, {\wedge}} \\
 			\sez (\vfi, s / \dm i) : V \to (W, \dm i : \rival{\edge_i}) \\
@@ -988,7 +994,7 @@ We do not have to bother with an equational theory, as we can simply inherit it 
 			\sez (\vfi, t \opA s / \dm i) : V \to (W, \dm i : \rival{\edge_i})
 		}{$\booleanalg$}
 	\]
-	\caption{Symmetric specializations of the rules in \cref{fig:calculus}. Note that the rules \textsc{conn:prism:}$*$ become a special case of \ruleref{conn:degree-symmetric}. We omit \ruleref{terminal} which specifies no degree, \ruleref{concursor} which specifies two, and \ruleref{symmetrize} and \ruleref{exchange} which already place constraints on the anpolarity $a_i$.}
+	\caption{Symmetric specializations of the rules in \cref{fig:calculus}. Note that the rules \textsc{conn:prism:}$*$ become a special case of \ruleref{conn:degree-symmetric}. We omit \ruleref{terminal} which specifies no degree, \ruleref{concursor} which specifies two, and \ruleref{symmetrize}which already places constraints on the anpolarity $a_i$.}
 	\label{fig:calculus:sym}
 \end{figure}
 \begin{figure}[htb]
@@ -1222,7 +1228,7 @@ It is worth pointing out that if $a_i = \npolar$, then \ruleref{conn:degree-symm
 			\item $j = i$, $\vec v = \vec v'$ and $w \jet_i w'$. In this case we have $\vec v \jet_j \vec v$ in $\JEP(\UFsymcube_i(V))$ by reflexivity.
 		\end{itemize}
 		
-		\item Soundness of \ruleref{exchange} follows from \cref{thm:cube-commute-symmetric}.
+		\item Recalling \cref{def:jep}, soundness of \ruleref{exchange} follows from \cref{thm:cube-commute-symmetric}.
 		
 		\item We prove soundness of \ruleref{conn:prism:tgt-absorbing} for the case where $Q = {\jet}$ and $\opA = \vee$, the other case is proven analogously.
 		Assume that $\vfi$ is a jet cube morphism $\UFsymcube_i V \to W$ and $(\vfi, t / \dm i)$ is a jet cube morphism $\mathemph{\Opcube_i V} \to (W, \dm i : \rival{\jet_i})$.
@@ -1620,6 +1626,8 @@ We will only use this lemma when $\eps = \affine$.
 \end{lemma}
 %The lemma allows $P^1, \ldots, P^n \in \accol{\jet, \tej, \equijet}$, but it is easy to see that $\vfi$ being a jet cube morphism (equivalently, $\EP(\vfi)$ being a jet set) implies $P^1, \ldots, P^n \in \accol{\jet, \tej}$.
 It is clear that $\dm k_1, \ldots, \dm k_m$ all occur in $V_0$ as they cannot have degree less (stronger) than $i$.
+
+In words, this lemma says that if the last variable $\dm i$ of $W$ is substituted with an expression $e$ depending on at least two variables, then all variables in $V$ of same degree as $\dm i$ that $e$ does \emph{not} depend on, can be promoted to equijet variables.
 \begin{proof}
 	%Let $\dm k_1, \ldots, \dm k_m$ be all \emph{other} variables that $e$ depends on.
 	For $c \in \accol{0, 1}$, let $A_c$ be the set of all $(\vec \kappa, \vec \zeta) \in \accol{0, 1}^{m+n}$ such that $\dm i \psub{\vfi} \psub{\vec \kappa / \vec{\dm k}, \vec \zeta / \vec{\dm j}} = c$.
@@ -1679,6 +1687,27 @@ It is clear that $\dm k_1, \ldots, \dm k_m$ all occur in $V_0$ as they cannot ha
 	Thus, $\chi$ provides us the jet pointing the other way, and we can conclude that $g(\vec u) \equijet_i g(\vec u')$.
 	Composing with $\EP(c/\dm i)$ for our original $c$ yields $f(\vec v) \equijet_i f(\vec v')$.
 \end{proof}
+\begin{corollary} \label{thm:weaken-connection}
+	In $\trijetcubeopt \affine \booleanalg {\vec a}$, let $\hat \vfi : V \to W$ be a jet cube morphism and write $\vfi = \erasejc{\hat \vfi}$.
+	Let $W = (W_0, \dm i : \rival{Q_i})$ with $Q \in \accol{\jet, \tej}$ and $a_i = \ypolar$.
+	Let $e$ be the reduction of $\dm i \psub \vfi$ and assume $e$ depends on at least two variables.
+	Then $(\novar/\dm i) \circ \vfi$ is a jet cube morphism $\UFsymcube_i V \to W_0$.
+\end{corollary}
+\begin{proof}
+	We know from \cref{thm:left-of-connection} that $\vfi$ is a jet cube morphism $\tilde V \to W$.
+	We first show that $(\novar / \dm i) \circ \vfi$ is a jet cube morphism $\tilde V \to W_0$.
+	Write $f = \EP(\vfi)$ and $p = \EP(\novar / \dm i)$.
+	Pick a non-reflexive jet $\vec v \jet_j \vec v'$ in $\tilde{V}$.
+	We show that $p(f(\vec v)) \jet_j p(f(\vec v'))$ in $W_0$.
+	We know that $f(\vec v) \jet_j f(\vec v')$ in $W$.
+	If $j \neq i$, it follows that $p(f(\vec v)) \jet_j p(f(\vec v'))$ in $W_0$.
+	If $j = i$, it follows that $p(f(\vec v)) \infrajet_i p(f(\vec v'))$ in $W_0$.
+	But because $(\novar/\dm i) \circ \vfi$ only depends on $i$-symmetric variables in $\tilde{V}$, we can conclude that $p(f(\vec v)) \equijet_i p(f(\vec v'))$.
+	Hence we also have the other arrow.
+	
+	We conclude that $(\novar/\dm i) \circ \vfi$ is a jet cube morphism $\tilde V \to W$.
+	Since it only depends on $i$-symmetric variables, there is no harm in promoting the ignored variables of degree $i$ to equijet variables, and that is all that $\UFsymcube_i V$ does.
+\end{proof}
 
 \subsubsection{Completeness}
 \begin{theorem}[Completeness] \label{thm:calculus-complete}
@@ -1687,7 +1716,7 @@ It is clear that $\dm k_1, \ldots, \dm k_m$ all occur in $V_0$ as they cannot ha
 \begin{proof}
 	For each variable $\dm k$ in $W$, let $e_{\dm k}$ be the reduction of $\dm k \psub{\vfi}$.
 
-	We prove completeness by induction on the number of nodes and leaves in the tuple $(e_{\dm k})_{\dm k \in W}$.
+	We prove completeness by induction on the number of nodes and leaves (added up) in the tuple $(e_{\dm k})_{\dm k \in W}$.
 	
 	If $W = ()$, then use \ruleref{terminal}.
 	
@@ -1695,7 +1724,7 @@ It is clear that $\dm k_1, \ldots, \dm k_m$ all occur in $V_0$ as they cannot ha
 	
 	In the remaining case, the last variable in $W$ is not an equijet dimension at a directed degree, i.e.\ it is of the form $\dm i : \rival{\jet_i}$ or $\dm i : \rival{\tej_i}$.
 	
-	If the last variable in $V$ is of degree strictly lower than $\dm i$, then in order to be a jet set morphism, $\JEP(\hat \vfi)$ cannot depend on that variable, so we can invoke \ruleref{wkn} until the last variable in $V$ is of degree at least $i$. We do not resort to the induction hypothesis but proceed below.
+	If the last variable in $V$ is of degree strictly lower (stronger) than $\dm i$, then in order to be a jet set morphism, $\JEP(\hat \vfi)$ cannot depend on that variable, so we can invoke \ruleref{wkn} until the last variable in $V$ is of degree at least $i$. We do not resort to the induction hypothesis but proceed below.
 	
 %	If $a_i = \npolar$, then we use \ruleref{exchange} (which is sound by \cref{thm:calculus-sound}) to reorder the variables of degree $i$ in $W$, and immediately proceed with the algorithm below.
 %	We put constants last. Before that, if existent, we put the sole variable $\dm k_1$ such that $e_{\dm k_1}$ mentions the last variable of degree $i$ in $V$.
@@ -1723,7 +1752,7 @@ It is clear that $\dm k_1, \ldots, \dm k_m$ all occur in $V_0$ as they cannot ha
 					\ar[d]^{(0/\dm i)}
 				\\
 				(V_0, \dm j : \rival{R_j}, V_1)
-					\ar[rr]_{\vfi (\chi, \dm j / \dm i)}
+					\ar[rr]_{\vfi = (\chi, \dm j / \dm i)}
 				&& (U, \dm i : \rival{\jet_i})
 				\\
 				(V_0, V_1)
@@ -1734,36 +1763,123 @@ It is clear that $\dm k_1, \ldots, \dm k_m$ all occur in $V_0$ as they cannot ha
 					\ar[u]_{(1/\dm i)}
 			}
 		\]
-		We note that the non-dashed arrows are all jet cube morphisms, and the vertical arrows all yield full jet set morphisms (\cref{def:full-jetsethom}).
+		We note that the black arrows are all jet cube morphisms, and the vertical arrows all yield full jet set morphisms (\cref{def:full-jetsethom}).
 		This implies that the dashed arrows also lift to jet set morphisms, i.e.\ are jet cube morphisms.
 		Then $\chi$ is both a jet cube morphism $(V_0, V_1) \to U$ and $\Opcube_i(\Opcube_j(V_0), V_1) \to U$.
 		\begin{itemize}
-			\item If $j = i$, then $R = {\jet}$, all variables in $V_1$ have degree $i$ and $\chi$ is both a jet cube morphism $(V_0, V_1) \to U$ and $(V_0, \Opcube_i(V_1)) \to U$.
-			This implies that $\EP(\vfi)$ sends every $i$-jet of the form $(\vec v_0, r, \vec v_1) \jet_i (\vec v_0, r, \vec v_1')$ (and hence every such $i$-infrajet) to an $i$-equijet $(\EP(\chi)(\vec v_0, \vec v_1), r) \equijet_i (\EP(\chi)(\vec v_0, \vec v'_1), r)$ in $\JEP(U, \dm i : \rival{\jet_i})$.
+			\item If $j = i$, then all variables in $V_1$ have degree $i$ and $\chi$ is both a jet cube morphism $(V_0, V_1) \to U$ and $\Opcube_i(\Opcube_i V_0, V_1) \to U$.
+			This implies that $\EP(\vfi)$ sends every $i$-jet of the form $(\vec v_0, r, \vec v_1) \jet_i (\vec v_0, r, \vec v_1')$ in $\JEP(V_0, V_1)$ -- which points the other way in $\JEP(\Opcube_i(\Opcube_i V_0, V_1))$ -- to an $i$-equijet $(\EP(\chi)(\vec v_0, \vec v_1), r) \equijet_i (\EP(\chi)(\vec v_0, \vec v'_1), r)$ in $\JEP(U, \dm i : \rival{\jet_i})$.
 			\begin{itemize}
-				\item If $a_i = \ypolar$, then all $i$-equijets in $\JEP(U, \dm i : \rival{\jet_i})$ are reflexive and all elements of the form $(\vec v_0, r, \vec v_1)$ for fixed $\vec v_0$ and $r$ but variable $\vec v_1$ are $i$-infrajet-connected, so this means that $\EP(\chi)(\vec v_0, \vec v_1)$ is independent of $V_1$.
-				Then $\chi$ cannot mention any variables from $V_1$.
-				\begin{itemize}
-					\item If $V_1$ contains any variables, then we can apply \ruleref{wkn}.
-					\item Otherwise, we can apply \ruleref{prism:fwd}.
-				\end{itemize}
+				\item If $a_i = \ypolar$, then for any bit-assignment $\vec v_1$ of the variables in $V_1$, we get a jet cube morphism $(\chi \circ (\vec v_1/V_1), \dm j / \dm i) : (\Opcube_i)^p(V_0, \dm j : \rival{R_j}) \to (U, \dm i : \rival{\jet_i})$, where $p$ is the number of zeroes in $\vec v$.
+				This implies that $p$ is the same for all assignments $\vec v$, which is only possible if $V_1 = ()$.
+				In that case, it is easy to see that $R = {\jet}$.
+				Thus, we can apply \ruleref{prism:fwd}.
+				
+%				\todoi{Old}
+%				then all $i$-equijets in $\JEP(U, \dm i : \rival{\jet_i})$ are reflexive and all elements of the form $(\vec v_0, r, \vec v_1)$ for fixed $\vec v_0$ and $r$ but variable $\vec v_1$ are $i$-infrajet-connected, so this means that $\EP(\chi)(\vec v_0, \vec v_1)$ is independent of $V_1$.
+%				Then $\chi$ cannot mention any variables from $V_1$.
+%				\begin{itemize}
+%					\item If $V_1$ contains any variables, then we can apply \ruleref{wkn}.
+%					\item Otherwise, we can apply \ruleref{prism:fwd}.
+%				\end{itemize}
 				
 				\item If $a_i = \npolar$, then we can use \ruleref{exchange} to create a morphism from $(V_0, V_1, \dm j : \rival{\edge_i})$ instead, which can be done using \ruleref{prism:fwd} (or equivalently \ruleref{prism:bck}).
 			\end{itemize}
 			
-			If $j > i$, then $\chi$ is necessarily a jet cube morphism $\UFsymcube_i(\UFsymcube_j(V_0), V_1) \to U$, so we can apply \ruleref{companion:fwd}, \ruleref{conjoint:fwd} or \ruleref{equicompanion:fwd}, depending on $R$.
-			Note that if $R = {\equijet}$, then $\UFsymcube_j(V_0) = V_0$, justifying the premise of \ruleref{equicompanion:fwd}.
+			If $j > i$, then $\chi$ is necessarily a jet cube morphism $\UFsymcube_i(\UFsymcube_j(V_0), V_1) \to U$, so we can apply \ruleref{concursor}.
 		\end{itemize}
 		
 		\item We have now covered all cases for the monad $\bipointedsym$.
-		In the remaining cases, $e_{\dm i}$ contains conjunction or disjunction symbols.
-		If $\dm i : \rival{\tej_i}$, we apply \ruleref{inv:fwd} and push down the introduced negation, after which we do not resort to the induction hypothesis but proceed below.\footnote{Alternatively, we could duplicate and adapt the proof below and the lemmas on which it relies to the case where $\dm i : \rival{\tej_i}$.}
+		In the remaining cases, $e_{\dm i}$ contains connection (conjunction or disjunction) symbols.
+		If $\dm i : \rival{\tej_i}$, we apply \ruleref{inv:fwd} and push down the introduced negation, after which we do not resort to the induction hypothesis but proceed below.\footnote{Alternatively, we could duplicate and adapt the proof below to the case where $\dm i : \rival{\tej_i}$.}
 		We now assume that $\dm i : \rival{\jet_i}$.
 		
 		\begin{itemize}
 			\item We first treat the case where $a_i = \npolar$.
 			Let $\vfi = (\chi, s \opA t/\dm i)$ where $\opA \in \accol{{\vee}, {\wedge}}$ and $W = (U, \dm i : \rival{\jet_i})$.
-			We claim that if $\vfi$ is a jet cube morphism, then so are $(\chi, s/\dm i)$ and $(\chi, t/\dm i)$.
+			We claim that if $\vfi$ is a jet cube morphism $V \to W = (U, \dm i : \rival{\edge_i})$, then so are $(\chi, s/\dm i)$ and $(\chi, t/\dm i)$, so that we can invoke \ruleref{conn:sym}.
+			Write
+			\[
+				f = \EP(\vfi), \qquad
+				g = \EP(\chi), \qquad
+				p = \EP(\chi, s/\dm i), \qquad
+				q = \EP(\chi, t/\dm i).
+			\]
+			Pick a non-reflexive jet $\vec v \jet_j \vec v'$.
+			We prove $p(\vec v) \jet_j p(\vec v')$; by symmetry of the situation we do not have to prove the same for $q$.
+			Let $\dm k$ be the variable of $V$ where $\vec v$ and $\vec v'$ differ.
+			There are four possible situations:
+			\begin{itemize}
+				\item If $\vfi$ does not depend on $\dm k$, then we are done.
+				\item If $\chi$ depends on $\dm k$, then we have $s \psub{\vec v} = s \psub{\vec v'} =: s_0$ and $t \psub{\vec v} = t \psub{\vec v'} =: t_0$.
+				\begin{itemize}
+					\item If $j \neq i$, then from $(g(\vec v), s_0 \opA t_0) = f(\vec v) \jet_j f(\vec v') = (g(\vec v'), s_0 \opA t_0)$, it follows that $g(\vec v) \jet_j g(\vec v')$ in $\JEP(U)$, whence $p(\vec v) = (g(\vec v), s_0) \jet_j (g(\vec v'), s_0) = p(\vec v')$.
+					\item If $j = i$, then from $(g(\vec v), s_0 \opA t_0) = f(\vec v) \edge_i f(\vec v') = (g(\vec v'), s_0 \opA t_0)$ it follows that $g(\vec v) \edge_i g(\vec v')$ in $\JEP(U)$, whence $p(\vec v) = (g(\vec v), s_0) \edge_i (g(\vec v'), s_0) = p(\vec v')$.
+				\end{itemize}
+				\item If $s$ depends on $\dm k$, then we have $g(\vec v) = g(\vec v') =: g_0$ and $t \psub{\vec v} = t \psub{\vec v'} =: t_0$.
+				Pick a bit-assignment $\sigma$ of the dependencies of $t$ such that $t \psub \sigma$ reduces to the neutral element $\neutralA$ of $\opA$.\footnote{If this were not possible, then $t$ would be a constant, which is in contradiction with the assumption that $e_{\dm i}$ was reduced.}
+				Define $\vec x$ and $\vec x'$ by overwriting $\vec v$ and $\vec v'$ with $\sigma$. Then $g(\vec x) = g(\vec x') = g_0$ and $t \psub{\vec x} = t \psub{\vec x'} = \neutralA$ and $s \psub{\vec x} = s \psub{\vec v}$ and $s \psub{\vec x'} = s \psub{\vec v'}$.
+				We have $\vec x \infrajet_j \vec x'$, whence $p(\vec v) = (g_0, s \psub{\vec v}) = f(\vec x) \infrajet_j f(\vec x') = (g_0, s \psub{\vec v'}) = p(\vec v')$ in $\JEP(W, \dm i : \rival{\jet_i})$.
+				Now, since these vectors only differ at $\dm i$, we can deduce equality if $j < i$ ($j$ is stronger than $i$) and otherwise that $p(\vec v) \edge_i p(\vec v')$, which implies $p(\vec v) \jet_j p(\vec v')$ since $j \geq i$ ($j$ is weaker than or equal to $i$).
+				
+				\item If $t$ depends on $\dm k$, then $\chi$ and $s$ do not so $p(\vec v) = p(\vec v')$ and we are done.
+			\end{itemize}
+			
+			\item Now assume that $a_i = \ypolar$.
+			Let $\vfi = (\chi, t \opA s/\dm i)$ where $\opA \in \accol{{\vee}, {\wedge}}$ and $W = (U, \dm i : \rival{\jet_i})$.
+			\Cref{thm:weaken-connection} immediately tells us that $\chi$ is a jet cube morphism $\UFsymcube V \to U$.
+			By \cref{thm:char-jet-cube-to-line}, we can assume that $s$ is either (the negation of) the last variable of degree $i$ in $V = (V_0, \dm i : \rival{P_i})$ with $P \in \accol{\jet, \tej}$ or a boolean expression only depending on $i$-symmetric variables.
+			\begin{itemize}
+				\item If $s = \dm i' \in \accol{\dm i, \lnot \dm i}$, then depending on $\opA$ we have one of the following commutative diagrams, where each arrow is a jet cube morphism but labelled with its erasure:
+				\[
+					\xymatrix{
+						&&\Opcube_i V
+							\ar[d]_{(0/\dm i)}
+							\ar@/^/[rrd]^{(\chi, t/\dm i)}
+						\\
+						(V, \dm i : \rival{\tej_i})
+							\ar@{<->}[rr]^{\cong}_{(\chi, \lnot \dm i/\dm i)}
+						&&
+						(V, \dm i : \rival{\jet_i})
+							\ar[rr]_{(\chi, t \vee \dm i/\dm i)}
+						&&
+						(W, \dm i : \rival{\jet_i})
+						\\
+						&& V
+							\ar[d]_{(1/\dm i)}
+							\ar@/^/[rrd]^{(\chi, t/\dm i)}
+						\\
+						(V, \dm i : \rival{\tej_i})
+							\ar@{<->}[rr]^{\cong}_{(\chi, \lnot \dm i/\dm i)}
+						&&
+						(V, \dm i : \rival{\jet_i})
+							\ar[rr]_{(\chi, t \wedge \dm i/\dm i)}
+						&&
+						(W, \dm i : \rival{\jet_i})
+					}
+				\]
+				Thus, we can invoke one of the rules \ruleref{conn:prism:tgt-absorbing}, \allowbreak \ruleref{conn:prism:src-absorbing}, \ruleref{conn:prism-inv:tgt-absorbing}, \ruleref{conn:prism-inv:src-absorbing}.
+				
+				\item If $s$ depends only on $i$-symmetric variables, then the same holds for $(\vfi, s / \dm i)$. Write
+				\[
+					f = \EP(\vfi), \qquad
+					g = \EP(\chi), \qquad
+					p = \EP(\chi, s/\dm i), \qquad
+					q = \EP(\chi, t/\dm i).
+				\]
+				We show that
+				\begin{itemize}
+					\item $(\chi, s / \dm i)$ is a jet cube morphism $\UFsymcube_i V \to (W, \dm i : \rival{\jet_i})$,
+					\item $(\chi, t / \dm i)$ is a jet cube morphism $V \to (W, \dm i : \rival{\jet_i})$,
+				\end{itemize}
+				so that we can invoke \ruleref{conn:degree-symmetric}.
+			\end{itemize}
+			
+			
+			
+			
+			
+			\todoi{Old stuff}
 			Indeed, assume $s$ depends on the variables $\dm j_1, \ldots, \dm j_n$.
 			Take a bit assignment $\vec v/\vec{\dm j}$ such that $s[\vec v/\vec{\dm j}]$ equals $0$ if $\opA = {\vee}$ and $1$ if $\opA = {\wedge}$.
 			Then $\dm i \psub \vfi \psub{\vec v/\vec{\dm j}} = (s \opA t)\psub{\vec v/\vec{\dm j}} = t \psub{\vec v/\vec{\dm j}}$, which thanks to affineness just equals $t$.
