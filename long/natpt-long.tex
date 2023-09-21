@@ -36,7 +36,7 @@
 %\usepackage[notext]{stix}
 \usepackage{fontawesome}
 \RequirePackage{amssymb}
-\RequirePackage{xcolor}
+\RequirePackage[dvipsnames]{xcolor}
 \usepackage{xypic}
 	\CompileMatrices
 \RequirePackage{mathtools}
@@ -870,6 +870,23 @@ We do not have to bother with an equational theory, as we can simply inherit it 
 		}{$\booleanalg$}
 	\]
 	\[
+		\inferencel{conn:prism-inv:tgt-absorbing}{
+			(Q, \opA, P) \in \mathemph{\accol{(\jet, \vee, \tej), (\tej, \wedge, \jet)}} \\
+			\sez \vfi : \UFsymcube_i V \to W \\
+			\sez (\vfi, s / \dm i) : \mathemph{\Opcube_i V} \to (W, \dm i : \rival{Q_i})
+		}{
+			\sez (\vfi, \mathemphB{\lnot \dm i} \opA s / \dm i) : (V, \dm i : \mathemphB{\rival{P_i}}) \to (W, \dm i : \rival{Q_i})
+		}{$\booleanalg$}
+		\qquad
+		\inferencel{conn:prism-inv:src-absorbing}{
+			(Q, \opA, P) \in \mathemph{\accol{(\jet, \wedge, \tej), (\tej, \vee, \jet)}} \\
+			\sez \vfi : \UFsymcube_i V \to W \\
+			\sez (\vfi, s / \dm i) : \mathemph{V} \to (W, \dm i : \rival{Q_i})
+		}{
+			\sez (\vfi, \mathemphB{\lnot \dm i} \opA s / \dm i) : (V, \dm i : \mathemphB{\rival{P_i}}) \to (W, \dm i : \rival{Q_i})
+		}{$\booleanalg$}
+	\]
+	\[
 		\inferencel{conn:degree-symmetric}{
 			Q \in \accol{\jet, \tej} \qquad
 			\opA \in \accol{{\vee}, {\wedge}} \\
@@ -966,7 +983,7 @@ We do not have to bother with an equational theory, as we can simply inherit it 
 			\sez (\vfi, t \opA s / \dm i) : V \to (W, \dm i : \rival{\edge_i})
 		}{$\booleanalg$}
 	\]
-	\caption{Symmetric specializations of the rules in \cref{fig:calculus}. Note that \ruleref{conn:prism:src-absorbing} and \ruleref{conn:prism:tgt-absorbing} become a special case of \ruleref{conn:degree-symmetric}. We omit \ruleref{terminal} which specifies no degree, \ruleref{concursor} which specifies two, and \ruleref{symmetrize} and \ruleref{exchange} which already place constraints on the anpolarity $a_i$.}
+	\caption{Symmetric specializations of the rules in \cref{fig:calculus}. Note that the rules \textsc{conn:prism:}$*$ become a special case of \ruleref{conn:degree-symmetric}. We omit \ruleref{terminal} which specifies no degree, \ruleref{concursor} which specifies two, and \ruleref{symmetrize} and \ruleref{exchange} which already place constraints on the anpolarity $a_i$.}
 	\label{fig:calculus:sym}
 \end{figure}
 \begin{figure}[htb]
@@ -1056,6 +1073,7 @@ Now let us look at what happens when we set $\dm i$ and $\dm j$ to $0$ or to $1$
 So $\vfi$ needs to be both a morphism of jet cubes from $(U, V)$ to $W$ and from $(\Opcube_j(U), V)$ to $\Opcube_i(W)$ or equivalently from $\Opcube_i(\Opcube_j(U), V)$ to $W$. This can be achieved by asking that $\vfi$ starts from \linebreak $\UFsym_i(\UFsym_j(U), V)$, which can be thought of as a join of $(U, V)$ and $\Opcube_i(\Opcube_j(U), V)$.
 
 The last four rules involve connections (conjunction and disjunction) and only apply if $M = \booleanalg$, as $\bipointedsym$ does not provide these operations.
+Due to the twisted nature of the twisted prism functor, it turns out that we can only substitute the last variable with a connection of which one operand is either \todoi{Continue}
 
 
 
