@@ -424,7 +424,7 @@ Using the operation $\bindop^\alpha : MX \to (X \to \accol{0, 1}) \to \accol{0, 
 %	$(\dm i_0 : \rival{\jet_{i_0}}, \ldots, \dm i_{n-1} : \rival{\tej_{i_{n-1}}})$.
 %	If $a_i = \npolar$, we use the symbols $\rival{\jet_i}$, $\rival{\tej_i}$ and $\rival{\edge_i}$ interchangeably.
 	
-	More generally, we define the set of \textbf{trioriented $\vec a$-jet-cubes} as the set of lists of elements of \linebreak $\set{\jet_i, \tej_i, \equijet_i}{0 \leq i < \lenpol{\vec a}}$, where we identify ${\jet_i} = {\tej_i} = {\equijet_i} =: {\edge_i}$ if $a_i = \npolar$, and where $\jet_i$ and $\tej_i$ cannot occur to the left of $\equijet_i$ if $a_i = \ypolar$.
+	More generally, we define the set of \textbf{trioriented $\vec a$-jet-cubes} as the set of lists of elements of \allowbreak $\set{\jet_i, \tej_i, \equijet_i}{0 \leq i < \lenpol{\vec a}}$, where we identify ${\jet_i} = {\tej_i} = {\equijet_i} =: {\edge_i}$ if $a_i = \npolar$, and where $\jet_i$ and $\tej_i$ cannot occur to the left of $\equijet_i$ if $a_i = \ypolar$.
 	We denote them e.g.\ as $(\dm i_0 : \rival{\jet_{i_0}}, \ldots, \dm i_{n-1} : \rival{\tej_{i_{n-1}}})$.
 \end{definition}
 \begin{definition} \label{def:symmetric-var}
@@ -651,7 +651,7 @@ In short then, by \cref{rem:two-monads}:
 \end{remark}
 
 \subsection{A Calculus of Trioriented Jet Cube Morphisms}
-In this section, we develop a calculus that inductively generates the morphisms of the category \linebreak $\trijetcubeopt{\affine}{M}{\vec a}$ and therefore also those of its full subcategory $\jetcubeopt{\affine}{M}{\vec a}$.
+In this section, we develop a calculus that inductively generates the morphisms of the category \allowbreak $\trijetcubeopt{\affine}{M}{\vec a}$ and therefore also those of its full subcategory $\jetcubeopt{\affine}{M}{\vec a}$.
 
 Since the forgetful functor $U : \jetset{\vec a} \to \Set$ is faithful, so is $\erasejc \loch : \trijetcubeopt{\affine}{M}{\vec a}$.
 As such, we can regard `being a morphism of (forward/trioriented) jet cubes' as a proof-irrelevant property of morphisms of cubes, which we will therefore use as preterms.
@@ -967,14 +967,19 @@ We do not have to bother with an equational theory, as we can simply inherit it 
 			\sez (\vfi, \dm i / \dm i) : (V, \dm i : \rival{\edge_i}) \to (W, \dm i : \rival{\edge_i})
 		}{}
 		\qquad
+		\inferencel{wkn:sym}{
+			\sez \vfi : V \to W
+		}{
+			\sez (\vfi, \dm i / \novar) : (V, \dm i : \rival{\edge_i}) \to W
+		}{}
 %		\inferencel{conn:prism:sym}{
 %			\opA \in \accol{{\vee}, {\wedge}} \\
 %			\sez (\vfi, s / \dm i) : V \to (W, \dm i : \rival{\edge_i})
 %		}{
 %			\sez (\vfi, \dm i \opA s / \dm i) : (V, \dm i : \rival{\edge_i}) \to (W, \dm i : \rival{\edge_i})
 %		}{$\booleanalg$}
-%	\]
-%	\[
+	\]
+	\[
 		\inferencel{conn:sym}{
 			\opA \in \accol{{\vee}, {\wedge}} \\
 			\sez (\vfi, s / \dm i) : V \to (W, \dm i : \rival{\edge_i}) \\
@@ -1070,11 +1075,12 @@ Now let us look at what happens when we set $\dm i$ and $\dm j$ to $0$ or to $1$
 			\ar[u]_{(1/\dm i)}
 	}
 \]
-So $\vfi$ needs to be both a morphism of jet cubes from $(U, V)$ to $W$ and from $(\Opcube_j(U), V)$ to $\Opcube_i(W)$ or equivalently from $\Opcube_i(\Opcube_j(U), V)$ to $W$. This can be achieved by asking that $\vfi$ starts from \linebreak $\UFsym_i(\UFsym_j(U), V)$, which can be thought of as a join of $(U, V)$ and $\Opcube_i(\Opcube_j(U), V)$.
+So $\vfi$ needs to be both a morphism of jet cubes from $(U, V)$ to $W$ and from $(\Opcube_j(U), V)$ to $\Opcube_i(W)$ or equivalently from $\Opcube_i(\Opcube_j(U), V)$ to $W$. This can be achieved by asking that $\vfi$ starts from \allowbreak $\UFsym_i(\UFsym_j(U), V)$, which can be thought of as a join of $(U, V)$ and $\Opcube_i(\Opcube_j(U), V)$.
 
 The last four rules involve connections (conjunction and disjunction) and only apply if $M = \booleanalg$, as $\bipointedsym$ does not provide these operations.
 Due to the twisted nature of the twisted prism functor, it turns out that we can only substitute the last variable with a connection of which one operand is either
-(the negation of) the last variable, or an expression depending only on $i$-symmetric variables.
+(the negation of) the last variable, or an expression depending only on $i$-symmetric variables.%
+\footnote{This is formalized in \cref{thm:char-jet-cube-to-line}.}
 
 In either case, it turns out that whether the last term reduces to $0$ or $1$ on any end point of the source cube, is sufficiently irregular that the remainder of $\vfi$ also can only depend on $i$-symmetric variables.
 The promotion of all variables of degree $i$ to equijet variables in the context of $\vfi$ in at least one of the premises, precludes their usage unless $a_i = \npolar$.
@@ -1188,7 +1194,7 @@ It is worth pointing out that if $a_i = \npolar$, then \ruleref{conn:degree-symm
 	
 		\item For \ruleref{src:fwd}, \ruleref{src:bck}, \ruleref{tgt:fwd} and \ruleref{tgt:bck}, this follows immediately from \cref{def:prism}.
 		
-		\item For \ruleref{inv:fwd}, by postcomposition, it suffices to show that $\zeta : (\id_W, \lnot \dim i / \dim i) : \erasejc{(W, i : \rival{\tej_i})} \to \erasejc{(W, i : \rival{\jet_i})}$ is a morphism of jet cubes, i.e.\ that $\EP(\zeta) : (\vec w, u) \mapsto (\vec w, \lnot u)$ is a morphism of jet sets $\JEP(W) \multip \rival{\tej_i} \to \JEP(W) \multip \rival{\jet_i}$.
+		\item For \ruleref{inv:fwd}, by postcomposition, it suffices to show that $\zeta : (\id_W, \lnot \dm i / \dm i) : \erasejc{(W, i : \rival{\tej_i})} \to \erasejc{(W, i : \rival{\jet_i})}$ is a morphism of jet cubes, i.e.\ that $\EP(\zeta) : (\vec w, u) \mapsto (\vec w, \lnot u)$ is a morphism of jet sets $\JEP(W) \multip \rival{\tej_i} \to \JEP(W) \multip \rival{\jet_i}$.
 		
 		Let $(\vec w, u) \jet_j (\vec w', u')$ in $\JEP(W) \multip \rival{\tej_i}$. Then by \cref{def:prism} of the opposite $i$-twisted prism, there are 3 possibilities:
 		\begin{itemize}
@@ -1213,62 +1219,135 @@ It is worth pointing out that if $a_i = \npolar$, then \ruleref{conn:degree-symm
 		Then there are two possibilities:
 		\begin{itemize}
 			\item $w = w'$ and $(\vec v, w) \jet_j (\vec v', w)$. The latter implies $\vec v \jet_j \vec v'$ in $\JEP(V)$ if $j \neq i$ and $\vec v \infrajet_i \vec v'$ if $j = i$. Moving to $\JEP(\UFsymcube_i(V))$, we get $\vec v \jet_j \vec v'$ in all cases, as required.
-			\item $j = i$, $\vec v = \vec v'$ and $w \jet_i w'$. In this case we trivially have $\vec v \jet_j \vec v$ in $\JEP(\UFsymcube_i(V))$.
+			\item $j = i$, $\vec v = \vec v'$ and $w \jet_i w'$. In this case we have $\vec v \jet_j \vec v$ in $\JEP(\UFsymcube_i(V))$ by reflexivity.
 		\end{itemize}
 		
 		\item Soundness of \ruleref{exchange} follows from \cref{thm:cube-commute-symmetric}.
 		
-		\item \todoi{Find-replace companion/conjoint} For \ruleref{companion:fwd}, let $\hat \vfi : \UFsymcube_i(\UFsymcube_j U, V) \to W$ be a jet cube morphism.
-		Then $f := \JEP(\hat \vfi)$ is a jet set morphism $\JEP(\UFsymcube_i(\UFsymcube_j U, V)) \to \JEP(W)$.
-		We need to show that $g : (\vec u, w, \vec v) \mapsto (f(\vec u, \vec v), w)$ is a jet set morphism $\JEP(U, \dm j : \rival{\jet_j}, V) \to \JEP(W, \dm i : \rival{\jet_i}) = \JEP(W) \multip \rival{\jet_i}$.
+		\item We prove soundness of \ruleref{conn:prism:tgt-absorbing} for the case where $Q = {\jet}$ and $\opA = \vee$, the other case is proven analogously.
+		Assume that $\vfi$ is a jet cube morphism $\UFsymcube_i V \to W$ and $(\vfi, t / \dm i)$ is a jet cube morphism $\mathemph{\Opcube_i V} \to (W, \dm i : \rival{\jet_i})$.
+		We prove that $(\vfi, t \vee \dm i / \dm i)$ is a jet cube morphism $(V, \dm i : \rival{\jet_i}) \to (W, \dm i : \rival{\jet_i})$.
 		
-		Assume we have $(\vec u, w, \vec v) \jet_k (\vec u', w', \vec v')$ in $\JEP(U, \dm j : \rival{\jet_j}, V)$.
-		By induction on $V$, one can show that we are in one of the following situations:
+		Pick a jet $(\vec v, u) \jet_j (\vec v', u')$ in $\JEP(V, \dm i : \rival{\jet_i})$.
+		As the other case is trivial, we assume that this jet is not reflexive.
+		Let $\dm k$ be the variable where both hands defer.
+		Write $f = \EP(\vfi)$ and $g = \EP(\vfi, t \vee \dm i / \dm i)$ and $h = \EP(\vfi, t / \dm i)$.
+		There are two possibilities:
 		\begin{itemize}
-			\item $\vec u = \vec u'$, $w = w'$ and $(\vec u, \vec v) \jet_k (\vec u, \vec v')$ in $\JEP(U, V)$.
-			The fact that $f$ is a jet set morphism implies that $f(\vec u, \vec v) \jet_k f(\vec u, \vec v')$ and even $f(\vec u, \vec v) \equijet_i f(\vec u, \vec v')$ if $k = i$.
-			Then we have the required jet between the images $(f(\vec u, \vec v), w) \jet_k (f(\vec u, \vec v'), w)$ in $\JEP(W) \multip \rival{\jet_i}$, where if $k = i$ we use the forward part of the equijet if $w = 1$ and the backward part if $w = 0$.
-			
-			\item $k = j$, $\vec u = \vec u'$, $\vec v = \vec v'$ and $\accol{w, w'} = \accol{0, 1}$. In that case, we have the required jet between the images $(f(\vec u, \vec v), w) \jet_j (f(\vec u, \vec v), w')$ because we have $(f(\vec u, \vec v), w) \infrajet_i (f(\vec u, \vec v), w')$ and $i < j$.
-			
-			\item $w = w'$, $\vec v = \vec v'$ and $(\vec u, w, \vec v) \jet_k (\vec u', w, \vec v)$ in $\JEP(U, \dm j : \rival{\jet_j}, V)$.
-			The latter implies $(\vec u, \vec v) \jet_k (\vec u', \vec v)$ in $\JEP(U, V)$ if $k \neq j$ and $(\vec u, \vec v) \infrajet_j (\vec u', \vec v)$ if $k = j$.
-			Moving to \linebreak $\JEP(\UFsymcube_i(\UFsymcube_j U, V))$, the $j$-infrajet for $k = j$ turns into a $j$-equijet and the $i$-jet for $k = i$ turns into an $i$-equijet.
-			Thus, we conclude, in any case, that $f(\vec u, \vec v) \jet_k f(\vec u', \vec v)$ in $\JEP(W)$, and even $f(\vec u, \vec v) \equijet_i f(\vec u', \vec v)$ if $k = i$.
-			Then we have the required jet between the images $(f(\vec u, \vec v), w) \jet_k (f(\vec u', \vec v), w)$.
+			\item If $\dm k = \dm i$, then without loss of generality we may assume that $j = i$, in which case $\vec v = \vec v'$, $u = 0$ and $u' = 1$.
+			In this case, $(t \vee \dm i) \psub{\vec v, 1} = 1$, so that there is necessarily an $i$-jet $g(\vec v, 0) = (f(\vec v), (t \vee \dm i) \psub{\vec v, 0}) \jet_i (f(\vec v), 1) = g(\vec v, 1)$.
+			\item If $\dm k \in V$, then $u = u'$ and $(\vec v, u) \jet_j (\vec v', u)$. Let $\dm l$ be the variable in $(W, \dm i : \rival{\jet_i})$ such that $\dm l \psub{\vfi, t \vee \dm i}$ depends on $\dm k$.
+			If there is no such variable, then we are done.
+			\begin{itemize}
+				\item If $\dm l = \dm i$, then $\dm k$ occurs in $t$.
+				\begin{itemize}
+					\item If $u = 1$, then $g(\vec v, 1) = (f(\vec v), 1) \overset{=}{\jet}_j (f(\vec v'), 1) = g(\vec v', 1)$ as required.
+					\item If $u = 0$, then we have $\vec v \jet_j \vec v'$ in $\JEP(\mathemph{\Opcube_i V})$.
+					Because $(\vfi, t / \dm i)$ is a jet cube morphism $\Opcube_i V \to (W, \dm i : \rival{\jet_i})$, we get
+					$g(\vec v, 0) = h(\vec v) \jet_j h(\vec v') = g(\vec v', 0)$ as required.
+				\end{itemize}
+				\item If $\dm l \in W$, then $\dm k$ occurs in $\vfi$.
+				Define $z = (t \vee \dm i) \psub{\vec v, u} = (t \vee \dm i) \psub{\vec v', u}$.
+				We have $g(\vec v, u) = (f(\vec v), z)$ and $g(\vec v', u) = (f(\vec v'), z)$.
+				\begin{itemize}
+					\item If $j = i$, then we have $\vec v \equijet_i \vec v'$ in $\JEP(\UFsymcube_i V)$, whence $f(\vec v) \equijet_i f(\vec v')$ in $\JEP(W)$, whence $g(\vec v, u) = (f(\vec v), z) \jet_i (f(\vec v'), z) = g(\vec v', u)$ in $\JEP(W, \dm i : \rival{\jet_i})$.
+					\item If $j \neq i$, then we have $\vec v \jet_j \vec v'$ in $\JEP(\UFsymcube_i V)$, whence $f(\vec v) \jet_j f(\vec v')$ in $\JEP(W)$, whence $g(\vec v, u) = (f(\vec v), z) \jet_j (f(\vec v'), z) = g(\vec v', u)$ in $\JEP(W, \dm i : \rival{\jet_i})$.
+				\end{itemize}
+			\end{itemize}
+%			\item $u = u'$ and $(\vec v, u) \jet_j (\vec v', u)$. The latter implies $\vec v \jet_j \vec v'$ in $\JEP(V)$ if $j \neq i$ and $\vec v \infrajet_i \vec v'$ if $j = i$.
+%			Either way, we get $\vec v \jet_j \vec v'$ in $\JEP(\UFsymcube_i V)$ and therefore $f(\vec v) \jet_j f(\vec v')$ in $\JEP(W)$ where $f = \EP(\vfi)$.
 		\end{itemize}
-		Soundness of \ruleref{companion:bck}, \ruleref{conjoint:fwd},\ruleref{conjoint:bck}, \ruleref{equicompanion:fwd} and \ruleref{equicompanion:bck} is proven almost identically, where it may be enlightening to remark that in the equicompanion rules, we know that $\UFsymcube_j(U) = U$.
 		
-		\item For \ruleref{conj:fwd}, assume given a jet cube morphism $\hat \vfi : \UFsymcube_i V \to W$ (write $\vfi = \erasejc{\hat \vfi}$ and $\EP(\vfi) = f$) and boolean expressions $s$ and $t$ such that $\EP(\vfi, s/\dm i, t/\dm j)$ is a jet set morphism $\JEP(V) \to \JEP(W, \dm i : \rival{\jet_i}, \dm j : \rival{\jet_i}) = \JEP(W) \multip \rival{\jet_i} \multip \rival{\jet_i}$.
-		We show that $\EP(\vfi, s \wedge t / \dm k)$ is a jet set morphism $\JEP(V) \to \JEP(W, \dm k : \rival{\jet_i}) = \JEP(W) \multip \rival{\jet_i}$.
-		Assume we have $v \jet_k v'$ in $\JEP(V)$. Then because $\EP(\vfi, s/\dm i, t/\dm j)$ is a jet set morphism, we are in one of the following situations:
+		\item Soundness of \ruleref{conn:prism:src-absorbing} is proven analogous to that of \ruleref{conn:prism:tgt-absorbing}, adapting the highlighted parts.
+		
+		\item Soundness of \ruleref{conn:prism-inv:tgt-absorbing} is proven from soundness of \allowbreak \ruleref{conn:prism:tgt-absorbing} by precomposing the result with $(\id_V, \lnot \dm i / \dm i)$ which is a jet cube morphism $(V, \dm i : \rival{P_i}) \to (V, \dm i : \rival{Q_i})$.
+		
+		\item Soundness of \ruleref{conn:prism-inv:src-absorbing} is similarly proven from soundness of \ruleref{conn:prism:src-absorbing}.
+		
+		\item We prove soundness of \ruleref{conn:degree-symmetric}.
+		Assume that
 		\begin{itemize}
-			\item $s(\vec v) = s(\vec v') =: s_0$ and $t(\vec v) = t(\vec v') =: t_0$ and $(f(\vec v), s_0, t_0) \jet_k (f(\vec v'), s_0, t_0)$.
-			The latter implies that $f(\vec v) \jet_k f(\vec v')$ if $k \neq i$.
-			On the other hand, if $k = i$ then because $\hat \vfi : \UFsymcube_i V \to W$ is a jet cube morphism, we know that $f(\vec v) \equijet_i f(\vec v')$.
-			In any case, we get the required jet between the images $(f(\vec v), s_0 \wedge t_0) \jet_k (f(\vec v'), s_0 \wedge t_0)$.
-			
-			\item $k = i$, $f(\vec v) = f(\vec v') = f_0$ and $(s(\vec v), t(\vec v)) \jet_i (s(\vec v'), t(\vec v'))$ in $\rival{\jet_i} \multip \rival{\jet_i}$.
-			The latter implies that exactly one row of the following table applies:
-			\[
-				\begin{array}{c | c | c c}
-					(s(\vec v), t(\vec v))
-					& (s(\vec v'), t(\vec v'))
-					& s(\vec v) \wedge t(\vec v)
-					& s(\vec v') \wedge t(\vec v')
-					\\ \hline
-					(1, 0) & (0, 0) & 0 & 0
-					\\
-					(0, 1) & (1, 1) & 0 & 1
-					\\
-					(0, 0) & (0, 1) & 0 & 0
-					\\
-					(1, 0) & (1, 1) & 0 & 1
-				\end{array}
-			\]
-			In each case, we get $s(\vec v) \wedge t(\vec v) \jet_i s(\vec v') \wedge t(\vec v')$ in $\rival{\jet_i}$, and thus the required jet between the images $(f_0, s(\vec v) \wedge t(\vec v)) \jet_i (f_0, s(\vec v') \wedge t(\vec v'))$.
+			\item $(\vfi, s / \dm i)$ is a jet cube morphism $\UFsymcube_i V \to (W, \dm i : \rival{Q_i})$,
+			\item $(\vfi, t / \dm i)$ is a jet cube morphism $V \to (W, \dm i : \rival{Q_i})$.
 		\end{itemize}
-		Soundness of \ruleref{disj:bck}, \ruleref{disj:fwd} and \ruleref{conj:bck} is proven analogously, but with a different case analysis in the table. \qedhere
+		We prove that $(\vfi, s \opA t / \dm i)$ is a jet cube morphism $V \to (W, \dm i : \rival{Q_i})$.
+		Write
+		\[
+			f = \EP(\vfi), \qquad
+			g = \EP(\vfi, s / \dm i), \qquad
+			h = \EP(\vfi, t / \dm i), \qquad
+			d = \EP(\vfi, s \opA t / \dm i).
+		\]
+		Pick a non-reflexive jet $\vec v \jet_j \vec v'$ in $\JEP(V)$; we prove that $d(\vec v) \jet d(\vec v')$ in $\JEP(W, \dm i : \rival{Q_i})$.
+		Let $\dm k$ be the variable of $V$ where $\vec v$ and $\vec v'$ differ.
+		There are four possible cases:
+		\begin{itemize}
+			\item If $\vfi$, $s$ and $t$ do not depend on $\dm k$ then the target jet is reflexive.
+			\item If $\vfi$ or $s$ depends on $\dm k$, then we have $t \psub{\vec v} = t \psub{\vec v'} =: t_0$.
+			\begin{itemize}
+				\item If $j \neq i$, then we have $\vec v \jet_j \vec v'$ in $\JEP(\UFsymcube_i V)$, whence $(f(\vec v), s\psub{\vec v}) = g(\vec v) \jet_j g(\vec v') = (f(\vec v'), s\psub{\vec v'})$ in $\JEP(W, \dm i : \rival{Q_i})$.
+				Taking a connection with $t_0$ does not influence the direction of the arrows to the left of $\dm i$, nor of the arrows at $\dm i$.
+				Hence we get $d(\vec v) = (f(\vec v), s\psub{\vec v} \opA t_0) \jet_j (f(\vec v'), s\psub{\vec v'} \opA t_0) = d(\vec v')$.
+				
+				\item If $j = i$, then we have $\vec v \equijet_i \vec v'$ in $\JEP(\UFsymcube_i V)$, whence $(f(\vec v), s\psub{\vec v}) = g(\vec v) \equijet_i g(\vec v') = (f(\vec v'), s\psub{\vec v'})$ in $\JEP(W, \dm i : \rival{Q_i})$.
+				Hence we get $d(\vec v) = (f(\vec v), s\psub{\vec v} \opA t_0) \equijet_i (f(\vec v'), s\psub{\vec v'} \opA t_0) = d(\vec v')$.
+			\end{itemize}
+			\item If $t$ depends on $\dm k$, then we have $f(\vec v) = f(\vec v') = : f_0$ and $s \psub{\vec v} = s \psub{\vec v'} =: s_0$.
+			We get $(f_0, t \psub{\vec v}) = h(\vec v) \jet_j h(\vec v') = (f_0, t \psub{\vec v'})$.
+			Taking a connection with $s_0$ yields $d(\vec v) = (f_0, s_0 \opA t \psub{\vec v}) \jet_j (f_0, s_0 \opA t \psub{\vec v'}) = d(\vec v')$. \qedhere
+		\end{itemize}
+		
+%		\item \todoi{Find-replace companion/conjoint} For \ruleref{companion:fwd}, let $\hat \vfi : \UFsymcube_i(\UFsymcube_j U, V) \to W$ be a jet cube morphism.
+%		Then $f := \JEP(\hat \vfi)$ is a jet set morphism $\JEP(\UFsymcube_i(\UFsymcube_j U, V)) \to \JEP(W)$.
+%		We need to show that $g : (\vec u, w, \vec v) \mapsto (f(\vec u, \vec v), w)$ is a jet set morphism $\JEP(U, \dm j : \rival{\jet_j}, V) \to \JEP(W, \dm i : \rival{\jet_i}) = \JEP(W) \multip \rival{\jet_i}$.
+%		
+%		Assume we have $(\vec u, w, \vec v) \jet_k (\vec u', w', \vec v')$ in $\JEP(U, \dm j : \rival{\jet_j}, V)$.
+%		By induction on $V$, one can show that we are in one of the following situations:
+%		\begin{itemize}
+%			\item $\vec u = \vec u'$, $w = w'$ and $(\vec u, \vec v) \jet_k (\vec u, \vec v')$ in $\JEP(U, V)$.
+%			The fact that $f$ is a jet set morphism implies that $f(\vec u, \vec v) \jet_k f(\vec u, \vec v')$ and even $f(\vec u, \vec v) \equijet_i f(\vec u, \vec v')$ if $k = i$.
+%			Then we have the required jet between the images $(f(\vec u, \vec v), w) \jet_k (f(\vec u, \vec v'), w)$ in $\JEP(W) \multip \rival{\jet_i}$, where if $k = i$ we use the forward part of the equijet if $w = 1$ and the backward part if $w = 0$.
+%			
+%			\item $k = j$, $\vec u = \vec u'$, $\vec v = \vec v'$ and $\accol{w, w'} = \accol{0, 1}$. In that case, we have the required jet between the images $(f(\vec u, \vec v), w) \jet_j (f(\vec u, \vec v), w')$ because we have $(f(\vec u, \vec v), w) \infrajet_i (f(\vec u, \vec v), w')$ and $i < j$.
+%			
+%			\item $w = w'$, $\vec v = \vec v'$ and $(\vec u, w, \vec v) \jet_k (\vec u', w, \vec v)$ in $\JEP(U, \dm j : \rival{\jet_j}, V)$.
+%			The latter implies $(\vec u, \vec v) \jet_k (\vec u', \vec v)$ in $\JEP(U, V)$ if $k \neq j$ and $(\vec u, \vec v) \infrajet_j (\vec u', \vec v)$ if $k = j$.
+%			Moving to \allowbreak $\JEP(\UFsymcube_i(\UFsymcube_j U, V))$, the $j$-infrajet for $k = j$ turns into a $j$-equijet and the $i$-jet for $k = i$ turns into an $i$-equijet.
+%			Thus, we conclude, in any case, that $f(\vec u, \vec v) \jet_k f(\vec u', \vec v)$ in $\JEP(W)$, and even $f(\vec u, \vec v) \equijet_i f(\vec u', \vec v)$ if $k = i$.
+%			Then we have the required jet between the images $(f(\vec u, \vec v), w) \jet_k (f(\vec u', \vec v), w)$.
+%		\end{itemize}
+%		Soundness of \ruleref{companion:bck}, \ruleref{conjoint:fwd},\ruleref{conjoint:bck}, \ruleref{equicompanion:fwd} and \ruleref{equicompanion:bck} is proven almost identically, where it may be enlightening to remark that in the equicompanion rules, we know that $\UFsymcube_j(U) = U$.
+%		
+%		\item For \ruleref{conj:fwd}, assume given a jet cube morphism $\hat \vfi : \UFsymcube_i V \to W$ (write $\vfi = \erasejc{\hat \vfi}$ and $\EP(\vfi) = f$) and boolean expressions $s$ and $t$ such that $\EP(\vfi, s/\dm i, t/\dm j)$ is a jet set morphism $\JEP(V) \to \JEP(W, \dm i : \rival{\jet_i}, \dm j : \rival{\jet_i}) = \JEP(W) \multip \rival{\jet_i} \multip \rival{\jet_i}$.
+%		We show that $\EP(\vfi, s \wedge t / \dm k)$ is a jet set morphism $\JEP(V) \to \JEP(W, \dm k : \rival{\jet_i}) = \JEP(W) \multip \rival{\jet_i}$.
+%		Assume we have $v \jet_k v'$ in $\JEP(V)$. Then because $\EP(\vfi, s/\dm i, t/\dm j)$ is a jet set morphism, we are in one of the following situations:
+%		\begin{itemize}
+%			\item $s(\vec v) = s(\vec v') =: s_0$ and $t(\vec v) = t(\vec v') =: t_0$ and $(f(\vec v), s_0, t_0) \jet_k (f(\vec v'), s_0, t_0)$.
+%			The latter implies that $f(\vec v) \jet_k f(\vec v')$ if $k \neq i$.
+%			On the other hand, if $k = i$ then because $\hat \vfi : \UFsymcube_i V \to W$ is a jet cube morphism, we know that $f(\vec v) \equijet_i f(\vec v')$.
+%			In any case, we get the required jet between the images $(f(\vec v), s_0 \wedge t_0) \jet_k (f(\vec v'), s_0 \wedge t_0)$.
+%			
+%			\item $k = i$, $f(\vec v) = f(\vec v') = f_0$ and $(s(\vec v), t(\vec v)) \jet_i (s(\vec v'), t(\vec v'))$ in $\rival{\jet_i} \multip \rival{\jet_i}$.
+%			The latter implies that exactly one row of the following table applies:
+%			\[
+%				\begin{array}{c | c | c c}
+%					(s(\vec v), t(\vec v))
+%					& (s(\vec v'), t(\vec v'))
+%					& s(\vec v) \wedge t(\vec v)
+%					& s(\vec v') \wedge t(\vec v')
+%					\\ \hline
+%					(1, 0) & (0, 0) & 0 & 0
+%					\\
+%					(0, 1) & (1, 1) & 0 & 1
+%					\\
+%					(0, 0) & (0, 1) & 0 & 0
+%					\\
+%					(1, 0) & (1, 1) & 0 & 1
+%				\end{array}
+%			\]
+%			In each case, we get $s(\vec v) \wedge t(\vec v) \jet_i s(\vec v') \wedge t(\vec v')$ in $\rival{\jet_i}$, and thus the required jet between the images $(f_0, s(\vec v) \wedge t(\vec v)) \jet_i (f_0, s(\vec v') \wedge t(\vec v'))$.
+%		\end{itemize}
+%		Soundness of \ruleref{disj:bck}, \ruleref{disj:fwd} and \ruleref{conj:bck} is proven analogously, but with a different case analysis in the table. \qedhere
 		
 %		\item We prove soundness of \ruleref{truth-table} by postcomposition with a jet cube morphism that erases to $(\id, \vec t[\vec{\dm i}]/\vec{\dm j}) : (W, \dm i_1 : \rival{\edge_i}, \ldots, \dm i_n : \rival{\edge_i}) \to (W, \dm j_1 : \rival{\edge_i}, \ldots, \dm j_m : \rival{\edge_i})$, i.e. we prove that $\EP(\id, \vec t[\vec{\dm i}]/\vec{\dm j}) : (\vec w, \vec u) \mapsto (\vec w, \vec t(\vec u))$ is a jet set morphism $\JEP(W, \dm i_1 : \rival{\edge_i}, \ldots, \dm i_n : \rival{\edge_i}) \to \JEP(W, \dm j_1 : \rival{\edge_i}, \ldots, \dm j_m : \rival{\edge_i})$.
 %		
