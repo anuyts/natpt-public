@@ -80,8 +80,12 @@ In RelDTT, modes were natural numbers (minus one) expressing the number of avail
 In NatPT, we will specify for each of these relations whether it is directed or not.
 \begin{definition} \label{def:anpolarity}
 	An \textbf{anpolarity}\footnote{`An' is Latin for `whether', as in `Nescio an polare sit,' meaning `I do not know whether it is polar'.} is an element of the set $\Anpolarity := \accol{\ypolar, \npolar}$, where $\ypolar$ stands for polar/directed and $\npolar$ stands for nonpolar/symmetric.
+	We equip $\Anpolarity$ with the partial order $\npolar \sqsubseteq \ypolar$.
 	
 	An \textbf{anpolarity mask} or just \textbf{mask} is a list $\vec a \in \List\,\Anpolarity$ of anpolarities. We write $\lenpol{\vec a}$ for its length, and call the numbers $0, \ldots, \lenpol{\vec a} - 1$ \textbf{degrees}.
+	We define $\sqsubseteq$ on masks of equal length pointwise.
+	
+	Both for anpolarities and for masks, we denote meets (infima) with $\sqcap$ and joints (suprema) with $\sqcup$.
 \end{definition}
 
 \begin{remark} \todoi{Move this remark}
@@ -126,6 +130,9 @@ In NatPT, we will specify for each of these relations whether it is directed or 
 \end{definition}
 \begin{definition} \label{def:full-jetsethom}
 	A jet set morphism is called \textbf{full} if it reflects all jet relations.
+\end{definition}
+\begin{definition} \label{def:jet-surjective}
+	A jet set morphism $f : X \to Y$ is called \textbf{jet-surjective} if it is surjective as a function, and moreover for any $\vec y \jet_j \vec y'$ in $Y$, there exist $\vec x \jet_j \vec x'$ in $X$ such that $f(\vec x) = \vec y$ and $f(\vec x') = \vec y'$. 
 \end{definition}
 \begin{definition} \label{def:transitive-jetset}
 	A jet set is called \textbf{transitive} if each of the $i$-jet relations is transitive (i.e. a pre-order and, if $i = \npolar$, an equivalence relation).
@@ -355,7 +362,7 @@ We construct the \textbf{(named) category of affine $M$-cubes $\cubecat_M^\affin
 Objects will be represented as for the cartesian cube categories.
 
 \begin{corollary}
-The categories $\cubecat^\affine_M$ and $\namedcubecat^\affine_M$ have a symmetric monoidal structure $(\top, {*})$ given by finite coproducts of sets. The binary operation is called the \textbf{separating product}. \qed
+The categories $\cubecat^\affine_M$ and $\namedcubecat^\affine_M$ have a symmetric monoidal structure $(\top, {*})$ given by finite coproducts of sets. The binary operation is called the \textbf{separated product}. \qed
 \end{corollary}
 
 \subsubsection{Examples}
@@ -650,7 +657,7 @@ In short then, by \cref{rem:two-monads}:
 	We are no longer interested in cartesian jet cubes.
 \end{remark}
 
-\subsection{A Calculus of Trioriented Jet Cube Morphisms}
+\subsection{Jet Cube Morphisms: A Calculus}
 In this section, we develop a calculus that inductively generates the morphisms of the category \allowbreak $\trijetcubeopt{\affine}{M}{\vec a}$ and therefore also those of its full subcategory $\jetcubeopt{\affine}{M}{\vec a}$.
 
 Since the forgetful functor $U : \jetset{\vec a} \to \Set$ is faithful, so is $\erasejc \loch : \trijetcubeopt{\affine}{M}{\vec a}$.
@@ -941,7 +948,7 @@ We do not have to bother with an equational theory, as we can simply inherit it 
 %			\sez (\vfi, t_1[s_1, \ldots, s_n] / \dm j_1, \ldots, t_m[s_1, \ldots, s_n]) / \dm j_m) : V \to (W, \dm j_1 : \rival{\edge_i}, \ldots, \dm j_m : \rival{\edge_i})
 %		}{$\booleanalg$, $\cartes$}
 %	\]
-	\caption{A calculus of affine trioriented jet cube morphisms, for the monads $\bipointedsym$ and $\booleanalg$. See \cref{fig:calculus:sym} for specializations of these rules to symmetric degrees and \cref{fig:calculus:general} for generalizations of the specialized forward/backward rules.}
+	\caption{A calculus of affine trioriented jet cube morphisms, for the monads $\bipointedsym$ and $\booleanalg$. See \cref{fig:calculus:sym} for specializations of these rules to symmetric degrees and \cref{fig:calculus:general} for unified versions of the specialized forward/backward rules.}
 	\label{fig:calculus}
 \end{figure}
 \begin{figure}[htb]
@@ -1029,7 +1036,7 @@ We do not have to bother with an equational theory, as we can simply inherit it 
 			\sez (\vfi, \dm i / \dm i) : (V, \dm i : \rival{Q_i}) \to (W, \dm i : \rival{Q_i})
 		}{}
 	\]
-	\caption{Generalizations of the specialized forward/backward rules in \cref{fig:calculus}.}
+	\caption{Unified versions of the specialized forward/backward rules in \cref{fig:calculus}.}
 	\label{fig:calculus:general}
 \end{figure}
 \begin{definition} \label{def:calculus}
@@ -1909,12 +1916,100 @@ In words, this lemma says that if the last variable $\dm i$ of $W$ is substitute
 	\end{itemize}
 \end{proof}
 
-\subsection{Jet Cubes: Separated Semisymmetric Product}
+\subsection{Jet Cubes: The Semisymmetric Separated Product}
+\begin{definition}
+	We define the \textbf{separated product} functor
+	\[
+		\loch * \loch : \jetset{\vec a} \times \jetset{\vec a} \to \jetset{\vec a}
+	\]
+	by letting $X * Y$ be the jet set with carrier $UX \times UY$ such that $(x, y) \jet_j (x', y')$ if either
+	\begin{itemize}
+		\item $x \jet_j x'$ and $y = y'$,
+		\item $x = x'$ and $y \jet_j y'$.
+	\end{itemize}
+	The action on morphisms is of course faithfully inherited from the cartesian product functor on $\Set$, which indeed produces jet set morphisms between separated products.
+\end{definition}
+\begin{definition} \label{def:sssprod}
+	Given masks $\vec a$ and $\vec b$ of equal length, if $\vec a \sqcap \vec b = \vec \npolar$, i.e. if for every $i$ we have $a_i = \npolar$ and/or $b_i = \npolar$, then we define the \textbf{semisymmetric separated product (SSS-product)} functor
+	\[
+		\loch * \loch : \trijetcubeopt \eps M {\vec a} \times \trijetcubeopt \eps M {\vec b} \to \trijetcubeopt \eps M {\vec a \sqcup \vec b}
+	\]
+	as follows:
+	\begin{itemize}
+		\item We rewrite input objects according to \cref{conv:sort-cubes}.
+		The variables of a pair of objects $(V, W)$ are zipped on a per-degree basis:
+		\begin{itemize}
+			\item If $a_i = b_i = \npolar$, then we list all variables of degree $i$ of $V$, followed by all variables of degree $i$ of $W$, all of them typed as $\rival{\edge_i}$,
+			\item If $a_i = \ypolar$ and $b_i = \npolar$, then we list all variables of degree $i$ of $W$, retyped as $\rival{\equijet_i}$, followed by all variables of degree $i$ of $V$ with their original types,
+			\item If $a_i = \npolar$ and $b_i = \ypolar$, then we list all variables of degree $i$ of $V$, retyped as $\rival{\equijet_i}$, followed by all variables of degree $i$ of $W$ with their original types.
+		\end{itemize}
+		\begin{corollary} \label{thm:erase-sssprod}
+			In $\cubecat_M^\eps$, we have
+			\begin{align*}
+				\erasejc{V * W} &\cong \erasejc V * \erasejc W &\text{if $\eps = \affine$,} \\
+				\erasejc{V * W} &\cong \erasejc V \times \erasejc W &\text{if $\eps = \cartes$.}
+			\end{align*}
+		\end{corollary}
+		\begin{corollary}
+			In $\jetset{\vec a \sqcup \vec b}$, we have
+			\[
+				\JEP(V * W) \cong \Usym_{\vec a \sqsubseteq \vec a \sqcup \vec b}(V) * \Usym_{\vec b \sqsubseteq \vec a \sqcup \vec b}(W),
+			\]
+			where $\Usym_{\vec x \sqsubseteq \vec y} : \jetset{\vec x} \to \jetset{\vec y}$ is the forgetful functor.
+		\end{corollary}
+		\item Recalling \cref{def:jet-cube-cat}, the action of morphisms is established as follows:
+		\begin{itemize}
+			\item At the level of $\cubecat_M^\eps$, by relying on functoriality of the separated/cartesian product,
+			\item At the level of $\jetset{\vec a \sqcup \vec b}$, by relying on functoriality of the separated product,
+			\item At the level of $\Set$, both of these approaches reduce to functoriality of the cartesian product.
+		\end{itemize}
+	\end{itemize}
+\end{definition}
+\begin{definition}
+	Given a fixed length $\ell$, which we assume clear from the context, and a degree $0 \leq i < \ell$, we define the \textbf{punch mask} $\vec \delta^i$ by $\vec \delta^i_j = \npolar$ if $i \neq j$ and $\vec \delta^i_i = \ypolar$.
+\end{definition}
+Thus, $\bigsqcup_i \vec \delta^i = \vec{\ypolar}$, and more generally $\vec a = \bigsqcup_i (\vec \delta^i \sqcap \vec a)$.
+\begin{theorem}[SSS-factorization] \label{sssfactorization}
+	Let $\vec a$ be a mask of length $\ell$.
+	For any jet cube morphism $\hat \vfi : V \to W$ in $\jetcubeopt \affine M {\vec a}$, there exist jet cubes $(V_i)_{0 \leq i < \ell}$ and $(W_i)_{0 \leq i < \ell}$ where $V_i, W_i$ are jet cubes of mask $\vec a \sqcap \vec \delta^i$, as well as jet cube morphisms $\vfi_i : V_i \to W_i$ and jet cube morphisms $\rho_0$ and $\rho_1$ that are cube renamings\footnote{Morphisms in $\Kleisli(M)$ that come from $\Set$, i.e.\ are not effectful or do not use the constants and operators provided by $M$.}, such that $\vfi$ factorizes as:
+	\[
+		\xymatrix{
+			V
+				\ar[rr]^{\rho_0}
+			&& {\bigasterisk_i V_i}
+				\ar[rr]^{\bigasterisk_i \vfi_i}
+			&& {\bigasterisk_i W_i}
+				\ar[rr]^{\rho_1}_\cong
+			&& W,
+		}
+	\]
+	where $\bigasterisk$ denotes a semisymmetric separated product.
+\end{theorem}
+\begin{proof}
+	Assume $V$ and $W$ adhere to \cref{conv:sort-cubes}.
 
-
+	We simply define $W_i$ as the jet cube consisting of all variables of $W$ of degree $i$, with their original typing.
+	It is then immediately clear that $\bigasterisk_i W_i \cong W$ by a renaming $\rho_1$.\footnote{In fact $\rho_1$ is the identity but this is due to the assumption of \cref{conv:sort-cubes}.}
+	
+	Next, we define $V_i$ as the jet cube consisting of all variables $\dm j$ of $V_i$ such that there is a variable $\dm i \in W_i$ such that $\dm i \psub \vfi$ depends on $\dm j$ (after reduction).
+	Variables of degree $i$ are kept with their original typing, unless a variable to their right has been used at a lower (stronger) degree, in which case they are retyped as $\rival{\equijet_i}$. Variables of higher (weaker) degree $j>i$ are retyped as $\rival{\edge_j}$. Variables of lower degree cannot occur.
+	
+	We then define $\rho_0$ as the cube morphism that discards all variables unused by $\vfi$, and $\vfi_i$ as the cube morphism such that $\dm i \psub{\vfi_i} = \dm i \psub{\vfi}$ for every variable $\dm i$ in $W_i$.
+	It is then immediately clear that $\vfi = \rho_1 \circ \paren{\bigasterisk_i \vfi_i} \circ \rho_0$.
+	What remains to be proven is that $\rho_0$ and $\vfi_i$ are jet cube morphisms.
+	
+	By \cref{thm:left-of-concursor}, any variable that is either unused, or used at a strictly lower (stronger) degree, or to the left of such a variable of the same degree, can be promoted to an equijet variable, and $\vfi$ will still be a jet cube morphism.
+	The result of these promotions is exactly (up to renaming isomorphism) $\bigasterisk_i V_i$.
+	As only an initial segment of the variables of any given degree gets promoted to equijet variables, the renaming $\rho_0 : V \to \bigasterisk_i V_i$ is a jet cube morphism.
+	
+	For $\vfi_i$, first note that the weakening morphism $\pi_i$ is a jet cube morphism $W \to \Usymcube_{\vec a \sqcap \vec \delta^i \sqsubseteq \vec a} W_i$, and hence so is $\pi_i \circ \vfi$.
+	By transposition, we see that $\pi_i \circ \vfi$ is also a jet cube morphism $\Fsymcube_{\vec a \sqcap \vec \delta^i \sqsubseteq \vec a} V \to W_i$.
+	As a cube morphism, $\pi_i \circ \vfi$ factors over the weakening morphism $\xi_i : \erasejc V \to \erasejc{V_i}$ as $\pi_i \circ \vfi = \vfi_i \circ \xi_i$.
+	Now $\xi_i$ only projects out symmetric variables therefore is a jet cube morphism $\Fsymcube_{\vec a \sqcap \vec \delta^i \sqsubseteq \vec a} V \to V_i$. Moreover, $\JEP(\xi_i)$ is jet-surjective (\cref{def:jet-surjective}), so we conclude that $\vfi_i$ too must be a jet cube morphism.
+\end{proof}
 
 \subsection{Comparison to Pinyo and Kraus's Twisted Cube Category}
-\todoi{Conjecture: $\jetcubeaff{\bipointedsym}{[\ypolar]}$ is the twisted cube category \cite{pinyo-twisted}. Symmetries zijn nodig om aan 0-kant te embedden. Moogt ook cartesians pakken, want hebt toch geen diagonalen.}
+\todoi{Conjecture: $\jetcubeaff{\bipointedsym}{[\ypolar]} \cong \jetcubeaff{\booleanalg}{[\ypolar]}$ is the twisted cube category \cite{pinyo-twisted}. Symmetries zijn nodig om aan 0-kant te embedden. Moogt ook cartesians pakken, want hebt toch geen diagonalen.}
 \todoi{Compare to all the different cube categories they have, I think I have them all included.}
 In this section, we discuss how our approach reduces to Pinyo and Kraus's \cite{pinyo-twisted} when $\vec a = [\ypolar]$.
 $\jetset{[\ypolar]}$ is the category of proof-irrelevant reflexive graphs.
