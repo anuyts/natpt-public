@@ -1817,8 +1817,8 @@ In words, this lemma says that if the last variable $\dm i$ of $W$ is substitute
 					\item If $j = i$, then from $(g(\vec v), s_0 \opA t_0) = f(\vec v) \edge_i f(\vec v') = (g(\vec v'), s_0 \opA t_0)$ it follows that $g(\vec v) \edge_i g(\vec v')$ in $\JEP(U)$, whence $p(\vec v) = (g(\vec v), s_0) \edge_i (g(\vec v'), s_0) = p(\vec v')$.
 				\end{itemize}
 				\item If $s$ depends on $\dm k$, then we have $g(\vec v) = g(\vec v') =: g_0$ and $t \psub{\vec v} = t \psub{\vec v'} =: t_0$.
-				Pick a bit-assignment $\sigma$ of the dependencies of $t$ such that $t \psub \sigma$ reduces to the neutral element $\neutralA$ of $\opA$.\footnote{If this were not possible, then $t$ would be a constant, which is in contradiction with the assumption that $e_{\dm i}$ was reduced.}
-				Define $\vec x$ and $\vec x'$ by overwriting $\vec v$ and $\vec v'$ with $\sigma$. Then $g(\vec x) = g(\vec x') = g_0$ and $t \psub{\vec x} = t \psub{\vec x'} = \neutralA$ and $s \psub{\vec x} = s \psub{\vec v}$ and $s \psub{\vec x'} = s \psub{\vec v'}$.
+				Pick a bit-assignment $\tau$ of the dependencies of $t$ such that $t \psub \tau$ reduces to the neutral element $\neutralA$ of $\opA$.\footnote{If this were not possible, then $t$ would be a constant, which is in contradiction with the assumption that $e_{\dm i}$ was reduced.}
+				Define $\vec x$ and $\vec x'$ by overwriting $\vec v$ and $\vec v'$ with $\tau$. Then $g(\vec x) = g(\vec x') = g_0$ and $t \psub{\vec x} = t \psub{\vec x'} = \neutralA$ and $s \psub{\vec x} = s \psub{\vec v}$ and $s \psub{\vec x'} = s \psub{\vec v'}$.
 				We have $\vec x \infrajet_j \vec x'$, whence $p(\vec v) = (g_0, s \psub{\vec v}) = f(\vec x) \infrajet_j f(\vec x') = (g_0, s \psub{\vec v'}) = p(\vec v')$ in $\JEP(W, \dm i : \rival{\jet_i})$.
 				Now, since these vectors only differ at $\dm i$, we can deduce equality if $j < i$ ($j$ is stronger than $i$) and otherwise that $p(\vec v) \edge_i p(\vec v')$, which implies $p(\vec v) \jet_j p(\vec v')$ since $j \geq i$ ($j$ is weaker than or equal to $i$).
 				
@@ -1873,107 +1873,131 @@ In words, this lemma says that if the last variable $\dm i$ of $W$ is substitute
 					\item $(\chi, t / \dm i)$ is a jet cube morphism $V \to (W, \dm i : \rival{\jet_i})$,
 				\end{itemize}
 				so that we can invoke \ruleref{conn:degree-symmetric}.
+				
+				Pick a non-reflexive jet $\vec v \jet_j \vec v'$ in $\JEP(V)$.
+				We will prove $p(\vec v) \jet_j p(\vec v')$ and $q(\vec v) \jet_j q(\vec v')$ and, if $j = i$, even $p(\vec v) \equijet_j p(\vec v')$, all the time in $\JEP(W, \dm i : \rival{\jet_i})$.
+				Let $\dm k$ be the variable where $\vec v$ and $\vec v'$ differ.
+				There are four possibilities:
+				\begin{itemize}
+					\item If $\vfi$ does not depend on $\dm k$, then we are done.
+					\item If $\chi$ depends on $\dm k$, then $s \psub{\vec v} = s \psub{\vec v'} =: s_0$ and $t \psub{\vec v} = t \psub{\vec v'} =: t_0$.
+					\begin{description}
+						\item[$\cdot$] If $j = i$, then $g(\vec v) \equijet_i g(\vec v')$ and hence $p(\vec v) = (g(\vec v), s_0) \equijet_i (g(\vec v'), s_0) = p(\vec v')$ and $q(\vec v) = (g(\vec v), t_0) \equijet_i (g(\vec v'), t_0) = q(\vec v')$ as required.
+						\item[$\cdot$] If $j \neq i$, then $g(\vec v) \jet_j g(\vec v')$ and hence $p(\vec v) = (g(\vec v), s_0) \jet_j (g(\vec v'), s_0) = p(\vec v')$ and $q(\vec v) = (g(\vec v), t_0) \jet_j (g(\vec v'), t_0) = q(\vec v')$ as required.
+					\end{description}
+					\item If $s$ depends on $\dm k$, then $g(\vec v) = g(\vec v') =: g_0$ and $t \psub{\vec v} = t \psub{\vec v'} =: t_0$, so $q(\vec v) = q(\vec v')$.
+					We pick $\tau$ and define $\vec x$ and $\vec x'$ in the same way as we did when $a_i = \npolar$ and all other circumstances were the same.
+					Then we have $\vec x \infrajet_j \vec x'$ in $\JEP(V)$, whence $p(\vec v) = f(\vec x) \infrajet_j f(\vec x') = p(\vec v')$.
+					Now, since these vectors only differ at $\dm i$, we can deduce equality if $j < i$ ($j$ is stronger than $i$) and otherwise that $p(\vec v) \infrajet_i p(\vec v')$.
+					But since $s$ and $\chi$ only depend on $i$-symmetric variables, it must be the case that $p(\vec v) \equijet_i p(\vec v')$, as required if $i = j$, and implying $p(\vec v) \jet_j p(\vec v')$ if $j > i$.
+					
+					\item If $t$ depends on $\dm k$, then $g(\vec v) = g(\vec v') =: g_0$ and $s \psub{\vec v} = s \psub{\vec v'} =: s_0$, so $p(\vec v) = p(\vec v')$.
+					Pick an assignment $\sigma$ of the dependencies of $s$ such that $s \psub \sigma$ reduces to the neutral element $\neutralA$ of $\opA$.
+					Define $\vec y$ and $\vec y'$ by overwriting $\vec v$ and $\vec v'$ with $\sigma$.
+					Then $g(\vec y) = g(\vec y') = g_0$ and $s \psub{\vec y} = s \psub{\vec y'} = \neutralA$ and $t \psub{\vec y} = t \psub{\vec v}$ and $t \psub{\vec y'} = t \psub{\vec v'}$.
+					We have $\vec y \infrajet_j \vec y'$ but, since all dependencies of $s$ are $i$-symmetric, they come to the left of all $i$-directed variables, so if $i = j$ we actually still have $\vec y \jet_i \vec y'$.
+					Now we have
+					\[
+						q(\vec v) = (g_0, t \psub{\vec v}) = f(\vec y) \infrajet_j f(\vec y') = (g_0, t \psub{\vec v'}) = q(\vec v')
+					\]
+					and $q(\vec v) \jet_i q(\vec v')$ if $j = i$.
+					Thus, the case $j = i$ has been handled.
+					Since $q(\vec v)$ and $q(\vec v')$ can only differ at $\dm i$ which has degree $i$, we can deduce equality if $j < i$ ($j$ is stronger than $i$) and otherwise that $q(\vec v) \infrajet_i q(\vec v')$ which implies $q(\vec v) \jet_j q(\vec v')$ as required. \qedhere
+				\end{itemize}
 			\end{itemize}
 			
-			
-			
-			
-			
-			\todoi{Old stuff}
-			Indeed, assume $s$ depends on the variables $\dm j_1, \ldots, \dm j_n$.
-			Take a bit assignment $\vec v/\vec{\dm j}$ such that $s[\vec v/\vec{\dm j}]$ equals $0$ if $\opA = {\vee}$ and $1$ if $\opA = {\wedge}$.
-			Then $\dm i \psub \vfi \psub{\vec v/\vec{\dm j}} = (s \opA t)\psub{\vec v/\vec{\dm j}} = t \psub{\vec v/\vec{\dm j}}$, which thanks to affineness just equals $t$.
-			By removing $\vec{\dm j}$ from $V$ and taking opposites in all the right places, we obtain a jet cube $V_1$ such that $(\vec v/\vec{\dm j}) : V_1 \to V$ is a jet cube morphism.
-			
-			\item \todoi{Directed case.}
-			\todoi{We do have to consider $e$ up to boolean equality}
-			
-			Weakening over all variables but $\dm i$ yields a jet cube morphism $V \to (\dm i : \rival{\jet_i})$ to which we can apply \cref{thm:char-jet-cube-to-line},
-			concluding that $\dm i \psub \vfi$ is of the form prescribed there.
-			Since we have already dealt with constants and (negations of) variables, the remaining cases are:
-			\begin{itemize}
-				\item $e$ is of the form $s \opA \lnot^p \dm k$ where $\dm k$ is the last $i$-directed variable of $V$ and $\opA \in \accol{{\vee}, {\wedge}}$.
-				It is easy to see that the last operand must be $\dm k'$ which we define to be equal to $\dm k$ if $\dm k : \rival{\jet_i}$ and $\lnot \dm k$ if $\dm k : \rival{\tej_i}$.
-			\end{itemize}
+%			\todoi{Old stuff}
+%			Indeed, assume $s$ depends on the variables $\dm j_1, \ldots, \dm j_n$.
+%			Take a bit assignment $\vec v/\vec{\dm j}$ such that $s[\vec v/\vec{\dm j}]$ equals $0$ if $\opA = {\vee}$ and $1$ if $\opA = {\wedge}$.
+%			Then $\dm i \psub \vfi \psub{\vec v/\vec{\dm j}} = (s \opA t)\psub{\vec v/\vec{\dm j}} = t \psub{\vec v/\vec{\dm j}}$, which thanks to affineness just equals $t$.
+%			By removing $\vec{\dm j}$ from $V$ and taking opposites in all the right places, we obtain a jet cube $V_1$ such that $(\vec v/\vec{\dm j}) : V_1 \to V$ is a jet cube morphism.
+%			
+%			\item \todoi{Directed case.}
+%			\todoi{We do have to consider $e$ up to boolean equality}
+%			
+%			Weakening over all variables but $\dm i$ yields a jet cube morphism $V \to (\dm i : \rival{\jet_i})$ to which we can apply \cref{thm:char-jet-cube-to-line},
+%			concluding that $\dm i \psub \vfi$ is of the form prescribed there.
+%			Since we have already dealt with constants and (negations of) variables, the remaining cases are:
+%			\begin{itemize}
+%				\item $e$ is of the form $s \opA \lnot^p \dm k$ where $\dm k$ is the last $i$-directed variable of $V$ and $\opA \in \accol{{\vee}, {\wedge}}$.
+%				It is easy to see that the last operand must be $\dm k'$ which we define to be equal to $\dm k$ if $\dm k : \rival{\jet_i}$ and $\lnot \dm k$ if $\dm k : \rival{\tej_i}$.
+%			\end{itemize}
 		\end{itemize}
-		\todoi{Your lemmas don't cover symmetric degrees!! But these are easy.}
-		\todoi{Shouldn't you reduce to $(\vfi, s)$ and $(\vfi, t)$? Do you need a cofibration for $s$?}
-		
-		
-		\todoi{Old stuff}
-		\begin{itemize}
-			\item If $V$ has $i$-directed variables (\cref{def:symmetric-var}), then $a_i = \ypolar$ and the last variable $\dm k$ of $V$ is a non-equijet variable of degree $i$.
-			We show that $e_{\dm i}$ is of one of the following forms:
-			\begin{itemize}
-				\item $r \wedge t$ or $r \vee t$ where $r$ only mentions $i$-symmetric variables,
-				\item $s \wedge \dm k'$ or $s \vee \dm k'$ where $\dm k' = \dm k$ if $\dm k : \rival{\jet_i}$ and $\dm k' = \lnot \dm k$ if $\dm k : \rival{\tej_i}$.
-			\end{itemize}
-			
-			We first show this under the assumption that $V$ \emph{only} has $i$-directed variables.
-			In that case, the cases $r \wedge t$ and $r \vee t$ can already be ruled out as $r$ would necessarily be a constant, but conjunctions and disjunctions have already been simplified.
-			
-			If $V$ has only $i$-directed variables, say $n$ of them, then $\JEP(V)$ has a Hamiltonian path of $i$-jets with $2^n$ nodes, which $e_{\dm i}$ must map onto $\accol{0 \jet_i 1}$.
-			Such a mapping is determined entirely by the step in the Hamiltonian path where the output flips from $0$ to $1$.
-			We remark that the last component of $\vec v \in \JEP(V)$ determines whether $\vec v$ is in the first or in the second half of the Hamiltonian path.
-			More precisely, $\vec v$ is in the first half if and only if $\dm k'[\vec v] = 0$.
-			We have a priori 5 possible scenarios:
-			\begin{itemize}
-				\item All nodes are sent to $0$. Then $e_{\dm i} = 0$, but we already handled that case.
-				\item All nodes are sent to $1$. Then $e_{\dm i} = 1$, but we already handled that case.
-				\item The first half of the nodes is sent to $0$, the second half is sent to $1$. Then $e_{\dm i} = \dm k'$, but we already handled that case.
-				\item The output bit flips somewhere in the first half. In that case, $e_{\dm i}$ can be written as an (a priori not affine) boolean expression of the form $s \vee \dm k'$.
-				\item The output bit flips somewhere in the first half. In that case, $e_{\dm i}$ can be written as an (a priori not affine) boolean expression of the form $s \vee \dm k'$.
-			\end{itemize}
-			\todoi{Show this}
-			
-			\item If $a_i = \npolar$ or all variables of degree $i$ in $V$ are equijet variables, then $V = \UFsym_i V$.
-			\todoi{Prove this case.}
-		\end{itemize}
-		
-		\item \todoi{Old version}
-		
-		If $\dm i : \rival{\jet_i}$ and $e_{\dm i} = s \wedge t$, then by the fact that $e_{\dm i}$ is the output of a reduction process, we know that $s$ and $t$ are not constants.
-		By affinity, we know that $s$ depends on variables $\dm j_1, \ldots, \dm j_m$ (which we gather in the set $J$) and $t$ depends on \emph{different} variables $\dm k_1, \ldots, \dm k_n$ (which we gather in $K$).
-		Furthermore, writing $\vfi = (\chi, s \wedge t / \dm i) : V \to W = (U, s \wedge t / \dm i)$, we know that $\chi$ depends again on different variables $\dm l_1, \ldots, \dm l_p$ (which we gather in $L$).
-		Since each of these variables in $J$ occur at most (and without loss of generality, exactly) once (possibly under a negation) in the leaves of the syntax tree of $s$, there exist constant assignments $\vec \zeta^0/\vec{\dm j}$ and $\vec \zeta^1/\vec{\dm j}$ that make $s$ reduce to 0 and to 1, respectively.
-		These constant assignments can be constructively chosen so that they differ by a single bit, which we do.%
-		\footnote{Start from assignments $\vec \theta^0/\vec{\dm j}$ and $\vec \theta^1/\vec{\dm j}$ that differ by zero or more bits and yield different outcomes for $s$.
-		Toggle bits in $\vec \theta^0$ until you get $\vec \theta^1$.
-		As soon as $s[\vec \theta/\vec{\dm j}]$ flips, return the last two assignments encountered.
-		When you reach $\vec \theta^1$ and have not returned anything yet, you have a contradiction.}
-		Pick similar assignments for $\vec \kappa^0/\vec{\dm k}$ and $\vec \kappa^1/\vec{\dm k}$ for $t$.
-	
-		We will now prove simultaneously that
-		\begin{itemize}
-			\item $\chi$ is a jet cube morphism $\UFsym_i V \to U$,
-			\item $(\chi, s / \dm j, t / \dm k)$ is a jet cube morphism $V \to (U, \dm j : \rival{\jet_i}, \dm k : \rival{\jet_i})$,
-		\end{itemize}
-		so that we can apply \ruleref{conj:fwd}.
-		
-		Pick a jet $\vec v \jet_j \vec v'$ in $V$. Writing $g = \EP(\chi)$, we need to prove that
-		\begin{itemize}
-			\item $g(\vec v) \jet_j g(\vec v')$ if $j \neq i$ and $g(\vec v) \equijet_i g(\vec v')$ if $j = i$,
-			\item $(g(\vec v), s[\vec v], t[\vec v]) \jet_j (g(\vec v'), s[\vec v'], t[\vec v'])$.
-		\end{itemize}
-		If $\vec v = \vec v'$, then this is trivial.
-		Otherwise, these vectors differ by a single bit, which concerns a variable $\dm h$ that is found in exactly one of the sets $J$, $K$ or $L$.
-		\begin{description}
-			\item[\framebox{$\dm h \in K$}] Then $g(\vec v) = g(\vec v') =: g_0$ and $s[\vec v] = s[\vec v'] =: s_0$.
-			Define $\vec w$ and $\vec w'$ by overriding $\vec v$ and $\vec v'$ with $\vec \zeta^1$.
-			Then $\vec w \infrajet_j \vec w'$, $g(\vec w) = g(\vec w') = g_0$, $s[\vec w] = s[\vec w'] = 1$, $t[\vec w] = t[\vec v]$ and $t[\vec w'] = t[\vec v']$.
-			Write $\jet'$ for the specific direction such that $\vec w \jet'_j \vec w'$, and $\tej'$ for its opposite.
-			Since $\vfi$ is a jet cube morphism, writing $f = \EP(\vfi)$, we get
-			\[
-				f(\vec w) = (g_0, 1 \wedge t[\vec v]) \jet'_j (g_0, 1 \wedge t[\vec v']) = f(\vec w').
-			\]
-			This implies that $t[\vec v] \jet'_j t[\vec v']$ in $\rival{\jet_i}$.
-		\end{description}
-		\todoi{Owv conditie op $\vfi$ en owv normaliteit normal form moet ge wel $n$-aire conjuncties/disjuncties beschouwen.}
+%		\todoi{Your lemmas don't cover symmetric degrees!! But these are easy.}
+%		\todoi{Shouldn't you reduce to $(\vfi, s)$ and $(\vfi, t)$? Do you need a cofibration for $s$?}
+%		
+%		
+%		\todoi{Old stuff}
+%		\begin{itemize}
+%			\item If $V$ has $i$-directed variables (\cref{def:symmetric-var}), then $a_i = \ypolar$ and the last variable $\dm k$ of $V$ is a non-equijet variable of degree $i$.
+%			We show that $e_{\dm i}$ is of one of the following forms:
+%			\begin{itemize}
+%				\item $r \wedge t$ or $r \vee t$ where $r$ only mentions $i$-symmetric variables,
+%				\item $s \wedge \dm k'$ or $s \vee \dm k'$ where $\dm k' = \dm k$ if $\dm k : \rival{\jet_i}$ and $\dm k' = \lnot \dm k$ if $\dm k : \rival{\tej_i}$.
+%			\end{itemize}
+%			
+%			We first show this under the assumption that $V$ \emph{only} has $i$-directed variables.
+%			In that case, the cases $r \wedge t$ and $r \vee t$ can already be ruled out as $r$ would necessarily be a constant, but conjunctions and disjunctions have already been simplified.
+%			
+%			If $V$ has only $i$-directed variables, say $n$ of them, then $\JEP(V)$ has a Hamiltonian path of $i$-jets with $2^n$ nodes, which $e_{\dm i}$ must map onto $\accol{0 \jet_i 1}$.
+%			Such a mapping is determined entirely by the step in the Hamiltonian path where the output flips from $0$ to $1$.
+%			We remark that the last component of $\vec v \in \JEP(V)$ determines whether $\vec v$ is in the first or in the second half of the Hamiltonian path.
+%			More precisely, $\vec v$ is in the first half if and only if $\dm k'[\vec v] = 0$.
+%			We have a priori 5 possible scenarios:
+%			\begin{itemize}
+%				\item All nodes are sent to $0$. Then $e_{\dm i} = 0$, but we already handled that case.
+%				\item All nodes are sent to $1$. Then $e_{\dm i} = 1$, but we already handled that case.
+%				\item The first half of the nodes is sent to $0$, the second half is sent to $1$. Then $e_{\dm i} = \dm k'$, but we already handled that case.
+%				\item The output bit flips somewhere in the first half. In that case, $e_{\dm i}$ can be written as an (a priori not affine) boolean expression of the form $s \vee \dm k'$.
+%				\item The output bit flips somewhere in the first half. In that case, $e_{\dm i}$ can be written as an (a priori not affine) boolean expression of the form $s \vee \dm k'$.
+%			\end{itemize}
+%			\todoi{Show this}
+%			
+%			\item If $a_i = \npolar$ or all variables of degree $i$ in $V$ are equijet variables, then $V = \UFsym_i V$.
+%			\todoi{Prove this case.}
+%		\end{itemize}
+%		
+%		\item \todoi{Old version}
+%		
+%		If $\dm i : \rival{\jet_i}$ and $e_{\dm i} = s \wedge t$, then by the fact that $e_{\dm i}$ is the output of a reduction process, we know that $s$ and $t$ are not constants.
+%		By affinity, we know that $s$ depends on variables $\dm j_1, \ldots, \dm j_m$ (which we gather in the set $J$) and $t$ depends on \emph{different} variables $\dm k_1, \ldots, \dm k_n$ (which we gather in $K$).
+%		Furthermore, writing $\vfi = (\chi, s \wedge t / \dm i) : V \to W = (U, s \wedge t / \dm i)$, we know that $\chi$ depends again on different variables $\dm l_1, \ldots, \dm l_p$ (which we gather in $L$).
+%		Since each of these variables in $J$ occur at most (and without loss of generality, exactly) once (possibly under a negation) in the leaves of the syntax tree of $s$, there exist constant assignments $\vec \zeta^0/\vec{\dm j}$ and $\vec \zeta^1/\vec{\dm j}$ that make $s$ reduce to 0 and to 1, respectively.
+%		These constant assignments can be constructively chosen so that they differ by a single bit, which we do.%
+%		\footnote{Start from assignments $\vec \theta^0/\vec{\dm j}$ and $\vec \theta^1/\vec{\dm j}$ that differ by zero or more bits and yield different outcomes for $s$.
+%		Toggle bits in $\vec \theta^0$ until you get $\vec \theta^1$.
+%		As soon as $s[\vec \theta/\vec{\dm j}]$ flips, return the last two assignments encountered.
+%		When you reach $\vec \theta^1$ and have not returned anything yet, you have a contradiction.}
+%		Pick similar assignments for $\vec \kappa^0/\vec{\dm k}$ and $\vec \kappa^1/\vec{\dm k}$ for $t$.
+%	
+%		We will now prove simultaneously that
+%		\begin{itemize}
+%			\item $\chi$ is a jet cube morphism $\UFsym_i V \to U$,
+%			\item $(\chi, s / \dm j, t / \dm k)$ is a jet cube morphism $V \to (U, \dm j : \rival{\jet_i}, \dm k : \rival{\jet_i})$,
+%		\end{itemize}
+%		so that we can apply \ruleref{conj:fwd}.
+%		
+%		Pick a jet $\vec v \jet_j \vec v'$ in $V$. Writing $g = \EP(\chi)$, we need to prove that
+%		\begin{itemize}
+%			\item $g(\vec v) \jet_j g(\vec v')$ if $j \neq i$ and $g(\vec v) \equijet_i g(\vec v')$ if $j = i$,
+%			\item $(g(\vec v), s[\vec v], t[\vec v]) \jet_j (g(\vec v'), s[\vec v'], t[\vec v'])$.
+%		\end{itemize}
+%		If $\vec v = \vec v'$, then this is trivial.
+%		Otherwise, these vectors differ by a single bit, which concerns a variable $\dm h$ that is found in exactly one of the sets $J$, $K$ or $L$.
+%		\begin{description}
+%			\item[\framebox{$\dm h \in K$}] Then $g(\vec v) = g(\vec v') =: g_0$ and $s[\vec v] = s[\vec v'] =: s_0$.
+%			Define $\vec w$ and $\vec w'$ by overriding $\vec v$ and $\vec v'$ with $\vec \zeta^1$.
+%			Then $\vec w \infrajet_j \vec w'$, $g(\vec w) = g(\vec w') = g_0$, $s[\vec w] = s[\vec w'] = 1$, $t[\vec w] = t[\vec v]$ and $t[\vec w'] = t[\vec v']$.
+%			Write $\jet'$ for the specific direction such that $\vec w \jet'_j \vec w'$, and $\tej'$ for its opposite.
+%			Since $\vfi$ is a jet cube morphism, writing $f = \EP(\vfi)$, we get
+%			\[
+%				f(\vec w) = (g_0, 1 \wedge t[\vec v]) \jet'_j (g_0, 1 \wedge t[\vec v']) = f(\vec w').
+%			\]
+%			This implies that $t[\vec v] \jet'_j t[\vec v']$ in $\rival{\jet_i}$.
+%		\end{description}
+%		\todoi{Owv conditie op $\vfi$ en owv normaliteit normal form moet ge wel $n$-aire conjuncties/disjuncties beschouwen.}
 	\end{itemize}
 \end{proof}
-
-\todoi{Use $\jetcubeaff{\booleanalg}{\vec a}$ or $\jetcubecart{\booleanalg}{\vec a}$}
-
 
 \subsection{Jet Cubes: Separated Semisymmetric Product}
 
