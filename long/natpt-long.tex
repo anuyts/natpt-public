@@ -670,26 +670,26 @@ We do not have to bother with an equational theory, as we can simply inherit it 
 		}{}
 	\]
 	\[
-		\inferencel{zero:fwd}{
+		\inferencel{src:fwd}{
 			\sez \vfi : V \to \Opcube_i(W)
 		}{
 			\sez (\vfi, 0/\dm i) : V \to (W, \dm i : \rival{\jet_i})
 		}{}
 		\qquad
-		\inferencel{one:bck}{
+		\inferencel{src:bck}{
 			\sez \vfi : V \to \Opcube_i(W)
 		}{
 			\sez (\vfi, 1/\dm i) : V \to (W, \dm i : \rival{\tej_i})
 		}{}
 	\]
 	\[
-		\inferencel{one:fwd}{
+		\inferencel{tgt:fwd}{
 			\sez \vfi : V \to W
 		}{
 			\sez (\vfi, 1/\dm i) : V \to (W, \dm i : \rival{\jet_i})
 		}{}
 		\qquad
-		\inferencel{zero:bck}{
+		\inferencel{tgt:bck}{
 			\sez \vfi : V \to W
 		}{
 			\sez (\vfi, 0/\dm i) : V \to (W, \dm i : \rival{\tej_i})
@@ -842,18 +842,33 @@ We do not have to bother with an equational theory, as we can simply inherit it 
 %		}{}
 %	\]
 	\[
+		\inferencel{conn-abs-tgt:prism}{
+			(Q, \opA) \in \mathemph{\accol{(\jet, \vee), (\tej, \wedge)}} \\
+			\sez \vfi : \UFsymcube_i V \to W \\
+			\sez (\vfi, s / \dm i) : \mathemph{\Opcube_i V} \to (W, \dm i : \rival{Q_i})
+		}{
+			\sez (\vfi, \dm i \opA s / \dm i) : (V, \dm i : \rival{Q_i}) \to (W, \dm i : \rival{Q_i})
+		}{$\booleanalg$}
+		\qquad
+		\inferencel{conn-abs-src:prism}{
+			(Q, \opA) \in \mathemph{\accol{(\jet, \wedge), (\tej, \vee)}} \\
+			\sez \vfi : \UFsymcube_i V \to W \\
+			\sez (\vfi, s / \dm i) : \mathemph{V} \to (W, \dm i : \rival{Q_i})
+		}{
+			\sez (\vfi, \dm i \opA s / \dm i) : (V, \dm i : \rival{Q_i}) \to (W, \dm i : \rival{Q_i})
+		}{$\booleanalg$}
+	\]
+	\[
 		\inferencel{conn-abs-tgt:concursor}{
-			P \in \accol{\jet, \tej, \equijet} \\
 			(Q, \opA) \in \mathemph{\accol{(\jet, \vee), (\tej, \wedge)}} \\
 			%Q \in \accol{\jet, \tej} \\
 			\sez (\vfi, s / \dm i) : \UFsymcube_j V \to (W, \dm i : \rival{Q_i}) \\
-			\sez (\vfi, t / \dm i) : \mathemph{\Opcube_j} V \to (W, \dm i : \rival{Q_i})
+			\sez (\vfi, t / \dm i) : V \to (W, \dm i : \rival{Q_i})
 		}{
 			\sez (\vfi, t \opA s / \dm i) : V \to (W, \dm i : \rival{Q_i})
 		}{$\booleanalg$}
 		\qquad
-		\inferencel{conn-abs-tgt:concursor}{
-			P \in \accol{\jet, \tej, \equijet} \\
+		\inferencel{conn-abs-src:concursor}{
 			(Q, \opA) \in \mathemph{\accol{(\jet, \wedge), (\tej, \vee)}} \\
 			%Q \in \accol{\jet, \tej} \\
 			\sez (\vfi, s / \dm i) : \UFsymcube_j V \to (W, \dm i : \rival{Q_i}) \\
@@ -862,42 +877,36 @@ We do not have to bother with an equational theory, as we can simply inherit it 
 			\sez (\vfi, t \opA s / \dm i) : V \to (W, \dm i : \rival{Q_i})
 		}{$\booleanalg$}
 	\]
-	\[
-		\inferencel{conj:fwd}{
-			\sez \vfi : \UFsymcube_i V \to W \\
-			\sez (\vfi, s/\dm i, t/\dm j) : V \to (W, \dm i : \rival{\jet_i}, \dm j : \rival{\jet_i})
-		}{
-			\sez (\vfi, s \wedge t/\dm k) : V \to (W, \dm k : \rival{\jet_i})
-		}{$\booleanalg$}
-		\qquad
-		\inferencel{disj:bck}{
-			\sez \vfi : \UFsymcube_i V \to W \\
-			\sez (\vfi, s/\dm i, t/\dm j) : V \to (W, \dm i : \rival{\tej_i}, \dm j : \rival{\tej_i})
-		}{
-			\sez (\vfi, s \vee t/\dm k) : V \to (W, \dm k : \rival{\tej_i})
-		}{$\booleanalg$}
-	\]
-	\[
-		\inferencel{disj:fwd}{
-			\sez \vfi : \UFsymcube_i V \to W \\
-			\sez (\vfi, s/\dm i, t/\dm j) : V \to (W, \dm i : \rival{\tej_i}, \dm j : \rival{\jet_i})
-		}{
-			\sez (\vfi, s \vee t/\dm k) : V \to (W, \dm k : \rival{\jet_i})
-		}{$\booleanalg$}
-	\qquad
-		\inferencel{conj:bck}{
-			\sez \vfi : \UFsymcube_i V \to W \\
-			\sez (\vfi, s/\dm i, t/\dm j) : V \to (W, \dm i : \rival{\jet_i}, \dm j : \rival{\tej_i})
-		}{
-			\sez (\vfi, s \wedge t/\dm k) : V \to (W, \dm k : \rival{\tej_i})
-		}{$\booleanalg$}
-	\]
-	\todoi{Have several versions
-	\begin{itemize}
-		\item Connection with concursor; symmetrize everything at current degree (for purely $i$-symmetric connections), appropriately symmetrize lower degree.
-		\item Connection with current degree; symmetrize everything at current degree.
-	\end{itemize}
-	}
+%	\[
+%		\inferencel{conj:fwd}{
+%			\sez \vfi : \UFsymcube_i V \to W \\
+%			\sez (\vfi, s/\dm i, t/\dm j) : V \to (W, \dm i : \rival{\jet_i}, \dm j : \rival{\jet_i})
+%		}{
+%			\sez (\vfi, s \wedge t/\dm k) : V \to (W, \dm k : \rival{\jet_i})
+%		}{$\booleanalg$}
+%		\qquad
+%		\inferencel{disj:bck}{
+%			\sez \vfi : \UFsymcube_i V \to W \\
+%			\sez (\vfi, s/\dm i, t/\dm j) : V \to (W, \dm i : \rival{\tej_i}, \dm j : \rival{\tej_i})
+%		}{
+%			\sez (\vfi, s \vee t/\dm k) : V \to (W, \dm k : \rival{\tej_i})
+%		}{$\booleanalg$}
+%	\]
+%	\[
+%		\inferencel{disj:fwd}{
+%			\sez \vfi : \UFsymcube_i V \to W \\
+%			\sez (\vfi, s/\dm i, t/\dm j) : V \to (W, \dm i : \rival{\tej_i}, \dm j : \rival{\jet_i})
+%		}{
+%			\sez (\vfi, s \vee t/\dm k) : V \to (W, \dm k : \rival{\jet_i})
+%		}{$\booleanalg$}
+%	\qquad
+%		\inferencel{conj:bck}{
+%			\sez \vfi : \UFsymcube_i V \to W \\
+%			\sez (\vfi, s/\dm i, t/\dm j) : V \to (W, \dm i : \rival{\jet_i}, \dm j : \rival{\tej_i})
+%		}{
+%			\sez (\vfi, s \wedge t/\dm k) : V \to (W, \dm k : \rival{\tej_i})
+%		}{$\booleanalg$}
+%	\]
 %	\[
 %		\inferencel{truth-table}{
 %			a_i = \npolar
@@ -922,7 +931,7 @@ We discuss these inference rules one by one.
 
 The unique morphism to the terminal cube $()$ is a jet cube morphism (\ruleref{terminal}).
 
-We can substitute the last variable with an endpoint. If this end point is at the last dimension's source side, then the rest of the morphism lands in the $i$-opposite of $W$ (\ruleref{zero:fwd}, \ruleref{one:bck}), otherwise it lands in $W$ itself (\ruleref{one:fwd}, \ruleref{zero:bck}).
+We can substitute the last variable with an endpoint. If this end point is at the last dimension's source side, then the rest of the morphism lands in the $i$-opposite of $W$ (\ruleref{src:fwd}, \ruleref{src:bck}), otherwise it lands in $W$ itself (\ruleref{tgt:fwd}, \ruleref{tgt:bck}).
 
 We can apply an involution to the last variable, provided that we turn around its direction (\ruleref{inv:fwd}, \ruleref{inv:bck}). Doing so means that the source-side is mapped to the source-side and the target-side is mapped to the target-side, so $W$ remains unaffected.
 
@@ -1062,7 +1071,7 @@ The cube $\erasejc U$ arose as the part of $\erasejc V$ not used by $s$ and $t$,
 	\begin{itemize}
 		\item For \ruleref{terminal}, note that $\JEP(())$ is the terminal jet set.
 	
-		\item For \ruleref{zero:fwd}, \ruleref{one:bck}, \ruleref{one:fwd} and \ruleref{zero:bck}, this follows immediately from \cref{def:prism}.
+		\item For \ruleref{src:fwd}, \ruleref{src:bck}, \ruleref{tgt:fwd} and \ruleref{tgt:bck}, this follows immediately from \cref{def:prism}.
 		
 		\item For \ruleref{inv:fwd}, by postcomposition, it suffices to show that $\zeta : (\id_W, \lnot \dim i / \dim i) : \erasejc{(W, i : \rival{\tej_i})} \to \erasejc{(W, i : \rival{\jet_i})}$ is a morphism of jet cubes, i.e.\ that $\EP(\zeta) : (\vec w, u) \mapsto (\vec w, \lnot u)$ is a morphism of jet sets $\JEP(W) \multip \rival{\tej_i} \to \JEP(W) \multip \rival{\jet_i}$.
 		
@@ -1501,9 +1510,9 @@ It is clear that $\dm k_1, \ldots, \dm k_m$ all occur in $V_0$ as they cannot ha
 	We proceed by inspecting $e_{\dm i}$.
 	
 	\begin{itemize}
-		\item If [$\dm i : \rival{\jet_i}$ and $e_{\dm i} = 0$] or [$\dm i : \rival{\tej_i}$ and $e_{\dm i} = 1$], then $\vfi$ being a jet cube morphism $V \to W = (U, \dm i : \_)$ (equivalently: $\EP(\vfi)$ being a jet set morphism $\JEP(V) \to \JEP(W)$) is equivalent to $(\novar / \dm i) \circ \vfi$ being a jet cube morphism $V \to \Opcube_i(U)$, so we can apply \ruleref{zero:fwd} or \ruleref{one:bck}.
+		\item If [$\dm i : \rival{\jet_i}$ and $e_{\dm i} = 0$] or [$\dm i : \rival{\tej_i}$ and $e_{\dm i} = 1$], then $\vfi$ being a jet cube morphism $V \to W = (U, \dm i : \_)$ (equivalently: $\EP(\vfi)$ being a jet set morphism $\JEP(V) \to \JEP(W)$) is equivalent to $(\novar / \dm i) \circ \vfi$ being a jet cube morphism $V \to \Opcube_i(U)$, so we can apply \ruleref{src:fwd} or \ruleref{src:bck}.
 		
-		\item If [$\dm i : \rival{\jet_i}$ and $e_{\dm i} = 1$] or [$\dm i : \rival{\tej_i}$ and $e_{\dm i} = 0$], then $\vfi$ being a jet cube morphism $V \to W = (U, \dm i : \_)$ (equivalently: $\EP(\vfi)$ being a jet set morphism $\JEP(V) \to \JEP(W)$) is equivalent to $(\novar / \dm i) \circ \vfi$ being a jet cube morphism $V \to U$, so we can apply \ruleref{one:fwd} or \ruleref{zero:bck}.
+		\item If [$\dm i : \rival{\jet_i}$ and $e_{\dm i} = 1$] or [$\dm i : \rival{\tej_i}$ and $e_{\dm i} = 0$], then $\vfi$ being a jet cube morphism $V \to W = (U, \dm i : \_)$ (equivalently: $\EP(\vfi)$ being a jet set morphism $\JEP(V) \to \JEP(W)$) is equivalent to $(\novar / \dm i) \circ \vfi$ being a jet cube morphism $V \to U$, so we can apply \ruleref{tgt:fwd} or \ruleref{tgt:bck}.
 		
 		\item If $\dm i : \rival{\jet_i}$ and $e_{\dm i} = \lnot \dm j$, then $\vfi$ being a jet cube morphism $V \to W = (U, \dm i : \rival{\jet_i})$ is equivalent to $(\lnot \dm i / \dm i) \circ \vfi$ being a jet cube morphism $V \to (U, \dm i : \rival{\tej_i})$, so we can apply \ruleref{inv:fwd}.
 		Similarly, if $\dm i : \rival{\tej_i}$ and $e_{\dm i} = \lnot \dm j$, we can apply \ruleref{inv:bck}.
