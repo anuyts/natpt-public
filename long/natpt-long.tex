@@ -856,34 +856,34 @@ We do not have to bother with an equational theory, as we can simply inherit it 
 		\inferencel{conn:prism:tgt-absorbing}{
 			(Q, \opA) \in \mathemph{\accol{(\jet, \vee), (\tej, \wedge)}} \\
 			\sez \vfi : \UFsymcube_i V \to W \\
-			\sez (\vfi, s / \dm i) : \mathemph{\Opcube_i V} \to (W, \dm i : \rival{Q_i})
+			\sez (\vfi, t / \dm i) : \mathemph{\Opcube_i V} \to (W, \dm i : \rival{Q_i})
 		}{
-			\sez (\vfi, \dm i \opA s / \dm i) : (V, \dm i : \rival{Q_i}) \to (W, \dm i : \rival{Q_i})
+			\sez (\vfi, t \opA \dm i / \dm i) : (V, \dm i : \rival{Q_i}) \to (W, \dm i : \rival{Q_i})
 		}{$\booleanalg$}
 		\qquad
 		\inferencel{conn:prism:src-absorbing}{
 			(Q, \opA) \in \mathemph{\accol{(\jet, \wedge), (\tej, \vee)}} \\
 			\sez \vfi : \UFsymcube_i V \to W \\
-			\sez (\vfi, s / \dm i) : \mathemph{V} \to (W, \dm i : \rival{Q_i})
+			\sez (\vfi, t / \dm i) : \mathemph{V} \to (W, \dm i : \rival{Q_i})
 		}{
-			\sez (\vfi, \dm i \opA s / \dm i) : (V, \dm i : \rival{Q_i}) \to (W, \dm i : \rival{Q_i})
+			\sez (\vfi, t \opA \dm i / \dm i) : (V, \dm i : \rival{Q_i}) \to (W, \dm i : \rival{Q_i})
 		}{$\booleanalg$}
 	\]
 	\[
 		\inferencel{conn:prism-inv:tgt-absorbing}{
 			(Q, \opA, P) \in \mathemph{\accol{(\jet, \vee, \tej), (\tej, \wedge, \jet)}} \\
 			\sez \vfi : \UFsymcube_i V \to W \\
-			\sez (\vfi, s / \dm i) : \mathemph{\Opcube_i V} \to (W, \dm i : \rival{Q_i})
+			\sez (\vfi, t / \dm i) : \mathemph{\Opcube_i V} \to (W, \dm i : \rival{Q_i})
 		}{
-			\sez (\vfi, \mathemphB{\lnot \dm i} \opA s / \dm i) : (V, \dm i : \mathemphB{\rival{P_i}}) \to (W, \dm i : \rival{Q_i})
+			\sez (\vfi, t \opA \mathemphB{\lnot \dm i} / \dm i) : (V, \dm i : \mathemphB{\rival{P_i}}) \to (W, \dm i : \rival{Q_i})
 		}{$\booleanalg$}
 		\qquad
 		\inferencel{conn:prism-inv:src-absorbing}{
 			(Q, \opA, P) \in \mathemph{\accol{(\jet, \wedge, \tej), (\tej, \vee, \jet)}} \\
 			\sez \vfi : \UFsymcube_i V \to W \\
-			\sez (\vfi, s / \dm i) : \mathemph{V} \to (W, \dm i : \rival{Q_i})
+			\sez (\vfi, t / \dm i) : \mathemph{V} \to (W, \dm i : \rival{Q_i})
 		}{
-			\sez (\vfi, \mathemphB{\lnot \dm i} \opA s / \dm i) : (V, \dm i : \mathemphB{\rival{P_i}}) \to (W, \dm i : \rival{Q_i})
+			\sez (\vfi, t \opA \mathemphB{\lnot \dm i} / \dm i) : (V, \dm i : \mathemphB{\rival{P_i}}) \to (W, \dm i : \rival{Q_i})
 		}{$\booleanalg$}
 	\]
 	\[
@@ -1073,94 +1073,107 @@ Now let us look at what happens when we set $\dm i$ and $\dm j$ to $0$ or to $1$
 So $\vfi$ needs to be both a morphism of jet cubes from $(U, V)$ to $W$ and from $(\Opcube_j(U), V)$ to $\Opcube_i(W)$ or equivalently from $\Opcube_i(\Opcube_j(U), V)$ to $W$. This can be achieved by asking that $\vfi$ starts from \linebreak $\UFsym_i(\UFsym_j(U), V)$, which can be thought of as a join of $(U, V)$ and $\Opcube_i(\Opcube_j(U), V)$.
 
 The last four rules involve connections (conjunction and disjunction) and only apply if $M = \booleanalg$, as $\bipointedsym$ does not provide these operations.
-Due to the twisted nature of the twisted prism functor, it turns out that we can only substitute the last variable with a connection of which one operand is either \todoi{Continue}
+Due to the twisted nature of the twisted prism functor, it turns out that we can only substitute the last variable with a connection of which one operand is either
+(the negation of) the last variable, or an expression depending only on $i$-symmetric variables.
 
+In either case, it turns out that whether the last term reduces to $0$ or $1$ on any end point of the source cube, is sufficiently irregular that the remainder of $\vfi$ also can only depend on $i$-symmetric variables.
+The promotion of all variables of degree $i$ to equijet variables in the context of $\vfi$ in at least one of the premises, precludes their usage unless $a_i = \npolar$.
 
+In the latter case, we can use \ruleref{conn:degree-symmetric}, where $s$ is also checked in the symmetrized context.
 
-\todoi{Old stuff}
-For rules allow us to substitute the last variable with a connection.
-The directions of the arrows in \ruleref{conj:fwd} and \ruleref{disj:fwd} can be understood by simply drawing jet squares and their images:
-\[
-	\xymatrix{
-		& {\mathclap{(\dm i : \rival{\jet_i}, \dm j : \rival{\jet_i})}}
-		\\
-		(0/\dm i, 0/\dm j)
-			\ar[rr]
-			\ar@{<-}[d]
-		&&
-		(0/\dm i, 1/\dm j)
-			\ar[d]
-		\\
-		(1/\dm i, 0/\dm j)
-			\ar[rr]
-		& \ar@{|=>}[d]^{(\dm i \wedge \dm j / \dm k) \circ \loch} &
-		(1/\dm i, 1/\dm j)
-		\\
-		(0/\dm k)
-			\ar@{=}[rr]
-			\ar@{=}[d]
-		&&
-		(0/\dm k)
-			\ar[d]
-		\\
-		(0/\dm k)
-			\ar[rr]
-		&&
-		(1/\dm k)
-	}
-	\qquad \qquad
-	\xymatrix{
-		& {\mathclap{(\dm i : \rival{\tej_i}, \dm j : \rival{\jet_i})}}
-		\\
-		(0/\dm i, 0/\dm j)
-			\ar[rr]
-			\ar[d]
-		&&
-		(0/\dm i, 1/\dm j)
-			\ar@{<-}[d]
-		\\
-		(1/\dm i, 0/\dm j)
-			\ar[rr]
-		& \ar@{|=>}[d]^{(\dm i \vee \dm j / \dm k) \circ \loch} &
-		(1/\dm i, 1/\dm j)
-		\\
-		(0/\dm k)
-			\ar[rr]
-			\ar[d]
-		&&
-		(1/\dm k)
-			\ar@{=}[d]
-		\\
-		(1/\dm k)
-			\ar@{=}[rr]
-		&&
-		(1/\dm k)
-	}
-\]
-The rules \ruleref{disj:bck} and \ruleref{conj:bck} then follow by conjugating with the involution.
-Again, caution is required.
-For example, in \ruleref{conj:fwd}, assume that $s = \dm i$ and $t = \dm j$ and consider what happens when we substitute $\dm i$ and $\dm j$ in \ruleref{conj:fwd} with different combinations that yield $0/\dm k$:
-\[
-	\xymatrix{
-		\Opcube_i(U)
-			\ar@/_/[dd]_{(0/\dm i, 1/\dm j)}
-			\ar@/^/[dd]^{(1/\dm i, 0/\dm j)}
-			\ar@{.>}[rr]^\vfi
-		&& \Opcube_i(W)
-			\ar[dd]^{(0/\dm k)}
-		\\
-		& U
-			\ar[ld]|{(0/\dm i, 0/\dm j)}
-			\ar@{.>}[ru]^\vfi
-		\\
-		(U, \dm i : \rival{\jet_i}, \dm j : \rival{\jet_i})
-		\ar[rr]_{(\vfi, \dm i \wedge \dm j / \dm k)}
-		&&
-		(W, \dm k : \rival{\jet_i})
-	}
-\]
-Again, we see that $\vfi : \erasejc U \to \erasejc W$ needs to be a morphism of jet cubes both from $\Opcube_i(U) \to \Opcube_i(W)$ (or equivalently from $U \to W$) and from $U \to \Opcube_i(W)$ (or equivalently from $\Opcube_i(U) \to W$). Again, we let $\vfi$ depart from their join $\UFsymcube_i(U)$.
-The cube $\erasejc U$ arose as the part of $\erasejc V$ not used by $s$ and $t$, so in the typing rule we can simply use $\UFsymcube_i(V)$ (this will be formalized in \cref{thm:calculus-sound,thm:calculus-complete}).
+In the former case, we get to apply a rule that combines a connection, possibly an inversion, and the \ruleref{prism} rules.
+The main point remarking upon is that the behaviour of $t$ only matters when the other operand does \emph{not} reduce to the absorbing element of the connection at hand.
+Depending on this, we decide whether $t$ must be checked in the $i$-opposite context or not.
+For example, in \ruleref{conn:prism:tgt-absorbing}, if $Q = {\jet}$ and $\opA = \vee$, then the absorbing element is $1$, so the behaviour of $t$ only matters when the other operand is not $1$, i.e.\ it is $0$.
+This means that we are coming from the source-side of $\dm i$, i.e.\ from $\Opcube_i V$.
+This distinction leads to four different rules (\ruleref{conn:prism:tgt-absorbing}, \ruleref{conn:prism:src-absorbing}, \ruleref{conn:prism-inv:tgt-absorbing}, \ruleref{conn:prism-inv:tgt-absorbing}).
+
+It is worth pointing out that if $a_i = \npolar$, then \ruleref{conn:degree-symmetric} specializes to the rule \ruleref{conn:sym} that is sufficiently general to also subsume the symmetric specializations of the other connection rules.
+
+%\todoi{Old stuff}
+%For rules allow us to substitute the last variable with a connection.
+%The directions of the arrows in \ruleref{conj:fwd} and \ruleref{disj:fwd} can be understood by simply drawing jet squares and their images:
+%\[
+%	\xymatrix{
+%		& {\mathclap{(\dm i : \rival{\jet_i}, \dm j : \rival{\jet_i})}}
+%		\\
+%		(0/\dm i, 0/\dm j)
+%			\ar[rr]
+%			\ar@{<-}[d]
+%		&&
+%		(0/\dm i, 1/\dm j)
+%			\ar[d]
+%		\\
+%		(1/\dm i, 0/\dm j)
+%			\ar[rr]
+%		& \ar@{|=>}[d]^{(\dm i \wedge \dm j / \dm k) \circ \loch} &
+%		(1/\dm i, 1/\dm j)
+%		\\
+%		(0/\dm k)
+%			\ar@{=}[rr]
+%			\ar@{=}[d]
+%		&&
+%		(0/\dm k)
+%			\ar[d]
+%		\\
+%		(0/\dm k)
+%			\ar[rr]
+%		&&
+%		(1/\dm k)
+%	}
+%	\qquad \qquad
+%	\xymatrix{
+%		& {\mathclap{(\dm i : \rival{\tej_i}, \dm j : \rival{\jet_i})}}
+%		\\
+%		(0/\dm i, 0/\dm j)
+%			\ar[rr]
+%			\ar[d]
+%		&&
+%		(0/\dm i, 1/\dm j)
+%			\ar@{<-}[d]
+%		\\
+%		(1/\dm i, 0/\dm j)
+%			\ar[rr]
+%		& \ar@{|=>}[d]^{(\dm i \vee \dm j / \dm k) \circ \loch} &
+%		(1/\dm i, 1/\dm j)
+%		\\
+%		(0/\dm k)
+%			\ar[rr]
+%			\ar[d]
+%		&&
+%		(1/\dm k)
+%			\ar@{=}[d]
+%		\\
+%		(1/\dm k)
+%			\ar@{=}[rr]
+%		&&
+%		(1/\dm k)
+%	}
+%\]
+%The rules \ruleref{disj:bck} and \ruleref{conj:bck} then follow by conjugating with the involution.
+%Again, caution is required.
+%For example, in \ruleref{conj:fwd}, assume that $s = \dm i$ and $t = \dm j$ and consider what happens when we substitute $\dm i$ and $\dm j$ in \ruleref{conj:fwd} with different combinations that yield $0/\dm k$:
+%\[
+%	\xymatrix{
+%		\Opcube_i(U)
+%			\ar@/_/[dd]_{(0/\dm i, 1/\dm j)}
+%			\ar@/^/[dd]^{(1/\dm i, 0/\dm j)}
+%			\ar@{.>}[rr]^\vfi
+%		&& \Opcube_i(W)
+%			\ar[dd]^{(0/\dm k)}
+%		\\
+%		& U
+%			\ar[ld]|{(0/\dm i, 0/\dm j)}
+%			\ar@{.>}[ru]^\vfi
+%		\\
+%		(U, \dm i : \rival{\jet_i}, \dm j : \rival{\jet_i})
+%		\ar[rr]_{(\vfi, \dm i \wedge \dm j / \dm k)}
+%		&&
+%		(W, \dm k : \rival{\jet_i})
+%	}
+%\]
+%Again, we see that $\vfi : \erasejc U \to \erasejc W$ needs to be a morphism of jet cubes both from $\Opcube_i(U) \to \Opcube_i(W)$ (or equivalently from $U \to W$) and from $U \to \Opcube_i(W)$ (or equivalently from $\Opcube_i(U) \to W$). Again, we let $\vfi$ depart from their join $\UFsymcube_i(U)$.
+%The cube $\erasejc U$ arose as the part of $\erasejc V$ not used by $s$ and $t$, so in the typing rule we can simply use $\UFsymcube_i(V)$ (this will be formalized in \cref{thm:calculus-sound,thm:calculus-complete}).
 
 \subsubsection{Soundness}
 \begin{theorem}[Soundness] \label{thm:calculus-sound}
