@@ -746,8 +746,7 @@ We do not have to bother with an equational theory, as we can simply inherit it 
 %		}{
 %			\sez (\vfi, \dm i / \novar) : (V, \dm i : \rival{\jet_i}) \to W
 %		}{}
-	\]
-	\[
+		\qquad
 		\inferencel{exchange}{
 			\sez \vfi : (V, \dm j : \rival{\edge_i}, U_1, \dm i : \rival{\edge_i}, U_2) \to W
 		}{
@@ -1388,12 +1387,13 @@ We will only use this lemma when $\eps = \affine$.
 	Assume $m+n \geq 2$.
 	By \cref{thm:char-jet-cube-to-line}, we know that $\dm j_1, \ldots, \dm j_n$ these are the \emph{last} $n$ variables of degree $i$ in $V$.
 	Order $V$ by \cref{conv:sort-cubes}, and write $V = (V_0, \dm j_1 : \rival{P^1_i}, \ldots, \dm j_n : \rival{P^n_i}, V_1)$ so that all variables in $V_0$ have degree at least (at the strongest) $i$ and all variables in $V_1$ have degree strictly less (stronger) than $i$.
-	Here, each $P^1, \ldots, P^n \in \accol{\jet, \tej, \equijet}$.
-	Define $\tilde V = (\UFsym_i V_0, \dm j_1 : \rival{P^1_i}, \ldots, \dm j_n : \rival{P^n_i}, V_n)$, i.e.\ every variable of degree $i$ to the left of $\dm j_1$ gets promoted to an equijet variable.
+	Here, each $P^1, \ldots, P^n \in \accol{\jet, \tej}$.%
+	\footnote{We could in principle allow $\equijet$ but it is easy to see that $\vfi$ being a jet cube morphism (equivalently, $\EP(\vfi)$ being a jet set) implies $P^1, \ldots, P^n \in \accol{\jet, \tej}$.}
+	Define $\tilde V = (\UFsymcube_i V_0, \dm j_1 : \rival{P^1_i}, \ldots, \dm j_n : \rival{P^n_i}, V_n)$, i.e.\ every variable of degree $i$ to the left of $\dm j_1$ gets promoted to an equijet variable.
 	Then $\vfi$ is a jet cube morphism $\tilde V \to W$.
 \end{lemma}
-The lemma allows $P^1, \ldots, P^n \in \accol{\jet, \tej, \equijet}$, but it is easy to see that $\vfi$ being a jet cube morphism (equivalently, $\EP(\vfi)$ being a jet set) implies $P^1, \ldots, P^n \in \accol{\jet, \tej}$.
-Similarly, it is clear that $\dm k_1, \ldots, \dm k_m$ all occur in $V_0$ as they cannot have degree less (stronger) than $i$.
+%The lemma allows $P^1, \ldots, P^n \in \accol{\jet, \tej, \equijet}$, but it is easy to see that $\vfi$ being a jet cube morphism (equivalently, $\EP(\vfi)$ being a jet set) implies $P^1, \ldots, P^n \in \accol{\jet, \tej}$.
+It is clear that $\dm k_1, \ldots, \dm k_m$ all occur in $V_0$ as they cannot have degree less (stronger) than $i$.
 \begin{proof}
 	%Let $\dm k_1, \ldots, \dm k_m$ be all \emph{other} variables that $e$ depends on.
 	For $c \in \accol{0, 1}$, let $A_c$ be the set of all $(\vec \kappa, \vec \zeta) \in \accol{0, 1}^{m+n}$ such that $\dm i \psub{\vfi} \psub{\vec \kappa / \vec{\dm k}, \vec \zeta / \vec{\dm j}} = c$.
