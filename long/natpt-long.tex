@@ -1,4 +1,8 @@
 \documentclass[a4paper]{memoir}
+	\setsecnumdepth{subsubsection}
+	%\renewcommand{\thechapter}{\Roman{chapter}}
+	%\setlength\cftchapternumwidth{3em}
+	\renewcommand{\thesubsubsection}{\arabic{chapter}.\arabic{section}.\arabic{subsection} (\alph{subsubsection})}
 
 \usepackage{a4wide}
 
@@ -28,7 +32,7 @@
 %\let\framedCopy=\framed
 %\let\framed=\undefined
 
-\usepackage[hidelinks,bookmarksnumbered]{hyperref}
+\usepackage[hidelinks,bookmarksnumbered,bookmarksdepth=subsubsection]{hyperref}
 \RequirePackage{cleveref}
 
 \usepackage{wasysym}
@@ -387,17 +391,28 @@ We remark that $\cubecat^\affine_{\demorgan}$ and $\cubecat^\affine_{\booleanalg
 
 \subsubsection{The Endpoint Model}
 We remarked above that $\catL := \Kleisli(M)\op$ is the Lawvere category of $M$.
-It is known then (see e.g.\ \cite{keml-diagrams}), that the Eilenberg-Moore category of $M$ (which is the category of Eilenberg-Moore algebras of $M$) is equivalent to the category of product-preserving functors $\catL \to \Set$.
+It is known then (see e.g.\ \cite{keml-diagrams}), that the Eilenberg-Moore category of $M$ (which is the category of Eilenberg-Moore algebras of $M$) is equivalent category of models of $\catL$ (which is the category of product-preserving functors $\catL \to \Set$).
 Such functors are fully determined by the image of the singleton set (as every set is a coproduct of singletons and the Kleisli-category retains coproducts) and that image will be exactly the carrier of the corresponding Eilenberg-Moore algebra.
 
 It is clear that both the cartesian and affine (named) cube categories are subcategories of $\catL$.
 As such, any $M$-algebra induces a functor $\catL \to \Set$ and hence a functor from any of the $M$-cube categories to $\Set$.
 
-We are interested, in particular, in $M$-algebra structures on the set of endpoints $\accol{0, 1}$.
-Each of the monads in \cref{ex:cube-monads} has an obvious such algebra structure.
-Thus, we get functors from each of the corresponding cube categories to $\Set$,
-sending $(\dm{i}_0 : \IX, \ldots, \dm{i}_{n-1} : \IX)$ to $\accol{0, 1}^{\accol{\dm{i}_0, \ldots, \dm{i}_{n-1}}}$.
-We will denote each of those functors as $\EP$.
+The initial algebra of any monad $M$ on $\Set$ has carrier $M \eset$, which for each of the monads in \cref{ex:cube-monads} equals $\accol{0, 1}$.
+Correspondingly, the initial model of $\catL$ is the functor $\EP : \catL \to \Set$ sending $(\dm{i}_0 : \IX, \ldots, \dm{i}_{n-1} : \IX)$ to $\accol{0, 1}^{\accol{\dm{i}_0, \ldots, \dm{i}_{n-1}}}$.
+We call this the \textbf{endpoint model}.
+It is naturally isomorphic (in fact equal) to $\Hom_\catL((), \loch) : \catL \to \Set$, since we have
+\small \[
+	\Hom_\catL((), (\dm{i}_0 : \IX, \ldots, \dm{i}_{n-1} : \IX))
+	= \Hom_{\Kleisli(M)}(\accol{\dm{i}_0, \ldots, \dm{i}_{n-1}}, \eset)
+	= (M\eset)^{\accol{\dm{i}_0, \ldots, \dm{i}_{n-1}}}
+	= \accol{0, 1}^{\accol{\dm{i}_0, \ldots, \dm{i}_{n-1}}}.
+\] \normalsize
+
+%We are interested, in particular, in $M$-algebra structures on the set of endpoints $\accol{0, 1}$.
+%Each of the monads in \cref{ex:cube-monads} has an obvious such algebra structure.
+%Thus, we get functors from each of the corresponding cube categories to $\Set$,
+%sending $(\dm{i}_0 : \IX, \ldots, \dm{i}_{n-1} : \IX)$ to $\accol{0, 1}^{\accol{\dm{i}_0, \ldots, \dm{i}_{n-1}}}$.
+%We will denote each of those functors as $\EP$.
 
 Recall that a morphism $\vfi : (\dm{i}_0 : \IX, \ldots, \dm{i}_{n-1} : \IX) \to (\dm{j}_0 : \IX, \ldots, \dm{j}_{m-1} : \IX)$ assigns to each $\dm j$ a value $\dm j\psub \vfi$ in $M \accol{\dm{i}_0, \ldots, \dm{i}_{n-1}}$, the free $M$-algebra over $\accol{\dm{i}_0, \ldots, \dm{i}_{n-1}}$.
 The function $\EP(\vfi)$ is defined by
