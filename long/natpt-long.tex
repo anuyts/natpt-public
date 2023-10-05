@@ -293,7 +293,7 @@ Note that in both instances, we take the opposite at the source-side of the jet 
 The functor $\loch \multip \rival{\edge_i}$ commutes with itself, i.e. $(x, v, w) \mapsto (x, w, v)$ is a natural automorphism of $\loch \multip \rival{\edge_i} \multip \rival{\edge_i}$. \qed
 \end{corollary}
 
-\subsection{Jet Jewels}
+\section{Jet Jewels}
 Write $\jet_i^*$ for the transitive closure of the $\jet_i$, and similarly $\infrajet_i^*$ for the transitive closure of $\infrajet_i$.
 We say that $x$ and $y$ are \textbf{$i$-connected} if $x \infrajet_i^* y$, and correspondingly define \textbf{$i$-connected components}.
 \begin{definition} \label{def:jet-jewel}
@@ -306,7 +306,7 @@ We say that $x$ and $y$ are \textbf{$i$-connected} if $x \infrajet_i^* y$, and c
 	The \textbf{category of jet jewels} $\jetjewel{\vec a}$ is defined as the full subcategory of $\jetset{\vec a}$ on jet jewels.
 \end{definition}
 Note that the second condition is vacuous if $a_i = \npolar$.
-\begin{corollary}
+\begin{corollary} \label{thm:lift-to-jet-jewels}
 	Jet jewels are closed under the functors $\Op_i, \Fsym_i, \Usym_i, \Csym_i, \loch \multip \rival{\jet_i}$ and $\loch \multip \rival{\tej_i}$. \qed
 \end{corollary}
 
@@ -536,9 +536,15 @@ Note that a $\vec b$-jet-cube is uniquely in the image of $\Usymcube_i$ if it do
 	Let $\vec a$ be a mask, $\eps \in \accol{\affine, \cartes}$ and $M$ a monad on $\Set$.
 	We define
 	the category $\jetcubeopt{\eps}{M}{\vec a}$ of \textbf{forward $\vec a$-jet-$M$-cubes} and
-	the category $\trijetcubeopt{\eps}{M}{\vec a}$ of \textbf{trioriented forward $\vec a$-jet-$M$-cubes}
+	the category $\trijetcubeopt{\eps}{M}{\vec a}$ of \textbf{trioriented $\vec a$-jet-$M$-cubes}
 	as the full subcategory of $\cubecat^\eps_M \times_\Set \jetset{\vec a}$ on (forward/opposable) jet cubes, as justified by \cref{thm:jet-cube-pullback}.
 \end{definition}
+\begin{corollary} \label{thm:jet-cubes-are-jewels}
+	The functor $\JEP : \trijetcubeopt{\eps}{M}{\vec a} \to \jetset{\vec a}$ (and hence its restriction to forward jet cubes) factors over the inclusion $\jetjewel{\vec a} \hookrightarrow \jetset{\vec a}$.
+\end{corollary}
+\begin{proof}
+	By induction on the dimension and using \cref{thm:lift-to-jet-jewels}, it is clear that for any trioriented jet cube $W$, the jet set $\JEP(W)$ is a jet jewel, which factors the action on objects. The action on morphism factors because the inclusion is full.
+\end{proof}
 \begin{proposition} \label{thm:lift-to-jet-cubes}
 	The functors $\Fsym_i$, $\loch \multip \rival{\jet_i}$ and $\loch \multip \rival{\edge_i}$ lift to both forward and trioriented jet-$M$-cube categories.
 	The functors $\Op_i$, $\Usym_i$ and $\loch \multip \rival{\tej_i}$ lift to trioriented jet-$M$-cube categories.
