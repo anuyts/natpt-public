@@ -1,4 +1,4 @@
-\documentclass[a4paper]{article}
+\documentclass[a4paper]{memoir}
 
 \usepackage{a4wide}
 
@@ -69,13 +69,15 @@
 %\begin{abstract}
 %\end{abstract}
 
+\pagebreak
+
 \tableofcontents
 
 \pagebreak
 
-\section{Base Categories and Modes}
+\chapter{Base Categories and Modes}
 
-\subsection{Modes are Anpolarity Masks}
+\section{Modes are Anpolarity Masks}
 In RelDTT, modes were natural numbers (minus one) expressing the number of available relations.
 In NatPT, we will specify for each of these relations whether it is directed or not.
 \begin{definition} \label{def:anpolarity}
@@ -109,6 +111,7 @@ In NatPT, we will specify for each of these relations whether it is directed or 
 	We will occasionally discuss these subtheories. By considering all of $\List\,\Anpolarity$ in the current paper, we maintain generality.
 \end{remark}
 
+\section{Jet Sets}
 \subsection{Jet Sets}
 \begin{definition} \label{def:jetset}
 	Let $\vec a$ be a mask. An \textbf{$\vec a$-jet-set} is a set $X$ equipped with $\lenpol{\vec a}$ (proof-irrelevant%
@@ -286,7 +289,8 @@ Note that in both instances, we take the opposite at the source-side of the jet 
 The functor $\loch \multip \rival{\edge_i}$ commutes with itself, i.e. $(x, v, w) \mapsto (x, w, v)$ is a natural automorphism of $\loch \multip \rival{\edge_i} \multip \rival{\edge_i}$. \qed
 \end{corollary}
 
-\subsection{Intermezzo: Cube Categories} \label{sec:cubes}
+\section{Jet Cubes}
+\subsection{Cube Categories} \label{sec:cubes}
 We introduce a family of cube categories with one flavour of dimension. Fix a monad $M$ on $\Set$.
 \begin{example} \label{ex:cube-monads}
 	Typically $M$ will be one of the following:
@@ -657,7 +661,7 @@ In short then, by \cref{rem:two-monads}:
 	We are no longer interested in cartesian jet cubes.
 \end{remark}
 
-\subsection{Jet Cube Morphisms: A Calculus}
+\subsection{A Calculus for Jet Cube Morphisms}
 In this section, we develop a calculus that inductively generates the morphisms of the category \allowbreak $\trijetcubeopt{\affine}{M}{\vec a}$ and therefore also those of its full subcategory $\jetcubeopt{\affine}{M}{\vec a}$.
 
 Since the forgetful functor $U : \jetset{\vec a} \to \Set$ is faithful, so is $\erasejc \loch : \trijetcubeopt{\affine}{M}{\vec a}$.
@@ -1916,7 +1920,7 @@ In words, this lemma says that if the last variable $\dm i$ of $W$ is substitute
 	\end{itemize}
 \end{proof}
 
-\subsection{Jet Cubes: The Semisymmetric Separated Product}
+\subsection{The Semisymmetric Separated Product}
 \begin{definition}
 	We define the \textbf{separated product} functor
 	\[
