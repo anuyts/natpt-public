@@ -81,7 +81,19 @@
 
 \chapter{Base Categories and Modes}
 
-\section{Modes are Anpolarity Masks}
+In this chapter, we establish the object part of the mode theory for naturality pretype theory and its model.
+Modes will be \textbf{anpolarity masks} $\vec a$ (\cref{sec:mask}) which will be modelled in presheaf categories over certain base categories.
+We propose two families of base categories, parametrized by the mask $\vec a$, and both are built using the category $\jetset{\vec a}$ of \textbf{jet sets} over $\vec a$ (\cref{sec:jetset}).
+
+The more complex but better behaved family of base categories are categories of \textbf{jet cubes} $\jetcubeopt \eps M {\vec a}$ (\cref{sec:jetcubes}).
+While we can get a grasp on jet cubes by characterizing their morphisms using a calculus (\cref{sec:jetcubes:calculus}), this calculus is relatively complex and its soundness and completeness proofs are even more complex.
+
+For these reasons, we alternatively propose to use categories of \textbf{jet jewels} $\jetjewel{\vec a}$ (\cref{sec:jetjewel}). These are full subcategories of $\jetset{\vec a}$ on objects that satisfy certain somewhat arbitrary well-behavedness criteria.
+The main purpose of the categories of jet jewels is to be workable for most basic purposes without being as complex as the categories of jet cubes.
+
+Upon a first lecture, readers may choose to omit \cref{sec:jetcubes} on jet cubes.
+
+\section{Anpolarity Masks} \label{sec:mask}
 In RelDTT, modes were natural numbers (minus one) expressing the number of available relations.
 In NatPT, we will specify for each of these relations whether it is directed or not.
 \begin{definition} \label{def:anpolarity}
@@ -115,8 +127,8 @@ In NatPT, we will specify for each of these relations whether it is directed or 
 	We will occasionally discuss these subtheories. By considering all of $\List\,\Anpolarity$ in the current paper, we maintain generality.
 \end{remark}
 
-\section{Jet Sets}
-\subsection{Jet Sets}
+\section{Jet Sets} \label{sec:jetset}
+\subsection{Definitions} \label{sec:jetset:def}
 \begin{definition} \label{def:jetset}
 	Let $\vec a$ be a mask. An \textbf{$\vec a$-jet-set} is a set $X$ equipped with $\lenpol{\vec a}$ (proof-irrelevant%
 	\footnote{So these relations are functions $X \to X \to \Prop$ where $\Prop$ is a universe of $h$-propositions \cite{hottbook}. In most applications, these relations will be decidable, but we do not require this.}%
@@ -293,7 +305,7 @@ Note that in both instances, we take the opposite at the source-side of the jet 
 The functor $\loch \multip \rival{\edge_i}$ commutes with itself, i.e. $(x, v, w) \mapsto (x, w, v)$ is a natural automorphism of $\loch \multip \rival{\edge_i} \multip \rival{\edge_i}$. \qed
 \end{corollary}
 
-\section{Jet Jewels}
+\section{Jet Jewels} \label{sec:jetjewel}
 Write $\jet_i^*$ for the transitive closure of the $\jet_i$, and similarly $\infrajet_i^*$ for the transitive closure of $\infrajet_i$.
 We say that $x$ and $y$ are \textbf{$i$-connected} if $x \infrajet_i^* y$, and correspondingly define \textbf{$i$-connected components}.
 \begin{definition} \label{def:jet-jewel}
@@ -310,7 +322,7 @@ Note that the second condition is vacuous if $a_i = \npolar$.
 	Jet jewels are closed under the functors $\Op_i, \Fsym_i, \Usym_i, \Csym_i, \loch \multip \rival{\jet_i}$ and $\loch \multip \rival{\tej_i}$. \qed
 \end{corollary}
 
-\section{Jet Cubes}
+\section{Jet Cubes} \label{sec:jetcubes}
 \subsection{Cube Categories} \label{sec:cubes}
 We introduce a family of cube categories with one flavour of dimension. Fix a monad $M$ on $\Set$.
 \begin{example} \label{ex:cube-monads}
@@ -454,7 +466,7 @@ Using the operation $\bindop^\alpha : MX \to (X \to \accol{0, 1}) \to \accol{0, 
 	Then $\dm j \psub \vfi \bindop^\alpha v$ will evaluate $\dm j \psub \vfi$ after replacing each variable $\dm i$ with its value $v(\dm i)$, yielding the value $f(v, \dm j)$ prescribed by the truth table $f(\loch, \dm j)$.
 \end{proof}
 
-\subsection{Jet Cubes}
+\subsection{Jet Cubes} \label{sec:jetcubes:def}
 
 \subsubsection{Jet Cube Objects}
 \begin{definition} \label{def:jet-cube}
@@ -699,7 +711,7 @@ In short then, by \cref{rem:two-monads}:
 	We are no longer interested in cartesian jet cubes.
 \end{remark}
 
-\subsection{A Calculus for Jet Cube Morphisms}
+\subsection{A Calculus for Jet Cube Morphisms} \label{sec:jetcubes:calculus}
 In this section, we develop a calculus that inductively generates the morphisms of the category \allowbreak $\trijetcubeopt{\affine}{M}{\vec a}$ and therefore also those of its full subcategory $\jetcubeopt{\affine}{M}{\vec a}$.
 
 Since the forgetful functor $U : \jetset{\vec a} \to \Set$ is faithful, so is $\erasejc \loch : \trijetcubeopt{\affine}{M}{\vec a}$.
