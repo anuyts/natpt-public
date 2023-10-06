@@ -22,6 +22,9 @@
 %\RequirePackage{xfrac}
 \RequirePackage{soul}
 	\sethlcolor{lightgray}
+	
+\usepackage{enumitem}
+	\setlist{noitemsep}
 
 %\usepackage{bm}
 \usepackage[all,cmtip]{xy}
@@ -33,6 +36,7 @@
 %\let\framed=\undefined
 
 \usepackage[hidelinks,bookmarksnumbered,bookmarksdepth=subsubsection]{hyperref}
+	\setcounter{tocdepth}{3}
 \RequirePackage{cleveref}
 
 \usepackage{wasysym}
@@ -106,27 +110,6 @@ In NatPT, we will specify for each of these relations whether it is directed or 
 	
 	Both for anpolarities and for masks, we denote meets (infima) with $\sqcap$ and joints (suprema) with $\sqcup$.
 \end{definition}
-
-\begin{remark} \todoi{Move this remark}
-	We note that it is always possible to restrict our mode theory, by discarding modes but keeping the same modalities and 2-cells between remaining modes.
-	We could decide to restrict to any of the following subsets of modes:
-	\begin{itemize}
-		\item Modes of the form $[\ypolar]^*$, i.e.\ where all degrees are polar,
-		\item Modes of the form $([\npolar] | [\npolar, \ypolar])^*$, i.e.\ where we think of a level as containing a path relation and optionally a weaker jet relation,
-		\begin{itemize}
-			\item Modes of the form $[\npolar, \ypolar]^*$ where the presence of a jet relation at each level is required,
-		\end{itemize}
-		\item Modes of the form $([\npolar] | [\ypolar, \npolar])^*$, i.e.\ where we think of a level as containing a bridge relation and optionally a stronger jet relation,
-		\begin{itemize}
-			\item Modes of the form $[\ypolar, \npolar]^*$ where the presence of a jet relation at each level is required,
-		\end{itemize}
-		\item Modes of the form $([\npolar, \npolar] | [\npolar, \ypolar, \npolar])^*$, i.e.\ where we think of a level as containing a path relation and a weaker bridge relation and optionally, in between, a jet relation,
-		\begin{itemize}
-			\item Modes of the form $[\npolar, \ypolar, \npolar]^*$ where the presence of a jet relation at each level is required.
-		\end{itemize}
-	\end{itemize}
-	We will occasionally discuss these subtheories. By considering all of $\List\,\Anpolarity$ in the current paper, we maintain generality.
-\end{remark}
 
 \section{Jet Sets} \label{sec:jetset}
 \subsection{Definitions} \label{sec:jetset:def}
@@ -455,8 +438,8 @@ The function $\EP(\vfi)$ is defined by
 where $\alpha : M\accol{0, 1} \to \accol{0, 1}$ is the algebra structure on $\accol{0, 1}$.
 Using the operation $\bindop^\alpha : MX \to (X \to \accol{0, 1}) \to \accol{0, 1} : \hat x \mapsto f \mapsto \alpha (Mf(\hat x))$, we can write this as $\EP(\vfi)(v)(\dm j) = \dm j \psub \vfi \bindop^\alpha v$.
 
-\begin{proposition}
-	The functor $\EP : \cubecat_\booleanalg \to \Set$ is fully faithful.
+\begin{proposition} \label{thm:booleanalg-ff}
+	The functor $\EP : \cubecat^\cartes_\booleanalg \to \Set$ is fully faithful.
 \end{proposition}
 \begin{proof}
 	We need to show that any function $f : \accol{0, 1}^{\accol{\dm{i}_0, \ldots, \dm{i}_{n-1}}} \to \accol{0, 1}^{\accol{\dm{j}_0, \ldots, \dm{j}_{m-1}}}$
@@ -465,6 +448,42 @@ Using the operation $\bindop^\alpha : MX \to (X \to \accol{0, 1}) \to \accol{0, 
 	From the full disjunctive normal form, it is clear that elements of the free boolean algebra are in 1-1 correspondence with truth tables.
 	Concretely, for each $\dm j$, define $\dm j \psub \vfi$ to be the element of $\booleanalg \accol{\dm{i}_0, \ldots, \dm{i}_{n-1}}$ corresponding to the truth table $f(\loch, \dm j)$.
 	Then $\dm j \psub \vfi \bindop^\alpha v$ will evaluate $\dm j \psub \vfi$ after replacing each variable $\dm i$ with its value $v(\dm i)$, yielding the value $f(v, \dm j)$ prescribed by the truth table $f(\loch, \dm j)$.
+\end{proof}
+\begin{proposition} \label{thm:monad-coercions-faithful}
+	The obvious functor $I : \cubecat_M^\delta \to \cubecat_N^\eps$ where
+	\begin{itemize}
+		\item $\delta, \eps \in \accol{\affine, \cartes}$ and $\delta \leq \eps$ according to the order $\affine \leq \cartes$,
+		\item $M, N \in \accol{\bipointed, \bipointedsym, \distlattice, \booleanalg}$ and $M \leq N$ according to the partial order
+		\[
+			\xymatrix{
+				\bipointed
+					\ar[r]^\leq
+					\ar[d]_{\rotatebox{270}{$\scriptstyle\leq$}}
+				& \bipointedsym
+					\ar[d]_{\rotatebox{270}{$\scriptstyle\leq$}}
+					\ar@/^/[ddr]^{\rotatebox{270}{$\scriptstyle\leq$}}
+				\\
+				\distlattice
+					\ar[r]^\leq
+					\ar@/_/[rrd]_\leq
+				& \demorgan
+				\\
+				&& \booleanalg,
+			}
+		\]
+		is faithful.
+	\end{itemize}
+\end{proposition}
+\begin{proof}
+	In a first step, it is obvious by construction that $\cubecat^\affine_M \to \cubecat^\cartes_M$ is faithful.
+	
+	In a second step, note that we have a monad morphism $\iota : M \to N$ such that $\iota_X : M(X) \to N(X)$ is injective for all $X$. Then the resulting functor between the Kleisli categories, which are opposite to the cartesian cube categories, is faithful.
+\end{proof}
+\begin{corollary} \label{thm:monads-faithful}
+	The functor $\EP : \cubecat^\eps_M \to \Set$ is faithful for each $M \in \accol{\bipointed, \bipointedsym, \distlattice, \booleanalg}$.
+\end{corollary}
+\begin{proof}
+	Follows by composing \cref{thm:booleanalg-ff} and \cref{thm:monad-coercions-faithful}.
 \end{proof}
 
 \subsection{Jet Cubes} \label{sec:jetcubes:def}
@@ -728,7 +747,7 @@ We do not have to bother with an equational theory, as we can simply inherit it 
 	\[
 		\inferencel{terminal}{
 		}{
-			\sez \vfi : V \to ()
+			\sez () : V \to ()
 		}{}
 	\]
 	\[
@@ -2091,7 +2110,7 @@ The category of affine cubes $\cubecat_\bipointed^\affine$ appears in a cubical 
 	The category $\cubecat_\bipointed^\affine$ is isomorphic to $\jetcubeopt{\affine}{\bipointed}{[\npolar]}$ and $\jetcubeopt{\cartes}{\bipointed}{[\npolar]}$.
 \end{proposition}
 \begin{proof}
-	Each time, the category for $\bipointed$ is the wide subcategory of the corresponding one for $\bipointedsym$ on morphisms that do not mention $\lnot$, so the result follows from \cref{thm:jetcubes:comparison:bipointedsym}.
+	Each time, the category for $\bipointed$ is the wide\footnote{Containing all objects.} subcategory of the corresponding one for $\bipointedsym$ on morphisms that do not mention $\lnot$, so the result follows from \cref{thm:jetcubes:comparison:bipointedsym}.
 \end{proof}
 
 \subsubsection{Cartesian Cubes}
@@ -2145,16 +2164,87 @@ The categories $\dcubeopt \cartes \bipointed n$ appear in the model of Degrees o
 \end{proof}
 
 \subsubsection{Comparison to Pinyo and Kraus's Twisted Cube Category}
-\todoi{Conjecture: $\jetcubeaff{\bipointedsym}{[\ypolar]} \cong \jetcubeaff{\booleanalg}{[\ypolar]}$ is the twisted cube category \cite{pinyo-twisted}. Symmetries zijn nodig om aan 0-kant te embedden. Moogt ook cartesians pakken, want hebt toch geen diagonalen.}
-\todoi{Compare to all the different cube categories they have, I think I have them all included.}
-In this section, we discuss how our approach reduces to Pinyo and Kraus's \cite{pinyo-twisted} when $\vec a = [\ypolar]$.
+In this section, we relate jet cubes to Pinyo and Kraus's twisted cubes \cite{pinyo-twisted} when $\vec a = [\ypolar]$.
 $\jetset{[\ypolar]}$ is the category of proof-irrelevant reflexive graphs.
 Pinyo and Kraus use arbitrary proof-irrelevant graphs, but since $\top$ is reflexive and the twisted prism functor \cite[def.\ 4]{pinyo-twisted} restricts to reflexive graphs, all twisted cubes are reflexive graphs anyway.
-\todoi{Continue}
 
+Two twisted cube categories appear (up to isomorphism) in \cite{pinyo-twisted}, and we show that we can recover both.
 
-Out of the category of jet sets, we will carve the category of jet cubes, in such a way that the category of jet cubes of mask $[\ypolar]$ is isomorphic to the twisted cube category \cite{pinyo-twisted}.
+\begin{definition} \cite[def.\ 25]{pinyo-twisted}
+	The category $\twistedcubegrp$ has as objects $[\ypolar]$-jet-cubes (i.e.\ natural numbers) and as morphisms $V \to W$ all jet set morphisms (i.e. graph morphisms) $\JEP(V) \to \JEP(W)$.
+\end{definition}
+\begin{proposition}
+	 $\twistedcubegrp$ is isomorphic to $\jetcubeopt \cartes \booleanalg {[\ypolar]}$.
+\end{proposition}
+\begin{proof}
+	Clearly, the objects correspond.
+	The morphisms $V \to W$ of $\jetcubeopt \cartes \booleanalg {[\ypolar]}$ are morphisms $f : \JEP(V) \to \JEP(W)$ such that $Uf : \EP(\erasejc V) \to \EP(\erasejc W)$ lifts to a morphism of cubes, which it always does by \cref{thm:booleanalg-ff}.
+\end{proof}
 
+We thoroughly rephrase Pinyo and Kraus's ternary twisted cube category:
+\begin{definition} \cite[def.\ 34]{pinyo-twisted} \label{def:twisted-tri}
+	The category $\twistedcubetri$ has as objects $[\ypolar]$-jet-cubes (i.e.\ natural numbers) and as morphisms $V \to W$ all jet set morphisms (i.e. graph morphisms) $\JEP(V) \to \JEP(W)$ or, equivalently by the previous proposition, all jet cube morphisms $V \to W$ in $\jetcubeopt \cartes \booleanalg {[\ypolar]}$,	
+	 generated by the rules \ruleref{terminal}, [\ruleref{src:fwd} immediately below \ruleref{inv:bck}], \ruleref{tgt:fwd} and \ruleref{prism:fwd} in \cref{fig:calculus}.
+\end{definition}
+The shared reader may object that Pinyo and Kraus define the morphisms of $\twistedcubetri$ by \emph{constructing} them inductively, rather than by selecting them inductively as we do above. However:
+\begin{corollary} \label{thm:twisted-tri-inductive}
+	Any morphism of $\twistedcubetri$ has a unique derivation using the given rules. \qed
+\end{corollary}
+\begin{proposition}
+	$\twistedcubetri$ is isomorphic to $\jetcubeopt \affine \bipointedsym {[\ypolar]}$.
+\end{proposition}
+\begin{proof}
+	Since the rules mentioned in \cref{def:twisted-tri} pertain to the calculus of $\trijetcubeopt \affine \bipointedsym {[\ypolar]}$ and in fact always yield premises/conclusions about forward cubes for conclusions/premises about forward cubes, and since $\jetcubeopt \affine \bipointedsym {[\ypolar]}$ is a faithful subcategory of $\jetcubeopt \cartes \booleanalg {[\ypolar]}$ by \cref{thm:monad-coercions-faithful}, it is clear that the identity-on-objects functor $\twistedcubetri \to \jetcubeopt \affine \bipointedsym {[\ypolar]}$ is faithful, i.e.\ we can think of $\twistedcubetri$ as a wide subcategory of $\jetcubeopt \affine \bipointedsym {[\ypolar]}$.
+	
+	To show fullness, we note the following facts about the calculus for $\trijetcubeopt \affine \bipointedsym {[\ypolar]}$:
+	\begin{enumerate}
+		\item No rule (read bottom-up) introduces equijets in the codomain.
+		\item In absence of equijets in the codomain, no rule changes the mask (except \ruleref{symmetrize} applied to the terminal codomain, but then apply \ruleref{terminal} instead).
+		\begin{itemize}
+			\item In particular, \ruleref{symmetrize} is useless.
+		\end{itemize}
+		\item Equijet variables can only be used at strictly stronger (lower) degrees, or at the current degree $i$ if $a_i = \npolar$. Since we have only one directed degree, equijet variables cannot be used.
+		\begin{itemize}
+			\item Hence \ruleref{wkn} can only be used to derive constant morphisms, which can instead be derived by [\ruleref{src:fwd} after \ruleref{inv:bck}] and \ruleref{tgt:fwd}.
+			\item Hence \ruleref{exchange} is useless.
+		\end{itemize} 
+		\item At mask $[\ypolar]$, the rule \ruleref{concursor} cannot be used as there is only one degree.
+		\item Since \ruleref{inv:fwd} and \ruleref{inv:bck} are mutually inverse, they can together be freely inserted everywhere. Hence, we can replace the rule \ruleref{src:fwd} with [\ruleref{src:fwd} after \ruleref{inv:bck}].
+		\item \ruleref{inv:fwd} and \ruleref{inv:bck} can be pushed up through any of the remaining rules except \ruleref{prism:fwd} and \ruleref{prism:bck}. Thus, we only involute right before using a variable.
+		All other rules (still read bottom-up) do not turn a forward codomain into a trioriented codomain, i.e.\ they do not introduce opposite jets.
+		Thus, we can assume the codomain is a forward jet cube until we encounter $\lnot \dm i$.
+		\item This means that until we encounter $\lnot \dm i$, we only need the rules \ruleref{terminal}, [\ruleref{src:fwd} after \ruleref{inv:bck}], \ruleref{tgt:fwd} and \ruleref{prism:fwd}.
+		These do not turn a forward domain into a trioriented domain. Thus, until we encounter $\lnot \dm i$, we can assume the domain is forward.
+		\item If both domain and codomain are forward, we cannot encounter $\lnot \dm i$.
+	\end{enumerate}
+	This means we can always rewrite a derivation tree in the calculus for $\trijetcubeopt \affine \bipointedsym {[\ypolar]}$ of a morphism in $\jetcubeopt \affine \bipointedsym {[\ypolar]}$ to use only the prescribed rules. 
+\end{proof}
+
+\chapter{Modalities}
+
+\chapter{Paths and Bridges}
+\begin{remark} \todoi{Move this remark}
+	We note that it is always possible to restrict our mode theory, by discarding modes but keeping the same modalities and 2-cells between remaining modes.
+	We could decide to restrict to any of the following subsets of modes:
+	\begin{itemize}
+		\item Modes of the form $[\ypolar]^*$, i.e.\ where all degrees are polar,
+		\item Modes of the form $([\npolar] | [\npolar, \ypolar])^*$, i.e.\ where we think of a level as containing a path relation and optionally a weaker jet relation,
+		\begin{itemize}
+			\item Modes of the form $[\npolar, \ypolar]^*$ where the presence of a jet relation at each level is required,
+		\end{itemize}
+		\item Modes of the form $([\npolar] | [\ypolar, \npolar])^*$, i.e.\ where we think of a level as containing a bridge relation and optionally a stronger jet relation,
+		\begin{itemize}
+			\item Modes of the form $[\ypolar, \npolar]^*$ where the presence of a jet relation at each level is required,
+		\end{itemize}
+		\item Modes of the form $([\npolar, \npolar] | [\npolar, \ypolar, \npolar])^*$, i.e.\ where we think of a level as containing a path relation and a weaker bridge relation and optionally, in between, a jet relation,
+		\begin{itemize}
+			\item Modes of the form $[\npolar, \ypolar, \npolar]^*$ where the presence of a jet relation at each level is required.
+		\end{itemize}
+	\end{itemize}
+	We will occasionally discuss these subtheories. By considering all of $\List\,\Anpolarity$ in the current paper, we maintain generality.
+\end{remark}
+
+\chapter{Transpension}
 
 \bibliographystyle{alphaurl}
 \bibliography{../refs/refs.bib}
