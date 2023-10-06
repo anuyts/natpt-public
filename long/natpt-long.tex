@@ -52,6 +52,7 @@
 %\usepackage[dutch]{babel}
 
 \usepackage{../natpt-macros}
+	\renewcommand{\thetheorem}{\arabic{chapter}.\arabic{section}.\arabic{subsection}\textdegree\arabic{theorem}}
 
 %\newcommand{\todoi}[1]{\textbf{\textcolor{red}{#1 \qed}}\par\noindent}
 %\newcommand{\todo}[1]{\textbf{\textcolor{red}{\footnote{\textcolor{red}{#1}}}}}
@@ -623,11 +624,11 @@ Note that a $\vec b$-jet-cube is uniquely in the image of $\Usymcube_i$ if it do
 	\end{itemize}
 \end{remark}
 \begin{theorem} \label{thm:affine-automatic}
-	Assuming the law of excluded middle for the affineness predicate on cube morphisms, we have isomorphisms of categories\footnote{Depending on the formalization, possibly even equalities.}
+	Assuming the law of excluded middle for the affineness predicate on cube morphisms, then for $M \in \accol{\bipointed, \bipointedsym}$, we have isomorphisms of categories\footnote{Depending on the formalization, possibly even equalities.}
 	\[
-		\trijetcubeopt \affine \bipointedsym {\vec a} \cong \trijetcubeopt \cartes \bipointedsym {\vec a},
+		\trijetcubeopt \affine M {\vec a} \cong \trijetcubeopt \cartes M {\vec a},
 		\qquad \qquad
-		\jetcubeopt \affine \bipointedsym {\vec a} \cong \jetcubeopt \cartes \bipointedsym {\vec a},
+		\jetcubeopt \affine M {\vec a} \cong \jetcubeopt \cartes M {\vec a},
 	\]
 	which act as the identity on objects.
 \end{theorem}
@@ -636,7 +637,7 @@ Note that a $\vec b$-jet-cube is uniquely in the image of $\Usymcube_i$ if it do
 	There, it is immediately clear that $\trijetcubeopt \affine \bipointedsym {\vec a}$ is a subcategory of $\trijetcubeopt \cartes \bipointedsym {\vec a}$.
 	So we need to show that any morphism in $\trijetcubeopt \cartes \bipointedsym {\vec a}$ is in fact affine.
 	Take such a morphism $\hat \vfi : V \to W$ (write $\vfi = \erasejc{\hat \vfi}$) and assume it is not affine.
-	Since $\bipointedsym$ only has nullary and unary operations, this means that $W$ has dimensions $\dm i$ and $\dm j$ such that $\dm i \psub \vfi$ and $\dm j \psub \vfi$ are not mutually fresh, meaning that $V$ has some dimension $\dm k$ such that $\dm i \psub \vfi, \dm j \psub \vfi \in \accol{\dm k, \lnot \dm k}$.
+	Since $M$ only has nullary and unary operations, this means that $W$ has dimensions $\dm i$ and $\dm j$ such that $\dm i \psub \vfi$ and $\dm j \psub \vfi$ are not mutually fresh, meaning that $V$ has some dimension $\dm k$ such that $\dm i \psub \vfi, \dm j \psub \vfi \in \accol{\dm k, \lnot \dm k}$.
 	Then $\JEP(\hat \vfi)$ cannot be a jet set morphism as $\JEP(W)$ has no diagonals. This is a contradiction.
 \end{proof}
 Note that the situation is not so simple for $\booleanalg$.
@@ -2062,7 +2063,88 @@ Thus, $\bigsqcup_i \vec \delta^i = \vec{\ypolar}$, and more generally $\vec a = 
 	Now $\xi_i$ only projects out symmetric variables therefore is a jet cube morphism $\Fsymcube_{\vec a \sqcap \vec \delta^i \sqsubseteq \vec a} V \to V_i$. Moreover, $\JEP(\xi_i)$ is jet-surjective (\cref{def:jet-surjective}), so we conclude that $\vfi_i$ too must be a jet cube morphism.
 \end{proof}
 
-\subsection{Comparison to Pinyo and Kraus's Twisted Cube Category}
+\subsection{Comparison to the Literature} \label{sec:jetcubes:comparison}
+\subsubsection{Point category}
+\begin{proposition}
+	The point category (terminal category) is isomorphic to $\jetcubeopt{\eps}{M}{[]}$.
+\end{proposition}
+\begin{proof}
+	It is clear that $()$ is the only object.
+	The only endomorphism of $()$ in $\cubecat^\eps_M$ is the identity, and $\erasejc \loch$ is faithful, so there is only one morphism.
+\end{proof}
+
+\subsubsection{Affine Symmetric Cubes}
+I am unsure whether the category of affine symmetric cubes $\cubecat_\bipointedsym^\affine$ appears anywhere.
+\begin{proposition} \label{thm:jetcubes:comparison:bipointedsym}
+	The category $\cubecat_\bipointedsym^\affine$ is isomorphic to $\jetcubeopt{\affine}{\bipointedsym}{[\npolar]}$ and $\jetcubeopt{\cartes}{\bipointedsym}{[\npolar]}$.
+\end{proposition}
+\begin{proof}
+	The latter two categories are isomorphic by \cref{thm:affine-automatic}.
+	It is clear that $\erasejc{\loch} : \jetcubeopt{\affine}{\bipointedsym}{[\npolar]} \to \cubecat_\bipointedsym^\affine$ is bijective on objects.
+	It is faithful, because $U : \jetset{[\npolar]} \to \Set$ is faithful.
+	It is full, because any morphism can be derived in the calculus (\cref{fig:calculus}), as can be shown by induction on the length of the codomain.
+\end{proof}
+
+\subsubsection{Affine Cubes}
+The category of affine cubes $\cubecat_\bipointed^\affine$ appears in a cubical model of HoTT \cite{bch} and its unary analogue in a cubical model of parametricity \cite{bcm}.
+\begin{proposition} \label{thm:jetcubes:comparison:bipointed}
+	The category $\cubecat_\bipointed^\affine$ is isomorphic to $\jetcubeopt{\affine}{\bipointed}{[\npolar]}$ and $\jetcubeopt{\cartes}{\bipointed}{[\npolar]}$.
+\end{proposition}
+\begin{proof}
+	Each time, the category for $\bipointed$ is the wide subcategory of the corresponding one for $\bipointedsym$ on morphisms that do not mention $\lnot$, so the result follows from \cref{thm:jetcubes:comparison:bipointedsym}.
+\end{proof}
+
+\subsubsection{Cartesian Cubes}
+One might hope to retrieve other existing categories as follows:
+\begin{itemize}
+	\item De Morgan cubes $\cubecat^\cartes_\demorgan$ \cite{cubical} as $\jetcubeopt{\cartes}{\demorgan}{[\npolar]}$,
+	\item Cartesian cubes $\cubecat^\cartes_\bipointed$ as $\jetcubeopt{\cartes}{\demorgan}{[\npolar]}$,
+	\item Depth $n$ cubes \cite{reldtt,reldtt-techreport} as $\jetcubeopt{\cartes}{\bipointed}{[\npolar]^n}$, where $\vec x^n$ denotes the $n$-fold repetition of the list $\vec x$,
+	\item \ldots
+\end{itemize}
+However, one cannot:
+\begin{proposition}
+	The morphism $(\dm i / \dm j, \dm i / \dm k) : (\dm i : \IX) \to (\dm j : \IX, \dm k : \IX)$ in $\cubecat^\cartes_M$ is not the erasure of any jet cube morphism.
+\end{proposition}
+\begin{proof}
+	Jet sets obtained from $\JEP$ do not have diagonals.
+\end{proof}
+
+\subsubsection{Affine Depth $n$ Cubes}
+\begin{definition}
+	The category $\dcubeopt \eps M n$ has:
+	\begin{itemize}
+		\item As objects lists of the form $W = (\dm i_1 : \rival{k_1}, \ldots, \dm i_m : \rival{k_m})$ where the $\dm i_i$ are regarded as bound de Bruijn indices and the $k_i$ are in $\accol{0, \ldots, n-1}$.
+		We define its erasure as $\erasejc W = (\dm i_1 : \IX, \ldots, \dm i_m : \IX)$.
+		\item As morphisms $\hat\vfi : V \to W$, morphisms $\vfi : \erasejc V \to \erasejc W$ such that for each $\dm i : \rival{k}$ in $W$, the expression $\dm i\psub \vfi$ mentions only variables $\dm j : \rival{\ell}$ in $V$ such that $\ell \geq k$.
+	\end{itemize}
+	Clearly this category comes with a faithful functor $\erasejc \loch : \dcubeopt \eps M n \to \cubecat^\eps_M$.
+\end{definition}
+The categories $\dcubeopt \cartes \bipointed n$ appear in the model of Degrees of Relatedness \cite{reldtt,reldtt-techreport}.
+
+\begin{proposition} \label{thm:jetcubes:comparison:depth-bipointedsym}
+	The category $\dcubeopt \affine \bipointedsym n$ is isomorphic to the category $\jetcubeopt \eps \bipointedsym {[\npolar]^n}$ for $\eps \in \accol{\cartes, \affine}$.
+\end{proposition}
+\begin{proof}
+	By \cref{thm:affine-automatic}, the value of $\eps$ does not matter, so let us set $\eps = \affine$.
+	We construct a functor $F : \jetcubeopt \affine \bipointedsym {[\npolar]^n} \to \dcubeopt \affine \bipointedsym n$ such that $\erasejc \loch \circ F = \erasejc \loch$:
+	\begin{itemize}
+		\item $F(\dm i_1 : \rival{\edge_{k_1}}, \ldots, \dm i_m : \rival{\edge_{k_m}}) = (\dm i_1 : \rival{k_1}, \ldots, \dm i_m : \rival{k_m})$,
+		\item For the action on morphisms, we have nothing to choose, we can only verify that it exists. This is done by induction on the derivation in the calculus (\cref{fig:calculus}).
+	\end{itemize}
+	
+	It is clear that $F$ is bijective on objects, and faithful.
+	Fullness is proven by proving by induction on the length of the codomain that every morphism of depth $n$ cubes can be derived in the calculus.
+\end{proof}
+
+\begin{proposition} \label{thm:jetcubes:comparison:depth-bipointed}
+	The category $\dcubeopt \affine \bipointed n$ is isomorphic to the category $\jetcubeopt \eps \bipointed {[\npolar]^n}$ for $\eps \in \accol{\cartes, \affine}$.
+\end{proposition}
+\begin{proof}
+	Each time, the category for $\bipointed$ is the wide subcategory of the corresponding one for $\bipointedsym$ on morphisms that do not mention $\lnot$, so the result follows from \cref{thm:jetcubes:comparison:depth-bipointedsym}.
+\end{proof}
+
+\subsubsection{Comparison to Pinyo and Kraus's Twisted Cube Category}
 \todoi{Conjecture: $\jetcubeaff{\bipointedsym}{[\ypolar]} \cong \jetcubeaff{\booleanalg}{[\ypolar]}$ is the twisted cube category \cite{pinyo-twisted}. Symmetries zijn nodig om aan 0-kant te embedden. Moogt ook cartesians pakken, want hebt toch geen diagonalen.}
 \todoi{Compare to all the different cube categories they have, I think I have them all included.}
 In this section, we discuss how our approach reduces to Pinyo and Kraus's \cite{pinyo-twisted} when $\vec a = [\ypolar]$.
