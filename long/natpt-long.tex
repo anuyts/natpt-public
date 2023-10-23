@@ -108,7 +108,7 @@ In NatPT, we will specify for each of these relations whether it is directed or 
 	An \textbf{anpolarity mask} or just \textbf{mask} is a list $\vec a \in \List\,\Anpolarity$ of anpolarities. We write $\lenpol{\vec a}$ for its length, and call the numbers $0, \ldots, \lenpol{\vec a} - 1$ \textbf{degrees}.
 	We define $\sqsubseteq$ on masks of equal length pointwise.
 	
-	Both for anpolarities and for masks, we denote meets (infima) with $\sqcap$ and joints (suprema) with $\sqcup$.
+	Both for anpolarities and for masks of equal length, we denote meets (infima) with $\sqcap$ and joins (suprema) with $\sqcup$.
 \end{definition}
 
 \section{Jet Sets} \label{sec:jetset}
@@ -142,7 +142,8 @@ In NatPT, we will specify for each of these relations whether it is directed or 
 \end{definition}
 \begin{proposition} \label{thm:jetset-equipment}
 	Let $X$ be a transitive $\vec a$-jet-set and $0 \leq i < j < \lenpol{\vec a}$.
-	Then the double category whose objects are elements of $X$, morphisms are (unique) proofs of $x \jet_i y$, pro-arrows are (unique) proofs of $x \jet_{j} y$ and squares are elements of the unit type, is a pro-arrow equipment \cite{nlab:proarrow,proarrow1,proarrow2}\todo{Refer to dedicated section instead.}.
+	Then the double category whose objects are elements of $X$, morphisms are (unique) proofs of $x \jet_i y$, pro-arrows are (unique) proofs of $x \jet_{j} y$ and squares are elements of the unit type, is a pro-arrow equipment \cite{nlab:proarrow,proarrow1,proarrow2}.
+	%\todo{Refer to dedicated section instead.}
 \end{proposition}
 \begin{proof}
 	It is clearly a double category. The existence of companions and conjoints is trivial.
@@ -2245,6 +2246,7 @@ The shared reader may object that Pinyo and Kraus define the morphisms of $\twis
 \end{remark}
 
 \chapter{Transpension}
+\todoi{Does Tw : sSet $\to$ sSet have a transp type? (Yes if it's Tw$_!$)}
 
 \bibliographystyle{alphaurl}
 \bibliography{../refs/refs.bib}
