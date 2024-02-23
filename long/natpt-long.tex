@@ -345,7 +345,7 @@ We introduce a family of cube categories with one flavour of dimension. Fix a mo
 		\item The `exception' monad $\bipointed$ that sends a set $X$ to $X \uplus \accol{0,1}$, which is the carrier of the free bipointed set over $X$;
 		\item The monad $\bipointedsym$ that sends a set $X$ to $X \uplus \set{\lnot x}{x \in X} \uplus \accol{0, 1}$, which is the carrier of the free [bipointed set equipped with an involution $\lnot$ that swaps $0$ and $1$] over $X$;
 		\item The monad $\distlattice$ that sends a set $X$ to the carrier of the free distributive lattice over $X$;
-		\item The monad $\demorgan$ that sends a set $X$ to the carrier of the free de Morgan algebra over $X$;
+		\item The monad $\demorgan$ that sends a set $X$ to the carrier of the free De Morgan algebra over $X$;
 		\item The monad $\booleanalg$ that sends a set $X$ to the carrier of the free boolean algebra over $X$.
 	\end{itemize}
 \end{example}
@@ -356,7 +356,7 @@ We introduce a family of cube categories with one flavour of dimension. Fix a mo
 	\begin{itemize}
 		\item The Kleisli category $\Kleisli(M)$ of $M$ has objects $\inKleisli{X}$ where $X$ is a set, and its morphisms $\inKleisli f : \inKleisli X \to \inKleisli Y$ are functions $f : X \to MY$.
 		\item Of this, we take the opposite $\Kleisli(M)\op$. (This is the Lawvere theory corresponding to the monad $M$.)
-		\item We define $\namedcubecat^\cartes_M$ as the full subcategory of $\Kleisli(M)\op$ on finite sets.
+		\item We define $\namedcubecat^\cartes_M$ as the full subcategory of $\Kleisli(M)\op$ on finite sets. (Alternatively, this is the opposite Kleisli category of the restriction of $M$ to finite sets, either as a monad on $\FinSet$ or as a relative monad $\FinSet \to \Set$.)
 		\item We define $\cubecat^\cartes_M$ as a designate skeleton of $\namedcubecat_M$, e.g.\ the full subcategory of $\namedcubecat^\cartes_M$ on sets of the form $\accol{0, \ldots, n-1}$ with $n \geq 0$.
 	\end{itemize}
 \end{definition}
@@ -395,7 +395,7 @@ This situation applies to each of the monads in \cref{ex:cube-monads}.
 In fact, often the quotient can be taken already at the level of the container, so that there exists a container $(S', P')$ such that $MX \cong \Sigma(s : S').(P'(s) \to X)$.
 \end{remark}
 
-We say that $(s, f), (s', f') \in T^\# X$ are \textbf{mutually fresh}, denoted $(s, f) \freshbin (s', f')$, if $f(P(s))$ and $f'(P(s'))$ are disjoint.
+We say that $(s, f), (s', f') \in T^\# X$ are \textbf{mutually fresh}, denoted $(s, f) \freshbin (s', f')$, if the images of $f$ and $f'$ are disjoint.
 Elements of $M^\# X$ are mutually fresh if they have mutually fresh representants.
 We call the monad $(T, \eta, \mu)$ \textbf{affine} if $\eta_X : X \to TX$ lands in $T^\# X$ for all $X$ and $\mu_X : TTX \to TX$ restricted to $(TT)^\# X$ (note that container functors are closed under composition) lands in $T^\# X$; and similar for $M$.
 
@@ -422,12 +422,12 @@ This way, we get -- among others -- the following cube categories:
 	\item[$\cubecat^\cartes_{\bipointed}$] The cartesian cube category.
 	A morphism $\vfi : V \to W$ sends every dimension $\dm{j} \in W$ to $\dm{j} \psub \vfi \in V \cup \accol{0, 1}$.
 	Its cubes have diagonals.
-	\item[$\cubecat^\affine_{\bipointed}$] The affine cube category.
+	\item[$\cubecat^\affine_{\bipointed}$] The affine cube category \cite{bch}.
 	A morphism $\vfi : V \to W$ sends every dimension $\dm{j} \in W$ to $\dm{j} \psub \vfi \in V \cup \accol{0, 1}$, such that if $\dm{j}\psub \vfi = \dm{j}' \psub \vfi \in V$ then $\dm{j} = \dm{j}'$.
 	Its cubes have no diagonals.
 	\item[$\cubecat^\cartes_{\bipointedsym}$] The symmetric cartesian cube category. We have a negation/involution/symmetry $(\lnot \dm{i} / \dm{j}) : (\dm i : \IX) \to (\dm{j} : \IX)$.
 	\item[$\cubecat^\cartes_{\distlattice}$] The cartesian cube category with connections. We have morphisms $(\dm i \vee \dm{j} / \dm k), (\dm i \wedge \dm{j} / \dm k) : (\dm i : \IX, \dm{j} : \IX) \to (\dm k : \IX)$. There are no symmetries
-	\item[$\cubecat^\cartes_{\demorgan}$] The CCHM cube category, which combines symmetries and connections \cite{cubical}. We have $(\dm i \wedge \lnot \dm i / \dm j) \neq (0/\dm j) : (\dm i : \IX) \to (\dm j : \IX)$ and $(\dm i \vee \lnot \dm i / \dm j) \neq (1/\dm j) : (\dm i : \IX) \to (\dm j : \IX)$.
+	\item[$\cubecat^\cartes_{\demorgan}$] The CCHM cube category \cite{cubical}, which combines symmetries and connections. We have $(\dm i \wedge \lnot \dm i / \dm j) \neq (0/\dm j) : (\dm i : \IX) \to (\dm j : \IX)$ and $(\dm i \vee \lnot \dm i / \dm j) \neq (1/\dm j) : (\dm i : \IX) \to (\dm j : \IX)$.
 	\item[$\cubecat^\cartes_{\booleanalg}$] A cube category very similar to the CCHM one, but we have $(\dm i \wedge \lnot \dm i / \dm j) = (0/\dm j) : (\dm i : \IX) \to (\dm j : \IX)$ and $(\dm i \vee \lnot \dm i / \dm j) = (1/\dm j) : (\dm i : \IX) \to (\dm j : \IX)$.
 \end{enumerate}
 We remark that $\cubecat^\affine_{\demorgan}$ and $\cubecat^\affine_{\booleanalg}$ should be isomorphic as the additional law of boolean algebras w.r.t.\ de Morgan algebras only affects non-affine expressions.
@@ -438,7 +438,7 @@ It is known then (see e.g.\ \cite{keml-diagrams}), that the Eilenberg-Moore cate
 Such functors are fully determined by the image of the singleton set (as every set is a coproduct of singletons and the Kleisli-category retains coproducts) and that image will be exactly the carrier of the corresponding Eilenberg-Moore algebra.
 
 It is clear that both the cartesian and affine (named) cube categories are subcategories of $\catL$.
-As such, any $M$-algebra induces a functor $\catL \to \Set$ and hence a functor from any of the $M$-cube categories to $\Set$.
+As such, any $M$-algebra induces a functor $\catL \to \Set$ and hence a functor from either of the $M$-cube categories to $\Set$.
 
 The initial algebra of any monad $M$ on $\Set$ has carrier $M \eset$, which for each of the monads in \cref{ex:cube-monads} equals $\accol{0, 1}$.
 Correspondingly, the initial model of $\catL$ is the functor $\EP : \catL \to \Set$ sending $(\dm{i}_0 : \IX, \ldots, \dm{i}_{n-1} : \IX)$ to $\accol{0, 1}^{\accol{\dm{i}_0, \ldots, \dm{i}_{n-1}}}$.
