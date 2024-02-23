@@ -98,7 +98,7 @@ The main purpose of the categories of jet jewels is to be workable for most basi
 
 Upon a first lecture, readers may choose to omit \cref{sec:jetcubes} on jet cubes.
 
-\todoi{I had some doubt about usability of jet jewels, but I think it's okay.
+\todoi{I momentarily had some doubt about usability of jet jewels, but I think it's okay.
 The calculus and its soundness proof are used mainly for modalities interacting with the interval. But these will not be used intensively in the NatPT paper itself.}
 
 \section{Anpolarity Masks} \label{sec:mask}
@@ -106,7 +106,7 @@ In RelDTT, modes were natural numbers (minus one) expressing the number of avail
 In NatPT, we will specify for each of these relations whether it is directed or not.
 \begin{definition} \label{def:anpolarity}
 	An \textbf{anpolarity}\footnote{`An' is Latin for `whether', as in `Nescio an polare sit,' meaning `I do not know whether it is polar'.} is an element of the set $\Anpolarity := \accol{\ypolar, \npolar}$, where $\ypolar$ stands for polar/directed and $\npolar$ stands for nonpolar/symmetric.
-	We equip $\Anpolarity$ with the partial order $\npolar \sqsubseteq \ypolar$.
+	We equip $\Anpolarity$ with the partial order $\npolar \sqsubseteq \ypolar$, corresponding to the intuition that symmetric relations are a subset of directed (i.e.\ potentially asymmetric) relations.
 	
 	An \textbf{anpolarity mask} or just \textbf{mask} is a list $\vec a \in \List\,\Anpolarity$ of anpolarities. We write $\lenpol{\vec a}$ for its length, and call the numbers $0, \ldots, \lenpol{\vec a} - 1$ \textbf{degrees}.
 	We define $\sqsubseteq$ on masks of equal length pointwise.
@@ -143,6 +143,7 @@ In NatPT, we will specify for each of these relations whether it is directed or 
 \begin{definition} \label{def:transitive-jetset}
 	A jet set is called \textbf{transitive} if each of the $i$-jet relations is transitive (i.e. a pre-order and, if $i = \npolar$, an equivalence relation).
 \end{definition}
+The following proposition will not really be used directly, but is a nice encouragement:
 \begin{proposition} \label{thm:jetset-equipment}
 	Let $X$ be a transitive $\vec a$-jet-set and $0 \leq i < j < \lenpol{\vec a}$.
 	Then the double category whose objects are elements of $X$, morphisms are (unique) proofs of $x \jet_i y$, pro-arrows are (unique) proofs of $x \jet_{j} y$ and squares are elements of the unit type, is a pro-arrow equipment \cite{nlab:proarrow,proarrow1,proarrow2}.
@@ -155,7 +156,7 @@ In NatPT, we will specify for each of these relations whether it is directed or 
 	We define the
 	\begin{itemize}
 		\item \textbf{$i$-equijet relation} $\equijet_i$ as the symmetric interior of $\jet_i$, i.e.\ $x \equijet_i y$ if and only if $x \jet_i y$ and $x \tej_i y$;
-		\item \textbf{$i$-infrajet relation} $\infrajet_i$ as the symmetric closure of $\jet_i$, i.e.\ $x \equijet_i y$ if and only if $x \jet_i y$ or $x \tej_i y$.
+		\item \textbf{$i$-infrajet relation} $\infrajet_i$ as the symmetric closure of $\jet_i$, i.e.\ $x \infrajet_i y$ if and only if $x \jet_i y$ or $x \tej_i y$.
 	\end{itemize}
 \end{definition}
 It is immediately clear that for nonpolar degrees, the jet/edge, equijet and infrajet relations coincide.
@@ -220,7 +221,7 @@ We have $\Op_i \circ \Op_i = \Id$ and if $a_i = \npolar$ then $\Op_i = \Id$.
 \begin{definition} \label{def:sym-forget}
 	Write $\vec a \sqsubset_i \vec b$ if $\lenpol{\vec a} = \lenpol{\vec b}$, $a_j = b_j$ for all $j \neq i$, $a_i = \npolar$ and $b_i = \ypolar$.
 	
-	If $\vec a \sqsubset_i \vec b$, then we write $\Usym_i : \jetset{\vec a} \to \jetset{\vec b}$ for the forgetful functor.
+	If $\vec a \sqsubset_i \vec b$, then we write $\Usym_i : \jetset{\vec a} \to \jetset{\vec b}$ for the forgetful functor which forgets the symmetry of $\jet_i$.
 \end{definition}
 \begin{corollary} \label{def:sym-free} \label{def:sym-cofree}
 	The forgetful functor $\Usym_i$ is part of an adjoint triple $\Fsym_i \dashv \Usym_i \dashv \Csym_i$ where $\Fsym_i$ and $\Csym_i$ take a $\vec b$-jet-set $X$ to a $\vec a$-jet-set of the same carrier with the same $j$-jet relations for $j \neq i$ but where
@@ -299,16 +300,41 @@ We say that $x$ and $y$ are \textbf{$i$-connected} if $x \infrajet_i^* y$, and c
 \begin{definition} \label{def:jet-jewel}
 	Let $\vec a$ be a mask of length $n$.
 	An $\vec a$-jet-set $X$ is a \textbf{jet jewel} if:
-	\begin{itemize}
+	\begin{enumerate}
 		\item it is $(n-1)$-connected, i.e.\ for any $x, y \in X$ we have $x \infrajet_{n-1}^* y$,
-		\item for every $0 \leq i < n$, the relation $\jet_i^*$ is a total pre-order on any connected component of $X$, i.e. if $x \infrajet_i^* y$, then $x \jet_i^* y$ or $x \tej_i^* y$.
-	\end{itemize}
+		\item for every $0 \leq i < n$, the relation $\jet_i^*$ is a total pre-order on any connected component of $X$, i.e. if $x \infrajet_i^* y$, then $x \jet_i^* y$ or $x \tej_i^* y$. We call this property \textbf{$i$-orientability}.
+	\end{enumerate}
 	The \textbf{category of jet jewels} $\jetjewel{\vec a}$ is defined as the full subcategory of $\jetset{\vec a}$ on jet jewels.
 \end{definition}
-Note that the second condition is vacuous if $a_i = \npolar$.
-\begin{corollary} \label{thm:lift-to-jet-jewels}
-	Jet jewels are closed under the functors $\Op_i, \Fsym_i, \Usym_i, \Csym_i, \loch \multip \rival{\jet_i}$ and $\loch \multip \rival{\tej_i}$. \qed
-\end{corollary}
+Note that $i$-orientability is vacuous if $a_i = \npolar$.
+\begin{proposition} \label{thm:lift-to-jet-jewels}
+	Jet jewels are closed under the functors $\Op_i$, $\Fsym_i$, $\Usym_i$, $\Csym_{i \neq n-1}$, $\UFsym_i$, $\UCsym_{i \neq n-1}$, $\loch \multip \rival{\jet_i}$ and $\loch \multip \rival{\tej_i}$.
+\end{proposition}
+\begin{proof}
+	\begin{description}
+		\item[$\Op_i$] Trivial.
+		\item[$\Fsym_i$] This functor clearly preserves $(n-1)$-connectedness even if $i = n-1$. Meanwhile, $j$-orientability is unaffected for $j \neq i$ and vacuous for $i$ which is symmetric in the codomain of $\Fsym_i$.
+		\item[$\Usym_i$] This functor does not modify the jet set, so the conditions are preserved.
+		\item[$\Csym_{i \neq n-1}$] Since $i \neq n-1$, this functor preserves $(n-1)$-connectedness. Meanwhile, $j$-orientability is unaffected for $j \neq i$ and vacuous for $i$ which is symmetric in the codomain of $\Csym_i$.
+		\item[$\UFsym_i$] Since $\UFsym_i = \Usym_i \circ \Fsym_i$.
+		\item[$\UCsym_{i \neq n-1}$] Since $\UCsym_i = \Usym_i \circ \Csym_i$.
+		\item[$\loch \multip \rival{\jet_i}$] To see $(n-1)$-connectedness, note that:
+		\begin{itemize}
+			\item All objects of the form $(x, 0)$ are $(n-1)$-connected,
+			\item All objects of the form $(x, 1)$ are $(n-1)$-connected,
+			\item Since $i \leq n-1$, we always have $(x, 0) \infrajet_i (x, 1)$.
+		\end{itemize}
+		For $j$-orientability, we consider 3 situations:
+		\begin{description}
+			\item[$j < i$] Then for every $x$, we have $(x, 0) \not\infrajet_j (x, 1)$. Every $j$-connected component $C \subseteq X$ produces two $j$-connected components $\set{(c, 0)}{c \in C}$ and $\set{(c, 1)}{c \in C}$, where totality of $\jet_j^*$ is inherited from $X$.
+			\item[$j > i$] Then for every $x$, we have $(x, 0) \equijet_j (x, 1)$. Every $j$-connected component $C \subseteq X$ produces one $j$-connected component $\set{(c, u)}{c \in C, u \in \accol{0, 1}}$, where totality of $\jet_j^*$ is inherited from $X$.
+			\item[$j = i$] Then $(x, u) \infrajet_i^* (y, v)$ if and only if $x \infrajet_i^* y$.
+			By $i$-orientability of the original jet jewel $X$, we have $x \jet_i^* y$ or $x \tej_i^* y$. Say we have $x \jet_i^* y$.
+			Then we have $(y, 0) \jet_i^* (x, 0) \jet_i (x, 1) \jet_i^* (y, 1)$, and thus either $(x, u) \jet_i^* (y, v)$ or $(x, u) \tej_i^* (y, v)$ depending on $u$ and $v$.
+		\end{description}
+		\item[$\loch \multip \rival{\tej_i}$] By an analogous argument. \qedhere
+	\end{description}
+\end{proof}
 
 \section{Jet Cubes} \label{sec:jetcubes}
 \subsection{Cube Categories} \label{sec:cubes}
