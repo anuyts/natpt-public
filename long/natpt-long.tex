@@ -525,7 +525,7 @@ Using the operation $\bindop^\alpha : MX \to (X \to \accol{0, 1}) \to \accol{0, 
 	$(\dm i_0 : \rival{\jet_{i_0}}, \ldots, \dm i_{n-1} : \rival{\jet_{i_{n-1}}})$, thinking of the names $\dm{i}_k$ as De Bruijn indices.
 	If $a_i = \npolar$, we write $\rival{\edge_i}$ instead of $\rival{\jet_i}$.
 	
-%	More generally, we define the set of \textbf{opposable jet cubes of mask $\vec a$} as the set of lists of elements of $\set{\jet_i, \tej_i}{a_i = \ypolar} \cup \set{\edge_i}{a_i = \npolar}$, but we denote them as
+%	More generally, we define the set of \textbf{trioriented jet cubes of mask $\vec a$} as the set of lists of elements of $\set{\jet_i, \tej_i}{a_i = \ypolar} \cup \set{\edge_i}{a_i = \npolar}$, but we denote them as
 %	$(\dm i_0 : \rival{\jet_{i_0}}, \ldots, \dm i_{n-1} : \rival{\tej_{i_{n-1}}})$.
 %	If $a_i = \npolar$, we use the symbols $\rival{\jet_i}$, $\rival{\tej_i}$ and $\rival{\edge_i}$ interchangeably.
 	
@@ -533,10 +533,10 @@ Using the operation $\bindop^\alpha : MX \to (X \to \accol{0, 1}) \to \accol{0, 
 	We denote them e.g.\ as $(\dm i_0 : \rival{\jet_{i_0}}, \ldots, \dm i_{n-1} : \rival{\tej_{i_{n-1}}})$.
 \end{definition}
 \begin{definition} \label{def:symmetric-var}
-	We call a variable $\dm i$ of a (forward/trioriented) $\vec a$-jet-cube \textbf{$i$-symmetric} (for a degree $0 \leq i < \lenpol(\vec a)$) if \emph{any} of the following conditions holds:
+	We call a variable $\dm i$ of a (forward/trioriented) $\vec a$-jet-cube \textbf{$i$-symmetric} (for a degree $0 \leq i < \lenpol{\vec a}$) if \emph{any} of the following conditions holds:
 	\begin{itemize}
 		\item $\dm i$ is not of degree $i$,
-		\item $\dm i$ is an equijet variable,
+		\item $\dm i$ is an equijet variable, i.e.\ $\dm i : \rival{\equijet_j}$,
 		\item $a_i = \npolar$.
 	\end{itemize}
 	Otherwise, it is called \textbf{$i$-directed}.
@@ -545,7 +545,7 @@ Using the operation $\bindop^\alpha : MX \to (X \to \accol{0, 1}) \to \accol{0, 
 \begin{definition} \label{def:sym-forget-cube}
 	Let $\vec a \sqsubset_i \vec b$. For any trioriented $\vec a$-jet-cube $W$, we define the trioriented $\vec b$-jet-cube $\Usymcube_i W$ by replacing every occurrence of $\edge_i$ with $\equijet_i$.
 \end{definition}
-Note that a $\vec b$-jet-cube is uniquely in the image of $\Usymcube_i$ if it does not feature the symbols $\jet_i$ and $\tej_i$.
+Note that a $\vec b$-jet-cube is uniquely in the image of $\Usymcube_i$ if it does not feature the symbols $\jet_i$ and $\tej_i$, i.e.\ if all variables are $i$-symmetric.
 \begin{definition} \label{def:jep}
 	For any (forward/trioriented) $\vec a$-jet-cube $W$, we define the $\vec a$-jet-set $\JEP(W)$ as follows:
 	\[ \begin{array}{l c l l}
@@ -576,14 +576,21 @@ Note that a $\vec b$-jet-cube is uniquely in the image of $\Usymcube_i$ if it do
 	Thus, every (forward/trioriented) jet cube determines an object of the following strict pullback of categories:
 	\[
 			\xymatrix{
+				\accol{\text{jet cubes}}
+					\ar@/^/[rrrd]^{\JEP}
+					\ar@/_/[rdd]_{\erasejc{\loch}}
+					\ar@{.>}[rd]
+				\\
+				&
 				\cubecat^\eps_M \times_\Set \jetset{\vec a}
-					\ar@{.>}[rr]^{\JEP}
-					\ar@{.>}[d]_{\erasejc{\loch}}
+					\ar@{.>}[rr]
+					\ar@{.>}[d]
 					\xydrcorner
 				&&
 				\jetset{\vec a}
 					\ar[d]^U
 				\\
+				&
 				\cubecat^\eps_M
 					\ar[rr]_{\EP}
 				&&
@@ -599,26 +606,27 @@ Note that a $\vec b$-jet-cube is uniquely in the image of $\Usymcube_i$ if it do
 	We define
 	the category $\jetcubeopt{\eps}{M}{\vec a}$ of \textbf{forward $\vec a$-jet-$M$-cubes} and
 	the category $\trijetcubeopt{\eps}{M}{\vec a}$ of \textbf{trioriented $\vec a$-jet-$M$-cubes}
-	as the full subcategory of $\cubecat^\eps_M \times_\Set \jetset{\vec a}$ on (forward/opposable) jet cubes, as justified by \cref{thm:jet-cube-pullback}.
+	as the full subcategory of $\cubecat^\eps_M \times_\Set \jetset{\vec a}$ on (forward/trioriented) jet cubes, as justified by \cref{thm:jet-cube-pullback}.
+	The functions $\JEP$ and $\erasejc{\loch}$ are correspondingly extended to functors.
 \end{definition}
 \begin{corollary} \label{thm:jet-cubes-are-jewels}
 	The functor $\JEP : \trijetcubeopt{\eps}{M}{\vec a} \to \jetset{\vec a}$ (and hence its restriction to forward jet cubes) factors over the inclusion $\jetjewel{\vec a} \hookrightarrow \jetset{\vec a}$.
 \end{corollary}
 \begin{proof}
-	By induction on the dimension and using \cref{thm:lift-to-jet-jewels}, it is clear that for any trioriented jet cube $W$, the jet set $\JEP(W)$ is a jet jewel, which factors the action on objects. The action on morphism factors because the inclusion is full.
+	By induction on the dimension and using \cref{thm:lift-to-jet-jewels}, it is clear that for any trioriented jet cube $W$, the jet set $\JEP(W)$ is a jet jewel, which factors the action on objects. The action on morphisms factors because $\jetjewel{\vec a}$ is a full subcategory of $\jetset{\vec a}$.
 \end{proof}
 \begin{proposition} \label{thm:lift-to-jet-cubes}
 	The functors $\Fsym_i$, $\loch \multip \rival{\jet_i}$ and $\loch \multip \rival{\edge_i}$ lift to both forward and trioriented jet-$M$-cube categories.
 	The functors $\Op_i$, $\Usym_i$ and $\loch \multip \rival{\tej_i}$ lift to trioriented jet-$M$-cube categories.
-	We denote the resulting functors as $\Fsymcube_i$, $\loch \multip (\dm i : \rival{\jet_i})$, $\loch \multip (\dm i : \rival{\edge_i})$, $\Opcube_i$, $\Usymcube_i$ and $\loch \multip (\dm i : \rival{\tej_i})$, where each time $\dm i$ represents a bound De Bruijn index.
+	We denote the resulting functors as $\Fsymcube_i$, $\loch \multip (\dm i : \rival{\jet_i})$, $\loch \multip (\dm i : \rival{\edge_i})$, $\Opcube_i$, $\Usymcube_i$ (in agreement with \cref{def:sym-forget-cube}) and $\loch \multip (\dm i : \rival{\tej_i})$, where each time $\dm i$ represents a bound De Bruijn index.
 	We have $\Fsymcube_i \dashv \Usymcube_i$ and thus an idempotent monad $\UFsymcube_i := \Usymcube_i \circ \Fsymcube_i$, whose definition we extend to masks $\vec b$ where $b_i = \npolar$ as in \cref{def:sym-closure-of-sym}.
 \end{proposition}
 \begin{proof}
 	The functors $\Fsym_i$, $\Op_i$ and $\Usym_i$ have no effect on the carrier, so they certainly lift to $\cubecat_M^\eps$, hence to the pullback $\cubecat_M^\eps \times_\Set \jetset{\vec a}$.
 	\begin{itemize}
 		\item $\Fsym_i$ lifts to (forward/trioriented) jet cubes by replacing every occurrence of $\jet_i$, $\tej_i$ or $\equijet_i$ with $\edge_i$.
-		\item $\Op_i$ lifts to trioriented jet cubes by reversing the \emph{last} occurrence of either $\jet_i$ or $\tej_i$ (\cref{thm:twisted-prism-op}).
-		\item $\Usym_i$ lifts to jet cubes as the operation $\Usymcube_i$ already introduced in \cref{def:sym-forget-cube}.
+		\item $\Op_i$ lifts to trioriented jet cubes by reversing the \emph{last} occurrence of either $\jet_i$ or $\tej_i$ (\cref{thm:twisted-prism-op}), if present.
+		\item $\Usym_i$ lifts to trioriented jet cubes as the operation $\Usymcube_i$ already introduced in \cref{def:sym-forget-cube}.
 	\end{itemize}
 	To prove $\Fsymcube \dashv \Usymcube$, we need to build unit and co-unit natural transformations.
 	Since the categories of forward/trioriented jet cubes are fully faithful subcategories of the pullback $\cubecat_M^\eps \times_\Set \jetset{\vec a}$, it suffices to build them there.
@@ -642,7 +650,7 @@ Note that a $\vec b$-jet-cube is uniquely in the image of $\Usymcube_i$ if it do
 %	\end{itemize}
 %	If $a_i = \npolar$, then we call this simply the \textbf{$i$-prism functor} $\loch \multip (\dm i : \rival{\edge_i}) : \jetcubeopt{\eps}{M}{\vec a} \to \jetcubeopt{\eps}{M}{\vec a}$.
 %	
-%	We similarly define, on opposable jet cubes:
+%	We similarly define, on trioriented jet cubes:
 %	\begin{itemize}
 %		\item the $i$-twisted-prism functor $\loch \multip (\dm i : \rival{\jet_i}) : \jetcubeopt{\eps}{M}{\vec a} \to \jetcubeopt{\eps}{M}{\vec a}$ when $a_i = \ypolar$,
 %		\item the opposite $i$-twisted-prism functor $\loch \multip (\dm i : \rival{\tej_i}) : \jetcubeopt{\eps}{M}{\vec a} \to \jetcubeopt{\eps}{M}{\vec a}$ when $a_i = \ypolar$,
@@ -753,7 +761,7 @@ which collapses five consecutive points of the Hamiltonian path and is a legitim
 		&&& (1, 1).
 	}
 \]
-Such morphisms are not assumed in the definition of pro-arrow equipments, so we wish to exclude these.
+Such morphisms are not assumed in the definition of pro-arrow equipments,\todo{Rephrase, this is unclear} so we wish to exclude these.
 For this reason, we will no longer be interested in cartesian jet-$\booleanalg$-cubes.
 By \cref{thm:affine-automatic}, we are also no longer interested in cartesian jet-$\bipointedsym$-cubes.
 In short then, by \cref{rem:two-monads}:
