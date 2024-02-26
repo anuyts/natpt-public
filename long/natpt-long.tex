@@ -509,6 +509,7 @@ Using the operation $\bindop^\alpha : MX \to (X \to \accol{0, 1}) \to \accol{0, 
 	
 	In a second step, note that we have a monad morphism $\iota : M \to N$ such that $\iota_X : M(X) \to N(X)$ is injective for all $X$. Then the resulting functor between the Kleisli categories, which are opposite to the cartesian cube categories, is faithful.
 \end{proof}
+Clearly, the functor $I : \cubecat_\demorgan^\cartes \to \cubecat_\booleanalg^\cartes$ is not faithful: it sends the morphisms $(0/\dm j), (\dm i \wedge \lnot \dm i/\dm j) : (\dm i : \IX) \to (\dm j : \IX)$ in $\cubecat_\demorgan^\cartes$ to the same morphism in $\cubecat_\booleanalg^\cartes$.
 \begin{corollary} \label{thm:monads-faithful}
 	The functor $\EP : \cubecat^\eps_M \to \Set$ is faithful for each $M \in \accol{\bipointed, \bipointedsym, \distlattice, \booleanalg}$.
 \end{corollary}
