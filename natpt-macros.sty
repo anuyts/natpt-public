@@ -202,7 +202,9 @@
 \newcommand{\namedcubecat}{{\name{NCube}}}
 	\newcommand{\affine}{\Box}
 	\newcommand{\cartes}{\boxslash}
-	\newcommand{\mycube}{\boxdot}
+	\newcommand{\mycube}{\eps}
+	\newcommand{\fwdori}{1}
+	\newcommand{\triori}{3}
 \newcommand{\twistedcubecat}{{\name{TwCube}}}
 	\newcommand{\twistedcubegrp}{\twistedcubecat_{\name{graph}}}
 	\newcommand{\twistedcubetri}{\twistedcubecat_{\name{tri}}}
@@ -212,13 +214,14 @@
 
 \newcommand{\jetset}[1]{\name{JetSet}(#1)}
 \newcommand{\jetjewel}[1]{\name{JetJewel}(#1)}
-\newcommand{\jetcube}[1]{\name{JetCube}\paren{#1}}
+\newcommand{\orijetcubeopt}[4]{\name{JetCube}^{#1, #2}_{#3}\paren{#4}}
 \newcommand{\jetcubeopt}[3]{\name{JetCube}^{#1}_{#2}\paren{#3}}
 \newcommand{\jetcubeaff}[2]{\jetcubeopt{\affine}{#1}{#2}}
 \newcommand{\jetcubecart}[2]{\jetcubeopt{\cartes}{#1}{#2}}
 	\newcommand{\erasejc}[1]{\floor{#1}}
-\newcommand{\trijetcube}[1]{\name{TriJetCube}\paren{#1}}
 \newcommand{\trijetcubeopt}[3]{\name{TriJetCube}^{#1}_{#2}\paren{#3}}
+\newcommand{\decrjetcubeopt}[3]{\name{DecrJetCube}^{#1}_{#2}\paren{#3}}
+\newcommand{\decrtrijetcubeopt}[3]{\name{DecrTriJetCube}^{#1}_{#2}\paren{#3}}
 
 \newcommand{\clockcat}{{\name{Clock}}}
 \newcommand{\clocksym}{{\text{\clock}}}
