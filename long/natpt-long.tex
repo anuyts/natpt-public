@@ -337,6 +337,16 @@ Note that $i$-orientability is vacuous if $a_i = \npolar$.
 \end{proof}
 
 \section{Jet Cubes} \label{sec:jetcubes}
+In \cref{sec:cubes}, we define a family of \emph{cube} categories $\cubecat_M^\mycubex$ parametrized by a monad $M$ which defines the available operations on cube dimensions, and a choice $\mycubex \in \accol{\affine, \cartes}$ of whether we want our cubes to be affine (no diagonals) or cartesian.
+
+In \cref{sec:jetcubes:def}, we define a family of \emph{jet cube} categories $\jetcube{\myorix}{\mycubex}{M}{\vec a}$ furthermore parametrized by a mask $\vec a$ and a choice $\myorix \in \accol{\fwdori, \triori}$ of orientation: forward or trioriented.
+
+In \cref{sec:jetcubes:calculus}, we characterize morphisms in certain jet cube categories using a calculus.
+
+In \cref{sec:jetcubes:sss}, we shed light on jet cubes from a different corner by introducing the \emph{semisymmetric separated product}.
+
+In \cref{sec:jetcubes:comparison} we compare our general class of jet cube categories to existing cube categories in the literature.
+
 \subsection{Cube Categories} \label{sec:cubes}
 We introduce a family of cube categories with one flavour of dimension. Fix a monad $M$ on $\Set$.
 \begin{example} \label{ex:cube-monads}
@@ -2036,7 +2046,7 @@ In words, this lemma says that if the last variable $\dm i$ of $W$ is substitute
 	\end{itemize}
 \end{proof}
 
-\subsection{The Semisymmetric Separated Product}
+\subsection{The Semisymmetric Separated Product} \label{sec:jetcubes:sss}
 \begin{definition}
 	We define the \textbf{separated product} functor
 	\[
@@ -2086,12 +2096,12 @@ In words, this lemma says that if the last variable $\dm i$ of $W$ is substitute
 	\end{itemize}
 \end{definition}
 \begin{definition}
-	Given a fixed length $\ell$, which we assume clear from the context, and a degree $0 \leq i < \ell$, we define the \textbf{punch mask} $\vec \mycubey^i$ by $\vec \mycubey^i_j = \npolar$ if $i \neq j$ and $\vec \mycubey^i_i = \ypolar$.
+	Given a fixed length $\ell$, which we assume clear from the context, and a degree $0 \leq i < \ell$, we define the \textbf{punch mask} $\vec \delta^i$ by $\vec \delta^i_j = \npolar$ if $i \neq j$ and $\vec \delta^i_i = \ypolar$.
 \end{definition}
-Thus, $\bigsqcup_i \vec \mycubey^i = \vec{\ypolar}$, and more generally $\vec a = \bigsqcup_i (\vec \mycubey^i \sqcap \vec a)$.
+Thus, $\bigsqcup_i \vec \delta^i = \vec{\ypolar}$, and more generally $\vec a = \bigsqcup_i (\vec \delta^i \sqcap \vec a)$.
 \begin{theorem}[SSS-factorization] \label{sssfactorization}
 	Let $\vec a$ be a mask of length $\ell$.
-	For any jet cube morphism $\hat \vfi : V \to W$ in $\jetcubefwd \affine M {\vec a}$, there exist jet cubes $(V_i)_{0 \leq i < \ell}$ and $(W_i)_{0 \leq i < \ell}$ where $V_i, W_i$ are jet cubes of mask $\vec a \sqcap \vec \mycubey^i$, as well as jet cube morphisms $\vfi_i : V_i \to W_i$ and jet cube morphisms $\rho_0$ and $\rho_1$ that are cube renamings\footnote{Morphisms in $\Kleisli(M)$ that come from $\Set$, i.e.\ are not effectful or do not use the constants and operators provided by $M$.}, such that $\vfi$ factorizes as:
+	For any jet cube morphism $\hat \vfi : V \to W$ in $\jetcubefwd \affine M {\vec a}$, there exist jet cubes $(V_i)_{0 \leq i < \ell}$ and $(W_i)_{0 \leq i < \ell}$ where $V_i, W_i$ are jet cubes of mask $\vec a \sqcap \vec \delta^i$, as well as jet cube morphisms $\vfi_i : V_i \to W_i$ and jet cube morphisms $\rho_0$ and $\rho_1$ that are cube renamings\footnote{Morphisms in $\Kleisli(M)$ that come from $\Set$, i.e.\ are not effectful or do not use the constants and operators provided by $M$.}, such that $\vfi$ factorizes as:
 	\[
 		\xymatrix{
 			V
@@ -2122,10 +2132,10 @@ Thus, $\bigsqcup_i \vec \mycubey^i = \vec{\ypolar}$, and more generally $\vec a 
 	The result of these promotions is exactly (up to renaming isomorphism) $\bigasterisk_i V_i$.
 	As only an initial segment of the variables of any given degree gets promoted to equijet variables, the renaming $\rho_0 : V \to \bigasterisk_i V_i$ is a jet cube morphism.
 	
-	For $\vfi_i$, first note that the weakening morphism $\pi_i$ is a jet cube morphism $W \to \Usymcube_{\vec a \sqcap \vec \mycubey^i \sqsubseteq \vec a} W_i$, and hence so is $\pi_i \circ \vfi$.
-	By transposition, we see that $\pi_i \circ \vfi$ is also a jet cube morphism $\Fsymcube_{\vec a \sqcap \vec \mycubey^i \sqsubseteq \vec a} V \to W_i$.
+	For $\vfi_i$, first note that the weakening morphism $\pi_i$ is a jet cube morphism $W \to \Usymcube_{\vec a \sqcap \vec \delta^i \sqsubseteq \vec a} W_i$, and hence so is $\pi_i \circ \vfi$.
+	By transposition, we see that $\pi_i \circ \vfi$ is also a jet cube morphism $\Fsymcube_{\vec a \sqcap \vec \delta^i \sqsubseteq \vec a} V \to W_i$.
 	As a cube morphism, $\pi_i \circ \vfi$ factors over the weakening morphism $\xi_i : \erasejc V \to \erasejc{V_i}$ as $\pi_i \circ \vfi = \vfi_i \circ \xi_i$.
-	Now $\xi_i$ only projects out symmetric variables therefore is a jet cube morphism $\Fsymcube_{\vec a \sqcap \vec \mycubey^i \sqsubseteq \vec a} V \to V_i$. Moreover, $\JEP(\xi_i)$ is jet-surjective (\cref{def:jet-surjective}), so we conclude that $\vfi_i$ too must be a jet cube morphism.
+	Now $\xi_i$ only projects out symmetric variables therefore is a jet cube morphism $\Fsymcube_{\vec a \sqcap \vec \delta^i \sqsubseteq \vec a} V \to V_i$. Moreover, $\JEP(\xi_i)$ is jet-surjective (\cref{def:jet-surjective}), so we conclude that $\vfi_i$ too must be a jet cube morphism.
 \end{proof}
 
 \subsection{Comparison to the Literature} \label{sec:jetcubes:comparison}
