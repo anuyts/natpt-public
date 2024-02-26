@@ -90,7 +90,7 @@ In this chapter, we establish the object part of the mode theory for naturality 
 Modes will be \textbf{anpolarity masks} $\vec a$ (\cref{sec:mask}) which will be modelled in presheaf categories over certain base categories.
 We propose two families of base categories, parametrized by the mask $\vec a$, and both are built using the category $\jetset{\vec a}$ of \textbf{jet sets} over $\vec a$ (\cref{sec:jetset}).
 
-The more complex but better behaved family of base categories are categories of \textbf{jet cubes} $\jetcubeopt \eps M {\vec a}$ (\cref{sec:jetcubes}).
+The more complex but better behaved family of base categories are categories of \textbf{jet cubes} $\jetcubefwd \mycubex M {\vec a}$ (\cref{sec:jetcubes}).
 While we can get a grasp on jet cubes by characterizing their morphisms using a calculus (\cref{sec:jetcubes:calculus}), this calculus is relatively complex and its soundness and completeness proofs are even more complex.
 
 For these reasons, we alternatively propose to use categories of \textbf{jet jewels} $\jetjewel{\vec a}$ (\cref{sec:jetjewel}). These are full subcategories of $\jetset{\vec a}$ on objects that satisfy certain somewhat arbitrary well-behavedness criteria.
@@ -480,9 +480,9 @@ Using the operation $\bindop^\alpha : MX \to (X \to \accol{0, 1}) \to \accol{0, 
 	Then $\dm j \psub \vfi \bindop^\alpha v$ will evaluate $\dm j \psub \vfi$ after replacing each variable $\dm i$ with its value $v(\dm i)$, yielding the value $f(v, \dm j)$ prescribed by the truth table $f(\loch, \dm j)$.
 \end{proof}
 \begin{proposition} \label{thm:monad-coercions-faithful}
-	The obvious functor $I : \cubecat_M^\delta \to \cubecat_N^\eps$ where
+	The obvious functor $I : \cubecat_M^\mycubey \to \cubecat_N^\mycubex$ where
 	\begin{itemize}
-		\item $\delta, \eps \in \accol{\affine, \cartes}$ and $\delta \leq \eps$ according to the order $\affine \leq \cartes$,
+		\item $\mycubey, \mycubex \in \accol{\affine, \cartes}$ and $\mycubey \leq \mycubex$ according to the order $\affine \leq \cartes$,
 		\item $M, N \in \accol{\bipointed, \bipointedsym, \distlattice, \booleanalg}$ and $M \leq N$ according to the partial order
 		\[
 			\xymatrix{
@@ -511,7 +511,7 @@ Using the operation $\bindop^\alpha : MX \to (X \to \accol{0, 1}) \to \accol{0, 
 \end{proof}
 Clearly, the functor $I : \cubecat_\demorgan^\cartes \to \cubecat_\booleanalg^\cartes$ is not faithful: it sends the morphisms $(0/\dm j), (\dm i \wedge \lnot \dm i/\dm j) : (\dm i : \IX) \to (\dm j : \IX)$ in $\cubecat_\demorgan^\cartes$ to the same morphism in $\cubecat_\booleanalg^\cartes$.
 \begin{corollary} \label{thm:monads-faithful}
-	The functor $\EP : \cubecat^\eps_M \to \Set$ is faithful for each $M \in \accol{\bipointed, \bipointedsym, \distlattice, \booleanalg}$.
+	The functor $\EP : \cubecat^\mycubex_M \to \Set$ is faithful for each $M \in \accol{\bipointed, \bipointedsym, \distlattice, \booleanalg}$.
 \end{corollary}
 \begin{proof}
 	Follows by composing \cref{thm:booleanalg-ff} and \cref{thm:monad-coercions-faithful}.
@@ -583,7 +583,7 @@ Note that a $\vec b$-jet-cube is uniquely in the image of $\Usymcube_i$ if it do
 					\ar@{.>}[rd]
 				\\
 				&
-				\cubecat^\eps_M \times_\Set \jetset{\vec a}
+				\cubecat^\mycubex_M \times_\Set \jetset{\vec a}
 					\ar@{.>}[rr]
 					\ar@{.>}[d]
 					\xydrcorner
@@ -592,7 +592,7 @@ Note that a $\vec b$-jet-cube is uniquely in the image of $\Usymcube_i$ if it do
 					\ar[d]^U
 				\\
 				&
-				\cubecat^\eps_M
+				\cubecat^\mycubex_M
 					\ar[rr]_{\EP}
 				&&
 				\Set,
@@ -603,15 +603,15 @@ Note that a $\vec b$-jet-cube is uniquely in the image of $\Usymcube_i$ if it do
 
 \subsubsection{Jet Cube Categories}
 \begin{definition} \label{def:jet-cube-cat}
-	Let $\vec a$ be a mask, $\eps \in \accol{\affine, \cartes}$ and $M$ a monad on $\Set$.
+	Let $\vec a$ be a mask, $\mycubex \in \accol{\affine, \cartes}$ and $M$ a monad on $\Set$.
 	We define
-	the category $\jetcubeopt{\eps}{M}{\vec a}$ of \textbf{forward $\vec a$-jet-$M$-cubes} and
-	the category $\trijetcubeopt{\eps}{M}{\vec a}$ of \textbf{trioriented $\vec a$-jet-$M$-cubes}
-	as the full subcategory of $\cubecat^\eps_M \times_\Set \jetset{\vec a}$ on (forward/trioriented) jet cubes, as justified by \cref{thm:jet-cube-pullback}.
+	the category $\jetcubefwd{\mycubex}{M}{\vec a}$ of \textbf{forward $\vec a$-jet-$M$-cubes} and
+	the category $\jetcubetri{\mycubex}{M}{\vec a}$ of \textbf{trioriented $\vec a$-jet-$M$-cubes}
+	as the full subcategory of $\cubecat^\mycubex_M \times_\Set \jetset{\vec a}$ on (forward/trioriented) jet cubes, as justified by \cref{thm:jet-cube-pullback}.
 	The functions $\JEP$ and $\erasejc{\loch}$ are correspondingly extended to functors.
 \end{definition}
 \begin{corollary} \label{thm:jet-cubes-are-jewels}
-	The functor $\JEP : \trijetcubeopt{\eps}{M}{\vec a} \to \jetset{\vec a}$ (and hence its restriction to forward jet cubes) factors over the inclusion $\jetjewel{\vec a} \hookrightarrow \jetset{\vec a}$.
+	The functor $\JEP : \jetcubetri{\mycubex}{M}{\vec a} \to \jetset{\vec a}$ (and hence its restriction to forward jet cubes) factors over the inclusion $\jetjewel{\vec a} \hookrightarrow \jetset{\vec a}$.
 \end{corollary}
 \begin{proof}
 	By induction on the dimension and using \cref{thm:lift-to-jet-jewels}, it is clear that for any trioriented jet cube $W$, the jet set $\JEP(W)$ is a jet jewel, which factors the action on objects. The action on morphisms factors because $\jetjewel{\vec a}$ is a full subcategory of $\jetset{\vec a}$.
@@ -623,39 +623,39 @@ Note that a $\vec b$-jet-cube is uniquely in the image of $\Usymcube_i$ if it do
 	We have $\Fsymcube_i \dashv \Usymcube_i$ and thus an idempotent monad $\UFsymcube_i := \Usymcube_i \circ \Fsymcube_i$, whose definition we extend to masks $\vec b$ where $b_i = \npolar$ as in \cref{def:sym-closure-of-sym}.
 \end{proposition}
 \begin{proof}
-	The functors $\Fsym_i$, $\Op_i$ and $\Usym_i$ have no effect on the carrier, so they certainly lift to $\cubecat_M^\eps$, hence to the pullback $\cubecat_M^\eps \times_\Set \jetset{\vec a}$.
+	The functors $\Fsym_i$, $\Op_i$ and $\Usym_i$ have no effect on the carrier, so they certainly lift to $\cubecat_M^\mycubex$, hence to the pullback $\cubecat_M^\mycubex \times_\Set \jetset{\vec a}$.
 	\begin{itemize}
 		\item $\Fsym_i$ lifts to (forward/trioriented) jet cubes by replacing every occurrence of $\jet_i$, $\tej_i$ or $\equijet_i$ with $\edge_i$.
 		\item $\Op_i$ lifts to trioriented jet cubes by reversing the \emph{last} occurrence of either $\jet_i$ or $\tej_i$ (\cref{thm:twisted-prism-op}), if present.
 		\item $\Usym_i$ lifts to trioriented jet cubes as the operation $\Usymcube_i$ already introduced in \cref{def:sym-forget-cube}.
 	\end{itemize}
 	To prove $\Fsymcube \dashv \Usymcube$, we need to build unit and co-unit natural transformations.
-	Since the categories of forward/trioriented jet cubes are fully faithful subcategories of the pullback $\cubecat_M^\eps \times_\Set \jetset{\vec a}$, it suffices to build them there.
+	Since the categories of forward/trioriented jet cubes are fully faithful subcategories of the pullback $\cubecat_M^\mycubex \times_\Set \jetset{\vec a}$, it suffices to build them there.
 	They were already established in $\jetset{\vec a}$ by \cref{def:sym-free,def:sym-cofree}.
-	As they reduce to the identity unit and co-unit of $\Id \dashv \Id$ for the carriers, they trivially lift to $\cubecat_M^\eps$.
+	As they reduce to the identity unit and co-unit of $\Id \dashv \Id$ for the carriers, they trivially lift to $\cubecat_M^\mycubex$.
 	
 	The various prism functors multiply the carrier with $\accol{0, 1}$ and thus lift over $\EP$ to the affine/cartesian cube category by multiplying with $(\dm i : \IX)$.
-	Hence, they also lift to the pullback $\cubecat_M^\eps \times_\Set \jetset{\vec a}$.
+	Hence, they also lift to the pullback $\cubecat_M^\mycubex \times_\Set \jetset{\vec a}$.
 	Each of them lifts to trioriented jet cubes, and the twisted prism functor also to forward jet cubes, by appending the symbol concerned.
 \end{proof}
 %\begin{definition} \label{def:prism-cube}
-%	Let $\vec a$ be a mask, $\eps \in \accol{\affine, \cartes}$ and $i < \lenpol{\vec a}$. We define the \textbf{$i$-twisted-prism functor $\loch \multip (\dm i : \rival{\jet_i}) : \jetcubeopt{\eps}{M}{\vec a} \to \jetcubeopt{\eps}{M}{\vec a}$} on jet cubes as follows:\footnote{We still think of $\dm i$ as a De Bruijn index.}
+%	Let $\vec a$ be a mask, $\mycubex \in \accol{\affine, \cartes}$ and $i < \lenpol{\vec a}$. We define the \textbf{$i$-twisted-prism functor $\loch \multip (\dm i : \rival{\jet_i}) : \jetcubefwd{\mycubex}{M}{\vec a} \to \jetcubefwd{\mycubex}{M}{\vec a}$} on jet cubes as follows:\footnote{We still think of $\dm i$ as a De Bruijn index.}
 %	\begin{itemize}
 %		\item The object $W$ is sent to $(W, \dm i : \rival{\jet_i})$.
 %		\item The morphism $\vfi : V \to W$ is sent to the morphism $\vfi \multip (\dm i : \rival{\jet_i})$ such that
 %		\begin{itemize}
-%			\item If $\eps = \affine$ then $\erasejc{\vfi \multip (\dm i : \rival{\jet_i})} = \erasejc \vfi * (\dm i : \IX)$,
-%			\item If $\eps = \cartes$ then $\erasejc{\vfi \multip (\dm i : \rival{\jet_i})} = \erasejc \vfi \times (\dm i : \IX)$,
+%			\item If $\mycubex = \affine$ then $\erasejc{\vfi \multip (\dm i : \rival{\jet_i})} = \erasejc \vfi * (\dm i : \IX)$,
+%			\item If $\mycubex = \cartes$ then $\erasejc{\vfi \multip (\dm i : \rival{\jet_i})} = \erasejc \vfi \times (\dm i : \IX)$,
 %			\item $\JEP(\vfi \multip (\dm i : \rival{\jet_i})) = \JEP(\vfi) \multip \rival{\jet_i}$.
 %		\end{itemize}
 %	\end{itemize}
-%	If $a_i = \npolar$, then we call this simply the \textbf{$i$-prism functor} $\loch \multip (\dm i : \rival{\edge_i}) : \jetcubeopt{\eps}{M}{\vec a} \to \jetcubeopt{\eps}{M}{\vec a}$.
+%	If $a_i = \npolar$, then we call this simply the \textbf{$i$-prism functor} $\loch \multip (\dm i : \rival{\edge_i}) : \jetcubefwd{\mycubex}{M}{\vec a} \to \jetcubefwd{\mycubex}{M}{\vec a}$.
 %	
 %	We similarly define, on trioriented jet cubes:
 %	\begin{itemize}
-%		\item the $i$-twisted-prism functor $\loch \multip (\dm i : \rival{\jet_i}) : \jetcubeopt{\eps}{M}{\vec a} \to \jetcubeopt{\eps}{M}{\vec a}$ when $a_i = \ypolar$,
-%		\item the opposite $i$-twisted-prism functor $\loch \multip (\dm i : \rival{\tej_i}) : \jetcubeopt{\eps}{M}{\vec a} \to \jetcubeopt{\eps}{M}{\vec a}$ when $a_i = \ypolar$,
-%		\item the $i$-prism functor $\loch \multip (\dm i : \rival{\edge_i}) : \jetcubeopt{\eps}{M}{\vec a} \to \jetcubeopt{\eps}{M}{\vec a}$ when $a_i = \npolar$.
+%		\item the $i$-twisted-prism functor $\loch \multip (\dm i : \rival{\jet_i}) : \jetcubefwd{\mycubex}{M}{\vec a} \to \jetcubefwd{\mycubex}{M}{\vec a}$ when $a_i = \ypolar$,
+%		\item the opposite $i$-twisted-prism functor $\loch \multip (\dm i : \rival{\tej_i}) : \jetcubefwd{\mycubex}{M}{\vec a} \to \jetcubefwd{\mycubex}{M}{\vec a}$ when $a_i = \ypolar$,
+%		\item the $i$-prism functor $\loch \multip (\dm i : \rival{\edge_i}) : \jetcubefwd{\mycubex}{M}{\vec a} \to \jetcubefwd{\mycubex}{M}{\vec a}$ when $a_i = \npolar$.
 %	\end{itemize}
 %\end{definition}
 \begin{proposition} \label{thm:cube-commute-diff-degree}
@@ -663,16 +663,16 @@ Note that a $\vec b$-jet-cube is uniquely in the image of $\Usymcube_i$ if it do
 	In other words, the natural transformation given in \cref{thm:commute-diff-degree} lifts to (forward/trioriented) jet cubes when the associated functors lift.
 \end{proposition}
 \begin{proof}
-	Since the categories of forward/trioriented jet cubes are fully faithful subcategories of the pullback $\cubecat_M^\eps \times_\Set \jetset{\vec a}$, it suffices to prove the natural isomorphism there.
+	Since the categories of forward/trioriented jet cubes are fully faithful subcategories of the pullback $\cubecat_M^\mycubex \times_\Set \jetset{\vec a}$, it suffices to prove the natural isomorphism there.
 	The isomorphism was already established in $\jetset{\vec a}$ by \cref{thm:commute-diff-degree}, and the effect on the carrier is either nothing (when at most one prism functor is involved) or swapping components (when both functors are prism functors).
-	These isomorphisms lift to $\cubecat_M^\eps$.
+	These isomorphisms lift to $\cubecat_M^\mycubex$.
 \end{proof}
 \begin{proposition} \label{thm:cube-commute-symmetric}
 	The functor $\loch \multip (\dm i : \rival{\edge_i})$ commutes with itself, i.e.\ the natural automorphism given in \cref{thm:commute-symmetric} lifts to (forward/trioriented) jet cubes as $(\dm i / \dm i, \dm j / \dm j) : \loch \multip (\dm i : \rival{\edge_i}) \multip (\dm j : \rival{\edge_i}) \cong \loch \multip (\dm j : \rival{\edge_i}) \multip (\dm i : \rival{\edge_i})$.
 \end{proposition}
 \begin{proof}
 	Analogous to the proof of \cref{thm:cube-commute-diff-degree}.
-	The isomorphism was already established in $\jetset{\vec a}$ by \cref{thm:commute-symmetric}, and the effect on the carrier is swapping components, which lifts to $\cubecat_M^\eps$.
+	The isomorphism was already established in $\jetset{\vec a}$ by \cref{thm:commute-symmetric}, and the effect on the carrier is swapping components, which lifts to $\cubecat_M^\mycubex$.
 \end{proof}
 \begin{remark} \label{rem:two-monads}
 	As of this point we will only be interested in the monads $\bipointedsym$ and $\booleanalg$ because:
@@ -684,26 +684,26 @@ Note that a $\vec b$-jet-cube is uniquely in the image of $\Usymcube_i$ if it do
 \begin{theorem} \label{thm:affine-automatic}
 	Assuming the law of excluded middle for the affineness predicate on cube morphisms, then for $M \in \accol{\bipointed, \bipointedsym}$, we have isomorphisms of categories\footnote{Depending on the formalization, possibly even equalities.}
 	\[
-		\trijetcubeopt \affine M {\vec a} \cong \trijetcubeopt \cartes M {\vec a},
+		\jetcubetri \affine M {\vec a} \cong \jetcubetri \cartes M {\vec a},
 		\qquad \qquad
-		\jetcubeopt \affine M {\vec a} \cong \jetcubeopt \cartes M {\vec a},
+		\jetcubefwd \affine M {\vec a} \cong \jetcubefwd \cartes M {\vec a},
 	\]
 	which act as the identity on objects.
 \end{theorem}
 \begin{proof}
 	Since the forward jet cube categories are full subcategories of the trioriented ones, it suffices to prove the first isomorphism.
-	There, it is immediately clear that $\trijetcubeopt \affine \bipointedsym {\vec a}$ is a subcategory of $\trijetcubeopt \cartes \bipointedsym {\vec a}$.
-	So we need to show that any morphism in $\trijetcubeopt \cartes \bipointedsym {\vec a}$ is in fact affine.
+	There, it is immediately clear that $\jetcubetri \affine \bipointedsym {\vec a}$ is a subcategory of $\jetcubetri \cartes \bipointedsym {\vec a}$.
+	So we need to show that any morphism in $\jetcubetri \cartes \bipointedsym {\vec a}$ is in fact affine.
 	Take such a morphism $\hat \vfi : V \to W$ (write $\vfi = \erasejc{\hat \vfi}$) and assume it is not affine.
 	Since $M$ only has nullary and unary operations, this means that $W$ has dimensions $\dm i$ and $\dm j$ such that $\dm i \psub \vfi$ and $\dm j \psub \vfi$ are not mutually fresh, meaning that $V$ has some dimension $\dm k$ such that $\dm i \psub \vfi, \dm j \psub \vfi \in \accol{\dm k, \lnot \dm k}$.
 	Then $\JEP(\hat \vfi)$ cannot be a jet set morphism as $\JEP(W)$ has no diagonals. This is a contradiction.
 \end{proof}
 Note that the situation is not so simple for $\booleanalg$.
-For example, at symmetric degrees, $\jetcubeopt \cartes \booleanalg{\vec a}$ features the `exclusive or' operation
+For example, at symmetric degrees, $\jetcubefwd \cartes \booleanalg{\vec a}$ features the `exclusive or' operation
 \[
 	((\dm i \vee \dm j) \wedge \lnot(\dm i \wedge \dm j)/\dm k) : (\dm i : \rival{\edge_i}, \dm j : \rival{\edge_i}) \to (\dm k : \rival{\edge_i})
 \]
-which cannot be constructed in $\jetcubeopt \affine \booleanalg{\vec a}$.
+which cannot be constructed in $\jetcubefwd \affine \booleanalg{\vec a}$.
 More startlingly, even at directed degrees, we have operations such as the following:
 \[
 	(\dm i \wedge \dm j/\dm p, \dm j \wedge \dm k/\dm q) : (\dm i : \rival{\jet_i}, \dm j : \rival{\jet_i}, \dm k : \rival{\jet_i}) \to (\dm p : \rival{\jet_i}, \dm q : \rival{\jet_i}),
@@ -771,9 +771,9 @@ In short then, by \cref{rem:two-monads}:
 \end{remark}
 
 \subsection{A Calculus for Jet Cube Morphisms} \label{sec:jetcubes:calculus}
-In this section, we develop a calculus that inductively generates the morphisms of the category \allowbreak $\trijetcubeopt{\affine}{M}{\vec a}$ and therefore also those of its full subcategory $\jetcubeopt{\affine}{M}{\vec a}$.
+In this section, we develop a calculus that inductively generates the morphisms of the category \allowbreak $\jetcubetri{\affine}{M}{\vec a}$ and therefore also those of its full subcategory $\jetcubefwd{\affine}{M}{\vec a}$.
 
-Since the forgetful functor $U : \jetset{\vec a} \to \Set$ is faithful, so is $\erasejc \loch : \trijetcubeopt{\affine}{M}{\vec a}$.
+Since the forgetful functor $U : \jetset{\vec a} \to \Set$ is faithful, so is $\erasejc \loch : \jetcubetri{\affine}{M}{\vec a}$.
 As such, we can regard `being a morphism of (forward/trioriented) jet cubes' as a proof-irrelevant property of morphisms of cubes, which we will therefore use as preterms.
 Our calculus will therefore feature a single judgement $\sez \vfi : V \to W$ meaning that the morphism $\vfi : \erasejc V \to \erasejc W$ is in fact a morphism of jet cubes.
 Soundness (\cref{thm:calculus-sound}) of the calculus will be the property that the judgement's meaning actually holds when the judgement is derivable, whereas completeness (\cref{thm:calculus-complete}) means that the judgement is derivable when its meaning is true.
@@ -1157,7 +1157,7 @@ We do not have to bother with an equational theory, as we can simply inherit it 
 	\label{fig:calculus:general}
 \end{figure}
 \begin{definition} \label{def:calculus}
-	For $M \in \accol{\bipointedsym, \booleanalg}$, any mask $\vec a$ and for any two objects $V, W \in \Obj(\trijetcubeopt \affine M {\vec a})$, we define a proof-irrelevant predicate on morphisms $\vfi : \erasejc V \to \erasejc W$, denoted $\sez \vfi : V \to W$, inductively generated by the inference rules in \cref{fig:calculus} subject to \cref{conv:sort-cubes}.
+	For $M \in \accol{\bipointedsym, \booleanalg}$, any mask $\vec a$ and for any two objects $V, W \in \Obj(\jetcubetri \affine M {\vec a})$, we define a proof-irrelevant predicate on morphisms $\vfi : \erasejc V \to \erasejc W$, denoted $\sez \vfi : V \to W$, inductively generated by the inference rules in \cref{fig:calculus} subject to \cref{conv:sort-cubes}.
 \end{definition}
 We discuss these inference rules one by one.
 
@@ -1534,7 +1534,7 @@ but for the cases involving connections (conjunctions and disjunctions), we need
 
 \paragraph{Understanding jet cube morphisms}
 \begin{lemma} \label{thm:left-of-concursor}
-	In $\trijetcubeopt \affine M {\vec a}$ with $M \in \accol{\bipointedsym, \booleanalg}$,
+	In $\jetcubetri \affine M {\vec a}$ with $M \in \accol{\bipointedsym, \booleanalg}$,
 	%assuming \cref{conv:sort-cubes},
 	the following holds:
 	If a cube morphism $\vfi$ is a jet cube morphism $V = (V_0, \dm j : \rival{P_j}, V_1) \to W = (W_0, \dm i : \rival{Q_i}, W_1)$ with $P, Q \in \accol{\jet, \tej, \equijet}$ and $j > i$,
@@ -1604,14 +1604,14 @@ In practice, we will only use this lemma for $M = \booleanalg$.
 	\end{description}
 \end{proof}
 \begin{lemma} \label{thm:char-twisted-cube-to-line}
-	In $\trijetcubeopt \eps \booleanalg {\vec a}$ with $\eps \in \accol{\affine, \cartes}$, let $V$ be a jet cube with only $i$-directed variables called (from left to right) $\dm j_1, \ldots, \dm j_n$, and consider $\vfi : V \to (\dm i : \rival{P_i})$ with $P \in \accol{\jet, \tej}$.
+	In $\jetcubetri \mycubex \booleanalg {\vec a}$ with $\mycubex \in \accol{\affine, \cartes}$, let $V$ be a jet cube with only $i$-directed variables called (from left to right) $\dm j_1, \ldots, \dm j_n$, and consider $\vfi : V \to (\dm i : \rival{P_i})$ with $P \in \accol{\jet, \tej}$.
 	Then $\dm i \psub{\vfi}$ is either a constant or of the form
 	\[
 		\dm i \psub{\vfi} = (\ldots((\lnot^{p_1} \dm j_1 \opA_1 \lnot^{p_2} \dm j_2) \opA_2 \lnot^{p_3} \dm j_3) \ldots) \opA_{n-1} \lnot^{p_n} \dm j_n
 	\]
 	with $p_k \in \accol{0, 1}$ and $\opA_k \in \accol{{\vee}, {\wedge}, {\opK}}$ where we define $x \opK y := y$.
 \end{lemma}
-We will only use this lemma when $\eps = \affine$.
+We will only use this lemma when $\mycubex = \affine$.
 \begin{proof}
 	We assume $P = {\jet}$, the proof for $P = {\tej}$ is analogous.
 
@@ -1664,7 +1664,7 @@ We will only use this lemma when $\eps = \affine$.
 	\end{itemize}
 \end{proof}
 \begin{lemma} \label{thm:char-jet-cube-to-line}
-	In $\trijetcubeopt \affine \booleanalg {\vec a}$ where $a_i = \ypolar$, consider $\vfi : V \to (\dm i : \rival{P_i})$ with $P \in \accol{\jet, \tej}$.
+	In $\jetcubetri \affine \booleanalg {\vec a}$ where $a_i = \ypolar$, consider $\vfi : V \to (\dm i : \rival{P_i})$ with $P \in \accol{\jet, \tej}$.
 	Write $\dm j_1, \ldots, \dm j_n$ for the $i$-directed variables of $V$.
 	Then $\vfi$ does not depend on variables of degree lower (stronger) than $i$, nor on $i$-equijet variables of $V$.
 	Moreover, $\dm i \psub{\vfi}$ is of the form
@@ -1737,7 +1737,7 @@ We will only use this lemma when $\eps = \affine$.
 	\end{itemize}
 \end{proof}
 \begin{lemma} \label{thm:left-of-connection}
-	In $\trijetcubeopt \affine \booleanalg {\vec a}$, let $\hat \vfi : V \to W$ be a jet cube morphism and write $\vfi = \erasejc{\hat \vfi}$.
+	In $\jetcubetri \affine \booleanalg {\vec a}$, let $\hat \vfi : V \to W$ be a jet cube morphism and write $\vfi = \erasejc{\hat \vfi}$.
 	Let $W = (W_0, \dm i : \rival{Q_i})$ with $Q \in \accol{\jet, \tej}$ and $a_i = \ypolar$.
 	Let $e$ be the reduction of $\dm i \psub \vfi$ and let $\dm j_1, \ldots, \dm j_n$ ($n \geq 0$) be all the variables of degree $i$ that $e$ depends on, and $\dm k_1, \ldots, \dm k_m$ ($m \geq 0$) all the other variables that $e$ depends on.
 	Assume $m+n \geq 2$.
@@ -1812,7 +1812,7 @@ In words, this lemma says that if the last variable $\dm i$ of $W$ is substitute
 	Composing with $\EP(c/\dm i)$ for our original $c$ yields $f(\vec v) \equijet_i f(\vec v')$.
 \end{proof}
 \begin{corollary} \label{thm:weaken-connection}
-	In $\trijetcubeopt \affine \booleanalg {\vec a}$, let $\hat \vfi : V \to W$ be a jet cube morphism and write $\vfi = \erasejc{\hat \vfi}$.
+	In $\jetcubetri \affine \booleanalg {\vec a}$, let $\hat \vfi : V \to W$ be a jet cube morphism and write $\vfi = \erasejc{\hat \vfi}$.
 	Let $W = (W_0, \dm i : \rival{Q_i})$ with $Q \in \accol{\jet, \tej}$ and $a_i = \ypolar$.
 	Let $e$ be the reduction of $\dm i \psub \vfi$ and assume $e$ depends on at least two variables.
 	Then $(\novar/\dm i) \circ \vfi$ is a jet cube morphism $\UFsymcube_i V \to W_0$.
@@ -1835,7 +1835,7 @@ In words, this lemma says that if the last variable $\dm i$ of $W$ is substitute
 
 \subsubsection{Completeness}
 \begin{theorem}[Completeness] \label{thm:calculus-complete}
-	For $M \in \accol{\bipointedsym, \booleanalg}$ and any morphism $\hat \vfi : V \to W$ in $\trijetcubeopt \affine M {\vec a}$ between cubes compliant to \cref{conv:sort-cubes}, writing $\vfi = \erasejc{\hat \vfi}$, we have $\sez \vfi : V \to W$.
+	For $M \in \accol{\bipointedsym, \booleanalg}$ and any morphism $\hat \vfi : V \to W$ in $\jetcubetri \affine M {\vec a}$ between cubes compliant to \cref{conv:sort-cubes}, writing $\vfi = \erasejc{\hat \vfi}$, we have $\sez \vfi : V \to W$.
 \end{theorem}
 \begin{proof}
 	For each variable $\dm k$ in $W$, let $e_{\dm k}$ be the reduction of $\dm k \psub{\vfi}$.
@@ -2049,7 +2049,7 @@ In words, this lemma says that if the last variable $\dm i$ of $W$ is substitute
 \begin{definition} \label{def:sssprod}
 	Given masks $\vec a$ and $\vec b$ of equal length, if $\vec a \sqcap \vec b = \vec \npolar$, i.e. if for every $i$ we have $a_i = \npolar$ and/or $b_i = \npolar$, then we define the \textbf{semisymmetric separated product (SSS-product)} functor
 	\[
-		\loch * \loch : \trijetcubeopt \eps M {\vec a} \times \trijetcubeopt \eps M {\vec b} \to \trijetcubeopt \eps M {\vec a \sqcup \vec b}
+		\loch * \loch : \jetcubetri \mycubex M {\vec a} \times \jetcubetri \mycubex M {\vec b} \to \jetcubetri \mycubex M {\vec a \sqcup \vec b}
 	\]
 	as follows:
 	\begin{itemize}
@@ -2061,10 +2061,10 @@ In words, this lemma says that if the last variable $\dm i$ of $W$ is substitute
 			\item If $a_i = \npolar$ and $b_i = \ypolar$, then we list all variables of degree $i$ of $V$, retyped as $\rival{\equijet_i}$, followed by all variables of degree $i$ of $W$ with their original types.
 		\end{itemize}
 		\begin{corollary} \label{thm:erase-sssprod}
-			In $\cubecat_M^\eps$, we have
+			In $\cubecat_M^\mycubex$, we have
 			\begin{align*}
-				\erasejc{V * W} &\cong \erasejc V * \erasejc W &\text{if $\eps = \affine$,} \\
-				\erasejc{V * W} &\cong \erasejc V \times \erasejc W &\text{if $\eps = \cartes$.}
+				\erasejc{V * W} &\cong \erasejc V * \erasejc W &\text{if $\mycubex = \affine$,} \\
+				\erasejc{V * W} &\cong \erasejc V \times \erasejc W &\text{if $\mycubex = \cartes$.}
 			\end{align*}
 		\end{corollary}
 		\begin{corollary}
@@ -2076,19 +2076,19 @@ In words, this lemma says that if the last variable $\dm i$ of $W$ is substitute
 		\end{corollary}
 		\item Recalling \cref{def:jet-cube-cat}, the action of morphisms is established as follows:
 		\begin{itemize}
-			\item At the level of $\cubecat_M^\eps$, by relying on functoriality of the separated/cartesian product,
+			\item At the level of $\cubecat_M^\mycubex$, by relying on functoriality of the separated/cartesian product,
 			\item At the level of $\jetset{\vec a \sqcup \vec b}$, by relying on functoriality of the separated product,
 			\item At the level of $\Set$, both of these approaches reduce to functoriality of the cartesian product.
 		\end{itemize}
 	\end{itemize}
 \end{definition}
 \begin{definition}
-	Given a fixed length $\ell$, which we assume clear from the context, and a degree $0 \leq i < \ell$, we define the \textbf{punch mask} $\vec \delta^i$ by $\vec \delta^i_j = \npolar$ if $i \neq j$ and $\vec \delta^i_i = \ypolar$.
+	Given a fixed length $\ell$, which we assume clear from the context, and a degree $0 \leq i < \ell$, we define the \textbf{punch mask} $\vec \mycubey^i$ by $\vec \mycubey^i_j = \npolar$ if $i \neq j$ and $\vec \mycubey^i_i = \ypolar$.
 \end{definition}
-Thus, $\bigsqcup_i \vec \delta^i = \vec{\ypolar}$, and more generally $\vec a = \bigsqcup_i (\vec \delta^i \sqcap \vec a)$.
+Thus, $\bigsqcup_i \vec \mycubey^i = \vec{\ypolar}$, and more generally $\vec a = \bigsqcup_i (\vec \mycubey^i \sqcap \vec a)$.
 \begin{theorem}[SSS-factorization] \label{sssfactorization}
 	Let $\vec a$ be a mask of length $\ell$.
-	For any jet cube morphism $\hat \vfi : V \to W$ in $\jetcubeopt \affine M {\vec a}$, there exist jet cubes $(V_i)_{0 \leq i < \ell}$ and $(W_i)_{0 \leq i < \ell}$ where $V_i, W_i$ are jet cubes of mask $\vec a \sqcap \vec \delta^i$, as well as jet cube morphisms $\vfi_i : V_i \to W_i$ and jet cube morphisms $\rho_0$ and $\rho_1$ that are cube renamings\footnote{Morphisms in $\Kleisli(M)$ that come from $\Set$, i.e.\ are not effectful or do not use the constants and operators provided by $M$.}, such that $\vfi$ factorizes as:
+	For any jet cube morphism $\hat \vfi : V \to W$ in $\jetcubefwd \affine M {\vec a}$, there exist jet cubes $(V_i)_{0 \leq i < \ell}$ and $(W_i)_{0 \leq i < \ell}$ where $V_i, W_i$ are jet cubes of mask $\vec a \sqcap \vec \mycubey^i$, as well as jet cube morphisms $\vfi_i : V_i \to W_i$ and jet cube morphisms $\rho_0$ and $\rho_1$ that are cube renamings\footnote{Morphisms in $\Kleisli(M)$ that come from $\Set$, i.e.\ are not effectful or do not use the constants and operators provided by $M$.}, such that $\vfi$ factorizes as:
 	\[
 		\xymatrix{
 			V
@@ -2119,30 +2119,30 @@ Thus, $\bigsqcup_i \vec \delta^i = \vec{\ypolar}$, and more generally $\vec a = 
 	The result of these promotions is exactly (up to renaming isomorphism) $\bigasterisk_i V_i$.
 	As only an initial segment of the variables of any given degree gets promoted to equijet variables, the renaming $\rho_0 : V \to \bigasterisk_i V_i$ is a jet cube morphism.
 	
-	For $\vfi_i$, first note that the weakening morphism $\pi_i$ is a jet cube morphism $W \to \Usymcube_{\vec a \sqcap \vec \delta^i \sqsubseteq \vec a} W_i$, and hence so is $\pi_i \circ \vfi$.
-	By transposition, we see that $\pi_i \circ \vfi$ is also a jet cube morphism $\Fsymcube_{\vec a \sqcap \vec \delta^i \sqsubseteq \vec a} V \to W_i$.
+	For $\vfi_i$, first note that the weakening morphism $\pi_i$ is a jet cube morphism $W \to \Usymcube_{\vec a \sqcap \vec \mycubey^i \sqsubseteq \vec a} W_i$, and hence so is $\pi_i \circ \vfi$.
+	By transposition, we see that $\pi_i \circ \vfi$ is also a jet cube morphism $\Fsymcube_{\vec a \sqcap \vec \mycubey^i \sqsubseteq \vec a} V \to W_i$.
 	As a cube morphism, $\pi_i \circ \vfi$ factors over the weakening morphism $\xi_i : \erasejc V \to \erasejc{V_i}$ as $\pi_i \circ \vfi = \vfi_i \circ \xi_i$.
-	Now $\xi_i$ only projects out symmetric variables therefore is a jet cube morphism $\Fsymcube_{\vec a \sqcap \vec \delta^i \sqsubseteq \vec a} V \to V_i$. Moreover, $\JEP(\xi_i)$ is jet-surjective (\cref{def:jet-surjective}), so we conclude that $\vfi_i$ too must be a jet cube morphism.
+	Now $\xi_i$ only projects out symmetric variables therefore is a jet cube morphism $\Fsymcube_{\vec a \sqcap \vec \mycubey^i \sqsubseteq \vec a} V \to V_i$. Moreover, $\JEP(\xi_i)$ is jet-surjective (\cref{def:jet-surjective}), so we conclude that $\vfi_i$ too must be a jet cube morphism.
 \end{proof}
 
 \subsection{Comparison to the Literature} \label{sec:jetcubes:comparison}
 \subsubsection{Point category}
 \begin{proposition}
-	The point category (terminal category) is isomorphic to $\jetcubeopt{\eps}{M}{[]}$.
+	The point category (terminal category) is isomorphic to $\jetcubefwd{\mycubex}{M}{[]}$.
 \end{proposition}
 \begin{proof}
 	It is clear that $()$ is the only object.
-	The only endomorphism of $()$ in $\cubecat^\eps_M$ is the identity, and $\erasejc \loch$ is faithful, so there is only one morphism.
+	The only endomorphism of $()$ in $\cubecat^\mycubex_M$ is the identity, and $\erasejc \loch$ is faithful, so there is only one morphism.
 \end{proof}
 
 \subsubsection{Affine Symmetric Cubes}
 I am unsure whether the category of affine symmetric cubes $\cubecat_\bipointedsym^\affine$ appears anywhere.
 \begin{proposition} \label{thm:jetcubes:comparison:bipointedsym}
-	The category $\cubecat_\bipointedsym^\affine$ is isomorphic to $\jetcubeopt{\affine}{\bipointedsym}{[\npolar]}$ and $\jetcubeopt{\cartes}{\bipointedsym}{[\npolar]}$.
+	The category $\cubecat_\bipointedsym^\affine$ is isomorphic to $\jetcubefwd{\affine}{\bipointedsym}{[\npolar]}$ and $\jetcubefwd{\cartes}{\bipointedsym}{[\npolar]}$.
 \end{proposition}
 \begin{proof}
 	The latter two categories are isomorphic by \cref{thm:affine-automatic}.
-	It is clear that $\erasejc{\loch} : \jetcubeopt{\affine}{\bipointedsym}{[\npolar]} \to \cubecat_\bipointedsym^\affine$ is bijective on objects.
+	It is clear that $\erasejc{\loch} : \jetcubefwd{\affine}{\bipointedsym}{[\npolar]} \to \cubecat_\bipointedsym^\affine$ is bijective on objects.
 	It is faithful, because $U : \jetset{[\npolar]} \to \Set$ is faithful.
 	It is full, because any morphism can be derived in the calculus (\cref{fig:calculus}), as can be shown by induction on the length of the codomain.
 \end{proof}
@@ -2150,7 +2150,7 @@ I am unsure whether the category of affine symmetric cubes $\cubecat_\bipointeds
 \subsubsection{Affine Cubes}
 The category of affine cubes $\cubecat_\bipointed^\affine$ appears in a cubical model of HoTT \cite{bch} and its unary analogue in a cubical model of parametricity \cite{bcm}.
 \begin{proposition} \label{thm:jetcubes:comparison:bipointed}
-	The category $\cubecat_\bipointed^\affine$ is isomorphic to $\jetcubeopt{\affine}{\bipointed}{[\npolar]}$ and $\jetcubeopt{\cartes}{\bipointed}{[\npolar]}$.
+	The category $\cubecat_\bipointed^\affine$ is isomorphic to $\jetcubefwd{\affine}{\bipointed}{[\npolar]}$ and $\jetcubefwd{\cartes}{\bipointed}{[\npolar]}$.
 \end{proposition}
 \begin{proof}
 	Each time, the category for $\bipointed$ is the wide\footnote{Containing all objects.} subcategory of the corresponding one for $\bipointedsym$ on morphisms that do not mention $\lnot$, so the result follows from \cref{thm:jetcubes:comparison:bipointedsym}.
@@ -2159,9 +2159,9 @@ The category of affine cubes $\cubecat_\bipointed^\affine$ appears in a cubical 
 \subsubsection{Cartesian Cubes}
 One might hope to retrieve other existing categories as follows:
 \begin{itemize}
-	\item De Morgan cubes $\cubecat^\cartes_\demorgan$ \cite{cubical} as $\jetcubeopt{\cartes}{\demorgan}{[\npolar]}$,
-	\item Cartesian cubes $\cubecat^\cartes_\bipointed$ as $\jetcubeopt{\cartes}{\demorgan}{[\npolar]}$,
-	\item Depth $n$ cubes \cite{reldtt,reldtt-techreport} as $\jetcubeopt{\cartes}{\bipointed}{[\npolar]^n}$, where $\vec x^n$ denotes the $n$-fold repetition of the list $\vec x$,
+	\item De Morgan cubes $\cubecat^\cartes_\demorgan$ \cite{cubical} as $\jetcubefwd{\cartes}{\demorgan}{[\npolar]}$,
+	\item Cartesian cubes $\cubecat^\cartes_\bipointed$ as $\jetcubefwd{\cartes}{\demorgan}{[\npolar]}$,
+	\item Depth $n$ cubes \cite{reldtt,reldtt-techreport} as $\jetcubefwd{\cartes}{\bipointed}{[\npolar]^n}$, where $\vec x^n$ denotes the $n$-fold repetition of the list $\vec x$,
 	\item \ldots
 \end{itemize}
 However, one cannot:
@@ -2174,22 +2174,22 @@ However, one cannot:
 
 \subsubsection{Affine Depth $n$ Cubes}
 \begin{definition}
-	The category $\dcubeopt \eps M n$ has:
+	The category $\dcubeopt \mycubex M n$ has:
 	\begin{itemize}
 		\item As objects lists of the form $W = (\dm i_1 : \rival{k_1}, \ldots, \dm i_m : \rival{k_m})$ where the $\dm i_i$ are regarded as bound de Bruijn indices and the $k_i$ are in $\accol{0, \ldots, n-1}$.
 		We define its erasure as $\erasejc W = (\dm i_1 : \IX, \ldots, \dm i_m : \IX)$.
 		\item As morphisms $\hat\vfi : V \to W$, morphisms $\vfi : \erasejc V \to \erasejc W$ such that for each $\dm i : \rival{k}$ in $W$, the expression $\dm i\psub \vfi$ mentions only variables $\dm j : \rival{\ell}$ in $V$ such that $\ell \geq k$.
 	\end{itemize}
-	Clearly this category comes with a faithful functor $\erasejc \loch : \dcubeopt \eps M n \to \cubecat^\eps_M$.
+	Clearly this category comes with a faithful functor $\erasejc \loch : \dcubeopt \mycubex M n \to \cubecat^\mycubex_M$.
 \end{definition}
 The categories $\dcubeopt \cartes \bipointed n$ appear in the model of Degrees of Relatedness \cite{reldtt,reldtt-techreport}.
 
 \begin{proposition} \label{thm:jetcubes:comparison:depth-bipointedsym}
-	The category $\dcubeopt \affine \bipointedsym n$ is isomorphic to the category $\jetcubeopt \eps \bipointedsym {[\npolar]^n}$ for $\eps \in \accol{\cartes, \affine}$.
+	The category $\dcubeopt \affine \bipointedsym n$ is isomorphic to the category $\jetcubefwd \mycubex \bipointedsym {[\npolar]^n}$ for $\mycubex \in \accol{\cartes, \affine}$.
 \end{proposition}
 \begin{proof}
-	By \cref{thm:affine-automatic}, the value of $\eps$ does not matter, so let us set $\eps = \affine$.
-	We construct a functor $F : \jetcubeopt \affine \bipointedsym {[\npolar]^n} \to \dcubeopt \affine \bipointedsym n$ such that $\erasejc \loch \circ F = \erasejc \loch$:
+	By \cref{thm:affine-automatic}, the value of $\mycubex$ does not matter, so let us set $\mycubex = \affine$.
+	We construct a functor $F : \jetcubefwd \affine \bipointedsym {[\npolar]^n} \to \dcubeopt \affine \bipointedsym n$ such that $\erasejc \loch \circ F = \erasejc \loch$:
 	\begin{itemize}
 		\item $F(\dm i_1 : \rival{\edge_{k_1}}, \ldots, \dm i_m : \rival{\edge_{k_m}}) = (\dm i_1 : \rival{k_1}, \ldots, \dm i_m : \rival{k_m})$,
 		\item For the action on morphisms, we have nothing to choose, we can only verify that it exists. This is done by induction on the derivation in the calculus (\cref{fig:calculus}).
@@ -2200,7 +2200,7 @@ The categories $\dcubeopt \cartes \bipointed n$ appear in the model of Degrees o
 \end{proof}
 
 \begin{proposition} \label{thm:jetcubes:comparison:depth-bipointed}
-	The category $\dcubeopt \affine \bipointed n$ is isomorphic to the category $\jetcubeopt \eps \bipointed {[\npolar]^n}$ for $\eps \in \accol{\cartes, \affine}$.
+	The category $\dcubeopt \affine \bipointed n$ is isomorphic to the category $\jetcubefwd \mycubex \bipointed {[\npolar]^n}$ for $\mycubex \in \accol{\cartes, \affine}$.
 \end{proposition}
 \begin{proof}
 	Each time, the category for $\bipointed$ is the wide subcategory of the corresponding one for $\bipointedsym$ on morphisms that do not mention $\lnot$, so the result follows from \cref{thm:jetcubes:comparison:depth-bipointedsym}.
@@ -2217,16 +2217,16 @@ Two twisted cube categories appear (up to isomorphism) in \cite{pinyo-twisted}, 
 	The category $\twistedcubegrp$ has as objects $[\ypolar]$-jet-cubes (i.e.\ natural numbers) and as morphisms $V \to W$ all jet set morphisms (i.e. graph morphisms) $\JEP(V) \to \JEP(W)$.
 \end{definition}
 \begin{proposition}
-	 $\twistedcubegrp$ is isomorphic to $\jetcubeopt \cartes \booleanalg {[\ypolar]}$.
+	 $\twistedcubegrp$ is isomorphic to $\jetcubefwd \cartes \booleanalg {[\ypolar]}$.
 \end{proposition}
 \begin{proof}
 	Clearly, the objects correspond.
-	The morphisms $V \to W$ of $\jetcubeopt \cartes \booleanalg {[\ypolar]}$ are morphisms $f : \JEP(V) \to \JEP(W)$ such that $Uf : \EP(\erasejc V) \to \EP(\erasejc W)$ lifts to a morphism of cubes, which it always does by \cref{thm:booleanalg-ff}.
+	The morphisms $V \to W$ of $\jetcubefwd \cartes \booleanalg {[\ypolar]}$ are morphisms $f : \JEP(V) \to \JEP(W)$ such that $Uf : \EP(\erasejc V) \to \EP(\erasejc W)$ lifts to a morphism of cubes, which it always does by \cref{thm:booleanalg-ff}.
 \end{proof}
 
 We thoroughly rephrase Pinyo and Kraus's ternary twisted cube category:
 \begin{definition} \cite[def.\ 34]{pinyo-twisted} \label{def:twisted-tri}
-	The category $\twistedcubetri$ has as objects $[\ypolar]$-jet-cubes (i.e.\ natural numbers) and as morphisms $V \to W$ all jet set morphisms (i.e. graph morphisms) $\JEP(V) \to \JEP(W)$ or, equivalently by the previous proposition, all jet cube morphisms $V \to W$ in $\jetcubeopt \cartes \booleanalg {[\ypolar]}$,	
+	The category $\twistedcubetri$ has as objects $[\ypolar]$-jet-cubes (i.e.\ natural numbers) and as morphisms $V \to W$ all jet set morphisms (i.e. graph morphisms) $\JEP(V) \to \JEP(W)$ or, equivalently by the previous proposition, all jet cube morphisms $V \to W$ in $\jetcubefwd \cartes \booleanalg {[\ypolar]}$,	
 	 generated by the rules \ruleref{terminal}, [\ruleref{src:fwd} immediately below \ruleref{inv:bck}], \ruleref{tgt:fwd} and \ruleref{prism:fwd} in \cref{fig:calculus}.
 \end{definition}
 The shared reader may object that Pinyo and Kraus define the morphisms of $\twistedcubetri$ by \emph{constructing} them inductively, rather than by selecting them inductively as we do above. However:
@@ -2234,12 +2234,12 @@ The shared reader may object that Pinyo and Kraus define the morphisms of $\twis
 	Any morphism of $\twistedcubetri$ has a unique derivation using the given rules. \qed
 \end{corollary}
 \begin{proposition}
-	$\twistedcubetri$ is isomorphic to $\jetcubeopt \affine \bipointedsym {[\ypolar]}$.
+	$\twistedcubetri$ is isomorphic to $\jetcubefwd \affine \bipointedsym {[\ypolar]}$.
 \end{proposition}
 \begin{proof}
-	Since the rules mentioned in \cref{def:twisted-tri} pertain to the calculus of $\trijetcubeopt \affine \bipointedsym {[\ypolar]}$ and in fact always yield premises/conclusions about forward cubes for conclusions/premises about forward cubes, and since $\jetcubeopt \affine \bipointedsym {[\ypolar]}$ is a faithful subcategory of $\jetcubeopt \cartes \booleanalg {[\ypolar]}$ by \cref{thm:monad-coercions-faithful}, it is clear that the identity-on-objects functor $\twistedcubetri \to \jetcubeopt \affine \bipointedsym {[\ypolar]}$ is faithful, i.e.\ we can think of $\twistedcubetri$ as a wide subcategory of $\jetcubeopt \affine \bipointedsym {[\ypolar]}$.
+	Since the rules mentioned in \cref{def:twisted-tri} pertain to the calculus of $\jetcubetri \affine \bipointedsym {[\ypolar]}$ and in fact always yield premises/conclusions about forward cubes for conclusions/premises about forward cubes, and since $\jetcubefwd \affine \bipointedsym {[\ypolar]}$ is a faithful subcategory of $\jetcubefwd \cartes \booleanalg {[\ypolar]}$ by \cref{thm:monad-coercions-faithful}, it is clear that the identity-on-objects functor $\twistedcubetri \to \jetcubefwd \affine \bipointedsym {[\ypolar]}$ is faithful, i.e.\ we can think of $\twistedcubetri$ as a wide subcategory of $\jetcubefwd \affine \bipointedsym {[\ypolar]}$.
 	
-	To show fullness, we note the following facts about the calculus for $\trijetcubeopt \affine \bipointedsym {[\ypolar]}$:
+	To show fullness, we note the following facts about the calculus for $\jetcubetri \affine \bipointedsym {[\ypolar]}$:
 	\begin{enumerate}
 		\item No rule (read bottom-up) introduces equijets in the codomain.
 		\item In absence of equijets in the codomain, no rule changes the mask (except \ruleref{symmetrize} applied to the terminal codomain, but then apply \ruleref{terminal} instead).
@@ -2260,7 +2260,7 @@ The shared reader may object that Pinyo and Kraus define the morphisms of $\twis
 		These do not turn a forward domain into a trioriented domain. Thus, until we encounter $\lnot \dm i$, we can assume the domain is forward.
 		\item If both domain and codomain are forward, we cannot encounter $\lnot \dm i$.
 	\end{enumerate}
-	This means we can always rewrite a derivation tree in the calculus for $\trijetcubeopt \affine \bipointedsym {[\ypolar]}$ of a morphism in $\jetcubeopt \affine \bipointedsym {[\ypolar]}$ to use only the prescribed rules. 
+	This means we can always rewrite a derivation tree in the calculus for $\jetcubetri \affine \bipointedsym {[\ypolar]}$ of a morphism in $\jetcubefwd \affine \bipointedsym {[\ypolar]}$ to use only the prescribed rules. 
 \end{proof}
 
 \chapter{Modalities}

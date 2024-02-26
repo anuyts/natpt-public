@@ -163,14 +163,14 @@
 \newcommand{\Id}{\mathrm{Id}}
 \newcommand{\op}{^{\name{op}}}
 \newcommand{\Op}{{\name{Op}}}
-	\newcommand{\Opcube}{\Op^\mycube}
+	\newcommand{\Opcube}{\Op^\boxdot}
 \newcommand{\Fsym}{\name{FSym}} % localization
-	\newcommand{\Fsymcube}{\Fsym^\mycube}
+	\newcommand{\Fsymcube}{\Fsym^\boxdot}
 \newcommand{\Usym}{\name{USym}} % forgetful
-	\newcommand{\Usymcube}{\Usym^\mycube}
+	\newcommand{\Usymcube}{\Usym^\boxdot}
 \newcommand{\Csym}{\name{CofSym}} % core
 \newcommand{\UFsym}{\name{SymCl}} % localization
-	\newcommand{\UFsymcube}{\UFsym^\mycube}
+	\newcommand{\UFsymcube}{\UFsym^\boxdot}
 \newcommand{\UCsym}{\name{SymInt}} % core
 \newcommand{\co}{^{\name{co}}}
 \newcommand{\coop}{^{\name{coop}}}
@@ -202,9 +202,11 @@
 \newcommand{\namedcubecat}{{\name{NCube}}}
 	\newcommand{\affine}{\Box}
 	\newcommand{\cartes}{\boxslash}
-	\newcommand{\mycube}{\eps}
-	\newcommand{\fwdori}{1}
-	\newcommand{\triori}{3}
+	\newcommand{\mycubex}{{\wasylozenge}}
+	\newcommand{\mycubey}{{\kreuz}}
+	\newcommand{\fwdori}{{\uranus}}
+	\newcommand{\triori}{{\neptune}}
+	\newcommand{\myori}{\kappa}
 \newcommand{\twistedcubecat}{{\name{TwCube}}}
 	\newcommand{\twistedcubegrp}{\twistedcubecat_{\name{graph}}}
 	\newcommand{\twistedcubetri}{\twistedcubecat_{\name{tri}}}
@@ -214,14 +216,22 @@
 
 \newcommand{\jetset}[1]{\name{JetSet}(#1)}
 \newcommand{\jetjewel}[1]{\name{JetJewel}(#1)}
-\newcommand{\orijetcubeopt}[4]{\name{JetCube}^{#1, #2}_{#3}\paren{#4}}
-\newcommand{\jetcubeopt}[3]{\name{JetCube}^{#1}_{#2}\paren{#3}}
-\newcommand{\jetcubeaff}[2]{\jetcubeopt{\affine}{#1}{#2}}
-\newcommand{\jetcubecart}[2]{\jetcubeopt{\cartes}{#1}{#2}}
-	\newcommand{\erasejc}[1]{\floor{#1}}
-\newcommand{\trijetcubeopt}[3]{\name{TriJetCube}^{#1}_{#2}\paren{#3}}
-\newcommand{\decrjetcubeopt}[3]{\name{DecrJetCube}^{#1}_{#2}\paren{#3}}
-\newcommand{\decrtrijetcubeopt}[3]{\name{DecrTriJetCube}^{#1}_{#2}\paren{#3}}
+\newcommand{\jetcube}[4]{{}^{#1}\hspace{-.5ex}\name{JetCube}^{#2}_{#3}\paren{#4}}
+	\newcommand{\jetcubefwd}[3]{\jetcube{\fwdori}{#1}{#2}{#3}}
+	\newcommand{\jetcubefwdaff}[2]{\jetcube{\fwdori}{\affine}{#1}{#2}}
+	\newcommand{\jetcubefwdcart}[2]{\jetcube{\fwdori}{\cartes}{#1}{#2}}
+	\newcommand{\jetcubetri}[3]{\jetcube{\triori}{#1}{#2}{#3}}
+	\newcommand{\jetcubetriaff}[2]{\jetcube{\triori}{\affine}{#1}{#2}}
+	\newcommand{\jetcubetricart}[2]{\jetcube{\triori}{\cartes}{#1}{#2}}
+\newcommand{\decrjetcube}[4]{{}^{#1}\hspace{-.5ex}\name{DecrJetCube}^{#2}_{#3}\paren{#4}}
+	\newcommand{\decrjetcubefwd}[3]{\decrjetcube{\fwdori}{#1}{#2}{#3}}
+	\newcommand{\decrjetcubefwdaff}[2]{\decrjetcube{\fwdori}{\affine}{#1}{#2}}
+	\newcommand{\decrjetcubefwdcart}[2]{\decrjetcube{\fwdori}{\cartes}{#1}{#2}}
+	\newcommand{\decrjetcubetri}[3]{\decrjetcube{\triori}{#1}{#2}{#3}}
+	\newcommand{\decrjetcubetriaff}[2]{\decrjetcube{\triori}{\affine}{#1}{#2}}
+	\newcommand{\decrjetcubetricart}[2]{\decrjetcube{\triori}{\cartes}{#1}{#2}}
+
+\newcommand{\erasejc}[1]{\floor{#1}}
 
 \newcommand{\clockcat}{{\name{Clock}}}
 \newcommand{\clocksym}{{\text{\clock}}}
