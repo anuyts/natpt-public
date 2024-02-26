@@ -980,7 +980,7 @@ We do not have to bother with an equational theory, as we can simply inherit it 
 %		}{}
 %	\]
 	\[
-		\inferencel{conn:prism:tgt-absorbing}{
+		\inferencel{conn:prism:src-neutral}{
 			(Q, \opA) \in \mathemph{\accol{(\jet, \vee), (\tej, \wedge)}} \\
 			\sez \vfi : \UFsymcube_i V \to W \\
 			\sez (\vfi, t / \dm i) : \mathemph{\Opcube_i V} \to (W, \dm i : \rival{Q_i})
@@ -988,7 +988,7 @@ We do not have to bother with an equational theory, as we can simply inherit it 
 			\sez (\vfi, t \opA \dm i / \dm i) : (V, \dm i : \rival{Q_i}) \to (W, \dm i : \rival{Q_i})
 		}{$\booleanalg$}
 		\qquad
-		\inferencel{conn:prism:src-absorbing}{
+		\inferencel{conn:prism:tgt-neutral}{
 			(Q, \opA) \in \mathemph{\accol{(\jet, \wedge), (\tej, \vee)}} \\
 			\sez \vfi : \UFsymcube_i V \to W \\
 			\sez (\vfi, t / \dm i) : \mathemph{V} \to (W, \dm i : \rival{Q_i})
@@ -997,7 +997,7 @@ We do not have to bother with an equational theory, as we can simply inherit it 
 		}{$\booleanalg$}
 	\]
 	\[
-		\inferencel{conn:prism-inv:tgt-absorbing}{
+		\inferencel{conn:prism-inv:src-neutral}{
 			(Q, \opA, P) \in \mathemph{\accol{(\jet, \vee, \tej), (\tej, \wedge, \jet)}} \\
 			\sez \vfi : \UFsymcube_i V \to W \\
 			\sez (\vfi, t / \dm i) : \mathemph{\Opcube_i V} \to (W, \dm i : \rival{Q_i})
@@ -1005,7 +1005,7 @@ We do not have to bother with an equational theory, as we can simply inherit it 
 			\sez (\vfi, t \opA \mathemphB{\lnot \dm i} / \dm i) : (V, \dm i : \mathemphB{\rival{P_i}}) \to (W, \dm i : \rival{Q_i})
 		}{$\booleanalg$}
 		\qquad
-		\inferencel{conn:prism-inv:src-absorbing}{
+		\inferencel{conn:prism-inv:tgt-neutral}{
 			(Q, \opA, P) \in \mathemph{\accol{(\jet, \wedge, \tej), (\tej, \vee, \jet)}} \\
 			\sez \vfi : \UFsymcube_i V \to W \\
 			\sez (\vfi, t / \dm i) : \mathemph{V} \to (W, \dm i : \rival{Q_i})
@@ -1221,13 +1221,13 @@ The promotion of all variables of degree $i$ to equijet variables in the context
 In the latter case, we can use \ruleref{conn:degree-symmetric}, where $s$ is also checked in the symmetrized context.
 
 In the former case, we get to apply a rule that combines a connection, possibly an inversion, and the \ruleref{prism} rules.
-The main point worth remarking upon is that the behaviour of $t$ only matters when the other operand does \emph{not} reduce to the absorbing element of the connection at hand.
+The main point worth remarking upon is that the behaviour of $t$ only matters when the other operand reduces to the neutral element of the connection at hand.
 Depending on this, we decide whether $t$ must be checked in the $i$-opposite context or not.
-For example, in \ruleref{conn:prism:tgt-absorbing}, if $Q = {\jet}$ and $\opA = \vee$, then the absorbing element is $1$, so the behaviour of $t$ only matters when the other operand is not $1$, i.e.\ it is $0$.
+For example, in \ruleref{conn:prism:src-neutral}, if $Q = {\jet}$ and $\opA = \vee$, then the neutral element is $0$, so the behaviour of $t$ only matters when the other operand is $0$.
 This means that we are coming from the source-side of $\dm i$, i.e.\ from $\Opcube_i V$.
-This distinction leads to four different rules (\ruleref{conn:prism:tgt-absorbing}, \ruleref{conn:prism:src-absorbing}, \ruleref{conn:prism-inv:tgt-absorbing}, \ruleref{conn:prism-inv:tgt-absorbing}).
+This distinction leads to four different rules (\ruleref{conn:prism:src-neutral}, \ruleref{conn:prism:tgt-neutral}, \ruleref{conn:prism-inv:src-neutral}, \ruleref{conn:prism-inv:src-neutral}).
 
-It is worth pointing out that if $a_i = \npolar$, then \ruleref{conn:degree-symmetric} specializes to the rule \ruleref{conn:sym} that is sufficiently general to also subsume the symmetric specializations of the other connection rules.
+It is worth pointing out that if $a_i = \npolar$, then \ruleref{conn:degree-symmetric} specializes to the rule \ruleref{conn:sym} (\cref{fig:calculus:sym}) that is sufficiently general to also subsume the symmetric specializations of the other connection rules.
 
 %\todoi{Old stuff}
 %For rules allow us to substitute the last variable with a connection.
@@ -1357,7 +1357,7 @@ It is worth pointing out that if $a_i = \npolar$, then \ruleref{conn:degree-symm
 		
 		\item Recalling \cref{def:jep}, soundness of \ruleref{exchange} follows from \cref{thm:cube-commute-symmetric}.
 		
-		\item We prove soundness of \ruleref{conn:prism:tgt-absorbing} for the case where $Q = {\jet}$ and $\opA = \vee$, the other case is proven analogously.
+		\item We prove soundness of \ruleref{conn:prism:src-neutral} for the case where $Q = {\jet}$ and $\opA = \vee$, the other case is proven analogously.
 		Assume that $\vfi$ is a jet cube morphism $\UFsymcube_i V \to W$ and $(\vfi, t / \dm i)$ is a jet cube morphism $\mathemph{\Opcube_i V} \to (W, \dm i : \rival{\jet_i})$.
 		We prove that $(\vfi, t \vee \dm i / \dm i)$ is a jet cube morphism $(V, \dm i : \rival{\jet_i}) \to (W, \dm i : \rival{\jet_i})$.
 		
@@ -1391,11 +1391,11 @@ It is worth pointing out that if $a_i = \npolar$, then \ruleref{conn:degree-symm
 %			Either way, we get $\vec v \jet_j \vec v'$ in $\JEP(\UFsymcube_i V)$ and therefore $f(\vec v) \jet_j f(\vec v')$ in $\JEP(W)$ where $f = \EP(\vfi)$.
 		\end{itemize}
 		
-		\item Soundness of \ruleref{conn:prism:src-absorbing} is proven analogous to that of \ruleref{conn:prism:tgt-absorbing}, adapting the highlighted parts.
+		\item Soundness of \ruleref{conn:prism:tgt-neutral} is proven analogous to that of \ruleref{conn:prism:src-neutral}, adapting the highlighted parts.
 		
-		\item Soundness of \ruleref{conn:prism-inv:tgt-absorbing} is proven from soundness of \allowbreak \ruleref{conn:prism:tgt-absorbing} by precomposing the result with $(\id_V, \lnot \dm i / \dm i)$ which is a jet cube morphism $(V, \dm i : \rival{P_i}) \to (V, \dm i : \rival{Q_i})$.
+		\item Soundness of \ruleref{conn:prism-inv:src-neutral} is proven from soundness of \allowbreak \ruleref{conn:prism:src-neutral} by precomposing the result with $(\id_V, \lnot \dm i / \dm i)$ which is a jet cube morphism $(V, \dm i : \rival{P_i}) \to (V, \dm i : \rival{Q_i})$.
 		
-		\item Soundness of \ruleref{conn:prism-inv:src-absorbing} is similarly proven from soundness of \ruleref{conn:prism:src-absorbing}.
+		\item Soundness of \ruleref{conn:prism-inv:tgt-neutral} is similarly proven from soundness of \ruleref{conn:prism:tgt-neutral}.
 		
 		\item We prove soundness of \ruleref{conn:degree-symmetric}.
 		Assume that
@@ -1985,7 +1985,7 @@ In words, this lemma says that if the last variable $\dm i$ of $W$ is substitute
 						(W, \dm i : \rival{\jet_i})
 					}
 				\]
-				Thus, we can invoke one of the rules \ruleref{conn:prism:tgt-absorbing}, \allowbreak \ruleref{conn:prism:src-absorbing}, \ruleref{conn:prism-inv:tgt-absorbing}, \ruleref{conn:prism-inv:src-absorbing}.
+				Thus, we can invoke one of the rules \ruleref{conn:prism:src-neutral}, \allowbreak \ruleref{conn:prism:tgt-neutral}, \ruleref{conn:prism-inv:src-neutral}, \ruleref{conn:prism-inv:tgt-neutral}.
 				
 				\item If $s$ depends only on $i$-symmetric variables, then the same holds for $(\vfi, s / \dm i)$. Write
 				\[
