@@ -339,7 +339,7 @@ Note that $i$-orientability is vacuous if $a_i = \npolar$.
 \section{Jet Cubes} \label{sec:jetcubes}
 In \cref{sec:cubes}, we define a family of \emph{cube} categories $\cubecat_M^\mycubex$ parametrized by a monad $M$ which defines the available operations on cube dimensions, and a choice $\mycubex \in \accol{\affine, \cartes}$ of whether we want our cubes to be affine (no diagonals) or cartesian.
 
-In \cref{sec:jetcubes:def}, we define a family of \emph{jet cube} categories $\jetcube{\myorix}{\mycubex}{M}{\vec a}$ furthermore parametrized by a mask $\vec a$ and a choice $\myorix \in \accol{\orif, \orifbe}$ of orientation: forward or trioriented.
+In \cref{sec:jetcubes:def}, we define a family of \emph{jet cube} categories $\jetcube{\myorix}{\mycubex}{M}{\vec a}$ furthermore parametrized by a mask $\vec a$ and an orientation set $\myorix$, which determines whether jets can only be forward or also backward and/or bidirectional.
 
 In \cref{sec:jetcubes:calculus}, we characterize morphisms in certain jet cube categories using a calculus.
 
@@ -531,7 +531,7 @@ Clearly, the functor $I : \cubecat_\demorgan^\cartes \to \cubecat_\booleanalg^\c
 
 \subsubsection{Jet Cube Objects}
 \begin{definition}
-	An \textbf{orientation set} is one of the following sets of formal symbols:
+	An \textbf{orientation set} is one of the following sets of formal symbols:\footnote{The letters stand for \emph{forward}, \emph{backward} and \emph{equijet}.}
 	\[
 		\orif = \accol{{\jet}}, \qquad
 		\orife = \accol{{\jet}, {\equijet}}, \qquad
@@ -647,6 +647,19 @@ Note that a $\vec b$-jet-cube is uniquely in the image of $\Usymcube_i$ if it do
 \end{corollary}
 \begin{proof}
 	By induction on the dimension and using \cref{thm:lift-to-jet-jewels}, it is clear that for any jet cube $W$, the jet set $\JEP(W)$ is a jet jewel, which factors the action on objects. The action on morphisms factors because $\jetjewel{\vec a}$ is a full subcategory of $\jetset{\vec a}$.
+\end{proof}
+We will ultimately only be interested in $(\orif, \vec a)$-jet-cubes, but in \cref{sec:jetcubes:calculus}, we define an inductive predicate to determine whether a cube morphism $\vfi : \erasejc V \to \erasejc W$ is in fact a jet cube morphism $V \to W$, and this predicate's inference rules make use of $(\orifbe, \vec a)$-jet-cubes in their premises.
+The orientation sets $\orife$ and $\orifb$ are only introduced for explanatory purposes: we can easily relate jet cubes with and without $\tej$ (\cref{thm:backward-jets-equivalent}), and later on\todo{Refer} we will be able to relate jet cubes with and without $\equijet$ by inserting additional symmetric degrees.
+\begin{proposition} \label{thm:backward-jets-equivalent}
+	Let $(\myorix, \myorix') \in \accol{(\orif, \orifb), (\orife, \orifbe)}$.
+	Then the inclusion
+	\[
+		\jetcube{\myorix}{\mycubex}{M}{\vec a} \hookrightarrow \jetcube{\myorix'}{\mycubex}{M}{\vec a},
+	\]
+	which is fully faithful by definition, is also split essentially surjective and therefore an equivalence.
+\end{proposition}
+\begin{proof}
+	One proves, by induction on the length of the jet cube, that any jet cube is equivalent to the jet cube in which every occurrence of $\rival{\tej_i}$ is replaced with $\rival{\jet_i}$.
 \end{proof}
 \begin{proposition} \label{thm:lift-to-jet-cubes}
 	The following functors on $\vec a$-jet-sets lift over $\JEP$ to functors on $(\myorix, \vec a)$-jet-cubes under the following conditions:
@@ -1580,6 +1593,7 @@ but for the cases involving connections (conjunctions and disjunctions), we need
 		The outcome is either a constant or a tree whose nodes are alternatingly (as we climb the tree) labeled with $\vee$ and $\wedge$ (the root can have either) and whose leaves are (negations of) variables.
 		Every node has finitely many children and at least 2.
 	\end{itemize}
+	We can also non-deterministically apply these algorithms to a term by first picking a representant and then reducing the representant.
 \end{definition}
 \begin{lemma} \label{thm:boolexp-to-const-assignment}
 	For every $t \in \booleanalg^\#(X)$ with non-constant reduction $e$ and $c \in \accol{0, 1}$, there exists a bit assignment $\sigma : X \to \accol{0, 1}$ such that $t[\sigma] = c$.
@@ -1589,6 +1603,7 @@ but for the cases involving connections (conjunctions and disjunctions), we need
 \end{proof}
 \begin{lemma} \label{thm:boolexp-to-var-assignment}
 	For every $t \in \booleanalg^\#(X)$ with reduction $e$ that has a leaf $\tilde x \in \accol{x,\lnot x}$ where $x \in X$, there exists a bit assignment $\sigma : X \setminus \accol x \to \accol{0, 1}$ such that $t[\sigma] = \tilde x$.
+\todoi{Generalize this to sets of leaves.}
 \end{lemma}
 \begin{proof}
 	By induction on the height of the tree.
@@ -1599,11 +1614,12 @@ but for the cases involving connections (conjunctions and disjunctions), we need
 	For disjunctions, we proceed dually.
 \end{proof}
 \begin{corollary} \label{thm:reduction-minimal-deps}
-	If the (basic/associative) reduction of $t$ is $e$ and $e$ depends on $x$, then every expression representing $t$ depends on $x$. \qedhere
+	If $e$ is a (basic/associative) reduction of $t$ and $e$ depends on $x$, then every expression representing $t$ depends on $x$. \qedhere
 \end{corollary}
 \begin{definition} \label{def:in-connection}
-	If an affine boolean term $t \in \booleanalg^\#(X)$ reduces to $e$ which depends on $x, y \in X$, then we say that $x$ and $y$ are \textbf{in conjunction/disjunction in $e$} if the closest common parent node of (the negation of) $x$ and (the negation of) $y$ is labelled with a conjunction/disjunction.
+	If an affine boolean $t \in \booleanalg^\#(X)$ reduces to $e$ which depends on $x, y \in X$, then we say that $x$ and $y$ are \textbf{in conjunction/disjunction in $e$} if the closest common parent node of (the negation of) $x$ and (the negation of) $y$ is labelled with a conjunction/disjunction.\footnote{This is manifestly a property of an \emph{expression} and not of a \emph{term}, since we can flip all labels by negating an expression twice and pushing one negation down the tree.} \todoi{This is a property of the reduction}
 \end{definition}
+\todoi{Associative reduction of affine terms is deterministic. This follows from the graph representation of expressions, which can be recognized from terms by assigning stuff. Develop some theory for this, this sounds fun.}
 
 \paragraph{Understanding jet cube morphisms}
 \begin{lemma} \label{thm:left-of-concursor}
@@ -1623,7 +1639,7 @@ We remark that this lemma is vacuous if $a_i = \npolar$ or $P = {\equijet}$.
 
 In words, the lemma says: When a variable of the domain of a jet cube morphism is used at a lower degree in the codomain, or not at all, then that variable and all variables of the same degree to its left can be promoted to equijet variables.
 
-In practice, we will only use this lemma for $M = \booleanalg$.
+%In practice, we will only use this lemma for $M = \booleanalg$.
 \begin{proof}
 	Let $W'$ be the cube obtained from $W$ by simply deleting all variables of degree $i$ or lower.
 	Then the weakening morphism $\pi : W \to W'$ is a jet cube morphism.
@@ -1653,11 +1669,11 @@ In practice, we will only use this lemma for $M = \booleanalg$.
 	Thus, $\rho$ is both a jet cube morphism $(\Opcube_j V_0, V_1) \to W'$ and $(V_0, V_1) \to W'$, hence it is a jet cube morphism $(\UFsymcube_j V_0, V_1) \to W'$.
 	
 	We now show that $\vfi$ is a jet cube morphism $\tilde V \to W$, i.e.\ that $f := \EP(\vfi)$ is a jet set morphism $\JEP(\tilde V) \to \JEP(W)$.
-	Pick a jet $\vec v = (\vec v_0, u, \vec v_1) \jet_k \vec v' = (\vec v_0', u', \vec v_1')$ in $\tilde V$; we show that $f(\vec v) \jet_k f(\vec v')$.
+	Pick a non-reflexive jet $\vec v = (\vec v_0, u, \vec v_1) \jet_k \vec v' = (\vec v_0', u', \vec v_1')$ in $\tilde V$; we show that $f(\vec v) \jet_k f(\vec v')$.
 	If $k \neq j$, then $\vec v \jet_k \vec v'$ is also a jet in $V$ and therefore preserved by $f$.
 	Thus, we can assume that $k = j$.
-	If $\vec v = \vec v'$, then preservation is trivial, so we assume $\vec v \neq \vec v'$
-	Let $\dm k$ be the unique variable where they differ.
+	%If $\vec v = \vec v'$, then preservation is trivial, so we assume $\vec v \neq \vec v'$.
+	Let $\dm k$ be the unique variable where $\vec v$ and $\vec v'$ differ.
 	There are three possibilities
 	\begin{description}
 		\item[\framebox{$\dm k \in V_0$}]
@@ -1667,7 +1683,9 @@ In practice, we will only use this lemma for $M = \booleanalg$.
 		\begin{itemize}
 			\item If $\dm l$ is of degree $\ell \leq i < j$, then $f(\vec v) \infrajet_j f(\vec v')$ is only possible if $f(\vec v) \infrajet_\ell f(\vec v')$ which implies $f(\vec v) \equijet_j f(\vec v')$.
 			\item If $\dm l$ is of degree $\ell > i$, then we have $\EP(\rho)(\vec v_0, \vec v_1) \overset{\neq}{\equijet}_j \EP(\rho)(\vec v_0', \vec v_1)$ because $\rho$ is a jet cube morphism $(\UFsymcube_j V_0, V_1) \to W'$.
-			Since $\EP(\rho) = \EP(\pi) \circ \EP(\vfi) \circ \EP(c/\dm j)$ for any $c \in \accol{0, 1}$ and the components forgotten by $\EP(\pi)$ are identical and include any dependency on $\dm j$, we have $f(\vec v) \equijet_j f(\vec v')$.
+			Since $\EP(\rho) = \EP(\pi) \circ \EP(\vfi) \circ \EP(c/\dm j)$ for any $c \in \accol{0, 1}$ and the components forgotten by $\EP(\pi)$ are identical,
+			%and include any dependency on $\dm j$,
+			we have $f(\vec v) \equijet_j f(\vec v')$.
 		\end{itemize}
 		
 		\item[\framebox{$\dm k = \dm j$}] In this case, we have $\vec v_0 = \vec v_0'$, $\vec v_1 = \vec v_1'$, and $\vec v \infrajet_j \vec v'$ in $V$.
@@ -1678,7 +1696,7 @@ In practice, we will only use this lemma for $M = \booleanalg$.
 \end{proof}
 \begin{lemma} \label{thm:char-twisted-cube-to-line}
 	In $\jetcubetri \mycubex \booleanalg {\vec a}$ with $\mycubex \in \accol{\affine, \cartes}$, let $V$ be a jet cube with only $i$-directed variables called (from left to right) $\dm j_1, \ldots, \dm j_n$, and consider $\vfi : V \to (\dm i : \rival{P_i})$ with $P \in \accol{\jet, \tej}$.
-	Then $\dm i \psub{\vfi}$ is either a constant or of the form
+	Then $\dm i \psub{\vfi}$ is either a constant or of the (obviously affine) form
 	\[
 		\dm i \psub{\vfi} = (\ldots((\lnot^{p_1} \dm j_1 \opA_1 \lnot^{p_2} \dm j_2) \opA_2 \lnot^{p_3} \dm j_3) \ldots) \opA_{n-1} \lnot^{p_n} \dm j_n
 	\]
@@ -1686,9 +1704,12 @@ In practice, we will only use this lemma for $M = \booleanalg$.
 \end{lemma}
 We will only use this lemma when $\mycubex = \affine$.
 \begin{proof}
+	%It is sufficient to prove this for $\mycubex = \cartes$ as the category of affine jet cubes is a subcategory of the category of cartesian jet cubes.
+%
 	We assume $P = {\jet}$, the proof for $P = {\tej}$ is analogous.
 
 	We prove this by induction on $n$.
+	% (and we don't have to worry about calling the induction hypothesis only on affine morphisms).
 	If $n = 0$ then $\dm i \psub \vfi$ is necessarily a constant.
 	Assume $n > 0$, implying that $a_i = \ypolar$.
 	The jet set $\JEP(V)$ has $2^n$ elements and a unique Hamiltonian path of $i$-jets.
@@ -1719,7 +1740,7 @@ We will only use this lemma when $\mycubex = \affine$.
 		By the induction hypothesis, $s$ is of the prescribed form, and therefore so is $\dm i \psub \vfi$.
 		\item The output of $f$ flips somewhere in the second half of the path.
 		Then $\dm i \psub \vfi = s \wedge \dm j_n'$ for some boolean expression $s$ depending on $\dm j_1, \ldots, \dm j_{n-1}$.
-		Write $V = (U, \dm j : \_)$.
+		Write $V = (U, \dm j_n : \_)$.
 		Then we have $(s/\dm i) : U \to (\dm i : \rival{\jet_i})$, such that $\JEP(s/\dm i)$ is essentially the restriction of $f$ to the second half of the Hamiltonian path as is evident from the following commutative diagram:
 		\[
 			\xymatrix{
@@ -1746,14 +1767,15 @@ We will only use this lemma when $\mycubex = \affine$.
 	\]
 	with $p_k \in \accol{0, 1}$ and $\opA_k \in \accol{{\vee}, {\wedge}, {\opK}}$ where we define $x \opK y := y$, and every $h_k$ is a composition of functions of the form $\loch \opB t$ with $t$ any affine boolean expression mentioning only $i$-symmetric variables and ${\opB} \in \accol{{\vee}, {\wedge}, {\opK}}$.
 \end{lemma}
+\todoi{This follows directly from the previous lemma via the graph representation of boolean expressions.}
 \begin{proof}
 	We assume $P = {\jet}$, the proof for $P = {\tej}$ is analogous.
 
 	First of all, the $i$-equijet relation as well as all $\ell$-jet relations for $\ell < i$ are reflexive in $\JEP(\dm i : \rival{\jet_i}) = \accol{0 \jet_i 1}$, so that $\JEP(\vfi)$ must be constant on $i$-equijet- or $\ell$-jet-connected components, implying that $\vfi$ cannot depend on those variables.
 	Then $\vfi$ factors over the map $\chi : V \to W$ that weakens over all those variables.
-	($\JEP(\chi)$ is the map that quotients out the $i$-equijet and therefore also the $\ell$-jet relations for $\ell < i$.)
+	($\JEP(\chi)$ is the map that quotients out the $i$-equijet relation and therefore also the $\ell$-jet relations for $\ell < i$.)
 	Thus, without loss of generality, we can assume that $V$ contains no variables of degree lower than $i$, and no $i$-equijet variables.
-	Moreover, applying \cref{conv:sort-cubes}, we can assume that the $i$-directed variables in $V$ are the last ones.
+	Moreover, applying \cref{thm:conv-jet-cube-cat}, we can assume without loss of generality that $V$ is conventional so that the $i$-directed variables in $V$ are the last ones.
 	
 	We prove the rest of the theorem by induction on $n$, the number of $i$-directed variables in $V$.
 	If $n = 0$, then $\dm i \psub \vfi = t = \_ \opK t$ where $t$ does not mention any $i$-directed variables.
@@ -1761,9 +1783,9 @@ We will only use this lemma when $\mycubex = \affine$.
 	Let $n > 0$.
 	We reduce $\dm i \psub \vfi$ to an expression $e$ by associative reduction (\cref{def:reduction}).
 	Write $\dm j_k'$ to mean $\dm j_k$ if $\dm j_k : \rival{\jet_i}$ and to mean $\lnot \dm j_k$ if $\dm j_k : \rival{\tej_i}$.
-	Write $U$ for the $i$-directed part of $V$ and note that any assignment of bits to all $i$-symmetric variables yields a jet cube morphism $U \to V$ which necessarily satisfies \cref{thm:char-twisted-cube-to-line}.
+	Write $U$ for the $i$-directed part of $V$ and note that any assignment of bits to all $i$-symmetric variables yields a jet cube morphism $U \to V$ whose composite with $\vfi$ necessarily satisfies \cref{thm:char-twisted-cube-to-line}.
 	
-	We prove the induction step again by induction, now on the height of the syntax tree of $e$.
+	We prove the induction step again by induction, now on the height of the syntax tree of $e$. \todoi{Are we though?}
 	
 	\begin{itemize}
 		\item We claim that if $\dm j_n$ and $\dm j_{k}$ occur in different children of the root node of $e$, then $\dm j'_n$ is a direct child of $e$.
@@ -1772,7 +1794,7 @@ We will only use this lemma when $\mycubex = \affine$.
 		
 		First of all, note that there exists an assignment of all $i$-symmetric variables in $t$ that makes none of the $i$-directed variables disappear.
 		The result should reduce to something satisfying \cref{thm:char-twisted-cube-to-line}.
-		Then this is only possible if any two $i$-directed variables in $t$ are also in $\opA$-connection (\cref{def:in-connection}), so that the parentheses can be moved around.
+		Then this is only possible if any two $i$-directed variables in $t$ are also in $\opA$-connection (\cref{def:in-connection}), so that the parentheses can be moved around. \todoi{Also in $\opA$-connection with $\dm j_n$?}
 		
 		We know that if $\dm j'_n$ is not a direct child of $e$, then it must depend on other variables and the root node of $t$ is labelled with $\opZ$.
 		If one of the immediate operands $s$ of $t$ depends on $\dm j_n$,
@@ -1780,6 +1802,7 @@ We will only use this lemma when $\mycubex = \affine$.
 		Then for every $r$ (and in particular for some $r$) there exists a bit assignment of its dependencies that makes $r$ reduce to $\absorbZ$, such that all of $t$ reduces to $\absorbZ$, and gets ignored as an operand of $e$.
 		In all other direct operands of $e$, we can choose bit assignments of $i$-symmetric variables that make no $i$-directed variables disappear.
 		Then $e$ will reduce to an expression containing $\dm j_k$ but not $\dm j_n$, in violation of \cref{thm:char-twisted-cube-to-line}.
+		\todoi{This is incomprehensible, prove this again!}
 		
 %		\todoi{The reasoning below is not good enough.}
 %		
@@ -2359,6 +2382,7 @@ The shared reader may object that Pinyo and Kraus define the morphisms of $\twis
 	\end{itemize}
 	We will occasionally discuss these subtheories. By considering all of $\List\,\Anpolarity$ in the current paper, we maintain generality.
 \end{remark}
+\todoi{Relate cubes with and without equijets.}
 
 \chapter{Transpension}
 \todoi{Does Tw : sSet $\to$ sSet have a transp type? (Yes if it's Tw$_!$)}
