@@ -1225,8 +1225,8 @@ The last five rules involve connections (conjunction and disjunction) and only a
 Due to the twisted nature of the twisted prism functor, it turns out that we can substitute the last variable of the target cube only with a connection of which one operand (say the right one) is either (the negation of) the last variable of the source cube, or an expression depending only on $i$-symmetric variables.%
 \footnote{This is formalized in \cref{thm:char-jet-cube-to-line}.}
 
-In either case, it turns out that whether the last term reduces to $0$ or $1$ on any end point of the source cube, is sufficiently irregular that the remainder of $\vfi$ can only depend on $i$-symmetric variables.
-The promotion of all variables of degree $i$ to equijet variables in the context of $\vfi$ in at least one of the premises, precludes their usage unless $a_i = \npolar$.
+In either case, it turns out that whether the last term reduces to $0$ or $1$ on any end point of the source cube, is sufficiently irregular that $i$-directed terms in the remainder of $\vfi$ can only depend on $i$-symmetric variables.
+The promotion of all variables of degree $i$ to equijet variables in the context of $\vfi$ in at least one of the premises, precludes their usage in $i$-directed terms.
 
 In the latter case, we can use \ruleref{conn:degree-symmetric}, where $s$ is also checked in the symmetrized context.
 
@@ -1368,17 +1368,19 @@ It is worth pointing out that if $a_i = \npolar$, then \ruleref{conn:degree-symm
 		\item Recalling \cref{def:jep}, soundness of \ruleref{exchange} follows from \cref{thm:cube-commute-symmetric}.
 		(Note that, since we are dealing with conventional cubes, all variables in $U_1$ also have type $\rival{\equijet_i}$.)
 		
+		\item \todoi{Concursor is missing}
+		
 		\item We prove soundness of \ruleref{conn:prism:src-neutral} for the case where $Q = {\jet}$ and $\opA = \vee$, the other case is proven analogously.
-		Assume that $\vfi$ is a jet cube morphism $\UFsymcube_i V \to W$ and $(\vfi, t / \dm i)$ is a jet cube morphism $\mathemph{\Opcube_i V} \to (W, \dm i : \rival{\jet_i})$.
+		Assume that $\vfi$ is a jet cube morphism $\UFsymcube_i V \to W$ and $(\vfi, t / \dm i)$ is a jet cube morphism $\Opcube_i V \to (W, \dm i : \rival{\jet_i})$.
 		We prove that $(\vfi, t \vee \dm i / \dm i)$ is a jet cube morphism $(V, \dm i : \rival{\jet_i}) \to (W, \dm i : \rival{\jet_i})$.
 		
 		Pick a jet $(\vec v, u) \jet_j (\vec v', u')$ in $\JEP(V, \dm i : \rival{\jet_i})$.
-		As the other case is trivial, we assume that this jet is not reflexive.
+		We can assume that this jet is not reflexive.
 		Let $\dm k$ be the variable where both hands defer.
 		Write $f = \EP(\vfi)$ and $g = \EP(\vfi, t \vee \dm i / \dm i)$ and $h = \EP(\vfi, t / \dm i)$.
 		There are two possibilities:
 		\begin{itemize}
-			\item If $\dm k = \dm i$, then without loss of generality we may assume that $j = i$, in which case $\vec v = \vec v'$, $u = 0$ and $u' = 1$.
+			\item If $\dm k = \dm i$, then $j = i$, $\vec v = \vec v'$, $u = 0$ and $u' = 1$.
 			In this case, $(t \vee \dm i) \psub{\vec v, 1} = 1$, so that there is necessarily an $i$-jet $g(\vec v, 0) = (f(\vec v), (t \vee \dm i) \psub{\vec v, 0}) \jet_i (f(\vec v), 1) = g(\vec v, 1)$.
 			\item If $\dm k \in V$, then $u = u'$ and $(\vec v, u) \jet_j (\vec v', u)$. Let $\dm l$ be the variable in $(W, \dm i : \rival{\jet_i})$ such that $\dm l \psub{\vfi, t \vee \dm i}$ depends on $\dm k$.
 			If there is no such variable, then we are done.
@@ -1386,7 +1388,7 @@ It is worth pointing out that if $a_i = \npolar$, then \ruleref{conn:degree-symm
 				\item If $\dm l = \dm i$, then $\dm k$ occurs in $t$.
 				\begin{itemize}
 					\item If $u = 1$, then $g(\vec v, 1) = (f(\vec v), 1) \overset{=}{\jet}_j (f(\vec v'), 1) = g(\vec v', 1)$ as required.
-					\item If $u = 0$, then we have $\vec v \jet_j \vec v'$ in $\JEP(\mathemph{\Opcube_i V})$.
+					\item If $u = 0$, then we have $\vec v \jet_j \vec v'$ in $\JEP(\Opcube_i V)$.
 					Because $(\vfi, t / \dm i)$ is a jet cube morphism $\Opcube_i V \to (W, \dm i : \rival{\jet_i})$, we get
 					$g(\vec v, 0) = h(\vec v) \jet_j h(\vec v') = g(\vec v', 0)$ as required.
 				\end{itemize}
@@ -1402,7 +1404,7 @@ It is worth pointing out that if $a_i = \npolar$, then \ruleref{conn:degree-symm
 %			Either way, we get $\vec v \jet_j \vec v'$ in $\JEP(\UFsymcube_i V)$ and therefore $f(\vec v) \jet_j f(\vec v')$ in $\JEP(W)$ where $f = \EP(\vfi)$.
 		\end{itemize}
 		
-		\item Soundness of \ruleref{conn:prism:tgt-neutral} is proven analogous to that of \ruleref{conn:prism:src-neutral}, adapting the highlighted parts.
+		\item Soundness of \ruleref{conn:prism:tgt-neutral} is proven analogously to that of \ruleref{conn:prism:src-neutral}.
 		
 		\item Soundness of \ruleref{conn:prism-inv:src-neutral} is proven from soundness of \allowbreak \ruleref{conn:prism:src-neutral} by precomposing the result with $(\id_V, \lnot \dm i / \dm i)$ which is a jet cube morphism $(V, \dm i : \rival{P_i}) \to (V, \dm i : \rival{Q_i})$.
 		
