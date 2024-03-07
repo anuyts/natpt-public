@@ -204,12 +204,13 @@
 	\newcommand{\cartes}{\boxslash}
 	\newcommand{\mycubex}{{\wasylozenge}}
 	\newcommand{\mycubey}{{\kreuz}}
-	\newcommand{\fwdori}{{\mathsf{1}}}
-	\newcommand{\biori}{{\mathsf{2}}}
-	\newcommand{\triori}{{\mathsf{3}}}
-	\newcommand{\myorix}{o}
-%	\newcommand{\fwdori}{{\uranus}}
-%	\newcommand{\triori}{{\neptune}}
+	\newcommand{\orif}{{\mathsf{f}}}
+	\newcommand{\orife}{{\mathsf{fe}}}
+	\newcommand{\orifb}{{\mathsf{fb}}}
+	\newcommand{\orifbe}{{\mathsf{fbe}}}
+	\newcommand{\myorix}{\omega}
+%	\newcommand{\orif}{{\uranus}}
+%	\newcommand{\orifbe}{{\neptune}}
 %	\newcommand{\myorix}{{\taurus}}
 %	\newcommand{\myoriy}{{\mercury}}
 \newcommand{\twistedcubecat}{{\name{TwCube}}}
@@ -221,20 +222,21 @@
 
 \newcommand{\jetset}[1]{\name{JetSet}(#1)}
 \newcommand{\jetjewel}[1]{\name{JetJewel}(#1)}
-\newcommand{\jetcube}[4]{{}^{#1}\hspace{-.5ex}\name{JetCube}^{#2}_{#3}\paren{#4}}
-	\newcommand{\jetcubefwd}[3]{\jetcube{\fwdori}{#1}{#2}{#3}}
-	\newcommand{\jetcubefwdaff}[2]{\jetcube{\fwdori}{\affine}{#1}{#2}}
-	\newcommand{\jetcubefwdcart}[2]{\jetcube{\fwdori}{\cartes}{#1}{#2}}
-	\newcommand{\jetcubetri}[3]{\jetcube{\triori}{#1}{#2}{#3}}
-	\newcommand{\jetcubetriaff}[2]{\jetcube{\triori}{\affine}{#1}{#2}}
-	\newcommand{\jetcubetricart}[2]{\jetcube{\triori}{\cartes}{#1}{#2}}
-\newcommand{\convjetcube}[4]{{}^{#1}\hspace{-.5ex}\name{JetCubeConv}^{#2}_{#3}\paren{#4}}
-	\newcommand{\convjetcubefwd}[3]{\convjetcube{\fwdori}{#1}{#2}{#3}}
-	\newcommand{\convjetcubefwdaff}[2]{\convjetcube{\fwdori}{\affine}{#1}{#2}}
-	\newcommand{\convjetcubefwdcart}[2]{\convjetcube{\fwdori}{\cartes}{#1}{#2}}
-	\newcommand{\convjetcubetri}[3]{\convjetcube{\triori}{#1}{#2}{#3}}
-	\newcommand{\convjetcubetriaff}[2]{\convjetcube{\triori}{\affine}{#1}{#2}}
-	\newcommand{\convjetcubetricart}[2]{\convjetcube{\triori}{\cartes}{#1}{#2}}
+\newcommand{\jetcube}[4]{\name{JetCube}^{#2}_{#3}\paren{#1,#4}}
+%\newcommand{\jetcube}[4]{{}^{#1}\hspace{-.5ex}\name{JetCube}^{#2}_{#3}\paren{#4}}
+	\newcommand{\jetcubefwd}[3]{\jetcube{\orif}{#1}{#2}{#3}}
+	\newcommand{\jetcubefwdaff}[2]{\jetcube{\orif}{\affine}{#1}{#2}}
+	\newcommand{\jetcubefwdcart}[2]{\jetcube{\orif}{\cartes}{#1}{#2}}
+	\newcommand{\jetcubetri}[3]{\jetcube{\orifbe}{#1}{#2}{#3}}
+	\newcommand{\jetcubetriaff}[2]{\jetcube{\orifbe}{\affine}{#1}{#2}}
+	\newcommand{\jetcubetricart}[2]{\jetcube{\orifbe}{\cartes}{#1}{#2}}
+\newcommand{\convjetcube}[4]{\name{JetCubeConv}^{#2}_{#3}\paren{#1,#4}}
+	\newcommand{\convjetcubefwd}[3]{\convjetcube{\orif}{#1}{#2}{#3}}
+	\newcommand{\convjetcubefwdaff}[2]{\convjetcube{\orif}{\affine}{#1}{#2}}
+	\newcommand{\convjetcubefwdcart}[2]{\convjetcube{\orif}{\cartes}{#1}{#2}}
+	\newcommand{\convjetcubetri}[3]{\convjetcube{\orifbe}{#1}{#2}{#3}}
+	\newcommand{\convjetcubetriaff}[2]{\convjetcube{\orifbe}{\affine}{#1}{#2}}
+	\newcommand{\convjetcubetricart}[2]{\convjetcube{\orifbe}{\cartes}{#1}{#2}}
 
 \newcommand{\erasejc}[1]{\floor{#1}}
 
@@ -397,6 +399,7 @@
 % mode theory
 
 \newcommand{\Anpolarity}{{\mathbb{A}}}
+\newcommand{\Ori}{{\mathbb{O}}}
 \newcommand{\ypolar}{{\text{\sagittarius}}}
 \newcommand{\npolar}{{\text{\fullmoon}}}
 %\newcommand{\ypolar}{{\pm}}
