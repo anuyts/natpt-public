@@ -1354,7 +1354,7 @@ It is worth pointing out that if $a_i = \npolar$, then \ruleref{conn:degree-symm
 		
 		\item Soundness of \ruleref{symmetrize} follows from the adjunction established in \cref{thm:lift-to-jet-cubes}.
 		
-		\item We prove soundness of \ruleref{wkn} by precomposition with a jet cube morphism that erases to $(\id, \dm i / \novar) : (V, \dm i : \rival{R_i}) \to \UFsym_i V$.
+		\item We prove soundness of \ruleref{wkn} by precomposition with a jet cube morphism that erases to $(\id, \dm i / \novar) : \erasejc{(V, \dm i : \rival{R_i})} \to \UFsym_i \erasejc{V}$.
 		Thus, we need to prove that $\EP(\id, \dm i / \novar) : (\vec v, w) \mapsto \vec v$ is a jet set morphism $\JEP(V, \dm i : \rival{R_i})
 		%= \JEP(V) \multip \rival{\jet_i}
 		\to \JEP(\UFsymcube_i(V))$.
@@ -1366,6 +1366,7 @@ It is worth pointing out that if $a_i = \npolar$, then \ruleref{conn:degree-symm
 		\end{itemize}
 		
 		\item Recalling \cref{def:jep}, soundness of \ruleref{exchange} follows from \cref{thm:cube-commute-symmetric}.
+		(Note that, since we are dealing with decreasing cubes, all variables in $U_1$ also have type $\rival{\equijet_i}$.)
 		
 		\item We prove soundness of \ruleref{conn:prism:src-neutral} for the case where $Q = {\jet}$ and $\opA = \vee$, the other case is proven analogously.
 		Assume that $\vfi$ is a jet cube morphism $\UFsymcube_i V \to W$ and $(\vfi, t / \dm i)$ is a jet cube morphism $\mathemph{\Opcube_i V} \to (W, \dm i : \rival{\jet_i})$.
