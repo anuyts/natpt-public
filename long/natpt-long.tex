@@ -1368,16 +1368,36 @@ It is worth pointing out that if $a_i = \npolar$, then \ruleref{conn:degree-symm
 		\item Recalling \cref{def:jep}, soundness of \ruleref{exchange} follows from \cref{thm:cube-commute-symmetric}.
 		(Note that, since we are dealing with conventional cubes, all variables in $U_1$ also have type $\rival{\equijet_i}$.)
 		
-		\item \todoi{Concursor is missing}
+		\item We prove soundness of \ruleref{concursor}.
+		Assume that $\vfi$ is a jet cube morphism $\UFsymcube_i(\UFsymcube_j U, V) \to W$ and $j > i$.
+		We prove that $(\vfi, \dm j / \dm i)$ is a jet cube morphism $(U, \dm j : \rival{P_j}, V) \to (W, \dm i : \rival{Q_i})$.
+		Write $f = \EP(\vfi)$ and $g = \EP(\vfi, \dm j / \dm i)$.
+		
+		Pick a jet $(\vec u, t, \vec v) \jet_k (\vec u', t', \vec v')$ in $\JEP(U, \dm j : \rival{P_j}, V)$.
+		We can assume that this jet is not reflexive.
+		Let $\dm k$ be the variable where both hands differ.
+		There are three possibilities:
+		\begin{itemize}
+			\item If $\dm k \in U$, then we have $t = t'$, $\vec v = \vec v'$ and $(\vec u, t, \vec v) \jet_k (\vec u', t, \vec v)$.
+			\begin{itemize}
+				\item If $k \neq j$ and $k \neq i$, this implies $(\vec u, \vec v) \jet_k (\vec u', \vec v)$ in $\JEP(U, V)$ and therefore also in $\JEP(\UFsymcube_i(\UFsymcube_j U, V))$, whence $f(\vec u, \vec v) \jet_k f(\vec u', \vec v)$, whence $g(\vec u, t, \vec v) = (f(\vec u, \vec v), t) \jet_k (f(\vec u', \vec v), t) = g(\vec u', t, \vec v)$.
+				\item If $k = i$ or $k = j$, this implies $(\vec u, \vec v) \infrajet_k (\vec u', \vec v)$ in $\JEP(U, V)$ and therefore $(\vec u, \vec v) \equijet_k (\vec u', \vec v)$ in $\JEP(\UFsymcube_i(\UFsymcube_j U, V))$, whence $f(\vec u, \vec v) \equijet_k f(\vec u', \vec v)$, whence $g(\vec u, t, \vec v) = (f(\vec u, \vec v), t) \equijet_k (f(\vec u', \vec v), t) = g(\vec u', t, \vec v)$.
+			\end{itemize}
+			\item If $\dm k = \dm j$, then we have $k = j$, $\vec u = \vec u'$, $t \neq t'$ and $\vec v = \vec v'$. Then $g(\vec u, t, \vec v) = (f(\vec u, \vec v), t) \infrajet_i (f(\vec u, \vec v), t') = g(\vec u, t', \vec v)$ which implies $g(\vec u, t, \vec v) \jet_j g(\vec u, t', \vec v)$ since $j > i$.
+			\item If $\dm k \in V$, then we have $t = t'$, $\vec u = \vec u'$ and $\vec v \jet_k \vec v'$ in $\JEP(V)$.
+			\begin{itemize}
+				\item If $k \neq i$, this implies $(\vec u, \vec v) \jet_k (\vec u, \vec v')$ in $\JEP(\UFsymcube_i(\UFsymcube_j U, V))$, whence $f(\vec u, \vec v) \jet_k f(\vec u, \vec v')$, whence $g(\vec u, t, \vec v) = (f(\vec u, \vec v), t) \jet_k (f(\vec u, \vec v'), t) = g(\vec u, t, \vec v')$.
+				\item If $k = i$, this implies $(\vec u, \vec v) \equijet_i (\vec u, \vec v')$ in $\JEP(\UFsymcube_i(\UFsymcube_j U, V))$, whence $f(\vec u, \vec v) \equijet_i f(\vec u, \vec v')$, whence $g(\vec u, t, \vec v) = (f(\vec u, \vec v), t) \equijet_i (f(\vec u, \vec v'), t) = g(\vec u, t, \vec v')$.
+			\end{itemize}
+		\end{itemize}
 		
 		\item We prove soundness of \ruleref{conn:prism:src-neutral} for the case where $Q = {\jet}$ and $\opA = \vee$, the other case is proven analogously.
 		Assume that $\vfi$ is a jet cube morphism $\UFsymcube_i V \to W$ and $(\vfi, t / \dm i)$ is a jet cube morphism $\Opcube_i V \to (W, \dm i : \rival{\jet_i})$.
 		We prove that $(\vfi, t \vee \dm i / \dm i)$ is a jet cube morphism $(V, \dm i : \rival{\jet_i}) \to (W, \dm i : \rival{\jet_i})$.
-		
-		Pick a jet $(\vec v, u) \jet_j (\vec v', u')$ in $\JEP(V, \dm i : \rival{\jet_i})$.
-		We can assume that this jet is not reflexive.
-		Let $\dm k$ be the variable where both hands defer.
 		Write $f = \EP(\vfi)$ and $g = \EP(\vfi, t \vee \dm i / \dm i)$ and $h = \EP(\vfi, t / \dm i)$.
+		
+		Pick a non-reflexive jet $(\vec v, u) \jet_j (\vec v', u')$ in $\JEP(V, \dm i : \rival{\jet_i})$.
+		Let $\dm k$ be the variable where both hands defer.
 		There are two possibilities:
 		\begin{itemize}
 			\item If $\dm k = \dm i$, then $j = i$, $\vec v = \vec v'$, $u = 0$ and $u' = 1$.
