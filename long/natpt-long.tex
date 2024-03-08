@@ -1724,7 +1724,7 @@ but for the cases involving connections (conjunctions and disjunctions), we need
 		\item $e$ is of the form $e = d_1 \opA d_2 \opA \ldots \opA d_m$ but the dependencies are not as expected.
 		Then we get a different partition of $X$ by the upward implication which we already proved.
 		But then we can intersect both partitions, yielding a finer one, which is in contradiction with the assumption that further partitioning was not possible.
-		\item $e$ is of the form $e = d_1 \opB d_2 \opB \ldots \opB d_m$. Then $X$ is $\opB$-connected meaning that $n = 1$, violating the assumptions.
+		\item $e$ is of the form $e = d_1 \opB d_2 \opB \ldots \opB d_m$. Then $X$ is $\opB$-connected meaning that $n = 1$, violating the assumptions. \qedhere
 	\end{itemize}
 \end{proof}
 \begin{theorem} \label{thm:bool:normal-from-graph}
@@ -1752,6 +1752,7 @@ but for the cases involving connections (conjunctions and disjunctions), we need
 	Thus, by \cref{thm:bool:normal-from-graph}, we conclude that $e = e'$.
 \end{proof}
 \todoi{Associative reduction of affine terms is deterministic. This follows from the graph representation of expressions, which can be recognized from terms by assigning stuff. Develop some theory for this, this sounds fun.}
+\todoi{Definition of pruning is insufficiently general: nodes may be fused.}
 
 \paragraph{Understanding jet cube morphisms}
 \begin{lemma} \label{thm:left-of-concursor}
