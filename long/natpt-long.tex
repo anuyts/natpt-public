@@ -2094,20 +2094,20 @@ In words, this lemma says that if the last variable $\dm i$ of $W$ is substitute
 
 \subsubsection{Completeness}
 \begin{theorem}[Completeness] \label{thm:calculus-complete}
-	For $M \in \accol{\bipointedsym, \booleanalg}$ and any morphism $\hat \vfi : V \to W$ in $\jetcubetri \affine M {\vec a}$ between cubes compliant to \cref{conv:sort-cubes}, writing $\vfi = \erasejc{\hat \vfi}$, we have $\sez \vfi : V \to W$.
+	For $M \in \accol{\bipointedsym, \booleanalg}$ and any morphism $\hat \vfi : V \to W$ in $\convjetcubetri \affine M {\vec a}$, writing $\vfi = \erasejc{\hat \vfi}$, we have $\sez \vfi : V \to W$.
 \end{theorem}
 \begin{proof}
-	For each variable $\dm k$ in $W$, let $e_{\dm k}$ be the reduction of $\dm k \psub{\vfi}$.
+	For each variable $\dm k$ in $W$, let $e_{\dm k}$ be the normal affine representant of $\dm k \psub{\vfi}$.
 
-	We prove completeness by induction on the number of nodes and leaves (added up) in the tuple $(e_{\dm k})_{\dm k \in W}$.
+	We prove completeness by induction on the number of nodes and leaves (added up) in the tuple $(e_{\dm k})_{\dm k \in W}$, plus the number of directed degrees in the mask.
 	
 	If $W = ()$, then use \ruleref{terminal}.
 	
-	If $a_i = \ypolar$ and the last variable in $W$ is $\dm i : \rival{\equijet_i}$, then $W$ is of the form $\Usymcube_i(U)$ and there will be a corresponding morphism $\Fsymcube_i(V) \to U$ and we can use the rule \ruleref{symmetrize}.
+	If $a_i = \ypolar$ and the last variable in $W$ is $\dm i : \rival{\equijet_i}$, then $W$ is of the form $\Usymcube_i(U)$ and we can use the induction hypothesis for the corresponding morphism $\Fsymcube_i(V) \to U$ and we can use the rule \ruleref{symmetrize}.
 	
 	In the remaining case, the last variable in $W$ is not an equijet dimension at a directed degree, i.e.\ it is of the form $\dm i : \rival{\jet_i}$ or $\dm i : \rival{\tej_i}$.
 	
-	If the last variable in $V$ is of degree strictly lower (stronger) than $\dm i$, then in order to be a jet set morphism, $\JEP(\hat \vfi)$ cannot depend on that variable, so we can invoke \ruleref{wkn} until the last variable in $V$ is of degree at least $i$. We do not resort to the induction hypothesis but proceed below.
+	If the last variable in $V$ is of degree strictly lower (stronger) than the degree of $\dm i$, then in order to be a jet set morphism, $\JEP(\hat \vfi)$ cannot depend on that variable, so we can invoke \ruleref{wkn} until the last variable in $V$ is of degree at least $i$. We do not resort to the induction hypothesis but proceed below.
 	
 %	If $a_i = \npolar$, then we use \ruleref{exchange} (which is sound by \cref{thm:calculus-sound}) to reorder the variables of degree $i$ in $W$, and immediately proceed with the algorithm below.
 %	We put constants last. Before that, if existent, we put the sole variable $\dm k_1$ such that $e_{\dm k_1}$ mentions the last variable of degree $i$ in $V$.
@@ -2146,14 +2146,14 @@ In words, this lemma says that if the last variable $\dm i$ of $W$ is substitute
 					\ar[u]_{(1/\dm i)}
 			}
 		\]
-		We note that the black arrows are all jet cube morphisms, and the vertical arrows all yield full jet set morphisms (\cref{def:full-jetsethom}).
+		We know that the black arrows are all jet cube morphisms, and the vertical arrows all yield full jet set morphisms (\cref{def:full-jetsethom}).
 		This implies that the dashed arrows also lift to jet set morphisms, i.e.\ are jet cube morphisms.
 		Then $\chi$ is both a jet cube morphism $(V_0, V_1) \to U$ and $\Opcube_i(\Opcube_j(V_0), V_1) \to U$.
 		\begin{itemize}
 			\item If $j = i$, then all variables in $V_1$ have degree $i$ and $\chi$ is both a jet cube morphism $(V_0, V_1) \to U$ and $\Opcube_i(\Opcube_i V_0, V_1) \to U$.
 			This implies that $\EP(\vfi)$ sends every $i$-jet of the form $(\vec v_0, r, \vec v_1) \jet_i (\vec v_0, r, \vec v_1')$ in $\JEP(V_0, V_1)$ -- which points the other way in $\JEP(\Opcube_i(\Opcube_i V_0, V_1))$ -- to an $i$-equijet $(\EP(\chi)(\vec v_0, \vec v_1), r) \equijet_i (\EP(\chi)(\vec v_0, \vec v'_1), r)$ in $\JEP(U, \dm i : \rival{\jet_i})$.
 			\begin{itemize}
-				\item If $a_i = \ypolar$, then for any bit-assignment $\vec v_1$ of the variables in $V_1$, we get a jet cube morphism $(\chi \circ (\vec v_1/V_1), \dm j / \dm i) : (\Opcube_i)^p(V_0, \dm j : \rival{R_j}) \to (U, \dm i : \rival{\jet_i})$, where $p$ is the number of zeroes in $\vec v$.
+				\item If $a_i = \ypolar$, then for any bit-assignment $\vec v_1$ of the variables in $V_1$, we get a jet cube morphism $(\chi \circ (\vec v_1/V_1), \dm j / \dm i) : (\Opcube_i)^p(V_0, \dm j : \rival{R_i}) \to (U, \dm i : \rival{\jet_i})$, where $p$ is the number of source constants in $\vec v$ (i.e.\ $0$ for $\rival{\jet_i}$ and $1$ for $\rival{\tej_i}$).
 				This implies that $p$ is the same for all assignments $\vec v$, which is only possible if $V_1 = ()$.
 				In that case, it is easy to see that $R = {\jet}$.
 				Thus, we can apply \ruleref{prism:fwd}.
@@ -2200,9 +2200,27 @@ In words, this lemma says that if the last variable $\dm i$ of $W$ is substitute
 					\item If $j = i$, then from $(g(\vec v), s_0 \opA t_0) = f(\vec v) \edge_i f(\vec v') = (g(\vec v'), s_0 \opA t_0)$ it follows that $g(\vec v) \edge_i g(\vec v')$ in $\JEP(U)$, whence $p(\vec v) = (g(\vec v), s_0) \edge_i (g(\vec v'), s_0) = p(\vec v')$.
 				\end{itemize}
 				\item If $s$ depends on $\dm k$, then we have $g(\vec v) = g(\vec v') =: g_0$ and $t \psub{\vec v} = t \psub{\vec v'} =: t_0$.
-				Pick a bit-assignment $\tau$ of the dependencies of $t$ such that $t \psub \tau$ reduces to the neutral element $\neutralA$ of $\opA$.\footnote{If this were not possible, then $t$ would be a constant, which is in contradiction with the assumption that $e_{\dm i}$ was reduced.}
+				Pick a bit-assignment $\tau$ of the dependencies of $t$ such that $t \psub \tau$ reduces to the neutral element $\neutralA$ of $\opA$.\footnote{If this were not possible, then $t$ would be a constant, which is in contradiction with the assumption that $e_{\dm i}$ was normal.}
 				Define $\vec x$ and $\vec x'$ by overwriting $\vec v$ and $\vec v'$ with $\tau$. Then $g(\vec x) = g(\vec x') = g_0$ and $t \psub{\vec x} = t \psub{\vec x'} = \neutralA$ and $s \psub{\vec x} = s \psub{\vec v}$ and $s \psub{\vec x'} = s \psub{\vec v'}$.
-				We have $\vec x \infrajet_j \vec x'$, whence $p(\vec v) = (g_0, s \psub{\vec v}) = f(\vec x) \infrajet_j f(\vec x') = (g_0, s \psub{\vec v'}) = p(\vec v')$ in $\JEP(W, \dm i : \rival{\jet_i})$.
+				We have $\vec x \infrajet_j \vec x'$, whence
+				\[
+					\begin{array}{c c c c c c c c c}
+					p(\vec v)
+					&=& (g_0, s \psub{\vec v})
+					&=& (g_0, s \psub{\vec v} \opA \neutralA)
+					&=& (g_0, s \psub{\vec x} \opA t \psub{\vec x})
+					&=& f(\vec x)
+					\\
+					&&&&&&&& \infrajet_j
+					\\
+					p(\vec v')
+					&=& (g_0, s \psub{\vec v'})
+					&=& (g_0, s \psub{\vec v'} \opA \neutralA)
+					&=& (g_0, s \psub{\vec x'} \opA t \psub{\vec x'})
+					&=& f(\vec x')
+					\end{array}
+				\]
+				in $\JEP(W, \dm i : \rival{\jet_i})$.
 				Now, since these vectors only differ at $\dm i$, we can deduce equality if $j < i$ ($j$ is stronger than $i$) and otherwise that $p(\vec v) \edge_i p(\vec v')$, which implies $p(\vec v) \jet_j p(\vec v')$ since $j \geq i$ ($j$ is weaker than or equal to $i$).
 				
 				\item If $t$ depends on $\dm k$, then $\chi$ and $s$ do not so $p(\vec v) = p(\vec v')$ and we are done.
@@ -2243,7 +2261,7 @@ In words, this lemma says that if the last variable $\dm i$ of $W$ is substitute
 				\]
 				Thus, we can invoke one of the rules \ruleref{conn:prism:src-neutral}, \allowbreak \ruleref{conn:prism:tgt-neutral}, \ruleref{conn:prism-inv:src-neutral}, \ruleref{conn:prism-inv:tgt-neutral}.
 				
-				\item If $s$ depends only on $i$-symmetric variables, then the same holds for $(\vfi, s / \dm i)$. Write
+				\item If $s$ depends only on $i$-symmetric variables, then the same holds for $(\chi, s / \dm i)$. Write
 				\[
 					f = \EP(\vfi), \qquad
 					g = \EP(\chi), \qquad
@@ -2281,7 +2299,21 @@ In words, this lemma says that if the last variable $\dm i$ of $W$ is substitute
 					We have $\vec y \infrajet_j \vec y'$ but, since all dependencies of $s$ are $i$-symmetric, they come to the left of all $i$-directed variables, so if $i = j$ we actually still have $\vec y \jet_i \vec y'$.
 					Now we have
 					\[
-						q(\vec v) = (g_0, t \psub{\vec v}) = f(\vec y) \infrajet_j f(\vec y') = (g_0, t \psub{\vec v'}) = q(\vec v')
+						\begin{array}{c c c c c c c c c}
+						q(\vec v)
+						&=& (g_0, t \psub{\vec v})
+						&=& (g_0, \neutralA \opA t \psub{\vec v})
+						&=& (g_0, s \psub{\vec y} \opA t \psub{\vec y})
+						&=& f(\vec y)
+						\\
+						&&&&&&&& \infrajet_j
+						\\
+						q(\vec v')
+						&=& (g_0, t \psub{\vec v'})
+						&=& (g_0, \neutralA \opA t \psub{\vec v'})
+						&=& (g_0, s \psub{\vec y'} \opA t \psub{\vec y'})
+						&=& f(\vec y')
+						\end{array}
 					\]
 					and $q(\vec v) \jet_i q(\vec v')$ if $j = i$.
 					Thus, the case $j = i$ has been handled.
