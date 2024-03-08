@@ -1608,7 +1608,13 @@ but for the cases involving connections (conjunctions and disjunctions), we need
 	Let $d$ and $e$ be normal expressions. We say that $d$ is a \textbf{prune} of $e$ if any of the following conditions hold (inductively):
 	\begin{itemize}
 		\item $d$ is a literal occurring in $e$,
-		\item $e$ has a subexpression $e'$ which has the same root label as $d$ ($\vee$ or $\wedge$) and such that every root operand of $d$ is a prune of a root operand in $e'$, and moreover a single operand of $e'$ cannot be used more often than its multiplicity in the multiset of root operands of $e'$ (taking into account the multiplicity of root operands of $d'$).
+		\item $e$ has a subexpression $e'$ which has the same root label ${\opA} \in \accol{{\vee}, {\wedge}}$ as $d$ and such that there exists a partition of the multiset of operands of $d$, i.e.
+		\[
+			d = D_1 \opA \ldots \opA D_n
+			\quad \text{where} \quad
+			D_i = d_{i1} \opA \ldots \opA d_{ik_i}
+		\]
+		such that every $D_i$ is a prune of a root operand in $e'$, and moreover a single operand of $e'$ cannot be used more often than its multiplicity in the multiset of root operands of $e'$.
 	\end{itemize}
 \end{definition}
 \begin{proposition} \label{thm:bool:assign-prune}
@@ -1658,8 +1664,9 @@ but for the cases involving connections (conjunctions and disjunctions), we need
 	Then $x$ and $y$ are in $\opA$-connection in $d$ if and only if they are in $\opA$-connection in $e$.
 \end{lemma}
 \begin{proof}
-	Take the closest common ancestor of $x$ and $y$ in $d$; call $d'$ the subtree rooted there.
-	By definition of a prune, there is a corresponding node in $e$ with the same label; call $e'$ the subtree rooted there.
+	Take the closest common ancestor of $x$ and $y$ in $d$.
+	Proving that $d$ is a prune of $e$ involves, at some point, that the operands of $d$ mentioning $x$ and $y$ are separated.
+	At that point, a corresponding node in $e$ was chosen with the same label; call $e'$ the subtree rooted there.
 	The immediate subtrees of $d'$ mentioning $x$ and $y$ are prunes of different immediate subtrees of $e'$, so that the root node of $e'$ is also the closest common ancestor of $x$ and $y$ in $e$.
 \end{proof}
 \begin{lemma} \label{thm:bool:twovar-normalization}
@@ -1738,7 +1745,7 @@ but for the cases involving connections (conjunctions and disjunctions), we need
 	Then \cref{thm:bool:char-root-node} partitions $X$ in $\opB$-connected components.
 	Then by the other implication of \cref{thm:bool:char-root-node}, $e'$ is of the form $e' = d_1' \opA d_2' \opA \ldots \opA d_n'$, where $d_i$ and $d_i'$ have the same dependencies $X_i$.
 	Thus, they must also depend on the same set of literals.
-	Since $d_i$ is a prune of $e$ and $d_i'$ is a prune of $e'$, we have $\getconn{d_i} \loch \loch = \getconn{d_i'} \loch \loch$.
+	Since $d_i$ is a prune of $e$ and $d_i'$ is a prune of $e'$, we have $\getconn{d_i} \loch \loch = \getconn e \loch \loch = \getconn{e'} \loch \loch = \getconn{d_i'} \loch \loch$ when considered on pairs of distinct variables in $X_i$.
 	From the induction hypothesis, we conclude that $d_i = d_i'$, for all $i$, and hence $e = e'$.
 \end{proof}
 \begin{theorem} \label{thm:bool:normalization}
