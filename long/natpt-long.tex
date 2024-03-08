@@ -98,6 +98,9 @@ The main purpose of the categories of jet jewels is to be workable for most basi
 
 Upon a first lecture, readers may choose to omit \cref{sec:jetcubes} on jet cubes.
 
+Finally in \cref{sec:pb}, we introduce a number of operations on anpolarity masks which serve to insert bridge and/or path relations for every degree.
+These will be both a technical device and a source of interesting modes in practice.
+
 \todoi{I momentarily had some doubt about usability of jet jewels, but I think it's okay.
 The calculus and its soundness proof are used mainly for modalities interacting with the interval. But these will not be used intensively in the NatPT paper itself.}
 
@@ -2566,30 +2569,65 @@ The shared reader may object that Pinyo and Kraus define the morphisms of $\twis
 	This means we can always rewrite a derivation tree in the calculus for $\jetcubetri \affine \bipointedsym {[\ypolar]}$ of a morphism in $\jetcubefwd \affine \bipointedsym {[\ypolar]}$ to use only the prescribed rules. 
 \end{proof}
 
-\chapter{Modalities}
+\section{Paths and Bridges} \label{sec:pb}
+In this section, we define a number of operations on anpolarity masks (\cref{def:anpolarity}) which serve to insert symmetric \emph{bridge} and/or \emph{path} relations for every degree.
+These operations serve three goals:
+\begin{itemize}
+	\item They are helpful to understand equijets\todo{refer},
+	\item They are helpful to prove pseudofunctoriality of the semantics of the mode theory\todo{refer},
+	\item They generate the modes that we will likely want to use in practice.
+\end{itemize}
 
-\chapter{Paths and Bridges}
-\begin{remark} \todoi{Move this remark}
-	We note that it is always possible to restrict our mode theory, by discarding modes but keeping the same modalities and 2-cells between remaining modes.
-	We could decide to restrict to any of the following subsets of modes:
-	\begin{itemize}
-		\item Modes of the form $[\ypolar]^*$, i.e.\ where all degrees are polar,
-		\item Modes of the form $([\npolar] | [\npolar, \ypolar])^*$, i.e.\ where we think of a level as containing a path relation and optionally a weaker jet relation,
-		\begin{itemize}
-			\item Modes of the form $[\npolar, \ypolar]^*$ where the presence of a jet relation at each level is required,
-		\end{itemize}
-		\item Modes of the form $([\npolar] | [\ypolar, \npolar])^*$, i.e.\ where we think of a level as containing a bridge relation and optionally a stronger jet relation,
-		\begin{itemize}
-			\item Modes of the form $[\ypolar, \npolar]^*$ where the presence of a jet relation at each level is required,
-		\end{itemize}
-		\item Modes of the form $([\npolar, \npolar] | [\npolar, \ypolar, \npolar])^*$, i.e.\ where we think of a level as containing a path relation and a weaker bridge relation and optionally, in between, a jet relation,
-		\begin{itemize}
-			\item Modes of the form $[\npolar, \ypolar, \npolar]^*$ where the presence of a jet relation at each level is required.
-		\end{itemize}
-	\end{itemize}
-	We will occasionally discuss these subtheories. By considering all of $\List\,\Anpolarity$ in the current paper, we maintain generality.
-\end{remark}
-\todoi{Relate cubes with and without equijets.}
+%\subsection{Path/Bridge Transformations}
+\begin{definition}
+	Let $\mymaskx \in \accol{\maskj, \maskpj, \maskjb, \maskpjb}$ and $\mymasky \in \accol{\maske, \maskpb}$, and let $a$ be an anpolarity.
+	We define $\maskop a \mymaskx \mymasky \in \List\,\Anpolarity$ as follows:
+	\[
+		\begin{array}{l c c c l c c}
+			\maskop \ypolar \maskj \mymasky &=& [\ypolar]
+			&\qquad&
+			\maskop \npolar \mymaskx \maske &=& [\npolar]
+			\\
+			\maskop \ypolar \maskpj \mymasky &=& [\npolar, \ypolar]
+			&\qquad&
+			\maskop \npolar \mymaskx \maskpb &=& [\npolar, \npolar]
+			\\
+			\maskop \ypolar \maskjb \mymasky &=& [\ypolar, \npolar]
+			\\
+			\maskop \ypolar \maskpjb \mymasky &=& [\npolar, \ypolar, \npolar]
+		\end{array}
+	\]
+	We extend this operation to anpolarity masks as follows: $\maskop{\vec a}{\mymaskx}{\mymasky}$ is the concatenation of the list of lists obtained by applying $\maskop{\loch}{\mymaskx}{\mymasky}$ to every element of $\vec a$.
+	Indexing the resulting mask is complicated, because the length of the resulting mask depends not only on the length of $\vec a$ but also on its contents.
+	
+	In order to stay sane, we will use an indexing system that still refers to the degrees of $\vec a$, which we will call \textbf{big degrees}, whereas the degrees of $\maskop{\vec a}{\mymaskx}{\mymasky}$ will be called \textbf{small degrees}.
+	Concretely, a small degree subscript will be replaced with a big degree subscript combined with a superscript indicating whether we are talking about the path/jet/bridge or edge relation.
+	For example, if $\vec a = [\ypolar, \npolar, \ypolar]$, then the relations of $\maskop{\vec a}{\maskpjb}{\maske}$ will be denoted as:
+	\[
+		\nwpath_0, \quad
+		\nwjet_0, \quad
+		\nwbridge_0, \quad
+		\nwedge_1, \quad
+		\nwpath_2, \quad
+		\nwjet_2, \quad
+		\nwbridge_2,
+	\]
+	rather than
+	\[
+		\edge_0, \quad
+		\jet_1, \quad
+		\edge_2, \quad
+		\edge_3, \quad
+		\edge_4, \quad
+		\jet_5, \quad
+		{\edge_6}.
+	\]
+\end{definition}
+
+\subsection{Understanding Equijets}
+\todoi{This is way easier if you have modalities}
+
+\chapter{Modalities}
 
 \chapter{Transpension}
 \todoi{Does Tw : sSet $\to$ sSet have a transp type? (Yes if it's Tw$_!$)}
