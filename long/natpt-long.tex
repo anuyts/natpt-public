@@ -1604,8 +1604,8 @@ but for the cases involving connections (conjunctions and disjunctions), we need
 %	\end{itemize}
 %	We can also non-deterministically apply these algorithms to a term by first picking a representant and then reducing the representant.
 \end{definition}
-\begin{definition} \label{def:bool:prune}
-	Let $d$ and $e$ be normal expressions. We say that $d$ is a \textbf{prune} of $e$ if any of the following conditions hold (inductively):
+\begin{definition} \label{def:bool:pruning}
+	Let $d$ and $e$ be normal expressions. We say that $d$ is a \textbf{pruning} of $e$ if any of the following conditions hold (inductively):
 	\begin{itemize}
 		\item $d$ is a literal occurring in $e$,
 		\item $e$ has a subexpression $e'$ which has the same root label ${\opA} \in \accol{{\vee}, {\wedge}}$ as $d$ and such that there exists a partition of the multiset of operands of $d$, i.e.
@@ -1614,12 +1614,12 @@ but for the cases involving connections (conjunctions and disjunctions), we need
 			\quad \text{where} \quad
 			D_i = d_{i1} \opA \ldots \opA d_{ik_i}
 		\]
-		such that every $D_i$ is a prune of a root operand in $e'$, and moreover a single operand of $e'$ cannot be used more often than its multiplicity in the multiset of root operands of $e'$.
+		such that every $D_i$ is a pruning of a root operand in $e'$, and moreover a single operand of $e'$ cannot be used more often than its multiplicity in the multiset of root operands of $e'$.
 	\end{itemize}
 \end{definition}
-\begin{proposition} \label{thm:bool:assign-prune}
+\begin{proposition} \label{thm:bool:assign-pruning}
 	Let $e$ be a normal expression with variables in $X$ and let $\sigma$ be a bit-assignment $\sigma : Y \to \accol{0, 1}$ of the variables in $Y \subseteq X$.
-	Let $e[\sigma]$ reduce to $d$. Then $d$ is either a constant or a prune of $e$.
+	Let $e[\sigma]$ reduce to $d$. Then $d$ is either a constant or a pruning of $e$.
 \end{proposition}
 \begin{proof}
 	By induction on $e$. If $e$ is a constant or a literal, this is immediate.
@@ -1632,7 +1632,7 @@ but for the cases involving connections (conjunctions and disjunctions), we need
 	Pick an affine representant $e \in [t]$ and assume it is normal (reduce if it is not).
 	Then we can prove this by induction on the height of $e$.
 \end{proof}
-\begin{lemma} \label{thm:boolexp-to-prune-assignment}
+\begin{lemma} \label{thm:boolexp-to-pruning-assignment}
 	For every normal affine expression $e \in \booleanexpr^\#(X)$ mentioning all and only the variables in $Z \subseteq X$, and for every $Y \subseteq X$, there exists a bit assignment $\sigma : X \setminus Y \to \accol{0, 1}$ such that $e[\sigma]$ reduces to a (necessarily normal affine) expression $d$ which mentions all and only the variables in $Y \cap Z$.
 \end{lemma}
 \begin{proof}
@@ -1658,16 +1658,16 @@ but for the cases involving connections (conjunctions and disjunctions), we need
 	If $e$ is a normal affine expression $e \in \booleanexpr^\#(X)$ depending on $x, y \in X$, then we say that $x$ and $y$ are \textbf{in $\opA$-connection} (where $\opA \in \accol{{\vee}, {\wedge}}$; concretely, we call this \textbf{in disjunction/conjunction}) \textbf{in $e$} if the closest common parent node of (the negation of) $x$ and (the negation of) $y$ is labelled with $\opA$.
 	We also write this as $\getconn e x y = {\opA}$.
 \end{definition}
-\begin{lemma} \label{thm:bool:prune-in-connection}
-	Let $d, e \in \booleanexpr^\#(X)$ be normal affine expressions and $d$ a prune of $e$.
+\begin{lemma} \label{thm:bool:pruning-in-connection}
+	Let $d, e \in \booleanexpr^\#(X)$ be normal affine expressions and $d$ a pruning of $e$.
 	Let $d$ (hence $e$) depend on $x, y \in X$.
 	Then $x$ and $y$ are in $\opA$-connection in $d$ if and only if they are in $\opA$-connection in $e$.
 \end{lemma}
 \begin{proof}
 	Take the closest common ancestor of $x$ and $y$ in $d$.
-	Proving that $d$ is a prune of $e$ involves, at some point, that the operands of $d$ mentioning $x$ and $y$ are separated.
+	Proving that $d$ is a pruning of $e$ involves, at some point, that the operands of $d$ mentioning $x$ and $y$ are separated.
 	At that point, a corresponding node in $e$ was chosen with the same label; call $e'$ the subtree rooted there.
-	The immediate subtrees of $d'$ mentioning $x$ and $y$ are prunes of different immediate subtrees of $e'$, so that the root node of $e'$ is also the closest common ancestor of $x$ and $y$ in $e$.
+	The immediate subtrees of $d'$ mentioning $x$ and $y$ are prunings of different immediate subtrees of $e'$, so that the root node of $e'$ is also the closest common ancestor of $x$ and $y$ in $e$.
 \end{proof}
 \begin{lemma} \label{thm:bool:twovar-normalization}
 	An affine boolean expression $t \in \booleanalg^\#(X)$ mentioning exactly two variables $x$ and $y$, has only a single normal representant, which is of the form $\tilde x \opA \tilde y$ with $\tilde x$ and $\tilde y$ literals mentioning $x$ and $y$, and $\opA \in \accol{{\vee}, {\wedge}}$.
@@ -1689,7 +1689,7 @@ but for the cases involving connections (conjunctions and disjunctions), we need
 	Let $e$ and $e'$ be normal affine representants of $t$ and let $x$ and $y$ be in $\opA$-connection in $e$.
 	Pick an assignment $\sigma$ such that $e[\sigma]$ reduces to $d$ which depends exactly on $\accol{x, y}$.
 	By \cref{thm:bool:twovar-normalization}, $d$ is then the unique normal affine representant of $t[\sigma]$, so that $e'[\sigma]$ also reduces to $d$.
-	Then $d$ is a prune of both $e$ and $e'$, so by \cref{thm:bool:prune-in-connection}, $x$ and $y$ are in $\opA$-connection in $e'$.
+	Then $d$ is a pruning of both $e$ and $e'$, so by \cref{thm:bool:pruning-in-connection}, $x$ and $y$ are in $\opA$-connection in $e'$.
 \end{proof}
 \begin{lemma} \label{thm:bool:char-siblings} (Not used.)
 	Let $e \in \booleanexpr^\#(X)$ be a normal affine expression depending on $x$ and $y$ where $x \neq y$.
@@ -1702,7 +1702,7 @@ but for the cases involving connections (conjunctions and disjunctions), we need
 \begin{proof}
 	It is clear that the second condition implies the first.
 	To prove the other implication, assume that $\tilde x$ and $\tilde y$ are not immediate siblings. Let ${\opA} = \getconn e x y$. Then one of them, say $\tilde y$, has a closer relative $\tilde z$ such that $\getconn e y z = {\opB} \neq {\opA}$.
-	This means that $e$ has a prune of the form $d = \tilde x \opA (\tilde y \opB \tilde z)$.
+	This means that $e$ has a pruning of the form $d = \tilde x \opA (\tilde y \opB \tilde z)$.
 	But then we have
 	\[
 		\getconn e x z = \getconn d x z = {\opA} \neq {\opB} = \getconn d y z = \getconn e y z,
@@ -1745,7 +1745,7 @@ but for the cases involving connections (conjunctions and disjunctions), we need
 	Then \cref{thm:bool:char-root-node} partitions $X$ in $\opB$-connected components.
 	Then by the other implication of \cref{thm:bool:char-root-node}, $e'$ is of the form $e' = d_1' \opA d_2' \opA \ldots \opA d_n'$, where $d_i$ and $d_i'$ have the same dependencies $X_i$.
 	Thus, they must also depend on the same set of literals.
-	Since $d_i$ is a prune of $e$ and $d_i'$ is a prune of $e'$, we have $\getconn{d_i} \loch \loch = \getconn e \loch \loch = \getconn{e'} \loch \loch = \getconn{d_i'} \loch \loch$ when considered on pairs of distinct variables in $X_i$.
+	Since $d_i$ is a pruning of $e$ and $d_i'$ is a pruning of $e'$, we have $\getconn{d_i} \loch \loch = \getconn e \loch \loch = \getconn{e'} \loch \loch = \getconn{d_i'} \loch \loch$ when considered on pairs of distinct variables in $X_i$.
 	From the induction hypothesis, we conclude that $d_i = d_i'$, for all $i$, and hence $e = e'$.
 \end{proof}
 \begin{theorem} \label{thm:bool:normalization}
