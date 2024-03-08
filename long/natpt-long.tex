@@ -223,14 +223,14 @@ We have $\Op_i \circ \Op_i = \Id$ and if $a_i = \npolar$ then $\Op_i = \Id$.
 	
 	If $\vec a \sqsubset_i \vec b$, then we write $\Usym_i : \jetset{\vec a} \to \jetset{\vec b}$ for the forgetful functor which forgets the symmetry of $\jet_i$.
 \end{definition}
-\begin{corollary} \label{def:sym-free} \label{def:sym-cofree}
+\begin{proposition} \label{def:sym-free} \label{def:sym-cofree}
 	The forgetful functor $\Usym_i$ is part of an adjoint triple $\Fsym_i \dashv \Usym_i \dashv \Csym_i$ where $\Fsym_i$ and $\Csym_i$ take a $\vec b$-jet-set $X$ to a $\vec a$-jet-set of the same carrier with the same $j$-jet relations for $j \neq i$ but where
 	\begin{itemize}
 		\item $x \edge_i^{\Fsym_i X} y$ if and only if $x \infrajet_i^X y$,
 		\item $x \edge_i^{\Csym_i X} y$ if and only if $x \equijet_i^X y$.
 	\end{itemize}
 	We have $\Fsym_i \circ \Usym_i = \Csym_i \circ \Usym_i = \Id$, so that $\UFsym_i := \Usym_i \circ \Fsym_i$ is an idempotent monad and $\UCsym_i := \Usym_i \circ \Csym_i$ is an idempotent comonad.
-\end{corollary}
+\end{proposition}
 \begin{definition} \label{def:sym-closure-of-sym}
 	We extend the definition of $\UFsym_i$ and $\UCsym_i$ to endofunctors on $\jetset{\vec b}$ where $b_i$ can be \emph{any} anpolarity:
 	\begin{itemize}
@@ -840,7 +840,7 @@ We do not have to bother with an equational theory, as we can simply inherit it 
 	We write $\convjetcube{\myorix}{\mycubex}{M}{\vec a}$ for the full subcategory of $\jetcube{\myorix}{\mycubex}{M}{\vec a}$ on conventional cubes.
 \end{definition}
 \begin{corollary} \label{thm:conv-jet-cube-cat}
-	By \cref{thm:cube-commute-diff-degree}, the inclusion $\convjetcube{\myorix}{\mycubex}{M}{\vec a} \hookrightarrow \jetcube{\myorix}{\mycubex}{M}{\vec a}$ is essentially surjective (in fact split essentially surjective by the existence of sorting algorithms) and thus an equivalence of categories. \qedhere
+	By \cref{thm:cube-commute-diff-degree}, the inclusion $\convjetcube{\myorix}{\mycubex}{M}{\vec a} \hookrightarrow \jetcube{\myorix}{\mycubex}{M}{\vec a}$ is essentially surjective (in fact split essentially surjective by the existence of sorting algorithms) and thus an equivalence of categories. \qed
 \end{corollary}
 %\begin{convention} \label{conv:sort-cubes}
 %	When presenting the calculus, as justified by \cref{thm:cube-commute-diff-degree}, we will order the dimensions of a (forward/trioriented) jet cube by \emph{decreasing} degree.
@@ -1583,42 +1583,174 @@ Proving completeness for the $\bipointedsym$ monad is fairly straightforward,
 but for the cases involving connections (conjunctions and disjunctions), we need a couple of helper lemmas.
 
 \paragraph{Boolean reduction}
-\begin{definition} \label{def:reduction}
-	Boolean terms $t \in \booleanalg(X)$ are equivalence classes $t = [e]$ of boolean expressions $e$, which can be regarded as abstract syntax trees.
-	We define two reduction algorithms that reduce an expression $e$ to $e'$ such that $[e] = [e']$.
+\begin{definition} \label{def:bool:reduction}
+	Boolean \textbf{terms} $t \in \booleanalg(X)$ are equivalence classes $t = [e]$ of boolean \textbf{expressions} $e \in \booleanexpr(X)$, which are defined as abstract syntax trees made up of $0$, $1$, $\vee$, $\wedge$, $\lnot$ and elements of $X$. Thanks to commutativity and associativity, we regard $\vee$ and $\wedge$ as having a \emph{multiset} of operands with at least two elements. The other operations have the usual arities.
+	
+	We define a reduction algorithm that reduces an expression $e$ to $e'$ such that $[e] = [e']$:
 	\begin{itemize}
-		\item By \textbf{(basic) reduction}, we mean the process of pushing all negations to the leaves, eliminating double negations, and simplifying conjunctions/disjunctions with the constants $0$ and $1$.
-		The outcome is either a constant, or a binary tree whose nodes are labelled with $\vee$ or $\wedge$ and whose leaves are (negations of) elements of $X$ (called \textbf{variables} in this setting).
-		\item For \textbf{associative reduction}, we first apply reduction and subsequently merge nodes with the same label.
-		The outcome is either a constant or a tree whose nodes are alternatingly (as we climb the tree) labeled with $\vee$ and $\wedge$ (the root can have either) and whose leaves are (negations of) variables.
-		Every node has finitely many children and at least 2.
+		\item push all negations down to the leaves of the syntax tree,
+    		\item eliminate negations of constants,
+    		\item eliminate double negations,
+    		\item eliminate conjunctions/disjunctions with constants,
+    		\item remove parentheses of nested conjunctions / nested disjunctions.
 	\end{itemize}
-	We can also non-deterministically apply these algorithms to a term by first picking a representant and then reducing the representant.
+	We call an expression \textbf{normal} if it is its own reduction, i.e.\ if it is either a constant or a tree whose nodes are alternatingly (as we climb the tree) labeled with $\vee$ and $\wedge$ (the root can have either) and whose leaves are \textbf{literals}, where a literal is either a variable or its negation.
+%	\begin{itemize}
+%		\item By \textbf{(basic) reduction}, we mean the process of pushing all negations to the leaves, eliminating double negations, and simplifying conjunctions/disjunctions with the constants $0$ and $1$.
+%		The outcome is either a constant, or a binary tree whose nodes are labelled with $\vee$ or $\wedge$ and whose leaves are (negations of) elements of $X$ (called \textbf{variables} in this setting).
+%		\item For \textbf{associative reduction}, we first apply reduction and subsequently merge nodes with the same label.
+%		The outcome is either a constant or a tree whose nodes are alternatingly (as we climb the tree) labeled with $\vee$ and $\wedge$ (the root can have either) and whose leaves are (negations of) variables.
+%		Every node has finitely many children and at least 2.
+%	\end{itemize}
+%	We can also non-deterministically apply these algorithms to a term by first picking a representant and then reducing the representant.
 \end{definition}
+\begin{definition} \label{def:bool:prune}
+	Let $d$ and $e$ be normal expressions. We say that $d$ is a \textbf{prune} of $e$ if any of the following conditions hold (inductively):
+	\begin{itemize}
+		\item $d$ is a literal occurring in $e$,
+		\item $e$ has a subexpression $e'$ which has the same root label as $d$ ($\vee$ or $\wedge$) and such that every root operand of $d$ is a prune of a root operand in $e'$, and moreover a single operand of $e'$ cannot be used more often than its multiplicity in the multiset of root operands of $e'$ (taking into account the multiplicity of root operands of $d'$).
+	\end{itemize}
+\end{definition}
+\begin{proposition} \label{thm:bool:assign-prune}
+	Let $e$ be a normal expression with variables in $X$ and let $\sigma$ be a bit-assignment $\sigma : Y \to \accol{0, 1}$ of the variables in $Y \subseteq X$.
+	Let $e[\sigma]$ reduce to $d$. Then $d$ is either a constant or a prune of $e$.
+\end{proposition}
+\begin{proof}
+	By induction on $e$. If $e$ is a constant or a literal, this is immediate.
+	If $e$ is a conjunction or disjunction, then this follows from the induction hypothesis for the immediate children of $e$.
+\end{proof}
 \begin{lemma} \label{thm:boolexp-to-const-assignment}
-	For every $t \in \booleanalg^\#(X)$ with non-constant reduction $e$ and $c \in \accol{0, 1}$, there exists a bit assignment $\sigma : X \to \accol{0, 1}$ such that $t[\sigma] = c$.
+	For every $t \in \booleanalg^\#(X)$ and $c \in \accol{0, 1}$, there exists a bit assignment $\sigma : X \to \accol{0, 1}$ such that $t[\sigma] = c$.
 \end{lemma}
 \begin{proof}
-	By induction on the height of $e$.
+	Pick an affine representant $e \in [t]$ and assume it is normal (reduce if it is not).
+	Then we can prove this by induction on the height of $e$.
 \end{proof}
-\begin{lemma} \label{thm:boolexp-to-var-assignment}
-	For every $t \in \booleanalg^\#(X)$ with reduction $e$ that has a leaf $\tilde x \in \accol{x,\lnot x}$ where $x \in X$, there exists a bit assignment $\sigma : X \setminus \accol x \to \accol{0, 1}$ such that $t[\sigma] = \tilde x$.
-\todoi{Generalize this to sets of leaves.}
+\begin{lemma} \label{thm:boolexp-to-prune-assignment}
+	For every normal affine expression $e \in \booleanexpr^\#(X)$ mentioning all and only the variables in $Z \subseteq X$, and for every $Y \subseteq X$, there exists a bit assignment $\sigma : X \setminus Y \to \accol{0, 1}$ such that $e[\sigma]$ reduces to a (necessarily normal affine) expression $d$ which mentions all and only the variables in $Y \cap Z$.
 \end{lemma}
 \begin{proof}
-	By induction on the height of the tree.
-	It is clear that $e$ is no constant, since it mentions $x$.
-	If the tree is a leaf, we are done.
-	If $e$ is a conjunction, then for every operand $d$ not depending on $x$, choose an assignment $\sigma$ for that operand's dependencies such that $[d][\sigma] = 1$.
-	For the sole operand mentioning $x$, apply the induction hypothesis.
-	For disjunctions, we proceed dually.
+	By induction on $e$.
+	If $e$ is a leaf (i.e.\ a constant or a literal), then this is trivial.
+	If $e$ is a node with label $\opA \in \accol{{\vee}, {\wedge}}$, then we invoke the induction hypothesis for all immediate subtrees mentioning variables in $Y$, and find assignments for the variables mentioned in those immediate subtrees.
+	For immediate subtrees not mentioning variables in $Y$, we use \cref{thm:boolexp-to-const-assignment} to find an assigment that reduces this subtree to the neutral element $\neutralA$ of $\opA$.
+	Combining all assignments yields the required result.
 \end{proof}
-\begin{corollary} \label{thm:reduction-minimal-deps}
-	If $e$ is a (basic/associative) reduction of $t$ and $e$ depends on $x$, then every expression representing $t$ depends on $x$. \qedhere
+\begin{corollary} \label{thm:boolexp-to-var-assignment}
+	For every normal affine expression $e \in \booleanexpr^\#(X)$ that has a leaf $\tilde y \in \accol{y,\lnot y}$ where $y \in X$, there exists a bit assignment $\sigma : X \setminus \accol y \to \accol{0, 1}$ such that $t[\sigma] = \tilde x$. \qed
 \end{corollary}
-\begin{definition} \label{def:in-connection}
-	If an affine boolean $t \in \booleanalg^\#(X)$ reduces to $e$ which depends on $x, y \in X$, then we say that $x$ and $y$ are \textbf{in conjunction/disjunction in $e$} if the closest common parent node of (the negation of) $x$ and (the negation of) $y$ is labelled with a conjunction/disjunction.\footnote{This is manifestly a property of an \emph{expression} and not of a \emph{term}, since we can flip all labels by negating an expression twice and pushing one negation down the tree.} \todoi{This is a property of the reduction}
+\begin{corollary} \label{thm:bool:term-dependencies}
+	If $e$ is a normal affine expression $e \in \booleanexpr^\#(X)$ depending on $y$, then every expression representing $[e]$ depends on $y$.
+	We say that \textbf{an affine term $t \in \booleanalg^\#(X)$ depends on $y \in X$} if the following equivalent conditions hold:
+	\begin{itemize}
+		\item All representants of $t$ depend on $y$.
+		\item All normal affine representants of $t$ depend on $y$.
+		\item Some normal affine representant of $t$ depends on $y$. \qed
+	\end{itemize}
+\end{corollary}
+\begin{definition} \label{def:bool:in-connection}
+	If $e$ is a normal affine expression $e \in \booleanexpr^\#(X)$ depending on $x, y \in X$, then we say that $x$ and $y$ are \textbf{in $\opA$-connection} (where $\opA \in \accol{{\vee}, {\wedge}}$; concretely, we call this \textbf{in disjunction/conjunction}) \textbf{in $e$} if the closest common parent node of (the negation of) $x$ and (the negation of) $y$ is labelled with $\opA$.
+	We also write this as $\getconn e x y = {\opA}$.
 \end{definition}
+\begin{lemma} \label{thm:bool:prune-in-connection}
+	Let $d, e \in \booleanexpr^\#(X)$ be normal affine expressions and $d$ a prune of $e$.
+	Let $d$ (hence $e$) depend on $x, y \in X$.
+	Then $x$ and $y$ are in $\opA$-connection in $d$ if and only if they are in $\opA$-connection in $e$.
+\end{lemma}
+\begin{proof}
+	Take the closest common ancestor of $x$ and $y$ in $d$; call $d'$ the subtree rooted there.
+	By definition of a prune, there is a corresponding node in $e$ with the same label; call $e'$ the subtree rooted there.
+	The immediate subtrees of $d'$ mentioning $x$ and $y$ are prunes of different immediate subtrees of $e'$, so that the root node of $e'$ is also the closest common ancestor of $x$ and $y$ in $e$.
+\end{proof}
+\begin{lemma} \label{thm:bool:twovar-normalization}
+	An affine boolean expression $t \in \booleanalg^\#(X)$ mentioning exactly two variables $x$ and $y$, has only a single normal representant, which is of the form $\tilde x \opA \tilde y$ with $\tilde x$ and $\tilde y$ literals mentioning $x$ and $y$, and $\opA \in \accol{{\vee}, {\wedge}}$.
+\end{lemma}
+\begin{proof}
+	Since every node has at least two children and there are exactly two leaves, there is exactly one node. This constrains the form of the normal representant.
+	Next, each one of these forms produces a different truth table and the truth table is a property of $t$, so there can be only one normal representant.
+\end{proof}
+\begin{lemma} \label{thm:bool:term-in-connection}
+	Let $t \in \booleanalg^\#(X)$ depend on $x, y \in X$, and let $\opA \in \accol{{\vee}, {\wedge}}$. The following conditions are equivalent:
+	\begin{itemize}
+		\item $x$ and $y$ are in $\opA$-connection in some normal affine representant of $t$,
+		\item $x$ and $y$ are in $\opA$-connection in all normal affine representants of $t$,
+		\item $x$ and $y$ are \textbf{in $\opA$-connection in $t$} (definition).
+	\end{itemize}
+	We also write this as $\getconn t x y = {\opA}$.
+\end{lemma}
+\begin{proof}
+	Let $e$ and $e'$ be normal affine representants of $t$ and let $x$ and $y$ be in $\opA$-connection in $e$.
+	Pick an assignment $\sigma$ such that $e[\sigma]$ reduces to $d$ which depends exactly on $\accol{x, y}$.
+	By \cref{thm:bool:twovar-normalization}, $d$ is then the unique normal affine representant of $t[\sigma]$, so that $e'[\sigma]$ also reduces to $d$.
+	Then $d$ is a prune of both $e$ and $e'$, so by \cref{thm:bool:prune-in-connection}, $x$ and $y$ are in $\opA$-connection in $e'$.
+\end{proof}
+\begin{lemma} \label{thm:bool:char-siblings} (Not used.)
+	Let $e \in \booleanexpr^\#(X)$ be a normal affine expression depending on $x$ and $y$ where $x \neq y$.
+	The following conditions are equivalent:
+	\begin{itemize}
+		\item $\getconn e x z = \getconn e y z$ for all $z \in X \setminus \accol{x, y}$,
+		\item the literals $\tilde x$ and $\tilde y$ corresponding to $x$ and $y$ occurring in $e$ are immediate siblings.
+	\end{itemize}
+\end{lemma}
+\begin{proof}
+	It is clear that the second condition implies the first.
+	To prove the other implication, assume that $\tilde x$ and $\tilde y$ are not immediate siblings. Let ${\opA} = \getconn e x y$. Then one of them, say $\tilde y$, has a closer relative $\tilde z$ such that $\getconn e y z = {\opB} \neq {\opA}$.
+	This means that $e$ has a prune of the form $d = \tilde x \opA (\tilde y \opB \tilde z)$.
+	But then we have
+	\[
+		\getconn e x z = \getconn d x z = {\opA} \neq {\opB} = \getconn d y z = \getconn e y z,
+	\]
+	violating the assumption.
+\end{proof}
+\begin{lemma} \label{thm:bool:char-root-node}
+	Let $X_1, X_2, \ldots, X_n \subseteq Z$ be disjoint and $n > 1$.
+	Let $e \in \booleanexpr^\#(Z)$ be a normal affine expression depending on all and only on variables in $X = \bigcup_i X_i$.
+	Let $\accol{{\opA}, {\opB}} \in \accol{{\vee}, {\wedge}}$.
+	The following conditions are equivalent:
+	\begin{itemize}
+		\item both of the following conditions hold:
+		\begin{itemize}
+			\item $\getconn e x y = \opA$ for all $x \in X_i$, $y \in X_j$, $i \neq j$,
+			\item each $X_i$ is $\opB$-connected meaning that no further partition of $X_i$ is possible maintaining the property above,
+		\end{itemize}
+		\item $e$ is of the form $e = d_1 \opA d_2 \opA \ldots \opA d_n$ with each $d_i$ depending on all and only on variables in $X_i$, and being either a leaf or a tree with root node labelled with $\opB$.
+	\end{itemize}
+\end{lemma}
+\begin{proof}
+	It is clear that the second condition implies the first.
+	To prove the other implication, assume that $e$ is not of this form.
+	There are two possibilities:
+	\begin{itemize}
+		\item $e$ is of the form $e = d_1 \opA d_2 \opA \ldots \opA d_m$ but the dependencies are not as expected.
+		Then we get a different partition of $X$ by the upward implication which we already proved.
+		But then we can intersect both partitions, yielding a finer one, which is in contradiction with the assumption that further partitioning was not possible.
+		\item $e$ is of the form $e = d_1 \opB d_2 \opB \ldots \opB d_m$. Then $X$ is $\opB$-connected meaning that $n = 1$, violating the assumptions.
+	\end{itemize}
+\end{proof}
+\begin{theorem} \label{thm:bool:normal-from-graph}
+	A non-constant normal affine boolean expression $e \in \booleanexpr^\#(X)$ is fully determined by the set of literals it mentions and $\getconn e \loch \loch$.
+\end{theorem}
+\begin{proof}
+	Let $e, e' \in \booleanexpr^\#(X)$ be normal affine boolean expressions mentioning the same literals and such that $\getconn e \loch \loch = \getconn{e'} \loch \loch$.
+	We prove that $e = e'$ by induction on $e$.
+	If $e$ is a constant or a literal, the result is immediate.
+	Otherwise, $e$ is of the form $e = d_1 \opA d_2 \opA \ldots \opA d_n$, where $\accol{{\opA}, {\opB}} \in \accol{{\vee}, {\wedge}}$.
+	Then \cref{thm:bool:char-root-node} partitions $X$ in $\opB$-connected components.
+	Then by the other implication of \cref{thm:bool:char-root-node}, $e'$ is of the form $e' = d_1' \opA d_2' \opA \ldots \opA d_n'$, where $d_i$ and $d_i'$ have the same dependencies $X_i$.
+	Thus, they must also depend on the same set of literals.
+	Since $d_i$ is a prune of $e$ and $d_i'$ is a prune of $e'$, we have $\getconn{d_i} \loch \loch = \getconn{d_i'} \loch \loch$.
+	From the induction hypothesis, we conclude that $d_i = d_i'$, for all $i$, and hence $e = e'$.
+\end{proof}
+\begin{theorem} \label{thm:bool:normalization}
+	Every affine boolean term $t \in \booleanalg^\#(Z)$ has exactly one normal affine representant.
+\end{theorem}
+\begin{proof}
+	Let $e, e' \in \booleanexpr^\#(X)$ be normal affine representants of $t$.
+	By \cref{thm:bool:term-dependencies}, we know that $e$ and $e'$ depend on the same set of variables $X$.
+	By \cref{thm:boolexp-to-var-assignment}, we know moreover that they mention the same literals.
+	By \cref{thm:bool:term-in-connection}, we know that $\getconn e \loch \loch = \getconn{e'} \loch \loch = \getconn t \loch \loch$.
+	Thus, by \cref{thm:bool:normal-from-graph}, we conclude that $e = e'$.
+\end{proof}
 \todoi{Associative reduction of affine terms is deterministic. This follows from the graph representation of expressions, which can be recognized from terms by assigning stuff. Develop some theory for this, this sounds fun.}
 
 \paragraph{Understanding jet cube morphisms}
@@ -1781,7 +1913,7 @@ We will only use this lemma when $\mycubex = \affine$.
 	If $n = 0$, then $\dm i \psub \vfi = t = \_ \opK t$ where $t$ does not mention any $i$-directed variables.
 	
 	Let $n > 0$.
-	We reduce $\dm i \psub \vfi$ to an expression $e$ by associative reduction (\cref{def:reduction}).
+	We reduce $\dm i \psub \vfi$ to an expression $e$ by associative reduction (\cref{def:bool:reduction}).
 	Write $\dm j_k'$ to mean $\dm j_k$ if $\dm j_k : \rival{\jet_i}$ and to mean $\lnot \dm j_k$ if $\dm j_k : \rival{\tej_i}$.
 	Write $U$ for the $i$-directed part of $V$ and note that any assignment of bits to all $i$-symmetric variables yields a jet cube morphism $U \to V$ whose composite with $\vfi$ necessarily satisfies \cref{thm:char-twisted-cube-to-line}.
 	
@@ -1794,7 +1926,7 @@ We will only use this lemma when $\mycubex = \affine$.
 		
 		First of all, note that there exists an assignment of all $i$-symmetric variables in $t$ that makes none of the $i$-directed variables disappear.
 		The result should reduce to something satisfying \cref{thm:char-twisted-cube-to-line}.
-		Then this is only possible if any two $i$-directed variables in $t$ are also in $\opA$-connection (\cref{def:in-connection}), so that the parentheses can be moved around. \todoi{Also in $\opA$-connection with $\dm j_n$?}
+		Then this is only possible if any two $i$-directed variables in $t$ are also in $\opA$-connection (\cref{def:bool:in-connection}), so that the parentheses can be moved around. \todoi{Also in $\opA$-connection with $\dm j_n$?}
 		
 		We know that if $\dm j'_n$ is not a direct child of $e$, then it must depend on other variables and the root node of $t$ is labelled with $\opZ$.
 		If one of the immediate operands $s$ of $t$ depends on $\dm j_n$,
