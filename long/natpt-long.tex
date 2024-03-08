@@ -63,7 +63,7 @@
 %\newcommand{\todoi}[1]{}
 %\newcommand{\todo}[1]{}
 
-\newcommand{\thetitle}{Naturality Pretype Theory - Extended Version}
+\newcommand{\thetitle}{Naturality Pretype Theory: \\ Technical Report \\ v0.1.1}
 \newcommand{\theauthors}{Andreas Nuyts}
 \begin{document}
 	\addtolength{\voffset}{-.5in}
@@ -84,7 +84,7 @@
 
 \pagebreak
 
-\chapter{Base Categories and Modes}
+\chapter{Base Categories and Modes} \label{ch:modes}
 
 In this chapter, we establish the object part of the mode theory for naturality pretype theory and its model.
 Modes will be \textbf{anpolarity masks} $\vec a$ (\cref{sec:mask}) which will be modelled in presheaf categories over certain base categories.
@@ -530,7 +530,7 @@ Clearly, the functor $I : \cubecat_\demorgan^\cartes \to \cubecat_\booleanalg^\c
 \subsection{Jet Cubes} \label{sec:jetcubes:def}
 
 \subsubsection{Jet Cube Objects}
-\begin{definition}
+\begin{definition} \label{def:orientation-set}
 	An \textbf{orientation set} is one of the following sets of formal symbols:\footnote{The letters stand for \emph{forward}, \emph{backward} and \emph{equijet}.}
 	\[
 		\orif = \accol{{\jet}}, \qquad
@@ -1374,7 +1374,7 @@ It is worth pointing out that if $a_i = \npolar$, then \ruleref{conn:degree-symm
 %Again, we see that $\vfi : \erasejc U \to \erasejc W$ needs to be a morphism of jet cubes both from $\Opcube_i(U) \to \Opcube_i(W)$ (or equivalently from $U \to W$) and from $U \to \Opcube_i(W)$ (or equivalently from $\Opcube_i(U) \to W$). Again, we let $\vfi$ depart from their join $\UFsymcube_i(U)$.
 %The cube $\erasejc U$ arose as the part of $\erasejc V$ not used by $s$ and $t$, so in the typing rule we can simply use $\UFsymcube_i(V)$ (this will be formalized in \cref{thm:calculus-sound,thm:calculus-complete}).
 
-\subsubsection{Soundness}
+\subsubsection{Soundness} \label{sec:jetcubes:calculus:soundness}
 \begin{theorem}[Soundness] \label{thm:calculus-sound}
 	If a morphism $\vfi : \erasejc V \to \erasejc W$ satisfies the predicate $\sez \vfi : V \to W$ from \cref{def:calculus}, then it actually arises as the image $\vfi = \erasejc{\hat \vfi}$ of a morphism $\hat \vfi : V \to W$.
 \end{theorem}
@@ -1582,11 +1582,12 @@ It is worth pointing out that if $a_i = \npolar$, then \ruleref{conn:degree-symm
 	\end{itemize}
 \end{proof}
 
-\subsubsection{Lemmas for Completeness}
+\subsubsection{Lemmas for Completeness} \label{sec:jetcubes:calculus:lemmas}
 Proving completeness for the $\bipointedsym$ monad is fairly straightforward,
 but for the cases involving connections (conjunctions and disjunctions), we need a couple of helper lemmas.
 
 \paragraph{Boolean reduction}
+In this section, we establish a normal form for affine boolean terms.
 \begin{definition} \label{def:bool:reduction}
 	Boolean \textbf{terms} $t \in \booleanalg(X)$ are equivalence classes $t = [e]$ of boolean \textbf{expressions} $e \in \booleanexpr(X)$, which are defined as abstract syntax trees made up of $0$, $1$, $\vee$, $\wedge$, $\lnot$ and elements of $X$. Thanks to commutativity and associativity, we regard $\vee$ and $\wedge$ as having a \emph{multiset} of operands with at least two elements. The other operations have the usual arities.
 	
@@ -1738,9 +1739,9 @@ but for the cases involving connections (conjunctions and disjunctions), we need
 		\item $e$ is of the form $e = d_1 \opB d_2 \opB \ldots \opB d_m$. Then $X$ is $\opB$-connected meaning that $n = 1$, violating the assumptions. \qedhere
 	\end{itemize}
 \end{proof}
-\begin{theorem} \label{thm:bool:normal-from-graph}
+\begin{lemma} \label{thm:bool:normal-from-graph}
 	A non-constant normal affine boolean expression $e \in \booleanexpr^\#(X)$ is fully determined by the set of literals it mentions and $\getconn e \loch \loch$.
-\end{theorem}
+\end{lemma}
 \begin{proof}
 	Let $e, e' \in \booleanexpr^\#(X)$ be normal affine boolean expressions mentioning the same literals and such that $\getconn e \loch \loch = \getconn{e'} \loch \loch$.
 	We prove that $e = e'$ by induction on $e$.
@@ -2096,7 +2097,7 @@ In words, this lemma says that if the last variable $\dm i$ of $W$ is substitute
 	Since it only depends on $i$-symmetric variables, there is no harm in promoting the ignored variables of degree $i$ to equijet variables, and that is all that $\UFsymcube_i V$ does.
 \end{proof}
 
-\subsubsection{Completeness}
+\subsubsection{Completeness} \label{sec:jetcubes:calculus:completeness}
 \begin{theorem}[Completeness] \label{thm:calculus-complete}
 	For $M \in \accol{\bipointedsym, \booleanalg}$ and any morphism $\hat \vfi : V \to W$ in $\convjetcubetri \affine M {\vec a}$, writing $\vfi = \erasejc{\hat \vfi}$, we have $\sez \vfi : V \to W$.
 \end{theorem}
@@ -2592,6 +2593,19 @@ The shared reader may object that Pinyo and Kraus define the morphisms of $\twis
 
 \chapter{Transpension}
 \todoi{Does Tw : sSet $\to$ sSet have a transp type? (Yes if it's Tw$_!$)}
+
+\appendix
+\chapter{Version history}
+\begin{description}
+	\item[v0.1] Wrote \cref{ch:modes}.
+	\item[v0.1.1] Changed title. \\
+		Proofread \cref{ch:modes}. \\
+		Added missing clause for \ruleref{concursor} in proof of \cref{thm:calculus-sound}. \\
+		Cleaned up affine boolean normalization lemmas in \cref{sec:jetcubes:calculus:lemmas}. \\
+		Introduced orientation sets (\cref{def:orientation-set}). \\
+		Introduced conventional cubes (\cref{def:conv-jet-cube-cat}). \\
+		General cleanup.
+\end{description}
 
 \bibliographystyle{alphaurl}
 \bibliography{../refs/refs.bib}
