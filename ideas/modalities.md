@@ -17,7 +17,7 @@ We have the following chains of adjoints:
   - = omission @ n-1 if n is symmetric
   - quotient out n if n = 0
 - discrete insertion @ n (always; loc of n-1, or equality if n = 0)
-- omission @ n (always)
+- omission @ n (always) **start here**
 - codiscrete insertion @ n (always; core of n+1, or top if n = max)
 - separation @ n (if n+1 is symmetric; replace n+1 with core of n; remove n)
   - = omission @ n+1 if n is symmetric
@@ -32,7 +32,7 @@ It is central if:
 
 - it preserves `=` (does not quotient)
 - it does not mention equijet
-- it does not mention ripple
+- it does not mention infrajet
 - it does not mention top
 
 It is left/right if its right/left adjoint is central.
