@@ -98,7 +98,7 @@ The main purpose of the categories of jet jewels is to be workable for most basi
 
 Upon a first lecture, readers may choose to omit \cref{sec:jetcubes} on jet cubes.
 
-Finally in \cref{sec:pb}, we introduce a number of operations on anpolarity masks which serve to insert bridge and/or path relations for every degree.
+Finally in \cref{sec:rpb}, we introduce a number of operations on anpolarity masks which serve to insert bridge and/or path relations for every degree.
 These will be both a technical device and a source of interesting modes in practice.
 
 \todoi{I momentarily had some doubt about usability of jet jewels, but I think it's okay.
@@ -2569,9 +2569,18 @@ The shared reader may object that Pinyo and Kraus define the morphisms of $\twis
 	This means we can always rewrite a derivation tree in the calculus for $\jetcubetri \affine \bipointedsym {[\ypolar]}$ of a morphism in $\jetcubefwd \affine \bipointedsym {[\ypolar]}$ to use only the prescribed rules. 
 \end{proof}
 
-\section{Paths and Bridges} \label{sec:pb}
+\section{Rods, Paths and Bridges} \label{sec:rpb}
 In this section, we define a number of operations on anpolarity masks (\cref{def:anpolarity}) which serve to insert symmetric \emph{bridge} and/or \emph{path} relations for every degree.
-These operations serve three goals:
+The idea, in the universe of small types, is the following:
+\begin{itemize}
+	\item Rods express strict equality,
+	\item Paths express isomorphism (in the presence of rods or bridges) or equivalence (in absence of rods),
+	\item Jets express homomorphism,
+	\item Bridges express relations.
+\end{itemize}
+Bridges and rods will not occur together, because bridges can be regarded as pro-rods (with `pro-' in the sense of pro-arrow equipments): a bridge between types expresses a relation, which is a notion of heterogeneous strict equality.
+
+The mask operations serve three goals:
 \begin{itemize}
 	\item They are helpful to understand equijets\todo{refer},
 	\item They are helpful to prove pseudofunctoriality of the semantics of the mode theory\todo{refer},
@@ -2580,7 +2589,7 @@ These operations serve three goals:
 
 %\subsection{Path/Bridge Transformations}
 \begin{definition}
-	Let $\mymaskx \in \accol{\maskj, \maskpj, \maskjb, \maskpjb}$ and $\mymasky \in \accol{\maske, \maskpb}$, and let $a$ be an anpolarity.
+	Let $\mymaskx \in \accol{\maskj, \maskpj, \maskjb, \maskpjb, \maskrpj}$ and $\mymasky \in \accol{\maske, \maskpb, \maskrp}$, and let $a$ be an anpolarity.
 	We define $\maskop a \mymaskx \mymasky \in \List\,\Anpolarity$ as follows:
 	\[
 		\begin{array}{l c c c l c c}
@@ -2593,15 +2602,19 @@ These operations serve three goals:
 			\maskop \npolar \mymaskx \maskpb &=& [\npolar, \npolar]
 			\\
 			\maskop \ypolar \maskjb \mymasky &=& [\ypolar, \npolar]
+			&\qquad&
+			\maskop \npolar \mymaskx \maskrp &=& [\npolar, \npolar]
 			\\
 			\maskop \ypolar \maskpjb \mymasky &=& [\npolar, \ypolar, \npolar]
+			\\
+			\maskop \ypolar \maskrpj \mymasky &=& [\npolar, \npolar, \ypolar]
 		\end{array}
 	\]
-	We extend this operation to anpolarity masks as follows: $\maskop{\vec a}{\mymaskx}{\mymasky}$ is the concatenation of the list of lists obtained by applying $\maskop{\loch}{\mymaskx}{\mymasky}$ to every element of $\vec a$.
-	Indexing the resulting mask is complicated, because the length of the resulting mask depends not only on the length of $\vec a$ but also on its contents.
+	We extend this operation to anpolarity masks as follows: $\maskop{\vec a}{\mymaskx}{\mymasky}$ is the concatenation (join / monadic multiplication) of the list of lists obtained by applying $\maskop{\loch}{\mymaskx}{\mymasky}$ to every element of $\vec a$.
 	
+	Indexing the resulting mask is complicated, because the length of the resulting mask depends not only on the length of $\vec a$ but also on its contents.
 	In order to stay sane, we will use an indexing system that still refers to the degrees of $\vec a$, which we will call \textbf{big degrees}, whereas the degrees of $\maskop{\vec a}{\mymaskx}{\mymasky}$ will be called \textbf{small degrees}.
-	Concretely, a small degree subscript will be replaced with a big degree subscript combined with a superscript indicating whether we are talking about the path/jet/bridge or edge relation.
+	Concretely, a small degree subscript will be replaced with a big degree subscript combined with a superscript indicating whether we are talking about the rod/path/jet/bridge or edge relation.
 	For example, if $\vec a = [\ypolar, \npolar, \ypolar]$, then the relations of $\maskop{\vec a}{\maskpjb}{\maske}$ will be denoted as:
 	\[
 		\nwpath_0, \quad
