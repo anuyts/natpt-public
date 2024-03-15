@@ -3199,8 +3199,56 @@ The mask operations serve three goals:
 				\item If $a_i = \ypolar$, then there are no further right adjoints.
 				\item If $a_i = \npolar$, then
 				\[
-					\cohfget_i = \cohpi_{i+1} \dashv \cohcodisc_i = \cohdisc_{i+1} \dashv \cohcopi_i = \cohfget_{i+1}, \qquad
-					\sharp_i = \shp_{i+1} \dashv \coshp_i = \flat_{i+1},
+					\begin{array}{c c c c c c c c c}
+						\cohdisc_i
+						&\dashv&
+						\cohfget_i
+						&\dashv&
+						\cohcodisc_i
+						&\dashv&
+						\cohcopi_i
+						&&
+						\\
+						&&
+						\rotatebox{90}{$=$}
+						&&
+						\rotatebox{90}{$=$}
+						&&
+						\rotatebox{90}{$=$}
+						&&
+						\\
+						&&
+						\cohpi_{i+1}
+						&\dashv&
+						\cohdisc_{i+1}
+						&\dashv&
+						\cohfget_{i+1}
+						&\dashv&
+						\cohcodisc_{i+1},
+						\\
+						\phantom{a}
+						\\
+						\phantom{a}
+						\\
+						\flat_i
+						&\dashv&
+						\sharp_i
+						&\dashv&
+						\coshp_i
+						\\
+						&&
+						\rotatebox{90}{$=$}
+						&&
+						\rotatebox{90}{$=$}
+						&&
+						\\
+						&&
+						\shp_{i+1}
+						&\dashv&
+						\flat_{i+1}
+						&\dashv&
+						\sharp_{i+1},
+					\end{array}
 				\]
 				and we can continue.
 			\end{itemize}
