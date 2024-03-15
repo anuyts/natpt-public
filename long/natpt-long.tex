@@ -2670,6 +2670,7 @@ The mask operations serve three goals:
 \end{definition}
 
 \subsection{The 2-poset of Polarized Reshuffles}
+\subsubsection{Definitions}
 \begin{definition}\label{def:orisymbol}
 	We define the set of \textbf{orientation symbols} as
 	\[
@@ -2763,6 +2764,7 @@ The mask operations serve three goals:
 	The Hom-wise equal sub-2-poset of $\poreshcat$ on masks with only symmetric degrees, is isomorphic to the category $\reshcat$ of (non-polarized) reshuffles from the model of Degrees of Relatedness \cite[def.\ 6.2.7]{reldtt-techreport}\cite{reldtt}, with the mask $[\npolar]^n$ corresponding to the depth $n-1$. \qed
 \end{corollary}
 
+\subsubsection{Adjunctions of Polarized Reshuffles}
 \begin{theorem}\label{thm:poresh-adjoint}
 	\begin{enumerate}
 		\item A pair of polarized reshuffles $\lambda \in \Hom(\vec a, \vec b)$ and $\rho \in \Hom(\vec b, \vec a)$ is adjoint ($\lambda \dashv \rho$) if and only if
@@ -3080,6 +3082,131 @@ The mask operations serve three goals:
 		\end{itemize}
 	\end{enumerate}
 \end{proof}
+\begin{example}
+	Let $\vec a \sqsubset_i \vec b$.
+	Then we have a triple of adjoint polarized reshuffles
+	\[
+		\Fsymresh \dashv \Usymresh \dashv \Csymresh
+	\]
+	where $\Usymresh : \vec a \to \vec b$.
+	Each of these preserves all $\jetsym_j$ for $j \neq i$ as well as $\eqty$. Furthermore, we have
+	\[
+		\edgesym_i \cdot \Fsymresh = \infrajetsym_i, \qquad
+		\jetsym_i \cdot \Usymresh = \edgesym_i, \qquad
+		\edgesym_i \cdot \Csymresh = \equijetsym_i.
+	\]
+	From \cref{thm:poresh-adjoint}, we conclude that no further left or right adjoints exist. We have
+	\[
+		\Fsymresh \circ \Usymresh = \id, \qquad \Csymresh \circ \Usymresh = \id.
+	\]
+	Thus, we get an idempotent monad $\UFsymresh = \Usymresh \circ \Fsymresh$ and an idempotent comonad $\UCsymresh = \Usymresh \circ \Fsymresh$ such that $\UFsymresh \dashv \UCsymresh$.
+	Both preserve all $\jetsym_j$ for $j \neq i$ as well as $\eqty$. Furthermore, we have
+	\[
+		\jetsym_i \cdot \UFsymresh = \infrajetsym_i, \qquad
+		\jetsym_i \cdot \UCsymresh = \equijetsym_i.
+	\]
+\end{example}
+\begin{example}
+	Let $\vec b$ be obtained from $\vec a$ by deleting the anpolarity with degree $i$. Let $n := \lenpol{\vec a} = \lenpol{\vec b} + 1$.
+	\[
+		\cohfget_i = \reshlist{\eqty}{\jetsym_0, \ldots, \jetsym_{i-1}, \jetsym_{i+1}, \ldots, \jetsym_{n-1}} : \vec a \to \vec b
+	\]
+	\begin{itemize}
+		\item If $i = 0$, then $\cohfget_0$ has two left adjoints $\cohpi_0 \dashv \cohdisc_0 \dashv \cohfget_0$ with
+		\begin{align*}
+			\cohpi_0 &= \reshlist{\infrajetsym_0}{\jetsym_1, \ldots, \jetsym_{n-1}} &: \vec a \to \vec b, \\
+			\dashv
+			\cohdisc_0 &= \reshlist{\eqty}{\eqty, \jetsym_0, \ldots, \jetsym_{n-2}} &: \vec b \to \vec a, \\
+			\dashv
+			\cohfget_0 &= \reshlist{\eqty}{\jetsym_1, \ldots, \jetsym_{n-1}} &: \vec a \to \vec b.
+		\end{align*}
+		By \cref{thm:poresh-adjoint}, $\cohpi_0$ has no further left adjoints.
+		We have $\cohpi_0 \cohdisc_0 = \cohfget_0 \cohdisc_0 = \id_{\vec b}$. We get adjoint idempotent (co)monads
+		\begin{align*}
+			\shp_0 = \cohdisc_0 \cohpi_0 &= \reshlist{\infrajet_0}{\infrajet_0, \jetsym_1, \ldots, \jetsym_{n-1}} &: \vec a \to \vec a, \\
+			\dashv
+			\flat_0 = \cohdisc_0 \cohfget_0 &= \reshlist{\eqty}{\eqty, \jetsym_1, \ldots, \jetsym_{n-1}} : \vec a \to \vec a.
+		\end{align*}
+		\item If $i > 0$, then $\cohfget_i$ has a left adjoint $\cohdisc_i \dashv \cohfget_i$ where
+		\[
+			\cohdisc_i = \reshlist{\eqty}{\jetsym_0, \ldots, \jetsym_{i-1}, \infrajetsym_{i-1}, \jetsym_i, \ldots, \jetsym_{n-2}} : \vec b \to \vec a.
+		\]
+		We have $\cohfget_i \cohdisc_i = \id_{\vec b}$. We get an idempotent comonad
+		\[
+			\flat_i = \cohdisc_i \cohfget_i = \reshlist{\eqty}{\jetsym_0, \ldots, \jetsym_{i-1}, \infrajetsym_{i-1}, \jetsym_{i+1}, \ldots, \jetsym_{n-1}} : \vec a \to \vec a
+		\]
+		\begin{itemize}
+			\item If $a_{i-1} = b_{i-1} = \ypolar$, then $\cohdisc_i$ has no further left adjoints.
+			\item If $a_{i-1} = b_{i-1} = \npolar$, then we have $\cohpi_i \dashv \cohdisc_i \dashv \cohfget_i$ with
+			\begin{align*}
+				\cohpi_i &= \reshlist{\eqty}{\jetsym_0, \ldots, \jetsym_{i-2}, \infrajetsym_i, \jetsym_{i+1}, \ldots, \jetsym_{n-1}}
+				&: \vec a \to \vec b, \\
+				\dashv
+				\cohdisc_i &= \reshlist{\eqty}{\jetsym_0, \ldots, \jetsym_{i-2}, \edgesym_{i-1}, \edgesym_{i-1}, \jetsym_i, \ldots, \jetsym_{n-2}}
+				&: \vec b \to \vec a, \\
+				\dashv
+				\cohfget_i &= \reshlist{\eqty}{\jetsym_0, \ldots, \jetsym_{i-2}, \edgesym_{i-1}, \jetsym_{i+1}, \ldots, \jetsym_{n-1}}
+				&: \vec a \to \vec b.
+			\end{align*}
+			We have $\cohpi_i \cohdisc_i = \cohfget_i \cohdisc_i = \id_{\vec b}$. We get adjoint idempotent (co)monads
+			\begin{align*}
+				\shp_i = \cohdisc_i \cohpi_i &= \reshlist{\eqty}{\jetsym_0, \ldots, \jetsym_{i-2}, \infrajetsym_i, \infrajetsym_i, \jetsym_{i+1}, \ldots, \jetsym_{n-1}} &: \vec a \to \vec a, \\
+				\dashv
+				\flat_i = \cohdisc_i \cohfget_i &= \reshlist{\eqty}{\jetsym_0, \ldots, \edgesym_{i-1}, \edgesym_{i-1}, \jetsym_{i+1}, \ldots, \jetsym_{n-1}} &: \vec a \to \vec a
+			\end{align*}
+			\begin{itemize}
+				\item If $a_i = \ypolar$, then there are no further left adjoints.
+				\item If $a_i = \npolar$, then $\cohpi_i = \cohfget_{i-1}$ and we can continue.
+			\end{itemize}
+		\end{itemize}
+		\item If $i = n-1$, then $\cohfget_{n-1}$ has a right adjoint $\cohfget_{n-1} \dashv \cohcodisc_{n-1}$ with
+		\begin{align*}
+			\cohfget_{n-1} &= \reshlist{\eqty}{\jetsym_0, \ldots, \jetsym_{n-2}} &: \vec a \to \vec b, \\
+			\dashv
+			\cohcodisc_{n-1} &= \reshlist{\eqty}{\jetsym_0, \ldots, \jetsym_{n-2}, \topsym} &: \vec b \to \vec a,
+		\end{align*}
+		and there are no further right adjoints.
+		We have $\cohfget_{n-1} \cohcodisc_{n-1} = \id_{\vec b}$.
+		We get an idempotent monad
+		\[
+			\sharp_{n-1} = \cohcodisc_{n-1} \cohfget_{n-1} = \reshlist{\eqty}{\jetsym_0, \ldots, \jetsym_{n-2}, \topsym} : \vec a \to \vec a.
+		\]
+		\item If $i < n-1$, then $\cohfget_i$ has a right adjoint $\cohfget_i \dashv \cohcodisc_i$ with
+		\[
+			\cohcodisc_i = \reshlist{\eqty}{\jetsym_0, \ldots, \jetsym_{i-1}, \equijetsym_{i}, \jetsym_{i}, \ldots, \jetsym_{n-2}} : \vec b \to \vec a.
+		\]
+		We have $\cohfget_i \cohcodisc_i = \id_{\vec b}$. We get an idempotent monad
+		\[
+			\sharp_i = \cohcodisc_i \cohfget_i = \reshlist{\eqty}{\jetsym_0, \ldots, \jetsym_{i-1}, \equijetsym_{i+1}, \jetsym_{i+1}, \ldots, \jetsym_{n-1}} : \vec a \to \vec a.
+		\]
+		\begin{itemize}
+			\item If $a_{i+1} = b_i = \ypolar$, then there are no further right adjoints.
+			\item If $a_{i+1} = b_i = \npolar$, then we have $\cohfget_i \dashv \cohcodisc_i \dashv \cohcopi_i$ with
+			\begin{align*}
+				\cohfget_i &= \reshlist{\eqty}{\jetsym_0, \ldots, \jetsym_{i-1}, \edgesym_{i+1}, \jetsym_{i+2}, \ldots, \jetsym_{n-1}} &: \vec a \to \vec b, \\
+				\dashv
+				\cohcodisc_i &= \reshlist{\eqty}{\jetsym_0, \ldots, \jetsym_{i-1}, \edgesym_{i}, \edgesym_{i}, \jetsym_{i+1}, \ldots, \jetsym_{n-2}} &: \vec b \to \vec a, \\
+				\dashv
+				\cohcopi_i &= \reshlist{\eqty}{\jetsym_0, \ldots, \jetsym_{i-1}, \equijet_i, \jetsym_{i+2}, \ldots, \jetsym_{n-1}} &: \vec a \to \vec b.
+			\end{align*}
+			We have $\cohfget_i \cohcodisc_i = \cohcopi_i \cohcodisc_i = \id_{\vec b}$. We get adjoint idempotent (co)monads
+			\begin{align*}
+				\sharp_i = \cohcodisc_i \cohfget_i &= \reshlist{\eqty}{\jetsym_0, \ldots, \jetsym_{i-1}, \edgesym_{i+1}, \edgesym_{i+1}, \jetsym_{i+2}, \ldots, \jetsym_{n-1}} &: \vec a \to \vec a, \\
+				\dashv
+				\coshp_i = \cohcodisc_i \cohcopi_i &= \reshlist{\eqty}{\jetsym_0, \ldots, \jetsym_{i-1}, \equijet_{i}, \equijet_{i}, \jetsym_{i+2}, \ldots, \jetsym_{n-1}} &: \vec a \to \vec a.
+			\end{align*}
+			\begin{itemize}
+				\item If $a_i = \ypolar$, then there are no further right adjoints.
+				\item If $a_i = \npolar$, then
+				\[
+					\cohfget_i = \cohpi_{i+1} \dashv \cohcodisc_i = \cohdisc_{i+1} \dashv \cohcopi_i = \cohfget_{i+1}, \qquad
+					\sharp_i = \shp_{i+1} \dashv \coshp_i = \flat_{i+1},
+				\]
+				and we can continue.
+			\end{itemize}
+		\end{itemize}
+	\end{itemize}
+\end{example}
 
 \chapter{Transpension}
 \todoi{Does Tw : sSet $\to$ sSet have a transp type? (Yes if it's Tw$_!$)}
