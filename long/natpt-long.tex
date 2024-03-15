@@ -3255,6 +3255,27 @@ The mask operations serve three goals:
 		\end{itemize}
 	\end{itemize}
 \end{example}
+\begin{example}
+	Let $\vec a = \maskopypolar{[\ypolar, \ypolar]}{\maskrpj} = [\npolar, \npolar, \ypolar, \npolar, \npolar, \ypolar]$ and $\vec b = \maskopypolar{[\ypolar]}{\maskrpj} = [\npolar, \npolar, \ypolar]$.
+	We have the following chain of adjoint reshuffles, now annotated with big degrees, which cannot be extended on either side:
+	\begin{align*}
+		\cohpi_0 &= \reshlist{\nwinfrajetsym_0}{\nwrodsym_1, \nwpathsym_1, \nwjetsym_1} &: \vec a \to \vec b, \\
+		\dashv
+		\cohdisc_0 &= \reshlist{\eqty}{\eqty, \eqty, \eqty, \nwrodsym_0, \nwpathsym_0, \nwjetsym_0} &: \vec b \to \vec a, \\
+		\dashv
+		\cohfget_0 &= \reshlist{\eqty}{\nwrodsym_1, \nwpathsym_1, \nwjetsym_1} &: \vec a \to \vec b, \\
+		\dashv
+		\cohcodisc_0 &= \reshlist{\eqty}{\nwrodsym_0, \nwrodsym_0, \nwrodsym_0, \nwrodsym_0, \nwpathsym_0, \nwjetsym_0} &: \vec b \to \vec a, \\
+		&\dashv
+		\reshlist{\eqty}{\nwrodsym_0, \nwpathsym_1, \nwjetsym_1} &: \vec a \to \vec b, \\
+		&\dashv
+		\reshlist{\eqty}{\nwrodsym_0, \nwpathsym_1, \nwpathsym_1, \nwpathsym_1, \nwpathsym_1, \nwjetsym_1} &: \vec b \to \vec a, \\
+		&\dashv
+		\reshlist{\eqty}{\nwrodsym_0, \nwpathsym_0, \nwjetsym_1} &: \vec a \to \vec b, \\
+		&\dashv
+		\reshlist{\eqty}{\nwrodsym_0, \nwpathsym_1, \nwequijetsym_1, \nwequijetsym_1, \nwequijetsym_1, \nwjetsym_1} &: \vec b \to \vec a.
+	\end{align*}
+\end{example}
 
 \chapter{Transpension}
 \todoi{Does Tw : sSet $\to$ sSet have a transp type? (Yes if it's Tw$_!$)}
