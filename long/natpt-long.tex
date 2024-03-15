@@ -55,6 +55,8 @@
 \usepackage[english]{babel}
 %\usepackage[dutch]{babel}
 
+\allowdisplaybreaks
+
 \usepackage{../natpt-macros}
 	\renewcommand{\thetheorem}{\arabic{chapter}.\arabic{section}.\arabic{subsection}\textdegree\arabic{theorem}}
 
@@ -2694,7 +2696,7 @@ The mask operations serve three goals:
 	\]
 	This makes $\orisymbol(\vec a)$ a lattice.
 	
-	We define a non-commutative multiplication operation $\loch \cdot \loch : \orisymbolnodegree \times \orisymbolnodegree \to \orisymbolnodegree$ by
+	We define an associative, non-commutative multiplication operation $\loch \cdot \loch : \orisymbolnodegree \times \orisymbolnodegree \to \orisymbolnodegree$ by
 	\[
 		\begin{array}{c | c c c c}
 			{\downarrow} \cdot {\rightarrow} & \jetsym & \tejsym & \equijetsym & \infrajetsym \\ \hline
@@ -2768,7 +2770,8 @@ The mask operations serve three goals:
 			\item A reshuffle $\rho$ has a left adjoint $\lambda$ if and only if
 			\begin{align}
 				&\eqty \cdot \rho = \eqty, \text{and} \label{eq:poresh-left-adjoint-crit1} \\
-				&\text{for all } \jetsym_i \in \orisymbolfwd(\vec a) \text{ with } a_i = \ypolar \text{, we have } \jetsym_i \cdot \rho \neq \infrajetsym_j. \label{eq:poresh-left-adjoint-crit2}
+				&\text{for all } \jetsym_i \in \orisymbolfwd(\vec a) \text{ with } \jetsym_i \cdot \rho = \infrajetsym_j \text{, we have } b_j = \npolar. \label{eq:poresh-left-adjoint-crit2}
+				%&\text{for all } \jetsym_i \in \orisymbolfwd(\vec a) \text{ with } a_i = \ypolar \text{, we have } \jetsym_i \cdot \rho \neq \infrajetsym_j. \label{eq:poresh-left-adjoint-crit2}
 			\end{align}
 			In this case, $Q_j \cdot \lambda$ is the greatest symbol $P_i \in \orisymbol(\vec a)$ such that $P_i \cdot \rho \leq Q_j$ (even when $Q_j \not\in \orisymbolfwd(\vec b)$).
 		\end{itemize}
@@ -2801,24 +2804,65 @@ The mask operations serve three goals:
 		Assume given a reshuffle $\rho \in \Hom(\vec b, \vec a)$.
 		We would like to define in a first step a function
 		\[
-			\loch \cdot \bar \lambda : \orisymbol(\vec b) \to \orisymbol(\vec a) : Q_j \mapsto \bigvee \set{P_i \in \orisymbol(\vec a)}{P_i \cdot \rho \leq Q_j}.
+			\ell : \orisymbol(\vec b) \to \orisymbol(\vec a) : Q_j \mapsto \max \set{P_i \in \orisymbol(\vec a)}{P_i \cdot \rho \leq Q_j}.
 		\]
-		A left adjoint exists if and only if this function is definable and the bind of some polarized reshuffle.
-		
-		However, $\loch \cdot \bar \lambda$ is only defined if the set of which we take the join, is non-empty.
+		A left adjoint $\lambda \dashv \rho$ exists if and only if this function is definable and is the bind of some polarized reshuffle.
+		%
+		However, $\ell$ is only defined if the set of which we take the maximum\footnote{Which differs from the join in that it needs to be one of the operands.}, is non-empty\footnote{In which case there is indeed a maximum, since the set is closed under joins, since the bind of $\rho$ respects joins.}.
 		As such, existence of a left adjoint requires that
 		\[
 			\forall Q_j \in \orisymbol(\vec b). \exists P_i \in \orisymbol(\vec i).P_i \cdot \rho \leq Q_j.
 		\]
 		Without loss of generality, we can instantiate both $P_i$ and $Q_j$ with the minimal element $\eqty$, so existence of a left adjoint requires that $\eqty \cdot \rho = \eqty$ (\cref{eq:poresh-left-adjoint-crit1}).
 		
-		We now assume that this is the case, so that $\loch \cdot \bar \lambda$ is defined.
+		We now assume that this is the case, so that $\ell$ is defined.
 		Its restriction to $\orisymbolfwd(\vec b)$ defines a polarized reshuffle $\lambda \in \Hom(\vec a, \vec b)$.
-		We have to show that $\loch \cdot \bar \lambda$ the bind of $\lambda$ if and only if \cref{eq:poresh-left-adjoint-crit2} holds.
+		We have to show that $\ell$ the bind of $\lambda$ if and only if \cref{eq:poresh-left-adjoint-crit2} holds.
+		\begin{itemize}
+			\item To prove `only if', assume that \cref{eq:poresh-left-adjoint-crit2} does not hold (which is decidable). Then there exists some $\jetsym_i \in \orisymbolfwd(\vec a)$ such that $\jetsym_i \cdot \rho = \infrajetsym_j$ with $b_j = \ypolar$.
+			This also implies $\equijetsym_i \cdot \rho = \infrajetsym_i \cdot \rho = \infrajetsym_j$.
+			Then by definition of $\ell$, we have $\ell(\infrajetsym_j) \geq \infrajetsym_i$, but $\jetsym_j \cdot \lambda = \ell(\jetsym_j) < \equijetsym_i$, implying that $\infrajetsym_j \cdot \lambda < \equijetsym_i$.
+			Thus, $\infrajetsym_j \cdot \lambda \neq \ell(\infrajetsym_j)$ so $\ell$ is not the bind of $\lambda$.
+			
+			\item To prove `if', assume that \cref{eq:poresh-left-adjoint-crit2} holds. We prove that $\ell$ is the bind of $\lambda$.
+			It is clear from the definition of $\ell$ that $\ell(\topsym) = \topsym$.
+			Furthermore, we have
+			\begin{align*}
+				\tejsym_j \cdot \lambda
+				&= \tejsym \cdot (\jetsym_j \cdot \lambda)
+				= \tejsym \cdot \ell(\jetsym_j) \\
+				& \qquad \qquad \text{(Definition of bind and $\lambda$)} \\
+				&= \tejsym \cdot \max \set{P'_i}{P'_i \in \orisymbol(\vec a) \text{ with } P'_i \cdot \rho \leq \jetsym_j} \\
+				& \qquad \qquad \text{(Definition of $\ell$)} \\
+				&= \max \set{\tejsym \cdot P'_i}{P'_i \in \orisymbol(\vec a) \text{ with } P'_i \cdot \rho \leq \jetsym_j} \\
+				& \qquad \qquad \text{(Involution $\tejsym \cdot \loch$ is a lattice isomorphism.)} \\
+				&= \max \set{P_i \in \orisymbol(\vec a)}{(\tejsym \cdot P_i) \cdot \rho = \tejsym \cdot (P_i \cdot \rho) \leq \jetsym_j} \\
+				& \qquad \qquad \text{(By taking $P'_i := \tejsym \cdot P_i$)} \\
+				&= \max \set{P_i \in \orisymbol(\vec a)}{P_i \cdot \rho \leq \tejsym_j} \\
+				& \qquad \qquad \text{(Involution $\tejsym \cdot \loch$ preserves and reflects $\leq$.)} \\
+				&= \ell(\tejsym_j) \\
+				% ------------------------
+				\ell(\tejsym_j)
+				&= \max \set{P_i \in \orisymbol(\vec a)}{P_i \cdot \rho \leq \tejsym_j} \\
+				&= \max \set{P_i \in \orisymbol(\vec a)}{(\tejsym \cdot P_i) \cdot \rho = \tejsym \cdot (P_i \cdot \rho) \leq \jetsym_j} \\
+				& \qquad \qquad \text{(Involution $\tejsym \cdot \loch$ preserves and reflects $\leq$.)} \\
+				&= \max \set{\tejsym \cdot P'_i}{P'_i \in \orisymbol(\vec a) \text{ with } P'_i \cdot \rho \leq \jetsym_j} \\
+				& \qquad \qquad \text{($P'_i := \tejsym \cdot P_i$)} \\
+				&= \tejsym \cdot \max \set{P'_i}{P'_i \in \orisymbol(\vec a) \text{ with } P'_i \cdot \rho \leq \jetsym_j} \\
+				& \qquad \qquad \text{(Involution $\tejsym \cdot \loch$ is a lattice isomorphism.)} \\
+				&= \tejsym \cdot \ell(\jetsym_j) = \tejsym \cdot (\jetsym_j \cdot \lambda) = \tejsym_j \cdot \lambda. \\
+				& \qquad \qquad \text{(Definition of $\ell$, of $\lambda$ and of bind.)} \\
+				% ------------------------
+				\ell(\equijetsym_j)
+				&= \max \set{P_i \in \orisymbol(\vec a)}{P_i \cdot \rho \leq \equijetsym_j} \\
+				% ------------------------
+				\ell(\infrajetsym_j)
+				&= \max \set{P_i \in \orisymbol(\vec a)}{P_i \cdot \rho \leq \infrajetsym_j} \\
+			\end{align*}
+		\end{itemize}
 		
-		Assume it does not. Then there exists some $\jetsym_i \in \orisymbolfwd(\vec a)$ with $a_i = \ypolar$ such that $\jetsym_i \cdot \rho = \infrajetsym_j$.
-		Then $\infrajetsym_j \cdot \bar \lambda \geq \infrajetsym_i$, but $\jetsym_j \cdot \lambda = \jetsym_j \cdot \bar \lambda < \equijetsym_i$.
-		This is impossible if $\loch \cdot \bar \lambda$ is the bind of $\lambda$.
+		
+		
 		
 		
 		\todoi{Old stuff}
