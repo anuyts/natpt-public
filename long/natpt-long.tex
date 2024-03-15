@@ -2717,6 +2717,8 @@ The mask operations serve three goals:
 	If $i = \npolar$, we simply get $P \cdot \edgesym_i = \edgesym_i$.
 	We call a symbol $P_i$ \textbf{symmetric} if $\tejsym \cdot P_i = P_i$.
 	
+	If $P_i, Q_j \in \orisymbol(\vec a)$ and either is symmetric, then we either have $P_i \leq Q_j$ or $Q_j \leq P_i$.
+	
 	We write $P_i \ll Q_j$ if $\infrajetsym \cdot P_i \leq \equijetsym \cdot Q_j$, which is the case if either: $P_i = \eqty$, $Q_j = \topsym$, $i < j$ or if $i = j$ and either $P = \equijetsym$ or $Q = \infrajetsym$ (both of which are true if $a_i = \npolar$).
 \end{definition}
 \begin{definition}\label{def:poreshcat}
@@ -2776,13 +2778,15 @@ The mask operations serve three goals:
 				%&\text{for all } \jetsym_i \in \orisymbolfwd(\vec a) \text{ with } a_i = \ypolar \text{, we have } \jetsym_i \cdot \rho \neq \infrajetsym_j. \label{eq:poresh-left-adjoint-crit2}
 			\end{align}
 			In this case, $Q_j \cdot \lambda$ is the greatest symbol $P_i \in \orisymbol(\vec a)$ such that $P_i \cdot \rho \leq Q_j$ (even when $Q_j \not\in \orisymbolfwd(\vec b)$).
+			
+			\item A reshuffle $\lambda$ has a right adjoint $\rho$ if and only if
+			\begin{align}
+				&\text{for all } \jetsym_j \in \orisymbolfwd(\vec b), \text{we have } \jetsym_j \cdot \lambda < \topsym, \text{and} \label{eq:poresh-right-adjoint-crit1} \\
+				&\text{for all } \jetsym_j \in \orisymbolfwd(\vec b) \text{ with } \jetsym_j \cdot \lambda = \equijetsym_i \text{, we have } a_i = \npolar. \label{eq:poresh-right-adjoint-crit2}
+			\end{align}
+			In this case, $P_i \cdot \rho$ is the least symbol $Q_j \in \orisymbol(\vec b)$ such that $P_i \leq Q_j \cdot \lambda$ (even when $P_i \not\in \orisymbolfwd(\vec a)$).
 		\end{itemize}
 	\end{enumerate}
-	\todoi{Old stuff}
-	\begin{itemize}
-		\item A reshuffle $\rho$ has a left adjoint $\lambda$ if and only if $(\eqty \cdot \rho) = (\eqty)$, where $Q_j \cdot \lambda$ is the greatest symbol $P_i \in \orisymbol(\vec a)$ such that $P_i \cdot \rho \leq Q_j$ (even when $Q_j \not\in \orisymbolfwd(\vec b)$).
-		\item A reshuffle $L$ has a right adjoint $R$ if and only if $j \cdot L < \top$ for all $j < \top$, where $i \cdot R$ is the least index $j \in \accol{\eqty, 0, \ldots, m, \top}$ such that $i \leq j \cdot L$ (even when $i = \top$).
-	\end{itemize}
 \end{theorem}
 \begin{proof}
 	\begin{enumerate}
@@ -2794,10 +2798,10 @@ The mask operations serve three goals:
 		To see the latter, we need to show that for all $Q_j$, we have $(Q_j \cdot \lambda) \cdot \rho \leq Q_j$ which is equivalent to $Q_j \cdot \lambda \leq Q_j \cdot \lambda$ and hence true.
 		
 		Conversely, assume that $\lambda \dashv \rho$. Then we have
-		\begin{align}
+		\begin{align*}
 			P_i \leq Q_j \cdot \lambda &\Rightarrow P_i \cdot \rho \leq (Q_j \cdot \lambda) \cdot \rho = Q_j \cdot (\lambda \circ \rho) \leq Q_j, \\
 			P_i \cdot \rho \leq Q_j &\Rightarrow P_i \leq P_i \cdot (\rho \circ \lambda) = (P_i \cdot \rho) \cdot \lambda \leq Q_j \cdot \lambda,
-		\end{align}
+		\end{align*}
 		so all adjoint pairs satisfy \cref{eq:poresh-adjoint-crit}.
 		
 		\item Next, we move to the criteria to determine existence of a left/right adjoint and the algorithms for constructing them.
@@ -2876,12 +2880,21 @@ The mask operations serve three goals:
 				&= \max \bigcup \left\{
 					\begin{array}{l}
 						\set{\equijetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \equijetsym_i \cdot \rho \leq \equijetsym_j}, \\
+						\set{\jetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \infrajetsym_i \cdot \rho \leq \equijetsym_j}, \\
+						\set{\tejsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \infrajetsym_i \cdot \rho \leq \equijetsym_j}, \\
+						\set{\infrajetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \infrajetsym_i \cdot \rho \leq \equijetsym_j}
+					\end{array}
+				\right\} \\
+				& \qquad \qquad \text{(Add sets bounded from above by last set.)} \\
+				&= \max \bigcup \left\{
+					\begin{array}{l}
+						\set{\equijetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \equijetsym_i \cdot \rho \leq \equijetsym_j}, \\
 						\set{\jetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \jetsym_i \cdot \rho \leq \equijetsym_j}, \\
 						\set{\tejsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \tejsym_i \cdot \rho \leq \equijetsym_j}, \\
 						\set{\infrajetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \infrajetsym_i \cdot \rho \leq \equijetsym_j}
 					\end{array}
 				\right\} \\
-				& \qquad \qquad \text{(Add sets bounded from above by first set.)} \\
+				& \qquad \qquad \text{(Use equivalent condition, since $\equijet_j$ is symmetric.)} \\
 				&= \max \set{P_i \in \orisymbol(\vec a)}{P_i \cdot \rho \leq \equijetsym_j} \\
 				& \qquad \qquad \text{(Regroup cases.)} \\
 				&= \ell(\equijetsym_j), \\
@@ -2923,24 +2936,148 @@ The mask operations serve three goals:
 						\set{\infrajetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \equijetsym_i \cdot \rho \leq \jetsym_j}
 					\end{array}
 				\right\} \\
-				& \qquad \qquad \text{(Add sets bounded from above by first set.)} \\
+				& \qquad \qquad \text{(Add sets bounded from above by last set.)} \\
 				&= \max \set{P_i \in \orisymbol(\vec a)}{\equijetsym_i \cdot \rho \leq \jetsym_j} \\
 				& \qquad \qquad \text{(Regroup cases.)} \\
 				&= \max \set{P_i \in \orisymbol(\vec a)}{\deg(\jetsym_i \cdot \rho) \leq j} \\
 				& \qquad \qquad \text{(Since, by \cref{eq:poresh-left-adjoint-crit2}, we have $\equijetsym_i \cdot \rho = \equijetsym_{\deg(\jetsym_i \cdot \rho)}$.)} \\
-				&= \max \set{P_i \in \orisymbol(\vec a)}{\jetsym_i \cdot \rho \leq \infrajetsym_j} \\
+				&= \max \set{P_i \in \orisymbol(\vec a)}{P_i \cdot \rho \leq \infrajetsym_j} \\
 				&= \ell(\infrajetsym_j).
 			\end{align*}
 		\end{itemize}
 		
+		\textbf{Existence of right adjoint.}
+		Assume given a reshuffle $\lambda \in \Hom(\vec a, \vec b)$.
+		We would like to define in a first step a function
+		\[
+			r : \orisymbol(\vec a) \to \orisymbol(\vec b) : P_i \mapsto \min \set{Q_j \in \orisymbol(\vec b)}{P_i \leq Q_j \cdot \lambda}.
+		\]
+		A right adjoint $\lambda \dashv \rho$ exists if and only if this function is definable and is the bind of some polarized reshuffle.
+		However, $r$ is only defined if the set of which we take the minimum, is non-empty.
+		As such, existence of a right adjoint requires that
+		\[
+			\forall P_i \in \orisymbol(\vec a) . \exists Q_j \in \orisymbol(\vec b). P_i \leq Q_j \cdot \lambda.
+		\]
+		Without loss of generality, we can instantiate both $P_i$ and $Q_j$ with the maximal element $\topsym$, in which case the resulting requirement $\topsym \leq \topsym \cdot \lambda$ is true by definition of the bind of $\lambda$.
 		
-		
-		
-		
-		\todoi{Old stuff}
-		The equivalence is unsatisfiable if $(\eqty \cdot R) \neq (\eqty)$, because then $(\eqty \cdot L)$ is undefined.
-		
-		It is also unsatisfiable if $m \cdot L = \top$ or $(\eqty \cdot L) = \top$ because then we get $\top \cdot R < \top$ which contradicts the definition $\top \cdot R := \top$.
+		We conclude that $r$ is always defined.
+		Its restriction to $\orisymbolfwd(\vec a)$ defines a polarized reshuffle $\rho \in \Hom(\vec b, \vec a)$.
+		We have to show that $r$ is the bind of $\rho$ if and only if \cref{eq:poresh-right-adjoint-crit1,eq:poresh-right-adjoint-crit2} hold.
+		\begin{itemize}
+			\item Assume that \cref{eq:poresh-right-adjoint-crit1} does not hold (which is decidable).
+			Then there exists some $\jetsym_j \in \orisymbolfwd(\vec b)$ such that $\jetsym_j \cdot \lambda = \topsym$.
+			Then $r(\topsym) \leq \jetsym_j \neq \topsym$, implying that $r$ cannot be the bind of $\rho$.
+			
+			\item Assume that \cref{eq:poresh-right-adjoint-crit2} does not hold (which is decidable).
+			Then there exists some $\jetsym_j \in \orisymbolfwd(\vec b)$ such that $\jetsym_j \cdot \rho = \equijetsym_i$ with $a_i = \ypolar$.
+			This also implies $\equijetsym_j \cdot \lambda = \infrajetsym_j \cdot \lambda = \equijetsym_i$.
+			Then by definition of $r$, we have $r(\equijetsym_i) \leq \equijetsym_j$, but $\jetsym_i \cdot \rho = r(\jetsym_i) > \infrajetsym_j$, implying that $\equijetsym_i \cdot \rho > \infrajetsym_j$. Thus, $\equijetsym_i \cdot \rho \neq r(\equijetsym_i)$ so $r$ is not the bind of $\rho$.
+			
+			\item To prove `if', assume that \cref{eq:poresh-right-adjoint-crit1,eq:poresh-right-adjoint-crit2} hold.
+			We prove that $r$ is the bind of $\rho$.
+			From \cref{eq:poresh-right-adjoint-crit1}, it follows that $r(\topsym) = \topsym$.
+			Furthermore, entirely dually (w.r.t.\ $\leq$) to our earlier calculations, we have
+			\begin{align*}
+				\tejsym_i \cdot \rho &= r(\tejsym_i) \\
+				&\qquad \qquad \text{(Analogous to dual situation.)} \\
+				% ----------------
+				\equijetsym_i \cdot \rho
+				&= \equijetsym \cdot (\jetsym_i \cdot \rho)
+				= \equijetsym \cdot r(\jetsym_i) \\
+				&= \equijetsym \cdot \min \set{Q_j \in \orisymbol(\vec b)}{\jetsym_i \leq Q_j \cdot \lambda} \\
+				&= \min \set{\equijetsym \cdot Q_j}{Q_j \in \orisymbol(\vec b) \text{ with } \jetsym_i \leq Q_j \cdot \lambda} \\
+				& \qquad \qquad \text{($\equijetsym \cdot \loch : \orisymbol(\vec b) \to \orisymbol(\vec b)$ preserves $\leq$.)} \\
+				&= \min \bigcup \left\{
+					\begin{array}{l}
+						\set{\equijetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \jetsym_i \leq \equijetsym_j \cdot \lambda}, \\
+						\set{\equijetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \jetsym_i \leq \jetsym_j \cdot \lambda}, \\
+						\set{\equijetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \jetsym_i \leq \tejsym_j \cdot \lambda}, \\
+						\set{\infrajetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \jetsym_i \leq \infrajetsym_j \cdot \lambda}
+					\end{array}
+				\right \} \\
+				& \qquad \qquad \text{(Consider all cases for $Q$.)} \\
+				&= \min \bigcup \left\{
+					\begin{array}{l}
+						\set{\equijetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \jetsym_i \leq (\jetsym_j \cdot \lambda) \vee (\tejsym \cdot \lambda)}, \\
+						\set{\infrajetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \jetsym_i \leq \infrajetsym_j \cdot \lambda}
+					\end{array}
+				\right \} \\
+				& \qquad \qquad \text{(Simplify disjunction of first 3 conditions.)} \\
+				&= \min \bigcup \left\{
+					\begin{array}{l}
+						\set{\equijetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \jetsym_i \leq \infrajetsym_j \cdot \lambda}, \\
+						\set{\infrajetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \jetsym_i \leq \infrajetsym_j \cdot \lambda}
+					\end{array}
+				\right \} \\
+				& \qquad \qquad \text{(Simplify join by case distinction on $\jetsym_j \cdot \lambda$.)} \\
+				&= \min \bigcup \left\{
+					\begin{array}{l}
+						\set{\equijetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \jetsym_i \leq \infrajetsym_j \cdot \lambda}, \\
+						\set{\jetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \jetsym_i \leq \infrajetsym_j \cdot \lambda}, \\
+						\set{\tejsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \jetsym_i \leq \infrajetsym_j \cdot \lambda}, \\
+						\set{\infrajetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \jetsym_i \leq \infrajetsym_j \cdot \lambda}
+					\end{array}
+				\right \} \\
+				& \qquad \qquad \text{(Add sets bounded from below by first set.)} \\
+				&= \min \set{Q_j \in \orisymbol(\vec b)}{\jetsym_i \leq \infrajetsym_j \cdot \lambda} \\
+				& \qquad \qquad \text{(Regroup cases.)} \\
+				&= \min \set{Q_j \in \orisymbol(\vec b)}{i \leq \deg(\jet_j \cdot \lambda)} \\
+				& \qquad \qquad \text{(Since, by \cref{eq:poresh-right-adjoint-crit2}, we have $\infrajetsym_j \cdot \lambda = \infrajetsym_{\deg(\jetsym_j \cdot \lambda)}$.)} \\
+				&= \min \set{Q_j \in \orisymbol(\vec b)}{\equijetsym_i \leq Q_j \cdot \lambda} \\
+				&= r(\equijetsym_i). \\
+				% ----------------
+				\infrajetsym_i \cdot \rho
+				&= \infrajetsym \cdot (\jetsym_i \cdot \rho)
+				= \infrajetsym \cdot r(\jetsym_i) \\
+				&= \infrajetsym \cdot \min \set{Q_j \in \orisymbol(\vec b)}{\jetsym_i \leq Q_j \cdot \lambda} \\
+				&= \min \set{\infrajetsym \cdot Q_j}{Q_j \in \orisymbol(\vec b) \text{ with } \jetsym_i \leq Q_j \cdot \lambda} \\
+				& \qquad \qquad \text{($\infrajetsym \cdot \loch : \orisymbol(\vec b) \to \orisymbol(\vec b)$ preserves $\leq$.)} \\
+				&= \min \bigcup \left\{
+					\begin{array}{l}
+						\set{\equijetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \jetsym_i \leq \equijetsym_j \cdot \lambda}, \\
+						\set{\infrajetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \jetsym_i \leq \jetsym_j \cdot \lambda}, \\
+						\set{\infrajetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \jetsym_i \leq \tejsym_j \cdot \lambda}, \\
+						\set{\infrajetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \jetsym_i \leq \infrajetsym_j \cdot \lambda}
+					\end{array}
+				\right \} \\
+				& \qquad \qquad \text{(Consider all cases for $Q$.)} \\
+				&= \min \bigcup \left\{
+					\begin{array}{l}
+						\set{\equijetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \jetsym_i \leq \equijetsym_j \cdot \lambda}, \\
+						\set{\infrajetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \jetsym_i \leq \infrajetsym_j \cdot \lambda}
+					\end{array}
+				\right \} \\
+				& \qquad \qquad \text{(Ignore subsets of last set.)} \\
+				&= \min \bigcup \left\{
+					\begin{array}{l}
+						\set{\equijetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \infrajetsym_i \leq \equijetsym_j \cdot \lambda}, \\
+						\set{\infrajetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \infrajetsym_i \leq \infrajetsym_j \cdot \lambda}
+					\end{array}
+				\right \} \\
+				& \qquad \qquad \text{(Right hand side is symmetric.)} \\
+				&= \min \bigcup \left\{
+					\begin{array}{l}
+						\set{\equijetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \infrajetsym_i \leq \equijetsym_j \cdot \lambda}, \\
+						\set{\jetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \infrajetsym_i \leq \equijetsym_j \cdot \lambda}, \\
+						\set{\tejsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \infrajetsym_i \leq \equijetsym_j \cdot \lambda}, \\
+						\set{\infrajetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \infrajetsym_i \leq \infrajetsym_j \cdot \lambda}
+					\end{array}
+				\right \} \\
+				& \qquad \qquad \text{(Add sets bounded from below by first set.)} \\
+				&= \min \bigcup \left\{
+					\begin{array}{l}
+						\set{\equijetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \infrajetsym_i \leq \equijetsym_j \cdot \lambda}, \\
+						\set{\jetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \infrajetsym_i \leq \jetsym_j \cdot \lambda}, \\
+						\set{\tejsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \infrajetsym_i \leq \tejsym_j \cdot \lambda}, \\
+						\set{\infrajetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \infrajetsym_i \leq \infrajetsym_j \cdot \lambda}
+					\end{array}
+				\right \} \\
+				& \qquad \qquad \text{(Use equivalent condition, since $\infrajetsym_i$ is symmetric.)} \\
+				&= \min \set{Q_j \in \orisymbol(\vec b)}{\infrajetsym_i \leq Q_j \cdot \lambda} \\
+				& \qquad \qquad \text{(Regroup cases.)} \\
+				&= r(\infrajetsym_i). &\qedhere
+			\end{align*}
+		\end{itemize}
 	\end{enumerate}
 \end{proof}
 
