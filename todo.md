@@ -1,0 +1,7 @@
+- use \P for coshp
+- tegenvb commutativiteit modaliteiten intikken
+- central semantics extend to general pseudosemantics iff codiscPdiscB commute (o.i.d.)
+- introduce affine/cartesian dependent jet cubes (if feasible & useful)
+- modify jet jewels -> connected jet sets; not locally pretotal
+- title: Models of Naturality Pretype Theory
+- explain equijets using paths
