@@ -50,6 +50,7 @@
 \newcommand{\interp}[1]{\mathopen{}\left\llbracket #1 \right\rrbracket\mathclose{}}
 	\newcommand{\Interp}[1]{\interp{#1}}
 \newcommand{\angles}[1]{\mathopen{}\left\langle #1 \right\rangle\mathclose{}}
+\newcommand{\ket}[1]{\mathopen{}\left[ #1 \right\rangle\mathclose{}}
 \newcommand{\accol}[1]{\mathopen{}\left\{ #1 \right\}\mathclose{}}
 \newcommand{\paren}[1]{\mathopen{}\left( #1 \right)\mathclose{}}
 \newcommand{\pparen}[1]{{\llparenthesis #1 \rrparenthesis}}
@@ -168,17 +169,17 @@
 	\newcommand{\Opcube}{\Op^\boxdot}
 \newcommand{\Fsym}{\name{FSym}} % localization
 	\newcommand{\Fsymcube}{\Fsym^\boxdot}
-	\newcommand{\Fsymresh}{\Fsym^{\poreshcat}}
+	\newcommand{\Fsymresh}{\name{F}^\npolar}
 \newcommand{\Usym}{\name{USym}} % forgetful
 	\newcommand{\Usymcube}{\Usym^\boxdot}
-	\newcommand{\Usymresh}{\Usym^{\poreshcat}}
+	\newcommand{\Usymresh}{\name{U}^\npolar}
 \newcommand{\Csym}{\name{CofSym}} % core
-	\newcommand{\Csymresh}{\Csym^{\poreshcat}}
+	\newcommand{\Csymresh}{\name{Cof}^\npolar}
 \newcommand{\UFsym}{\name{SymCl}} % localization
 	\newcommand{\UFsymcube}{\UFsym^\boxdot}
-	\newcommand{\UFsymresh}{\UFsym^\poreshcat}
+	\newcommand{\UFsymresh}{\name{Clo}^\npolar}
 \newcommand{\UCsym}{\name{SymInt}} % core
-	\newcommand{\UCsymresh}{\UCsym^\poreshcat} % core
+	\newcommand{\UCsymresh}{\name{Int}^\npolar} % core
 \newcommand{\co}{^{\name{co}}}
 \newcommand{\coop}{^{\name{coop}}}
 \newcommand{\whisk}{\mathbin{\star}}
@@ -202,10 +203,11 @@
 	\newcommand{\orisymbol}{{\mathbb{OS}}}
 	\newcommand{\orisymbolnodegree}{\orisymbol_0}
 	\newcommand{\orisymbolfwd}{\orisymbol^+}
-\newcommand{\poreshcatll}{\poreshcat^{\circ \circ \bullet}}
-\newcommand{\poreshcatlr}{\poreshcat^{\circ \bullet \circ}}
-\newcommand{\poreshcatrr}{\poreshcat^{\bullet \circ \circ}}
-\newcommand{\poreshcatllr}{\poreshcat^{\circ \circ \bullet \circ}}
+\newcommand{\withl}{^{\circ \bullet}}
+\newcommand{\withll}{^{\circ \circ \bullet}}
+\newcommand{\withlr}{^{\circ \bullet \circ}}
+\newcommand{\withrr}{^{\bullet \circ \circ}}
+\newcommand{\withllr}{^{\circ \circ \bullet \circ}}
 
 %base categories
 \newcommand{\RGcat}{{\name{RG}}}
@@ -241,6 +243,7 @@
 \newcommand{\dcubeopt}[3]{\dcubecat^{#1}_{#2}\paren{#3}}
 
 \newcommand{\jetset}[1]{\name{JetSet}(#1)}
+	\newcommand{\jetsetsym}{\name{JetSet}}
 \newcommand{\jetjewel}[1]{\name{JetJewel}(#1)}
 \newcommand{\jetcube}[4]{\name{JetCube}^{#2}_{#3}\paren{#1,#4}}
 %\newcommand{\jetcube}[4]{{}^{#1}\hspace{-.5ex}\name{JetCube}^{#2}_{#3}\paren{#4}}
