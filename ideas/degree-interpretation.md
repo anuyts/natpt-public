@@ -10,8 +10,8 @@
   
 ## Degree interpretations for weak NatTT (NatHoTT)
 ```
--1      path    equivalence along a 0-path (weak mutual mapping) (abolish?)
--1      jet     equivalence along a 0-jet (weak mapping) (abolish?)
+-1      path    equivalence along a 0-path (weak mutual mapping) (abolish? no: too complicated)
+-1      jet     equivalence along a 0-jet (weak mapping) (abolish? no: necessary to express covariance)
 0       path    equivalence
 0       jet     morphism
 1       path    relation / pro-equivalence
@@ -37,8 +37,8 @@ Remarks
 
 ## Degree interpretations for strict NatTT
 ```
--1      path    equality along a 0-path (strict mutual mapping) (abolish?)
--1      jet     equality along a 0-jet (strict mapping) (abolish?)
+-1      path    equality along a 0-path (strict mutual mapping) (abolish? no: too complicated)
+-1      jet     equality along a 0-jet (strict mapping) (abolish? no: necessary to express covariance)
 -1      bridge  equality
 0       path    isomorphism
 0       jet     morphism
