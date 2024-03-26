@@ -3151,28 +3151,30 @@ The mask operations serve three goals:
 	Let $\vec a \sqsubset_i \vec b$.
 	Then we have a triple of adjoint polarized reshuffles
 	\[
-		\Fsymresh \dashv \Usymresh \dashv \Csymresh
+		\Fsymresh_i \dashv \Usymresh_i \dashv \Csymresh_i
 	\]
-	where $\Usymresh : \vec a \to \vec b$.
+	where $\Usymresh_i : \vec a \to \vec b$.
 	Each of these preserves all $\jetsym_j$ for $j \neq i$ as well as $\eqty$. Furthermore, we have
 	\[
-		\edgesym_i \cdot \Fsymresh = \infrajetsym_i, \qquad
-		\jetsym_i \cdot \Usymresh = \edgesym_i, \qquad
-		\edgesym_i \cdot \Csymresh = \equijetsym_i.
+		\edgesym_i \cdot \Fsymresh_i = \infrajetsym_i, \qquad
+		\jetsym_i \cdot \Usymresh_i = \edgesym_i, \qquad
+		\edgesym_i \cdot \Csymresh_i = \equijetsym_i.
 	\]
 	From \cref{thm:poresh-adjoint}, we conclude that no further left or right adjoints exist. We have
 	\[
-		\Fsymresh \circ \Usymresh = \id, \qquad \Csymresh \circ \Usymresh = \id.
+		\Fsymresh_i \circ \Usymresh_i = \id, \qquad \Csymresh_i \circ \Usymresh_i = \id.
 	\]
-	Thus, we get an idempotent monad $\UFsymresh = \Usymresh \circ \Fsymresh$ and an idempotent comonad $\UCsymresh = \Usymresh \circ \Fsymresh$ such that $\UFsymresh \dashv \UCsymresh$.
+	Thus, we get an idempotent monad $\UFsymresh_i = \Usymresh_i \circ \Fsymresh_i$ and an idempotent comonad $\UCsymresh_i = \Usymresh_i \circ \Fsymresh_i$ such that $\UFsymresh_i \dashv \UCsymresh_i$.
 	Both preserve all $\jetsym_j$ for $j \neq i$ as well as $\eqty$. Furthermore, we have
 	\[
-		\jetsym_i \cdot \UFsymresh = \infrajetsym_i, \qquad
-		\jetsym_i \cdot \UCsymresh = \equijetsym_i.
+		\jetsym_i \cdot \UFsymresh_i = \infrajetsym_i, \qquad
+		\jetsym_i \cdot \UCsymresh_i = \equijetsym_i.
 	\]
 \end{example}
 \begin{example}
-	Let $\vec b$ be obtained from $\vec a$ by deleting the anpolarity with degree $i$. Let $n := \lenpol{\vec a} = \lenpol{\vec b} + 1$.
+	Let $\vec b$ be obtained from $\vec a$ by deleting the anpolarity with degree $i$.
+	Let $n := \lenpol{\vec a} = \lenpol{\vec b} + 1$.
+	We define the following polarized reshuffle, which forgets the $i$-jet relation:
 	\[
 		\cohfget_i = \reshlist{\eqty}{\jetsym_0, \ldots, \jetsym_{i-1}, \jetsym_{i+1}, \ldots, \jetsym_{n-1}} : \vec a \to \vec b
 	\]
@@ -3320,27 +3322,52 @@ The mask operations serve three goals:
 		\end{itemize}
 	\end{itemize}
 \end{example}
-\begin{example}
-	Let $\vec a = \maskopypolar{[\ypolar, \ypolar]}{\maskrpj} = [\npolar, \npolar, \ypolar, \npolar, \npolar, \ypolar]$ and $\vec b = \maskopypolar{[\ypolar]}{\maskrpj} = [\npolar, \npolar, \ypolar]$.
+\begin{example} \label{ex:pjb-paramty}
+	Let $\vec a = \maskopypolar{[\ypolar, \ypolar]}{\maskpjb} = [\npolar, \ypolar, \npolar, \npolar, \ypolar, \npolar]$ and $\vec b = \maskopypolar{[\ypolar]}{\maskpjb} = [\npolar, \ypolar, \npolar]$.
 	We have the following chain of adjoint reshuffles, now annotated with big degrees, which cannot be extended on either side:
 	\begin{align*}
-		\cohpi_0 &= \reshlist{\nwinfrajetsym_0}{\nwrodsym_1, \nwpathsym_1, \nwjetsym_1} &: \vec a \to \vec b, \\
+		\cohpi_0^{\maskopfont{PJB}} &= \reshlist{\nwbridgesym_0}{\nwpathsym_1, \nwjetsym_1, \nwbridgesym_1} &: \vec a \to \vec b, \\
 		\dashv
-		\cohdisc_0 &= \reshlist{\eqty}{\eqty, \eqty, \eqty, \nwrodsym_0, \nwpathsym_0, \nwjetsym_0} &: \vec b \to \vec a, \\
+		\cohdisc_0^{\maskopfont{PJB}} &= \reshlist{\eqty}{\eqty, \eqty, \eqty, \nwpathsym_0, \nwjetsym_0, \nwbridgesym_0} &: \vec b \to \vec a, \\
 		\dashv
-		\cohfget_0 &= \reshlist{\eqty}{\nwrodsym_1, \nwpathsym_1, \nwjetsym_1} &: \vec a \to \vec b, \\
+		\cohpi{}_0^{\maskopfont{JB};}{}_1^{\maskopfont{P}} =
+		\cohfget_0^{\maskopfont{PJB}} &= \reshlist{\eqty}{\nwpathsym_1, \nwjetsym_1, \nwbridgesym_1} &: \vec a \to \vec b, \\
 		\dashv
-		\cohcodisc_0 &= \reshlist{\eqty}{\nwrodsym_0, \nwrodsym_0, \nwrodsym_0, \nwrodsym_0, \nwpathsym_0, \nwjetsym_0} &: \vec b \to \vec a, \\
-		&\dashv
-		\reshlist{\eqty}{\nwrodsym_0, \nwpathsym_1, \nwjetsym_1} &: \vec a \to \vec b, \\
-		&\dashv
-		\reshlist{\eqty}{\nwrodsym_0, \nwpathsym_1, \nwpathsym_1, \nwpathsym_1, \nwpathsym_1, \nwjetsym_1} &: \vec b \to \vec a, \\
-		&\dashv
-		\reshlist{\eqty}{\nwrodsym_0, \nwpathsym_0, \nwjetsym_1} &: \vec a \to \vec b, \\
-		&\dashv
-		\reshlist{\eqty}{\nwrodsym_0, \nwpathsym_1, \nwequijetsym_1, \nwequijetsym_1, \nwequijetsym_1, \nwjetsym_1} &: \vec b \to \vec a.
+		\cohdisc{}_0^{\maskopfont{JB};}{}_1^{\maskopfont{P}} =
+		\cohcodisc_0^{\maskopfont{PJB}} &= \reshlist{\eqty}{\nwpathsym_0, \nwpathsym_0, \nwpathsym_0, \nwpathsym_0, \nwjetsym_0, \nwbridgesym_0} &: \vec b \to \vec a, \\
+		\dashv
+		\cohfget{}_0^{\maskopfont{JB};}{}_1^{\maskopfont{P}} =
+		\cohcopi_0^{\maskopfont{PJB}} &= 
+		\reshlist{\eqty}{\nwpathsym_0, \nwjetsym_1, \nwbridgesym_1} &: \vec a \to \vec b, \\
+		\dashv
+		\cohcodisc{}_0^{\maskopfont{JB};}{}_1^{\maskopfont{P}} =
+		\phantom{\cohcopi_0^{\maskopfont{PJB}}} &\mathrel{\phantom{=}} 
+		\reshlist{\eqty}{\nwpathsym_0, \nwequijetsym_0, \nwequijetsym_0, \nwequijetsym_0, \nwjetsym_0, \nwbridgesym_0} &: \vec b \to \vec a.
 	\end{align*}
+	The function type with modality $\cohfget_0^{\maskopfont{PJB}}$ will take a limit of a covariant functor, and could be called `covariant naturality'.
+	The modality $\cohcodisc_0^{\maskopfont{PJB}}$ will be used to lift structure inhabiting a covariant functor to $\Type^{\vec b}$, to mode $\vec a$, e.g. to build the category of pointed types. It could be called `covariant structurality'.
 \end{example}
+%\begin{example}
+%	Let $\vec a = \maskopypolar{[\ypolar, \ypolar]}{\maskrpj} = [\npolar, \npolar, \ypolar, \npolar, \npolar, \ypolar]$ and $\vec b = \maskopypolar{[\ypolar]}{\maskrpj} = [\npolar, \npolar, \ypolar]$.
+%	We have the following chain of adjoint reshuffles, now annotated with big degrees, which cannot be extended on either side:
+%	\begin{align*}
+%		\cohpi_0 &= \reshlist{\nwinfrajetsym_0}{\nwrodsym_1, \nwpathsym_1, \nwjetsym_1} &: \vec a \to \vec b, \\
+%		\dashv
+%		\cohdisc_0 &= \reshlist{\eqty}{\eqty, \eqty, \eqty, \nwrodsym_0, \nwpathsym_0, \nwjetsym_0} &: \vec b \to \vec a, \\
+%		\dashv
+%		\cohfget_0 &= \reshlist{\eqty}{\nwrodsym_1, \nwpathsym_1, \nwjetsym_1} &: \vec a \to \vec b, \\
+%		\dashv
+%		\cohcodisc_0 &= \reshlist{\eqty}{\nwrodsym_0, \nwrodsym_0, \nwrodsym_0, \nwrodsym_0, \nwpathsym_0, \nwjetsym_0} &: \vec b \to \vec a, \\
+%		&\dashv
+%		\reshlist{\eqty}{\nwrodsym_0, \nwpathsym_1, \nwjetsym_1} &: \vec a \to \vec b, \\
+%		&\dashv
+%		\reshlist{\eqty}{\nwrodsym_0, \nwpathsym_1, \nwpathsym_1, \nwpathsym_1, \nwpathsym_1, \nwjetsym_1} &: \vec b \to \vec a, \\
+%		&\dashv
+%		\reshlist{\eqty}{\nwrodsym_0, \nwpathsym_0, \nwjetsym_1} &: \vec a \to \vec b, \\
+%		&\dashv
+%		\reshlist{\eqty}{\nwrodsym_0, \nwpathsym_1, \nwequijetsym_1, \nwequijetsym_1, \nwequijetsym_1, \nwjetsym_1} &: \vec b \to \vec a.
+%	\end{align*}
+%\end{example}
 
 \chapter{Transpension}
 \todoi{Does Tw : sSet $\to$ sSet have a transp type? (Yes if it's Tw$_!$)}
