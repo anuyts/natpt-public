@@ -2856,101 +2856,131 @@ The mask operations serve three goals:
 				&= \ell(\tejsym_j), \\
 				% ------------------------
 				\equijetsym_j \cdot \lambda
-				&= \equijetsym \cdot (\jetsym_j \cdot \lambda)
-				= \equijetsym \cdot \ell(\jetsym_j) \\
-				&= \equijetsym \cdot \max \set{P_i \in \orisymbol(\vec a)}{P_i \cdot \rho \leq \jetsym_j} \\
-				&= \max \set{\equijetsym \cdot P_i}{P_i \in \orisymbol(\vec a) \text{ with } P_i \cdot \rho \leq \jetsym_j} \\
-				& \qquad \qquad \text{($\equijetsym \cdot \loch : \orisymbol(\vec a) \to \orisymbol(\vec a)$ preserves $\leq$.)} \\
-				&= \max \bigcup \left\{
-					\begin{array}{l}
-						\set{\equijetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \equijetsym_i \cdot \rho \leq \jetsym_j}, \\
-						\set{\equijetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \jetsym_i \cdot \rho \leq \jetsym_j}, \\
-						\set{\equijetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \tejsym_i \cdot \rho \leq \jetsym_j}, \\
-						\set{\infrajetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \infrajetsym_i \cdot \rho \leq \jetsym_j}
-					\end{array}
-				\right\} \\
-				& \qquad \qquad \text{(Consider all cases for $P$.)} \\
-				&= \max \bigcup \left\{
-					\begin{array}{l}
-						\set{\equijetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \equijetsym_i \cdot \rho \leq \jetsym_j}, \\
-						\set{\infrajetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \infrajetsym_i \cdot \rho \leq \jetsym_j}
-					\end{array}
-				\right\} \\
-				& \qquad \qquad \text{(Ignore subsets of first set.)} \\
-				&= \max \bigcup \left\{
-					\begin{array}{l}
-						\set{\equijetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \equijetsym_i \cdot \rho \leq \equijetsym_j}, \\
-						\set{\infrajetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \infrajetsym_i \cdot \rho \leq \equijetsym_j}
-					\end{array}
-				\right\} \\
-				& \qquad \qquad \text{(Left hand side is symmetric.)} \\
-				&= \max \bigcup \left\{
-					\begin{array}{l}
-						\set{\equijetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \equijetsym_i \cdot \rho \leq \equijetsym_j}, \\
-						\set{\jetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \infrajetsym_i \cdot \rho \leq \equijetsym_j}, \\
-						\set{\tejsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \infrajetsym_i \cdot \rho \leq \equijetsym_j}, \\
-						\set{\infrajetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \infrajetsym_i \cdot \rho \leq \equijetsym_j}
-					\end{array}
-				\right\} \\
-				& \qquad \qquad \text{(Add sets bounded from above by last set.)} \\
-				&= \max \bigcup \left\{
-					\begin{array}{l}
-						\set{\equijetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \equijetsym_i \cdot \rho \leq \equijetsym_j}, \\
-						\set{\jetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \jetsym_i \cdot \rho \leq \equijetsym_j}, \\
-						\set{\tejsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \tejsym_i \cdot \rho \leq \equijetsym_j}, \\
-						\set{\infrajetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \infrajetsym_i \cdot \rho \leq \equijetsym_j}
-					\end{array}
-				\right\} \\
-				& \qquad \qquad \text{(Use equivalent condition, since $\equijet_j$ is symmetric.)} \\
+				&= (\jetsym_j \cdot \lambda) \wedge (\tejsym_j \cdot \lambda) \\
+				& \qquad \qquad \text{(By definition of $\loch \cdot \loch$.)} \\
+				&= \ell(\jetsym_j) \wedge \ell(\tejsym_j) \\
+				& \qquad \qquad \text{(Definition of $\lambda$, result above.)} \\
+				&= \max \set{P_i \in \orisymbol(\vec a)}{P_i \cdot \rho \leq \jetsym_j} \wedge \max \set{P_i \in \orisymbol(\vec a)}{P_i \cdot \rho \leq \tejsym_j} \\
+				&= \max \set{P_i \in \orisymbol(\vec a)}{P_i \cdot \rho \leq \jetsym_j} \cap \set{P_i \in \orisymbol(\vec a)}{P_i \cdot \rho \leq \tejsym_j} \\
+				& \qquad \qquad \text{(Both sets are downward closed.)} \\
+				&= \max \set{P_i \in \orisymbol(\vec a)}{P_i \cdot \rho \leq \jetsym_j \text{ and } P_i \cdot \rho \leq \tejsym_j} \\
 				&= \max \set{P_i \in \orisymbol(\vec a)}{P_i \cdot \rho \leq \equijetsym_j} \\
-				& \qquad \qquad \text{(Regroup cases.)} \\
 				&= \ell(\equijetsym_j), \\
 				% ------------------------
 				\infrajetsym_j \cdot \lambda
-				&= \infrajetsym \cdot (\jetsym_j \cdot \lambda)
-				= \infrajetsym \cdot \ell(\jetsym_j) \\
-				&= \infrajetsym \cdot \max \set{P_i \in \orisymbol(\vec a)}{P_i \cdot \rho \leq \jetsym_j} \\
-				&= \max \set{\infrajetsym \cdot P_i}{P_i \in \orisymbol(\vec a) \text{ with } P_i \cdot \rho \leq \jetsym_j} \\
-				& \qquad \qquad \text{($\infrajetsym \cdot \loch : \orisymbol(\vec a) \to \orisymbol(\vec a)$ preserves $\leq$.)} \\
-				&= \max \bigcup \left\{
-					\begin{array}{l}
-						\set{\equijetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \equijetsym_i \cdot \rho \leq \jetsym_j}, \\
-						\set{\infrajetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \jetsym_i \cdot \rho \leq \jetsym_j}, \\
-						\set{\infrajetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \tejsym_i \cdot \rho \leq \jetsym_j}, \\
-						\set{\infrajetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \infrajetsym_i \cdot \rho \leq \jetsym_j}
-					\end{array}
-				\right\} \\
-				& \qquad \qquad \text{(Consider all cases for $P$.)} \\
-				&= \max \bigcup \left\{
-					\begin{array}{l}
-						\set{\equijetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \equijetsym_i \cdot \rho \leq \jetsym_j}, \\
-						\set{\infrajetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } (\jetsym_i \cdot \rho) \wedge (\tejsym_i \cdot \rho) \leq \jetsym_j}
-					\end{array}
-				\right\} \\
-				& \qquad \qquad \text{(Simplify disjunction of last 3 conditions.)} \\
-				&= \max \bigcup \left\{
-					\begin{array}{l}
-						\set{\equijetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \equijetsym_i \cdot \rho \leq \jetsym_j}, \\
-						\set{\infrajetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \equijetsym_i \cdot \rho \leq \jetsym_j}
-					\end{array}
-				\right\} \\
-				& \qquad \qquad \text{(Simplify meet by case distinction on $\jetsym_i \cdot \rho$.)} \\
-				&= \max \bigcup \left\{
-					\begin{array}{l}
-						\set{\equijetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \equijetsym_i \cdot \rho \leq \jetsym_j}, \\
-						\set{\jetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \equijetsym_i \cdot \rho \leq \jetsym_j}, \\
-						\set{\tejsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \equijetsym_i \cdot \rho \leq \jetsym_j}, \\
-						\set{\infrajetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \equijetsym_i \cdot \rho \leq \jetsym_j}
-					\end{array}
-				\right\} \\
-				& \qquad \qquad \text{(Add sets bounded from above by last set.)} \\
-				&= \max \set{P_i \in \orisymbol(\vec a)}{\equijetsym_i \cdot \rho \leq \jetsym_j} \\
-				& \qquad \qquad \text{(Regroup cases.)} \\
-				&= \max \set{P_i \in \orisymbol(\vec a)}{\deg(\jetsym_i \cdot \rho) \leq j} \\
-				& \qquad \qquad \text{(Since, by \cref{eq:poresh-left-adjoint-crit2}, we have $\equijetsym_i \cdot \rho = \equijetsym_{\deg(\jetsym_i \cdot \rho)}$.)} \\
-				&= \max \set{P_i \in \orisymbol(\vec a)}{P_i \cdot \rho \leq \infrajetsym_j} \\
-				&= \ell(\infrajetsym_j).
+				&= (\jetsym_j \cdot \lambda) \vee (\tejsym_j \cdot \lambda) \\
+				& \qquad \qquad \text{(By definition of $\loch \cdot \loch$.)} \\
+				&= \ell(\jetsym_j) \vee \ell(\tejsym_j) \\
+				& \qquad \qquad \text{(Definition of $\lambda$, result above.)} \\
+				&= \max \set{P_i \in \orisymbol(\vec a)}{P_i \cdot \rho \leq \jetsym_j} \vee \max \set{P_i \in \orisymbol(\vec a)}{P_i \cdot \rho \leq \tejsym_j} \\
+				&= \bigvee \set{P_i \in \orisymbol(\vec a)}{P_i \cdot \rho \leq \jetsym_j} \vee \bigvee \set{P_i \in \orisymbol(\vec a)}{P_i \cdot \rho \leq \tejsym_j} \\
+				& \qquad \qquad \text{(The maxima exist, so they are equal to the joins (suprema).)} \\
+				&= \bigvee \set{P_i \in \orisymbol(\vec a)}{P_i \cdot \rho \leq \jetsym_j} \cup \set{P_i \in \orisymbol(\vec a)}{P_i \cdot \rho \leq \tejsym_j} \\
+				& \qquad \qquad \text{(Associativity.)} \\
+				&= \bigvee \set{P_i \in \orisymbol(\vec a)}{P_i \cdot \rho \leq \jetsym_j \text{ or } P_i \cdot \rho \leq \tejsym_j} \\
+				&= \bigvee \set{P_i \in \orisymbol(\vec a)}{P_i \cdot \rho \leq \infrajetsym_j} \\
+				& \qquad \qquad \text{(Using \cref{eq:poresh-left-adjoint-crit2}.)} \\
+				&= \ell(\infrajetsym_j). \\
+				& \qquad \qquad \text{(Definition and existence of $\ell$.)}
 			\end{align*}
+%			\begin{align*}
+%				% ------------------------
+%				\equijetsym_j \cdot \lambda
+%				&= \equijetsym \cdot (\jetsym_j \cdot \lambda)
+%				= \equijetsym \cdot \ell(\jetsym_j) \\
+%				&= \equijetsym \cdot \max \set{P_i \in \orisymbol(\vec a)}{P_i \cdot \rho \leq \jetsym_j} \\
+%				&= \max \set{\equijetsym \cdot P_i}{P_i \in \orisymbol(\vec a) \text{ with } P_i \cdot \rho \leq \jetsym_j} \\
+%				& \qquad \qquad \text{($\equijetsym \cdot \loch : \orisymbol(\vec a) \to \orisymbol(\vec a)$ preserves $\leq$.)} \\
+%				&= \max \bigcup \left\{
+%					\begin{array}{l}
+%						\set{\equijetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \equijetsym_i \cdot \rho \leq \jetsym_j}, \\
+%						\set{\equijetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \jetsym_i \cdot \rho \leq \jetsym_j}, \\
+%						\set{\equijetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \tejsym_i \cdot \rho \leq \jetsym_j}, \\
+%						\set{\infrajetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \infrajetsym_i \cdot \rho \leq \jetsym_j}
+%					\end{array}
+%				\right\} \\
+%				& \qquad \qquad \text{(Consider all cases for $P$.)} \\
+%				&= \max \bigcup \left\{
+%					\begin{array}{l}
+%						\set{\equijetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \equijetsym_i \cdot \rho \leq \jetsym_j}, \\
+%						\set{\infrajetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \infrajetsym_i \cdot \rho \leq \jetsym_j}
+%					\end{array}
+%				\right\} \\
+%				& \qquad \qquad \text{(Ignore subsets of first set.)} \\
+%				&= \max \bigcup \left\{
+%					\begin{array}{l}
+%						\set{\equijetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \equijetsym_i \cdot \rho \leq \equijetsym_j}, \\
+%						\set{\infrajetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \infrajetsym_i \cdot \rho \leq \equijetsym_j}
+%					\end{array}
+%				\right\} \\
+%				& \qquad \qquad \text{(Left hand side is symmetric.)} \\
+%				&= \max \bigcup \left\{
+%					\begin{array}{l}
+%						\set{\equijetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \equijetsym_i \cdot \rho \leq \equijetsym_j}, \\
+%						\set{\jetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \infrajetsym_i \cdot \rho \leq \equijetsym_j}, \\
+%						\set{\tejsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \infrajetsym_i \cdot \rho \leq \equijetsym_j}, \\
+%						\set{\infrajetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \infrajetsym_i \cdot \rho \leq \equijetsym_j}
+%					\end{array}
+%				\right\} \\
+%				& \qquad \qquad \text{(Add sets bounded from above by last set.)} \\
+%				&= \max \bigcup \left\{
+%					\begin{array}{l}
+%						\set{\equijetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \equijetsym_i \cdot \rho \leq \equijetsym_j}, \\
+%						\set{\jetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \jetsym_i \cdot \rho \leq \equijetsym_j}, \\
+%						\set{\tejsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \tejsym_i \cdot \rho \leq \equijetsym_j}, \\
+%						\set{\infrajetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \infrajetsym_i \cdot \rho \leq \equijetsym_j}
+%					\end{array}
+%				\right\} \\
+%				& \qquad \qquad \text{(Use equivalent condition, since $\equijet_j$ is symmetric.)} \\
+%				&= \max \set{P_i \in \orisymbol(\vec a)}{P_i \cdot \rho \leq \equijetsym_j} \\
+%				& \qquad \qquad \text{(Regroup cases.)} \\
+%				&= \ell(\equijetsym_j), \\ \\
+%				% ------------------------
+%				\infrajetsym_j \cdot \lambda
+%				&= \infrajetsym \cdot (\jetsym_j \cdot \lambda)
+%				= \infrajetsym \cdot \ell(\jetsym_j) \\
+%				&= \infrajetsym \cdot \max \set{P_i \in \orisymbol(\vec a)}{P_i \cdot \rho \leq \jetsym_j} \\
+%				&= \max \set{\infrajetsym \cdot P_i}{P_i \in \orisymbol(\vec a) \text{ with } P_i \cdot \rho \leq \jetsym_j} \\
+%				& \qquad \qquad \text{($\infrajetsym \cdot \loch : \orisymbol(\vec a) \to \orisymbol(\vec a)$ preserves $\leq$.)} \\
+%				&= \max \bigcup \left\{
+%					\begin{array}{l}
+%						\set{\equijetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \equijetsym_i \cdot \rho \leq \jetsym_j}, \\
+%						\set{\infrajetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \jetsym_i \cdot \rho \leq \jetsym_j}, \\
+%						\set{\infrajetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \tejsym_i \cdot \rho \leq \jetsym_j}, \\
+%						\set{\infrajetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \infrajetsym_i \cdot \rho \leq \jetsym_j}
+%					\end{array}
+%				\right\} \\
+%				& \qquad \qquad \text{(Consider all cases for $P$.)} \\
+%				&= \max \bigcup \left\{
+%					\begin{array}{l}
+%						\set{\equijetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \equijetsym_i \cdot \rho \leq \jetsym_j}, \\
+%						\set{\infrajetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } (\jetsym_i \cdot \rho) \wedge (\tejsym_i \cdot \rho) \leq \jetsym_j}
+%					\end{array}
+%				\right\} \\
+%				& \qquad \qquad \text{(Simplify disjunction of last 3 conditions.)} \\
+%				&= \max \bigcup \left\{
+%					\begin{array}{l}
+%						\set{\equijetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \equijetsym_i \cdot \rho \leq \jetsym_j}, \\
+%						\set{\infrajetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \equijetsym_i \cdot \rho \leq \jetsym_j}
+%					\end{array}
+%				\right\} \\
+%				& \qquad \qquad \text{(Simplify meet by case distinction on $\jetsym_i \cdot \rho$.)} \\
+%				&= \max \bigcup \left\{
+%					\begin{array}{l}
+%						\set{\equijetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \equijetsym_i \cdot \rho \leq \jetsym_j}, \\
+%						\set{\jetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \equijetsym_i \cdot \rho \leq \jetsym_j}, \\
+%						\set{\tejsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \equijetsym_i \cdot \rho \leq \jetsym_j}, \\
+%						\set{\infrajetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \equijetsym_i \cdot \rho \leq \jetsym_j}
+%					\end{array}
+%				\right\} \\
+%				& \qquad \qquad \text{(Add sets bounded from above by last set.)} \\
+%				&= \max \set{P_i \in \orisymbol(\vec a)}{\equijetsym_i \cdot \rho \leq \jetsym_j} \\
+%				& \qquad \qquad \text{(Regroup cases.)} \\
+%				&= \max \set{P_i \in \orisymbol(\vec a)}{\deg(\jetsym_i \cdot \rho) \leq j} \\
+%				& \qquad \qquad \text{(Since, by \cref{eq:poresh-left-adjoint-crit2}, we have $\equijetsym_i \cdot \rho = \equijetsym_{\deg(\jetsym_i \cdot \rho)}$.)} \\
+%				&= \max \set{P_i \in \orisymbol(\vec a)}{P_i \cdot \rho \leq \infrajetsym_j} \\
+%				&= \ell(\infrajetsym_j).
+%			\end{align*}
 		\end{itemize}
 		
 		\textbf{Existence of right adjoint.}

@@ -1,3 +1,4 @@
+- shorten proofs adjunctions
 - tegenvb commutativiteit modaliteiten intikken
 - central semantics extend to general pseudosemantics iff codiscPdiscB commute (o.i.d.)
 - introduce affine/cartesian dependent jet cubes (if feasible & useful)
