@@ -3018,102 +3018,132 @@ The mask operations serve three goals:
 				\tejsym_i \cdot \rho &= r(\tejsym_i) \\
 				&\qquad \qquad \text{(Analogous to dual situation.)} \\
 				% ----------------
-				\equijetsym_i \cdot \rho
-				&= \equijetsym \cdot (\jetsym_i \cdot \rho)
-				= \equijetsym \cdot r(\jetsym_i) \\
-				&= \equijetsym \cdot \min \set{Q_j \in \orisymbol(\vec b)}{\jetsym_i \leq Q_j \cdot \lambda} \\
-				&= \min \set{\equijetsym \cdot Q_j}{Q_j \in \orisymbol(\vec b) \text{ with } \jetsym_i \leq Q_j \cdot \lambda} \\
-				& \qquad \qquad \text{($\equijetsym \cdot \loch : \orisymbol(\vec b) \to \orisymbol(\vec b)$ preserves $\leq$.)} \\
-				&= \min \bigcup \left\{
-					\begin{array}{l}
-						\set{\equijetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \jetsym_i \leq \equijetsym_j \cdot \lambda}, \\
-						\set{\equijetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \jetsym_i \leq \jetsym_j \cdot \lambda}, \\
-						\set{\equijetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \jetsym_i \leq \tejsym_j \cdot \lambda}, \\
-						\set{\infrajetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \jetsym_i \leq \infrajetsym_j \cdot \lambda}
-					\end{array}
-				\right \} \\
-				& \qquad \qquad \text{(Consider all cases for $Q$.)} \\
-				&= \min \bigcup \left\{
-					\begin{array}{l}
-						\set{\equijetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \jetsym_i \leq (\jetsym_j \cdot \lambda) \vee (\tejsym \cdot \lambda)}, \\
-						\set{\infrajetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \jetsym_i \leq \infrajetsym_j \cdot \lambda}
-					\end{array}
-				\right \} \\
-				& \qquad \qquad \text{(Simplify disjunction of first 3 conditions.)} \\
-				&= \min \bigcup \left\{
-					\begin{array}{l}
-						\set{\equijetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \jetsym_i \leq \infrajetsym_j \cdot \lambda}, \\
-						\set{\infrajetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \jetsym_i \leq \infrajetsym_j \cdot \lambda}
-					\end{array}
-				\right \} \\
-				& \qquad \qquad \text{(Simplify join by case distinction on $\jetsym_j \cdot \lambda$.)} \\
-				&= \min \bigcup \left\{
-					\begin{array}{l}
-						\set{\equijetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \jetsym_i \leq \infrajetsym_j \cdot \lambda}, \\
-						\set{\jetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \jetsym_i \leq \infrajetsym_j \cdot \lambda}, \\
-						\set{\tejsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \jetsym_i \leq \infrajetsym_j \cdot \lambda}, \\
-						\set{\infrajetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \jetsym_i \leq \infrajetsym_j \cdot \lambda}
-					\end{array}
-				\right \} \\
-				& \qquad \qquad \text{(Add sets bounded from below by first set.)} \\
-				&= \min \set{Q_j \in \orisymbol(\vec b)}{\jetsym_i \leq \infrajetsym_j \cdot \lambda} \\
-				& \qquad \qquad \text{(Regroup cases.)} \\
-				&= \min \set{Q_j \in \orisymbol(\vec b)}{i \leq \deg(\jet_j \cdot \lambda)} \\
-				& \qquad \qquad \text{(Since, by \cref{eq:poresh-right-adjoint-crit2}, we have $\infrajetsym_j \cdot \lambda = \infrajetsym_{\deg(\jetsym_j \cdot \lambda)}$.)} \\
-				&= \min \set{Q_j \in \orisymbol(\vec b)}{\equijetsym_i \leq Q_j \cdot \lambda} \\
-				&= r(\equijetsym_i). \\
-				% ----------------
 				\infrajetsym_i \cdot \rho
-				&= \infrajetsym \cdot (\jetsym_i \cdot \rho)
-				= \infrajetsym \cdot r(\jetsym_i) \\
-				&= \infrajetsym \cdot \min \set{Q_j \in \orisymbol(\vec b)}{\jetsym_i \leq Q_j \cdot \lambda} \\
-				&= \min \set{\infrajetsym \cdot Q_j}{Q_j \in \orisymbol(\vec b) \text{ with } \jetsym_i \leq Q_j \cdot \lambda} \\
-				& \qquad \qquad \text{($\infrajetsym \cdot \loch : \orisymbol(\vec b) \to \orisymbol(\vec b)$ preserves $\leq$.)} \\
-				&= \min \bigcup \left\{
-					\begin{array}{l}
-						\set{\equijetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \jetsym_i \leq \equijetsym_j \cdot \lambda}, \\
-						\set{\infrajetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \jetsym_i \leq \jetsym_j \cdot \lambda}, \\
-						\set{\infrajetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \jetsym_i \leq \tejsym_j \cdot \lambda}, \\
-						\set{\infrajetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \jetsym_i \leq \infrajetsym_j \cdot \lambda}
-					\end{array}
-				\right \} \\
-				& \qquad \qquad \text{(Consider all cases for $Q$.)} \\
-				&= \min \bigcup \left\{
-					\begin{array}{l}
-						\set{\equijetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \jetsym_i \leq \equijetsym_j \cdot \lambda}, \\
-						\set{\infrajetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \jetsym_i \leq \infrajetsym_j \cdot \lambda}
-					\end{array}
-				\right \} \\
-				& \qquad \qquad \text{(Ignore subsets of last set.)} \\
-				&= \min \bigcup \left\{
-					\begin{array}{l}
-						\set{\equijetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \infrajetsym_i \leq \equijetsym_j \cdot \lambda}, \\
-						\set{\infrajetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \infrajetsym_i \leq \infrajetsym_j \cdot \lambda}
-					\end{array}
-				\right \} \\
-				& \qquad \qquad \text{(Right hand side is symmetric.)} \\
-				&= \min \bigcup \left\{
-					\begin{array}{l}
-						\set{\equijetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \infrajetsym_i \leq \equijetsym_j \cdot \lambda}, \\
-						\set{\jetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \infrajetsym_i \leq \equijetsym_j \cdot \lambda}, \\
-						\set{\tejsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \infrajetsym_i \leq \equijetsym_j \cdot \lambda}, \\
-						\set{\infrajetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \infrajetsym_i \leq \infrajetsym_j \cdot \lambda}
-					\end{array}
-				\right \} \\
-				& \qquad \qquad \text{(Add sets bounded from below by first set.)} \\
-				&= \min \bigcup \left\{
-					\begin{array}{l}
-						\set{\equijetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \infrajetsym_i \leq \equijetsym_j \cdot \lambda}, \\
-						\set{\jetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \infrajetsym_i \leq \jetsym_j \cdot \lambda}, \\
-						\set{\tejsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \infrajetsym_i \leq \tejsym_j \cdot \lambda}, \\
-						\set{\infrajetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \infrajetsym_i \leq \infrajetsym_j \cdot \lambda}
-					\end{array}
-				\right \} \\
-				& \qquad \qquad \text{(Use equivalent condition, since $\infrajetsym_i$ is symmetric.)} \\
+				&= (\jetsym_i \cdot \rho) \vee (\tejsym_i \cdot \rho) \\
+				&\qquad \qquad \text{(By definition of $\loch \cdot \loch$.)} \\
+				&= r(\jetsym_i) \vee r(\tejsym_i) \\
+				&\qquad \qquad \text{(Definition of $\rho$, result above.)} \\
+				&= \min \set{Q_j \in \orisymbol(\vec b)}{\jetsym_i \leq Q_j \cdot \lambda} \vee \min \set{Q_j \in \orisymbol(\vec b)}{\tejsym_i \leq Q_j \cdot \lambda} \\
+				&= \min \set{Q_j \in \orisymbol(\vec b)}{\jetsym_i \leq Q_j \cdot \lambda} \cap \set{Q_j \in \orisymbol(\vec b)}{\tejsym_i \leq Q_j \cdot \lambda} \\
+				&\qquad \qquad \text{(Both sets are upward closed.)} \\
+				&= \min \set{Q_j \in \orisymbol(\vec b)}{\jetsym_i \leq Q_j \cdot \lambda \text{ and } \tejsym_i \leq Q_j \cdot \lambda} \\
 				&= \min \set{Q_j \in \orisymbol(\vec b)}{\infrajetsym_i \leq Q_j \cdot \lambda} \\
-				& \qquad \qquad \text{(Regroup cases.)} \\
-				&= r(\infrajetsym_i). &\qedhere
+				&= r(\infrajetsym_i) \\
+				% ----------------
+				\equijetsym_i \cdot \rho
+				&= (\jetsym_i \cdot \rho) \wedge (\tejsym_i \cdot \rho) \\
+				&\qquad \qquad \text{(By definition of $\loch \cdot \loch$.)} \\
+				&= r(\jetsym_i) \wedge r(\tejsym_i) \\
+				&\qquad \qquad \text{(Definition of $\rho$, result above.)} \\
+				&= \min \set{Q_j \in \orisymbol(\vec b)}{\jetsym_i \leq Q_j \cdot \lambda} \wedge \min \set{Q_j \in \orisymbol(\vec b)}{\tejsym_i \leq Q_j \cdot \lambda} \\
+				&= \bigwedge \set{Q_j \in \orisymbol(\vec b)}{\jetsym_i \leq Q_j \cdot \lambda} \wedge \bigwedge \set{Q_j \in \orisymbol(\vec b)}{\tejsym_i \leq Q_j \cdot \lambda} \\
+				&\qquad \qquad \text{(The minima exist, so they are equal to the meets (infima).)} \\
+				&= \bigwedge \set{Q_j \in \orisymbol(\vec b)}{\jetsym_i \leq Q_j \cdot \lambda} \cup \set{Q_j \in \orisymbol(\vec b)}{\tejsym_i \leq Q_j \cdot \lambda} \\
+				&\qquad \qquad \text{(Associativity.)} \\
+				&= \bigwedge \set{Q_j \in \orisymbol(\vec b)}{\jetsym_i \leq Q_j \cdot \lambda \text{ or } \tejsym_i \leq Q_j \cdot \lambda} \\
+				&= \bigwedge \set{Q_j \in \orisymbol(\vec b)}{\equijetsym_i \leq Q_j \cdot \lambda} \\
+				&\qquad \qquad \text{(Using \cref{eq:poresh-right-adjoint-crit2}.)} \\
+				&= r(\equijet_i). \\
+				&\qquad \qquad \text{(Definition and existence of $r$.)} &\qedhere
 			\end{align*}
+%			\begin{align*}
+%				% ----------------
+%				\infrajetsym_i \cdot \rho
+%				&= \infrajetsym \cdot (\jetsym_i \cdot \rho)
+%				= \infrajetsym \cdot r(\jetsym_i) \\
+%				&= \infrajetsym \cdot \min \set{Q_j \in \orisymbol(\vec b)}{\jetsym_i \leq Q_j \cdot \lambda} \\
+%				&= \min \set{\infrajetsym \cdot Q_j}{Q_j \in \orisymbol(\vec b) \text{ with } \jetsym_i \leq Q_j \cdot \lambda} \\
+%				& \qquad \qquad \text{($\infrajetsym \cdot \loch : \orisymbol(\vec b) \to \orisymbol(\vec b)$ preserves $\leq$.)} \\
+%				&= \min \bigcup \left\{
+%					\begin{array}{l}
+%						\set{\equijetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \jetsym_i \leq \equijetsym_j \cdot \lambda}, \\
+%						\set{\infrajetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \jetsym_i \leq \jetsym_j \cdot \lambda}, \\
+%						\set{\infrajetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \jetsym_i \leq \tejsym_j \cdot \lambda}, \\
+%						\set{\infrajetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \jetsym_i \leq \infrajetsym_j \cdot \lambda}
+%					\end{array}
+%				\right \} \\
+%				& \qquad \qquad \text{(Consider all cases for $Q$.)} \\
+%				&= \min \bigcup \left\{
+%					\begin{array}{l}
+%						\set{\equijetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \jetsym_i \leq \equijetsym_j \cdot \lambda}, \\
+%						\set{\infrajetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \jetsym_i \leq \infrajetsym_j \cdot \lambda}
+%					\end{array}
+%				\right \} \\
+%				& \qquad \qquad \text{(Ignore subsets of last set.)} \\
+%				&= \min \bigcup \left\{
+%					\begin{array}{l}
+%						\set{\equijetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \infrajetsym_i \leq \equijetsym_j \cdot \lambda}, \\
+%						\set{\infrajetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \infrajetsym_i \leq \infrajetsym_j \cdot \lambda}
+%					\end{array}
+%				\right \} \\
+%				& \qquad \qquad \text{(Right hand side is symmetric.)} \\
+%				&= \min \bigcup \left\{
+%					\begin{array}{l}
+%						\set{\equijetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \infrajetsym_i \leq \equijetsym_j \cdot \lambda}, \\
+%						\set{\jetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \infrajetsym_i \leq \equijetsym_j \cdot \lambda}, \\
+%						\set{\tejsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \infrajetsym_i \leq \equijetsym_j \cdot \lambda}, \\
+%						\set{\infrajetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \infrajetsym_i \leq \infrajetsym_j \cdot \lambda}
+%					\end{array}
+%				\right \} \\
+%				& \qquad \qquad \text{(Add sets bounded from below by first set.)} \\
+%				&= \min \bigcup \left\{
+%					\begin{array}{l}
+%						\set{\equijetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \infrajetsym_i \leq \equijetsym_j \cdot \lambda}, \\
+%						\set{\jetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \infrajetsym_i \leq \jetsym_j \cdot \lambda}, \\
+%						\set{\tejsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \infrajetsym_i \leq \tejsym_j \cdot \lambda}, \\
+%						\set{\infrajetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \infrajetsym_i \leq \infrajetsym_j \cdot \lambda}
+%					\end{array}
+%				\right \} \\
+%				& \qquad \qquad \text{(Use equivalent condition, since $\infrajetsym_i$ is symmetric.)} \\
+%				&= \min \set{Q_j \in \orisymbol(\vec b)}{\infrajetsym_i \leq Q_j \cdot \lambda} \\
+%				& \qquad \qquad \text{(Regroup cases.)} \\
+%				&= r(\infrajetsym_i). &\qedhere
+%				% ----------------
+%				\equijetsym_i \cdot \rho
+%				&= \equijetsym \cdot (\jetsym_i \cdot \rho)
+%				= \equijetsym \cdot r(\jetsym_i) \\
+%				&= \equijetsym \cdot \min \set{Q_j \in \orisymbol(\vec b)}{\jetsym_i \leq Q_j \cdot \lambda} \\
+%				&= \min \set{\equijetsym \cdot Q_j}{Q_j \in \orisymbol(\vec b) \text{ with } \jetsym_i \leq Q_j \cdot \lambda} \\
+%				& \qquad \qquad \text{($\equijetsym \cdot \loch : \orisymbol(\vec b) \to \orisymbol(\vec b)$ preserves $\leq$.)} \\
+%				&= \min \bigcup \left\{
+%					\begin{array}{l}
+%						\set{\equijetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \jetsym_i \leq \equijetsym_j \cdot \lambda}, \\
+%						\set{\equijetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \jetsym_i \leq \jetsym_j \cdot \lambda}, \\
+%						\set{\equijetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \jetsym_i \leq \tejsym_j \cdot \lambda}, \\
+%						\set{\infrajetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \jetsym_i \leq \infrajetsym_j \cdot \lambda}
+%					\end{array}
+%				\right \} \\
+%				& \qquad \qquad \text{(Consider all cases for $Q$.)} \\
+%				&= \min \bigcup \left\{
+%					\begin{array}{l}
+%						\set{\equijetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \jetsym_i \leq (\jetsym_j \cdot \lambda) \vee (\tejsym \cdot \lambda)}, \\
+%						\set{\infrajetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \jetsym_i \leq \infrajetsym_j \cdot \lambda}
+%					\end{array}
+%				\right \} \\
+%				& \qquad \qquad \text{(Simplify disjunction of first 3 conditions.)} \\
+%				&= \min \bigcup \left\{
+%					\begin{array}{l}
+%						\set{\equijetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \jetsym_i \leq \infrajetsym_j \cdot \lambda}, \\
+%						\set{\infrajetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \jetsym_i \leq \infrajetsym_j \cdot \lambda}
+%					\end{array}
+%				\right \} \\
+%				& \qquad \qquad \text{(Simplify join by case distinction on $\jetsym_j \cdot \lambda$.)} \\
+%				&= \min \bigcup \left\{
+%					\begin{array}{l}
+%						\set{\equijetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \jetsym_i \leq \infrajetsym_j \cdot \lambda}, \\
+%						\set{\jetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \jetsym_i \leq \infrajetsym_j \cdot \lambda}, \\
+%						\set{\tejsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \jetsym_i \leq \infrajetsym_j \cdot \lambda}, \\
+%						\set{\infrajetsym_j}{0 \leq j < \lenpol{\vec b} \text{ with } \jetsym_i \leq \infrajetsym_j \cdot \lambda}
+%					\end{array}
+%				\right \} \\
+%				& \qquad \qquad \text{(Add sets bounded from below by first set.)} \\
+%				&= \min \set{Q_j \in \orisymbol(\vec b)}{\jetsym_i \leq \infrajetsym_j \cdot \lambda} \\
+%				& \qquad \qquad \text{(Regroup cases.)} \\
+%				&= \min \set{Q_j \in \orisymbol(\vec b)}{i \leq \deg(\jet_j \cdot \lambda)} \\
+%				& \qquad \qquad \text{(Since, by \cref{eq:poresh-right-adjoint-crit2}, we have $\infrajetsym_j \cdot \lambda = \infrajetsym_{\deg(\jetsym_j \cdot \lambda)}$.)} \\
+%				&= \min \set{Q_j \in \orisymbol(\vec b)}{\equijetsym_i \leq Q_j \cdot \lambda} \\
+%				&= r(\equijetsym_i). \\
+%			\end{align*}
 		\end{itemize}
 	\end{enumerate}
 \end{proof}
