@@ -3408,14 +3408,26 @@ The mask operations serve three goals:
 
 \subsection{Intervals and Prisms}
 \begin{proposition} \label{thm:poresh-jetset-intervals}
-	Let $\mu : \vec a \to \vec b$ be a polarized reshuffle with left adjoint $\kappa \dashv \mu$. Then we have
-	\[
-		\mu \rival{\jetsym_i} = \rival{\jetsym_i \cdot \kappa}, \qquad
-		\mu \rival{\tejsym_i} = \rival{\tejsym_i \cdot \kappa}, \qquad
-		\mu \rival{\equijetsym_i} = \rival{\equijetsym_i \cdot \kappa}.
-	\]
+	Let $\mu : \vec a \to \vec b$ be a polarized reshuffle with right adjoint $\mu \dashv \rho$. Then we have
+	\begin{equation}
+		\mu \rival{\jetsym_i} \cong \rival{\jetsym_i \cdot \rho}, \qquad
+		\mu \rival{\tejsym_i} \cong \rival{\tejsym_i \cdot \rho}, \qquad
+		\mu \rival{\equijetsym_i} \cong \rival{\equijetsym_i \cdot \rho},
+		\label{eq:poresh-jetset-intervals}
+	\end{equation}
+	where we define $\rival{\topsym}$ as the jet set with carrier $\accol{0, 1}$ on which all $i$-jet relations are reflexive, and $\rival{\eqty}$ as the terminal jet set.%
+	\footnote{By virtue of \cref{thm:poresh-adjoint}, we do not have to define $\rival{\infrajet_j}$ for $b_j = \ypolar$.}
 \end{proposition}
 \begin{proof}
+	Suppose $\jetsym_i \cdot \rho = \eqty$. Then each of the right hand sides in \cref{eq:poresh-jetset-intervals} is the terminal jet set.
+	From \cref{thm:poresh-adjoint}, we know that $\eqty \cdot \mu \geq \jetsym_i$ and therefore, by symmetry of $\eqty \cdot \mu$, that $\eqty \cdot \mu \geq \infrajetsym_i$.
+	Then $0$ and $1$ are related by $\eqty \cdot \mu$ in $\rival{\jetsym_i}$, $\rival{\tejsym_i}$ and $\rival{\equijetsym_i}$ and therefore identified in the jet sets obtained by applying $\mu$ to the left hand sides of \cref{eq:poresh-jetset-intervals}.
+	
+	Suppose $\jetsym_i \cdot \rho > \eqty$. Then the right hand sides of \cref{eq:poresh-jetset-intervals} have carrier $\accol{0, 1}$.
+	From \cref{thm:poresh-adjoint}, we know that $\eqty \cdot \mu < \jetsym_i$ and therefore, by symmetry of $\eqty \cdot \mu$, that $\eqty \cdot \mu < \equijetsym_i$.
+	Then $0$ and $1$ are \emph{not} related by $\eqty \cdot \mu$ in $\rival{\jetsym_i}$, $\rival{\tejsym_i}$ and $\rival{\equijetsym_i}$ and therefore \emph{not} identified in the jet sets obtained by applying $\mu$ to the left hand sides of \cref{eq:poresh-jetset-intervals}.
+	Thus, the carriers of the left hand sides are either $\accol{0, 1}$ or that same set quotiented by the equality relation.
+
 	\todoi{Prove this}
 \end{proof}
 \begin{proposition} \label{thm:poresh-jetset-prism-commut}
