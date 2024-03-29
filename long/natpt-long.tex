@@ -3377,60 +3377,125 @@ The mask operations serve three goals:
 %	\end{align*}
 %\end{example}
 
-\section{Semantics on Jet Sets} \label{sec:poresh-jetset}
-\begin{definition} \label{def:poresh-jetset}
-	We define a pseudofunctor $\jetsetsym : \poreshcat \to \Cat$:
-	\begin{itemize}
-		\item Sending an object $\vec a$ to $\jetset{\vec a}$.
-		\item Sending a morphism $\mu : \vec a \to \vec b$ to $\jetset{\mu} : \jetset{\vec a} \to \jetset{\vec b}$ where $\jetset{\mu}$ (more briefly denoted as $\mu$) sends a jet set $X$ to the jet set $\mu X$ whose
-		\begin{itemize}
-			\item carrier is the carrier of $X$, quotiented out by the transitive closure of $\eqty \cdot \mu$ in case $\eqty \cdot \mu \neq \eqty$,
-			\item $\hat x \jet_i^{\mu X} \hat y$ if and only if $\hat x$ and $\hat y$ have representants $x$ and $y$ related by $\jetsym_i \cdot \mu$ in $X$.
-			This is in turn equivalent to saying that all representants of $\hat x$ and $\hat y$ are related by $(\eqty \cdot \mu)^* \otimes (\jetsym_i \cdot \mu) \otimes (\eqty \cdot \mu)^*$ in $X$, where $\otimes$ is composition of relations via existential quantification.
-		\end{itemize}
-		This is easily seen to be a functor.
-		2-functoriality is not strict due to the quotienting, but pseudofunctoriality is not endangered.
-		\item Sending a unique proof of inequality $\mu \leq \nu : \vec a \to \vec b$ to an obvious natural transformation $\ket{\mu \leq \nu} : \mu \to \nu : \jetset{\vec a} \to \jetset{\vec b}$.
-	\end{itemize}
-	By a manual intervention, we decided not to quotient if $\eqty \cdot \mu = \eqty$.
-	Thus, by \cref{thm:poresh-adjoint}, the restriction of $\jetsetsym$ to $\poreshcat\withl$ is a strict 2-functor as it does not quotient at all.
+\section{Semantics on Jet Sets and Jet Setoids} \label{sec:poresh-jetset}
+\begin{definition} \label{def:setoid}
+	A \textbf{setoid} is a set equipped with an equivalence relation $\eqty$.
+	A \textbf{setoid morphism} is a function between setoids respecting $\eqty$.
+	This defines the category $\Setoid$ of setoids.
+	
+	A setoid is called \textbf{discrete} if the equivalence relation is the equality relation.
+	
+	$\Setoid$ can be regarded as a $\Setoid$-enriched category by considering setoid morphisms equivalent if they are pointwise equivalent.
+	$\Set$ can be regarded as discrete-$\Setoid$-enriched by considering functions equivalent if they are equal.
 \end{definition}
-\begin{corollary} \label{thm:poresh-jetset:bind}
-	Let $\mu : \vec a \to \vec b$ and $X \in \jetset{\vec a}$.
-	For an arbitrary $Q_j \in \orisymbol(\vec b)$, we have that $\hat x \mathrel{Q_j}^{\mu X} \hat y$ if and only if $\hat x$ and $\hat y$ have representants $x$ and $y$ related by $Q_j \cdot \mu$. (Here, we interpret $\eqty$ as equality and $\topsym$ as the relation `true'.) \qed
+\begin{corollary} \label{thm:setoid-equiv-set}
+	The quotient functor $\setoidquot : \Setoid \to \Set$ and the discrete functor $\setoiddisc : \Set \to \Setoid$ form an equivalence of $\Setoid$-enriched categories. \qed
+\end{corollary}
+\begin{definition} \label{def:jetsetoid}
+	We define the category $\jetsetoid{\vec a}$ of \textbf{$\vec a$-jet-setoids} as the following strict pullback:
+	\[
+		\xymatrix{
+			\jetsetoid{\vec a}
+				\xydrcorner
+				\ar@{.>}[r]
+				\ar@{.>}[d]
+			&
+			\jetset{\vec a}
+				\ar[d]^U
+			\\
+			\Setoid
+				\ar[r]_\setoidquot
+			&
+			\Set
+		}
+	\]
+	where $U$ sends a jet set to its carrier and $\setoidquot$ quotients out the equivalence relation.
+	In other words, a jet setoid $X$ is a setoid $X$ with a jet set structure on $\setoidquot X$.
+	However, rather than working with equivalence classes explicitly, we will pull back the jet set structure along $[\loch] : X \to \setoidquot X$ and consider an equivalence-respecting jet set structure directly on $X$.
+	A jet setoid morphism is then a setoid morphism $f : X \to Y$ such that $x_1 \jet_i x_2$ for $x_1, x_2 \in X$ implies $f(x_1) \jet_i f(x_2)$.
+	
+	We turn $\jetsetoid{\vec a}$ into a $\Setoid$-enriched category by declaring morphisms equivalent if the underlying setoid morphisms are equivalent.
+\end{definition}
+\begin{corollary} \label{thm:jetsetoid-equiv-jetset}
+	The equivalence from \cref{thm:setoid-equiv-set} carries over to an equivalence of setoid-enriched categories $\jetsetoid{\vec a} \simeq \jetset{\vec a}$. \qed
+\end{corollary}
+\begin{definition} \label{def:poresh-jetsetoid} \label{def:poresh-jetset}
+	\begin{enumerate}
+		\item We define a strict\footnote{Assuming propositional extensionality.} 2-functor $\jetsetoidsym : \poreshcat \to \Setoid\Cat$ from the 2-category of polarized reshuffles to the 2-category of setoid-enriched categories:
+		\begin{itemize}
+			\item Sending an object $\vec a$ to $\jetsetoid{\vec a}$.
+			\item Sending a morphism $\mu : \vec a \to \vec b$ to $\jetsetoid{\mu} : \jetsetoid{\vec a} \to \jetsetoid{\vec b}$ where $\jetsetoid{\mu}$ (more briefly denoted as $\mu$) sends a jet set $X$ to the jet set $\mu X$ whose
+			\begin{itemize}
+				\item carrier is the carrier of $X$,
+				%quotiented out by the transitive closure of $\eqty \cdot \mu$ in case $\eqty \cdot \mu \neq \eqty$,
+				\item equivalence relation $\eqty^{\mu X}$ is given by transitive closure of $\eqty \cdot \mu$ on $X$,
+				\item $i$-jet relation $\jetsym_i^{\mu X}$ is given by the relation $\jetsym_i \cdot \mu$ on $X$, made stable under $\eqty^{\mu X}$, i.e. we have
+				$\jetsym_i^{\mu X} = (\eqty \cdot \mu)^* \otimes (\jetsym_i \cdot \mu) \otimes (\eqty \cdot \mu)^*$, where $\otimes$ is composition of relations via existential quantification.
+	%			\item $\hat x \jet_i^{\mu X} \hat y$ if and only if $\hat x$ and $\hat y$ have representants $x$ and $y$ related by $\jetsym_i \cdot \mu$ in $X$.
+	%			This is in turn equivalent to saying that all representants of $\hat x$ and $\hat y$ are related by $(\eqty \cdot \mu)^* \otimes (\jetsym_i \cdot \mu) \otimes (\eqty \cdot \mu)^*$ in $X$, where $\otimes$ is composition of relations via existential quantification.
+			\end{itemize}
+			$\jetsetoid{\mu}$ is easily seen to have a functorial action on jet set morphisms which preserves identity and composition.
+			\item Sending a unique proof of inequality $\mu \leq \nu : \vec a \to \vec b$ to an obvious natural transformation $\ket{\mu \leq \nu} : \mu \to \nu : \jetsetoid{\vec a} \to \jetsetoid{\vec b}$ whose underlying function is the identity function.
+		\end{itemize}
+		
+		\item By \cref{thm:jetsetoid-equiv-jetset}, we obtain a pseudofunctor $\jetsetsym : \poreshcat \to \Cat$:
+		\begin{itemize}
+			\item Sending an object $\vec a$ to $\jetset{\vec a}$,
+			\item Sending a morphism $\mu : \vec a \to \vec b$ to $\jetset{\mu} = \setoidquot \circ \jetsetoid{\mu} \circ \setoiddisc : \jetset{\vec a} \to \jetset{\vec b}$,
+			\item \ldots
+		\end{itemize}
+		
+		\item Additionally, if we consider only modalities $\mu$ which have a left adjoint and for which, by \cref{thm:poresh-adjoint}, $\eqty \cdot \mu = \eqty$, then we directly get a strict 2-functor $\jetsetsym \withl : \poreshcat \to \Cat$, equivalent to the pseudofunctor above:
+		\begin{itemize}
+			\item Sending an object $\vec a$ to $\jetset{\vec a}$,
+			\item Sending a morphism $\mu : \vec a \to \vec b$ to $\jetsetl{\mu} : \jetset{\vec a} \to \jetset{\vec b}$ where $\jetsetl{\mu}$ (more briefly denoted as $\mu$) sends a jet set $X$ to the jet set $\mu X$ whose
+			\begin{itemize}
+				\item carrier is the carrier of $X$,
+				\item $i$-jet relation $\jetsym_i^{\mu X}$ is the relation $\jetsym_i \cdot \mu$ on $X$.
+			\end{itemize}
+			\item \ldots
+		\end{itemize}
+	\end{enumerate}
+\end{definition}
+\begin{corollary} \label{thm:poresh-jetsetoid:bind}
+	Let $\mu : \vec a \to \vec b$ and $X \in \jetsetoid{\vec a}$.
+	For an arbitrary $Q_j \in \orisymbol(\vec b)$, the relation $Q_j$ on $\mu X$ is given by $(\eqty \cdot \mu)^* \otimes (Q_j \cdot \mu) \otimes (\eqty \cdot \mu)^*$.
+	Here, $\topsym$ is interpreted as `true'.
+	
+	If $\mu$ has a left adjoint and $X \in \jetset{\vec a}$, then for an arbitrary $Q_j \in \orisymbol(\vec b)$, the relation $Q_j$ on $\mu X$ is given by  $Q_j \cdot \mu$. \qed
 \end{corollary}
 \begin{example} \label{ex:poresh-op-jetset}
-	The functor $\Op_i$ from \cref{def:op} arises from the reshuffle in \cref{ex:poresh-op} as $\jetset{\Op_i}$.
+	The functor $\Op_i$ from \cref{def:op} arises from the reshuffle in \cref{ex:poresh-op} as $\jetsetl{\Op_i}$.
 \end{example}
 \begin{example} \label{ex:poresh-sym-jetset}
-	The functors $\Fsym_i \dashv \Usym_i \dashv \Csym_i$ and $\UFsym_i \dashv \UCsym_i$ from \cref{def:sym-forget,def:sym-free,def:sym-cofree} arise from the reshuffles in \cref{ex:poresh-sym} as $\jetset{\Fsymresh_i} \dashv \jetset{\Usymresh_i} \dashv \jetset{\Csymresh_i}$ and $\jetset{\UFsymresh_i} \dashv \jetset{\UCsymresh_i}$.
+	The functors $\Fsym_i \dashv \Usym_i \dashv \Csym_i$ and $\UFsym_i \dashv \UCsym_i$ from \cref{def:sym-forget,def:sym-free,def:sym-cofree} arise from the reshuffles in \cref{ex:poresh-sym} as $\jetset{\Fsymresh_i} \dashv \jetsetl{\Usymresh_i} \dashv \jetsetl{\Csymresh_i}$ and $\jetset{\UFsymresh_i} \dashv \jetsetl{\UCsymresh_i}$.
 \end{example}
 
 \subsection{Intervals and Prisms}
-\begin{proposition} \label{thm:poresh-jetset-intervals}
+\begin{proposition} \label{thm:poresh-jetsetoid-intervals}
 	Let $\mu : \vec a \to \vec b$ be a polarized reshuffle with right adjoint $\mu \dashv \rho$. Then we have
 	\begin{equation}
 		\mu \rival{\jetsym_i} \cong \rival{\jetsym_i \cdot \rho}, \qquad
 		\mu \rival{\tejsym_i} \cong \rival{\tejsym_i \cdot \rho}, \qquad
 		\mu \rival{\equijetsym_i} \cong \rival{\equijetsym_i \cdot \rho},
-		\label{eq:poresh-jetset-intervals}
+		\label{eq:poresh-jetsetoid-intervals}
 	\end{equation}
 	where we define $\rival{\topsym}$ as the jet set with carrier $\accol{0, 1}$ on which all $i$-jet relations are reflexive, and $\rival{\eqty}$ as the terminal jet set.%
 	\footnote{By virtue of \cref{thm:poresh-adjoint}, we do not have to define $\rival{\infrajet_j}$ for $b_j = \ypolar$.}
 \end{proposition}
 \begin{proof}
-	Suppose $\jetsym_i \cdot \rho = \eqty$. Then each of the right hand sides in \cref{eq:poresh-jetset-intervals} is the terminal jet set.
+	Suppose $\jetsym_i \cdot \rho = \eqty$. Then each of the right hand sides in \cref{eq:poresh-jetsetoid-intervals} is the terminal jet set.
 	From \cref{thm:poresh-adjoint}, we know that $\eqty \cdot \mu \geq \jetsym_i$ and therefore, by symmetry of $\eqty \cdot \mu$, that $\eqty \cdot \mu \geq \infrajetsym_i$.
-	Then $0$ and $1$ are related by $\eqty \cdot \mu$ in $\rival{\jetsym_i}$, $\rival{\tejsym_i}$ and $\rival{\equijetsym_i}$ and therefore identified in the jet sets obtained by applying $\mu$ to the left hand sides of \cref{eq:poresh-jetset-intervals}.
+	Then $0$ and $1$ are related by $\eqty \cdot \mu$ in $\rival{\jetsym_i}$, $\rival{\tejsym_i}$ and $\rival{\equijetsym_i}$ and therefore identified in the jet sets obtained by applying $\mu$ to the left hand sides of \cref{eq:poresh-jetsetoid-intervals}.
 	
-	Suppose $\jetsym_i \cdot \rho > \eqty$. Then the right hand sides of \cref{eq:poresh-jetset-intervals} have carrier $\accol{0, 1}$.
+	Suppose $\jetsym_i \cdot \rho > \eqty$. Then the right hand sides of \cref{eq:poresh-jetsetoid-intervals} have carrier $\accol{0, 1}$.
 	From \cref{thm:poresh-adjoint}, we know that $\eqty \cdot \mu < \jetsym_i$ and therefore, by symmetry of $\eqty \cdot \mu$, that $\eqty \cdot \mu < \equijetsym_i$.
-	Then $0$ and $1$ are \emph{not} related by $\eqty \cdot \mu$ in $\rival{\jetsym_i}$, $\rival{\tejsym_i}$ and $\rival{\equijetsym_i}$ and therefore \emph{not} identified in the jet sets obtained by applying $\mu$ to the left hand sides of \cref{eq:poresh-jetset-intervals}.
+	Then $0$ and $1$ are \emph{not} related by $\eqty \cdot \mu$ in $\rival{\jetsym_i}$, $\rival{\tejsym_i}$ and $\rival{\equijetsym_i}$ and therefore \emph{not} identified in the jet sets obtained by applying $\mu$ to the left hand sides of \cref{eq:poresh-jetsetoid-intervals}.
 	Thus, the carriers of the left hand sides are either $\accol{0, 1}$ or that same set quotiented by the equality relation.
 
 	\todoi{Prove this}
 \end{proof}
-\begin{proposition} \label{thm:poresh-jetset-prism-commut}
+\begin{proposition} \label{thm:poresh-jetsetoid-prism-commut}
 	Let $\mu : \vec a \to \vec b$ be a polarized reshuffle with left adjoint $\kappa \dashv \mu$. Then we have
 	\begin{align*}
 		\jetset{\mu} \circ (\loch \multip \rival{\jetsym_i}) &= (\loch \multip \rival{\jetsym_i \cdot \kappa}) \circ \jetset{\mu},
