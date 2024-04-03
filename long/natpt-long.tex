@@ -3502,10 +3502,20 @@ The mask operations serve three goals:
 \end{definition}
 \begin{lemma} \label{thm:poresh-jetsetoid-cocontinuous}
 	Let $\mu : \vec a \to \vec b$ be a polarized reshuffle.
-	Then $\jetsetoid{\vec \mu}$, seen as a non-enriched functor, preserves colimits.
+	Then $\jetsetoid{\mu}$, seen as a non-enriched functor, preserves colimits.
 \end{lemma}
 \begin{proof}
-	\todoi{Trivial by definition}
+	Take a diagram $D : \cat S \to \jetsetoid{\vec a}$.
+	We prove (assuming propositional extensionality) that
+	\[
+		\mu \colim D = \colim (\mu  \circ D).
+	\]
+	\begin{itemize}
+		\item The functor $\jetsetoid{\mu}$ does not modify the carrier, and the carrier of a colimit of jet setoids is the colimit of the carriers.
+		Write $\iota_s$ for the functions $D(s) \to \colim D$.
+		\item One checks that, on both sides, elements $x$ and $y$ are equivalent if and only if there exist $x = x_0, x_1, x_2, \ldots, x_n = y$ such that for each $0 \leq i < n$, there exists an $s \in \Obj(\cat S)$ and $u, v \in D(s)$ such that $x_i = \iota_s(u)$ and $x_{i+1} = \iota_s(v)$ and $u \mathrel{(\eqtysym \cdot \mu)} v$.
+		\item One checks that, on both sides, $x \jet_i y$ holds in $\mu \colim D$ if and only if there exist an $s \in \Obj(\cat S)$, $x \eqty^{\mu \colim D} \iota_s(x')$ and $y \eqty^{\mu \colim D} \iota_s(y')$ such that $x' \mathrel{(\jetsym_i \cdot \mu)} y'$ in $D(s)$. \qedhere
+	\end{itemize}
 \end{proof}
 \begin{lemma}
 	Let $\mu : \vec a \to \vec b$ be a polarized reshuffle, and let $\jetsym_j \cdot \mu \in \accol{\jetsym_i, \tejsym_i}$.
