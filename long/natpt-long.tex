@@ -3227,7 +3227,7 @@ The mask operations serve three goals:
 			\begin{align*}
 				\shp_i = \cohdisc_i \cohpi_i &= \reshlist{\eqtysym}{\jetsym_0, \ldots, \jetsym_{i-2}, \infrajetsym_i, \infrajetsym_i, \jetsym_{i+1}, \ldots, \jetsym_{n-1}} &: \vec a \to \vec a, \\
 				\dashv
-				\flat_i = \cohdisc_i \cohfget_i &= \reshlist{\eqtysym}{\jetsym_0, \ldots, \edgesym_{i-1}, \edgesym_{i-1}, \jetsym_{i+1}, \ldots, \jetsym_{n-1}} &: \vec a \to \vec a
+				\flat_i = \cohdisc_i \cohfget_i &= \reshlist{\eqtysym}{\jetsym_0, \ldots, \jetsym_{i-2}, \edgesym_{i-1}, \edgesym_{i-1}, \jetsym_{i+1}, \ldots, \jetsym_{n-1}} &: \vec a \to \vec a
 			\end{align*}
 			\begin{itemize}
 				\item If $a_i = \ypolar$, then there are no further left adjoints.
@@ -3377,6 +3377,34 @@ The mask operations serve three goals:
 %	\end{align*}
 %\end{example}
 
+\subsubsection{Additional Results}
+\begin{proposition} \label{thm:poresh-op}
+	Let $\mu : \vec a \to \vec b$ be a polarized reshuffle, and let $\jetsym_j \cdot \mu \in \accol{\jetsym_i, \tejsym_i}$.
+	Then $\Op_j \circ \mu = \mu \circ \Op_i$.
+\end{proposition}
+\todoi{Are the degrees sensible?}
+\begin{proof}
+	By computing the result in both cases.
+\end{proof}
+\begin{proposition} \label{thm:poresh-adjoint-directed}
+	Let $\lambda : \vec a \to \vec b$ be a polarized reshuffle with adjoint $\lambda \dashv \rho$. Let $a_i = b_j = \ypolar$. Then we have:
+	\begin{itemize}
+		\item $\jetsym_j \cdot \lambda = \jetsym_i \quad\Leftrightarrow\quad \jetsym_j = \jetsym_i \cdot \rho$,
+		\item $\jetsym_j \cdot \lambda = \tejsym_i \quad\Leftrightarrow\quad \tejsym_j = \jetsym_i \cdot \rho$.
+	\end{itemize}
+\end{proposition}
+\begin{proof}
+	We can prove the second line (where the direction flips) from the first one.
+	Let $\jetsym_j \cdot \lambda = \tejsym_i$.
+	Using \cref{thm:poresh-op}, define $\lambda' = \Op_j \circ \lambda = \lambda \circ \Op_i$.
+	Then $\jetsym_j \cdot \lambda' = \jetsym_i$.
+	Since $\Op_k$ is self-adjoint and by uniqueness and composability of adjoints, we find that $\lambda' \dashv \rho' = \Op_i \circ \rho = \rho \circ \Op_j$.
+	The first line implies that $\jetsym_j = \jetsym_i \cdot \rho'$ so that $\tejsym_j = \jetsym_i \cdot \rho$.
+
+	The variant of this statement with the equalities replaced with $\leq$ follows immediately from \cref{thm:poresh-adjoint}.
+	Thus, it remains to prove $\geq$ assuming equality.
+\end{proof}
+
 \section{Semantics on Jet Sets and Jet Setoids} \label{sec:poresh-jetset}
 \begin{definition} \label{def:setoid}
 	A \textbf{setoid} is a set equipped with an equivalence relation $\eqtysym$.
@@ -3477,11 +3505,11 @@ The mask operations serve three goals:
 \end{definition}
 \begin{proposition} \label{thm:poresh-jetsetoid-intervals}
 	Let $\mu : \vec a \to \vec b$ be a polarized reshuffle with right adjoint $\mu \dashv \rho$. Then we have%
-	\footnote{By virtue of \cref{thm:poresh-adjoint}, all right hand sides are defined as $P_i \cdot \rho \neq \infrajetsym_j$ for $b_j = \ypolar$.}
+	\footnote{By virtue of \cref{thm:poresh-adjoint}, all right hand sides are defined since $P_i \cdot \rho \neq \infrajetsym_j$ for $b_j = \ypolar$.}
 	\begin{equation}
-		\jetsetoid{\mu} \rival{\jetsym_i} \cong \rival{\jetsym_i \cdot \rho}, \quad
-		\jetsetoid{\mu} \rival{\tejsym_i} \cong \rival{\tejsym_i \cdot \rho}, \quad
-		\jetsetoid{\mu} \rival{\equijetsym_i} \cong \rival{\equijetsym_i \cdot \rho}.
+		\jetsetoid{\mu} \rival{\jetsym_i} = \rival{\jetsym_i \cdot \rho}, \quad
+		\jetsetoid{\mu} \rival{\tejsym_i} = \rival{\tejsym_i \cdot \rho}, \quad
+		\jetsetoid{\mu} \rival{\equijetsym_i} = \rival{\equijetsym_i \cdot \rho}.
 		\label{eq:poresh-jetsetoid-intervals}
 	\end{equation}
 \end{proposition}
@@ -3517,13 +3545,6 @@ The mask operations serve three goals:
 		\item One checks that, on both sides, $x \jet_i y$ holds in $\mu \colim D$ if and only if there exist an $s \in \Obj(\cat S)$, $x \eqty^{\mu \colim D} \iota_s(x')$ and $y \eqty^{\mu \colim D} \iota_s(y')$ such that $x' \mathrel{(\jetsym_i \cdot \mu)} y'$ in $D(s)$. \qedhere
 	\end{itemize}
 \end{proof}
-\begin{lemma}
-	Let $\mu : \vec a \to \vec b$ be a polarized reshuffle, and let $\jetsym_j \cdot \mu \in \accol{\jetsym_i, \tejsym_i}$.
-	Then $\Op_j \circ \mu = \mu \circ \Op_i$.
-\end{lemma}
-\begin{proof}
-	\todoi{Just look at things}
-\end{proof}
 \begin{proposition} \label{thm:poresh-jetsetoid-prism-commut}
 	Let $\mu : \vec a \to \vec b$ be a polarized reshuffle with right adjoint $\mu \dashv \rho$.
 	Let $P \in \accol{\jetsym, \tejsym}$.
@@ -3549,6 +3570,23 @@ The mask operations serve three goals:
 Note that a cartesian product with $\rival{\eqtysym}$ or $\rival{\topsym}$ is the same as a separated product, since neither jet setoid has any jets between non-equivalent elements.
 \begin{proof}
 	Each time, it is clear that the carrier is just $X \times \accol{0, 1}$.
+	We can write $X \multip \rival{P_i}$ as the colimit of $X$, $\Op_i(X)$, a copy of $\rival{P_i}$ for every element of $X$, and a copy of the terminal jet setoid for every element of $X \times \accol{0, 1}$.
+	By \cref{thm:poresh-jetsetoid-cocontinuous}, $\jetsetoid{\mu}$ preserves that colimit.
+	By \cref{thm:poresh-jetsetoid-intervals}, $\mu \rival{P_i} = \rival{P_i \cdot \rho}$.
+	Thus, we see that $\mu (X \multip \rival{P_i})$ is a colimit of $\mu X$, $\mu \Op_i X$ and $\rival{P_i \cdot \rho}$.
+	We case distinguish on $P_i \cdot \rho$.
+	\begin{description}
+		\item[\framebox{$\eqtysym$}] If $P_i \cdot \rho = \eqtysym$, then from \cref{eq:poresh-adjoint-crit} in the statement of \cref{thm:poresh-adjoint}, we conclude that $P_i \leq \eqtysym \cdot \mu$.
+		By symmetry of $\eqtysym \cdot \mu$, we can conclude that $\infrajetsym \cdot P_i = \infrajetsym_i \leq \eqtysym \cdot \mu$, so that $\mu$ cannot mention degree $i$ in any form other than $\infrajetsym_i$ and therefore $\mu = \mu \Op_i$. Then the colimit produces $\mu X * \rival{\eqty} = \mu X \times \rival{\eqty}$.
+		
+		\item[\framebox{$\equijetsym_j$}] \todoi{We cannot rule out that $\jetsym_{i'} \cdot \mu \in \accol{\jetsym_j, \tejsym_j}$ for $i' > i$.}
+		
+		\item[\framebox{$\jetsym_j$}] 
+	\end{description}
+	
+	
+	\todoi{Hmm.}
+	By \cref{thm:poresh-op}, $\mu \Op_i(X) = $
 	
 	\todoi{Write prism over $X$ as colimit of $X$, $\Op_i(X)$ and a lot of intervals. Then invoke the lemmas.}
 	

@@ -1,3 +1,7 @@
+- modify reshuffle notation:
+  - \oplus, \ominus, \otimes, \oast form a monoid
+    - actually let's have a category whose objects are anpolarities. Use \fullmoon here and \libra or \opposition for \npolar.
+  - this monoid has a right action on \jet, \tej, \infrajet, \equijet
 - modify jet jewels -> connected jet sets; not locally pretotal
 - semantics on connected jet sets
 - adjoint triple semantics on jet cubes
