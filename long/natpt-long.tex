@@ -344,7 +344,7 @@ Note that $i$-orientability is vacuous if $a_i = \npolar$.
 \section{Jet Cubes} \label{sec:jetcubes}
 In \cref{sec:cubes}, we define a family of \emph{cube} categories $\cubecat_M^\mycubex$ parametrized by a monad $M$ which defines the available operations on cube dimensions, and a choice $\mycubex \in \accol{\affine, \cartes}$ of whether we want our cubes to be affine (no diagonals) or cartesian.
 
-In \cref{sec:jetcubes:def}, we define a family of \emph{jet cube} categories $\jetcube{\myorix}{\mycubex}{M}{\vec a}$ furthermore parametrized by a mask $\vec a$ and an orientation set $\myorix$, which determines whether jets can only be forward or also backward and/or bidirectional.
+In \cref{sec:jetcubes:def}, we define a family of \emph{jet cube} categories $\jetcube{\myorix}{\mycubex}{M}{\vec a}$ furthermore parametrized by a mask $\vec a$ and an orientation kit $\myorix$, which determines whether jets can only be forward or also backward and/or bidirectional.
 
 In \cref{sec:jetcubes:calculus}, we characterize morphisms in certain jet cube categories using a calculus.
 
@@ -535,18 +535,18 @@ Clearly, the functor $I : \cubecat_\demorgan^\cartes \to \cubecat_\booleanalg^\c
 \subsection{Jet Cubes} \label{sec:jetcubes:def}
 
 \subsubsection{Jet Cube Objects}
-\begin{definition} \label{def:orientation-set}
-	An \textbf{orientation set} is one of the following sets of formal symbols:\footnote{The letters stand for \emph{forward}, \emph{backward} and \emph{equijet}.}
+\begin{definition} \label{def:orientation-kit}
+	An \textbf{orientation kit} is one of the following sets of formal symbols:\footnote{The letters stand for \emph{forward}, \emph{backward} and \emph{equijet}.}
 	\[
 		\orif = \accol{{\jet}}, \qquad
 		\orife = \accol{{\jet}, {\equijet}}, \qquad
 		\orifb = \accol{{\jet}, {\tej}}, \qquad
 		\orifbe = \accol{{\jet}, {\tej}, {\equijet}}.
 	\]
-	The set of orientation sets will be denoted $\Ori = \accol{\orif, \orife, \orifb, \orifbe}$.
+	The set of orientation kits will be denoted $\orientationkit = \accol{\orif, \orife, \orifb, \orifbe}$.
 \end{definition}
 \begin{definition} \label{def:jet-cube}
-	Let $\vec a$ be a mask and $\myorix$ an orientation set.
+	Let $\vec a$ be a mask and $\myorix$ an orientation kit.
 	We define the set of \textbf{$(\myorix, \vec{a})$-jet-cubes} as the set of lists of elements of $\set{P_i}{P \in \myorix, 0 \leq i < \lenpol{\vec a}}$,
 	where we identify all $P_i = Q_i =: {\edge}_i$ ($P, Q \in \myorix$) if $a_i = \npolar$.
 	We denote jet cubes as
@@ -641,7 +641,7 @@ Note that a $\vec b$-jet-cube is uniquely in the image of $\Usymcube_i$ if it do
 
 \subsubsection{Jet Cube Categories}
 \begin{definition} \label{def:jet-cube-cat}
-	Let $\vec a$ be a mask, $\myorix \in \Ori$, $\mycubex \in \accol{\affine, \cartes}$ and $M$ a monad on $\Set$.
+	Let $\vec a$ be a mask, $\myorix \in \orientationkit$, $\mycubex \in \accol{\affine, \cartes}$ and $M$ a monad on $\Set$.
 	We define
 	the category $\jetcube{\myorix}{\mycubex}{M}{\vec a}$ of \textbf{$(\myorix, \vec a)$-jet-$M$-cubes}
 	as the full subcategory of $\cubecat^\mycubex_M \times_\Set \jetset{\vec a}$ on $(\myorix, \vec a)$-jet-cubes, as justified by \cref{thm:jet-cube-pullback}.
@@ -654,7 +654,7 @@ Note that a $\vec b$-jet-cube is uniquely in the image of $\Usymcube_i$ if it do
 	By induction on the dimension and using \cref{thm:lift-to-jet-jewels}, it is clear that for any jet cube $W$, the jet set $\JEP(W)$ is a jet jewel, which factors the action on objects. The action on morphisms factors because $\jetjewel{\vec a}$ is a full subcategory of $\jetset{\vec a}$.
 \end{proof}
 We will ultimately only be interested in $(\orif, \vec a)$-jet-cubes, but in \cref{sec:jetcubes:calculus}, we define an inductive predicate to determine whether a cube morphism $\vfi : \erasejc V \to \erasejc W$ is in fact a jet cube morphism $V \to W$, and this predicate's inference rules make use of $(\orifbe, \vec a)$-jet-cubes in their premises.
-The orientation sets $\orife$ and $\orifb$ are only introduced for explanatory purposes: we can easily relate jet cubes with and without $\tej$ (\cref{thm:backward-jets-equivalent}), and later on\todo{Refer} we will be able to relate jet cubes with and without $\equijet$ by inserting additional symmetric degrees.
+The orientation kits $\orife$ and $\orifb$ are only introduced for explanatory purposes: we can easily relate jet cubes with and without $\tej$ (\cref{thm:backward-jets-equivalent}), and later on\todo{Refer} we will be able to relate jet cubes with and without $\equijet$ by inserting additional symmetric degrees.
 \begin{proposition} \label{thm:backward-jets-equivalent}
 	Let $(\myorix, \myorix') \in \accol{(\orif, \orifb), (\orife, \orifbe)}$.
 	Then the inclusion
@@ -2448,7 +2448,7 @@ I am unsure whether the category of affine symmetric cubes $\cubecat_\bipointeds
 	The category $\cubecat_\bipointedsym^\affine$ is isomorphic to $\jetcube{\myorix}{\affine}{\bipointedsym}{[\npolar]}$ and $\jetcube{\myorix}{\cartes}{\bipointedsym}{[\npolar]}$.
 \end{proposition}
 \begin{proof}
-	The orientation set $\omega$ does not matter as all degrees are symmetric.
+	The orientation kit $\omega$ does not matter as all degrees are symmetric.
 	The latter two categories are isomorphic by \cref{thm:affine-automatic}.
 	It is clear that $\erasejc{\loch} : \jetcube{\myorix}{\affine}{\bipointedsym}{[\npolar]} \to \cubecat_\bipointedsym^\affine$ is bijective on objects.
 	It is faithful, because $U : \jetset{[\npolar]} \to \Set$ is faithful.
@@ -2683,7 +2683,7 @@ The mask operations serve three goals:
 	Let $\vec a$ be an anpolarity mask.
 	We define the set of \textbf{$\vec a$-orientation symbols} as
 	\[
-		\orisymbol(\vec a) = \set{P_i}{P \in \orisymbol, 0 \leq i < \lenpol{\vec a}} \cup \accol{\eqtysym, \topsym},
+		\orisymbol(\vec a) = \set{P_i}{P \in \orisymbolnodegree, 0 \leq i < \lenpol{\vec a}} \cup \accol{\eqtysym, \topsym},
 	\]
 	where we identify $\jetsym_i = \tejsym_i = \equijetsym_i = \infrajetsym_i =: \edgesym_i$ if $a_i = \npolar$.
 	We write $\deg(P_i) := i$.
@@ -2699,7 +2699,7 @@ The mask operations serve three goals:
 		\eqtysym \leq P_i \leq \topsym, \qquad
 		\equijetsym_i \leq \jetsym_i \leq \infrajetsym_i, \qquad
 		\equijetsym_i \leq \tejsym_i \leq \infrajetsym_i, \qquad
-		\infrajetsym_i \leq \equijetsym_j\,\text{if}\,i \leq j.
+		\infrajetsym_i \leq \equijetsym_j\,\text{if}\,i < j.
 	\]
 	This makes $\orisymbol(\vec a)$ a lattice.
 	
@@ -3639,7 +3639,7 @@ Note that a cartesian product with $\rival{\eqtysym}$ or $\rival{\topsym}$ is th
 		Proofread \cref{ch:modes}. \\
 		Added missing clause for \ruleref{concursor} in proof of \cref{thm:calculus-sound}. \\
 		Cleaned up affine boolean normalization lemmas in \cref{sec:jetcubes:calculus:lemmas}. \\
-		Introduced orientation sets (\cref{def:orientation-set}). \\
+		Introduced orientation kits (\cref{def:orientation-kit}). \\
 		Introduced conventional cubes (\cref{def:conv-jet-cube-cat}). \\
 		General cleanup.
 	\item[v0.2] Wrote \cref{ch:modalities}. \\
