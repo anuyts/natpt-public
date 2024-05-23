@@ -199,17 +199,24 @@
 %mode theories
 \newcommand{\reshcat}{\name{Resh}}
 	\newcommand{\reshlist}[2]{\mathopen{}\left\langle #1 \,\middle|\, #2 \right\rangle\mathclose{}}
-\newcommand{\orideg}{\name{OriDeg}}
-	\newcommand{\eqtydeg}{{\mathrm{eq}}}
-	\newcommand{\Deg}{{\name{Deg}}}
+\newcommand{\eqtydeg}{{\mathrm{eq}}}
+\newcommand{\Deg}{{\name{Deg}}}
 	\newcommand{\Degeq}{{\name{Deg}_\eqtydeg}}
 	\newcommand{\Degeqtop}{{\name{Deg}_\eqtydeg^\top}}
-	\newcommand{\poldeg}{\name{PolDeg}}
+	\newcommand{\getdeg}{\name{deg}}
+\newcommand{\orideg}{\name{OriDeg}}
+	\newcommand{\oridegeq}{\name{OriDeg}_\eqtydeg}
+	\newcommand{\oridegeqtop}{\name{OriDeg}_\eqtydeg^\top}
+	\newcommand{\odeg}[2]{{#1}_{#2}}
+	\newcommand{\getori}{\name{ori}}
+\newcommand{\poldeg}{\name{PolDeg}}
 	\newcommand{\poldegeq}{\name{PolDeg}_\eqtydeg}
 	\newcommand{\poldegeqtop}{\name{PolDeg}_\eqtydeg^\top}
-	\newcommand{\getdeg}{\name{deg}}
+	%\newcommand{\dpol}[2]{{#1}^{#2}}
+	\newcommand{\dpol}[2]{{#2}_{#1}}
 	\newcommand{\getpol}{\name{pol}}
-	\newcommand{\orisymbol}{{\name{Ori}}}
+	\newcommand{\pdeg}[2]{\dpol{#2}{#1}}
+\newcommand{\orisymbol}{{\name{Ori}}}
 	\newcommand{\orisymbolnodegree}{\orisymbol_0}
 	\newcommand{\orisymbolfwd}{\orisymbol^+}
 \newcommand{\poreshcat}{\name{PoResh}}
