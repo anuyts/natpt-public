@@ -2674,6 +2674,41 @@ The mask operations serve three goals:
 \end{definition}
 
 \subsection{Definitions}
+In this section, we will construct a diagram of 2-posets and poset-valued profunctors between them.
+Viewing poset-valued presheaves $P : \catC\op \to \Poset$ as profunctors to the terminal 2-poset $\top$, the diagram we will construct is the following:
+\[
+	\xymatrix{
+		&& \polcat
+			\ar[rrdd]|{/}^(.6){\oripsh}
+			\ar@{=>}[dd]
+		\\ \\
+		\poreshcat
+			\ar[rruu]|{\setminus}^(.4){\poldegeqtop}
+			\ar[rrrr]|{|}_{\oridegeqtop}
+		&&&&
+		\top.
+	}
+\]
+The 2-poset $\poreshcat$ will serve as the mode theory of Naturality Pretype Theory.
+Its objects, the modes, will be anpolarity masks.
+Its morphisms, the modalities, are called \textbf{polarized reshuffles} and will answer the question: for a $\mu$-modal function $f$, in order to get a $j$-jet $f(x) \jet_j f(y)$, what do I need between $x$ and $y$?
+The answer $P_i$ consists of two parts: the \emph{degree} $i$ at which we need a jet between $x$ and $y$, and the \emph{orientation} $P$ of that jet.
+A polarized reshuffle $\mu \in \Hom_{\poreshcat}(\vec a, \vec b)$ is merely that: a consistent answer to the above question for all degrees $j$ in the codomain mask $\vec b$.
+However, if we can answer that question, we can more generally answer: in order to get $f(x) \mathrel{Q_j} f(y)$, what do I need between $x$ and $y$?
+The $Q_j$ will be called an \textbf{oriented degree} for the mask $\vec b$, i.e. $Q_j \in \oridegeqtop(\vec b)$, and we can combine it with $\mu$ to get the answer $P_i$ to our question, which is an oriented degree for the domain mask $\vec a$, i.e.\ $P_i \in \oridegeqtop(\vec a)$.
+The operation that answers this question, is the functorial action of the presheaf $\oridegeqtop$.
+
+In order to be able to define $\poreshcat$ in a somewhat concise way, we start by considering what would happen if there were always only a single degree.
+This leads to the 2-poset $\polcat$ whose objects are anpolarities and whose morphisms are polarities, which answer the question: in order to get $f(x) \jet f(y)$, what do I need between $x$ and $y$?
+There will be 4 polarities $\isopol$, $\pospol$, $\negpol$ and $\mixpol$ which will ask for an equijet, forward jet, backward jet and an infrajet respectively.
+Once we know the answer to that question, we can answer the more general question: for a $p$-polar function $f$, in order to get $f(x) \mathrel{Q} f(y)$, what do I need between $x$ and $y$?
+In other words, there will be an operation combining a polarity $p$ with an orientation $Q$, producing another orientation $P$. This is the functorial action of the presheaf of orientations $\oripsh$.
+Finally, a \textbf{polarized degree} $p_i$ can be regarded as a modality for a function $f : A \to B$ from a domain $A$ with multiple degrees, to a codomain $B$ with only a single degree. It answers the question: for a $p_i$-modal function $f$, in order to get $f(x) \jet f(y)$, what do I need between $x$ and $y$?
+The answer consists of a degree $i$ at which a jet is needed in $A$, and a polarity telling us which way the jet should point.
+This multi-single-degree function $f$ can be composed at the domain side with multi-multi-degree functions, and at the codomain side with single-single-degree functions, which explains why $\poldegeqtop$ is a profunctor.
+Finally, we can generalize the above question: for a $p_i$-modal function $f$, in order to get $f(x) \mathrel{Q} f(y)$, what do I need between $x$ and $y$? Thus, we get an operation that takes an orientation $Q$ and a polarized degree $p_i$ and answers with a polarized degree $P_i$; this is the filler of the triangular diagram.
+Naturality and extranaturality of this operation simply express that it is consistent with how multi-single-degree functions compose on either side.
+
 \subsubsection{Polarities and Orientations}
 \begin{definition} \label{def:polarity-cat}
 	The \textbf{2-poset of polarities} $\polcat$ has
