@@ -3316,32 +3316,47 @@ where the identity is $\id_{[\ypolar]} = \reshlist{\pdeg \nonpol \eqtydeg}{\pdeg
 \todoi{Sometimes, we need to consider only reshuffles that have at least a certain number of left/right adjoints. The 2-posets that contain only those reshuffles (with the same order relation) will be denoted as $\poreshcat\withllr$, where the number of white bullets on the left/right is the minimal number of left/right adjoints.}
 \begin{theorem}\label{thm:poresh-adjoint}
 	\begin{enumerate}
-		\item A pair of polarized reshuffles $\lambda \in \Hom(\vec a, \vec b)$ and $\rho \in \Hom(\vec b, \vec a)$ is adjoint ($\lambda \dashv \rho$) if and only if
-		\begin{equation} \label{eq:poresh-adjoint-crit}
-			\forall P_i \in \oridegeqtop(\vec a), Q_j \in \oridegeqtop(\vec b). P_i \leq Q_j \oriof \lambda \Leftrightarrow P_i \oriof \rho \leq Q_j.
-		\end{equation}
+		\item A pair of polarized reshuffles $\lambda \in \Hom(\vec a, \vec b)$ and $\rho \in \Hom(\vec b, \vec a)$ is adjoint ($\lambda \dashv \rho$) if and only if the following equivalent conditions are satisfied:
+		\begin{align}
+			&\forall P_i \in \oridegeqtop(\vec a), Q_j \in \oridegeqtop(\vec b). P_i \leq Q_j \oriof \lambda \Leftrightarrow P_i \oriof \rho \leq Q_j,
+			\label{eq:poresh-adjoint-crit-orideg}
+			\\
+			&\forall c \in \Anpolarity, p_i \in \poldegeqtop(\vec a, c), q_j \in \poldegeqtop(\vec b, c). p_i \leq q_j \circ \lambda \Leftrightarrow p_i \circ \rho \leq q_j.
+			\label{eq:poresh-adjoint-crit-poldeg}
+		\end{align}
 		\item By consequence:
 		\begin{itemize}
 			\item A reshuffle $\rho$ has a left adjoint $\lambda$ if and only if
 			\begin{align}
-				&\eqtysym \oriof \rho = \eqtysym, \text{and} \label{eq:poresh-left-adjoint-crit1} \\
-				&\text{for all } i \in \Degeq(\vec a) \text{ with } i \cdot \rho = \isopol_j \text{, we have } b_j = \npolar. \label{eq:poresh-left-adjoint-crit2}
+				&\eqtydeg \cdot \rho = \nonpol_\eqtydeg, \text{and} \label{eq:poresh-left-adjoint-crit1} \\
+				&\text{for all } i \in \Degeq(\vec a) \text{ with } i \cdot \rho = \isopol_j \text{, we have } b_j = \npolar \text{ (so $i \cdot \rho = \nonpol_j$)}. \label{eq:poresh-left-adjoint-crit2}
 				%&\text{for all } \jetsym_i \in \oripshfwd(\vec a) \text{ with } a_i = \ypolar \text{, we have } \jetsym_i \cdot \rho \neq \infrajetsym_j. \label{eq:poresh-left-adjoint-crit2}
 			\end{align}
-			In this case, for any $Q_j \in \oridegeqtop(\vec b)$, we find $Q_j \oriof \lambda$ as the greatest oriented degree $P_i \in \oridegeqtop(\vec a)$ such that $P_i \oriof \rho \leq Q_j$.
+			In this case,
+			\begin{itemize}
+				\item for any $Q_j \in \oridegeqtop(\vec b)$, we find $Q_j \oriof \lambda$ as the greatest oriented degree $P_i \in \oridegeqtop(\vec a)$ such that $P_i \oriof \rho \leq Q_j$;
+				\item for any $q_j \in \poldegeqtop(\vec b, c)$, we find $q_j \circ \lambda$ as the greatest polarized degree $p_i \in \poldegeqtop(\vec a, c)$ such that $p_i \circ \rho \leq q_j$.\footnote{Recall from \cref{thm:deg-vs-poldeg-poresh} that $j \cdot \lambda = \pospol_j \circ \lambda$.}
+			\end{itemize}
 			
 			\item A reshuffle $\lambda$ has a right adjoint $\rho$ if and only if
 			\begin{align}
 				&\text{for all } j \in \Degeq(\vec b), \text{we have } j \cdot \lambda < \topsym, \text{and} \label{eq:poresh-right-adjoint-crit1} \\
-				&\text{for all } j \in \Degeq(\vec b) \text{ with } j \cdot \lambda = \mixpol_i \text{, we have } a_i = \npolar. \label{eq:poresh-right-adjoint-crit2}
+				&\text{for all } j \in \Degeq(\vec b) \text{ with } j \cdot \lambda = \mixpol_i \text{, we have } a_i = \npolar \text{ (so $j \cdot \lambda = \nonpol_i$)}. \label{eq:poresh-right-adjoint-crit2}
 			\end{align}
-			In this case, for any $P_i \in \oridegeqtop(\vec a)$, we find $P_i \oriof \rho$ as the least oriented degree $Q_j \in \oridegeqtop(\vec b)$ such that $P_i \leq Q_j \oriof \lambda$.
+			In this case,
+			\begin{itemize}
+				\item for any $P_i \in \oridegeqtop(\vec a)$, we find $P_i \oriof \rho$ as the least oriented degree $Q_j \in \oridegeqtop(\vec b)$ such that $P_i \leq Q_j \oriof \lambda$;
+				\item for any $p_i \in \poldegeqtop(\vec a, c)$, we find $p_i \circ \rho$ as the least polarized degree $q_j \in \poldegeqtop(\vec b, c)$ such that $p_i \leq q_j \circ \lambda$.
+			\end{itemize}
 		\end{itemize}
 	\end{enumerate}
 \end{theorem}
 \begin{proof}
+	First of all, throughout the statement of the theorem, the formulation in terms of oriented degrees is equivalent to the formulation in terms of polarized degrees with `codomain' $\ypolar$ because we have isomorphisms of poset-valued presheaves $\Hom_\polcat(\loch, \ypolar) \cong \oripsh$ and $\poldegeqtop(\loch, \ypolar) \cong \oridegeqtop$.
+	In both cases the isomorphism is given by the action $\jetsym \oriof \loch$.
+	Furthermore, the corresponding presheaves of polarities and polarized degrees with codomain $\npolar$ are pointwise full subposets of those with codomain $\ypolar$, so asking that the same conditions apply there, adds nothing to the statement as a whole.
 	\begin{enumerate}
-		\item First, assume that we have reshuffles $\lambda \in \Hom(\vec a, \vec b)$ and $\rho \in \Hom(\vec b, \vec a)$ satisfying \cref{eq:poresh-adjoint-crit}.
+		\item First, assume that we have reshuffles $\lambda \in \Hom(\vec a, \vec b)$ and $\rho \in \Hom(\vec b, \vec a)$ satisfying \cref{eq:poresh-adjoint-crit-orideg,eq:poresh-adjoint-crit-poldeg}.
 		We show that $\lambda \dashv \rho$, i.e. that $\id_{\vec a} \leq \rho \circ \lambda$ and $\lambda \circ \rho \leq \id_{\vec b}$.
 		
 		To see the former, we need to show that for all $i \in \Degeq(\vec a)$, we have $\pospol_i \leq (i \cdot \rho) \circ \lambda$:
@@ -3350,12 +3365,12 @@ where the identity is $\id_{[\ypolar]} = \reshlist{\pdeg \nonpol \eqtydeg}{\pdeg
 			&\quad\Leftrightarrow\quad
 			\pospol_i \leq \pospol_i \circ \rho \circ \lambda
 			& \text{(\cref{thm:deg-vs-poldeg-poresh})} \\
+%			&\quad\Leftrightarrow\quad
+%			\jetsym \oriof \pospol_i \leq \jetsym \oriof \pospol_i \circ \rho \circ \lambda
+%			& \text{($\jetsym \oriof \loch$ is an isomorphism)} \\
 			&\quad\Leftrightarrow\quad
-			\jetsym \oriof \pospol_i \leq \jetsym \oriof \pospol_i \circ \rho \circ \lambda
-			& \text{($\jetsym \oriof \loch$ is an isomorphism)} \\
-			&\quad\Leftrightarrow\quad
-			\jetsym \oriof \pospol_i \circ \rho \leq \jetsym \oriof \pospol_i \circ \rho
-			& \text{(\cref{eq:poresh-adjoint-crit})} \\
+			\pospol_i \circ \rho \leq \pospol_i \circ \rho
+			& \text{(\cref{eq:poresh-adjoint-crit-poldeg})} \\
 			&\quad\Leftrightarrow\quad
 			\text{true}.
 		\end{align*}
@@ -3366,12 +3381,12 @@ where the identity is $\id_{[\ypolar]} = \reshlist{\pdeg \nonpol \eqtydeg}{\pdeg
 			&\quad\Leftrightarrow\quad
 			\pospol_j \circ \lambda \circ \rho \leq \pospol_j
 			& \text{(\cref{thm:deg-vs-poldeg-poresh})} \\
+%			&\quad\Leftrightarrow\quad
+%			\jetsym \oriof \pospol_j \circ \lambda \circ \rho \leq \jetsym \oriof \pospol_j
+%			& \text{($\jetsym \oriof \loch$ is an isomorphism)} \\
 			&\quad\Leftrightarrow\quad
-			\jetsym \oriof \pospol_j \circ \lambda \circ \rho \leq \jetsym \oriof \pospol_j
-			& \text{($\jetsym \oriof \loch$ is an isomorphism)} \\
-			&\quad\Leftrightarrow\quad
-			\jetsym \oriof \pospol_j \circ \lambda \leq \jetsym \oriof \pospol_j \circ \lambda
-			& \text{(\cref{eq:poresh-adjoint-crit})} \\
+			\pospol_j \circ \lambda \leq \pospol_j \circ \lambda
+			& \text{(\cref{eq:poresh-adjoint-crit-poldeg})} \\
 			&\quad\Leftrightarrow\quad
 			\text{true}.
 		\end{align*}
@@ -3381,181 +3396,90 @@ where the identity is $\id_{[\ypolar]} = \reshlist{\pdeg \nonpol \eqtydeg}{\pdeg
 			P_i \leq Q_j \oriof \lambda &\quad\Rightarrow\quad P_i \oriof \rho \leq (Q_j \oriof \lambda) \oriof \rho = Q_j \oriof (\lambda \circ \rho) \leq Q_j, \\
 			P_i \oriof \rho \leq Q_j &\quad\Rightarrow\quad P_i \leq P_i \oriof (\rho \circ \lambda) = (P_i \oriof \rho) \oriof \lambda \leq Q_j \oriof \lambda,
 		\end{align*}
-		so all adjoint pairs satisfy \cref{eq:poresh-adjoint-crit}.
-\todoi{Update notation}
+		so all adjoint pairs satisfy \cref{eq:poresh-adjoint-crit-orideg} and, equivalently, \cref{eq:poresh-adjoint-crit-poldeg}.
 		
 		\item Next, we move to the criteria to determine existence of a left/right adjoint and the algorithms for constructing them.
-		The algorithms are just rephrasings of \cref{eq:poresh-adjoint-crit}, so assuming that a left/right adjoint exists, they are clearly correct.
+		The algorithms are just rephrasings of \cref{eq:poresh-adjoint-crit-orideg,eq:poresh-adjoint-crit-poldeg}, so assuming that a left/right adjoint exists, they are clearly correct.
 		
 		\textbf{Existence of left adjoint.} Assume given a reshuffle $\rho \in \Hom(\vec b, \vec a)$.
-		We would like to define in a first step a function
+		We would like to define in a first step a function (parametrized by $c \in \Anpolarity$)
 		\[
-			\ell : \oridegeqtop(\vec b) \to \oridegeqtop(\vec a) : Q_j \mapsto \max \set{P_i \in \oridegeqtop(\vec a)}{P_i \oriof \rho \leq Q_j}.
+			\ell_c : \poldegeqtop(\vec b, c) \to \poldegeqtop(\vec a, c) : q_j \mapsto \max \set{p_i \in \poldegeqtop(\vec a, c)}{p_i \circ \rho \leq q_j}.
 		\]
-		A left adjoint $\lambda \dashv \rho$ exists if and only if this function is definable and is the action of some polarized reshuffle on oriented degrees.
+		A left adjoint $\lambda \dashv \rho$ exists if and only if this function is definable and is the action of some polarized reshuffle on polarized degrees.
 		%
-		However, $\ell$ is only defined if the set of which we take the maximum\footnote{Which differs from the join in that it needs to be one of the operands.}, is non-empty\footnote{In which case there is indeed a maximum, since the set is closed under joins, since $\loch \oriof \rho$ respects joins (\cref{thm:poldeg-poresh-lattice}).}.
+		However, $\ell_c$ is only defined if the set of which we take the maximum\footnote{Which differs from the join in that it needs to be one of the operands.}, is non-empty\footnote{In which case there is indeed a maximum, since the set is closed under joins, since $\loch \oriof \rho$ respects joins (\cref{thm:poldeg-poresh-lattice}).}.
 		As such, existence of a left adjoint requires that
 		\[
-			\forall Q_j \in \oridegeqtop(\vec b). \exists P_i \in \oridegeqtop(\vec i).P_i \oriof \rho \leq Q_j.
+			\forall q_j \in \poldegeqtop(\vec b, c). \exists p_i \in \poldegeqtop(\vec a, c).p_i \circ \rho \leq q_j.
 		\]
-		Without loss of generality, we can instantiate both $P_i$ and $Q_j$ with the minimal element $\eqtysym$, so existence of a left adjoint requires that $\eqtysym \oriof \rho = \eqtysym$ (\cref{eq:poresh-left-adjoint-crit1}).
+		Without loss of generality, we can instantiate both $p_i$ and $q_j$ with the minimal element $\nonpol_\eqtydeg$, so existence of a left adjoint requires that $\eqtydeg \cdot \rho = \nonpol_\eqtydeg \circ \rho = \nonpol_\eqtydeg$ (\cref{eq:poresh-left-adjoint-crit1}).
 		
-		We now assume that this is the case, so that $\ell$ is defined.
-		We define $\lambda$ by $j \cdot \lambda = \pospol_j$ \todoi{You're mixing up orientations and polarities here.}
-		Its restriction to $\oripshfwd(\vec b)$ defines a polarized reshuffle $\lambda \in \Hom(\vec a, \vec b)$.
-		We have to show that $\ell$ the bind of $\lambda$ if and only if \cref{eq:poresh-left-adjoint-crit2} holds.
+		We now assume that this is the case, so that $\ell_c$ is defined.
+		It is then, by construction, right adjoint to $\loch \circ \rho$.
+		We define a polarized reshuffle $\lambda \in \Hom(\vec a, \vec b)$ by $j \cdot \lambda = \ell_{b_j}(\pospol_j) \in \poldegeqtop(\vec a, b_j)$.
+		We have to show that $\ell$ is the action of $\lambda$ if and only if \cref{eq:poresh-left-adjoint-crit2} holds.
 		\begin{itemize}
-			\item To prove `only if', assume that \cref{eq:poresh-left-adjoint-crit2} does not hold (which is decidable). Then there exists some $\jetsym_i \in \oripshfwd(\vec a)$ such that $\jetsym_i \cdot \rho = \infrajetsym_j$ with $b_j = \ypolar$.
-			This also implies $\equijetsym_i \cdot \rho = \infrajetsym_i \cdot \rho = \infrajetsym_j$.
-			Then by definition of $\ell$, we have $\ell(\infrajetsym_j) \geq \infrajetsym_i$, but $\jetsym_j \cdot \lambda = \ell(\jetsym_j) < \equijetsym_i$, implying that $\infrajetsym_j \cdot \lambda < \equijetsym_i$.
-			Thus, $\infrajetsym_j \cdot \lambda \neq \ell(\infrajetsym_j)$ so $\ell$ is not the bind of $\lambda$.
+			\item To prove `only if', assume that \cref{eq:poresh-left-adjoint-crit2} does not hold (which is decidable). Then there exists some $i \in \Degeq(\vec a)$ such that $i \cdot \rho = \isopol_j \in \poldegeqtop(\vec b, a_i)$ with $b_j = \ypolar$.
 			
-			\item To prove `if', assume that \cref{eq:poresh-left-adjoint-crit2} holds. We prove that $\ell$ is the bind of $\lambda$.
-			It is clear from the definition of $\ell$ that $\ell(\topsym) = \topsym$.
-			Furthermore, we have
+			This implies that $\isopol_i \circ \rho = \isopol_j \in \poldegeqtop(\vec b, \ypolar)$ and hence, by the adjunction $\loch \circ \rho \dashv \ell$, that $\isopol_i \leq \ell_{\ypolar}(\isopol_j)$.
+			
+			On the other hand, we have that $\mixpol_i \circ \rho = \isopol_j \not\leq \pospol_j \in \poldegeqtop(\vec b, \ypolar)$ and hence, by the adjunction $\loch \circ \rho \dashv \ell$, that $\mixpol_i \not\leq \ell_\ypolar(\pospol_j) = j \cdot \lambda \in \poldegeqtop(\vec a, \ypolar)$.
+			This is only possible if $\getdeg(j \cdot \lambda) < i$.
+			
+			We tie our findings together:
+			\[
+				\getdeg(j \cdot \lambda) < i = \getdeg(\isopol_i) \leq \getdeg(\ell_\ypolar(\isopol_j))
+			\]
+			so that $\ell$ cannot be the action of $\lambda$.
+			
+			\item To prove `if', assume that \cref{eq:poresh-left-adjoint-crit2} holds. We prove that $\ell_c$ is the action of $\lambda$.
+			It is sufficient to prove this for $c = \ypolar$, since there is just one composition table for polarities (\cref{fig:polarity-orientation}) and no additional equalities are introduced if the codomain $c$ becomes $\npolar$.
+			It is clear from the definition of $\ell$ that $\ell(\nonpol_\top) = \nonpol_\top$, and for all other degrees we have $\ell(\pospol_j) = \pospol_j \circ \lambda$ by definition of $\lambda$ and \cref{thm:deg-vs-poldeg-poresh}.
+%			For degrees $j$ where $b_j = \npolar$, this is enough, as all polarized degrees are then equal to $\nonpol_j = \pospol_j$.
+%			For other degrees $j$, we have furthermore
 			\begin{align*}
-				\tejsym_j \cdot \lambda
-				&= \tejsym \cdot (\jetsym_j \cdot \lambda)
-				= \tejsym \cdot \ell(\jetsym_j) \\
-				& \qquad \qquad \text{(Definition of bind and $\lambda$)} \\
-				&= \tejsym \cdot \max \set{P_i \in \oripsh(\vec a)}{P_i \cdot \rho \leq \jetsym_j} \\
+				\negpol_j \circ \lambda
+				&= \negpol \circ (j \cdot \lambda)
+				= \negpol \circ \ell(\pospol_j) \\
+				& \qquad \qquad \text{(Definition of $\lambda$)} \\
+				&= \negpol \circ \max \set{p_i \in \poldegeqtop(\vec a, b_j)}{p_i \circ \rho \leq \pospol_j} \\
 				& \qquad \qquad \text{(Definition of $\ell$)} \\
-				&= \max \set{\tejsym \cdot P_i}{P_i \in \oripsh(\vec a) \text{ with } P_i \cdot \rho \leq \jetsym_j} \\
-				& \qquad \qquad \text{($\tejsym \cdot \loch : \oripsh(\vec a) \to \oripsh(\vec a)$ preserves $\leq$.)} \\
-				&= \max \set{P'_i \in \oripsh(\vec a)}{(\tejsym \cdot P'_i) \cdot \rho = \tejsym \cdot (P'_i \cdot \rho) \leq \jetsym_j} \\
-				& \qquad \qquad \text{(By taking $P'_i := \tejsym \cdot P_i$)} \\
-				&= \max \set{P'_i \in \oripsh(\vec a)}{P'_i \cdot \rho \leq \tejsym_j} \\
+				&= \max \set{\negpol \circ p_i}{p_i \in \poldegeqtop(\vec a, b_j) \text{ with } p_i \circ \rho \leq \pospol_j} \\
+				& \qquad \qquad \text{($\negpol \circ \loch : \poldegeqtop(\vec a, b_j) \to \poldegeqtop(\vec a, \ypolar)$ preserves $\leq$.)} \\
+				&= \max \set{p'_i \in \poldegeqtop(\vec a, \ypolar)}{\negpol \circ p'_i \circ \rho \leq \pospol_j} \\
+				& \qquad \qquad \text{(By taking $p'_i := \negpol \circ p_i$)} \\
+				&= \max \set{p'_i \in \poldegeqtop(\vec a, \ypolar)}{p'_i \circ \rho \leq \negpol_j} \\
 				& \qquad \qquad \text{(Involution $\tejsym \cdot \loch$ preserves and reflects $\leq$.)} \\
-				&= \ell(\tejsym_j), \\
+				&= \ell(\negpol_j), \\
 				% ------------------------
-				\equijetsym_j \cdot \lambda
-				&= (\jetsym_j \cdot \lambda) \wedge (\tejsym_j \cdot \lambda) \\
-				& \qquad \qquad \text{(By definition of $\loch \cdot \loch$.)} \\
-				&= \ell(\jetsym_j) \wedge \ell(\tejsym_j) \\
-				& \qquad \qquad \text{(Definition of $\lambda$, result above.)} \\
-				&= \max \set{P_i \in \oripsh(\vec a)}{P_i \cdot \rho \leq \jetsym_j} \wedge \max \set{P_i \in \oripsh(\vec a)}{P_i \cdot \rho \leq \tejsym_j} \\
-				&= \max \set{P_i \in \oripsh(\vec a)}{P_i \cdot \rho \leq \jetsym_j} \cap \set{P_i \in \oripsh(\vec a)}{P_i \cdot \rho \leq \tejsym_j} \\
-				& \qquad \qquad \text{(Both sets are downward closed.)} \\
-				&= \max \set{P_i \in \oripsh(\vec a)}{P_i \cdot \rho \leq \jetsym_j \text{ and } P_i \cdot \rho \leq \tejsym_j} \\
-				&= \max \set{P_i \in \oripsh(\vec a)}{P_i \cdot \rho \leq \equijetsym_j} \\
-				&= \ell(\equijetsym_j), \\
+				\mixpol_j \circ \lambda
+				&= (\pospol_j \circ \lambda) \wedge (\negpol_j \circ \lambda) \\
+				& \qquad \qquad \text{(By \cref{thm:poldeg-poresh-lattice})} \\
+				&= \ell_\ypolar(\pospol_j) \wedge \ell_\ypolar(\negpol_j) \\
+				& \qquad \qquad \text{(By previous results)} \\
+				&= \ell_\ypolar(\pospol_j \wedge \negpol_j) = \ell_\ypolar(\mixpol_j) \\
+				& \qquad \qquad \text{(Right adjoints preserve meets),} \\
 				% ------------------------
-				\infrajetsym_j \cdot \lambda
-				&= (\jetsym_j \cdot \lambda) \vee (\tejsym_j \cdot \lambda) \\
-				& \qquad \qquad \text{(By definition of $\loch \cdot \loch$.)} \\
-				&= \ell(\jetsym_j) \vee \ell(\tejsym_j) \\
-				& \qquad \qquad \text{(Definition of $\lambda$, result above.)} \\
-				&= \max \set{P_i \in \oripsh(\vec a)}{P_i \cdot \rho \leq \jetsym_j} \vee \max \set{P_i \in \oripsh(\vec a)}{P_i \cdot \rho \leq \tejsym_j} \\
-				&= \bigvee \set{P_i \in \oripsh(\vec a)}{P_i \cdot \rho \leq \jetsym_j} \vee \bigvee \set{P_i \in \oripsh(\vec a)}{P_i \cdot \rho \leq \tejsym_j} \\
+				\isopol_j \circ \lambda
+				&= (\pospol_j \circ \lambda) \vee (\negpol_j \circ \lambda) \\
+				& \qquad \qquad \text{(By \cref{thm:poldeg-poresh-lattice})} \\
+				&= \ell_\ypolar(\pospol_j) \vee \ell_\ypolar(\negpol_j) \\
+				& \qquad \qquad \text{(By previous results)} \\
+				&= \max \set{p_i \in \poldegeqtop(\vec a, \ypolar)}{p_i \circ \rho \leq \pospol_j} \vee \max \set{p_i \in \poldegeqtop(\vec a, \ypolar)}{p_i \circ \rho \leq \negpol_j} \\
+				& \qquad \qquad \text{(Definition of $\ell$)} \\
+				&= \bigvee \set{p_i \in \poldegeqtop(\vec a, \ypolar)}{p_i \circ \rho \leq \pospol_j} \vee \bigvee \set{p_i \in \poldegeqtop(\vec a, \ypolar)}{p_i \circ \rho \leq \negpol_j} \\
 				& \qquad \qquad \text{(The maxima exist, so they are equal to the joins (suprema).)} \\
-				&= \bigvee \set{P_i \in \oripsh(\vec a)}{P_i \cdot \rho \leq \jetsym_j} \cup \set{P_i \in \oripsh(\vec a)}{P_i \cdot \rho \leq \tejsym_j} \\
+				&= \bigvee \set{p_i \in \poldegeqtop(\vec a, \ypolar)}{p_i \circ \rho \leq \pospol_j} \cup \set{p_i \in \poldegeqtop(\vec a, \ypolar)}{p_i \circ \rho \leq \negpol_j} \\
 				& \qquad \qquad \text{(Associativity.)} \\
-				&= \bigvee \set{P_i \in \oripsh(\vec a)}{P_i \cdot \rho \leq \jetsym_j \text{ or } P_i \cdot \rho \leq \tejsym_j} \\
-				&= \bigvee \set{P_i \in \oripsh(\vec a)}{P_i \cdot \rho \leq \infrajetsym_j} \\
+				&= \bigvee \set{p_i \in \poldegeqtop(\vec a, \ypolar)}{p_i \circ \rho \leq \pospol_j \text{ or } p_i \circ \rho \leq \negpol_j} \\
+				&= \bigvee \set{p_i \in \poldegeqtop(\vec a, \ypolar)}{p_i \circ \rho \leq \isopol_j} \\
 				& \qquad \qquad \text{(Using \cref{eq:poresh-left-adjoint-crit2}.)} \\
-				&= \ell(\infrajetsym_j). \\
+				&= \ell_\ypolar(\isopol_j). \\
 				& \qquad \qquad \text{(Definition and existence of $\ell$.)}
 			\end{align*}
-%			\begin{align*}
-%				% ------------------------
-%				\equijetsym_j \cdot \lambda
-%				&= \equijetsym \cdot (\jetsym_j \cdot \lambda)
-%				= \equijetsym \cdot \ell(\jetsym_j) \\
-%				&= \equijetsym \cdot \max \set{P_i \in \oripsh(\vec a)}{P_i \cdot \rho \leq \jetsym_j} \\
-%				&= \max \set{\equijetsym \cdot P_i}{P_i \in \oripsh(\vec a) \text{ with } P_i \cdot \rho \leq \jetsym_j} \\
-%				& \qquad \qquad \text{($\equijetsym \cdot \loch : \oripsh(\vec a) \to \oripsh(\vec a)$ preserves $\leq$.)} \\
-%				&= \max \bigcup \left\{
-%					\begin{array}{l}
-%						\set{\equijetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \equijetsym_i \cdot \rho \leq \jetsym_j}, \\
-%						\set{\equijetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \jetsym_i \cdot \rho \leq \jetsym_j}, \\
-%						\set{\equijetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \tejsym_i \cdot \rho \leq \jetsym_j}, \\
-%						\set{\infrajetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \infrajetsym_i \cdot \rho \leq \jetsym_j}
-%					\end{array}
-%				\right\} \\
-%				& \qquad \qquad \text{(Consider all cases for $P$.)} \\
-%				&= \max \bigcup \left\{
-%					\begin{array}{l}
-%						\set{\equijetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \equijetsym_i \cdot \rho \leq \jetsym_j}, \\
-%						\set{\infrajetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \infrajetsym_i \cdot \rho \leq \jetsym_j}
-%					\end{array}
-%				\right\} \\
-%				& \qquad \qquad \text{(Ignore subsets of first set.)} \\
-%				&= \max \bigcup \left\{
-%					\begin{array}{l}
-%						\set{\equijetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \equijetsym_i \cdot \rho \leq \equijetsym_j}, \\
-%						\set{\infrajetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \infrajetsym_i \cdot \rho \leq \equijetsym_j}
-%					\end{array}
-%				\right\} \\
-%				& \qquad \qquad \text{(Left hand side is symmetric.)} \\
-%				&= \max \bigcup \left\{
-%					\begin{array}{l}
-%						\set{\equijetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \equijetsym_i \cdot \rho \leq \equijetsym_j}, \\
-%						\set{\jetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \infrajetsym_i \cdot \rho \leq \equijetsym_j}, \\
-%						\set{\tejsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \infrajetsym_i \cdot \rho \leq \equijetsym_j}, \\
-%						\set{\infrajetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \infrajetsym_i \cdot \rho \leq \equijetsym_j}
-%					\end{array}
-%				\right\} \\
-%				& \qquad \qquad \text{(Add sets bounded from above by last set.)} \\
-%				&= \max \bigcup \left\{
-%					\begin{array}{l}
-%						\set{\equijetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \equijetsym_i \cdot \rho \leq \equijetsym_j}, \\
-%						\set{\jetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \jetsym_i \cdot \rho \leq \equijetsym_j}, \\
-%						\set{\tejsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \tejsym_i \cdot \rho \leq \equijetsym_j}, \\
-%						\set{\infrajetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \infrajetsym_i \cdot \rho \leq \equijetsym_j}
-%					\end{array}
-%				\right\} \\
-%				& \qquad \qquad \text{(Use equivalent condition, since $\equijet_j$ is symmetric.)} \\
-%				&= \max \set{P_i \in \oripsh(\vec a)}{P_i \cdot \rho \leq \equijetsym_j} \\
-%				& \qquad \qquad \text{(Regroup cases.)} \\
-%				&= \ell(\equijetsym_j), \\ \\
-%				% ------------------------
-%				\infrajetsym_j \cdot \lambda
-%				&= \infrajetsym \cdot (\jetsym_j \cdot \lambda)
-%				= \infrajetsym \cdot \ell(\jetsym_j) \\
-%				&= \infrajetsym \cdot \max \set{P_i \in \oripsh(\vec a)}{P_i \cdot \rho \leq \jetsym_j} \\
-%				&= \max \set{\infrajetsym \cdot P_i}{P_i \in \oripsh(\vec a) \text{ with } P_i \cdot \rho \leq \jetsym_j} \\
-%				& \qquad \qquad \text{($\infrajetsym \cdot \loch : \oripsh(\vec a) \to \oripsh(\vec a)$ preserves $\leq$.)} \\
-%				&= \max \bigcup \left\{
-%					\begin{array}{l}
-%						\set{\equijetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \equijetsym_i \cdot \rho \leq \jetsym_j}, \\
-%						\set{\infrajetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \jetsym_i \cdot \rho \leq \jetsym_j}, \\
-%						\set{\infrajetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \tejsym_i \cdot \rho \leq \jetsym_j}, \\
-%						\set{\infrajetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \infrajetsym_i \cdot \rho \leq \jetsym_j}
-%					\end{array}
-%				\right\} \\
-%				& \qquad \qquad \text{(Consider all cases for $P$.)} \\
-%				&= \max \bigcup \left\{
-%					\begin{array}{l}
-%						\set{\equijetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \equijetsym_i \cdot \rho \leq \jetsym_j}, \\
-%						\set{\infrajetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } (\jetsym_i \cdot \rho) \wedge (\tejsym_i \cdot \rho) \leq \jetsym_j}
-%					\end{array}
-%				\right\} \\
-%				& \qquad \qquad \text{(Simplify disjunction of last 3 conditions.)} \\
-%				&= \max \bigcup \left\{
-%					\begin{array}{l}
-%						\set{\equijetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \equijetsym_i \cdot \rho \leq \jetsym_j}, \\
-%						\set{\infrajetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \equijetsym_i \cdot \rho \leq \jetsym_j}
-%					\end{array}
-%				\right\} \\
-%				& \qquad \qquad \text{(Simplify meet by case distinction on $\jetsym_i \cdot \rho$.)} \\
-%				&= \max \bigcup \left\{
-%					\begin{array}{l}
-%						\set{\equijetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \equijetsym_i \cdot \rho \leq \jetsym_j}, \\
-%						\set{\jetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \equijetsym_i \cdot \rho \leq \jetsym_j}, \\
-%						\set{\tejsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \equijetsym_i \cdot \rho \leq \jetsym_j}, \\
-%						\set{\infrajetsym_i}{0 \leq i < \lenpol{\vec a} \text{ with } \equijetsym_i \cdot \rho \leq \jetsym_j}
-%					\end{array}
-%				\right\} \\
-%				& \qquad \qquad \text{(Add sets bounded from above by last set.)} \\
-%				&= \max \set{P_i \in \oripsh(\vec a)}{\equijetsym_i \cdot \rho \leq \jetsym_j} \\
-%				& \qquad \qquad \text{(Regroup cases.)} \\
-%				&= \max \set{P_i \in \oripsh(\vec a)}{\deg(\jetsym_i \cdot \rho) \leq j} \\
-%				& \qquad \qquad \text{(Since, by \cref{eq:poresh-left-adjoint-crit2}, we have $\equijetsym_i \cdot \rho = \equijetsym_{\deg(\jetsym_i \cdot \rho)}$.)} \\
-%				&= \max \set{P_i \in \oripsh(\vec a)}{P_i \cdot \rho \leq \infrajetsym_j} \\
-%				&= \ell(\infrajetsym_j).
-%			\end{align*}
 		\end{itemize}
+\todoi{Update notation}
 		
 		\textbf{Existence of right adjoint.}
 		Assume given a reshuffle $\lambda \in \Hom(\vec a, \vec b)$.
