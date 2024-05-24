@@ -2673,7 +2673,7 @@ The mask operations serve three goals:
 	such that $\circ$ is associative and unital with respect to $\id$.
 \end{definition}
 
-\subsection{Definitions} \label{sec:poreshcat:def}
+\subsection{Definitions and Properties} \label{sec:poreshcat:def}
 In this section, we will construct a diagram of 2-posets and poset-valued profunctors between them.
 Viewing poset-valued presheaves $P : \catC\op \to \Poset$ as profunctors to the terminal 2-poset $\top$, the diagram we will construct is the following:
 \[
@@ -2810,6 +2810,10 @@ This is the motivation of the somewhat peculiar relation $\ll$ introduced below,
 	In particular, it satisfies the presheaf laws: it respects identity and composition of polarities. \qed
 \end{proposition}
 \begin{proposition}
+	\label{thm:pol-lattice}
+	\label{thm:ori-lattice}
+	\label{thm:pol-pol-lattice}
+	\label{thm:ori-pol-lattice}
 	Each constituent poset $\Hom(a, b)$ of $\polcat$ and each constituent poset $\oripsh(a)$ of $\oripsh$ is a lattice.
 	Composition of polarities and their action on orientations both preserve meets and joins in the \emph{left} argument. \qed
 \end{proposition}
@@ -2874,6 +2878,16 @@ The argument for meets and for $\loch \circ \loch$ is similar.
 \begin{proof}
 	This is immediately inherited from associativity and unitality of $\polcat$.
 \end{proof}
+\begin{corollary} \label{thm:pol-poldeg-lattice}
+	The functorial action $q \circ (\pdeg p i)$ of polarities on polarized degrees, preserves meets and joins in its left argument. \qed
+\end{corollary}
+\begin{proposition} \label{thm:poldeg-lattice}
+	Each poset $\poldeg(\vec a, b)$, $\poldegeq(\vec a, b)$ and $\poldegeqtop(\vec a, b)$ is a lattice.
+\end{proposition}
+\begin{proof}
+	To take the meet/join of polarized degrees with different degrees, simply take the operand with the lowest/highest degree.
+	To take the meet/join of polarized degrees with the same degree, take the meet/join of the polarities.
+\end{proof}
 
 \subsubsection{Polarized Reshuffles}
 \begin{definition}\label{def:poreshcat}
@@ -2908,6 +2922,9 @@ The argument for meets and for $\loch \circ \loch$ is similar.
 	\end{itemize}
 	We will also denote modalities $\mu : \vec a \to \vec b$ as $\mu = \reshlist{\eqtydeg \cdot \mu}{0 \cdot \mu, \ldots, (\lenpol{\vec a} - 1) \cdot \mu}$, e.g.\ $\id_{[\ypolar, \npolar, \ypolar]} = \reshlist{\pdeg \nonpol \eqtydeg}{\pdeg \pospol 0, \pdeg \nonpol 1, \pdeg \pospol 2}$.
 \end{definition}
+\begin{corollary} \label{thm:deg-vs-poldeg-poresh}
+	We have $\pospol_j \circ \mu = j \cdot \mu$. \qed
+\end{corollary}
 \begin{proposition}
 	$\poldegeqtop$ is a profunctor from $\poreshcat$ to $\polcat$, i.e.\ a 2-functor $\poldegeqtop : \poreshcat\op \times \polcat \to \Poset$.
 \end{proposition}
@@ -2987,12 +3004,30 @@ We do not have the same result for $\poldeg$, and do not bother for $\poldegeq$.
 		& \text{(def.\ of comp.\ in $\poreshcat$)} \\
 		&= \pospol_i \circ \mu
 		& \text{(def.\ of $\id$ in $\poreshcat$)} \\
-		&= \pospol \circ (i \cdot \mu)
-		& \text{(\cref{eq:poldeg-poresh})} \\
+%		&= \pospol \circ (i \cdot \mu)
+%		& \text{(\cref{eq:poldeg-poresh})} \\
 		&= i \cdot \mu
-		& \text{($\poldegeqtop$ respects the identity)}&.
+		& \text{(\cref{thm:deg-vs-poldeg-poresh})}&.
 		\qquad \qedhere
 	\end{align*}
+\end{proof}
+\begin{proposition}
+	\label{thm:poresh-lattice}
+	\label{thm:poldeg-poresh-lattice}
+	\label{thm:poresh-poresh-lattice}
+	\begin{enumerate}
+		\item Each Hom-set of $\poreshcat$ is a lattice.
+		\item The action $\pdeg q j \circ \mu$ of polarized degrees on polarized reshuffles, preserves meets and joins in its left argument.
+		\item Composition of polarized reshuffles, preserves meets and joins in its left argument.
+	\end{enumerate}
+\end{proposition}
+\begin{proof}
+	\begin{enumerate}
+		\item We can take meets/joins pointwise.
+		\item For polarized degrees with different degrees, meets/joins amount to minima/maxima, which are preserved by any poset morphism.
+		For polarized degrees with the same degree, this follows, via \cref{eq:poldeg-poresh}, from \ref{thm:pol-poldeg-lattice}.
+		\item Follows immediately from the previous two points and the definition of composition of polarized reshuffles. \qedhere
+	\end{enumerate}
 \end{proof}
 
 \subsubsection{Oriented Degrees}
@@ -3006,7 +3041,7 @@ We do not have the same result for $\poldeg$, and do not bother for $\poldegeq$.
 	
 	We write $\odeg P i \ll \odeg Q j$ if \textbf{EITHER} $i < j$ \textbf{OR} $i = j$ and $P \ll Q$.
 	
-	We define a transformation, extranatural in $b$ (\cref{thm:ori-poldeg-extranat}):
+	We define a transformation, extranatural in $b$ (\cref{thm:ori-poldeg-extranatural}):
 	\begin{equation}
 		\loch \oriof \loch : \oripsh(b) \times \poldegeqtop(\vec a, b) \to \oridegeqtop(\vec a) : Q \oriof (\pdeg p i) = \odeg{(Q \oriof p)}{i}, \label{eq:ori-poldeg}
 	\end{equation}
@@ -3080,6 +3115,23 @@ We do not have the same result for $\poldeg$, and do not bother for $\poldegeq$.
 		&= (\odeg R k \oriof \nu) \oriof \mu 
 		& \text{(\cref{eq:orideg-poresh})} &. \qquad \qedhere
 	\end{align*}
+\end{proof}
+\begin{proposition}
+	\label{thm:orideg-lattice}
+	\label{thm:ori-poldeg-lattice}
+	\label{thm:orideg-poresh-lattice}
+	\begin{enumerate}
+		\item Each poset $\orideg(\vec a)$, $\oridegeq(\vec a)$ and $\oridegeqtop(\vec a)$ is a lattice.
+		\item The action in \cref{eq:ori-poldeg} preserves meets and joins in its left argument.
+		\item The action in \cref{eq:orideg-poresh} preserves meets and joins in its left argument.
+	\end{enumerate}
+\end{proposition}
+\begin{proof}
+	\begin{enumerate}
+		\item To take the meet/join of oriented degrees with different degrees, simply take the operand with the lowest/highest degree. To take the meet/join of oriented degrees with the same degree, take the meet/join of the orientations.
+		\item Trivial from \cref{thm:ori-pol-lattice}.
+		\item For oriented degrees with different degrees, meets/joins amount to minima/maxima, which are preserved by any poset morphism. For oriented degrees with the same degree, this follows, via \cref{eq:orideg-poresh}, from the previous point. \qedhere
+	\end{enumerate}
 \end{proof}
 
 \subsubsection{Discussion and Related Work}
@@ -3261,30 +3313,29 @@ where the identity is $\id_{[\ypolar]} = \reshlist{\pdeg \nonpol \eqtydeg}{\pdeg
 %\end{corollary}
 
 \subsection{Adjunctions of Polarized Reshuffles}
-\todoi{
-	Sometimes, we need to consider only reshuffles that have at least a certain number of left/right adjoints. The 2-posets that contain only those reshuffles (with the same order relation) will be denoted as $\poreshcat\withllr$, where the number of white bullets on the left/right is the minimal number of left/right adjoints.}
+\todoi{Sometimes, we need to consider only reshuffles that have at least a certain number of left/right adjoints. The 2-posets that contain only those reshuffles (with the same order relation) will be denoted as $\poreshcat\withllr$, where the number of white bullets on the left/right is the minimal number of left/right adjoints.}
 \begin{theorem}\label{thm:poresh-adjoint}
 	\begin{enumerate}
 		\item A pair of polarized reshuffles $\lambda \in \Hom(\vec a, \vec b)$ and $\rho \in \Hom(\vec b, \vec a)$ is adjoint ($\lambda \dashv \rho$) if and only if
 		\begin{equation} \label{eq:poresh-adjoint-crit}
-			\forall P_i \in \oripsh(\vec a), Q_j \in \oripsh(\vec b). P_i \leq Q_j \cdot \lambda \Leftrightarrow P_i \cdot \rho \leq Q_j.
+			\forall P_i \in \oridegeqtop(\vec a), Q_j \in \oridegeqtop(\vec b). P_i \leq Q_j \oriof \lambda \Leftrightarrow P_i \oriof \rho \leq Q_j.
 		\end{equation}
 		\item By consequence:
 		\begin{itemize}
 			\item A reshuffle $\rho$ has a left adjoint $\lambda$ if and only if
 			\begin{align}
-				&\eqtysym \cdot \rho = \eqtysym, \text{and} \label{eq:poresh-left-adjoint-crit1} \\
-				&\text{for all } \jetsym_i \in \oripshfwd(\vec a) \text{ with } \jetsym_i \cdot \rho = \infrajetsym_j \text{, we have } b_j = \npolar. \label{eq:poresh-left-adjoint-crit2}
+				&\eqtysym \oriof \rho = \eqtysym, \text{and} \label{eq:poresh-left-adjoint-crit1} \\
+				&\text{for all } i \in \Degeq(\vec a) \text{ with } i \cdot \rho = \isopol_j \text{, we have } b_j = \npolar. \label{eq:poresh-left-adjoint-crit2}
 				%&\text{for all } \jetsym_i \in \oripshfwd(\vec a) \text{ with } a_i = \ypolar \text{, we have } \jetsym_i \cdot \rho \neq \infrajetsym_j. \label{eq:poresh-left-adjoint-crit2}
 			\end{align}
-			In this case, $Q_j \cdot \lambda$ is the greatest symbol $P_i \in \oripsh(\vec a)$ such that $P_i \cdot \rho \leq Q_j$ (even when $Q_j \not\in \oripshfwd(\vec b)$).
+			In this case, for any $Q_j \in \oridegeqtop(\vec b)$, we find $Q_j \oriof \lambda$ as the greatest oriented degree $P_i \in \oridegeqtop(\vec a)$ such that $P_i \oriof \rho \leq Q_j$.
 			
 			\item A reshuffle $\lambda$ has a right adjoint $\rho$ if and only if
 			\begin{align}
-				&\text{for all } \jetsym_j \in \oripshfwd(\vec b), \text{we have } \jetsym_j \cdot \lambda < \topsym, \text{and} \label{eq:poresh-right-adjoint-crit1} \\
-				&\text{for all } \jetsym_j \in \oripshfwd(\vec b) \text{ with } \jetsym_j \cdot \lambda = \equijetsym_i \text{, we have } a_i = \npolar. \label{eq:poresh-right-adjoint-crit2}
+				&\text{for all } j \in \Degeq(\vec b), \text{we have } j \cdot \lambda < \topsym, \text{and} \label{eq:poresh-right-adjoint-crit1} \\
+				&\text{for all } j \in \Degeq(\vec b) \text{ with } j \cdot \lambda = \mixpol_i \text{, we have } a_i = \npolar. \label{eq:poresh-right-adjoint-crit2}
 			\end{align}
-			In this case, $P_i \cdot \rho$ is the least symbol $Q_j \in \oripsh(\vec b)$ such that $P_i \leq Q_j \cdot \lambda$ (even when $P_i \not\in \oripshfwd(\vec a)$).
+			In this case, for any $P_i \in \oridegeqtop(\vec a)$, we find $P_i \oriof \rho$ as the least oriented degree $Q_j \in \oridegeqtop(\vec b)$ such that $P_i \leq Q_j \oriof \lambda$.
 		\end{itemize}
 	\end{enumerate}
 \end{theorem}
@@ -3293,16 +3344,45 @@ where the identity is $\id_{[\ypolar]} = \reshlist{\pdeg \nonpol \eqtydeg}{\pdeg
 		\item First, assume that we have reshuffles $\lambda \in \Hom(\vec a, \vec b)$ and $\rho \in \Hom(\vec b, \vec a)$ satisfying \cref{eq:poresh-adjoint-crit}.
 		We show that $\lambda \dashv \rho$, i.e. that $\id_{\vec a} \leq \rho \circ \lambda$ and $\lambda \circ \rho \leq \id_{\vec b}$.
 		
-		To see the former, we need to show that for all $P_i \in \oripshfwd(\vec a)$, we have $P_i \leq (P_i \cdot \rho) \cdot \lambda$ which is equivalent to $P_i \cdot \rho \leq P_i \cdot \rho$ and hence true.
+		To see the former, we need to show that for all $i \in \Degeq(\vec a)$, we have $\pospol_i \leq (i \cdot \rho) \circ \lambda$:
+		\begin{align*}
+			\pospol_i \leq (i \cdot \rho) \circ \lambda
+			&\quad\Leftrightarrow\quad
+			\pospol_i \leq \pospol_i \circ \rho \circ \lambda
+			& \text{(\cref{thm:deg-vs-poldeg-poresh})} \\
+			&\quad\Leftrightarrow\quad
+			\jetsym \oriof \pospol_i \leq \jetsym \oriof \pospol_i \circ \rho \circ \lambda
+			& \text{($\jetsym \oriof \loch$ is an isomorphism)} \\
+			&\quad\Leftrightarrow\quad
+			\jetsym \oriof \pospol_i \circ \rho \leq \jetsym \oriof \pospol_i \circ \rho
+			& \text{(\cref{eq:poresh-adjoint-crit})} \\
+			&\quad\Leftrightarrow\quad
+			\text{true}.
+		\end{align*}
 		
-		To see the latter, we need to show that for all $Q_j \in \oripshfwd(\vec b)$, we have $(Q_j \cdot \lambda) \cdot \rho \leq Q_j$ which is equivalent to $Q_j \cdot \lambda \leq Q_j \cdot \lambda$ and hence true.
+		To see the latter, we need to show that for all $j \in \Degeq(\vec b)$, we have $(j \cdot \lambda) \circ \rho \leq \pospol_j$:
+		\begin{align*}
+			(j \cdot \lambda) \circ \rho \leq \pospol_j
+			&\quad\Leftrightarrow\quad
+			\pospol_j \circ \lambda \circ \rho \leq \pospol_j
+			& \text{(\cref{thm:deg-vs-poldeg-poresh})} \\
+			&\quad\Leftrightarrow\quad
+			\jetsym \oriof \pospol_j \circ \lambda \circ \rho \leq \jetsym \oriof \pospol_j
+			& \text{($\jetsym \oriof \loch$ is an isomorphism)} \\
+			&\quad\Leftrightarrow\quad
+			\jetsym \oriof \pospol_j \circ \lambda \leq \jetsym \oriof \pospol_j \circ \lambda
+			& \text{(\cref{eq:poresh-adjoint-crit})} \\
+			&\quad\Leftrightarrow\quad
+			\text{true}.
+		\end{align*}
 		
 		Conversely, assume that $\lambda \dashv \rho$. Then we have
 		\begin{align*}
-			P_i \leq Q_j \cdot \lambda &\Rightarrow P_i \cdot \rho \leq (Q_j \cdot \lambda) \cdot \rho = Q_j \cdot (\lambda \circ \rho) \leq Q_j, \\
-			P_i \cdot \rho \leq Q_j &\Rightarrow P_i \leq P_i \cdot (\rho \circ \lambda) = (P_i \cdot \rho) \cdot \lambda \leq Q_j \cdot \lambda,
+			P_i \leq Q_j \oriof \lambda &\quad\Rightarrow\quad P_i \oriof \rho \leq (Q_j \oriof \lambda) \oriof \rho = Q_j \oriof (\lambda \circ \rho) \leq Q_j, \\
+			P_i \oriof \rho \leq Q_j &\quad\Rightarrow\quad P_i \leq P_i \oriof (\rho \circ \lambda) = (P_i \oriof \rho) \oriof \lambda \leq Q_j \oriof \lambda,
 		\end{align*}
 		so all adjoint pairs satisfy \cref{eq:poresh-adjoint-crit}.
+\todoi{Update notation}
 		
 		\item Next, we move to the criteria to determine existence of a left/right adjoint and the algorithms for constructing them.
 		The algorithms are just rephrasings of \cref{eq:poresh-adjoint-crit}, so assuming that a left/right adjoint exists, they are clearly correct.
@@ -3310,11 +3390,11 @@ where the identity is $\id_{[\ypolar]} = \reshlist{\pdeg \nonpol \eqtydeg}{\pdeg
 		\textbf{Existence of left adjoint.} Assume given a reshuffle $\rho \in \Hom(\vec b, \vec a)$.
 		We would like to define in a first step a function
 		\[
-			\ell : \oripsh(\vec b) \to \oripsh(\vec a) : Q_j \mapsto \max \set{P_i \in \oripsh(\vec a)}{P_i \cdot \rho \leq Q_j}.
+			\ell : \oridegeqtop(\vec b) \to \oridegeqtop(\vec a) : Q_j \mapsto \max \set{P_i \in \oridegeqtop(\vec a)}{P_i \oriof \rho \leq Q_j}.
 		\]
-		A left adjoint $\lambda \dashv \rho$ exists if and only if this function is definable and is the bind of some polarized reshuffle.
+		A left adjoint $\lambda \dashv \rho$ exists if and only if this function is definable and is the action of some polarized reshuffle on oriented degrees.
 		%
-		However, $\ell$ is only defined if the set of which we take the maximum\footnote{Which differs from the join in that it needs to be one of the operands.}, is non-empty\footnote{In which case there is indeed a maximum, since the set is closed under joins, since the bind of $\rho$ respects joins.}.
+		However, $\ell$ is only defined if the set of which we take the maximum\footnote{Which differs from the join in that it needs to be one of the operands.}, is non-empty\footnote{In which case there is indeed a maximum, since the set is closed under joins, since $\loch \oriof \rho$ respects joins.}.
 		As such, existence of a left adjoint requires that
 		\[
 			\forall Q_j \in \oripsh(\vec b). \exists P_i \in \oripsh(\vec i).P_i \cdot \rho \leq Q_j.
