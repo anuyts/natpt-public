@@ -3120,6 +3120,20 @@ Thus, we have retrieved exactly the 2-poset of (ordinary) reshuffles from Degree
 \paragraph{When Everything is Directed}
 If we forget about the existence of the anpolarity $\npolar$, then $\polcat$ becomes a 2-poset with a single object $\ypolar$, i.e.\ fully determined by the ordered monoid $\Hom_\polcat(\ypolar, \ypolar) = \accol{\isopol, \pospol, \negpol, \mixpol}$.
 
+This ordered monoid has a semantics in endofunctors on $\Cat$, sending $\pospol$ to the identity functor, $\negpol$ to taking the opposite, $\isopol$ to taking the localization (which makes all morphisms invertible) and $\mixpol$ to taking the core (which discards all non-invertible morphisms).
+
+\emph{Almost} the same ordered monoid is used by Abel \cite{abel-polarized} (who writes $\top$ for $\isopol$ and $\circ$ for $\mixpol$),
+in my master thesis \cite{nuyts-phd} (where I write $=$ for $\isopol$)
+and in our earlier work on polarities for Agda \cite{abstract-agda-polarities} (ignoring the strictly positive modality; there we write $*$ or \texttt{mixed} for $\mixpol$ and \texttt{unused} for $\isopol$).
+However, there is a subtle difference in that all of the cited work has $\isopol \circ \mixpol = \isopol$, whereas we have $\isopol \circ \mixpol = \mixpol$.
+The variation with $\isopol \circ \mixpol = \isopol$ has a semantics in endofunctors on $\Cat$ where we model $\isopol$ not as taking the localization, but as squashing to a (sub)singleton.
+Alternatively, it has a semantics on the category of pro-arrow equipments \cite{nlab:proarrow,proarrow1,proarrow2} where $\pospol$ is still the identity, $\negpol$ and $\mixpol$ take the opposite and core (resp.) of the arrow dimension, and $\isopol$ replaces the arrow dimension with the core of the pro-arrow dimension.
+
+For us, pro-arrows will live at a different degree than arrows, and our \emph{polarities} (as opposed to polarized reshuffles) are concerned with only a single degree.
+Moreover, we do not think of $\isopol$ as a squashing or `unused' modality, but rather as a modality for functions that promote morphisms to isomorphisms, as the localization does.
+Thus, we stick to the equality $\isopol \circ \mixpol = \mixpol$.
+
+\todoi{Are you swapping $\isopol$ and $\mixpol$????}
 
 \todoi{Spell out}
 \begin{itemize}
