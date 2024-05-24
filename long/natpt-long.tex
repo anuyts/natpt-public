@@ -3394,14 +3394,15 @@ where the identity is $\id_{[\ypolar]} = \reshlist{\pdeg \nonpol \eqtydeg}{\pdeg
 		\]
 		A left adjoint $\lambda \dashv \rho$ exists if and only if this function is definable and is the action of some polarized reshuffle on oriented degrees.
 		%
-		However, $\ell$ is only defined if the set of which we take the maximum\footnote{Which differs from the join in that it needs to be one of the operands.}, is non-empty\footnote{In which case there is indeed a maximum, since the set is closed under joins, since $\loch \oriof \rho$ respects joins.}.
+		However, $\ell$ is only defined if the set of which we take the maximum\footnote{Which differs from the join in that it needs to be one of the operands.}, is non-empty\footnote{In which case there is indeed a maximum, since the set is closed under joins, since $\loch \oriof \rho$ respects joins (\cref{thm:poldeg-poresh-lattice}).}.
 		As such, existence of a left adjoint requires that
 		\[
-			\forall Q_j \in \oripsh(\vec b). \exists P_i \in \oripsh(\vec i).P_i \cdot \rho \leq Q_j.
+			\forall Q_j \in \oridegeqtop(\vec b). \exists P_i \in \oridegeqtop(\vec i).P_i \oriof \rho \leq Q_j.
 		\]
-		Without loss of generality, we can instantiate both $P_i$ and $Q_j$ with the minimal element $\eqtysym$, so existence of a left adjoint requires that $\eqtysym \cdot \rho = \eqtysym$ (\cref{eq:poresh-left-adjoint-crit1}).
+		Without loss of generality, we can instantiate both $P_i$ and $Q_j$ with the minimal element $\eqtysym$, so existence of a left adjoint requires that $\eqtysym \oriof \rho = \eqtysym$ (\cref{eq:poresh-left-adjoint-crit1}).
 		
 		We now assume that this is the case, so that $\ell$ is defined.
+		We define $\lambda$ by $j \cdot \lambda = \pospol_j$ \todoi{You're mixing up orientations and polarities here.}
 		Its restriction to $\oripshfwd(\vec b)$ defines a polarized reshuffle $\lambda \in \Hom(\vec a, \vec b)$.
 		We have to show that $\ell$ the bind of $\lambda$ if and only if \cref{eq:poresh-left-adjoint-crit2} holds.
 		\begin{itemize}
