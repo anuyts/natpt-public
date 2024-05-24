@@ -2862,14 +2862,14 @@ The argument for meets and for $\loch \circ \loch$ is similar.
 		\item $\poldeg(\vec a, b) = \Sigma(i \in \Deg(\vec a)).\Hom_\polcat(a_i, b)$ with dictionary order,
 		\item $\poldegeq(\vec a, b)$ and $\poldegeqtop(\vec a, b)$ similarly.
 	\end{itemize}
-	We denote a dependent pair $(i, p)$ of a degree and a polarity as $\dpol i p$ and write $\getdeg(\dpol i p) = i$ and $\getpol(\dpol i p) = p$.
+	We denote a dependent pair $(i, p)$ of a degree $i$ and a polarity $p$ as $\dpol i p$ and write $\getdeg(\dpol i p) = i$ and $\getpol(\dpol i p) = p$.
 	
 	We write $\dpol i p \ll \dpol j q$ if \textbf{EITHER} $i < j$ \textbf{OR} $i = j$ and $p \ll q$.
 	
 	We make $\poldeg(\vec a, b)$ a covariant 2-functor of $b \in \Obj(\polcat)$ by defining $q \circ (\dpol i p) = \dpol i {(q \circ p)}$, and similar for $\poldegeq(\vec a, b)$ and $\poldegeqtop(\vec a, b)$.
 \end{definition}
 \begin{corollary}
-	The functor $\poldeg(\vec a, \loch)$ (as well as $\poldegeq(\vec a, \loch)$ and $\poldegeqtop(\vec a, \loch)$) respects identity and composition of modalities.
+	The functor $\poldeg(\vec a, \loch)$ (as well as $\poldegeq(\vec a, \loch)$ and $\poldegeqtop(\vec a, \loch)$) respects identity and composition of polarities.
 \end{corollary}
 \begin{proof}
 	This is immediately inherited from associativity and unitality of $\polcat$.
@@ -3002,24 +3002,85 @@ We do not have the same result for $\poldeg$, and do not bother for $\poldegeq$.
 		\item $\orideg(\vec a) = \Sigma(i \in \Deg(\vec a)).\oripsh(a_i)$ with dictionary order,
 		\item $\oridegeq(\vec a)$ and $\oridegeqtop(\vec a)$ similarly.
 	\end{itemize}
-	We denote a dependent pair $(i, P)$ of a degree and a polarity as $\odeg P i$ and write $\getdeg(\odeg P i) = i$ and $\getori(\odeg P i) = P$.
+	We denote a dependent pair $(i, P)$ of a degree $i$ and an orientation $P$ as $\odeg P i$ and write $\getdeg(\odeg P i) = i$ and $\getori(\odeg P i) = P$.
 	
 	We write $\odeg P i \ll \odeg Q j$ if \textbf{EITHER} $i < j$ \textbf{OR} $i = j$ and $P \ll Q$.
 	
-	We define a transformation, extranatural in $b$:
+	We define a transformation, extranatural in $b$ (\cref{thm:ori-poldeg-extranat}):
 	\begin{equation}
-		\loch \oriof \loch : \oripsh(b) \times \poldegeqtop(\vec a, b) \to \oridegeqtop(\vec a) : Q \oriof (\pdeg p i) = \odeg{(Q \oriof p)}{i}, \label{eq:ori-of-poldeg}
+		\loch \oriof \loch : \oripsh(b) \times \poldegeqtop(\vec a, b) \to \oridegeqtop(\vec a) : Q \oriof (\pdeg p i) = \odeg{(Q \oriof p)}{i}, \label{eq:ori-poldeg}
 	\end{equation}
 	and similar operations for $\poldegeq$ and $\poldeg$.
 	
 	Using this, we make $\oridegeqtop$ (but not $\orideg$ and $\oridegeq$) a presheaf by defining an operation
-	\[
+	\begin{equation} \label{eq:orideg-poresh}
 		\loch \oriof \loch : \oridegeqtop(\vec b) \times \Hom_{\poreshcat}(\vec a, \vec b) \to \oridegeqtop(\vec a) : Q_j \oriof \mu = Q \oriof (j \cdot \mu),
-	\]
-	which preserves identity and composition.
-	We can now observe that the action in \cref{eq:ori-of-poldeg} is natural in $\vec a$.
+	\end{equation}
+	which preserves identity and composition (\cref{thm:orideg-functor-laws}).
+	We can now observe that the action in \cref{eq:ori-poldeg} is natural in $\vec a$ (\cref{thm:ori-poldeg-natural}).
 \end{definition}
-\todoi{Functoriality/naturality/extranaturality results.}
+\begin{proposition} \label{thm:ori-poldeg-extranatural}
+	The action in \cref{eq:ori-poldeg} is extranatural in $b$.
+\end{proposition}
+\begin{proof}
+	This is immediately inherited from functoriality of $\oripsh$:
+	\begin{align*}
+		(R \oriof q) \oriof (\pdeg p i)
+		&= \pdeg{((R \oriof q) \oriof p)}{i}
+		& \text{(\cref{eq:ori-poldeg})} \\
+		&= \pdeg{(R \oriof (q \circ p))}{i}
+		& \text{($\oripsh$ respects comp.\ of polarities)} \\
+		&= R \oriof (\pdeg{(q \circ p)}{i})
+		& \text{(\cref{eq:ori-poldeg})} \\
+		&= R \oriof (q \circ (\pdeg p i))
+		& \text{(\cref{def:poldeg})} &. \qquad \qedhere
+	\end{align*}
+\end{proof}
+\begin{proposition} \label{thm:ori-poldeg-natural}
+	The action in \cref{eq:ori-poldeg} is natural in $\vec a$.
+\end{proposition}
+\begin{proof}
+	\begin{align*}
+		(R \oriof \pdeg q j) \oriof \mu 
+		&= \odeg{(R \oriof q)}{j} \oriof \mu 
+		& \text{(\cref{eq:ori-poldeg})} \\
+		&= (R \oriof q) \oriof (j \cdot \mu)
+		& \text{(\cref{eq:orideg-poresh})} \\
+		&= R \oriof (q \circ (j \cdot \mu))
+		& \text{(\cref{thm:ori-poldeg-extranatural})} \\
+		&= R \oriof (\pdeg q j \circ \mu)
+		& \text{(\cref{eq:poldeg-poresh})} &. \qquad \qedhere
+	\end{align*}
+\end{proof}
+\begin{proposition} \label{thm:orideg-functor-laws}
+	The functorial action of $\oridegeqtop$ respects identity and composition of polarized reshuffles.
+\end{proposition}
+\begin{proof}
+	For the identity, we have
+	\begin{align*}
+		\odeg P i \oriof \id
+		&= P \oriof (i \cdot \id)
+		& \text{(\cref{eq:orideg-poresh})} \\
+		&= P \oriof (\pdeg \pospol i)
+		& \text{(def.\ of $\id$ in $\poreshcat$)} \\
+		&= \odeg{(P \oriof \pospol)}{i}
+		& \text{(\cref{eq:ori-poldeg})} \\
+		&= \odeg P i
+		& \text{($\oripsh$ respects identity polarity)} &.
+	\end{align*}
+	For composition, we have
+	\begin{align*}
+		\odeg R k \oriof (\nu \circ \mu)
+		&= R \oriof (k \cdot (\nu \circ \mu))
+		& \text{(\cref{eq:orideg-poresh})} \\
+		&= R \oriof ((k \cdot \nu) \circ \mu)
+		& \text{(def.\ of comp.\ in $\poreshcat$)} \\
+		&= (R \oriof (k \cdot \nu)) \oriof \mu 
+		& \text{(\cref{thm:ori-poldeg-natural})} \\
+		&= (\odeg R k \oriof \nu) \oriof \mu 
+		& \text{(\cref{eq:orideg-poresh})} &. \qquad \qedhere
+	\end{align*}
+\end{proof}
 
 \subsubsection{Discussion and Related Work}
 \todoi{Spell out}
