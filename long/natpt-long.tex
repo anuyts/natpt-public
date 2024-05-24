@@ -3083,6 +3083,44 @@ We do not have the same result for $\poldeg$, and do not bother for $\poldegeq$.
 \end{proof}
 
 \subsubsection{Discussion and Related Work}
+\paragraph{When Everything is Symmetric}
+If we forget about the existence of the anpolarity $\ypolar$, then $\polcat$ becomes a 2-poset with only a single object $\npolar$ and a single morphism $\nonpol \in \Hom_\polcat(\npolar, \npolar)$.
+The presheaf $\oripsh$ is then just a set $\oripsh(\npolar)$ containing only a single orientation $\edgesym$.
+An anpolarity mask $\vec a$ is always of the form $[\npolar]^n$, i.e.\ it is just a natural number.
+Furthermore, we have
+\[
+	\poldegeqtop([\npolar]^n, \npolar) \cong \oridegeqtop([\npolar]^n) \cong \Degeqtop([\npolar]^n).
+\]
+Finally, a polarized reshuffle $\mu \in \Hom_\poreshcat([\npolar]^m, [\npolar]^n)$ is essentially just a function
+\[
+	\loch \cdot \mu : \Degeq([\npolar]^n) \to \Degeqtop([\npolar]^m).
+\]
+Thus, we have retrieved exactly the 2-poset of (ordinary) reshuffles from Degrees of Relatedness \cite{reldtt,reldtt-techreport}:
+\begin{definition}[{\cite[def.\ 6.2.7]{reldtt-techreport}}]
+	The \textbf{2-poset of reshuffles} $\reshcat$ has:
+	\begin{itemize}
+		\item as objects, \textbf{depths}, which are integers $d \geq -1$,
+		\item as morphisms $\mu \in \Hom_\reshcat(d, e)$, functions
+		\[
+			\loch \cdot \mu : \accol{\eqtydeg \leq 0 \leq \ldots \leq e} \to \accol{\eqtydeg \leq 0 \leq \ldots \leq d \leq \top},
+		\]
+		\item pointwise inequalities.
+	\end{itemize}
+\end{definition}
+\begin{theorem}
+	There is an embedding $I : \reshcat \to \poreshcat$ of the 2-poset of reshuffles $\reshcat$ from \cite[def.\ 6.2.7]{reldtt-techreport} into $\poreshcat$ which
+	\begin{itemize}
+		\item sends the object (the `depth') $d \geq -1$ to the anpolarity mask $I(d) = [\npolar]^{d+1}$,
+		\item sends the reshuffle $\mu \in \Hom_\reshcat(d, e)$ to the polarized reshuffle $I(\mu) \in \Hom_\poreshcat([\npolar]^{d+1}, [\npolar]^{e+1})$
+		such that $i \cdot I(\mu) = \pdeg{\nonpol}{i \cdot \mu}$.
+	\end{itemize}
+	The action of the 2-functor $I$ on every $\Hom$-poset is an isomorphism of posets. \qed
+\end{theorem}
+
+\paragraph{When Everything is Directed}
+If we forget about the existence of the anpolarity $\npolar$, then $\polcat$ becomes a 2-poset with a single object $\ypolar$, i.e.\ fully determined by the ordered monoid $\Hom_\polcat(\ypolar, \ypolar) = \accol{\isopol, \pospol, \negpol, \mixpol}$.
+
+
 \todoi{Spell out}
 \begin{itemize}
 	\item Simplification if everything is symmetric (reshuffles)
