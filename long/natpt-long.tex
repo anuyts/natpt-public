@@ -3085,7 +3085,7 @@ We do not have the same result for $\poldeg$, and do not bother for $\poldegeq$.
 \subsubsection{Discussion and Related Work}
 \paragraph{When Everything is Symmetric}
 If we forget about the existence of the anpolarity $\ypolar$, then $\polcat$ becomes a 2-poset with only a single object $\npolar$ and a single morphism $\nonpol \in \Hom_\polcat(\npolar, \npolar)$.
-The presheaf $\oripsh$ is then just a set $\oripsh(\npolar)$ containing only a single orientation $\edgesym$.
+The presheaf $\oripsh$ is then just a poset $\oripsh(\npolar)$ containing only a single orientation $\edgesym$.
 An anpolarity mask $\vec a$ is always of the form $[\npolar]^n$, i.e.\ it is just a natural number.
 Furthermore, we have
 \[
@@ -3133,12 +3133,31 @@ For us, pro-arrows will live at a different degree than arrows, and our \emph{po
 Moreover, we do not think of $\isopol$ as a squashing or `unused' modality, but rather as a modality for functions that promote morphisms to isomorphisms, as the localization does.
 Thus, we stick to the equality $\isopol \circ \mixpol = \mixpol$.
 
-\todoi{Spell out}
-\begin{itemize}
-	\item Simplification if everything is symmetric (reshuffles)
-	\item Simplification if everything is directed. ($\Hom_\polcat(\ypolar, \ypolar)$)
-	\item Discuss $\Hom_\poreshcat([\ypolar], [\ypolar])$.
-\end{itemize}
+The presheaf of orientations $\oripsh$ is just a single poset $\oripsh(\ypolar) = \accol{\equijetsym, \jetsym, \tejsym, \infrajetsym}$ on which the ordered monoid of polarities has a right action.
+
+An anpolarity mask $\vec a$ is always of the form $[\ypolar]^n$, i.e.\ it is just a natural number.
+A polarized/oriented degree $\pdeg p i \in \poldegeqtop([\ypolar]^n, \ypolar)$ or $\odeg P i \in \oridegeqtop([\ypolar]^n)$ is now just a (non-dependent) pair of a degree and a polarity/orientation.
+
+For purposes of illustration, we list all polarized reshuffles in $\Hom_\poreshcat([\ypolar], [\ypolar])$:
+\[
+	\begin{array}{l l l l}
+		\reshlist{\pdeg \nonpol \eqtydeg}{\pdeg \nonpol \eqtydeg} \\
+		\reshlist{\pdeg \nonpol \eqtydeg}{\pdeg \mixpol 0} &
+		\reshlist{\pdeg \mixpol 0}{\pdeg \mixpol 0} \\
+		\reshlist{\pdeg \nonpol \eqtydeg}{\pdeg \pospol 0} &
+		\reshlist{\pdeg \mixpol 0}{\pdeg \pospol 0} \\
+		\reshlist{\pdeg \nonpol \eqtydeg}{\pdeg \negpol 0} &
+		\reshlist{\pdeg \mixpol 0}{\pdeg \negpol 0} \\
+		\reshlist{\pdeg \nonpol \eqtydeg}{\pdeg \isopol 0} &
+		\reshlist{\pdeg \mixpol 0}{\pdeg \isopol 0} &
+		\reshlist{\pdeg \isopol 0}{\pdeg \isopol 0} \\
+		\reshlist{\pdeg \nonpol \eqtydeg}{\pdeg \nonpol \top} &
+		\reshlist{\pdeg \mixpol 0}{\pdeg \nonpol \top} &
+		\reshlist{\pdeg \isopol 0}{\pdeg \nonpol \top} &
+		\reshlist{\pdeg \nonpol \top}{\pdeg \nonpol \top},
+	\end{array}
+\]
+where the identity is $\id_{[\ypolar]} = \reshlist{\pdeg \nonpol \eqtydeg}{\pdeg \pospol 0}$.
 
 \subsubsection{Old Stuff}
 \todoi{Old stuff}
