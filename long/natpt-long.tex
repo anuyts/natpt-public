@@ -3181,9 +3181,12 @@ However, there is a subtle difference in that all of the cited work has $\isopol
 The variation with $\isopol \circ \mixpol = \isopol$ has a semantics in endofunctors on $\Cat$ where we model $\isopol$ not as taking the localization, but as squashing to a (sub)singleton.
 Alternatively, it has a semantics on the category of pro-arrow equipments \cite{nlab:proarrow,proarrow1,proarrow2} where $\pospol$ is still the identity, $\negpol$ and $\mixpol$ take the opposite and core (resp.) of the arrow dimension, and $\isopol$ replaces the arrow dimension with the core of the pro-arrow dimension.
 
-For us, pro-arrows will live at a different degree than arrows, and our \emph{polarities} (as opposed to polarized reshuffles) are concerned with only a single degree.
-Moreover, we do not think of $\isopol$ as a squashing or `unused' modality, but rather as a modality for functions that promote morphisms to isomorphisms, as the localization does.
-Thus, we stick to the equality $\isopol \circ \mixpol = \mixpol$.
+For us, pro-arrows will live at a different degree than arrows, and a modality that replaces the arrow relation with the core of the pro-arrow relation, will make crucial use of the \emph{reshuffling} aspect of polarized reshuffles.
+%, and our \emph{polarities} (as opposed to polarized reshuffles) are concerned with only a single degree.
+Similarly, a squashing operation can be represented by a modality $\mu$ such that $\eqtydeg \cdot \mu = \nonpol_\top$.
+Our \emph{polarities}, on the contrary, are concerned with only a single degree, and as such we stick to the interpretation of $\isopol$ as promoting infrajets to jets (hence equijets, by symmetry of infrajets), much like the localization does.
+%Moreover, we do not think of $\isopol$ as a squashing or `unused' modality, but rather as a modality for functions that promote morphisms to isomorphisms, as the localization does.
+This leads to the equality $\isopol \circ \mixpol = \mixpol$.
 
 The presheaf of orientations $\oripsh$ is just a single poset $\oripsh(\ypolar) = \accol{\equijetsym, \jetsym, \tejsym, \infrajetsym}$ on which the ordered monoid of polarities has a right action.
 
@@ -3313,7 +3316,9 @@ where the identity is $\id_{[\ypolar]} = \reshlist{\pdeg \nonpol \eqtydeg}{\pdeg
 %\end{corollary}
 
 \subsection{Adjunctions of Polarized Reshuffles}
-\todoi{Sometimes, we need to consider only reshuffles that have at least a certain number of left/right adjoints. The 2-posets that contain only those reshuffles (with the same order relation) will be denoted as $\poreshcat\withllr$, where the number of white bullets on the left/right is the minimal number of left/right adjoints.}
+\begin{notation} \label{not:poresh-with}
+	Sometimes, we need to consider only reshuffles that have at least a certain number of left/right adjoints. The 2-posets that contain only those reshuffles (with the same order relation) will be denoted as $\poreshcat\withllr$, where the number of white bullets on the left/right is the minimal number of left/right adjoints.
+\end{notation}
 \begin{theorem}\label{thm:poresh-adjoint}
 	\begin{enumerate}
 		\item A pair of polarized reshuffles $\lambda \in \Hom(\vec a, \vec b)$ and $\rho \in \Hom(\vec b, \vec a)$ is adjoint ($\lambda \dashv \rho$) if and only if the following equivalent conditions are satisfied:
@@ -3557,6 +3562,131 @@ where the identity is $\id_{[\ypolar]} = \reshlist{\pdeg \nonpol \eqtydeg}{\pdeg
 		\end{itemize}
 	\end{enumerate}
 \end{proof}
+
+\begin{definition} \label{def:suc-degree}
+	Let $\vec a$ be an anpolarity mask and $i \in \Degeq(\vec a)$.
+	Write $\sucdeg(i) := \min \set{i' \in \Degeqtop(\vec a)}{i' > a}$; we call this the \textbf{successor} of $i$.
+\end{definition}
+
+\begin{theorem} \label{thm:poresh-withrr}
+	Let $\kappa \in \Hom(\vec b, \vec a)$ be a polarized reshuffle with right adjoint $\lambda \in \Hom(\vec a, \vec b)$.
+	Then $\lambda$ has a further right adjoint $\kappa \dashv \lambda \dashv \rho$ if and only if
+	\begin{align}
+		&\text{?} \label{eq:poresh-withrr-crit1} \\
+		&\text{?} \label{eq:poresh-withrr-crit2}
+	\end{align}
+\end{theorem}
+\begin{proof}
+	\todoi{Prove}
+\end{proof}
+
+\begin{theorem} \label{thm:poresh-withll}
+	Let $\tau \in \Hom(\vec a, \vec b)$ be a polarized reshuffle with left adjoint $\rho \in \Hom(\vec b, \vec a)$.
+	Then $\rho$ has a further left adjoint $\lambda \dashv \rho \dashv \tau$ if and only if
+	\begin{align}
+		&\text{$\getdeg(\sucdeg(\eqtydeg) \cdot \tau) > \eqtydeg$, and} \label{eq:poresh-withll-crit1} \\
+		&\text{$\forall j \in \Degeq(\vec b)$, if $j \cdot \tau \leq \mixpol_i$ and $\getdeg(\sucdeg(j) \cdot \tau) > i$ then $b_j = \npolar$.} \label{eq:poresh-withll-crit2}
+	\end{align}
+\end{theorem}
+In words, \cref{eq:poresh-withll-crit2} says that:
+\begin{itemize}
+	\item The last mention of a symmetric degree $i \in \Degeq(\vec a)$ by $\tau$ is at a symmetric degree $j \in \Degeq(\vec b)$;
+	\item The last mention of a directed degree $i \in \Degeq(\vec a)$ (hence $i \neq \eqtydeg$) is either:
+	\begin{itemize}
+		\item of the form $\mixpol_i$ at a symmetric degree $j \in \Degeq(\vec b)$;
+		\item or of the form $\pospol_i$ or $\negpol_i$ at an arbitrary degree $j \in \Degeq(\vec b)$;
+		\item it already could not be of the form $\isopol_i$ as per \cref{eq:poresh-left-adjoint-crit2}.
+	\end{itemize}
+\end{itemize}
+\begin{proof}
+	We show that \cref{eq:poresh-withll-crit1} $\Leftrightarrow$ \cref{eq:poresh-left-adjoint-crit1} and \cref{eq:poresh-withll-crit2} $\Leftrightarrow$ \cref{eq:poresh-left-adjoint-crit2}.
+	
+	Starting from \cref{eq:poresh-left-adjoint-crit1}, we have
+	\begin{align*}
+		&\quad\mathrel{\phantom{\Leftrightarrow}}\quad
+		\eqtydeg \cdot \rho = \nonpol_\eqtydeg \\
+		&\quad\Leftrightarrow\quad
+		\eqtydeg \cdot \rho < \mixpol_{\sucdeg(\eqtydeg)} \\
+		&\quad\Leftrightarrow\quad
+		\eqtydeg \cdot \rho < \pospol_{\sucdeg(\eqtydeg)}
+		& \text{(Case distinction on $b_{\sucdeg(\eqtydeg)}$; $\rho$ satisfies \cref{eq:poresh-right-adjoint-crit2})} \\
+		&\quad\Leftrightarrow\quad
+		\nonpol_\eqtydeg \circ \rho \not\geq \pospol_{\sucdeg(\eqtydeg)}
+		& \text{(By \cref{thm:deg-vs-poldeg-poresh}. Sym.\ pol.\ degrees are always comparable)} \\
+		&\quad\Leftrightarrow\quad
+		\nonpol_\eqtydeg \not\geq \pospol_{\sucdeg(\eqtydeg)} \circ \tau
+		& \text{($\loch \circ \tau \dashv \loch \circ \rho$)} \\
+		&\quad\Leftrightarrow\quad
+		\nonpol_\eqtydeg < {\sucdeg(\eqtydeg)} \cdot \tau
+		& \text{(By \cref{thm:deg-vs-poldeg-poresh}. Sym.\ pol.\ degrees are always comparable)} \\
+		&\quad\Leftrightarrow\quad
+		\eqtydeg < \getdeg({\sucdeg(\eqtydeg)} \cdot \tau).
+	\end{align*}
+	%Now either $\lenpol{\vec b} = 0$ and $m = \top$, in which case $\getdeg(m \cdot \tau) = \top$ and the given equation is trivally satisfied; or $\lenpol{\vec b} > 0$ and $m = 0$.
+	This gives \cref{eq:poresh-withll-crit1}.
+	
+	Recall \cref{eq:poresh-left-adjoint-crit2}:
+	\begin{align*}
+		\text{for all } i \in \Degeq(\vec a) \text{ with } i \cdot \rho = \isopol_j \text{, we have } b_j = \npolar \text{ (so $i \cdot \rho = \nonpol_j$)}.
+	\end{align*}
+	We can rewrite the condition as $\isopol_j \leq i \cdot \rho$ \textbf{AND} $i \cdot \rho \leq \isopol_j$.
+	We have
+	\begin{align*}
+		&\quad\mathrel{\phantom{\Leftrightarrow}}\quad
+		\isopol_j \leq i \cdot \rho
+		\\ &\quad\Leftrightarrow\quad
+		\isopol_j \circ \tau \leq \pospol_i
+		& \text{($\loch \circ \tau \dashv \loch \circ \rho$; \cref{thm:deg-vs-poldeg-poresh})}
+%		\\ &\quad\Leftrightarrow\quad
+%		\isopol \circ (j \cdot \tau) \leq \pospol_i
+%		& \text{(\cref{eq:poldeg-poresh})}
+%		\\ &\quad\Leftrightarrow\quad
+%		\isopol_{\getdeg(j \cdot \tau)} \leq \pospol_i
+%		& \text{(Case distinction on $a_{\getdeg(j \cdot \tau)}$; $\tau$ satisfies \cref{eq:poresh-right-adjoint-crit2})}
+%		\\ &\quad\Leftrightarrow\quad
+%		\getdeg(j \cdot \tau) < i \text{ or} \\
+%		&\quad\mathrel{\phantom{\Leftrightarrow}}\quad
+%		\getdeg(j \cdot \tau) = i \text{ with } a_i = \npolar,
+		\\ &\quad\Leftrightarrow\quad
+		(\pospol_j \circ \tau) \vee (\negpol_j \circ \tau) \leq \pospol_i
+		& \text{(\Cref{thm:poldeg-poresh-lattice})}
+		\\ &\quad\Leftrightarrow\quad
+		\pospol_j \circ \tau \leq \pospol_i \text{ and }
+		\negpol_j \circ \tau \leq \pospol_i
+		\\ &\quad\Leftrightarrow\quad
+		\pospol_j \circ \tau \leq \pospol_i \text{ and }
+		\pospol_j \circ \tau \leq \negpol_i
+		& \text{(Apply $\negpol \circ \loch$ to both sides)}
+		\\ &\quad\Leftrightarrow\quad
+		j \cdot \tau \leq \mixpol_i
+	\end{align*}
+	and
+	\begin{align*}
+		&\quad\mathrel{\phantom{\Leftrightarrow}}\quad
+		i \cdot \rho \leq \isopol_j
+		\\ &\quad\Leftrightarrow\quad
+		i \cdot \rho < \mixpol_{\sucdeg(j)}
+		%& \paren{\text{Let ${\sucdeg(j)} = \min \set{j' \in \Degeqtop(\vec b)}{j' > j}$}}
+		\\ &\quad\Leftrightarrow\quad
+		\pospol_i \circ \rho \not\geq \mixpol_{\sucdeg(j)}
+		& \text{(By \cref{thm:deg-vs-poldeg-poresh}. Sym.\ pol.\ degrees are always comparable)}
+		\\ &\quad\Leftrightarrow\quad
+		\pospol_i \not\geq \mixpol_{\sucdeg(j)} \circ \tau
+		& \text{($\loch \circ \tau \dashv \loch \circ \rho$)}
+		\\ &\quad\Leftrightarrow\quad
+		\pospol_i < \mixpol \circ ({\sucdeg(j)} \cdot \tau)
+		& \text{(By \cref{eq:poldeg-poresh}. Sym.\ pol.\ degrees are always comparable)}
+		\\ &\quad\Leftrightarrow\quad
+		\pospol_i < \mixpol_{\getdeg({\sucdeg(j)} \cdot \tau)}
+		& \text{($\tau$ satisfies \cref{eq:poresh-left-adjoint-crit2})}
+		\\ &\quad\Leftrightarrow\quad
+		i < \getdeg({\sucdeg(j)} \cdot \tau)
+	\end{align*}
+	%Now either $\lenpol{\vec b} = j+1$ and $m = \top$, in which case $\getdeg(m \cdot \tau) = \top$ and the given equation is trivially satisfied; or $\lenpol{\vec b} > j+1$ and $m = j+1$.
+	Thus, for any $j$, if either of the above conditions for $\tau$ is satisfied, we conclude that $b_j = \npolar$.
+	This gives \cref{eq:poresh-withll-crit2}.
+\end{proof}
+
 \todoi{Update notation}
 
 \subsubsection{Examples}
@@ -3812,6 +3942,7 @@ where the identity is $\id_{[\ypolar]} = \reshlist{\pdeg \nonpol \eqtydeg}{\pdeg
 
 	The variant of this statement with the equalities replaced with $\leq$ follows immediately from \cref{thm:poresh-adjoint}.
 	Thus, it remains to prove $\geq$ assuming equality.
+	\todoi{So do that.}
 \end{proof}
 
 \section{Semantics on Jet Sets and Jet Setoids} \label{sec:poresh-jetset}
