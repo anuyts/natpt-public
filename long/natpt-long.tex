@@ -3333,9 +3333,9 @@ where the identity is $\id_{[\ypolar]} = \reshlist{\pdeg \nonpol \eqtydeg}{\pdeg
 		\begin{itemize}
 			\item A reshuffle $\rho$ has a left adjoint $\lambda$ if and only if
 			\begin{align}
-				&\eqtydeg \cdot \rho = \nonpol_\eqtydeg, \text{and} \label{eq:poresh-left-adjoint-crit1} \\
-				&\text{for all } i \in \Degeq(\vec a) \text{ with } i \cdot \rho = \isopol_j \text{, we have } b_j = \npolar \text{ (so $i \cdot \rho = \nonpol_j$)}. \label{eq:poresh-left-adjoint-crit2}
-				%&\text{for all } \jetsym_i \in \oripshfwd(\vec a) \text{ with } a_i = \ypolar \text{, we have } \jetsym_i \cdot \rho \neq \infrajetsym_j. \label{eq:poresh-left-adjoint-crit2}
+				&\eqtydeg \cdot \rho = \nonpol_\eqtydeg, \text{and} \label{eq:poresh-withl-crit1} \\
+				&\text{for all } i \in \Degeq(\vec a) \text{ with } i \cdot \rho = \isopol_j \text{, we have } b_j = \npolar \text{ (so $i \cdot \rho = \nonpol_j$)}. \label{eq:poresh-withl-crit2}
+				%&\text{for all } \jetsym_i \in \oripshfwd(\vec a) \text{ with } a_i = \ypolar \text{, we have } \jetsym_i \cdot \rho \neq \infrajetsym_j. \label{eq:poresh-withl-crit2}
 			\end{align}
 			In this case,
 			\begin{itemize}
@@ -3345,8 +3345,8 @@ where the identity is $\id_{[\ypolar]} = \reshlist{\pdeg \nonpol \eqtydeg}{\pdeg
 			
 			\item A reshuffle $\lambda$ has a right adjoint $\rho$ if and only if
 			\begin{align}
-				&\text{for all } j \in \Degeq(\vec b), \text{we have } j \cdot \lambda < \nonpol_\top, \text{and} \label{eq:poresh-right-adjoint-crit1} \\
-				&\text{for all } j \in \Degeq(\vec b) \text{ with } j \cdot \lambda = \mixpol_i \text{, we have } a_i = \npolar \text{ (so $j \cdot \lambda = \nonpol_i$)}. \label{eq:poresh-right-adjoint-crit2}
+				&\text{for all } j \in \Degeq(\vec b), \text{we have } j \cdot \lambda < \nonpol_\top, \text{and} \label{eq:poresh-withr-crit1} \\
+				&\text{for all } j \in \Degeq(\vec b) \text{ with } j \cdot \lambda = \mixpol_i \text{, we have } a_i = \npolar \text{ (so $j \cdot \lambda = \nonpol_i$)}. \label{eq:poresh-withr-crit2}
 			\end{align}
 			In this case,
 			\begin{itemize}
@@ -3418,14 +3418,14 @@ where the identity is $\id_{[\ypolar]} = \reshlist{\pdeg \nonpol \eqtydeg}{\pdeg
 		\[
 			\forall q_j \in \poldegeqtop(\vec b, c). \exists p_i \in \poldegeqtop(\vec a, c).p_i \circ \rho \leq q_j.
 		\]
-		Without loss of generality, we can instantiate both $p_i$ and $q_j$ with the minimal element $\nonpol_\eqtydeg$, so existence of a left adjoint requires that $\eqtydeg \cdot \rho = \nonpol_\eqtydeg \circ \rho = \nonpol_\eqtydeg$ (\cref{eq:poresh-left-adjoint-crit1}).
+		Without loss of generality, we can instantiate both $p_i$ and $q_j$ with the minimal element $\nonpol_\eqtydeg$, so existence of a left adjoint requires that $\eqtydeg \cdot \rho = \nonpol_\eqtydeg \circ \rho = \nonpol_\eqtydeg$ (\cref{eq:poresh-withl-crit1}).
 		
 		We now assume that this is the case, so that $\ell_c$ is defined.
 		It is then, by construction, right adjoint to $\loch \circ \rho$.
 		We define a polarized reshuffle $\lambda \in \Hom(\vec a, \vec b)$ by $j \cdot \lambda = \ell_{b_j}(\pospol_j) \in \poldegeqtop(\vec a, b_j)$.
-		We have to show that $\ell$ is the action of $\lambda$ if and only if \cref{eq:poresh-left-adjoint-crit2} holds.
+		We have to show that $\ell$ is the action of $\lambda$ if and only if \cref{eq:poresh-withl-crit2} holds.
 		\begin{itemize}
-			\item To prove `only if', assume that \cref{eq:poresh-left-adjoint-crit2} does not hold (which is decidable). Then there exists some $i \in \Degeq(\vec a)$ such that $i \cdot \rho = \isopol_j \in \poldegeqtop(\vec b, a_i)$ with $b_j = \ypolar$.
+			\item To prove `only if', assume that \cref{eq:poresh-withl-crit2} does not hold (which is decidable). Then there exists some $i \in \Degeq(\vec a)$ such that $i \cdot \rho = \isopol_j \in \poldegeqtop(\vec b, a_i)$ with $b_j = \ypolar$.
 			
 			This implies that $\isopol_i \circ \rho = \isopol_j \in \poldegeqtop(\vec b, \ypolar)$ and hence, by the adjunction $\loch \circ \rho \dashv \ell$, that $\isopol_i \leq \ell_{\ypolar}(\isopol_j)$.
 			
@@ -3439,7 +3439,7 @@ where the identity is $\id_{[\ypolar]} = \reshlist{\pdeg \nonpol \eqtydeg}{\pdeg
 			\]
 			so that $\ell$ cannot be the action of $\lambda$.
 			
-			\item To prove `if', assume that \cref{eq:poresh-left-adjoint-crit2} holds. We prove that $\ell_c$ is the action of $\lambda$.
+			\item To prove `if', assume that \cref{eq:poresh-withl-crit2} holds. We prove that $\ell_c$ is the action of $\lambda$.
 			It is sufficient to prove this for $c = \ypolar$, since there is just one composition table for polarities (\cref{fig:polarity-orientation}) and no additional equalities are introduced if the codomain $c$ becomes $\npolar$.
 			It is clear from the definition of $\ell$ that $\ell(\nonpol_\top) = \nonpol_\top$, and for all other degrees we have $\ell(\pospol_j) = \pospol_j \circ \lambda$ by definition of $\lambda$ and \cref{thm:deg-vs-poldeg-poresh}.
 %			For degrees $j$ where $b_j = \npolar$, this is enough, as all polarized degrees are then equal to $\nonpol_j = \pospol_j$.
@@ -3480,7 +3480,7 @@ where the identity is $\id_{[\ypolar]} = \reshlist{\pdeg \nonpol \eqtydeg}{\pdeg
 				& \qquad \qquad \text{(Associativity.)} \\
 				&= \bigvee \set{p_i \in \poldegeqtop(\vec a, \ypolar)}{p_i \circ \rho \leq \pospol_j \text{ or } p_i \circ \rho \leq \negpol_j} \\
 				&= \bigvee \set{p_i \in \poldegeqtop(\vec a, \ypolar)}{p_i \circ \rho \leq \isopol_j} \\
-				& \qquad \qquad \text{(Using \cref{eq:poresh-left-adjoint-crit2}.)} \\
+				& \qquad \qquad \text{(Using \cref{eq:poresh-withl-crit2}.)} \\
 				&= \ell_\ypolar(\isopol_j). \\
 				& \qquad \qquad \text{(Definition and existence of $\ell$.)}
 			\end{align*}
@@ -3503,14 +3503,14 @@ where the identity is $\id_{[\ypolar]} = \reshlist{\pdeg \nonpol \eqtydeg}{\pdeg
 		We conclude that $r$ is always defined.
 		It is then, by construction, left adjoint to $\loch \circ \lambda$.
 		We define a polarized reshuffle $\rho \in \Hom(\vec b, \vec a)$ by $i \cdot \rho = r_{a_i}(\pospol_i) \in \poldegeqtop(\vec b, a_i)$.
-		We have to show that $r$ is the action of $\rho$ if and only if \cref{eq:poresh-right-adjoint-crit1,eq:poresh-right-adjoint-crit2} hold.
+		We have to show that $r$ is the action of $\rho$ if and only if \cref{eq:poresh-withr-crit1,eq:poresh-withr-crit2} hold.
 		\begin{itemize}
-			\item Assume that \cref{eq:poresh-right-adjoint-crit1} does not hold (which is decidable).
+			\item Assume that \cref{eq:poresh-withr-crit1} does not hold (which is decidable).
 			Then there exists some $j \in \Degeq(\vec b)$ such that $\pospol_j \circ \lambda = j \cdot \lambda = \nonpol_\top \in \poldegeqtop(\vec a, b_j)$.
 			Then by the adjunction $r \dashv \loch \circ \lambda$, we get
 			$r_{b_j}(\nonpol_\top) \leq \pospol_j \neq \nonpol_\top = \nonpol_\top \circ \rho \in \poldegeqtop(\vec b, b_j)$, implying that $r$ cannot be the action of $\rho$.
 			
-			\item Assume that \cref{eq:poresh-right-adjoint-crit2} does not hold (which is decidable).
+			\item Assume that \cref{eq:poresh-withr-crit2} does not hold (which is decidable).
 			Then there exists some $j \in \Degeq(\vec b)$ such that $j \cdot \lambda = \mixpol_i \in \poldegeqtop(\vec a, b_j)$ with $a_i = \ypolar$.
 			
 			This implies that $\mixpol_j \circ \lambda = \mixpol_i \in \poldegeqtop(\vec a, \ypolar)$ and hence, by the adjunction $r \dashv \loch \circ \lambda$, that $r_\ypolar(\mixpol_i) \leq \mixpol_j \in \poldegeqtop(\vec b, \ypolar)$.
@@ -3525,10 +3525,10 @@ where the identity is $\id_{[\ypolar]} = \reshlist{\pdeg \nonpol \eqtydeg}{\pdeg
 			\]
 			so that $r$ cannot be the action of $\rho$.
 			
-			\item To prove `if', assume that \cref{eq:poresh-right-adjoint-crit1,eq:poresh-right-adjoint-crit2} hold.
+			\item To prove `if', assume that \cref{eq:poresh-withr-crit1,eq:poresh-withr-crit2} hold.
 			We prove that $r_c$ is the action of $\rho$.
 			Again, it is sufficient to prove this for $c = \ypolar$.
-			From \cref{eq:poresh-right-adjoint-crit1} and the definition of $r$, it follows that $r(\nonpol_\top) = \nonpol_\top$.
+			From \cref{eq:poresh-withr-crit1} and the definition of $r$, it follows that $r(\nonpol_\top) = \nonpol_\top$.
 			For all other degrees we have $r(\pospol_i) = \pospol_i \circ \rho$ by definition of $\rho$ and \cref{thm:deg-vs-poldeg-poresh}.
 			Furthermore, entirely dually (w.r.t.\ $\leq$) to our earlier calculations, we have
 			\begin{align*}
@@ -3555,7 +3555,7 @@ where the identity is $\id_{[\ypolar]} = \reshlist{\pdeg \nonpol \eqtydeg}{\pdeg
 				&\qquad \qquad \text{(Associativity.)} \\
 				&= \bigwedge \set{q_j \in \poldegeqtop(\vec b, \ypolar)}{\pospol_i \leq q_j \circ \lambda \text{ or } \negpol_i \leq q_j} \\
 				&= \bigwedge \set{q_j \in \poldegeqtop(\vec b, \ypolar)}{\mixpol_i \leq q_j} \\
-				&\qquad \qquad \text{(Using \cref{eq:poresh-right-adjoint-crit2}.)} \\
+				&\qquad \qquad \text{(Using \cref{eq:poresh-withr-crit2}.)} \\
 				&= r_\ypolar(\mixpol_i). \\
 				&\qquad \qquad \text{(Definition and existence of $r$.)} &\qedhere
 			\end{align*}
@@ -3564,28 +3564,19 @@ where the identity is $\id_{[\ypolar]} = \reshlist{\pdeg \nonpol \eqtydeg}{\pdeg
 \end{proof}
 
 \begin{definition} \label{def:suc-degree}
-	Let $\vec a$ be an anpolarity mask and $i \in \Degeq(\vec a)$.
-	Write $\sucdeg(i) := \min \set{i' \in \Degeqtop(\vec a)}{i' > a}$; we call this the \textbf{successor} of $i$.
+	Let $\vec a$ be an anpolarity mask and $i \in \Degeqtop(\vec a)$.
+	\begin{enumerate}
+		\item If $i < \top$, write $\sucdeg(i) := \min \set{i' \in \Degeqtop(\vec a)}{i' > i}$; we call this the \textbf{successor} of $i$.
+		\item If $i > \eqtydeg$, write $\predeg(i) := \max \set{i' \in \Degeqtop(\vec a)}{i' < i}$; we call this the \textbf{predecessor} of $i$.
+	\end{enumerate}
 \end{definition}
-
-\begin{theorem} \label{thm:poresh-withrr}
-	Let $\kappa \in \Hom(\vec b, \vec a)$ be a polarized reshuffle with right adjoint $\lambda \in \Hom(\vec a, \vec b)$.
-	Then $\lambda$ has a further right adjoint $\kappa \dashv \lambda \dashv \rho$ if and only if
-	\begin{align}
-		&\text{?} \label{eq:poresh-withrr-crit1} \\
-		&\text{?} \label{eq:poresh-withrr-crit2}
-	\end{align}
-\end{theorem}
-\begin{proof}
-	\todoi{Prove}
-\end{proof}
 
 \begin{theorem} \label{thm:poresh-withll}
 	Let $\tau \in \Hom(\vec a, \vec b)$ be a polarized reshuffle with left adjoint $\rho \in \Hom(\vec b, \vec a)$.
 	Then $\rho$ has a further left adjoint $\lambda \dashv \rho \dashv \tau$ if and only if
 	\begin{align}
 		&\text{$\getdeg(\sucdeg(\eqtydeg) \cdot \tau) > \eqtydeg$, and} \label{eq:poresh-withll-crit1} \\
-		&\text{$\forall j \in \Degeq(\vec b)$, if $j \cdot \tau \leq \mixpol_i$ and $\getdeg(\sucdeg(j) \cdot \tau) > i$ then $b_j = \npolar$.} \label{eq:poresh-withll-crit2}
+		&\text{$\forall j \in \Degeq(\vec b), i \in \Degeq(\vec a)$, if $j \cdot \tau \leq \mixpol_i$ and $\getdeg(\sucdeg(j) \cdot \tau) > i$ then $b_j = \npolar$.} \label{eq:poresh-withll-crit2}
 	\end{align}
 \end{theorem}
 In words, \cref{eq:poresh-withll-crit2} says that:
@@ -3595,13 +3586,13 @@ In words, \cref{eq:poresh-withll-crit2} says that:
 	\begin{itemize}
 		\item of the form $\mixpol_i$ at a symmetric degree $j \in \Degeq(\vec b)$;
 		\item or of the form $\pospol_i$ or $\negpol_i$ at an arbitrary degree $j \in \Degeq(\vec b)$;
-		\item it already could not be of the form $\isopol_i$ as per \cref{eq:poresh-left-adjoint-crit2}.
+		\item it already could not be of the form $\isopol_i$ as per \cref{eq:poresh-withl-crit2}.
 	\end{itemize}
 \end{itemize}
 \begin{proof}
-	We show that \cref{eq:poresh-withll-crit1} $\Leftrightarrow$ \cref{eq:poresh-left-adjoint-crit1} and \cref{eq:poresh-withll-crit2} $\Leftrightarrow$ \cref{eq:poresh-left-adjoint-crit2}.
+	We show that \cref{eq:poresh-withll-crit1} $\Leftrightarrow$ \cref{eq:poresh-withl-crit1} and \cref{eq:poresh-withll-crit2} $\Leftrightarrow$ \cref{eq:poresh-withl-crit2}.
 	
-	Starting from \cref{eq:poresh-left-adjoint-crit1}, we have
+	Starting from \cref{eq:poresh-withl-crit1}, we have
 	\begin{align*}
 		&\quad\mathrel{\phantom{\Leftrightarrow}}\quad
 		\eqtydeg \cdot \rho = \nonpol_\eqtydeg \\
@@ -3609,7 +3600,7 @@ In words, \cref{eq:poresh-withll-crit2} says that:
 		\eqtydeg \cdot \rho < \mixpol_{\sucdeg(\eqtydeg)} \\
 		&\quad\Leftrightarrow\quad
 		\eqtydeg \cdot \rho < \pospol_{\sucdeg(\eqtydeg)}
-		& \text{(Case distinction on $b_{\sucdeg(\eqtydeg)}$; $\rho$ satisfies \cref{eq:poresh-right-adjoint-crit2})} \\
+		& \text{(Case distinction on $b_{\sucdeg(\eqtydeg)}$; $\rho$ satisfies \cref{eq:poresh-withr-crit2})} \\
 		&\quad\Leftrightarrow\quad
 		\nonpol_\eqtydeg \circ \rho \not\geq \pospol_{\sucdeg(\eqtydeg)}
 		& \text{(By \cref{thm:deg-vs-poldeg-poresh}. Sym.\ pol.\ degrees are always comparable)} \\
@@ -3625,11 +3616,11 @@ In words, \cref{eq:poresh-withll-crit2} says that:
 	%Now either $\lenpol{\vec b} = 0$ and $m = \top$, in which case $\getdeg(m \cdot \tau) = \top$ and the given equation is trivally satisfied; or $\lenpol{\vec b} > 0$ and $m = 0$.
 	This gives \cref{eq:poresh-withll-crit1}.
 	
-	Recall \cref{eq:poresh-left-adjoint-crit2}:
+	Recall \cref{eq:poresh-withl-crit2}:
 	\begin{align*}
 		\text{for all } i \in \Degeq(\vec a) \text{ with } i \cdot \rho = \isopol_j \text{, we have } b_j = \npolar \text{ (so $i \cdot \rho = \nonpol_j$)}.
 	\end{align*}
-	We can rewrite the condition as $\isopol_j \leq i \cdot \rho$ \textbf{AND} $i \cdot \rho \leq \isopol_j$.
+	We can rewrite the condition as $\isopol_j \leq i \cdot \rho$ \textbf{AND} $\isopol_j \geq i \cdot \rho$.
 	We have
 	\begin{align*}
 		&\quad\mathrel{\phantom{\Leftrightarrow}}\quad
@@ -3642,7 +3633,7 @@ In words, \cref{eq:poresh-withll-crit2} says that:
 %		& \text{(\cref{eq:poldeg-poresh})}
 %		\\ &\quad\Leftrightarrow\quad
 %		\isopol_{\getdeg(j \cdot \tau)} \leq \pospol_i
-%		& \text{(Case distinction on $a_{\getdeg(j \cdot \tau)}$; $\tau$ satisfies \cref{eq:poresh-right-adjoint-crit2})}
+%		& \text{(Case distinction on $a_{\getdeg(j \cdot \tau)}$; $\tau$ satisfies \cref{eq:poresh-withr-crit2})}
 %		\\ &\quad\Leftrightarrow\quad
 %		\getdeg(j \cdot \tau) < i \text{ or} \\
 %		&\quad\mathrel{\phantom{\Leftrightarrow}}\quad
@@ -3663,28 +3654,113 @@ In words, \cref{eq:poresh-withll-crit2} says that:
 	and
 	\begin{align*}
 		&\quad\mathrel{\phantom{\Leftrightarrow}}\quad
-		i \cdot \rho \leq \isopol_j
+		\isopol_j \geq i \cdot \rho
 		\\ &\quad\Leftrightarrow\quad
-		i \cdot \rho < \mixpol_{\sucdeg(j)}
+		\mixpol_{\sucdeg(j)} > i \cdot \rho
 		%& \paren{\text{Let ${\sucdeg(j)} = \min \set{j' \in \Degeqtop(\vec b)}{j' > j}$}}
 		\\ &\quad\Leftrightarrow\quad
-		\pospol_i \circ \rho \not\geq \mixpol_{\sucdeg(j)}
+		\mixpol_{\sucdeg(j)} \not\leq \pospol_i \circ \rho
 		& \text{(By \cref{thm:deg-vs-poldeg-poresh}. Sym.\ pol.\ degrees are always comparable)}
 		\\ &\quad\Leftrightarrow\quad
-		\pospol_i \not\geq \mixpol_{\sucdeg(j)} \circ \tau
+		\mixpol_{\sucdeg(j)} \circ \tau \not\leq \pospol_i
 		& \text{($\loch \circ \tau \dashv \loch \circ \rho$)}
 		\\ &\quad\Leftrightarrow\quad
-		\pospol_i < \mixpol \circ ({\sucdeg(j)} \cdot \tau)
+		\mixpol \circ ({\sucdeg(j)} \cdot \tau) > \pospol_i
 		& \text{(By \cref{eq:poldeg-poresh}. Sym.\ pol.\ degrees are always comparable)}
 		\\ &\quad\Leftrightarrow\quad
-		\pospol_i < \mixpol_{\getdeg({\sucdeg(j)} \cdot \tau)}
-		& \text{($\tau$ satisfies \cref{eq:poresh-left-adjoint-crit2})}
+		\mixpol_{\getdeg({\sucdeg(j)} \cdot \tau)} > \pospol_i
+		& \text{(Case distinction on $a_{\getdeg({\sucdeg(j)} \cdot \tau)}$; $\tau$ satisfies \cref{eq:poresh-withl-crit2})}
 		\\ &\quad\Leftrightarrow\quad
-		i < \getdeg({\sucdeg(j)} \cdot \tau)
+		\getdeg({\sucdeg(j)} \cdot \tau) > i
 	\end{align*}
 	%Now either $\lenpol{\vec b} = j+1$ and $m = \top$, in which case $\getdeg(m \cdot \tau) = \top$ and the given equation is trivially satisfied; or $\lenpol{\vec b} > j+1$ and $m = j+1$.
-	Thus, for any $j$, if either of the above conditions for $\tau$ is satisfied, we conclude that $b_j = \npolar$.
+	Thus, for any $i$, if both of the above conditions for $\tau$ are satisfied, we conclude that $b_j = \npolar$.
 	This gives \cref{eq:poresh-withll-crit2}.
+\end{proof}
+
+\begin{theorem} \label{thm:poresh-withrr}
+	Let $\kappa \in \Hom(\vec b, \vec a)$ be a polarized reshuffle with right adjoint $\lambda \in \Hom(\vec a, \vec b)$.
+	Then $\lambda$ has a further right adjoint $\kappa \dashv \lambda \dashv \rho$ if and only if
+	\begin{align}
+		&\predeg(\top) \cdot \kappa > \mixpol_{\predeg(\top)} \label{eq:poresh-withrr-crit1} \\
+		&\text{$\forall j \in \Degeq(\vec b), i \in \Deg(\vec a)$, if $\getdeg(\predeg(i) \cdot \kappa) < j$ and $i \cdot \kappa \geq \isopol_j$ then $a_i = \npolar$.} \label{eq:poresh-withrr-crit2}
+	\end{align}
+\end{theorem}
+In words, \cref{eq:poresh-withrr-crit2} says that:
+\begin{itemize}
+	\item The first mention of a symmetric degree $j \in \Degeq(\vec b)$ by $\kappa$ is at a symmetric degree $i \in \Degeq(\vec a)$;
+	\item The first mention of a directed degree $j \in \Degeq(\vec b)$ by $\kappa$ is either:
+	\begin{itemize}
+		\item of the form $\isopol_j$ at a symmetric degree $i \in \Degeq(\vec a)$;
+		\item or of the form $\pospol_j$ or $\negpol_j$ at an arbitrary degree $i \in \Degeq(\vec a)$;
+		\item it already could not be of the form $\mixpol_j$ as per \cref{eq:poresh-withr-crit2}.
+	\end{itemize}
+\end{itemize}
+\begin{proof}
+	We show that \cref{eq:poresh-withrr-crit1} $\Leftrightarrow$ \cref{eq:poresh-withr-crit1} and \cref{eq:poresh-withrr-crit2} $\Leftrightarrow$ \cref{eq:poresh-withr-crit2}.
+	
+	Note that \cref{eq:poresh-withr-crit1} can equivalently be stated only for $j = \predeg(\top)$. Then we have
+	\begin{align*}
+		&\quad\mathrel{\phantom{\Leftrightarrow}}\quad
+		\predeg(\top) \cdot \lambda < \nonpol_\top
+		\\ &\quad\Leftrightarrow\quad
+		\pospol_{\predeg(\top)} \circ \lambda \leq \isopol_{\predeg(\top)}
+		&\text{(\Cref{thm:deg-vs-poldeg-poresh})}
+		\\ &\quad\Leftrightarrow\quad
+		\pospol_{\predeg(\top)} \leq \isopol_{\predeg(\top)} \circ \kappa
+		&\text{($\loch \circ \lambda \dashv \loch \circ \kappa$)}
+		\\ &\quad\Leftrightarrow\quad
+		\mixpol_{\predeg(\top)} < \predeg(\top) \cdot \kappa
+		&\text{(Case distinction)} &.
+	\end{align*}
+	
+	Recall \cref{eq:poresh-withr-crit2}:
+	\[
+		\text{for all } j \in \Degeq(\vec b) \text{ with } j \cdot \lambda = \mixpol_i \text{, we have } a_i = \npolar \text{ (so $j \cdot \lambda = \nonpol_i$)}.
+	\]
+	We can rewrite the condition as $j \cdot \lambda \leq \mixpol_i$ \textbf{AND} $\mixpol_i \leq j \cdot \lambda$. We have
+	\begin{align*}
+		&\quad\mathrel{\phantom{\Leftrightarrow}}\quad
+		j \cdot \lambda \leq \mixpol_i
+		\\ &\quad\Leftrightarrow\quad
+		\pospol_j \leq \mixpol_i \circ \kappa
+		& \text{($\loch\circ  \lambda \dashv \loch \circ \kappa$; \cref{thm:deg-vs-poldeg-poresh})}
+		\\ &\quad\Leftrightarrow\quad
+		\pospol_j \leq (\pospol_i \circ \kappa) \wedge (\negpol_i \circ \kappa)
+		& \text{(\cref{thm:poldeg-poresh-lattice})}
+		\\ &\quad\Leftrightarrow\quad
+		\pospol_j \leq \pospol_i \circ \kappa \text{ and }
+		\pospol_j \leq \negpol_i \circ \kappa
+		\\ &\quad\Leftrightarrow\quad
+		\pospol_j \leq \pospol_i \circ \kappa \text{ and }
+		\negpol_j \leq \pospol_i \circ \kappa
+		& \text{(Apply $\negpol \circ \loch$ to both sides)}
+		\\ &\quad\Leftrightarrow\quad
+		\isopol_j \leq i \cdot \kappa
+	\end{align*}
+	and
+	\begin{align*}
+		&\quad\mathrel{\phantom{\Leftrightarrow}}\quad
+		j \cdot \lambda \geq \mixpol_i
+		\\ &\quad\Leftrightarrow\quad
+		j \cdot \lambda > \isopol_{\predeg(i)}
+		&\text{(WLOG, $i > \eqtydeg$, since $a_\eqtydeg = \npolar$ regardless)}
+		\\ &\quad\Leftrightarrow\quad
+		\pospol_j \circ \lambda \not\leq \isopol_{\predeg(i)}
+		& \text{(By \cref{thm:deg-vs-poldeg-poresh}. Sym.\ pol.\ degrees are always comparable)}
+		\\ &\quad\Leftrightarrow\quad
+		\pospol_j \not\leq \isopol_{\predeg(i)} \circ \kappa
+		& \text{($\loch\circ  \lambda \dashv \loch \circ \kappa$)}
+		\\ &\quad\Leftrightarrow\quad
+		\pospol_j > \isopol \circ (\predeg(i) \cdot \kappa)
+		& \text{(By \cref{eq:poldeg-poresh}. Sym.\ pol.\ degrees are always comparable)}
+		\\ &\quad\Leftrightarrow\quad
+		\pospol_j > \isopol_{\getdeg(\predeg(i) \cdot \kappa)}
+		& \text{(Case distinction on $b_{\getdeg(\predeg(i) \cdot \kappa)}$; $\kappa$ satisfies \cref{eq:poresh-withr-crit2})}
+		\\ &\quad\Leftrightarrow\quad
+		j > \getdeg(\predeg(i) \cdot \kappa).
+	\end{align*}
+	Thus, for any $j \in \Deg(\vec b)$, if both of the above conditions for $\kappa$ are satisfied, we conclude that $a_i = \npolar$. This gives \cref{eq:poresh-withrr-crit2}.
 \end{proof}
 
 \todoi{Update notation}
