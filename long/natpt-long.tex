@@ -4076,7 +4076,7 @@ In words, \cref{eq:poresh-withrr-crit2} says that:
 	$\Set$ can be regarded as discrete-$\Setoid$-enriched by considering functions equivalent if they are equal.
 \end{definition}
 \begin{corollary} \label{thm:setoid-equiv-set}
-	The quotient functor $\setoidquot : \Setoid \to \Set$ and the discrete functor $\setoiddisc : \Set \to \Setoid$ form an equivalence of $\Setoid$-enriched categories. \qed
+	The quotient functor $\setoidquot : \Setoid \to \Set$ and the discrete functor $\setoiddisc : \Set \to \Setoid$ form an equivalence of $\Setoid$-enriched categories (where $\setoiddisc \setoidquot$ is only naturally \emph{equivalent}, not naturally isomorphic, to the identity functor). \qed
 \end{corollary}
 \begin{definition} \label{def:jetsetoid}
 	We define the category $\jetsetoid{\vec a}$ of \textbf{$\vec a$-jet-setoids} as the following strict pullback:
@@ -4111,13 +4111,13 @@ In words, \cref{eq:poresh-withrr-crit2} says that:
 		\item We define a strict\footnote{Assuming propositional extensionality.} 2-functor $\jetsetoidsym : \poreshcat \to \Setoid\Cat$ from the 2-category of polarized reshuffles to the 2-category of setoid-enriched categories:
 		\begin{itemize}
 			\item Sending an object $\vec a$ to $\jetsetoid{\vec a}$.
-			\item Sending a morphism $\mu : \vec a \to \vec b$ to $\jetsetoid{\mu} : \jetsetoid{\vec a} \to \jetsetoid{\vec b}$ where $\jetsetoid{\mu}$ (more briefly denoted as $\mu$) sends a jet set $X$ to the jet set $\mu X$ whose
+			\item Sending a morphism $\mu : \vec a \to \vec b$ to $\jetsetoid{\mu} : \jetsetoid{\vec a} \to \jetsetoid{\vec b}$ where $\jetsetoid{\mu}$ (more briefly denoted as $\mu$) sends a jet setoid $X$ to the jet setoid $\mu X$ whose
 			\begin{itemize}
 				\item carrier is the carrier of $X$,
 				%quotiented out by the transitive closure of $\eqtysym \cdot \mu$ in case $\eqtysym \cdot \mu \neq \eqtysym$,
-				\item equivalence relation $\eqtysym^{\mu X}$ is given by transitive closure of $\eqtysym \cdot \mu$ on $X$,
+				\item equivalence relation $\eqtysym^{\mu X}$ is given by transitive closure of $\eqtysym \oriof \mu$ on $X$,
 				\item $i$-jet relation $\jetsym_i^{\mu X}$ is given by the relation $\jetsym_i \cdot \mu$ on $X$, made stable under $\eqtysym^{\mu X}$, i.e. we have
-				$\jetsym_i^{\mu X} = (\eqtysym \cdot \mu)^* \otimes (\jetsym_i \cdot \mu) \otimes (\eqtysym \cdot \mu)^*$, where $\otimes$ is composition of relations via existential quantification.
+				$\jetsym_i^{\mu X} = (\eqtysym \oriof \mu)^* \otimes (\jetsym_i \cdot \mu) \otimes (\eqtysym \oriof \mu)^*$, where $\otimes$ is composition of relations via existential quantification.
 	%			\item $\hat x \jet_i^{\mu X} \hat y$ if and only if $\hat x$ and $\hat y$ have representants $x$ and $y$ related by $\jetsym_i \cdot \mu$ in $X$.
 	%			This is in turn equivalent to saying that all representants of $\hat x$ and $\hat y$ are related by $(\eqtysym \cdot \mu)^* \otimes (\jetsym_i \cdot \mu) \otimes (\eqtysym \cdot \mu)^*$ in $X$, where $\otimes$ is composition of relations via existential quantification.
 			\end{itemize}
@@ -4132,13 +4132,13 @@ In words, \cref{eq:poresh-withrr-crit2} says that:
 			\item \ldots
 		\end{itemize}
 		
-		\item Additionally, if we consider only modalities $\mu$ which have a left adjoint and for which, by \cref{thm:poresh-adjoint}, $\eqtysym \cdot \mu = \eqtysym$, then we directly get a strict 2-functor $\jetsetsym \withl : \poreshcat \to \Cat$, equivalent to the pseudofunctor above:
+		\item Additionally, if we consider only modalities $\mu$ which have a left adjoint and for which, by \cref{thm:poresh-adjoint}, $\eqtysym \oriof \mu = \eqtysym$, then we directly get a strict 2-functor $\jetsetsym \noquot : \poreshcat \noquot \to \Cat$, equivalent to the pseudofunctor above:
 		\begin{itemize}
 			\item Sending an object $\vec a$ to $\jetset{\vec a}$,
 			\item Sending a morphism $\mu : \vec a \to \vec b$ to $\jetsetl{\mu} : \jetset{\vec a} \to \jetset{\vec b}$ where $\jetsetl{\mu}$ (more briefly denoted as $\mu$) sends a jet set $X$ to the jet set $\mu X$ whose
 			\begin{itemize}
 				\item carrier is the carrier of $X$,
-				\item $i$-jet relation $\jetsym_i^{\mu X}$ is the relation $\jetsym_i \cdot \mu$ on $X$.
+				\item $i$-jet relation $\jetsym_i^{\mu X}$ is the relation $\jetsym_i \oriof \mu$ on $X$.
 			\end{itemize}
 			\item \ldots
 		\end{itemize}
@@ -4146,35 +4146,41 @@ In words, \cref{eq:poresh-withrr-crit2} says that:
 \end{definition}
 \begin{corollary} \label{thm:poresh-jetsetoid:bind}
 	Let $\mu : \vec a \to \vec b$ and $X \in \jetsetoid{\vec a}$.
-	For an arbitrary $Q_j \in \oripsh(\vec b)$, the relation $Q_j$ on $\mu X$ is given by $(\eqtysym \cdot \mu)^* \otimes (Q_j \cdot \mu) \otimes (\eqtysym \cdot \mu)^*$.
+	For an arbitrary $Q_j \in \oridegeqtop(\vec b)$, the relation $Q_j$ on $\mu X$ is given by $(\eqtysym \oriof \mu)^* \otimes (Q_j \oriof \mu) \otimes (\eqtysym \oriof \mu)^*$.
 	Here, $\topsym$ is interpreted as `true'.
 	
-	If $\mu$ has a left adjoint and $X \in \jetset{\vec a}$, then for an arbitrary $Q_j \in \oripsh(\vec b)$, the relation $Q_j$ on $\mu X$ is given by  $Q_j \cdot \mu$. \qed
+	If $\mu$ has a left adjoint and $X \in \jetset{\vec a}$, then for an arbitrary $Q_j \in \oripsh(\vec b)$, the relation $Q_j$ on $\mu X$ is given by  $Q_j \oriof \mu$. \qed
 \end{corollary}
 \begin{example} \label{ex:poresh-op-jetset}
 	The functor $\Op_i$ from \cref{def:op} arises from the reshuffle in \cref{ex:poresh-op} as $\jetsetl{\Op_i}$.
 \end{example}
 \begin{example} \label{ex:poresh-sym-jetset}
-	The functors $\Fsym_i \dashv \Usym_i \dashv \Csym_i$ and $\UFsym_i \dashv \UCsym_i$ from \cref{def:sym-forget,def:sym-free,def:sym-cofree} arise from the reshuffles in \cref{ex:poresh-sym} as $\jetset{\Fsymresh_i} \dashv \jetsetl{\Usymresh_i} \dashv \jetsetl{\Csymresh_i}$ and $\jetset{\UFsymresh_i} \dashv \jetsetl{\UCsymresh_i}$.
+	The functors $\Fsym_i \dashv \Usym_i \dashv \Csym_i$ and $\UFsym_i \dashv \UCsym_i$ from \cref{def:sym-forget,def:sym-free,def:sym-cofree} arise from the reshuffles in \cref{ex:poresh-sym} as
+	\[
+		\jetsetl{\Fsymresh_i} \dashv \jetsetl{\Usymresh_i} \dashv \jetsetl{\Csymresh_i},
+	\]
+	\[
+		\jetsetl{\UFsymresh_i} \dashv \jetsetl{\UCsymresh_i}.
+	\]
 \end{example}
 
 \subsection{Intervals and Prisms}
 \begin{definition} \label{def:jetsetoid-interval}
-	We view the intervals from \cref{def:interval} not just as jet sets but also as jet setoids. We additionally introduce $\rival{\eqtysym}$, the jet setoid on $\accol{0, 1}$ generated by $0 \eqty 1$, and $\rival{\topsym}$ as the jet set or jet setoid on $\accol{0, 1}$ where the equivalence and all $i$-jet relations are reflexive.
+	We view the intervals from \cref{def:interval} not just as jet sets but also as (discrete) jet setoids. We additionally introduce $\rival{\eqtysym}$, the jet setoid on $\accol{0, 1}$ generated by $0 \eqty 1$, and $\rival{\topsym}$ as the jet set or jet setoid on $\accol{0, 1}$ where the equivalence and all $i$-jet relations are reflexive.
 \end{definition}
 \begin{proposition} \label{thm:poresh-jetsetoid-intervals}
 	Let $\mu : \vec a \to \vec b$ be a polarized reshuffle with right adjoint $\mu \dashv \rho$. Then we have%
-	\footnote{By virtue of \cref{thm:poresh-adjoint}, all right hand sides are defined since $P_i \cdot \rho \neq \infrajetsym_j$ for $b_j = \ypolar$.}
+	\footnote{By virtue of \cref{thm:poresh-adjoint}, all right hand sides are defined since $P_i \oriof \rho \neq \infrajetsym_j$ for $b_j = \ypolar$.}
 	\begin{equation}
-		\jetsetoid{\mu} \rival{\jetsym_i} = \rival{\jetsym_i \cdot \rho}, \quad
-		\jetsetoid{\mu} \rival{\tejsym_i} = \rival{\tejsym_i \cdot \rho}, \quad
-		\jetsetoid{\mu} \rival{\equijetsym_i} = \rival{\equijetsym_i \cdot \rho}.
+		\jetsetoid{\mu} \rival{\jetsym_i} = \rival{\jetsym_i \oriof \rho}, \quad
+		\jetsetoid{\mu} \rival{\tejsym_i} = \rival{\tejsym_i \oriof \rho}, \quad
+		\jetsetoid{\mu} \rival{\equijetsym_i} = \rival{\equijetsym_i \oriof \rho}.
 		\label{eq:poresh-jetsetoid-intervals}
 	\end{equation}
 \end{proposition}
 \begin{proof}
-	By \cref{thm:poresh-adjoint}, $P_i \cdot \rho$ is the least symbol (i.e. the strictest relation) $Q_j$ such that $P_i \leq Q_j \cdot \mu$, i.e. so that $0 \mathrel{Q_j} 1$ in $\mu \rival{P_i}$.
-	This means that the jet setoid structure of $\mu \rival{P_i}$ is indeed generated by $0 \mathrel{(P_i \cdot \rho)} 1$.
+	By \cref{thm:poresh-adjoint}, $P_i \oriof \rho$ is the least symbol (i.e. the strictest relation) $Q_j$ such that $P_i \leq Q_j \oriof \mu$, i.e. so that $0 \mathrel{Q_j} 1$ in $\mu \rival{P_i}$.
+	This means that the jet setoid structure of $\mu \rival{P_i}$ is indeed generated by $0 \mathrel{(P_i \oriof \rho)} 1$.
 \end{proof}
 \begin{definition} \label{def:jetsetoid-prism}
 	We define the prism functors from \cref{def:prism} on jet setoids:
@@ -4200,7 +4206,7 @@ In words, \cref{eq:poresh-withrr-crit2} says that:
 	\begin{itemize}
 		\item The functor $\jetsetoid{\mu}$ does not modify the carrier, and the carrier of a colimit of jet setoids is the colimit of the carriers.
 		Write $\iota_s$ for the functions $D(s) \to \colim D$.
-		\item One checks that, on both sides, elements $x$ and $y$ are equivalent if and only if there exist $x = x_0, x_1, x_2, \ldots, x_n = y$ such that for each $0 \leq i < n$, there exists an $s \in \Obj(\cat S)$ and $u, v \in D(s)$ such that $x_i = \iota_s(u)$ and $x_{i+1} = \iota_s(v)$ and $u \mathrel{(\eqtysym \cdot \mu)} v$.
+		\item One checks that, on both sides, elements $x$ and $y$ are equivalent if and only if there exist $x = x_0, x_1, x_2, \ldots, x_n = y$ such that for each $0 \leq i < n$, there exists an $s \in \Obj(\cat S)$ and $u, v \in D(s)$ such that $x_i = \iota_s(u)$ and $x_{i+1} = \iota_s(v)$ and $u \mathrel{(\eqtysym \oriof \mu)} v$.
 		\item One checks that, on both sides, $x \jet_i y$ holds in $\mu \colim D$ if and only if there exist an $s \in \Obj(\cat S)$, $x \eqty^{\mu \colim D} \iota_s(x')$ and $y \eqty^{\mu \colim D} \iota_s(y')$ such that $x' \mathrel{(\jetsym_i \cdot \mu)} y'$ in $D(s)$. \qedhere
 	\end{itemize}
 \end{proof}
@@ -4210,7 +4216,7 @@ In words, \cref{eq:poresh-withrr-crit2} says that:
 	Then the action of $\jetsetoid{\mu}$ on prisms can be looked up in the following table:
 	\[
 		\begin{array}{c || c | c | c | c | c}
-			P_i \cdot \rho 
+			P_i \oriof \rho 
 			& \eqtysym 
 			& \equijetsym_j
 			& \jetsym_j
@@ -4221,7 +4227,7 @@ In words, \cref{eq:poresh-withrr-crit2} says that:
 			& (\mu X) \times \rival{\eqtysym}
 			& (\mu X) * \rival{\equijetsym_j}
 			& (\mu X) \multip \rival{\jetsym_j}
-			& (\mu X) \multip \rival{\tejsym_j}
+			& (\Op_j\mu X) \multip \rival{\tejsym_j}
 			& (\mu X) \times \rival{\topsym}
 		\end{array}
 	\]
@@ -4231,14 +4237,16 @@ Note that a cartesian product with $\rival{\eqtysym}$ or $\rival{\topsym}$ is th
 	Each time, it is clear that the carrier is just $X \times \accol{0, 1}$.
 	We can write $X \multip \rival{P_i}$ as the colimit of $X$, $\Op_i(X)$, a copy of $\rival{P_i}$ for every element of $X$, and a copy of the terminal jet setoid for every element of $X \times \accol{0, 1}$.
 	By \cref{thm:poresh-jetsetoid-cocontinuous}, $\jetsetoid{\mu}$ preserves that colimit.
-	By \cref{thm:poresh-jetsetoid-intervals}, $\mu \rival{P_i} = \rival{P_i \cdot \rho}$.
-	Thus, we see that $\mu (X \multip \rival{P_i})$ is a colimit of $\mu X$, $\mu \Op_i X$ and $\rival{P_i \cdot \rho}$.
-	We case distinguish on $P_i \cdot \rho$.
+	By \cref{thm:poresh-jetsetoid-intervals}, $\mu \rival{P_i} = \rival{P_i \oriof \rho}$.
+	Thus, we see that $\mu (X \multip \rival{P_i})$ is a colimit of $\mu X$, $\mu \Op_i X$ and $\rival{P_i \oriof \rho}$.
+	We case distinguish on $P_i \oriof \rho$.
 	\begin{description}
-		\item[\framebox{$\eqtysym$}] If $P_i \cdot \rho = \eqtysym$, then from \cref{eq:poresh-adjoint-crit} in the statement of \cref{thm:poresh-adjoint}, we conclude that $P_i \leq \eqtysym \cdot \mu$.
-		By symmetry of $\eqtysym \cdot \mu$, we can conclude that $\infrajetsym \cdot P_i = \infrajetsym_i \leq \eqtysym \cdot \mu$, so that $\mu$ cannot mention degree $i$ in any form other than $\infrajetsym_i$ and therefore $\mu = \mu \Op_i$. Then the colimit produces $\mu X * \rival{\eqty} = \mu X \times \rival{\eqty}$.
+		\item[\framebox{$\eqtysym$}] If $P_i \oriof \rho = \eqtysym$, then from \cref{eq:poresh-adjoint-crit-orideg} in the statement of \cref{thm:poresh-adjoint}, we conclude that $P_i \leq \eqtysym \oriof \mu$.
+		By symmetry of $\eqtysym \oriof \mu$, we can conclude that $\infrajetsym \oriof P_i = \infrajetsym_i \leq \eqtysym \oriof \mu$, so that $\mu$ cannot mention degree $i$ in any form other than $\infrajetsym_i$ and therefore $\mu = \mu \Op_i$. Then the colimit produces $(\mu X) * \rival{\eqty} = (\mu X) \times \rival{\eqty}$.
 		
-		\item[\framebox{$\equijetsym_j$}] \todoi{We cannot rule out that $\jetsym_{i'} \cdot \mu \in \accol{\jetsym_j, \tejsym_j}$ for $i' > i$.}
+		\item[\framebox{$\equijetsym_j$}] If $P_i \oriof \rho = P \oriof (i \cdot \rho) = \equijetsym_j$, then by invertibility of $P \oriof \loch$, we can conclude that $i \cdot \rho = mixpol_j$, so that $\Op_i \circ \rho = \rho$.
+		Then by uniqueness of the adjoint, $\mu \circ \Op_i = \mu$.
+		Then the colimit produces $(\mu X) * \rival{\equijetsym_j}$.
 		
 		\item[\framebox{$\jetsym_j$}] 
 	\end{description}
