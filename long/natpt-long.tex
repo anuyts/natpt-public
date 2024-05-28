@@ -109,7 +109,9 @@ The calculus and its soundness proof are used mainly for modalities interacting 
 \section{Anpolarity Masks} \label{sec:mask}
 In RelDTT, modes were natural numbers (minus one) expressing the number of available relations.
 In NatPT, we will specify for each of these relations whether it is directed or not.
-\begin{definition} \label{def:anpolarity}
+\begin{definition}
+	\label{def:anpolarity}
+	\label{def:anpolarity-order}
 	An \textbf{anpolarity}\footnote{`An' is Latin for `whether', as in `Nescio an polare sit,' meaning `I do not know whether it is polar'.} is an element of the set $\Anpolarity := \accol{\ypolar, \npolar}$, where $\ypolar$ stands for polar/directed and $\npolar$ stands for nonpolar/symmetric.
 	We equip $\Anpolarity$ with the partial order $\npolar \sqsubseteq \ypolar$, corresponding to the intuition that symmetric relations are a subset of directed (i.e.\ potentially asymmetric) relations.
 	
@@ -223,7 +225,9 @@ So for mode $[\ypolar, \ypolar, \npolar]$, we get
 	This defines a functor $\Op_i(X) : \jetset{\vec a} \to \jetset{\vec a}$.
 \end{definition}
 We have $\Op_i \circ \Op_i = \Id$ and if $a_i = \npolar$ then $\Op_i = \Id$.
-\begin{definition} \label{def:sym-forget}
+\begin{definition}
+	\label{def:sym-forget}
+	\label{def:anpolarity-order-step}
 	Write $\vec a \sqsubset_i \vec b$ if $\lenpol{\vec a} = \lenpol{\vec b}$, $a_j = b_j$ for all $j \neq i$, $a_i = \npolar$ and $b_i = \ypolar$.
 	
 	If $\vec a \sqsubset_i \vec b$, then we write $\Usym_i : \jetset{\vec a} \to \jetset{\vec b}$ for the forgetful functor which forgets the symmetry of $\jet_i$.
@@ -3319,6 +3323,8 @@ where the identity is $\id_{[\ypolar]} = \reshlist{\pdeg \nonpol \eqtydeg}{\pdeg
 \begin{notation} \label{not:poresh-with}
 	Sometimes, we need to consider only reshuffles that have at least a certain number of left/right adjoints. The 2-posets that contain only those reshuffles (with the same order relation) will be denoted as $\poreshcat\withllr$, where the number of white bullets on the left/right is the minimal number of left/right adjoints.
 \end{notation}
+
+\subsubsection{Characterization}
 \begin{theorem}\label{thm:poresh-adjoint}
 	\begin{enumerate}
 		\item A pair of polarized reshuffles $\lambda \in \Hom(\vec a, \vec b)$ and $\rho \in \Hom(\vec b, \vec a)$ is adjoint ($\lambda \dashv \rho$) if and only if the following equivalent conditions are satisfied:
@@ -3586,8 +3592,9 @@ In words, \cref{eq:poresh-withll-crit2} says that:
 	\begin{itemize}
 		\item of the form $\mixpol_i$ at a symmetric degree $j \in \Degeq(\vec b)$;
 		\item or of the form $\pospol_i$ or $\negpol_i$ at an arbitrary degree $j \in \Degeq(\vec b)$;
-		\item it already could not be of the form $\isopol_i$ as per \cref{eq:poresh-withl-crit2}.
+		\item it already could not be of the form $\isopol_i$ as per \cref{eq:poresh-withl-crit2};
 	\end{itemize}
+	\item If a degree $i \in \Degeq(\vec a)$ is never mentioned, then the last mention of a degree less than $i$ is at a symmetric degree $j \in \Degeq(\vec b)$.
 \end{itemize}
 \begin{proof}
 	We show that \cref{eq:poresh-withll-crit1} $\Leftrightarrow$ \cref{eq:poresh-withl-crit1} and \cref{eq:poresh-withll-crit2} $\Leftrightarrow$ \cref{eq:poresh-withl-crit2}.
@@ -3693,8 +3700,9 @@ In words, \cref{eq:poresh-withrr-crit2} says that:
 	\begin{itemize}
 		\item of the form $\isopol_j$ at a symmetric degree $i \in \Degeq(\vec a)$;
 		\item or of the form $\pospol_j$ or $\negpol_j$ at an arbitrary degree $i \in \Degeq(\vec a)$;
-		\item it already could not be of the form $\mixpol_j$ as per \cref{eq:poresh-withr-crit2}.
+		\item it already could not be of the form $\mixpol_j$ as per \cref{eq:poresh-withr-crit2};
 	\end{itemize}
+	\item If a degree $j \in \Degeq(\vec b)$ is never mentioned, then the first mention of degree greater than $j$ is at a symmetric degree $i \in \Degeq(\vec a)$.
 \end{itemize}
 \begin{proof}
 	We show that \cref{eq:poresh-withrr-crit1} $\Leftrightarrow$ \cref{eq:poresh-withr-crit1} and \cref{eq:poresh-withrr-crit2} $\Leftrightarrow$ \cref{eq:poresh-withr-crit2}.
@@ -3763,86 +3771,92 @@ In words, \cref{eq:poresh-withrr-crit2} says that:
 	Thus, for any $j \in \Deg(\vec b)$, if both of the above conditions for $\kappa$ are satisfied, we conclude that $a_i = \npolar$. This gives \cref{eq:poresh-withrr-crit2}.
 \end{proof}
 
-\todoi{Update notation}
-
 \subsubsection{Examples}
 \begin{example} \label{ex:poresh-op}
 	Let $a_i = \ypolar$.
-	Then we have a self-inverse and therefore self-adjoint polarized reshuffle $\Op_i : \vec a \to \vec a$ preserving all $\jetsym_j$ for $j \neq i$ as well as $\eqtysym$, and such that $\jetsym_i \cdot \Op_i = \tejsym_i$.
+	Then we have a self-inverse and therefore self-adjoint polarized reshuffle $\Op_i : \vec a \to \vec a$ defined by $i \cdot \Op_i = \negpol_i$ and $j \cdot \Op_i = \pospol_j$ for all $i \neq j \in \Degeq(\vec a)$.
 \end{example}
 \begin{example} \label{ex:poresh-sym}
-	Let $\vec a \sqsubset_i \vec b$.
+	Let $\vec a \sqsubset_i \vec b$ (\cref{def:anpolarity-order-step}).
 	Then we have a triple of adjoint polarized reshuffles
 	\[
 		\Fsymresh_i \dashv \Usymresh_i \dashv \Csymresh_i
 	\]
-	where $\Usymresh_i : \vec a \to \vec b$.
-	Each of these preserves all $\jetsym_j$ for $j \neq i$ as well as $\eqtysym$. Furthermore, we have
-	\[
-		\edgesym_i \cdot \Fsymresh_i = \infrajetsym_i, \qquad
-		\jetsym_i \cdot \Usymresh_i = \edgesym_i, \qquad
-		\edgesym_i \cdot \Csymresh_i = \equijetsym_i.
-	\]
+	where $\Usymresh_i : \vec a \to \vec b$, defined by
+	\begin{align*}
+		i \cdot \Fsymresh_i &= \isopol_i
+		& i \cdot \Usymresh_i &= \nonpol_i
+		& i \cdot \Csymresh_i &= \mixpol_i
+		\\
+		j \cdot \Fsymresh_i &= \pospol_i
+		& j \cdot \Usymresh_i &= \pospol_i
+		& j \cdot \Csymresh_i &= \pospol_i
+		& \text{for $i \neq j \in \Degeq(\vec a) = \Degeq(\vec b)$}
+	\end{align*}
 	From \cref{thm:poresh-adjoint}, we conclude that no further left or right adjoints exist. We have
 	\[
-		\Fsymresh_i \circ \Usymresh_i = \id, \qquad \Csymresh_i \circ \Usymresh_i = \id.
+		\Fsymresh_i \circ \Usymresh_i = \id, \qquad \Csymresh_i \circ \Usymresh_i = \id_{\vec a}.
 	\]
 	Thus, we get an idempotent monad $\UFsymresh_i = \Usymresh_i \circ \Fsymresh_i$ and an idempotent comonad $\UCsymresh_i = \Usymresh_i \circ \Fsymresh_i$ such that $\UFsymresh_i \dashv \UCsymresh_i$.
-	Both preserve all $\jetsym_j$ for $j \neq i$ as well as $\eqtysym$. Furthermore, we have
-	\[
-		\jetsym_i \cdot \UFsymresh_i = \infrajetsym_i, \qquad
-		\jetsym_i \cdot \UCsymresh_i = \equijetsym_i.
-	\]
+	Both are given by
+	\begin{align*}
+		i \cdot \UFsymresh_i &= \isopol_i
+		& i \cdot \UCsymresh_i &= \mixpol_i
+		\\
+		j \cdot \UFsymresh_i &= \pospol_i
+		& j \cdot \UCsymresh_i &= \pospol_i
+		& \text{for $i \neq j \in \Degeq(\vec b)$}
+	\end{align*}
 \end{example}
 \begin{example} \label{ex:cohesion}
 	Let $\vec b$ be obtained from $\vec a$ by deleting the anpolarity with degree $i$.
 	Let $n := \lenpol{\vec a} = \lenpol{\vec b} + 1$.
 	We define the following polarized reshuffle, which forgets the $i$-jet relation:
 	\[
-		\cohfget_i = \reshlist{\eqtysym}{\jetsym_0, \ldots, \jetsym_{i-1}, \jetsym_{i+1}, \ldots, \jetsym_{n-1}} : \vec a \to \vec b
+		\cohfget_i = \reshlist{\nonpol_\eqtydeg}{\pospol_0, \ldots, \pospol_{i-1}, \pospol_{i+1}, \ldots, \pospol_{n-1}} : \vec a \to \vec b
 	\]
 	\begin{itemize}
 		\item If $i = 0$, then $\cohfget_0$ has two left adjoints $\cohpi_0 \dashv \cohdisc_0 \dashv \cohfget_0$ with
 		\begin{align*}
-			\cohpi_0 &= \reshlist{\infrajetsym_0}{\jetsym_1, \ldots, \jetsym_{n-1}} &: \vec a \to \vec b, \\
+			\cohpi_0 &= \reshlist{\isopol_0}{\pospol_1, \ldots, \pospol_{n-1}} &: \vec a \to \vec b, \\
 			\dashv
-			\cohdisc_0 &= \reshlist{\eqtysym}{\eqtysym, \jetsym_0, \ldots, \jetsym_{n-2}} &: \vec b \to \vec a, \\
+			\cohdisc_0 &= \reshlist{\nonpol_\eqtydeg}{\nonpol_\eqtydeg, \pospol_0, \ldots, \pospol_{n-2}} &: \vec b \to \vec a, \\
 			\dashv
-			\cohfget_0 &= \reshlist{\eqtysym}{\jetsym_1, \ldots, \jetsym_{n-1}} &: \vec a \to \vec b.
+			\cohfget_0 &= \reshlist{\nonpol_\eqtydeg}{\pospol_1, \ldots, \pospol_{n-1}} &: \vec a \to \vec b.
 		\end{align*}
 		By \cref{thm:poresh-adjoint}, $\cohpi_0$ has no further left adjoints.
 		We have $\cohpi_0 \cohdisc_0 = \cohfget_0 \cohdisc_0 = \id_{\vec b}$. We get adjoint idempotent (co)monads
 		\begin{align*}
-			\shp_0 = \cohdisc_0 \cohpi_0 &= \reshlist{\infrajet_0}{\infrajet_0, \jetsym_1, \ldots, \jetsym_{n-1}} &: \vec a \to \vec a, \\
+			\shp_0 = \cohdisc_0 \cohpi_0 &= \reshlist{\isopol_0}{\isopol_0, \pospol_1, \ldots, \pospol_{n-1}} &: \vec a \to \vec a, \\
 			\dashv
-			\flat_0 = \cohdisc_0 \cohfget_0 &= \reshlist{\eqtysym}{\eqtysym, \jetsym_1, \ldots, \jetsym_{n-1}} : \vec a \to \vec a.
+			\flat_0 = \cohdisc_0 \cohfget_0 &= \reshlist{\nonpol_\eqtydeg}{\nonpol_\eqtydeg, \pospol_1, \ldots, \pospol_{n-1}} : \vec a \to \vec a.
 		\end{align*}
 		\item If $i > 0$, then $\cohfget_i$ has a left adjoint $\cohdisc_i \dashv \cohfget_i$ where
 		\[
-			\cohdisc_i = \reshlist{\eqtysym}{\jetsym_0, \ldots, \jetsym_{i-1}, \infrajetsym_{i-1}, \jetsym_i, \ldots, \jetsym_{n-2}} : \vec b \to \vec a.
+			\cohdisc_i = \reshlist{\nonpol_\eqtydeg}{\pospol_0, \ldots, \pospol_{i-1}, \isopol_{i-1}, \pospol_i, \ldots, \pospol_{n-2}} : \vec b \to \vec a.
 		\]
 		We have $\cohfget_i \cohdisc_i = \id_{\vec b}$. We get an idempotent comonad
 		\[
-			\flat_i = \cohdisc_i \cohfget_i = \reshlist{\eqtysym}{\jetsym_0, \ldots, \jetsym_{i-1}, \infrajetsym_{i-1}, \jetsym_{i+1}, \ldots, \jetsym_{n-1}} : \vec a \to \vec a
+			\flat_i = \cohdisc_i \cohfget_i = \reshlist{\nonpol_\eqtydeg}{\pospol_0, \ldots, \pospol_{i-1}, \isopol_{i-1}, \pospol_{i+1}, \ldots, \pospol_{n-1}} : \vec a \to \vec a
 		\]
 		\begin{itemize}
 			\item If $a_{i-1} = b_{i-1} = \ypolar$, then $\cohdisc_i$ has no further left adjoints.
 			\item If $a_{i-1} = b_{i-1} = \npolar$, then we have $\cohpi_i \dashv \cohdisc_i \dashv \cohfget_i$ with
 			\begin{align*}
-				\cohpi_i &= \reshlist{\eqtysym}{\jetsym_0, \ldots, \jetsym_{i-2}, \infrajetsym_i, \jetsym_{i+1}, \ldots, \jetsym_{n-1}}
+				\cohpi_i &= \reshlist{\nonpol_\eqtydeg}{\pospol_0, \ldots, \pospol_{i-2}, \isopol_i, \pospol_{i+1}, \ldots, \pospol_{n-1}}
 				&: \vec a \to \vec b, \\
 				\dashv
-				\cohdisc_i &= \reshlist{\eqtysym}{\jetsym_0, \ldots, \jetsym_{i-2}, \edgesym_{i-1}, \edgesym_{i-1}, \jetsym_i, \ldots, \jetsym_{n-2}}
+				\cohdisc_i &= \reshlist{\nonpol_\eqtydeg}{\pospol_0, \ldots, \pospol_{i-2}, \nonpol_{i-1}, \nonpol_{i-1}, \pospol_i, \ldots, \pospol_{n-2}}
 				&: \vec b \to \vec a, \\
 				\dashv
-				\cohfget_i &= \reshlist{\eqtysym}{\jetsym_0, \ldots, \jetsym_{i-2}, \edgesym_{i-1}, \jetsym_{i+1}, \ldots, \jetsym_{n-1}}
+				\cohfget_i &= \reshlist{\nonpol_\eqtydeg}{\pospol_0, \ldots, \pospol_{i-2}, \nonpol_{i-1}, \pospol_{i+1}, \ldots, \pospol_{n-1}}
 				&: \vec a \to \vec b.
 			\end{align*}
 			We have $\cohpi_i \cohdisc_i = \cohfget_i \cohdisc_i = \id_{\vec b}$. We get adjoint idempotent (co)monads
 			\begin{align*}
-				\shp_i = \cohdisc_i \cohpi_i &= \reshlist{\eqtysym}{\jetsym_0, \ldots, \jetsym_{i-2}, \infrajetsym_i, \infrajetsym_i, \jetsym_{i+1}, \ldots, \jetsym_{n-1}} &: \vec a \to \vec a, \\
+				\shp_i = \cohdisc_i \cohpi_i &= \reshlist{\nonpol_\eqtydeg}{\pospol_0, \ldots, \pospol_{i-2}, \isopol_i, \isopol_i, \pospol_{i+1}, \ldots, \pospol_{n-1}} &: \vec a \to \vec a, \\
 				\dashv
-				\flat_i = \cohdisc_i \cohfget_i &= \reshlist{\eqtysym}{\jetsym_0, \ldots, \jetsym_{i-2}, \edgesym_{i-1}, \edgesym_{i-1}, \jetsym_{i+1}, \ldots, \jetsym_{n-1}} &: \vec a \to \vec a
+				\flat_i = \cohdisc_i \cohfget_i &= \reshlist{\nonpol_\eqtydeg}{\pospol_0, \ldots, \pospol_{i-2}, \nonpol_{i-1}, \nonpol_{i-1}, \pospol_{i+1}, \ldots, \pospol_{n-1}} &: \vec a \to \vec a
 			\end{align*}
 			\begin{itemize}
 				\item If $a_i = \ypolar$, then there are no further left adjoints.
@@ -3851,39 +3865,39 @@ In words, \cref{eq:poresh-withrr-crit2} says that:
 		\end{itemize}
 		\item If $i = n-1$, then $\cohfget_{n-1}$ has a right adjoint $\cohfget_{n-1} \dashv \cohcodisc_{n-1}$ with
 		\begin{align*}
-			\cohfget_{n-1} &= \reshlist{\eqtysym}{\jetsym_0, \ldots, \jetsym_{n-2}} &: \vec a \to \vec b, \\
+			\cohfget_{n-1} &= \reshlist{\nonpol_\eqtydeg}{\pospol_0, \ldots, \pospol_{n-2}} &: \vec a \to \vec b, \\
 			\dashv
-			\cohcodisc_{n-1} &= \reshlist{\eqtysym}{\jetsym_0, \ldots, \jetsym_{n-2}, \topsym} &: \vec b \to \vec a,
+			\cohcodisc_{n-1} &= \reshlist{\nonpol_\eqtydeg}{\pospol_0, \ldots, \pospol_{n-2}, \nonpol_\top} &: \vec b \to \vec a,
 		\end{align*}
 		and there are no further right adjoints.
 		We have $\cohfget_{n-1} \cohcodisc_{n-1} = \id_{\vec b}$.
 		We get an idempotent monad
 		\[
-			\sharp_{n-1} = \cohcodisc_{n-1} \cohfget_{n-1} = \reshlist{\eqtysym}{\jetsym_0, \ldots, \jetsym_{n-2}, \topsym} : \vec a \to \vec a.
+			\sharp_{n-1} = \cohcodisc_{n-1} \cohfget_{n-1} = \reshlist{\nonpol_\eqtydeg}{\pospol_0, \ldots, \pospol_{n-2}, \nonpol_\top} : \vec a \to \vec a.
 		\]
 		\item If $i < n-1$, then $\cohfget_i$ has a right adjoint $\cohfget_i \dashv \cohcodisc_i$ with
 		\[
-			\cohcodisc_i = \reshlist{\eqtysym}{\jetsym_0, \ldots, \jetsym_{i-1}, \equijetsym_{i}, \jetsym_{i}, \ldots, \jetsym_{n-2}} : \vec b \to \vec a.
+			\cohcodisc_i = \reshlist{\nonpol_\eqtydeg}{\pospol_0, \ldots, \pospol_{i-1}, \mixpol_{i}, \pospol_{i}, \ldots, \pospol_{n-2}} : \vec b \to \vec a.
 		\]
 		We have $\cohfget_i \cohcodisc_i = \id_{\vec b}$. We get an idempotent monad
 		\[
-			\sharp_i = \cohcodisc_i \cohfget_i = \reshlist{\eqtysym}{\jetsym_0, \ldots, \jetsym_{i-1}, \equijetsym_{i+1}, \jetsym_{i+1}, \ldots, \jetsym_{n-1}} : \vec a \to \vec a.
+			\sharp_i = \cohcodisc_i \cohfget_i = \reshlist{\nonpol_\eqtydeg}{\pospol_0, \ldots, \pospol_{i-1}, \mixpol_{i+1}, \pospol_{i+1}, \ldots, \pospol_{n-1}} : \vec a \to \vec a.
 		\]
 		\begin{itemize}
 			\item If $a_{i+1} = b_i = \ypolar$, then there are no further right adjoints.
 			\item If $a_{i+1} = b_i = \npolar$, then we have $\cohfget_i \dashv \cohcodisc_i \dashv \cohcopi_i$ with
 			\begin{align*}
-				\cohfget_i &= \reshlist{\eqtysym}{\jetsym_0, \ldots, \jetsym_{i-1}, \edgesym_{i+1}, \jetsym_{i+2}, \ldots, \jetsym_{n-1}} &: \vec a \to \vec b, \\
+				\cohfget_i &= \reshlist{\nonpol_\eqtydeg}{\pospol_0, \ldots, \pospol_{i-1}, \nonpol_{i+1}, \pospol_{i+2}, \ldots, \pospol_{n-1}} &: \vec a \to \vec b, \\
 				\dashv
-				\cohcodisc_i &= \reshlist{\eqtysym}{\jetsym_0, \ldots, \jetsym_{i-1}, \edgesym_{i}, \edgesym_{i}, \jetsym_{i+1}, \ldots, \jetsym_{n-2}} &: \vec b \to \vec a, \\
+				\cohcodisc_i &= \reshlist{\nonpol_\eqtydeg}{\pospol_0, \ldots, \pospol_{i-1}, \nonpol_{i}, \nonpol_{i}, \pospol_{i+1}, \ldots, \pospol_{n-2}} &: \vec b \to \vec a, \\
 				\dashv
-				\cohcopi_i &= \reshlist{\eqtysym}{\jetsym_0, \ldots, \jetsym_{i-1}, \equijet_i, \jetsym_{i+2}, \ldots, \jetsym_{n-1}} &: \vec a \to \vec b.
+				\cohcopi_i &= \reshlist{\nonpol_\eqtydeg}{\pospol_0, \ldots, \pospol_{i-1}, \mixpol_i, \pospol_{i+2}, \ldots, \pospol_{n-1}} &: \vec a \to \vec b.
 			\end{align*}
 			We have $\cohfget_i \cohcodisc_i = \cohcopi_i \cohcodisc_i = \id_{\vec b}$. We get adjoint idempotent (co)monads
 			\begin{align*}
-				\sharp_i = \cohcodisc_i \cohfget_i &= \reshlist{\eqtysym}{\jetsym_0, \ldots, \jetsym_{i-1}, \edgesym_{i+1}, \edgesym_{i+1}, \jetsym_{i+2}, \ldots, \jetsym_{n-1}} &: \vec a \to \vec a, \\
+				\sharp_i = \cohcodisc_i \cohfget_i &= \reshlist{\nonpol_\eqtydeg}{\pospol_0, \ldots, \pospol_{i-1}, \nonpol_{i+1}, \nonpol_{i+1}, \pospol_{i+2}, \ldots, \pospol_{n-1}} &: \vec a \to \vec a, \\
 				\dashv
-				\coshp_i = \cohcodisc_i \cohcopi_i &= \reshlist{\eqtysym}{\jetsym_0, \ldots, \jetsym_{i-1}, \equijet_{i}, \equijet_{i}, \jetsym_{i+2}, \ldots, \jetsym_{n-1}} &: \vec a \to \vec a.
+				\coshp_i = \cohcodisc_i \cohcopi_i &= \reshlist{\nonpol_\eqtydeg}{\pospol_0, \ldots, \pospol_{i-1}, \mixpol_{i}, \mixpol_{i}, \pospol_{i+2}, \ldots, \pospol_{n-1}} &: \vec a \to \vec a.
 			\end{align*}
 			\begin{itemize}
 				\item If $a_i = \ypolar$, then there are no further right adjoints.
@@ -3949,26 +3963,26 @@ In words, \cref{eq:poresh-withrr-crit2} says that:
 	Let $\vec a = \maskopypolar{[\ypolar, \ypolar]}{\maskpjb} = [\npolar, \ypolar, \npolar, \npolar, \ypolar, \npolar]$ and $\vec b = \maskopypolar{[\ypolar]}{\maskpjb} = [\npolar, \ypolar, \npolar]$.
 	We have the following chain of adjoint reshuffles, now annotated with big degrees, which cannot be extended on either side:
 	\begin{align*}
-		\cohpi_0^{\maskopfont{PJB}} &= \reshlist{\nwbridgesym_0}{\nwpathsym_1, \nwjetsym_1, \nwbridgesym_1} &: \vec a \to \vec b, \\
+		\cohpi_0^{\maskopfont{PJB}} &= \reshlist{\nwbridgepol_0}{\nwpathpol_1, \nwpospol_1, \nwbridgepol_1} &: \vec a \to \vec b, \\
 		\dashv
-		\cohdisc_0^{\maskopfont{PJB}} &= \reshlist{\eqtysym}{\eqtysym, \eqtysym, \eqtysym, \nwpathsym_0, \nwjetsym_0, \nwbridgesym_0} &: \vec b \to \vec a, \\
+		\cohdisc_0^{\maskopfont{PJB}} &= \reshlist{\nonpol_\eqtydeg}{\nonpol_\eqtydeg, \nonpol_\eqtydeg, \nonpol_\eqtydeg, \nwpathpol_0, \nwpospol_0, \nwbridgepol_0} &: \vec b \to \vec a, \\
 		\dashv
 		\cohpi{}_0^{\maskopfont{JB};}{}_1^{\maskopfont{P}} =
-		\cohfget_0^{\maskopfont{PJB}} &= \reshlist{\eqtysym}{\nwpathsym_1, \nwjetsym_1, \nwbridgesym_1} &: \vec a \to \vec b, \\
+		\cohfget_0^{\maskopfont{PJB}} &= \reshlist{\nonpol_\eqtydeg}{\nwpathpol_1, \nwpospol_1, \nwbridgepol_1} &: \vec a \to \vec b, \\
 		\dashv
 		\cohdisc{}_0^{\maskopfont{JB};}{}_1^{\maskopfont{P}} =
-		\cohcodisc_0^{\maskopfont{PJB}} &= \reshlist{\eqtysym}{\nwpathsym_0, \nwpathsym_0, \nwpathsym_0, \nwpathsym_0, \nwjetsym_0, \nwbridgesym_0} &: \vec b \to \vec a, \\
+		\cohcodisc_0^{\maskopfont{PJB}} &= \reshlist{\nonpol_\eqtydeg}{\nwpathpol_0, \nwpathpol_0, \nwpathpol_0, \nwpathpol_0, \nwpospol_0, \nwbridgepol_0} &: \vec b \to \vec a, \\
 		\dashv
 		\cohfget{}_0^{\maskopfont{JB};}{}_1^{\maskopfont{P}} =
 		\cohcopi_0^{\maskopfont{PJB}} &= 
-		\reshlist{\eqtysym}{\nwpathsym_0, \nwjetsym_1, \nwbridgesym_1} &: \vec a \to \vec b, \\
+		\reshlist{\nonpol_\eqtydeg}{\nwpathpol_0, \nwpospol_1, \nwbridgepol_1} &: \vec a \to \vec b, \\
 		\dashv
 		\cohcodisc{}_0^{\maskopfont{JB};}{}_1^{\maskopfont{P}} =
 		\phantom{\cohcopi_0^{\maskopfont{PJB}}} &\mathrel{\phantom{=}} 
-		\reshlist{\eqtysym}{\nwpathsym_0, \nwequijetsym_0, \nwequijetsym_0, \nwequijetsym_0, \nwjetsym_0, \nwbridgesym_0} &: \vec b \to \vec a.
+		\reshlist{\nonpol_\eqtydeg}{\nwpathpol_0, \nwmixpol_0, \nwmixpol_0, \nwmixpol_0, \nwpospol_0, \nwbridgepol_0} &: \vec b \to \vec a.
 	\end{align*}
 	The function type with modality $\cohfget_0^{\maskopfont{PJB}}$ will take a limit of a covariant functor, and could be called `covariant naturality'.
-	The modality $\cohcodisc_0^{\maskopfont{PJB}}$ will be used to lift structure inhabiting a covariant functor to $\Type^{\vec b}$, to mode $\vec a$, e.g. to build the category of pointed types. It could be called `covariant structurality'.
+	The modality $\cohcodisc_0^{\maskopfont{PJB}}$ will be used to lift structure inhabiting a covariant functor to $\Type^{\vec b}$, to mode $\vec a$, e.g. to build the category of pointed types. It could be called `covariant structurality'.\todo{Not 100\% sure right now.}
 \end{example}
 %\begin{example}
 %	Let $\vec a = \maskopypolar{[\ypolar, \ypolar]}{\maskrpj} = [\npolar, \npolar, \ypolar, \npolar, \npolar, \ypolar]$ and $\vec b = \maskopypolar{[\ypolar]}{\maskrpj} = [\npolar, \npolar, \ypolar]$.
@@ -3993,6 +4007,7 @@ In words, \cref{eq:poresh-withrr-crit2} says that:
 %\end{example}
 
 \subsubsection{Additional Results}
+\todoi{Update notation}
 \begin{proposition} \label{thm:poresh-op}
 	Let $\mu : \vec a \to \vec b$ be a polarized reshuffle, and let $\jetsym_j \cdot \mu \in \accol{\jetsym_i, \tejsym_i}$.
 	Then $\Op_j \circ \mu = \mu \circ \Op_i$.
