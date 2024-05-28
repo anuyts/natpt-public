@@ -4009,31 +4009,59 @@ In words, \cref{eq:poresh-withrr-crit2} says that:
 \subsubsection{Additional Results}
 \todoi{Update notation}
 \begin{proposition} \label{thm:poresh-op}
-	Let $\mu : \vec a \to \vec b$ be a polarized reshuffle, and let $\jetsym_j \cdot \mu \in \accol{\jetsym_i, \tejsym_i}$.
+	Let $\mu : \vec a \to \vec b$ be a polarized reshuffle, $a_i = b_j = \ypolar$, and let $j \cdot \mu \in \accol{\pospol_i, \negpol_i}$.
 	Then $\Op_j \circ \mu = \mu \circ \Op_i$.
 \end{proposition}
-\todoi{Are the degrees sensible?}
 \begin{proof}
-	By computing the result in both cases.
+	We prove this if $j \cdot \mu = \pospol_i$; otherwise we can set $\mu' = \Op_j \circ \mu$. Clearly, we have:
+	\[
+		j \cdot (\Op_j \circ \mu) = \negpol_j \circ \mu = \negpol_i = (j \cdot \mu) \circ \Op_i.
+	\]
+	Now if $j' \neq j$, then we have
+	\begin{align*}
+		j' \cdot (\Op_j \circ \mu) &= \pospol_{j'} \circ \mu = j' \cdot \mu, \\
+		j' \cdot (\mu \circ \Op_j) &= (j' \cdot \mu) \circ \Op_j,
+	\end{align*}
+	so we have to prove that $(j' \cdot \mu) \circ \Op_j = j' \cdot \mu$.
+	This is the case if either $\getdeg(j' \cdot \mu) \neq i$ or $\getpol(j' \cdot \mu)$ is symmetric. But that follows from the fact that $j' \cdot \mu \ll j \cdot \mu$ or $j \cdot \mu \ll j' \cdot \mu$.
 \end{proof}
 \begin{proposition} \label{thm:poresh-adjoint-directed}
 	Let $\lambda : \vec a \to \vec b$ be a polarized reshuffle with adjoint $\lambda \dashv \rho$. Let $a_i = b_j = \ypolar$. Then we have:
 	\begin{itemize}
-		\item $\jetsym_j \cdot \lambda = \jetsym_i \quad\Leftrightarrow\quad \jetsym_j = \jetsym_i \cdot \rho$,
-		\item $\jetsym_j \cdot \lambda = \tejsym_i \quad\Leftrightarrow\quad \tejsym_j = \jetsym_i \cdot \rho$.
+		\item $j \cdot \lambda = \pospol_i \quad\Leftrightarrow\quad i \cdot \rho = \pospol_j$,
+		\item $j \cdot \lambda = \negpol_i \quad\Leftrightarrow\quad i \cdot \rho = \negpol_j$.
 	\end{itemize}
 \end{proposition}
 \begin{proof}
-	We can prove the second line (where the direction flips) from the first one.
-	Let $\jetsym_j \cdot \lambda = \tejsym_i$.
-	Using \cref{thm:poresh-op}, define $\lambda' = \Op_j \circ \lambda = \lambda \circ \Op_i$.
-	Then $\jetsym_j \cdot \lambda' = \jetsym_i$.
-	Since $\Op_k$ is self-adjoint and by uniqueness and composability of adjoints, we find that $\lambda' \dashv \rho' = \Op_i \circ \rho = \rho \circ \Op_j$.
-	The first line implies that $\jetsym_j = \jetsym_i \cdot \rho'$ so that $\tejsym_j = \jetsym_i \cdot \rho$.
-
-	The variant of this statement with the equalities replaced with $\leq$ follows immediately from \cref{thm:poresh-adjoint}.
-	Thus, it remains to prove $\geq$ assuming equality.
-	\todoi{So do that.}
+	We will prove the first equivalence. The second one then follows by considering $\lambda' = \Op_j \circ \lambda = \lambda \circ \Op_i$ and its adjoint $\rho' = \Op_i \circ \rho = \rho \circ \Op_j$.
+	
+	We decompose the equality as $\pospol_i \leq j \cdot \lambda < \isopol_i$.
+	For the first inequality, we have
+	\[
+		\pospol_i \leq j \cdot \lambda
+		\quad\Leftrightarrow\quad
+		\pospol_i \leq \pospol_j \circ \lambda
+		\quad\Leftrightarrow\quad
+		\pospol_i \circ \rho \leq \pospol_j
+		\quad\Leftrightarrow\quad
+		i \cdot \rho \leq \pospol_j.
+	\]
+	On the other hand, we have
+	\begin{align*}
+		&\quad\mathrel{\phantom{\Leftrightarrow}}\quad
+		\isopol_i > j \cdot \lambda
+		\\ &\quad\Leftrightarrow\quad
+		\isopol_i \not\leq \pospol_j \circ \lambda
+		& \text{(\Cref{thm:deg-vs-poldeg-poresh}. Sym.\ pol.\ degrees are always comparable)}
+		\\ &\quad\Leftrightarrow\quad
+		\isopol_i \circ \rho \not\leq \pospol_j
+		& \text{($\loch \circ \rho \dashv \loch \circ \lambda$)}
+		\\ &\quad\Leftrightarrow\quad
+		\isopol_i \circ \rho > \pospol_j
+		& \text{Sym.\ pol.\ degrees are always comparable)}&.
+	\end{align*}
+	Since $\getdeg(\isopol_i \circ \rho) = \getdeg(i \cdot \rho)$, we can conclude that both must be equal to $j$. Then from $i \cdot \rho \leq \pospol_j$, it follows that $i \cdot \rho \in \accol{\mixpol_j, \pospol_j}$.
+	Then $\isopol_i \circ \rho > \pospol_j$ rules out $\mixpol_j$, so we conclude that $i \cdot \rho = \pospol_j$.
 \end{proof}
 
 \section{Semantics on Jet Sets and Jet Setoids} \label{sec:poresh-jetset}
