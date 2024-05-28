@@ -4212,87 +4212,69 @@ In words, \cref{eq:poresh-withrr-crit2} says that:
 \end{proof}
 \begin{proposition} \label{thm:poresh-jetsetoid-prism-commut}
 	Let $\mu : \vec a \to \vec b$ be a polarized reshuffle with right adjoint $\mu \dashv \rho$.
-	Let $P \in \accol{\jetsym, \tejsym}$.
-	Then the action of $\jetsetoid{\mu}$ on prisms can be looked up in the following table:
+	Then the action of $\jetsetoid{\mu}$ on prisms can be looked up in the following table:%
+	\footnote{Note that if $b_j = \npolar$, then the results for $\nonpol_j$ are consistent.}%
+	\footnote{Note that if $i \cdot \rho = \isopol_j$, then by \cref{eq:poresh-withl-crit2}, $b_j = \npolar$.}
 	\[
 		\begin{array}{c || c | c | c | c | c}
-			P_i \oriof \rho 
-			& \eqtysym 
-			& \equijetsym_j
-			& \jetsym_j
-			& \tejsym_j 
-			& \topsym 
+			i \cdot \rho 
+			& \nonpol_\eqtydeg 
+			& \mixpol_j
+			& \pospol_j
+			& \negpol_j 
+			& \nonpol_\top 
 			\\ \hline
-			\mu(X \multip \rival{P_i})
+			\mu(X \multip \rival{\jetsym_i})
 			& (\mu X) \times \rival{\eqtysym}
 			& (\mu X) * \rival{\equijetsym_j}
 			& (\mu X) \multip \rival{\jetsym_j}
 			& (\Op_j\mu X) \multip \rival{\tejsym_j}
+			& (\mu X) \times \rival{\topsym}
+			\\
+			\mu(X \multip \rival{\tejsym_i})
+			& (\mu X) \times \rival{\eqtysym}
+			& (\mu X) * \rival{\equijetsym_j}
+			& (\mu X) \multip \rival{\tejsym_j}
+			& (\Op_j\mu X) \multip \rival{\jetsym_j}
 			& (\mu X) \times \rival{\topsym}
 		\end{array}
 	\]
 \end{proposition}
 Note that a cartesian product with $\rival{\eqtysym}$ or $\rival{\topsym}$ is the same as a separated product, since neither jet setoid has any jets between non-equivalent elements.
 \begin{proof}
+	We mainly prove the upper row of the table
+	For the lower row, we use that $X \multip \rival{\tejsym_i} = \Op_i(X \multip \rival{\jetsym_i})$ so the result can be derived from the upper row if we can rewrite $\mu \circ \Op_i$.
+	
 	Each time, it is clear that the carrier is just $X \times \accol{0, 1}$.
-	We can write $X \multip \rival{P_i}$ as the colimit of $X$, $\Op_i(X)$, a copy of $\rival{P_i}$ for every element of $X$, and a copy of the terminal jet setoid for every element of $X \times \accol{0, 1}$.
+	We can write $X \multip \rival{\jetsym_i}$ as the colimit of $\Op_i(X)$, $X$, a copy of $\rival{P_i}$ for every element of $X$, and a copy of the terminal jet setoid for every element of $X \times \accol{0, 1}$.
 	By \cref{thm:poresh-jetsetoid-cocontinuous}, $\jetsetoid{\mu}$ preserves that colimit.
-	By \cref{thm:poresh-jetsetoid-intervals}, $\mu \rival{P_i} = \rival{P_i \oriof \rho}$.
-	Thus, we see that $\mu (X \multip \rival{P_i})$ is a colimit of $\mu X$, $\mu \Op_i X$ and $\rival{P_i \oriof \rho}$.
-	We case distinguish on $P_i \oriof \rho$.
+	By \cref{thm:poresh-jetsetoid-intervals}, $\mu \rival{\jetsym_i} = \rival{\jetsym_i \oriof \rho}$.
+	Thus, we see that $\mu (X \multip \rival{\jetsym_i})$ is a colimit of $\mu \Op_i X$, $\mu X$ and copies of $\rival{\jetsym_i \oriof \rho}$.
+	We case distinguish on $i \cdot \rho$.
 	\begin{description}
-		\item[\framebox{$\eqtysym$}] If $P_i \oriof \rho = \eqtysym$, then from \cref{eq:poresh-adjoint-crit-orideg} in the statement of \cref{thm:poresh-adjoint}, we conclude that $P_i \leq \eqtysym \oriof \mu$.
-		By symmetry of $\eqtysym \oriof \mu$, we can conclude that $\infrajetsym \oriof P_i = \infrajetsym_i \leq \eqtysym \oriof \mu$, so that $\mu$ cannot mention degree $i$ in any form other than $\infrajetsym_i$ and therefore $\mu = \mu \Op_i$. Then the colimit produces $(\mu X) * \rival{\eqty} = (\mu X) \times \rival{\eqty}$.
-		
-		\item[\framebox{$\equijetsym_j$}] If $P_i \oriof \rho = P \oriof (i \cdot \rho) = \equijetsym_j$, then by invertibility of $P \oriof \loch$, we can conclude that $i \cdot \rho = mixpol_j$, so that $\Op_i \circ \rho = \rho$.
+		\item[\framebox{$\nonpol_\eqtydeg$}] If $i \cdot \rho = \nonpol_\eqtydeg$, then $\Op_i \circ \rho = \rho$.
 		Then by uniqueness of the adjoint, $\mu \circ \Op_i = \mu$.
-		Then the colimit produces $(\mu X) * \rival{\equijetsym_j}$.
+		Then the colimit produces $(\mu X) * \rival{\edgesym_\eqtydeg}$, and the result for the opposite prism is the same.
+%		
+%		then from \cref{eq:poresh-adjoint-crit-orideg} in the statement of \cref{thm:poresh-adjoint}, we conclude that $\pospol_i \leq \nonpol_\eqtydeg \oriof \mu$.
+%		By symmetry of $\nonpol_\eqtydeg \oriof \mu$, we can conclude that $\isopol_i \leq \nonpol_\eqtydeg \oriof \mu$, so that $\mu$ cannot mention degree $i$ in any form other than $\isopol_i$ and therefore $\mu = \mu \circ \Op_i$. Then the colimit produces $(\mu X) * \rival{\eqty} = (\mu X) \times \rival{\eqty}$, and the result for the opposite prism is the same.
 		
-		\item[\framebox{$\jetsym_j$}] 
+		\item[\framebox{$\mixpol_j$}] If $i \cdot \rho = \mixpol_j$, then $\Op_i \circ \rho = \rho$.
+		Then by uniqueness of the adjoint, $\mu \circ \Op_i = \mu$.
+		Then the colimit produces $(\mu X) * \rival{\equijetsym_j}$, and the result for the opposite prism is the same.
+		
+		\item[\framebox{$\pospol_j$}] If $i \cdot \rho = \pospol_j$, then by \cref{thm:poresh-adjoint-directed}, $j \cdot \mu = \pospol_i$ and $\mu \circ \Op_i = \Op_j \circ \mu$.
+		This means that we are taking the $j$-opposite at the original source-side of the twisted prism, which is also the new source-side, so we get a $j$-twisted prism $(\mu X) \multip \rival{\jetsym_j}$.
+		The image of the $i$-opposite is then the $j$-opposite of the image, which is the opposite prism $(\mu X) \multip \rival{\tejsym_j}$.
+		
+		\item[\framebox{$\negpol_j$}] If $i \cdot \rho = \negpol_j$, then by \cref{thm:poresh-adjoint-directed}, $j \cdot \mu = \negpol_i$ and $\mu \circ \Op_i = \Op_j \circ \mu$.
+		This means that we are taking the $j$-opposite at the original source-side of the twisted prism, which is the new \emph{target}-side. Equivalently, we can take the $j$-opposite on both sides and then again at the source-side, so we get a $j$-twisted prism $(\Op_j \mu X) \multip \rival{\jetsym_j}$.
+		The image of the $i$-opposite is then the $j$-opposite of the image, which is the opposite prism $(\Op_j \mu X) \multip \rival{\tejsym_j}$.
+		
+		\item[\framebox{$\nonpol_\top$}] If $i \cdot \rho = \nonpol_\top$, then $\Op_i \circ \rho = \rho$.
+		Then by uniqueness of the adjoint, $\mu \circ \Op_i = \mu$.
+		Then the colimit produces $(\mu X) * \rival{\edgesym_\top} = (\mu X) \times \rival{\edgesym_\top}$, and the result for the opposite prism is the same. \qedhere
 	\end{description}
-	
-	
-	\todoi{Hmm.}
-	By \cref{thm:poresh-op}, $\mu \Op_i(X) = $
-	
-	\todoi{Write prism over $X$ as colimit of $X$, $\Op_i(X)$ and a lot of intervals. Then invoke the lemmas.}
-	
-	\todoi{Remove what follows.}
-	
-	Moreover, the underlying \emph{setoid} is always a cartesian product of a setoid structure on $X$ and one on $\accol{0, 1}$:
-	\begin{itemize}
-		\item On the right, this is an immediate consequence of the definition of the product or prism operation being used on jet setoids.
-		\item On the left, we have $(x, u) \eqty (y, v)$ in $\mu(X \multip \rival{P_i})$ if $(x, u) \mathrel{(\eqtysym \cdot \mu)^*} (y, v)$ in $X \multip \rival{P_i}$.
-		But by \cref{def:poreshcat} of polarized reshuffles $\eqtysym \cdot \mu$ is symmetric, so that paths from $(x, u)$ to $(y, v)$ can be modified by changing the point at which we `step' from $u$ to $v$.
-		It is then clear that these pairs are related if and only if $x \mathrel{(\eqtysym \cdot \mu)^*} y$ in $X$ (so $x \eqty y$ in $\mu X$) and $u \mathrel{(\eqtysym \cdot \mu)^*} v$ in $\rival{P_i}$ (so $u \eqty v$ in $\mu \rival{P_i}$).
-	\end{itemize}
-	Thus, invoking \cref{thm:poresh-jetsetoid-intervals}, we find that the underlying setoids on both hands coincide.
-	
-	Knowing this, let us call a jet $(x, u) \jet_k (y, v)$:
-	\begin{description}
-		\item[trivial] if $(x, u) \eqty (y, v)$,
-		\item[horizontal] if non-trivial but $u \eqty v$,
-		\item[vertical] if non-trivial but $x \eqty y$,
-		\item[diagonal] if neither is the case.
-	\end{description}
-	
-	By definition of a jet setoid, \textbf{trivial} jets are always present, so we do not consider these further.
-	
-	\textbf{Diagonal} jets do not exist.
-	This is clear on the right hand side.
-	On the left, take a vertical-or-diagonal jet $(x, u) \jet_k (y, v)$ in $\mu(X \multip \rival{P_i})$.
-	The fact that it is vertical-or-diagonal, implies that $u \not\eqty v$ in $\mu \rival{P_i}$, so equivalent elements of $\mu \rival{P_i}$ must be equal.
-	Now the jet arises from some
-	$(x', u) \mathrel{(\jetsym_k \cdot \mu)} (y', v)$ in $X \multip \rival{P_i}$, where $x \eqty^{\mu X} x'$ and $y \eqty^{\mu X} y'$.
-	Since $u \not\eqty v$ in $\rival{P_i}$ and there are no diagonals in a twisted prism, we can also conclude that $x' \eqty y'$ in $X$ and then certainly in $\mu X$.
-	In short, we find $x \eqty x' \eqty y' \eqty y$ in $\mu X$, so that the original jet is not diagonal but vertical.
-	
-	We have now found that a \textbf{vertical} jet in $\mu(X \multip \rival{P_i})$ looks like.
-	By definition of the prism functors, we can conclude $u \mathrel{(\jetsym_k \cdot \mu)} v$ in $\rival{P_i}$, i.e.\ $u \jet_k^{\mu \rival{P_i}} v$.
-	Thus, vertical jets have equivalent first components and the second components from a corresponding jet in $\mu \rival{P_i}$.
-	Invoking \cref{thm:poresh-jetsetoid-intervals}, we see the exact same thing on the right hand side of the table.
-	
-	
 \end{proof}
 
 \chapter{Transpension}
