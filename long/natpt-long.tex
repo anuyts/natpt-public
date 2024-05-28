@@ -310,10 +310,14 @@ The functor $\loch \multip \rival{\edge_i}$ commutes with itself, i.e. $(x, v, w
 	In a jet set $X$, write $\jet_i^*$ for the transitive closure of the $\jet_i$, and similarly $\infrajet_i^*$ for the transitive closure of $\infrajet_i$.
 	\begin{itemize}
 		\item We say that $x$ and $y$ are \textbf{$i$-connected} if $x \infrajet_i^* y$, and correspondingly define \textbf{$i$-connected components}.
-		\item We say that $X$ is \textbf{$i$-orientable} if on any $i$-connected component, the relation $\jetsym_i^*$ is a total pre-order.
-		\item We say that $X$ is \textbf{$i$-antisymmetric} if $x \jet_i^* y$ and $x \tej_i^* y$ together imply $x \infrajet_{i-1}^* y$ if $i > 0$ and $x = y$ if $i = 0$.
+		We say that $X$ is \textbf{$i$-connected} if any two elements are $i$-connected.
+		\item We say that $X$ is \textbf{$i$-orientable} if on any $i$-connected component, the relation $\jetsym_i^*$ is a total pre-order, i.e.\ if $x \infrajet_i^* y$ implies either $x \jet_i^* y$ or $x \tej_i^* y$.
+		\item We say that $X$ is \textbf{$i$-acyclic} if $x \jet_i^* y$ and $x \tej_i^* y$ together imply $x \equijet_i^* y$.
+		\item We say that $X$ is \textbf{$i$-antisymmetric} if $x \equijet_i y$ implies $x \infrajet_{i-1} y$ for $i > 0$, or $x = y$ for $i = 0$.
 	\end{itemize}
 \end{definition}
+Note that $i$-orientability and $i$-acyclicity are vacuous at symmetric degrees $i$.
+On the other hand, $i$-antisymmetry at a symmetric degree $i$ would completely define the $i$-edge relation.
 %\begin{definition} 
 %	A jet set is called \textbf{$i$-orientable} if the $i$-jet relation has no cycles, i.e. sequences
 %	\[
@@ -323,17 +327,19 @@ The functor $\loch \multip \rival{\edge_i}$ commutes with itself, i.e. $(x, v, w
 %\end{definition}
 \begin{definition} \label{def:jet-jewel}
 	Let $\vec a$ be a mask of length $n$.
-	An $\vec a$-jet-set $X$ is a \textbf{jet jewel} if:
+	An $\vec a$-jet-set $X$ is a \textbf{jet jewel} if it is:
 	\begin{enumerate}
-		\item it is finite,
-		\item it is $(n-1)$-connected, i.e.\ for any $x, y \in X$ we have $x \infrajet_{n-1}^* y$,
-		\item it is $i$-orientable for every directed degree $i$,
-		\item it is $i$-antisymmetric for every directed degree $i$.
+		\item finite,
+		\item $(n-1)$-connected,
+		\item $i$-orientable for every degree $i$,
+		\item $i$-acyclic for every degree $i$,
+		\item $i$-antisymmetric for every \emph{directed} degree $i$.
 		%\item for every $0 \leq i < n$, the relation $\jet_i^*$ is a total pre-order on any connected component of $X$, i.e. if $x \infrajet_i^* y$, then $x \jet_i^* y$ or $x \tej_i^* y$. We call this property \textbf{$i$-orientability}.
 	\end{enumerate}
 	The \textbf{category of jet jewels} $\jetjewel{\vec a}$ is defined as the full subcategory of $\jetset{\vec a}$ on jet jewels.
 \end{definition}
-Note that $i$-orientability is vacuous if $a_i = \npolar$.
+The conceptual reason for asking $i$-antisymmetry is to exclude the equijet interval $\rival{\equijetsym_i}$, so that the only jet jewel intervals at directed degrees are $\rival{\jetsym_i}$ and $\rival{\tejsym_i}$.
+\todoi{Adapt to new definition}
 \begin{proposition} \label{thm:lift-to-jet-jewels}
 	Jet jewels are closed under the functors $\Op_i$, $\Fsym_i$,
 	%$\Usym_i$, $\Csym_{i \neq n-1}$, $\UFsym_i$, $\UCsym_{i \neq n-1}$,
