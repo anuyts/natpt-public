@@ -304,36 +304,57 @@ The functor $\loch \multip \rival{\edge_i}$ commutes with itself, i.e. $(x, v, w
 \end{corollary}
 
 \section{Jet Jewels} \label{sec:jetjewel}
-Write $\jet_i^*$ for the transitive closure of the $\jet_i$, and similarly $\infrajet_i^*$ for the transitive closure of $\infrajet_i$.
-We say that $x$ and $y$ are \textbf{$i$-connected} if $x \infrajet_i^* y$, and correspondingly define \textbf{$i$-connected components}.
+\begin{definition}
+	\label{def:jet-connected}
+	\label{def:jet-sublinear}
+	In a jet set $X$, write $\jet_i^*$ for the transitive closure of the $\jet_i$, and similarly $\infrajet_i^*$ for the transitive closure of $\infrajet_i$.
+	\begin{itemize}
+		\item We say that $x$ and $y$ are \textbf{$i$-connected} if $x \infrajet_i^* y$, and correspondingly define \textbf{$i$-connected components}.
+		\item We say that $X$ is \textbf{$i$-orientable} if on any $i$-connected component, the relation $\jetsym_i^*$ is a total pre-order.
+		\item We say that $X$ is \textbf{$i$-antisymmetric} if $x \jet_i^* y$ and $x \tej_i^* y$ together imply $x \infrajet_{i-1}^* y$ if $i > 0$ and $x = y$ if $i = 0$.
+	\end{itemize}
+\end{definition}
+%\begin{definition} 
+%	A jet set is called \textbf{$i$-orientable} if the $i$-jet relation has no cycles, i.e. sequences
+%	\[
+%		x_0 \jet_i x_1 \jet_i \cdots \jet_i x_n = x_0
+%	\]
+%	with $n \geq 2$.
+%\end{definition}
 \begin{definition} \label{def:jet-jewel}
 	Let $\vec a$ be a mask of length $n$.
 	An $\vec a$-jet-set $X$ is a \textbf{jet jewel} if:
 	\begin{enumerate}
+		\item it is finite,
 		\item it is $(n-1)$-connected, i.e.\ for any $x, y \in X$ we have $x \infrajet_{n-1}^* y$,
-		\item for every $0 \leq i < n$, the relation $\jet_i^*$ is a total pre-order on any connected component of $X$, i.e. if $x \infrajet_i^* y$, then $x \jet_i^* y$ or $x \tej_i^* y$. We call this property \textbf{$i$-orientability}.
+		\item it is $i$-orientable for every directed degree $i$,
+		\item it is $i$-antisymmetric for every directed degree $i$.
+		%\item for every $0 \leq i < n$, the relation $\jet_i^*$ is a total pre-order on any connected component of $X$, i.e. if $x \infrajet_i^* y$, then $x \jet_i^* y$ or $x \tej_i^* y$. We call this property \textbf{$i$-orientability}.
 	\end{enumerate}
 	The \textbf{category of jet jewels} $\jetjewel{\vec a}$ is defined as the full subcategory of $\jetset{\vec a}$ on jet jewels.
 \end{definition}
 Note that $i$-orientability is vacuous if $a_i = \npolar$.
 \begin{proposition} \label{thm:lift-to-jet-jewels}
-	Jet jewels are closed under the functors $\Op_i$, $\Fsym_i$, $\Usym_i$, $\Csym_{i \neq n-1}$, $\UFsym_i$, $\UCsym_{i \neq n-1}$, $\loch \multip \rival{\jet_i}$ and $\loch \multip \rival{\tej_i}$.
+	Jet jewels are closed under the functors $\Op_i$, $\Fsym_i$,
+	%$\Usym_i$, $\Csym_{i \neq n-1}$, $\UFsym_i$, $\UCsym_{i \neq n-1}$,
+	$\loch \multip \rival{\jet_i}$ and $\loch \multip \rival{\tej_i}$.
 \end{proposition}
 \begin{proof}
 	\begin{description}
 		\item[$\Op_i$] Trivial.
-		\item[$\Fsym_i$] This functor clearly preserves $(n-1)$-connectedness even if $i = n-1$. Meanwhile, $j$-orientability is unaffected for $j \neq i$ and vacuous for $i$ which is symmetric in the codomain of $\Fsym_i$.
-		\item[$\Usym_i$] This functor does not modify the jet set, so the conditions are preserved.
-		\item[$\Csym_{i \neq n-1}$] Since $i \neq n-1$, this functor preserves $(n-1)$-connectedness. Meanwhile, $j$-orientability is unaffected for $j \neq i$ and vacuous for $i$ which is symmetric in the codomain of $\Csym_i$.
-		\item[$\UFsym_i$] Since $\UFsym_i = \Usym_i \circ \Fsym_i$.
-		\item[$\UCsym_{i \neq n-1}$] Since $\UCsym_i = \Usym_i \circ \Csym_i$.
+		\item[$\Fsym_i$] This functor clearly preserves $(n-1)$-connectedness even if $i = n-1$. Meanwhile, $j$-orientability and $j$-antisymmetry are unaffected for $j \neq i$ and not required for $j = i$. In the case of $(i+1)$-antisymmetry, we use that $\infrajetsym_i$ remains unchanged.
+%		\item[$\Usym_i$] This functor does not modify the jet set, so the conditions are preserved.
+%		\item[$\Csym_{i \neq n-1}$] Since $i \neq n-1$, this functor preserves $(n-1)$-connectedness. Meanwhile, $j$-acyclicity is unaffected for $j \neq i$ and vacuous for $i$ which is symmetric in the codomain of $\Csym_i$.
+%		\item[$\UFsym_i$] Since $\UFsym_i = \Usym_i \circ \Fsym_i$.
+%		\item[$\UCsym_{i \neq n-1}$] Since $\UCsym_i = \Usym_i \circ \Csym_i$.
 		\item[$\loch \multip \rival{\jet_i}$] To see $(n-1)$-connectedness, note that:
 		\begin{itemize}
 			\item All objects of the form $(x, 0)$ are $(n-1)$-connected,
 			\item All objects of the form $(x, 1)$ are $(n-1)$-connected,
 			\item Since $i \leq n-1$, we always have $(x, 0) \infrajet_i (x, 1)$.
 		\end{itemize}
-		For $j$-orientability, we consider 3 situations:
+		\todoi{Continue proof}
+		Assuming $a_j = \ypolar$, for $j$-orientability, we consider 3 situations:
 		\begin{description}
 			\item[$j < i$] Then for every $x$, we have $(x, 0) \not\infrajet_j (x, 1)$. Every $j$-connected component $C \subseteq X$ produces two $j$-connected components $\set{(c, 0)}{c \in C}$ and $\set{(c, 1)}{c \in C}$, where totality of $\jet_j^*$ is inherited from $X$.
 			\item[$j > i$] Then for every $x$, we have $(x, 0) \equijet_j (x, 1)$. Every $j$-connected component $C \subseteq X$ produces one $j$-connected component $\set{(c, u)}{c \in C, u \in \accol{0, 1}}$, where totality of $\jet_j^*$ is inherited from $X$.
@@ -4276,6 +4297,8 @@ Note that a cartesian product with $\rival{\eqtysym}$ or $\rival{\topsym}$ is th
 		Then the colimit produces $(\mu X) * \rival{\edgesym_\top} = (\mu X) \times \rival{\edgesym_\top}$, and the result for the opposite prism is the same. \qedhere
 	\end{description}
 \end{proof}
+
+\section{Semantics on Jet Jewels} \label{sec:poresh-jetjewel}
 
 \chapter{Transpension}
 \todoi{Does Tw : sSet $\to$ sSet have a transp type? (Yes if it's Tw$_!$)}
