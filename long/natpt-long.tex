@@ -362,12 +362,12 @@ The conceptual reason for asking $i$-antisymmetry is to exclude the equijet inte
 			\item All objects of the form $(x, 1)$ are $(n-1)$-connected,
 			\item Since $i \leq n-1$, we always have $(x, 0) \infrajet_{n-1} (x, 1)$.
 		\end{itemize}
-		For $j$-orientability, $j$-acyclicity and $j$-antisymmetry, we consider 3 situations:
+		Assume $a_j = \ypolar$. For $j$-orientability, $j$-acyclicity and $j$-antisymmetry, we consider 3 situations:
 		\begin{description}
 			\item[$j < i$] Then for every $x$, we have $(x, 0) \not\infrajet_j (x, 1)$. Every $j$-connected component $C \subseteq X$ produces two $j$-connected components $\set{(c, 0)}{c \in C}$ and $\set{(c, 1)}{c \in C}$, where $j$-orientability, $j$-acyclicity and $j$-antisymmetry are inherited from $X$.
 			\item[$j > i$] Then for every $x$, we have $(x, 0) \equijet_j (x, 1)$. Every $j$-connected component $C \subseteq X$ produces one $j$-connected component $\set{(c, u)}{c \in C, u \in \accol{0, 1}}$, where totality of $\jet_j^*$ is inherited from $X$.
 			
-			For $j$-acyclicity, note that $(x, u) \jet_j^* (y, v)$ if and only if $x \jet_j^* y$ and $(x, u) \equijet_j^* (y, v)$ if and only if $x \equijet_j^* y$. Thus, $j$-acyclicity is also inherited from $X$.
+			For $j$-acyclicity, note that $(x, u) \jet_j^* (y, v) \Leftrightarrow x \jet_j^* y$ and $(x, u) \equijet_j^* (y, v) \Leftrightarrow x \equijet_j^* y$. Thus, $j$-acyclicity is also inherited from $X$.
 			
 			For $j$-antisymmetry, note that $(x, u) \equijet_j (y, v)$ means that either $x \equijet_j y$ and $u = v$ or that $x = y$ and $u \neq v$.
 			In the former case, we get $x \infrajet_{j-1} y$ and hence $(x, u) \infrajet_{j-1} (y, v)$.
@@ -378,7 +378,7 @@ The conceptual reason for asking $i$-antisymmetry is to exclude the equijet inte
 			
 			For $i$-acyclicity, note that if $(x, u) \jet_i^* (y, v)$ and $(x, u) \tej_i^* (y, v)$, then $u = v$, so this is inherited from $i$-acyclicity of $X$.
 			
-			For $i$-antisymmetry, $(x, u) \equijet_i (y, v)$ implies $u = v$, so this is also inherited from $i$-antisymmetry of $X$.
+			For $i$-antisymmetry, $(x, u) \equijet_i (y, v)$ implies $u = v$, so this is also inherited from $i$-antisymme\-try of $X$.
 		\end{description}
 		\item[\framebox{$\loch \multip \rival{\tej_i}$}] By an analogous argument. \qedhere
 	\end{description}
@@ -691,7 +691,7 @@ Note that a $\vec b$-jet-cube is uniquely in the image of $\Usymcube_i$ if it do
 	The functions $\JEP$ and $\erasejc{\loch}$ are correspondingly extended to functors.
 \end{definition}
 \begin{corollary} \label{thm:jet-cubes-are-jewels}
-	The functor $\JEP : \jetcube{\myorix}{\mycubex}{M}{\vec a} \to \jetset{\vec a}$ factors over the inclusion $\jetjewel{\vec a} \hookrightarrow \jetset{\vec a}$.
+	For $\myorix \in \accol{\orif, \orifb}$, the functor $\JEP : \jetcube{\myorix}{\mycubex}{M}{\vec a} \to \jetset{\vec a}$ factors over the inclusion $\jetjewel{\vec a} \hookrightarrow \jetset{\vec a}$.
 \end{corollary}
 \begin{proof}
 	By induction on the dimension and using \cref{thm:lift-to-jet-jewels}, it is clear that for any jet cube $W$, the jet set $\JEP(W)$ is a jet jewel, which factors the action on objects. The action on morphisms factors because $\jetjewel{\vec a}$ is a full subcategory of $\jetset{\vec a}$.
