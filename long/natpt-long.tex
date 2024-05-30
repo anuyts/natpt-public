@@ -339,36 +339,48 @@ On the other hand, $i$-antisymmetry at a symmetric degree $i$ would completely d
 	The \textbf{category of jet jewels} $\jetjewel{\vec a}$ is defined as the full subcategory of $\jetset{\vec a}$ on jet jewels.
 \end{definition}
 The conceptual reason for asking $i$-antisymmetry is to exclude the equijet interval $\rival{\equijetsym_i}$, so that the only jet jewel intervals at directed degrees are $\rival{\jetsym_i}$ and $\rival{\tejsym_i}$.
-\todoi{Adapt to new definition}
 \begin{proposition} \label{thm:lift-to-jet-jewels}
 	Jet jewels are closed under the functors $\Op_i$, $\Fsym_i$,
 	%$\Usym_i$, $\Csym_{i \neq n-1}$, $\UFsym_i$, $\UCsym_{i \neq n-1}$,
 	$\loch \multip \rival{\jet_i}$ and $\loch \multip \rival{\tej_i}$.
 \end{proposition}
 \begin{proof}
+	Clearly, each of these functors preserves finiteness.
+	We prove the other properties in the definition of a jet jewel:
 	\begin{description}
-		\item[$\Op_i$] Trivial.
-		\item[$\Fsym_i$] This functor clearly preserves $(n-1)$-connectedness even if $i = n-1$. Meanwhile, $j$-orientability and $j$-antisymmetry are unaffected for $j \neq i$ and not required for $j = i$. In the case of $(i+1)$-antisymmetry, we use that $\infrajetsym_i$ remains unchanged.
+		\item[\framebox{$\Op_i$}] Trivial.
+		\item[\framebox{$\Fsym_i$}] This functor (defined in \cref{def:sym-free}) clearly preserves $(n-1)$-connectedness even if $i = n-1$.
+		Meanwhile, $j$-orientability and $j$-antisymmetry are unaffected for $j \neq i$ and not required for $j = i$.
+		In the case of $i$-antisymmetry, we use that $\infrajetsym_{i-1}$ and equality (if $i = 0$) remain unchanged.
 %		\item[$\Usym_i$] This functor does not modify the jet set, so the conditions are preserved.
 %		\item[$\Csym_{i \neq n-1}$] Since $i \neq n-1$, this functor preserves $(n-1)$-connectedness. Meanwhile, $j$-acyclicity is unaffected for $j \neq i$ and vacuous for $i$ which is symmetric in the codomain of $\Csym_i$.
 %		\item[$\UFsym_i$] Since $\UFsym_i = \Usym_i \circ \Fsym_i$.
 %		\item[$\UCsym_{i \neq n-1}$] Since $\UCsym_i = \Usym_i \circ \Csym_i$.
-		\item[$\loch \multip \rival{\jet_i}$] To see $(n-1)$-connectedness, note that:
+		\item[\framebox{$\loch \multip \rival{\jet_i}$}] To see $(n-1)$-connectedness, note that:
 		\begin{itemize}
 			\item All objects of the form $(x, 0)$ are $(n-1)$-connected,
 			\item All objects of the form $(x, 1)$ are $(n-1)$-connected,
-			\item Since $i \leq n-1$, we always have $(x, 0) \infrajet_i (x, 1)$.
+			\item Since $i \leq n-1$, we always have $(x, 0) \infrajet_{n-1} (x, 1)$.
 		\end{itemize}
-		\todoi{Continue proof}
-		Assuming $a_j = \ypolar$, for $j$-orientability, we consider 3 situations:
+		For $j$-orientability, $j$-acyclicity and $j$-antisymmetry, we consider 3 situations:
 		\begin{description}
-			\item[$j < i$] Then for every $x$, we have $(x, 0) \not\infrajet_j (x, 1)$. Every $j$-connected component $C \subseteq X$ produces two $j$-connected components $\set{(c, 0)}{c \in C}$ and $\set{(c, 1)}{c \in C}$, where totality of $\jet_j^*$ is inherited from $X$.
+			\item[$j < i$] Then for every $x$, we have $(x, 0) \not\infrajet_j (x, 1)$. Every $j$-connected component $C \subseteq X$ produces two $j$-connected components $\set{(c, 0)}{c \in C}$ and $\set{(c, 1)}{c \in C}$, where $j$-orientability, $j$-acyclicity and $j$-antisymmetry are inherited from $X$.
 			\item[$j > i$] Then for every $x$, we have $(x, 0) \equijet_j (x, 1)$. Every $j$-connected component $C \subseteq X$ produces one $j$-connected component $\set{(c, u)}{c \in C, u \in \accol{0, 1}}$, where totality of $\jet_j^*$ is inherited from $X$.
+			
+			For $j$-acyclicity, note that $(x, u) \jet_j^* (y, v)$ if and only if $x \jet_j^* y$ and $(x, u) \equijet_j^* (y, v)$ if and only if $x \equijet_j^* y$. Thus, $j$-acyclicity is also inherited from $X$.
+			
+			For $j$-antisymmetry, note that $(x, u) \equijet_j (y, v)$ means that either $x \equijet_j y$ and $u = v$ or that $x = y$ and $u \neq v$.
+			In the former case, we get $x \infrajet_{j-1} y$ and hence $(x, u) \infrajet_{j-1} (y, v)$.
+			In the latter case, since $j-1 \geq i$, we get $(x, 0) \jet_{j-1} (x, 1)$, so that $(x, u) \infrajet_{j-1} (y, v)$.
 			\item[$j = i$] Then $(x, u) \infrajet_i^* (y, v)$ if and only if $x \infrajet_i^* y$.
 			By $i$-orientability of the original jet jewel $X$, we have $x \jet_i^* y$ or $x \tej_i^* y$. Say we have $x \jet_i^* y$.
 			Then we have $(y, 0) \jet_i^* (x, 0) \jet_i (x, 1) \jet_i^* (y, 1)$, and thus either $(x, u) \jet_i^* (y, v)$ or $(x, u) \tej_i^* (y, v)$ depending on $u$ and $v$.
+			
+			For $i$-acyclicity, note that if $(x, u) \jet_i^* (y, v)$ and $(x, u) \tej_i^* (y, v)$, then $u = v$, so this is inherited from $i$-acyclicity of $X$.
+			
+			For $i$-antisymmetry, $(x, u) \equijet_i (y, v)$ implies $u = v$, so this is also inherited from $i$-antisymmetry of $X$.
 		\end{description}
-		\item[$\loch \multip \rival{\tej_i}$] By an analogous argument. \qedhere
+		\item[\framebox{$\loch \multip \rival{\tej_i}$}] By an analogous argument. \qedhere
 	\end{description}
 \end{proof}
 
