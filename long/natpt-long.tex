@@ -84,7 +84,7 @@
 
 \tableofcontents
 
-\pagebreak
+%\pagebreak
 
 \chapter{Base Categories and Modes} \label{ch:modes}
 
@@ -95,16 +95,16 @@ We propose two families of base categories, parametrized by the mask $\vec a$, a
 The more complex but better behaved family of base categories are categories of \textbf{jet cubes} $\jetcubefwd \mycubex M {\vec a}$ (\cref{sec:jetcubes}).
 While we can get a grasp on jet cubes by characterizing their morphisms using a calculus (\cref{sec:jetcubes:calculus}), this calculus is relatively complex and its soundness and completeness proofs are even more complex.
 
-For these reasons, we alternatively propose to use categories of \textbf{jet jewels} $\jetjewel{\vec a}$ (\cref{sec:jetjewel}). These are full subcategories of $\jetset{\vec a}$ on objects that satisfy certain somewhat arbitrary well-behavedness criteria.
-The main purpose of the categories of jet jewels is to be workable for most basic purposes without being as complex as the categories of jet cubes.
+For these reasons, we alternatively propose to use categories of \textbf{jet topes} $\jettope{\vec a}$ (\cref{sec:jettope}). These are full subcategories of $\jetset{\vec a}$ on objects that satisfy certain somewhat arbitrary well-behavedness criteria.
+The main purpose of the categories of jet topes is to be workable for most basic purposes without being as complex as the categories of jet cubes.
 
 Upon a first lecture, readers may choose to omit \cref{sec:jetcubes} on jet cubes.
 
 Finally in \cref{sec:rpb}, we introduce a number of operations on anpolarity masks which serve to insert bridge and/or path relations for every degree.
 These will be both a technical device and a source of interesting modes in practice.
 
-\todoi{I momentarily had some doubt about usability of jet jewels, but I think it's okay.
-The calculus and its soundness proof are used mainly for modalities interacting with the interval. But these will not be used intensively in the NatPT paper itself.}
+%\todoi{I momentarily had some doubt about usability of jet topes, but I think it's okay.
+%The calculus and its soundness proof are used mainly for modalities interacting with the interval. But these will not be used intensively in the NatPT paper itself.}
 
 \section{Anpolarity Masks} \label{sec:mask}
 In RelDTT, modes were natural numbers (minus one) expressing the number of available relations.
@@ -303,7 +303,7 @@ Note that in both instances, we take the opposite at the source-side of the jet 
 The functor $\loch \multip \rival{\edge_i}$ commutes with itself, i.e. $(x, v, w) \mapsto (x, w, v)$ is a natural automorphism of $\loch \multip \rival{\edge_i} \multip \rival{\edge_i}$. \qed
 \end{corollary}
 
-\section{Jet Jewels} \label{sec:jetjewel}
+\section{Jet Topes} \label{sec:jettope}
 \begin{definition}
 	\label{def:jet-connected}
 	\label{def:jet-sublinear}
@@ -325,9 +325,9 @@ On the other hand, $i$-antisymmetry at a symmetric degree $i$ would completely d
 %	\]
 %	with $n \geq 2$.
 %\end{definition}
-\begin{definition} \label{def:jet-jewel}
+\begin{definition} \label{def:jet-tope}
 	Let $\vec a$ be a mask of length $n$.
-	An $\vec a$-jet-set $X$ is a \textbf{jet jewel} if it is:
+	An $\vec a$-jet-set $X$ is a \textbf{jet tope} if it is:
 	\begin{enumerate}
 		\item finite,
 		\item $(n-1)$-connected,
@@ -336,17 +336,17 @@ On the other hand, $i$-antisymmetry at a symmetric degree $i$ would completely d
 		\item $i$-antisymmetric for every \emph{directed} degree $i$.
 		%\item for every $0 \leq i < n$, the relation $\jet_i^*$ is a total pre-order on any connected component of $X$, i.e. if $x \infrajet_i^* y$, then $x \jet_i^* y$ or $x \tej_i^* y$. We call this property \textbf{$i$-orientability}.
 	\end{enumerate}
-	The \textbf{category of jet jewels} $\jetjewel{\vec a}$ is defined as the full subcategory of $\jetset{\vec a}$ on jet jewels.
+	The \textbf{category of jet topes} $\jettope{\vec a}$ is defined as the full subcategory of $\jetset{\vec a}$ on jet topes.
 \end{definition}
-The conceptual reason for asking $i$-antisymmetry is to exclude the equijet interval $\rival{\equijetsym_i}$, so that the only jet jewel intervals at directed degrees are $\rival{\jetsym_i}$ and $\rival{\tejsym_i}$.
-\begin{proposition} \label{thm:lift-to-jet-jewels}
-	Jet jewels are closed under the functors $\Op_i$, $\Fsym_i$,
+The conceptual reason for asking $i$-antisymmetry is to exclude the equijet interval $\rival{\equijetsym_i}$, so that the only jet tope intervals at directed degrees are $\rival{\jetsym_i}$ and $\rival{\tejsym_i}$.
+\begin{proposition} \label{thm:lift-to-jet-topes}
+	Jet topes are closed under the functors $\Op_i$, $\Fsym_i$,
 	%$\Usym_i$, $\Csym_{i \neq n-1}$, $\UFsym_i$, $\UCsym_{i \neq n-1}$,
 	$\loch \multip \rival{\jet_i}$ and $\loch \multip \rival{\tej_i}$.
 \end{proposition}
 \begin{proof}
 	Clearly, each of these functors preserves finiteness.
-	We prove the other properties in the definition of a jet jewel:
+	We prove the other properties in the definition of a jet tope:
 	\begin{description}
 		\item[\framebox{$\Op_i$}] Trivial.
 		\item[\framebox{$\Fsym_i$}] This functor (defined in \cref{def:sym-free}) clearly preserves $(n-1)$-connectedness even if $i = n-1$.
@@ -373,7 +373,7 @@ The conceptual reason for asking $i$-antisymmetry is to exclude the equijet inte
 			In the former case, we get $x \infrajet_{j-1} y$ and hence $(x, u) \infrajet_{j-1} (y, v)$.
 			In the latter case, since $j-1 \geq i$, we get $(x, 0) \jet_{j-1} (x, 1)$, so that $(x, u) \infrajet_{j-1} (y, v)$.
 			\item[$j = i$] Then $(x, u) \infrajet_i^* (y, v)$ if and only if $x \infrajet_i^* y$.
-			By $i$-orientability of the original jet jewel $X$, we have $x \jet_i^* y$ or $x \tej_i^* y$. Say we have $x \jet_i^* y$.
+			By $i$-orientability of the original jet tope $X$, we have $x \jet_i^* y$ or $x \tej_i^* y$. Say we have $x \jet_i^* y$.
 			Then we have $(y, 0) \jet_i^* (x, 0) \jet_i (x, 1) \jet_i^* (y, 1)$, and thus either $(x, u) \jet_i^* (y, v)$ or $(x, u) \tej_i^* (y, v)$ depending on $u$ and $v$.
 			
 			For $i$-acyclicity, note that if $(x, u) \jet_i^* (y, v)$ and $(x, u) \tej_i^* (y, v)$, then $u = v$, so this is inherited from $i$-acyclicity of $X$.
@@ -690,11 +690,11 @@ Note that a $\vec b$-jet-cube is uniquely in the image of $\Usymcube_i$ if it do
 	as the full subcategory of $\cubecat^\mycubex_M \times_\Set \jetset{\vec a}$ on $(\myorix, \vec a)$-jet-cubes, as justified by \cref{thm:jet-cube-pullback}.
 	The functions $\JEP$ and $\erasejc{\loch}$ are correspondingly extended to functors.
 \end{definition}
-\begin{corollary} \label{thm:jet-cubes-are-jewels}
-	For $\myorix \in \accol{\orif, \orifb}$, the functor $\JEP : \jetcube{\myorix}{\mycubex}{M}{\vec a} \to \jetset{\vec a}$ factors over the inclusion $\jetjewel{\vec a} \hookrightarrow \jetset{\vec a}$.
+\begin{corollary} \label{thm:jet-cubes-are-topes}
+	For $\myorix \in \accol{\orif, \orifb}$, the functor $\JEP : \jetcube{\myorix}{\mycubex}{M}{\vec a} \to \jetset{\vec a}$ factors over the inclusion $\jettope{\vec a} \hookrightarrow \jetset{\vec a}$.
 \end{corollary}
 \begin{proof}
-	By induction on the dimension and using \cref{thm:lift-to-jet-jewels}, it is clear that for any jet cube $W$, the jet set $\JEP(W)$ is a jet jewel, which factors the action on objects. The action on morphisms factors because $\jetjewel{\vec a}$ is a full subcategory of $\jetset{\vec a}$.
+	By induction on the dimension and using \cref{thm:lift-to-jet-topes}, it is clear that for any jet cube $W$, the jet set $\JEP(W)$ is a jet tope, which factors the action on objects. The action on morphisms factors because $\jettope{\vec a}$ is a full subcategory of $\jetset{\vec a}$.
 \end{proof}
 We will ultimately only be interested in $(\orif, \vec a)$-jet-cubes, but in \cref{sec:jetcubes:calculus}, we define an inductive predicate to determine whether a cube morphism $\vfi : \erasejc V \to \erasejc W$ is in fact a jet cube morphism $V \to W$, and this predicate's inference rules make use of $(\orifbe, \vec a)$-jet-cubes in their premises.
 The orientation kits $\orife$ and $\orifb$ are only introduced for explanatory purposes: we can easily relate jet cubes with and without $\tej$ (\cref{thm:backward-jets-equivalent}), and later on\todo{Refer} we will be able to relate jet cubes with and without $\equijet$ by inserting additional symmetric degrees.
@@ -4316,7 +4316,34 @@ Note that a cartesian product with $\rival{\eqtysym}$ or $\rival{\topsym}$ is th
 	\end{description}
 \end{proof}
 
-\section{Semantics on Jet Jewels} \label{sec:poresh-jetjewel}
+\section{Semantics on Jet Topes and Jet Topical Sets} \label{sec:poresh-jettope}
+
+\subsection{Semantics on Jet Topes}
+\todoi{You don't need multiple modalities if they ultimately do the same thing. So consider only those with a right adjoint.}
+\todoi{Modalities with a right adjoint, preserve topes iff they have a further right adjoint.}
+
+\subsection{Triple Semantics on Jet Topic Sets}
+
+\subsection{Mask Enhancement}
+\todoi{Endofunctor on $\poreshcat$}
+
+\subsection{Strict Semantics on Enhanced Bimodal Jet Topic Setoids}
+
+\subsection{Pseudosemantics on Jet Topic Sets}
+
+\section{Semantics on Jet Cubes and Jet Cubical Sets} \label{sec:poresh-jetcube}
+
+\subsection{Semantics on Jet Cubes}
+
+\subsection{Triple Semantics on Jet Cubical Sets}
+\todoi{No go theorem}
+
+\subsection{Mask Enhancement}
+\todoi{Endofunctor on $\poreshcat$}
+
+\subsection{Strict Semantics on Enhanced Modal Jet Cubical Sets}
+
+\subsection{Pseudosemantics on Jet Cubical Sets}
 
 \chapter{Transpension}
 \todoi{Does Tw : sSet $\to$ sSet have a transp type? (Yes if it's Tw$_!$)}
@@ -4334,7 +4361,8 @@ Note that a cartesian product with $\rival{\eqtysym}$ or $\rival{\topsym}$ is th
 		General cleanup.
 	\item[v0.2] Wrote \cref{ch:modalities}. \\
 		Wrote \cref{sec:rpb}. \\
-		Changed title.
+		Changed title. \\
+		Renamed jet jewels to jet topes; modified their definition (\cref{def:jet-tope}).
 \end{description}
 
 \bibliographystyle{alphaurl}
