@@ -330,7 +330,7 @@ On the other hand, $i$-antisymmetry at a symmetric degree $i$ would completely d
 	An $\vec a$-jet-set $X$ is a \textbf{jet tope} if it is:
 	\begin{enumerate}
 		\item finite,
-		\item $(n-1)$-connected,
+		\item $(n-1)$-connected if $n > 0$, or a subsingleton if $n = 0$,
 		\item $i$-orientable for every degree $i$,
 		\item $i$-acyclic for every degree $i$,
 		\item $i$-antisymmetric for every \emph{directed} degree $i$.
@@ -346,6 +346,9 @@ The conceptual reason for asking $i$-antisymmetry is to exclude the equijet inte
 \end{proposition}
 \begin{proof}
 	Clearly, each of these functors preserves finiteness.
+	
+	Moreover, by existence of $0 \leq i < n$, we conclude that $n > 0$, so our jet tope needs to be $(n-1)$-connected rather than a subsingleton.
+	
 	We prove the other properties in the definition of a jet tope:
 	\begin{description}
 		\item[\framebox{$\Op_i$}] Trivial.
@@ -4145,7 +4148,9 @@ In words, \cref{eq:poresh-withrr-crit2} says that:
 \begin{corollary} \label{thm:jetsetoid-equiv-jetset}
 	The functors $\setoidquot$ and $\setoiddisc$ and the equivalence from \cref{thm:setoid-equiv-set} carry over to an equivalence of setoid-enriched categories $\jetsetoid{\vec a} \simeq \jetset{\vec a}$. \qed
 \end{corollary}
-\begin{definition} \label{def:poresh-jetsetoid} \label{def:poresh-jetset}
+\begin{definition}
+	\label{def:poresh-jetsetoid}
+	\label{def:poresh-jetset}
 	\begin{enumerate}
 		\item We define a strict\footnote{Assuming propositional extensionality.} 2-functor $\jetsetoidsym : \poreshcat \to \Setoid\Cat$ from the 2-category of polarized reshuffles to the 2-category of setoid-enriched categories:
 		\begin{itemize}
@@ -4316,11 +4321,82 @@ Note that a cartesian product with $\rival{\eqtysym}$ or $\rival{\topsym}$ is th
 	\end{description}
 \end{proof}
 
-\section{Semantics on Jet Topes and Jet Topical Sets} \label{sec:poresh-jettope}
+\section{Semantics on Jet Topes and Jet Topic Sets} \label{sec:poresh-jettope}
+\todoi{Short intro}
 
 \subsection{Semantics on Jet Topes}
-\todoi{You don't need multiple modalities if they ultimately do the same thing. So consider only those with a right adjoint.}
-\todoi{Modalities with a right adjoint, preserve topes iff they have a further right adjoint.}
+In this section, we want to construct a 2-functor that sends polarized reshuffles $\mu : \vec a \to \vec b$ to functors $\jettope{\vec a} \to \jettope{\vec b}$, thus giving our mode theory of polarized reshuffles a semantics on jet topes.
+
+However, it is pointless to distinguish between two modalities when they have the exact same semantics, and it is at least roughly pointless to do so when they have roughly the same semantics.
+Looking at \cref{def:jet-tope} of jet topes, we see that:
+\begin{itemize}
+	\item Due to $i$-antisymmetry at directed degrees, we know that the $i$-equijet relation is equivalent to the $(i-1)$-infrajet relation (if $i > 0$) or to equality (if $i = 0$).
+	This means that a modality $\mu$ will have the same semantics, regardless of whether $j \cdot \mu = \mixpol_i$ or $j \cdot \mu = \isopol_{i-1}$ (if $i > 0$) or $j \cdot \mu = \nonpol_\eqtydeg$ (if $i = 0$).
+	For this reason, we will disallow any mentions of $\mixpol_i$ when $a_i = \ypolar$.
+	
+	\item Due to $(n-1)$-connectedness, the $(n-1)$-infrajet relation is roughly equivalent to the `true' relation.
+	For this reason, we will disallow any mentions of $\nonpol_\top$, as $\isopol_{n-1}$ can be mentioned instead.
+\end{itemize}
+Taking these two requirements together, by \cref{thm:poresh-adjoint}, we get exactly the statement that $\mu$ must have a right adjoint.
+
+\begin{theorem}
+	Let $\mu \in \Hom_\poreshcat(\vec a, \vec b)$ have a right adjoint $\mu \dashv \rho$.
+	Then the functor $\mu : \jetset{\vec a} \to \jetset{\vec b}$ sends jet topes to jet topes if and only if $\rho$ has a further right adjoint $\mu \dashv \rho \dashv \tau$.
+	
+	By consequence, there is a pseudofunctor $\jettopesym : \poreshcat\withrr \to \Cat$ sending
+	\begin{itemize}
+		\item an object $\vec a$ to $\jettope{\vec a}$,
+		\item a morphism $\mu : \vec a \to \vec b$ to the restriction of $\jetset{\mu} : \jetset{\vec a} \to \jetset{\vec b}$ to $\jettope{\vec a}$,
+		\item a 2-cell $\alpha : \mu \to \nu : \vec a \to \vec b$ to the restriction of $\jetset{\alpha}$ to $\jettope{\vec a}$.
+	\end{itemize}
+\end{theorem}
+\begin{proof}
+	We first prove the `only if' direction.
+	Note that, by \cref{thm:poresh-withrr}, the property that $\rho$ has a further right adjoint is decidable, so we can do this from the absurd.
+	Assume that $\rho$ does not have a right adjoint.
+	\begin{itemize}
+		\item Either $\rho$ violates \cref{eq:poresh-withr-crit1}, i.e. $\predeg(\top) \cdot \rho = \nonpol_\top$.
+		Then by \cref{thm:poresh-jetsetoid-intervals}, $\mu \rival{\jetsym_{\predeg(\top)}} = \rival{\edgesym_\top}$, where $\rival{\jetsym_{\predeg(\top)}}$ is a jet tope but $\rival{\edgesym_\top}$ is not, as it is not $(n-1)$-connected (if $n > 0$) or not a subsingleton (if $n = 0$).
+		\item Or $\rho : \vec b \to \vec a$ violates \cref{eq:poresh-withr-crit2}, i.e.\ there is some $i \in \Degeq(\vec a)$ with $i \cdot \rho = \mixpol_j$ and $b_j = \ypolar$.
+		Then by \cref{thm:poresh-jetsetoid-intervals}, $\mu \rival{\jetsym_i} = \rival{\equijetsym_j}$, where $\rival{\jetsym_i}$ is a jet tope but $\rival{\equijetsym_j}$ is not, as it is not $j$-antisymmetric.
+	\end{itemize}
+	
+	Now we prove the `if' direction.
+	Assume that $\rho$ does have a further right adjoint $\mu \dashv \rho \dashv \tau$ and take a jet tope $X$.
+	We prove that $\mu X$ is a jet tope (\cref{def:jet-tope}).
+	Informed by the construction in \cref{def:poresh-jetset}, we will regard both $X$ and $\mu X$ as jet \emph{setoids}.
+	\begin{enumerate}
+		\item Clearly, $\setoidquot(\mu X)$ is finite, as $\setoidquot(X)$ was finite.
+		
+		\item To see that $\mu X$ is $\predeg(\top)$-connected (i.e.\ $(n-1)$-connected if $n > 0$, or $\eqtydeg$-connected if $n = 0$), note that $x \jet_{\predeg(\top)} y$ in $\mu X$ if and only if $x \infrajet_{\eqtydeg \cdot \mu}^* x' \jet_{\predeg(\top) \cdot \mu} y' \infrajet_{\eqtydeg \cdot \mu}^* y$, and in particular if $x \jet_{\predeg(\top) \cdot \mu} y$.
+		Now $\predeg(\top) \cdot \mu > \mixpol_{\predeg(\top)}$ by \cref{eq:poresh-withrr-crit1}.
+		So $\infrajetsym_{\predeg(\top)} \oriof \mu = \infrajetsym_{\predeg(\top)}$.
+		Thus, since $\infrajetsym_{\predeg(\top)}^*$ is always true in $X$, we conclude that $\infrajetsym_{\predeg(\top)}^*$ is always true in $\mu X$.
+		
+		\item We show that $\mu X$ is $j$-orientable for every $j \in \Deg(\vec b)$. Let $x \infrajet_j^* y$ in $\mu X$.
+		Then
+		\[
+			x \mathrel{((\edgesym_\eqtydeg \oriof \mu)^* \otimes (\infrajetsym_j \oriof \mu) \otimes (\edgesym_\eqtydeg \oriof \mu)^*)^*} y
+		\]
+		in $X$.
+		Now $\eqtydeg < j$ so $\eqtydeg \cdot \mu \ll j \cdot \mu$, so $\edgesym_\eqtydeg \oriof \mu \leq \equijetsym_j \oriof \mu \leq \infrajetsym_j \oriof \mu$, so we can conclude more simply that $x \mathrel{(\infrajetsym_j \oriof \mu)^*} y$.
+		By case analysis on $\getpol(j \cdot \mu)$, where the symmetric cases are trivial, and using that $X$ is $\getdeg(j \cdot \mu)$-orientable, we can conclude that $x (\jet_j \oriof \mu)^* y$ or $x (\tej_j \oriof \mu)^* y$ in $X$, and therefore that $x \jet_j^* y$ or $x \tej_j^* y$ in $\mu X$.
+		
+		\item We show that $\mu X$ is $j$-acyclic for every $j \in \Deg(\vec b)$ by similar reasoning.
+		
+		\item Assume that $b_j = \ypolar$.
+		We show that $\mu X$ is $j$-antisymmetric, i.e. that $x \equijet_j^{\mu X} y$ implies $x \infrajet_{\predeg(j)}^{\mu X} y$.
+		Let $p'_{i'} = \predeg(j) \cdot \mu$ and $p_i = j \cdot \mu$.
+		We case split on how $i'$ compares to $i$
+		\begin{description}
+			\item[$i' = i$] Then without relying on $X$ being a jet tope, we can prove $j$-antisymmetry by case distinction on $p'$ and $p$.
+			\item[$i' = \predeg(i)$] Then by \cref{eq:poresh-withrr-crit2,eq:poresh-withr-crit2}, we find that $p \in \accol{\pospol, \negpol}$. By \cref{eq:poresh-withr-crit2}, $p' \in \accol{\pospol, \negpol, \isopol}$.
+			Thus, we see that $\infrajetsym_{\predeg(j)} \oriof \mu = \infrajetsym_{\predeg(i)}$ and $\equijetsym_j \oriof \mu = \equijetsym_i$.
+			Then we can invoke $i$-antisymmetry of $X$.
+			\item[$i' < \predeg(i)$] Then we have $\getdeg(\predeg(j) \cdot \mu) < \predeg(i)$ and $j \cdot \mu \geq \isopol_{\predeg(i)}$, so by \cref{eq:poresh-withrr-crit2}, this is impossible as $b_j = \ypolar$. \qedhere
+		\end{description}
+	\end{enumerate}
+\end{proof}
 
 \subsection{Triple Semantics on Jet Topic Sets}
 
