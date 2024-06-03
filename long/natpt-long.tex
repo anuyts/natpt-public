@@ -4321,10 +4321,10 @@ Note that a cartesian product with $\rival{\eqtysym}$ or $\rival{\topsym}$ is th
 	\end{description}
 \end{proof}
 
-\section{Semantics on Jet Topes and Jet Topic Sets} \label{sec:poresh-jettope}
+\section{Semantics on Jet Topes and Jet Topic Sets} \label{sec:poresh-jettope-jtset}
 \todoi{Short intro}
 
-\subsection{Semantics on Jet Topes}
+\subsection{Semantics on Jet Topes} \label{sec:poresh-jettope}
 In this section, we want to construct a 2-functor that sends polarized reshuffles $\mu : \vec a \to \vec b$ to functors $\jettope{\vec a} \to \jettope{\vec b}$, thus giving our mode theory of polarized reshuffles a semantics on jet topes.
 
 However, it is pointless to distinguish between two modalities when they have the exact same semantics, and it is at least roughly pointless to do so when they have roughly the same semantics.
@@ -4339,7 +4339,7 @@ Looking at \cref{def:jet-tope} of jet topes, we see that:
 \end{itemize}
 Taking these two requirements together, by \cref{thm:poresh-adjoint}, we get exactly the statement that $\mu$ must have a right adjoint.
 
-\begin{theorem}
+\begin{theorem} \label{sec:poresh-jettope}
 	Let $\mu \in \Hom_\poreshcat(\vec a, \vec b)$ have a right adjoint $\mu \dashv \rho$.
 	Then the functor $\mu : \jetset{\vec a} \to \jetset{\vec b}$ sends jet topes to jet topes if and only if $\rho$ has a further right adjoint $\mu \dashv \rho \dashv \tau$.
 	
@@ -4398,28 +4398,90 @@ Taking these two requirements together, by \cref{thm:poresh-adjoint}, we get exa
 	\end{enumerate}
 \end{proof}
 
-\subsection{Triple Semantics on Jet Topic Sets}
+\subsection{Triple Semantics on Jet Topic Sets} \label{sec:poresh-jtset:triple}
+\begin{definition}
+	The category of \textbf{$\vec a$-jet topic sets} is the presheaf category $\jtset{\vec a} := \Psh(\jettope{\vec a})$.
+\end{definition}
+\begin{theorem} \label{thm:poresh-jettopicset}
+	We have the following pseudofunctors:
+	\begin{itemize}
+		\item $\jtsetsym\withrr : \poreshcat\withrr \to \Cat\withrr$,
+		\item $\jtsetsym\withlr : \poreshcat\withlr \to \Cat\withlr$,
+		\item $\jtsetsym\withll : \poreshcat\withll \to \Cat\withll$,
+	\end{itemize}
+	to the 2-category of categories, functors with a specified number of left/right adjoints (\cref{not:poresh-with}), and natural transformations, where:
+	\begin{itemize}
+		\item each functor sends an object $\vec a$ to $\Psh(\jettope{\vec a})$,
+		\item a triple of polarized reshuffles $\mu \dashv \rho \dashv \tau$ is sent by the respective functors to
+		\[
+			\jtsetsym\withrr(\mu) = \lpsh \mu
+			\qquad\dashv\qquad
+			\jtsetsym\withlr(\rho) = \fpsh \mu
+			\qquad\dashv\qquad
+			\jtsetsym\withll(\tau) = \rpsh \mu,
+		\]
+		\item 2-cells are also respected.
+	\end{itemize}
+\end{theorem}
+\begin{proof}
+	In general, a functor $F : \catV \to \catW$ gives rise to a triple of adjoint functors $\lpsh F \dashv \fpsh F \dashv \rpsh F$ where $\fpsh F : \Psh(\catW) \to \Psh(\catV)$ is precomposition with $F$ and the other two are left and right Kan extension along $F$ \cite{stacks-adjoints,nlab:lifting-functors}\cite[\S 2.3.8]{nuyts-phd}.
+\end{proof}
+This is a fairly good result: any polarized reshuffle that is part of a chain of at least three adjoints, now has semantics on jet topic sets.
+Moreover, if we have a chain of four adjoints $\kappa \dashv \mu \dashv \rho \dashv \tau$, then by uniqueness of the adjoint, we find that $\jtsetsym\withlr(\mu) \cong \jtsetsym\withrr(\mu)$ and similar for $\rho$.
+So the 3 pseudofunctors essentially agree on the intersection of their domains.
 
-\subsection{Mask Enhancement}
+However, we can have commutative diagrams in $\poreshcat$ each of whose sides has semantics in jet topic sets, but where the composites of the sides do not have such semantics, so that commutativity is not necessarily preserved.
+Consider, for example, the following diagram with functors from \cref{ex:cohesion}:
+\[
+	\xymatrix{
+		[\ypolar]
+			\ar[rr]^{\cohpi_0 = \reshlist{\isopol_0}{}}
+			\ar[dd]_{\cohcodisc_1 = \reshlist{\nonpol_\eqtydeg}{\pospol_0, \nonpol_\top}}
+		&&
+		[]
+			\ar[dd]^{\cohcodisc_0 = \reshlist{\nonpol_\eqtydeg}{\nonpol_\top}}
+		\\ \\
+		[\ypolar, \ypolar]
+			\ar[rr]_{\cohpi_0 = \reshlist{\isopol_0}{\pospol_1}}
+		&&
+		[\ypolar]
+	}
+\]
+The horizontal sides are in $\poreshcat\withrr$: $\cohpi_0 \dashv \cohdisc_0 \dashv \cohfget_0$.
+The vertical sides are in $\poreshcat\withll$: $\cohdisc_i \dashv \cohfget_i \dashv \cohcodisc_i$.
+The diagonals compose to $\cohcodisc_0 = \reshlist{\isopol_0}{\nonpol_\top} : [\ypolar, \ypolar]$, which by \cref{thm:poresh-adjoint} has neither a left, nor a right adjoint.
+So each of the sides has semantics on jet topic sets, but we currently do not know whether the diagram still commutes there.
+We cannot invoke the composition law of any pseudofunctor involved here, because the composition operands all require a different pseudofunctor.
+
+For this reason, not unlike our usage of jet setoids in \cref{sec:poresh-jetset}, we will take a detour via setoid enriched categories that are equivalent to the categories of jet topic sets but where a single strict 2-functorial semantics of our mode theory can be achieved.
+
+\subsection{Mask Bi-Enhancement} \label{sec:poresh-jtset:enhancement}
+The trick we will use to achieve this is the following: we will insert additional symmetric degrees into our anpolarity masks, which will serve as degrees for formal infrajets and equijets, as well as for the `true' relation.
+We will call this \textbf{mask bi-enhancement}.
+To get a handle on equality, we will resort to setoid-valued presheaves.
+
+We will then take the full subcategory of jet topic sets for the enhanced mask, on those presheaves where formal and actual infrajets (equijets) actually coincide (\cref{sec:poresh-jtset:strict}).
+This category will be equivalent to the original category of jet topic sets for the original mask.
+
 \todoi{Endofunctor on $\poreshcat$}
 
-\subsection{Strict Semantics on Enhanced Bimodal Jet Topic Setoids}
+\subsection{Strict Semantics on Enhanced Bimodal Jet Topic Setoids} \label{sec:poresh-jtset:strict}
 
-\subsection{Pseudosemantics on Jet Topic Sets}
+\subsection{Pseudosemantics on Jet Topic Sets} \label{sec:poresh-jtset:pseudo}
 
-\section{Semantics on Jet Cubes and Jet Cubical Sets} \label{sec:poresh-jetcube}
+\section{Semantics on Jet Cubes and Jet Cubical Sets} \label{sec:poresh-jetcube-jcset}
 
-\subsection{Semantics on Jet Cubes}
+\subsection{Semantics on Jet Cubes} \label{sec:poresh-jetcube}
 
-\subsection{Triple Semantics on Jet Cubical Sets}
+\subsection{Triple Semantics on Jet Cubical Sets} \label{sec:poresh-jcset:triple}
 \todoi{No go theorem}
 
-\subsection{Mask Enhancement}
+\subsection{Mask Enhancement} \label{sec:poresh-jcset:enhancement}
 \todoi{Endofunctor on $\poreshcat$}
 
-\subsection{Strict Semantics on Enhanced Modal Jet Cubical Sets}
+\subsection{Strict Semantics on Enhanced Modal Jet Cubical Sets} \label{sec:poresh-jcset:strict}
 
-\subsection{Pseudosemantics on Jet Cubical Sets}
+\subsection{Pseudosemantics on Jet Cubical Sets} \label{sec:poresh-jcset:pseudo}
 
 \chapter{Transpension}
 \todoi{Does Tw : sSet $\to$ sSet have a transp type? (Yes if it's Tw$_!$)}
