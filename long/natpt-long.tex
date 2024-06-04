@@ -100,7 +100,7 @@ The main purpose of the categories of jet topes is to be workable for most basic
 
 Upon a first lecture, readers may choose to omit \cref{sec:jetcubes} on jet cubes.
 
-Finally in \cref{sec:rpb}, we introduce a number of operations on anpolarity masks which serve to insert bridge and/or path relations for every degree.
+Finally in \cref{sec:pb}, we introduce a number of operations on anpolarity masks which serve to insert bridge and/or path relations for every degree.
 These will be both a technical device and a source of interesting modes in practice.
 
 %\todoi{I momentarily had some doubt about usability of jet topes, but I think it's okay.
@@ -2617,7 +2617,7 @@ The shared reader may object that Pinyo and Kraus define the morphisms of $\twis
 	This means we can always rewrite a derivation tree in the calculus for $\jetcubetri \affine \bipointedsym {[\ypolar]}$ of a morphism in $\jetcubefwd \affine \bipointedsym {[\ypolar]}$ to use only the prescribed rules. 
 \end{proof}
 
-\section{Rods, Paths and Bridges} \label{sec:rpb}
+\section{Rods, Paths and Bridges} \label{sec:pb}
 \todoi{Reabolish rods}
 In this section, we define a number of operations on anpolarity masks (\cref{def:anpolarity}) which serve to insert symmetric \emph{bridge} and/or \emph{path} relations for every degree.
 The idea, in the universe of small types, is the following:
@@ -2637,7 +2637,7 @@ The mask operations serve three goals:
 \end{itemize}
 
 %\subsection{Path/Bridge Transformations}
-\begin{definition}
+\begin{definition} \label{def:pb}
 	Let $\mymaskx \in \accol{\maskj, \maskpj, \maskjb, \maskpjb, \maskrpj}$ and $\mymasky \in \accol{\maske, \maskpb, \maskrp}$, and let $a$ be an anpolarity.
 	We define $\maskop a \mymaskx \mymasky \in \List\,\Anpolarity$ as follows:
 	\[
@@ -2684,6 +2684,7 @@ The mask operations serve three goals:
 		\jet_5, \quad
 		{\edge_6}.
 	\]
+	When we need a degree in itself, we will write e.g.\ $\pathdeg{0}$.
 \end{definition}
 
 \subsection{Understanding Equijets}
@@ -4453,19 +4454,143 @@ The diagonals compose to $\cohcodisc_0 = \reshlist{\isopol_0}{\nonpol_\top} : [\
 So each of the sides has semantics on jet topic sets, but we currently do not know whether the diagram still commutes there.
 We cannot invoke the composition law of any pseudofunctor involved here, because the composition operands all require a different pseudofunctor.
 
-For this reason, not unlike our usage of jet setoids in \cref{sec:poresh-jetset}, we will take a detour via setoid enriched categories that are equivalent to the categories of jet topic sets but where a single strict 2-functorial semantics of our mode theory can be achieved.
+\subsection{Ambidextrification} \label{sec:poresh-jtset:ambidextrification}
+For this reason, not unlike our usage of jet setoids in \cref{sec:poresh-jetset}, we will take a detour via setoid enriched categories that are equivalent to the categories of jet topic sets but where a single strict 2-functorial semantics of our mode theory can be achieved (\cref{sec:poresh-jtset:strict}).
 
-\subsection{Mask Bi-Enhancement} \label{sec:poresh-jtset:enhancement}
 The trick we will use to achieve this is the following: we will insert additional symmetric degrees into our anpolarity masks, which will serve as degrees for formal infrajets and equijets, as well as for the `true' relation.
-We will call this \textbf{mask bi-enhancement}.
+The result is that any polarized reshuffle can be re-encoded as one that has both a left and a right adjoint. We call this \textbf{ambidextrification}.
 To get a handle on equality, we will resort to setoid-valued presheaves.
 
-We will then take the full subcategory of jet topic sets for the enhanced mask, on those presheaves where formal and actual infrajets (equijets) actually coincide (\cref{sec:poresh-jtset:strict}).
-This category will be equivalent to the original category of jet topic sets for the original mask.
+We will then take the full subcategory of jet topic sets for the ambidextrified mask, on those presheaves where formal and actual infrajets (equijets) actually coincide (\cref{sec:poresh-jtset:strict}).
+This category will be equivalent to the original category of jet topic sets for the original mask (\cref{sec:poresh-jtset:pseudo}).
 
-\todoi{Endofunctor on $\poreshcat$}
+Ambidextrification is done in two steps: sinistrification (making all reshuffles left adjoint) and dextrification (making them right adjoint).%
+\footnote{Shulman \cite{matt} introduces a construction called \emph{co-dextrification} which adds left adjoints to existing morphisms in a certain 2-category in such a way that the result satisfies a co-free property. He should perhaps have called it \emph{co-free dextrification}, so that the free construction could be called \emph{free dextrification} and the word \emph{dextrification} per se would be available when no universal property is proven. We mean the words sinistrification, dextrification and ambidextrification in this latter sense: we do not prove any universal property.}
+These operation make use of \cref{def:pb} and its \emph{big degree} notation.
 
-\subsection{Strict Semantics on Enhanced Bimodal Jet Topic Setoids} \label{sec:poresh-jtset:strict}
+\begin{definition} \label{def:poresh-sin}
+	We define a functor $\Sin : \poreshcat \to \poreshcat\withr$ called \textbf{sinistrification}, which sends:
+	\begin{itemize}
+		\item an object $\vec a$ to $\Sin(\vec a) := \maskop{[\vec a, \npolar]}{\maskpj}{\maske}$,
+		\item a morphism $\mu : \vec a \to \vec b$ to $\Sin(\mu)$ which we define
+%		by
+%		\[
+%			\begin{array}{c | c c c | l}
+%				j \cdot \mu & \edgedeg j \cdot \mu & \pathdeg j \cdot \mu & \jetdeg j \cdot \mu & \\ \hline
+%				\nonpol_\eqtydeg & \nonpol_\eqtydeg & \nonpol_\eqtydeg & \nonpol_\eqtydeg \\
+%				\nonpol_i & \nwnonpol_i & \nwnonpol_i & \nwnonpol_i & \text{for $i \in \Deg(\vec a)$ with $a_i = \npolar$} \\
+%				\isopol_i & \nwisopol_i & \nwisopol_i & \nwisopol_i & \text{for $i \in \Deg(\vec a)$ with $a_i = \ypolar$} \\
+%				\pospol_i &  & \nwpospol_i & \nwbridgepol_i & \text{for $i \in \Deg(\vec a)$ with $a_i = \ypolar$} \\
+%				\negpol_i &  & \nwnegpol_i & \nwbridgepol_i & \text{for $i \in \Deg(\vec a)$ with $a_i = \ypolar$} \\
+%				\mixpol_i & \nwbridgepol_i & \nwbridgepol_i & \nwbridgepol_i & \text{for $i \in \Deg(\vec a)$ with $a_i = \ypolar$} \\
+%			\end{array}
+%		\]
+		using an auxiliary function $\Sin' : \poldegeqtop(\vec a) \to \poldegeq(\Sin(\vec a))$ defined by
+		\[
+			\left\{ \begin{array}{l l l l}
+				\Sin'(\nonpol_\eqtydeg) &:=& \nonpol_\eqtydeg, \\
+				\Sin'(\nonpol_i) &:=& \nwnonpol_i &\text{for $i \in \Deg(\vec a)$ with $a_i = \npolar$}, \\
+				\Sin'(\mixpol_i) &:=& \nwpathpol_i &\text{for $i \in \Deg(\vec a)$ with $a_i = \ypolar$}, \\
+				\Sin'(\pospol_i) &:=& \nwpospol_i &\text{for $i \in \Deg(\vec a)$ with $a_i = \ypolar$}, \\
+				\Sin'(\negpol_i) &:=& \nwnegpol_i &\text{for $i \in \Deg(\vec a)$ with $a_i = \ypolar$}, \\
+				\Sin'(\isopol_i) &:=& \nwisopol_i &\text{for $i \in \Deg(\vec a)$ with $a_i = \ypolar$}, \\
+				\Sin'(\nonpol_\top) &:=& \nwnonpol_{\lenpol{\vec a}}. \\
+			\end{array} \right.
+		\]
+		We then define:
+		\begin{itemize}
+			\item $\eqtydeg \cdot \Sin(\mu) := \Sin'(\eqtydeg \cdot \mu)$,
+			\item $\edgedeg j \cdot \Sin(\mu) := \Sin'(j \cdot \mu)$,
+			\item $\pathdeg j \cdot \Sin(\mu) := \Sin'(\mixpol_j \circ \mu)$,
+			\item $\jetdeg j \cdot \Sin(\mu) := \Sin'(j \cdot \mu)$,
+			\item $\edgedeg{\lenpol{\vec b}} \cdot \Sin(\mu) := \edgedeg{\lenpol{\vec a}}$.
+		\end{itemize}
+		\item This respects inequality, since $\Sin'$ is monotonically increasing.
+	\end{itemize}
+\end{definition}
+\begin{corollary} \label{thm:poresh-sin-char}
+	We have, for all $\mu : \vec a \to \vec b$ and $q_j \in \poldegeqtop(\vec b)$, that
+	\begin{align*}
+		\Sin'(q_j) \circ \Sin(\mu) &= \Sin'(q_j \circ \mu).
+	\end{align*}
+\end{corollary}
+\begin{proof}
+	By considering all possibilities for $q_j$.
+\end{proof}
+\begin{definition} \label{def:poresh-dex}
+	We define a functor $\Dex : \poreshcat \to \poreshcat\withl$ called \textbf{dextrification}, which sends:
+	\begin{itemize}
+		\item an object $\vec a$ to $\Dex(\vec a) := \maskop{\vec a}{\maskjb}{\maske}$,
+		\item a morphism $\mu : \vec a \to \vec b$ to $\Dex(\mu)$ which we define using an auxiliary function $\Dex' : \poldegeqtop(\vec a) \to \poldegeqtop(\Dex(\vec a))$ defined by
+		\[
+			\left\{ \begin{array}{l l l l}
+				\Dex'(\nonpol_\eqtydeg) &:=& \nonpol_\eqtydeg, \\
+				\Dex'(\nonpol_i) &:=& \nwnonpol_i &\text{for $i \in \Deg(\vec a)$ with $a_i = \npolar$}, \\
+				\Dex'(\mixpol_i) &:=& \nwmixpol_i &\text{for $i \in \Deg(\vec a)$ with $a_i = \ypolar$}, \\
+				\Dex'(\pospol_i) &:=& \nwpospol_i &\text{for $i \in \Deg(\vec a)$ with $a_i = \ypolar$}, \\
+				\Dex'(\negpol_i) &:=& \nwnegpol_i &\text{for $i \in \Deg(\vec a)$ with $a_i = \ypolar$}, \\
+				\Dex'(\isopol_i) &:=& \nwbridgepol_i &\text{for $i \in \Deg(\vec a)$ with $a_i = \ypolar$}, \\
+				\Dex'(\nonpol_\top) &:=& \nonpol_\top. \\
+			\end{array} \right.
+		\]
+		We then define:
+		\begin{itemize}
+			\item $\eqtydeg \cdot \Dex(\mu) := \Dex'(\eqtydeg \cdot \mu)$,
+			\item $\edgedeg j \cdot \Dex(\mu) := \Dex'(j \cdot \mu)$,
+			\item $\jetdeg j \cdot \Dex(\mu) := \Dex'(j \cdot \mu)$,
+			\item $\bridgedeg j \cdot \Dex(\mu) := \Dex'(\isopol_j \circ \mu)$.
+		\end{itemize}
+		\item This respects inequality, since $\Dex'$ is monotonically increasing.
+	\end{itemize}
+\end{definition}
+\begin{corollary} \label{thm:poresh-dex-char}
+	We have, for all $\mu : \vec a \to \vec b$ and $q_j \in \poldegeqtop(\vec b)$, that
+	\begin{align*}
+		\Dex'(q_j) \circ \Dex(\mu) &= \Dex'(q_j \circ \mu).
+	\end{align*}
+\end{corollary}
+\begin{proof}
+	By considering all possibilities for $q_j$.
+\end{proof}
+\begin{definition} \label{def:poresh-amb}
+	We define a functor $\Amb : \poreshcat \to \poreshcat\withlr$ called \textbf{ambidextrification}, which sends:
+	\begin{itemize}
+		\item an object $\vec a$ to $\Amb(\vec a) := \maskop{[\vec a, \npolar]}{\maskpjb}{\maske}$,
+		\item a morphism $\mu : \vec a \to \vec b$ to $\Amb(\mu)$ which we define using an auxiliary function $\Amb' : \poldegeqtop(\vec a) \to \poldegeq(\Dex(\vec a))$ defined by
+		\[
+			\left\{ \begin{array}{l l l l}
+				\Dex'(\nonpol_\eqtydeg) &:=& \nonpol_\eqtydeg, \\
+				\Dex'(\nonpol_i) &:=& \nwnonpol_i &\text{for $i \in \Deg(\vec a)$ with $a_i = \npolar$}, \\
+				\Dex'(\mixpol_i) &:=& \nwpathpol_i &\text{for $i \in \Deg(\vec a)$ with $a_i = \ypolar$}, \\
+				\Dex'(\pospol_i) &:=& \nwpospol_i &\text{for $i \in \Deg(\vec a)$ with $a_i = \ypolar$}, \\
+				\Dex'(\negpol_i) &:=& \nwnegpol_i &\text{for $i \in \Deg(\vec a)$ with $a_i = \ypolar$}, \\
+				\Dex'(\isopol_i) &:=& \nwbridgepol_i &\text{for $i \in \Deg(\vec a)$ with $a_i = \ypolar$}, \\
+				\Dex'(\nonpol_\top) &:=& \nwnonpol_{\lenpol{\vec a}}. \\
+			\end{array} \right.
+		\]
+		We then define:
+		\begin{itemize}
+			\item $\eqtydeg \cdot \Dex(\mu) := \Dex'(\eqtydeg \cdot \mu)$,
+			\item $\edgedeg j \cdot \Dex(\mu) := \Dex'(j \cdot \mu)$,
+			\item $\pathdeg j \cdot \Sin(\mu) := \Sin'(\mixpol_j \circ \mu)$,
+			\item $\jetdeg j \cdot \Dex(\mu) := \Dex'(j \cdot \mu)$,
+			\item $\bridgedeg j \cdot \Dex(\mu) := \Dex'(\isopol_j \circ \mu)$,
+			\item $\edgedeg{\lenpol{\vec b}} \cdot \Sin(\mu) := \edgedeg{\lenpol{\vec a}}$.
+		\end{itemize}
+		\item This respects inequality, since $\Dex'$ is monotonically increasing.
+	\end{itemize}
+\end{definition}
+\begin{theorem}
+	We have $\Amb = \Sin \circ \Dex = \Dex \circ \Sin$ and $\Amb' = \Sin' \circ \Dex' = \Dex' \circ \Sin'$. \qed
+\end{theorem}
+\begin{corollary}
+	We have, for all $\mu : \vec a \to \vec b$ and $q_j \in \poldegeqtop(\vec b)$, that
+	\begin{align*}
+		\Amb'(q_j) \circ \Amb(\mu) &= \Amb'(q_j \circ \mu). &\qed
+	\end{align*}
+\end{corollary}
+
+\subsection{Strict Semantics on Ambidextrified Bimodal Jet Topic Setoids} \label{sec:poresh-jtset:strict}
 
 \subsection{Pseudosemantics on Jet Topic Sets} \label{sec:poresh-jtset:pseudo}
 
@@ -4477,6 +4602,7 @@ This category will be equivalent to the original category of jet topic sets for 
 \todoi{No go theorem}
 
 \subsection{Mask Enhancement} \label{sec:poresh-jcset:enhancement}
+\todoi{Sinistrification or dextrification?}
 \todoi{Endofunctor on $\poreshcat$}
 
 \subsection{Strict Semantics on Enhanced Modal Jet Cubical Sets} \label{sec:poresh-jcset:strict}
@@ -4498,7 +4624,7 @@ This category will be equivalent to the original category of jet topic sets for 
 		Introduced conventional cubes (\cref{def:conv-jet-cube-cat}). \\
 		General cleanup.
 	\item[v0.2] Wrote \cref{ch:modalities}. \\
-		Wrote \cref{sec:rpb}. \\
+		Wrote \cref{sec:pb}. \\
 		Changed title. \\
 		Renamed jet jewels to jet topes; modified their definition (\cref{def:jet-tope}).
 \end{description}

@@ -235,6 +235,7 @@
 \newcommand{\withl}{^{\circ \bullet}}
 \newcommand{\withll}{^{\circ \circ \bullet}}
 \newcommand{\withlr}{^{\circ \bullet \circ}}
+\newcommand{\withr}{^{\bullet \circ}}
 \newcommand{\withrr}{^{\bullet \circ \circ}}
 \newcommand{\withllr}{^{\circ \circ \bullet \circ}}
 
@@ -720,6 +721,10 @@
 \newcommand{\Rel}{{\mathrm{Rel}}}
 \newcommand{\EqinRel}{{\mathrm{Eq}}}
 
+\newcommand{\Sin}{{\mathsf{Sin}}}
+\newcommand{\Dex}{{\mathsf{Dex}}}
+\newcommand{\Amb}{{\mathsf{Amb}}}
+
 \newcommand{\maskopfont}[1]{\mathsf{#1}}
 \newcommand{\maskop}[3]{#1^{#2;#3}}
 \newcommand{\maskopypolar}[2]{#1^{#2;\_}}
@@ -733,6 +738,12 @@
 	\newcommand{\maske}{\maskopfont{E}}
 	\newcommand{\mymaskx}{\maskopfont{X}}
 	\newcommand{\mymasky}{\maskopfont{Y}}
+
+\newcommand{\bigdeg}[2]{{#1}^{\maskopfont{#2}}}
+\newcommand{\pathdeg}[1]{\bigdeg{#1}{P}}
+\newcommand{\jetdeg}[1]{\bigdeg{#1}{J}}
+\newcommand{\bridgedeg}[1]{\bigdeg{#1}{B}}
+\newcommand{\edgedeg}[1]{\bigdeg{#1}{E}}
 	
 \newcommand{\nwrod}{\edge^\maskopfont{R}}
 \newcommand{\nwpath}{\edge^\maskopfont{P}}
