@@ -4455,7 +4455,9 @@ The diagonals compose to $\cohcodisc_0 = \reshlist{\isopol_0}{\nonpol_\top} : [\
 So each of the sides has semantics on jet topic sets, but we currently do not know whether the diagram still commutes there.
 We cannot invoke the composition law of any pseudofunctor involved here, because the composition operands all require a different pseudofunctor.
 
-\subsection{Ambidextrification} \label{sec:poresh-jtset:ambidextrification}
+\subsection{Sinistrification} \label{sec:poresh-jtset:sinistrification}
+\todoi{Maybe skip dextrification, since it seems to work differently for the two criteria for having a left adjoint. We use sinistrification to give them an additional right adjoint so that we can interpret them on jet topes and internalize them.}
+\todoi{Argue that we want to preserve at least commutation of modalities that actually can be internalized, i.e. those that have a single left adjoint. Their locks internalize functors that have a single right adjoint.}
 For this reason, not unlike our usage of jet setoids in \cref{sec:poresh-jetset}, we will take a detour via setoid enriched categories that are equivalent to the categories of jet topic sets but where a single strict 2-functorial semantics of our mode theory can be achieved (\cref{sec:poresh-jtset:strict}).
 
 The trick we will use to achieve this is the following: we will insert additional symmetric degrees into our anpolarity masks, which will serve as degrees for formal infrajets and equijets, as well as for the `true' relation.
@@ -4469,7 +4471,8 @@ Ambidextrification is done in two steps: sinistrification (making all reshuffles
 \footnote{Shulman \cite{matt} introduces a construction called \emph{co-dextrification} which adds left adjoints to existing morphisms in a certain 2-category in such a way that the result satisfies a co-free property. He should perhaps have called it \emph{co-free dextrification}, so that the free construction could be called \emph{free dextrification} and the word \emph{dextrification} per se would be available when no universal property is proven. We mean the words sinistrification (Lat.\ \emph{sinister}: `left'), dextrification (Lat.\ \emph{dexter}: `right') and ambidextrification (Lat.\ \emph{ambidexter}: `ambidextrous') in this latter sense: we do not prove any universal property.}
 These operation make use of \cref{def:pb} and its \emph{big degree} notation.
 
-\subsubsection{Sinistrification}
+\bigskip
+
 By \cref{thm:poresh-adjoint}, left adjoints cannot mention $\nonpol_\top$ or $\mixpol_i$ for symmetric degrees $i$.
 So in order to make all polarized reshuffles left adjoint, we will insert formal degrees $\nwedgesym_{\lenpol{\vec a}}$ for the true relation, and $\nwpathsym_i$ for the $i$-equijet relation.
 \begin{definition} \label{def:poresh-sin:obj}
@@ -4704,136 +4707,139 @@ Thus, the action of $\loch \cdot \Sin(\mu)$ is to first rewrite formal polarized
 %		&= \mu \divleft \cohcodisc^\Sin.
 	\end{align*}
 \end{proof}
-
-\subsubsection{Dextrification}
-By \cref{thm:poresh-adjoint}, right adjoints cannot mention $\isopol_i$ for symmetric degrees $i$, and must preserve $\eqtydeg$.
-So in order to make all polarized reshuffles left adjoint, we will insert formal degrees $\nwedgesym_0$ for equality (causing an offset of 1 on all other degrees), and $\nwbridgesym_{i+1}$ for the $i$-infrajet relation.
-
-\subsubsection{Old stuff}
-
-\begin{definition} \label{def:poresh-sin}
-	We define a functor $\Sin : \poreshcat \to \poreshcat\withr$ called \textbf{sinistrification}, which sends:
-	\begin{itemize}
-		\item an object $\vec a$ to $\Sin(\vec a) := \maskop{[\vec a, \npolar]}{\maskpj}{\maske}$,
-		\item a morphism $\mu : \vec a \to \vec b$ to $\Sin(\mu)$ which we define
-%		by
-%		\[
-%			\begin{array}{c | c c c | l}
-%				j \cdot \mu & \edgedeg j \cdot \mu & \pathdeg j \cdot \mu & \jetdeg j \cdot \mu & \\ \hline
-%				\nonpol_\eqtydeg & \nonpol_\eqtydeg & \nonpol_\eqtydeg & \nonpol_\eqtydeg \\
-%				\nonpol_i & \nwnonpol_i & \nwnonpol_i & \nwnonpol_i & \text{for $i \in \Deg(\vec a)$ with $a_i = \npolar$} \\
-%				\isopol_i & \nwisopol_i & \nwisopol_i & \nwisopol_i & \text{for $i \in \Deg(\vec a)$ with $a_i = \ypolar$} \\
-%				\pospol_i &  & \nwpospol_i & \nwbridgepol_i & \text{for $i \in \Deg(\vec a)$ with $a_i = \ypolar$} \\
-%				\negpol_i &  & \nwnegpol_i & \nwbridgepol_i & \text{for $i \in \Deg(\vec a)$ with $a_i = \ypolar$} \\
-%				\mixpol_i & \nwbridgepol_i & \nwbridgepol_i & \nwbridgepol_i & \text{for $i \in \Deg(\vec a)$ with $a_i = \ypolar$} \\
-%			\end{array}
-%		\]
-		using an auxiliary function $\Sin' : \poldegeqtop(\vec a) \to \poldegeq(\Sin(\vec a))$ defined by
-		\[
-			\left\{ \begin{array}{l l l l}
-				\Sin'(\nonpol_\eqtydeg) &:=& \nonpol_\eqtydeg, \\
-				\Sin'(\nonpol_i) &:=& \nwnonpol_i &\text{for $i \in \Deg(\vec a)$ with $a_i = \npolar$}, \\
-				\Sin'(\mixpol_i) &:=& \nwpathpol_i &\text{for $i \in \Deg(\vec a)$ with $a_i = \ypolar$}, \\
-				\Sin'(\pospol_i) &:=& \nwpospol_i &\text{for $i \in \Deg(\vec a)$ with $a_i = \ypolar$}, \\
-				\Sin'(\negpol_i) &:=& \nwnegpol_i &\text{for $i \in \Deg(\vec a)$ with $a_i = \ypolar$}, \\
-				\Sin'(\isopol_i) &:=& \nwisopol_i &\text{for $i \in \Deg(\vec a)$ with $a_i = \ypolar$}, \\
-				\Sin'(\nonpol_\top) &:=& \nwnonpol_{\lenpol{\vec a}}. \\
-			\end{array} \right.
-		\]
-		We then define:
-		\begin{itemize}
-			\item $\eqtydeg \cdot \Sin(\mu) := \Sin'(\eqtydeg \cdot \mu)$,
-			\item $\edgedeg j \cdot \Sin(\mu) := \Sin'(j \cdot \mu)$,
-			\item $\pathdeg j \cdot \Sin(\mu) := \Sin'(\mixpol_j \circ \mu)$,
-			\item $\jetdeg j \cdot \Sin(\mu) := \Sin'(j \cdot \mu)$,
-			\item $\edgedeg{\lenpol{\vec b}} \cdot \Sin(\mu) := \edgedeg{\lenpol{\vec a}}$.
-		\end{itemize}
-		\item This respects inequality, since $\Sin'$ is monotonically increasing.
-	\end{itemize}
-\end{definition}
-\begin{corollary} \label{thm:poresh-sin-char}
-	We have, for all $\mu : \vec a \to \vec b$ and $q_j \in \poldegeqtop(\vec b)$, that
-	\begin{align*}
-		\Sin'(q_j) \circ \Sin(\mu) &= \Sin'(q_j \circ \mu).
-	\end{align*}
-\end{corollary}
-\begin{proof}
-	By considering all possibilities for $q_j$.
-\end{proof}
-\begin{definition} \label{def:poresh-dex}
-	We define a functor $\Dex : \poreshcat \to \poreshcat\withl$ called \textbf{dextrification}, which sends:
-	\begin{itemize}
-		\item an object $\vec a$ to $\Dex(\vec a) := \maskop{\vec a}{\maskjb}{\maske}$,
-		\item a morphism $\mu : \vec a \to \vec b$ to $\Dex(\mu)$ which we define using an auxiliary function $\Dex' : \poldegeqtop(\vec a) \to \poldegeqtop(\Dex(\vec a))$ defined by
-		\[
-			\left\{ \begin{array}{l l l l}
-				\Dex'(\nonpol_\eqtydeg) &:=& \nonpol_\eqtydeg, \\
-				\Dex'(\nonpol_i) &:=& \nwnonpol_i &\text{for $i \in \Deg(\vec a)$ with $a_i = \npolar$}, \\
-				\Dex'(\mixpol_i) &:=& \nwmixpol_i &\text{for $i \in \Deg(\vec a)$ with $a_i = \ypolar$}, \\
-				\Dex'(\pospol_i) &:=& \nwpospol_i &\text{for $i \in \Deg(\vec a)$ with $a_i = \ypolar$}, \\
-				\Dex'(\negpol_i) &:=& \nwnegpol_i &\text{for $i \in \Deg(\vec a)$ with $a_i = \ypolar$}, \\
-				\Dex'(\isopol_i) &:=& \nwbridgepol_i &\text{for $i \in \Deg(\vec a)$ with $a_i = \ypolar$}, \\
-				\Dex'(\nonpol_\top) &:=& \nonpol_\top. \\
-			\end{array} \right.
-		\]
-		We then define:
-		\begin{itemize}
-			\item $\eqtydeg \cdot \Dex(\mu) := \Dex'(\eqtydeg \cdot \mu)$,
-			\item $\edgedeg j \cdot \Dex(\mu) := \Dex'(j \cdot \mu)$,
-			\item $\jetdeg j \cdot \Dex(\mu) := \Dex'(j \cdot \mu)$,
-			\item $\bridgedeg j \cdot \Dex(\mu) := \Dex'(\isopol_j \circ \mu)$.
-		\end{itemize}
-		\item This respects inequality, since $\Dex'$ is monotonically increasing.
-	\end{itemize}
-\end{definition}
-\begin{corollary} \label{thm:poresh-dex-char}
-	We have, for all $\mu : \vec a \to \vec b$ and $q_j \in \poldegeqtop(\vec b)$, that
-	\begin{align*}
-		\Dex'(q_j) \circ \Dex(\mu) &= \Dex'(q_j \circ \mu).
-	\end{align*}
-\end{corollary}
-\begin{proof}
-	By considering all possibilities for $q_j$.
-\end{proof}
-\begin{definition} \label{def:poresh-amb}
-	We define a functor $\Amb : \poreshcat \to \poreshcat\withlr$ called \textbf{ambidextrification}, which sends:
-	\begin{itemize}
-		\item an object $\vec a$ to $\Amb(\vec a) := \maskop{[\vec a, \npolar]}{\maskpjb}{\maske}$,
-		\item a morphism $\mu : \vec a \to \vec b$ to $\Amb(\mu)$ which we define using an auxiliary function $\Amb' : \poldegeqtop(\vec a) \to \poldegeq(\Dex(\vec a))$ defined by
-		\[
-			\left\{ \begin{array}{l l l l}
-				\Dex'(\nonpol_\eqtydeg) &:=& \nonpol_\eqtydeg, \\
-				\Dex'(\nonpol_i) &:=& \nwnonpol_i &\text{for $i \in \Deg(\vec a)$ with $a_i = \npolar$}, \\
-				\Dex'(\mixpol_i) &:=& \nwpathpol_i &\text{for $i \in \Deg(\vec a)$ with $a_i = \ypolar$}, \\
-				\Dex'(\pospol_i) &:=& \nwpospol_i &\text{for $i \in \Deg(\vec a)$ with $a_i = \ypolar$}, \\
-				\Dex'(\negpol_i) &:=& \nwnegpol_i &\text{for $i \in \Deg(\vec a)$ with $a_i = \ypolar$}, \\
-				\Dex'(\isopol_i) &:=& \nwbridgepol_i &\text{for $i \in \Deg(\vec a)$ with $a_i = \ypolar$}, \\
-				\Dex'(\nonpol_\top) &:=& \nwnonpol_{\lenpol{\vec a}}. \\
-			\end{array} \right.
-		\]
-		We then define:
-		\begin{itemize}
-			\item $\eqtydeg \cdot \Dex(\mu) := \Dex'(\eqtydeg \cdot \mu)$,
-			\item $\edgedeg j \cdot \Dex(\mu) := \Dex'(j \cdot \mu)$,
-			\item $\pathdeg j \cdot \Sin(\mu) := \Sin'(\mixpol_j \circ \mu)$,
-			\item $\jetdeg j \cdot \Dex(\mu) := \Dex'(j \cdot \mu)$,
-			\item $\bridgedeg j \cdot \Dex(\mu) := \Dex'(\isopol_j \circ \mu)$,
-			\item $\edgedeg{\lenpol{\vec b}} \cdot \Sin(\mu) := \edgedeg{\lenpol{\vec a}}$.
-		\end{itemize}
-		\item This respects inequality, since $\Dex'$ is monotonically increasing.
-	\end{itemize}
-\end{definition}
-\begin{theorem}
-	We have $\Amb = \Sin \circ \Dex = \Dex \circ \Sin$ and $\Amb' = \Sin' \circ \Dex' = \Dex' \circ \Sin'$. \qed
-\end{theorem}
 \begin{corollary}
-	We have, for all $\mu : \vec a \to \vec b$ and $q_j \in \poldegeqtop(\vec b)$, that
-	\begin{align*}
-		\Amb'(q_j) \circ \Amb(\mu) &= \Amb'(q_j \circ \mu). &\qed
-	\end{align*}
+	For any $\mu : \vec a \to \vec b$, we have $\cohfget^\Sin \circ \Sin(\mu) \circ \cohcodisc^\Sin = \mu$. \qed
 \end{corollary}
 
-\subsection{Strict Semantics on Ambidextrified Bimodal Jet Topic Setoids} \label{sec:poresh-jtset:strict}
+%\subsubsection{Dextrification}
+%By \cref{thm:poresh-adjoint}, right adjoints cannot mention $\isopol_i$ for symmetric degrees $i$, and must preserve $\eqtydeg$.
+%So in order to make all polarized reshuffles left adjoint, we will insert formal degrees $\nwedgesym_0$ for equality (causing an offset of 1 on all other degrees), and $\nwbridgesym_{i+1}$ for the $i$-infrajet relation.
+%
+%\subsubsection{Old stuff}
+%
+%\begin{definition} \label{def:poresh-sin}
+%	We define a functor $\Sin : \poreshcat \to \poreshcat\withr$ called \textbf{sinistrification}, which sends:
+%	\begin{itemize}
+%		\item an object $\vec a$ to $\Sin(\vec a) := \maskop{[\vec a, \npolar]}{\maskpj}{\maske}$,
+%		\item a morphism $\mu : \vec a \to \vec b$ to $\Sin(\mu)$ which we define
+%%		by
+%%		\[
+%%			\begin{array}{c | c c c | l}
+%%				j \cdot \mu & \edgedeg j \cdot \mu & \pathdeg j \cdot \mu & \jetdeg j \cdot \mu & \\ \hline
+%%				\nonpol_\eqtydeg & \nonpol_\eqtydeg & \nonpol_\eqtydeg & \nonpol_\eqtydeg \\
+%%				\nonpol_i & \nwnonpol_i & \nwnonpol_i & \nwnonpol_i & \text{for $i \in \Deg(\vec a)$ with $a_i = \npolar$} \\
+%%				\isopol_i & \nwisopol_i & \nwisopol_i & \nwisopol_i & \text{for $i \in \Deg(\vec a)$ with $a_i = \ypolar$} \\
+%%				\pospol_i &  & \nwpospol_i & \nwbridgepol_i & \text{for $i \in \Deg(\vec a)$ with $a_i = \ypolar$} \\
+%%				\negpol_i &  & \nwnegpol_i & \nwbridgepol_i & \text{for $i \in \Deg(\vec a)$ with $a_i = \ypolar$} \\
+%%				\mixpol_i & \nwbridgepol_i & \nwbridgepol_i & \nwbridgepol_i & \text{for $i \in \Deg(\vec a)$ with $a_i = \ypolar$} \\
+%%			\end{array}
+%%		\]
+%		using an auxiliary function $\Sin' : \poldegeqtop(\vec a) \to \poldegeq(\Sin(\vec a))$ defined by
+%		\[
+%			\left\{ \begin{array}{l l l l}
+%				\Sin'(\nonpol_\eqtydeg) &:=& \nonpol_\eqtydeg, \\
+%				\Sin'(\nonpol_i) &:=& \nwnonpol_i &\text{for $i \in \Deg(\vec a)$ with $a_i = \npolar$}, \\
+%				\Sin'(\mixpol_i) &:=& \nwpathpol_i &\text{for $i \in \Deg(\vec a)$ with $a_i = \ypolar$}, \\
+%				\Sin'(\pospol_i) &:=& \nwpospol_i &\text{for $i \in \Deg(\vec a)$ with $a_i = \ypolar$}, \\
+%				\Sin'(\negpol_i) &:=& \nwnegpol_i &\text{for $i \in \Deg(\vec a)$ with $a_i = \ypolar$}, \\
+%				\Sin'(\isopol_i) &:=& \nwisopol_i &\text{for $i \in \Deg(\vec a)$ with $a_i = \ypolar$}, \\
+%				\Sin'(\nonpol_\top) &:=& \nwnonpol_{\lenpol{\vec a}}. \\
+%			\end{array} \right.
+%		\]
+%		We then define:
+%		\begin{itemize}
+%			\item $\eqtydeg \cdot \Sin(\mu) := \Sin'(\eqtydeg \cdot \mu)$,
+%			\item $\edgedeg j \cdot \Sin(\mu) := \Sin'(j \cdot \mu)$,
+%			\item $\pathdeg j \cdot \Sin(\mu) := \Sin'(\mixpol_j \circ \mu)$,
+%			\item $\jetdeg j \cdot \Sin(\mu) := \Sin'(j \cdot \mu)$,
+%			\item $\edgedeg{\lenpol{\vec b}} \cdot \Sin(\mu) := \edgedeg{\lenpol{\vec a}}$.
+%		\end{itemize}
+%		\item This respects inequality, since $\Sin'$ is monotonically increasing.
+%	\end{itemize}
+%\end{definition}
+%\begin{corollary} \label{thm:poresh-sin-char}
+%	We have, for all $\mu : \vec a \to \vec b$ and $q_j \in \poldegeqtop(\vec b)$, that
+%	\begin{align*}
+%		\Sin'(q_j) \circ \Sin(\mu) &= \Sin'(q_j \circ \mu).
+%	\end{align*}
+%\end{corollary}
+%\begin{proof}
+%	By considering all possibilities for $q_j$.
+%\end{proof}
+%\begin{definition} \label{def:poresh-dex}
+%	We define a functor $\Dex : \poreshcat \to \poreshcat\withl$ called \textbf{dextrification}, which sends:
+%	\begin{itemize}
+%		\item an object $\vec a$ to $\Dex(\vec a) := \maskop{\vec a}{\maskjb}{\maske}$,
+%		\item a morphism $\mu : \vec a \to \vec b$ to $\Dex(\mu)$ which we define using an auxiliary function $\Dex' : \poldegeqtop(\vec a) \to \poldegeqtop(\Dex(\vec a))$ defined by
+%		\[
+%			\left\{ \begin{array}{l l l l}
+%				\Dex'(\nonpol_\eqtydeg) &:=& \nonpol_\eqtydeg, \\
+%				\Dex'(\nonpol_i) &:=& \nwnonpol_i &\text{for $i \in \Deg(\vec a)$ with $a_i = \npolar$}, \\
+%				\Dex'(\mixpol_i) &:=& \nwmixpol_i &\text{for $i \in \Deg(\vec a)$ with $a_i = \ypolar$}, \\
+%				\Dex'(\pospol_i) &:=& \nwpospol_i &\text{for $i \in \Deg(\vec a)$ with $a_i = \ypolar$}, \\
+%				\Dex'(\negpol_i) &:=& \nwnegpol_i &\text{for $i \in \Deg(\vec a)$ with $a_i = \ypolar$}, \\
+%				\Dex'(\isopol_i) &:=& \nwbridgepol_i &\text{for $i \in \Deg(\vec a)$ with $a_i = \ypolar$}, \\
+%				\Dex'(\nonpol_\top) &:=& \nonpol_\top. \\
+%			\end{array} \right.
+%		\]
+%		We then define:
+%		\begin{itemize}
+%			\item $\eqtydeg \cdot \Dex(\mu) := \Dex'(\eqtydeg \cdot \mu)$,
+%			\item $\edgedeg j \cdot \Dex(\mu) := \Dex'(j \cdot \mu)$,
+%			\item $\jetdeg j \cdot \Dex(\mu) := \Dex'(j \cdot \mu)$,
+%			\item $\bridgedeg j \cdot \Dex(\mu) := \Dex'(\isopol_j \circ \mu)$.
+%		\end{itemize}
+%		\item This respects inequality, since $\Dex'$ is monotonically increasing.
+%	\end{itemize}
+%\end{definition}
+%\begin{corollary} \label{thm:poresh-dex-char}
+%	We have, for all $\mu : \vec a \to \vec b$ and $q_j \in \poldegeqtop(\vec b)$, that
+%	\begin{align*}
+%		\Dex'(q_j) \circ \Dex(\mu) &= \Dex'(q_j \circ \mu).
+%	\end{align*}
+%\end{corollary}
+%\begin{proof}
+%	By considering all possibilities for $q_j$.
+%\end{proof}
+%\begin{definition} \label{def:poresh-amb}
+%	We define a functor $\Amb : \poreshcat \to \poreshcat\withlr$ called \textbf{ambidextrification}, which sends:
+%	\begin{itemize}
+%		\item an object $\vec a$ to $\Amb(\vec a) := \maskop{[\vec a, \npolar]}{\maskpjb}{\maske}$,
+%		\item a morphism $\mu : \vec a \to \vec b$ to $\Amb(\mu)$ which we define using an auxiliary function $\Amb' : \poldegeqtop(\vec a) \to \poldegeq(\Dex(\vec a))$ defined by
+%		\[
+%			\left\{ \begin{array}{l l l l}
+%				\Dex'(\nonpol_\eqtydeg) &:=& \nonpol_\eqtydeg, \\
+%				\Dex'(\nonpol_i) &:=& \nwnonpol_i &\text{for $i \in \Deg(\vec a)$ with $a_i = \npolar$}, \\
+%				\Dex'(\mixpol_i) &:=& \nwpathpol_i &\text{for $i \in \Deg(\vec a)$ with $a_i = \ypolar$}, \\
+%				\Dex'(\pospol_i) &:=& \nwpospol_i &\text{for $i \in \Deg(\vec a)$ with $a_i = \ypolar$}, \\
+%				\Dex'(\negpol_i) &:=& \nwnegpol_i &\text{for $i \in \Deg(\vec a)$ with $a_i = \ypolar$}, \\
+%				\Dex'(\isopol_i) &:=& \nwbridgepol_i &\text{for $i \in \Deg(\vec a)$ with $a_i = \ypolar$}, \\
+%				\Dex'(\nonpol_\top) &:=& \nwnonpol_{\lenpol{\vec a}}. \\
+%			\end{array} \right.
+%		\]
+%		We then define:
+%		\begin{itemize}
+%			\item $\eqtydeg \cdot \Dex(\mu) := \Dex'(\eqtydeg \cdot \mu)$,
+%			\item $\edgedeg j \cdot \Dex(\mu) := \Dex'(j \cdot \mu)$,
+%			\item $\pathdeg j \cdot \Sin(\mu) := \Sin'(\mixpol_j \circ \mu)$,
+%			\item $\jetdeg j \cdot \Dex(\mu) := \Dex'(j \cdot \mu)$,
+%			\item $\bridgedeg j \cdot \Dex(\mu) := \Dex'(\isopol_j \circ \mu)$,
+%			\item $\edgedeg{\lenpol{\vec b}} \cdot \Sin(\mu) := \edgedeg{\lenpol{\vec a}}$.
+%		\end{itemize}
+%		\item This respects inequality, since $\Dex'$ is monotonically increasing.
+%	\end{itemize}
+%\end{definition}
+%\begin{theorem}
+%	We have $\Amb = \Sin \circ \Dex = \Dex \circ \Sin$ and $\Amb' = \Sin' \circ \Dex' = \Dex' \circ \Sin'$. \qed
+%\end{theorem}
+%\begin{corollary}
+%	We have, for all $\mu : \vec a \to \vec b$ and $q_j \in \poldegeqtop(\vec b)$, that
+%	\begin{align*}
+%		\Amb'(q_j) \circ \Amb(\mu) &= \Amb'(q_j \circ \mu). &\qed
+%	\end{align*}
+%\end{corollary}
+
+\subsection{Strict Semantics on Sinistrified Modal Jet Topic Setoids} \label{sec:poresh-jtset:strict}
 
 \subsection{Pseudosemantics on Jet Topic Sets} \label{sec:poresh-jtset:pseudo}
 
@@ -4844,11 +4850,11 @@ So in order to make all polarized reshuffles left adjoint, we will insert formal
 \subsection{Triple Semantics on Jet Cubical Sets} \label{sec:poresh-jcset:triple}
 \todoi{No go theorem}
 
-\subsection{Mask Enhancement} \label{sec:poresh-jcset:enhancement}
-\todoi{Sinistrification or dextrification?}
-\todoi{Endofunctor on $\poreshcat$}
+%\subsection{Mask Enhancement} \label{sec:poresh-jcset:enhancement}
+%\todoi{Sinistrification or dextrification?}
+%\todoi{Endofunctor on $\poreshcat$}
 
-\subsection{Strict Semantics on Enhanced Modal Jet Cubical Sets} \label{sec:poresh-jcset:strict}
+\subsection{Strict Semantics on Sinistrified Modal Jet Cubical Sets} \label{sec:poresh-jcset:strict}
 
 \subsection{Pseudosemantics on Jet Cubical Sets} \label{sec:poresh-jcset:pseudo}
 
