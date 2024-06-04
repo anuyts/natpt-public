@@ -339,6 +339,7 @@ On the other hand, $i$-antisymmetry at a symmetric degree $i$ would completely d
 	The \textbf{category of jet topes} $\jettope{\vec a}$ is defined as the full subcategory of $\jetset{\vec a}$ on jet topes.
 \end{definition}
 The conceptual reason for asking $i$-antisymmetry is to exclude the equijet interval $\rival{\equijetsym_i}$, so that the only jet tope intervals at directed degrees are $\rival{\jetsym_i}$ and $\rival{\tejsym_i}$.
+Having an $i$-equijet interval object in the base category, will cause presheaves to contain `formal' $i$-equijets as an additional symmetric relation, stricter than the $i$-jet relation, which we wish to avoid.
 \begin{proposition} \label{thm:lift-to-jet-topes}
 	Jet topes are closed under the functors $\Op_i$, $\Fsym_i$,
 	%$\Usym_i$, $\Csym_{i \neq n-1}$, $\UFsym_i$, $\UCsym_{i \neq n-1}$,
@@ -4469,7 +4470,7 @@ Ambidextrification is done in two steps: sinistrification (making all reshuffles
 These operation make use of \cref{def:pb} and its \emph{big degree} notation.
 
 \subsubsection{Sinistrification}
-Left adjoints cannot mention $\nonpol_\top$ or $\mixpol_i$ for symmetric degrees $i$.
+By \cref{thm:poresh-adjoint}, left adjoints cannot mention $\nonpol_\top$ or $\mixpol_i$ for symmetric degrees $i$.
 So in order to make all polarized reshuffles left adjoint, we will insert formal degrees $\nwedgesym_{\lenpol{\vec a}}$ for the true relation, and $\nwpathsym_i$ for the $i$-equijet relation.
 \begin{definition} \label{def:poresh-sin:obj}
 	Given a mask $\vec a$, we define its \textbf{sinistrification}\footnote{Of course, a mask is just an object and cannot become a left adjoint. We use the word sinistrification already because $\Sin$ will be extended to a strict 2-functor.} $\Sin(\vec a) := \maskop{[\vec a, \npolar]}{\maskpj}{\maske}$, and a polarized reshuffle
@@ -4703,6 +4704,10 @@ Thus, the action of $\loch \cdot \Sin(\mu)$ is to first rewrite formal polarized
 %		&= \mu \divleft \cohcodisc^\Sin.
 	\end{align*}
 \end{proof}
+
+\subsubsection{Dextrification}
+By \cref{thm:poresh-adjoint}, right adjoints cannot mention $\isopol_i$ for symmetric degrees $i$, and must preserve $\eqtydeg$.
+So in order to make all polarized reshuffles left adjoint, we will insert formal degrees $\nwedgesym_0$ for equality (causing an offset of 1 on all other degrees), and $\nwbridgesym_{i+1}$ for the $i$-infrajet relation.
 
 \subsubsection{Old stuff}
 
