@@ -4465,8 +4465,245 @@ We will then take the full subcategory of jet topic sets for the ambidextrified 
 This category will be equivalent to the original category of jet topic sets for the original mask (\cref{sec:poresh-jtset:pseudo}).
 
 Ambidextrification is done in two steps: sinistrification (making all reshuffles left adjoint) and dextrification (making them right adjoint).%
-\footnote{Shulman \cite{matt} introduces a construction called \emph{co-dextrification} which adds left adjoints to existing morphisms in a certain 2-category in such a way that the result satisfies a co-free property. He should perhaps have called it \emph{co-free dextrification}, so that the free construction could be called \emph{free dextrification} and the word \emph{dextrification} per se would be available when no universal property is proven. We mean the words sinistrification, dextrification and ambidextrification in this latter sense: we do not prove any universal property.}
+\footnote{Shulman \cite{matt} introduces a construction called \emph{co-dextrification} which adds left adjoints to existing morphisms in a certain 2-category in such a way that the result satisfies a co-free property. He should perhaps have called it \emph{co-free dextrification}, so that the free construction could be called \emph{free dextrification} and the word \emph{dextrification} per se would be available when no universal property is proven. We mean the words sinistrification (Lat.\ \emph{sinister}: `left'), dextrification (Lat.\ \emph{dexter}: `right') and ambidextrification (Lat.\ \emph{ambidexter}: `ambidextrous') in this latter sense: we do not prove any universal property.}
 These operation make use of \cref{def:pb} and its \emph{big degree} notation.
+
+\subsubsection{Sinistrification}
+Left adjoints cannot mention $\nonpol_\top$ or $\mixpol_i$ for symmetric degrees $i$.
+So in order to make all polarized reshuffles left adjoint, we will insert formal degrees $\nwedgesym_{\lenpol{\vec a}}$ for the true relation, and $\nwpathsym_i$ for the $i$-equijet relation.
+\begin{definition} \label{def:poresh-sin:obj}
+	Given a mask $\vec a$, we define its \textbf{sinistrification}\footnote{Of course, a mask is just an object and cannot become a left adjoint. We use the word sinistrification already because $\Sin$ will be extended to a strict 2-functor.} $\Sin(\vec a) := \maskop{[\vec a, \npolar]}{\maskpj}{\maske}$, and a polarized reshuffle
+	\[
+		\cohfget^\Sin : \Sin(\vec a) \to \vec a
+	\]
+	given by
+	\[
+		\left\{ \begin{array}{r l l l}
+			\eqtydeg \cdot \cohfget^\Sin &:=& \nonpol_\eqtydeg \\
+			i \cdot \cohfget^\Sin &:=& \nwnonpol_i &\text{if $a_i = \npolar$}, \\
+			i \cdot \cohfget^\Sin &:=& \nwpospol_i &\text{if $a_i = \ypolar$}.
+		\end{array} \right.
+	\]
+\end{definition}
+When we let $\cohfget^\Sin$ act on a jet set, its effect is to forget the inserted formal relations.
+\begin{proposition} \label{thm:poresh-sin:cohesion}
+	The polarized reshuffle $\cohfget^\Sin$ is part of an adjoint triple $\cohdisc^\Sin \dashv \cohfget^\Sin \dashv \cohcodisc^\Sin$ where $\cohdisc^\Sin, \cohcodisc^\Sin : \vec a \to \Sin(\vec a)$ are defined by
+	\[
+		\left\{ \begin{array}{r l l l}
+			\eqtydeg \cdot \cohdisc^\Sin &:=& \nonpol_\eqtydeg \\
+			\edgedeg i \cdot \cohdisc^\Sin &:=& \nonpol_i &\text{for $i \in \Deg(\vec a)$ with $a_i = \npolar$}, \\
+			\pathdeg i \cdot \cohdisc^\Sin &:=& \isopol_{\predeg(i)} &\text{for $i \in \Deg(\vec a)$ with $a_i = \ypolar$}, \\
+			\jetdeg i \cdot \cohdisc^\Sin &:=& \pospol_{i} &\text{for $i \in \Deg(\vec a)$ with $a_i = \ypolar$}, \\
+			\edgedeg{\lenpol{\vec a}} \cdot \cohdisc^\Sin &:=& \isopol_{\predeg(\top)}.
+		\end{array} \right.
+	\]
+	\[
+		\left\{ \begin{array}{r l l l}
+			\eqtydeg \cdot \cohcodisc^\Sin &:=& \nonpol_\eqtydeg \\
+			\edgedeg i \cdot \cohcodisc^\Sin &:=& \nonpol_i &\text{for $i \in \Deg(\vec a)$ with $a_i = \npolar$}, \\
+			\pathdeg i \cdot \cohcodisc^\Sin &:=& \mixpol_{i} &\text{for $i \in \Deg(\vec a)$ with $a_i = \ypolar$}, \\
+			\jetdeg i \cdot \cohcodisc^\Sin &:=& \pospol_{i} &\text{for $i \in \Deg(\vec a)$ with $a_i = \ypolar$}, \\
+			\edgedeg{\lenpol{\vec a}} \cdot \cohcodisc^\Sin &:=& \nonpol_\top.
+		\end{array} \right.
+	\]
+	We have $\cohfget^\Sin \cohdisc^\Sin = \cohfget^\Sin \cohcodisc^\Sin = \id_{\vec a}$, and we have idempotent (co)monads $\flat^\Sin = \cohdisc^\Sin \cohfget^\Sin$ and $\sharp^\Sin = \cohcodisc^\Sin \cohfget^\Sin$. The latter is given by:
+	\[
+		\left\{ \begin{array}{r l l l}
+			\eqtydeg \cdot \sharp^\Sin &:=& \nonpol_\eqtydeg \\
+			\edgedeg i \cdot \sharp^\Sin &:=& \nwnonpol_i &\text{for $i \in \Deg(\vec a)$ with $a_i = \npolar$}, \\
+			\pathdeg i \cdot \sharp^\Sin &:=& \nwmixpol_{i} &\text{for $i \in \Deg(\vec a)$ with $a_i = \ypolar$}, \\
+			\jetdeg i \cdot \sharp^\Sin &:=& \nwpospol_{i} &\text{for $i \in \Deg(\vec a)$ with $a_i = \ypolar$}, \\
+			\edgedeg{\lenpol{\vec a}} \cdot \sharp^\Sin &:=& \nonpol_\top.
+		\end{array} \right.
+	\]
+\end{proposition}
+\begin{proof}
+	By \cref{thm:poresh-adjoint}. Alternatively, one can simply verify the unit and co-unit inequalities for these adjunctions.
+\end{proof}
+The action of $\cohcodisc^\Sin$ on an $\vec a$-jet set is to insert formal relations for $i$-equijets and for the true relation, and actually define them as the original $i$-equijet and true relations.
+The action of $\sharp^\Sin$ is to \emph{re}define the formal relations this way.
+The action of $\cohdisc^\Sin$ is rather less useful: it instead inserts formal relations for $\predeg(i)$-infrajets and $\predeg(\top)$-infrajets.
+
+When we look at the action on polarized degrees, the order of the adjoints is reversed:
+\[
+	\loch \circ \cohcodisc^\Sin \dashv \loch \circ \cohfget^\Sin \dashv \loch \circ \cohdisc^\Sin.
+\]
+\begin{proposition} \label{thm:poresh-sin:div-poldeg}
+	The operation $\loch \circ \cohcodisc^\Sin : \poldegeqtop(\Sin(\vec a), b) \to \poldegeqtop(\vec a, b)$ has a left adjoint $\loch \divleft \cohcodisc^\Sin : \poldegeqtop(\vec a, b) \to \poldegeqtop(\Sin(\vec a), b)$ given by:
+	\[
+		\left\{ \begin{array}{r l l l}
+			\nonpol_\eqtydeg \divleft \cohcodisc^\Sin &:=& \nonpol_\eqtydeg, \\
+			\nonpol_i \divleft \cohcodisc^\Sin &:=& \nwnonpol_i &\text{for $i \in \Deg(\vec a)$ with $a_i = \npolar$}, \\
+			\mixpol_i \divleft \cohcodisc^\Sin &:=& \nwpathpol_i &\text{for $i \in \Deg(\vec a)$ with $a_i = \ypolar$}, \\
+			\pospol_i \divleft \cohcodisc^\Sin &:=& \nwpospol_i &\text{for $i \in \Deg(\vec a)$ with $a_i = \ypolar$}, \\
+			\negpol_i \divleft \cohcodisc^\Sin &:=& \nwnegpol_i &\text{for $i \in \Deg(\vec a)$ with $a_i = \ypolar$}, \\
+			\isopol_i \divleft \cohcodisc^\Sin &:=& \nwisopol_i &\text{for $i \in \Deg(\vec a)$ with $a_i = \ypolar$}, \\
+			\nonpol_\top \divleft \cohcodisc^\Sin &:=& \nwnonpol_{\lenpol{\vec a}}. \\
+		\end{array} \right.
+	\]
+	The composite $(\loch \divleft \cohcodisc^\Sin) \circ \cohcodisc^\Sin$ is the identity at $\poldegeqtop(\vec a, b)$.
+	The other composite $(\loch \circ \cohcodisc^\Sin) \divleft \cohcodisc^\Sin =: \loch \divleft \sharp^\Sin$ is an idempotent comonad left adjoint to $\loch \circ \sharp^\Sin$ and is given by
+	\[
+		\left\{ \begin{array}{r l l l}
+			\nonpol_\eqtydeg \divleft \sharp^\Sin &:=& \nonpol_\eqtydeg, \\
+			\nwnonpol_i \divleft \sharp^\Sin &:=& \nwnonpol_i &\text{for $i \in \Deg(\vec a)$ with $a_i = \npolar$}, \\
+			\nwpathpol_i \divleft \sharp^\Sin &:=& \nwpathpol_i &\text{for $i \in \Deg(\vec a)$ with $a_i = \ypolar$}, \\
+			\nwmixpol_i \divleft \sharp^\Sin &:=& \nwpathpol_i &\text{for $i \in \Deg(\vec a)$ with $a_i = \ypolar$}, \\
+			\nwpospol_i \divleft \sharp^\Sin &:=& \nwpospol_i &\text{for $i \in \Deg(\vec a)$ with $a_i = \ypolar$}, \\
+			\nwnegpol_i \divleft \sharp^\Sin &:=& \nwnegpol_i &\text{for $i \in \Deg(\vec a)$ with $a_i = \ypolar$}, \\
+			\nwisopol_i \divleft \sharp^\Sin &:=& \nwisopol_i &\text{for $i \in \Deg(\vec a)$ with $a_i = \ypolar$}, \\
+			\nwnonpol_{\lenpol{\vec a}} \divleft \sharp^\Sin &:=& \nwnonpol_{\lenpol{\vec a}}. \\
+			\nonpol_\top \divleft \sharp^\Sin &:=& \nwnonpol_{\lenpol{\vec a}}. \\
+		\end{array} \right.
+	\]
+\end{proposition}
+\begin{proof}
+	Define the operation $\loch \divleft \cohcodisc^\Sin$ as above.
+	The composition with $\loch \circ \cohcodisc^\Sin$ on either side can be computed, and indeed we find the identity and $\loch \divleft \sharp^\Sin$ as defined above.
+	The unit inequality is then trivial whereas the co-unit inequality $\loch \divleft \sharp^\Sin \leq \id$ is easy to check.
+	This establishes that $\loch \divleft \cohcodisc^\Sin \dashv \loch \circ \cohcodisc^\Sin$.
+	
+	The fact that $(\loch \circ \cohcodisc^\Sin) \divleft \cohcodisc^\Sin$ is left adjoint to $\loch \circ \sharp^\Sin$ follows from the fact that adjunctions compose: the right adjoint of the former is $(\loch \circ \cohcodisc^\Sin) \circ \cohfget^\Sin = \loch \circ \sharp^\Sin$.
+\end{proof}
+The action of $\loch \divleft \cohcodisc^\Sin$ is to rewrite polarized degrees whose mention is illegal in a left adjoint modality, to their formal counterparts.
+The action of $\loch \divleft \sharp^\Sin$ is the same, but on input that was already allowed to mention the formal counterparts.
+\begin{proposition} \label{thm:poresh-sin:div-poresh}
+	The operation $\loch \circ \cohcodisc^\Sin : \Hom_\poreshcat(\Sin(\vec a), \vec b) \to \Hom_\poreshcat(\vec a, \vec b)$ has a left adjoint $\loch \divleft \cohcodisc^\Sin : \Hom_\poreshcat(\vec a, \vec b) \to \Hom_\poreshcat(\Sin(\vec a), \vec b)$ given by $i \cdot (\mu \divleft \cohcodisc^\Sin) := (i \cdot \mu) \divleft \cohcodisc^\Sin$.
+	
+	The idempotent comonad $\loch \divleft \sharp^\Sin$ similarly generalizes to polarized reshuffles.
+\end{proposition}
+\begin{proof}
+	We let the operations act degree-wise.
+\end{proof}
+\begin{lemma} \label{thm:poresh-sin:div-poresh:fuse}
+	Let $\nu : \vec b \to \vec c$ be a left adjoint, and $\mu : \vec a \to \vec b$. Then $\nu \circ (\mu \divleft \cohcodisc^\Sin) = (\nu \circ \mu) \divleft \cohcodisc^\Sin$.
+\end{lemma}
+\begin{proof}
+	Take $k \in \Deg(\vec c)$, and let $k \cdot \nu = q_j$. Since $\nu$ is a left adjoint, we know that $j < \top$ and that, if $b_j = \ypolar$, then $q \in \accol{\isopol, \pospol, \negpol}$.
+	For these polarities, we can check that $q \circ (p_i \divleft \cohcodisc^\Sin) = (q \circ p_i) \divleft \cohcodisc^\Sin$.
+	Thus, we find:
+	\begin{align*}
+		k \cdot (\nu \circ (\mu \divleft \cohcodisc^\Sin))
+		&= q_j \circ (\mu \divleft \cohcodisc^\Sin)
+		& (\text{\cref{def:poreshcat}}) \\
+		&= q \circ ((j \cdot \mu) \divleft \cohcodisc^\Sin)
+		& (\text{\cref{thm:poresh-sin:div-poresh}}) \\
+		&= ((q \circ (j \cdot \mu)) \divleft \cohcodisc^\Sin)
+		& (\text{argued above}) \\
+		&= ((q_j \circ \mu) \divleft \cohcodisc^\Sin) \\
+		&= ((k \cdot (\nu \circ \mu)) \divleft \cohcodisc^\Sin)
+		& (\text{\cref{def:poreshcat}}) \\
+		&= k \cdot ((\nu \circ \mu) \divleft \cohcodisc^\Sin)
+		& (\text{\cref{thm:poresh-sin:div-poresh}})&. &\qedhere
+	\end{align*}
+\end{proof}
+\begin{definition}
+	We define a strict 2-functor $\Sin : \poreshcat \to \poreshcat\withr$ called \textbf{sinistrification}, which sends:
+	\begin{itemize}
+		\item an object $\vec a$ to $\Sin(\vec a) := \maskop{[\vec a, \npolar]}{\maskpj}{\maske}$ (\cref{def:poresh-sin:obj}),
+		\item a morphism $\mu : \vec a \to \vec b$ to $\Sin(\mu) := (\cohcodisc^\Sin \circ \mu) \divleft \cohcodisc^\Sin$,
+		\item this respects 2-cells because both $\cohcodisc^\Sin \circ \loch$ and $\loch \divleft \cohcodisc^\Sin$ are monotonically increasing.
+	\end{itemize}
+\end{definition}
+Thus, the action of $\loch \cdot \Sin(\mu)$ is to first rewrite formal polarized degrees to their original counterparts ($\loch \cdot \cohcodisc^\Sin$), then look up those degrees in $\mu$, and finally rewrite illegal degrees to their formal counterparts ($\loch \divleft \cohcodisc^\Sin$).
+\begin{proposition}
+	$\Sin$ respects the functor laws.
+\end{proposition}
+\begin{proof}
+	This is most easily seen by the explanation given above.
+	
+	Preservation of the identity can simply be computed.
+%	To see that identity is respected, we have
+%	\begin{align*}
+%		\eqtydeg \cdot (\cohcodisc^\Sin \divleft \cohcodisc^\Sin)
+%		&= (\eqtydeg \cdot \cohcodisc^\Sin) \divleft \cohcodisc^\Sin \\
+%		&= \nonpol_\eqtydeg \divleft \cohcodisc^\Sin = \nonpol_\eqtydeg, \\
+%		\edgedeg i \cdot (\cohcodisc^\Sin \divleft \cohcodisc^\Sin)
+%		&= (\edgedeg i \cdot \cohcodisc^\Sin) \divleft \cohcodisc^\Sin \\
+%		&= \nonpol_i \divleft \cohcodisc^\Sin = \nwnonpol_i, \\
+%		\pathdeg i \cdot (\cohcodisc^\Sin \divleft \cohcodisc^\Sin)
+%		&= (\pathdeg i \cdot \cohcodisc^\Sin) \divleft \cohcodisc^\Sin \\
+%		&= \mixpol_i \divleft \cohcodisc^\Sin = \nwpathpol_i \\
+%		\jetdeg i \cdot (\cohcodisc^\Sin \divleft \cohcodisc^\Sin)
+%		&= (\jetdeg i \cdot \cohcodisc^\Sin) \divleft \cohcodisc^\Sin \\
+%		&= \pospol_i \divleft \cohcodisc^\Sin = \nwpospol_i, \\
+%		\edgedeg{\lenpol{\vec a}} \cdot (\cohcodisc^\Sin \divleft \cohcodisc^\Sin)
+%		&= (\edgedeg{\lenpol{\vec a}} \cdot \cohcodisc^\Sin) \divleft \cohcodisc^\Sin \\
+%		&= \nonpol_\top \divleft \cohcodisc^\Sin = \nwnonpol_{\lenpol{\vec a}}.
+%	\end{align*}
+
+	We argue preservation of composition as follows:
+	\begin{align*}
+		\Sin(\nu) \circ \Sin(\mu)
+		&= \Sin(\nu) \circ ((\cohcodisc^\Sin \circ \mu) \divleft \cohcodisc^\Sin) \\
+		&= ((\Sin(\nu) \circ \cohcodisc^\Sin \circ \mu) \divleft \cohcodisc^\Sin)
+		& \text{(\cref{thm:poresh-sin:div-poresh:fuse})} \\
+		&= ((((\cohcodisc^\Sin \circ \nu) \divleft \cohcodisc^\Sin) \circ \cohcodisc^\Sin \circ \mu) \divleft \cohcodisc^\Sin) \\
+		&= ((\cohcodisc^\Sin \circ \nu \circ \mu) \divleft \cohcodisc^\Sin)
+		& ((\loch \divleft \cohcodisc^\Sin) \circ \cohcodisc^\Sin = \id) \\
+		&= \Sin(\nu \circ \mu). &&& \qedhere
+	\end{align*}
+%	
+%	To see that composition of $\mu : \vec a \to \vec b$ with $\nu : \vec b \to \vec c$ is respected, first note that for any $\mu : \vec a \to \vec b$, we have
+%	\begin{align*}
+%		\edgedeg{\lenpol{\vec b}} \cdot ((\cohcodisc^\Sin \circ \mu) \divleft \cohcodisc^\Sin)
+%		&= (\edgedeg{\lenpol{\vec b}} \cdot (\cohcodisc^\Sin \circ \mu)) \divleft \cohcodisc^\Sin \\
+%		&= (\nonpol_\top \circ \mu) \divleft \cohcodisc^\Sin
+%		= \nonpol_\top \divleft \cohcodisc^\Sin = \edgedeg{\lenpol{\vec a}},
+%	\end{align*}
+%	i.e.\ all sinistrified modalities respect the `formal true relation' $\edgesym_{\lenpol{\vec x}}$.
+%	
+%	Next, we consider any other degree $\bigdeg{k}{\mymaskz} \in \Degeq(\Sin(\vec c))$, and we can assume $k < \lenpol{\vec c}$:
+%	\begin{align*}
+%		&{} \mathrel{\phantom{=}}
+%		\getdeg\paren{ \bigdeg{k}{\mymaskz} \cdot ((\cohcodisc^\Sin \circ \nu) \divleft \cohcodisc^\Sin) \circ ((\cohcodisc^\Sin \circ \nu) \divleft \cohcodisc^\Sin) } \\
+%		&= \getdeg\paren{ ((\bigdeg{k}{\mymaskz} \cdot (\cohcodisc^\Sin \circ \nu)) \divleft \cohcodisc^\Sin) \circ ((\cohcodisc^\Sin \circ \nu) \divleft \cohcodisc^\Sin) } \\
+%		&= \getdeg\paren{ ((r_k \circ \nu) \divleft \cohcodisc^\Sin) \circ ((\cohcodisc^\Sin \circ \nu) \divleft \cohcodisc^\Sin) }
+%		& \text{for some $r$} \\
+%	\end{align*}
+%	
+%	\todoi{Old stuff}
+%	To see that composition is respected, we have, for any big degree $I$:
+%	\begin{align*}
+%		&{} \mathrel{\phantom{=}}
+%		I \cdot ((\cohcodisc^\Sin \circ \nu) \divleft \cohcodisc^\Sin) \circ ((\cohcodisc^\Sin \circ \nu) \divleft \cohcodisc^\Sin) \\
+%		&= ((I \cdot (\cohcodisc^\Sin \circ \nu)) \divleft \cohcodisc^\Sin) \circ ((\cohcodisc^\Sin \circ \nu) \divleft \cohcodisc^\Sin).
+%	\end{align*}
+%	Now let $I \cdot (\cohcodisc^\Sin \circ \nu) =: p_i$ and $p_i \divleft \cohcodisc^\Sin = p'_{I'}$.
+%	Then we can proceed:
+%	\begin{align*}
+%		\ldots &= p'_{I'} \circ ((\cohcodisc^\Sin \circ \nu) \divleft \cohcodisc^\Sin) \\
+%		&= p' \circ ((I' \cdot (\cohcodisc^\Sin \circ \nu)) \divleft \cohcodisc^\Sin).
+%	\end{align*}
+%	We can check in the definition of $\cohcodisc^\Sin$ that $I' \cdot \cohcodisc^\Sin$ is of the form $q_i$ where $i$ was already defined above, i.e.\ $\cohcodisc^\Sin$ undoes any degree modification introduced by $\loch \divleft \cohcodisc^\Sin$. Then we proceed:
+%	\begin{align*}
+%		\ldots &= p' \circ ((q_i \circ \nu) \divleft \cohcodisc^\Sin)
+%	\end{align*}
+%%	\begin{align*}
+%%		\edgedeg i \cdot ((\cohcodisc^\Sin \circ \nu \circ \mu) \divleft \cohcodisc^\Sin)
+%%		&= (\edgedeg i \cdot (\cohcodisc^\Sin \circ \nu \circ \mu)) \divleft \cohcodisc^\Sin \\
+%%		&= (\nwnonpol_i \circ \nu \circ \mu) \divleft \cohcodisc^\Sin
+%%	\end{align*}
+\end{proof}
+\begin{theorem}
+	$\cohcodisc^\Sin : \Id \to \Sin$ is a natural transformation.
+\end{theorem}
+\begin{proof}
+	We have
+	\begin{align*}
+		\Sin(\mu) \circ \cohcodisc^\Sin
+		&= ((\cohcodisc^\Sin \circ \mu) \divleft \cohcodisc^\Sin) \circ \cohcodisc^\Sin \\
+		&= \cohcodisc^\Sin \circ \mu
+		& ((\loch \divleft \cohcodisc^\Sin) \circ \cohcodisc^\Sin = \id)&. \\
+		\cohfget^\Sin \circ \Sin(\mu)
+		&= \cohfget^\Sin \circ ((\cohcodisc^\Sin \circ \mu) \divleft \cohcodisc^\Sin) \\
+		&= (\cohfget^\Sin \circ \cohcodisc^\Sin \circ \mu) \divleft \cohcodisc^\Sin
+		& \text{(\cref{thm:poresh-sin:div-poresh:fuse})} \\
+		&= \mu \divleft \cohcodisc^\Sin. &&& \qedhere
+	\end{align*}
+\end{proof}
+
+\subsubsection{Old stuff}
 
 \begin{definition} \label{def:poresh-sin}
 	We define a functor $\Sin : \poreshcat \to \poreshcat\withr$ called \textbf{sinistrification}, which sends:
