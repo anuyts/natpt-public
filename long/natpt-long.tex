@@ -2709,6 +2709,12 @@ The mask operations serve three goals:
 		\item For each $x, y, z \in \Obj(\cat C)$, a \emph{functor} $\circ : \Hom(y, z) \times \Hom(x, y) \to \Hom(x, z)$,
 	\end{itemize}
 	such that $\circ$ is associative and unital with respect to $\id$.
+	
+	We write $\catC\op$ for the category with the same objects and such that $\Hom_{\catC\op}(x, y) = \Hom_\catC(y, x)$.
+	
+	We write $\catC\co$ for the category with the same objects and such that $\Hom_{\catC\co}(x, y) = \Hom_{\catC}(x, y)\op$.
+	
+	We write $\catC\coop = (\catC\co)\op$.
 \end{definition}
 \begin{definition}
 	A \textdef{2-poset}, \textdef{poset-enriched category} or \textdef{Hom-wise gaunt/skeletal (1, 2)-category} $\cat C$ consists of:
@@ -4341,7 +4347,7 @@ Looking at \cref{def:jet-tope} of jet topes, we see that:
 \end{itemize}
 Taking these two requirements together, by \cref{thm:poresh-adjoint}, we get exactly the statement that $\mu$ must have a right adjoint.
 
-\begin{theorem} \label{sec:poresh-jettope}
+\begin{theorem} \label{thm:poresh-jettope}
 	Let $\mu \in \Hom_\poreshcat(\vec a, \vec b)$ have a right adjoint $\mu \dashv \rho$.
 	Then the functor $\mu : \jetset{\vec a} \to \jetset{\vec b}$ sends jet topes to jet topes if and only if $\rho$ has a further right adjoint $\mu \dashv \rho \dashv \tau$.
 	
@@ -4400,11 +4406,11 @@ Taking these two requirements together, by \cref{thm:poresh-adjoint}, we get exa
 	\end{enumerate}
 \end{proof}
 
-\subsection{Triple Semantics on Jet Topic Sets} \label{sec:poresh-jtset:triple}
+\subsection{Adjoint Triple Semantics on Jet Topic Sets} \label{sec:poresh-jtset:triple}
 \begin{definition}
 	The category of \textbf{$\vec a$-jet topic sets} is the presheaf category $\jtset{\vec a} := \Psh(\jettope{\vec a})$.
 \end{definition}
-\begin{theorem} \label{thm:poresh-jettopicset}
+\begin{theorem} \label{thm:poresh-jtset:triple}
 	We have the following pseudofunctors:
 	\begin{itemize}
 		\item $\jtsetsym\withrr : \poreshcat\withrr \to \Cat\withrr$,
@@ -4422,11 +4428,16 @@ Taking these two requirements together, by \cref{thm:poresh-adjoint}, we get exa
 			\qquad\dashv\qquad
 			\jtsetsym\withll(\tau) = \rpsh \mu,
 		\]
+		of which $\fpsh \mu$ is a strict CwF morphism \cite{dybjer-cwf} and $\rpsh \mu$ is a weak CwF morphism \cite[def.\ 2.1.1]{reldtt-techreport}\cite[def.\ 3.2.5]{nuyts-phd} w.r.t.\ the standard CwF structure on a presheaf category \cite[ch.\ 4]{Hofmann97}\cite[\S 4.1]{nuyts-phd}.
 		\item 2-cells are also respected.
 	\end{itemize}
 \end{theorem}
 \begin{proof}
 	In general, a functor $F : \catV \to \catW$ gives rise to a triple of adjoint functors $\lpsh F \dashv \fpsh F \dashv \rpsh F$ where $\fpsh F : \Psh(\catW) \to \Psh(\catV)$ is precomposition with $F$ and the other two are left and right Kan extension along $F$ \cite{stacks-adjoints,nlab:lifting-functors}\cite[\S 2.3.8]{nuyts-phd}.
+	It is in general true that $\fpsh F$ is a strict CwF morphism and $\rpsh F$ is a weak one \cite[thm.\ 2.2.1 \& prop.\ 2.2.9]{reldtt-techreport}\cite[\S 6.4]{nuyts-phd}.
+	
+	The middle operation amounts to a strict 2-functor $\Cat\coop \to \Cat$, so the other operations amount to pseudofunctors $\Cat \to \Cat$.
+	We compose these operations with the pseudofunctorial semantics of polarized reshuffles on jet topes (\cref{thm:poresh-jettope}), and finally use the fact that $\poreshcat\withll \cong (\poreshcat\withlr)\coop \cong \poreshcat\withrr$, with each isomorphism sending a polarized reshuffle to its left adjoint.
 \end{proof}
 This is a fairly good result: any polarized reshuffle that is part of a chain of at least three adjoints, now has semantics on jet topic sets.
 Moreover, if we have a chain of four adjoints $\kappa \dashv \mu \dashv \rho \dashv \tau$, then by uniqueness of the adjoint, we find that $\jtsetsym\withlr(\mu) \cong \jtsetsym\withrr(\mu)$ and similar for $\rho$.
@@ -4456,27 +4467,42 @@ So each of the sides has semantics on jet topic sets, but we currently do not kn
 We cannot invoke the composition law of any pseudofunctor involved here, because the composition operands all require a different pseudofunctor.
 
 \subsection{Sinistrification} \label{sec:poresh-jtset:sinistrification}
-\todoi{Maybe skip dextrification, since it seems to work differently for the two criteria for having a left adjoint. We use sinistrification to give them an additional right adjoint so that we can interpret them on jet topes and internalize them.}
-\todoi{Argue that we want to preserve at least commutation of modalities that actually can be internalized, i.e. those that have a single left adjoint. Their locks internalize functors that have a single right adjoint.}
-For this reason, not unlike our usage of jet setoids in \cref{sec:poresh-jetset}, we will take a detour via setoid enriched categories that are equivalent to the categories of jet topic sets but where a single strict 2-functorial semantics of our mode theory can be achieved (\cref{sec:poresh-jtset:strict}).
+%\todoi{Maybe skip dextrification, since it seems to work differently for the two criteria for having a left adjoint. We use sinistrification to give them an additional right adjoint so that we can interpret them on jet topes and internalize them.}
+%\todoi{Argue that we want to preserve at least commutation of modalities that actually can be internalized, i.e. those that have a single left adjoint. Their locks internalize functors that have a single right adjoint.}
+For this reason, not unlike our usage of jet setoids in \cref{sec:poresh-jetset}, we will take a detour via alternative categories that are equivalent to the categories of jet topic sets but where our semantics do not act on adjoint triples as in \cref{thm:poresh-jtset:triple}, but rather on adjoint pairs (\cref{sec:poresh-jtset:pair-sin}).
+That is:
+\begin{itemize}
+	\item $\jtset\withrr$ and $\jtset\withlr$ will get a common generalization $\jtset\withr$ with domain $\poreshcat\withr$,
+	\item $\jtset\withlr$ and $\jtset\withll$ will get a common generalization $\jtset\withl$ with domain $\poreshcat\withl$.
+\end{itemize}
+In fact, we could aim for a single semantics generalizing all three, but:
+\begin{itemize}
+	\item we will see that it does not work for jet cubical sets \todo{Refer to no-go theorem},
+	\item it is unnecessary: the general modal system MTT \cite{mtt-journal} that we wish to instantiate, itself has a syntax $\locknovar \mu$ for left adjoint functors, which can be applied to contexts, and another syntax $\Modifynovar \mu \loch$ for (weak) dependent right adjoints (DRAs, \cite{dra}), which can be applied to types.
+	These will be modelled by pairs of a left adjoint and an (in our case proper) DRA.
+	Equations between functors that are neither left nor right adjoint, but may arise as a composite of left and right adjoints, are not of interest to MTT, so we take no interest in dealing with these in the model.
+\end{itemize}
+%a single strict 2-functorial semantics of our mode theory can be achieved (\cref{sec:poresh-jtset:strict}).
 
-The trick we will use to achieve this is the following: we will insert additional symmetric degrees into our anpolarity masks, which will serve as degrees for formal infrajets and equijets, as well as for the `true' relation.
-The result is that any polarized reshuffle can be re-encoded as one that has both a left and a right adjoint. We call this \textbf{ambidextrification}.
-To get a handle on equality, we will resort to setoid-valued presheaves.
+The trick we will use to achieve the above is the following: we will insert additional symmetric degrees into our anpolarity masks, which will serve as degrees for formal equijets, as well as for the `true' relation.
+Then any polarized reshuffle can be re-encoded as one that does not mention $\mixpol_i$ for directed degrees $i$, nor $\nonpol_\top$, i.e.\ as one that has a right adjoint as per \cref{thm:poresh-adjoint}, by mentioning the inserted formal degrees instead.
+We call this \textbf{sinistrification}.%
+%The result is that any polarized reshuffle can be re-encoded as one that has both a left and a right adjoint. We call this \textbf{ambidextrification}.
+%To get a handle on equality, we will resort to setoid-valued presheaves.
+\footnote{Shulman \cite{matt} introduces a construction called \emph{co-dextrification} (Lat.\ \emph{dexter}: `right') which adds left adjoints to existing morphisms in a certain 2-category in such a way that the result satisfies a co-free property. He should perhaps have called it \emph{co-free dextrification}, so that the free construction could be called \emph{free dextrification} and the word \emph{dextrification} per se would be available when no universal property is proven. We mean the word sinistrification (Lat.\ \emph{sinister}: `left') in this latter sense: we do not prove any universal property. As such, we cannot speak of \emph{the} sinistrification but are instead presenting \emph{some} particular sinistrification that we choose to work with.}
 
-We will then take the full subcategory of jet topic sets for the ambidextrified mask, on those presheaves where formal and actual infrajets (equijets) actually coincide (\cref{sec:poresh-jtset:strict}).
-This category will be equivalent to the original category of jet topic sets for the original mask (\cref{sec:poresh-jtset:pseudo}).
+We will then take the full subcategory of jet topic sets for the `sinistrified' mask, on those presheaves where formal and actual equijets actually coincide (\cref{sec:poresh-jtset:pair-sin}), and whose formal `true' relation is actually true.
+This category will be equivalent to the original category of jet topic sets for the original mask (\cref{sec:poresh-jtset:pair}).
 
-Ambidextrification is done in two steps: sinistrification (making all reshuffles left adjoint) and dextrification (making them right adjoint).%
-\footnote{Shulman \cite{matt} introduces a construction called \emph{co-dextrification} which adds left adjoints to existing morphisms in a certain 2-category in such a way that the result satisfies a co-free property. He should perhaps have called it \emph{co-free dextrification}, so that the free construction could be called \emph{free dextrification} and the word \emph{dextrification} per se would be available when no universal property is proven. We mean the words sinistrification (Lat.\ \emph{sinister}: `left'), dextrification (Lat.\ \emph{dexter}: `right') and ambidextrification (Lat.\ \emph{ambidexter}: `ambidextrous') in this latter sense: we do not prove any universal property.}
-These operation make use of \cref{def:pb} and its \emph{big degree} notation.
+%Ambidextrification is done in two steps: sinistrification (making all reshuffles left adjoint) and dextrification (making them right adjoint).
 
 \bigskip
 
-By \cref{thm:poresh-adjoint}, left adjoints cannot mention $\nonpol_\top$ or $\mixpol_i$ for symmetric degrees $i$.
+\noindent By \cref{thm:poresh-adjoint}, left adjoints cannot mention $\nonpol_\top$ or $\mixpol_i$ for symmetric degrees $i$.
 So in order to make all polarized reshuffles left adjoint, we will insert formal degrees $\nwedgesym_{\lenpol{\vec a}}$ for the true relation, and $\nwpathsym_i$ for the $i$-equijet relation.
+This operation makes use of \cref{def:pb} and its \emph{big degree} notation.
 \begin{definition} \label{def:poresh-sin:obj}
-	Given a mask $\vec a$, we define its \textbf{sinistrification}\footnote{Of course, a mask is just an object and cannot become a left adjoint. We use the word sinistrification already because $\Sin$ will be extended to a strict 2-functor.} $\Sin(\vec a) := \maskop{[\vec a, \npolar]}{\maskpj}{\maske}$, and a polarized reshuffle
+	Given a mask $\vec a$, we define its \textbf{sinistrification}\footnote{Of course, a mask is just an object and cannot become a left adjoint. We use the word sinistrification already because $\Sin$ will be extended to a strict 2-functor.} $\Sin(\vec a) := \maskop{[\vec a, \npolar]}{\maskpj}{\maske}$ (\cref{def:pb}), and a polarized reshuffle
 	\[
 		\cohfget^\Sin : \Sin(\vec a) \to \vec a
 	\]
@@ -4484,14 +4510,16 @@ So in order to make all polarized reshuffles left adjoint, we will insert formal
 	\[
 		\left\{ \begin{array}{r l l l}
 			\eqtydeg \cdot \cohfget^\Sin &:=& \nonpol_\eqtydeg \\
-			i \cdot \cohfget^\Sin &:=& \nwnonpol_i &\text{if $a_i = \npolar$}, \\
-			i \cdot \cohfget^\Sin &:=& \nwpospol_i &\text{if $a_i = \ypolar$}.
+			i \cdot \cohfget^\Sin &:=& \nwnonpol_i &\text{for $i \in \Deg(\vec a)$ with $a_i = \npolar$}, \\
+			i \cdot \cohfget^\Sin &:=& \nwpospol_i &\text{for $i \in \Deg(\vec a)$ with $a_i = \ypolar$}.
 		\end{array} \right.
 	\]
 \end{definition}
 When we let $\cohfget^\Sin$ act on a jet set, its effect is to forget the inserted formal relations.
 \begin{proposition} \label{thm:poresh-sin:cohesion}
-	The polarized reshuffle $\cohfget^\Sin$ is part of an adjoint triple $\cohdisc^\Sin \dashv \cohfget^\Sin \dashv \cohcodisc^\Sin$ where $\cohdisc^\Sin, \cohcodisc^\Sin : \vec a \to \Sin(\vec a)$ are defined by
+	The polarized reshuffle $\cohfget^\Sin$ is part of an adjoint triple%
+	\footnote{We do not actually have any use for $\cohdisc^\Sin$.}
+	$\cohdisc^\Sin \dashv \cohfget^\Sin \dashv \cohcodisc^\Sin$ where $\cohdisc^\Sin, \cohcodisc^\Sin : \vec a \to \Sin(\vec a)$ are defined by
 	\[
 		\left\{ \begin{array}{r l l l}
 			\eqtydeg \cdot \cohdisc^\Sin &:=& \nonpol_\eqtydeg \\
@@ -4577,7 +4605,7 @@ The action of $\loch \divleft \sharp^\Sin$ is the same, but on input that was al
 	The idempotent comonad $\loch \divleft \sharp^\Sin$ similarly generalizes to polarized reshuffles.
 \end{proposition}
 \begin{proof}
-	We let the operations act degree-wise.
+	Follows from \cref{thm:poresh-sin:div-poldeg}, since all operations involved act degree-wise.
 \end{proof}
 \begin{lemma} \label{thm:poresh-sin:div-poresh:fuse}
 	Let $\nu : \vec b \to \vec c$ be a left adjoint, and $\mu : \vec a \to \vec b$. Then $\nu \circ (\mu \divleft \cohcodisc^\Sin) = (\nu \circ \mu) \divleft \cohcodisc^\Sin$.
@@ -4591,7 +4619,7 @@ The action of $\loch \divleft \sharp^\Sin$ is the same, but on input that was al
 		&= q_j \circ (\mu \divleft \cohcodisc^\Sin)
 		& (\text{\cref{def:poreshcat}}) \\
 		&= q \circ ((j \cdot \mu) \divleft \cohcodisc^\Sin)
-		& (\text{\cref{thm:poresh-sin:div-poresh}}) \\
+		& (\text{$j < \top$; \cref{thm:poresh-sin:div-poresh}}) \\
 		&= ((q \circ (j \cdot \mu)) \divleft \cohcodisc^\Sin)
 		& (\text{argued above}) \\
 		&= ((q_j \circ \mu) \divleft \cohcodisc^\Sin) \\
@@ -4609,12 +4637,13 @@ The action of $\loch \divleft \sharp^\Sin$ is the same, but on input that was al
 		\item this respects 2-cells because both $\cohcodisc^\Sin \circ \loch$ and $\loch \divleft \cohcodisc^\Sin$ are monotonically increasing.
 	\end{itemize}
 \end{definition}
-Thus, the action of $\loch \cdot \Sin(\mu)$ is to first rewrite formal polarized degrees to their original counterparts ($\loch \cdot \cohcodisc^\Sin$), then look up those degrees in $\mu$, and finally rewrite illegal degrees to their formal counterparts ($\loch \divleft \cohcodisc^\Sin$).
+Thus, the action of $\loch \circ \Sin(\mu)$ on polarized degrees is to first rewrite formal polarized degrees to their original counterparts ($\loch \circ \cohcodisc^\Sin$), then look up those degrees in $\mu$, and finally rewrite illegal degrees to their formal counterparts ($\loch \divleft \cohcodisc^\Sin$).
 \begin{proposition}
 	$\Sin$ respects the functor laws.
 \end{proposition}
 \begin{proof}
 	This is most easily seen by the explanation given above.
+	Alternatively:
 	
 	Preservation of the identity can simply be computed.
 %	To see that identity is respected, we have
@@ -4839,24 +4868,24 @@ Thus, the action of $\loch \cdot \Sin(\mu)$ is to first rewrite formal polarized
 %	\end{align*}
 %\end{corollary}
 
-\subsection{Strict Semantics on Sinistrified Modal Jet Topic Setoids} \label{sec:poresh-jtset:strict}
+\subsection{Adjoint Pair Semantics on Sinistrified Modal Jet Topic Setoids} \label{sec:poresh-jtset:pair-sin}
 
-\subsection{Pseudosemantics on Jet Topic Sets} \label{sec:poresh-jtset:pseudo}
+\subsection{Adjoint Pair Semantics on Jet Topic Sets} \label{sec:poresh-jtset:pair}
 
 \section{Semantics on Jet Cubes and Jet Cubical Sets} \label{sec:poresh-jetcube-jcset}
 
 \subsection{Semantics on Jet Cubes} \label{sec:poresh-jetcube}
 
-\subsection{Triple Semantics on Jet Cubical Sets} \label{sec:poresh-jcset:triple}
+\subsection{Adjoint Triple Semantics on Jet Cubical Sets} \label{sec:poresh-jcset:triple}
 \todoi{No go theorem}
 
 %\subsection{Mask Enhancement} \label{sec:poresh-jcset:enhancement}
 %\todoi{Sinistrification or dextrification?}
 %\todoi{Endofunctor on $\poreshcat$}
 
-\subsection{Strict Semantics on Sinistrified Modal Jet Cubical Sets} \label{sec:poresh-jcset:strict}
+\subsection{Adjoint Pair Semantics on Sinistrified Modal Jet Cubical Sets} \label{sec:poresh-jcset:pair-sin}
 
-\subsection{Pseudosemantics on Jet Cubical Sets} \label{sec:poresh-jcset:pseudo}
+\subsection{Adjoint Pair Semantics on Jet Cubical Sets} \label{sec:poresh-jcset:pair}
 
 \chapter{Transpension}
 \todoi{Does Tw : sSet $\to$ sSet have a transp type? (Yes if it's Tw$_!$)}
