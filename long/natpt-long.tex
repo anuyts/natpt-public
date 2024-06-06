@@ -2686,6 +2686,12 @@ The mask operations serve three goals:
 		{\edge_6}.
 	\]
 	When we need a degree in itself, we will write e.g.\ $\pathdeg{0}$.
+	
+	A modality $\mu : \maskop{\vec a}{\maskpjb}{\maske} \to \maskop{\vec a}{\maskpjb}{\maske}$ will be denoted
+	\[
+		\reshlist{\eqtydeg \cdot \mu}{\pathdeg 0 \cdot \mu, \jetdeg 0 \cdot \mu, \bridgedeg 0 \cdot \mu ; \edgedeg 1 \cdot \mu ; \pathdeg 2 \cdot \mu, \jetdeg 2 \cdot \mu, \bridgedeg 2 \cdot \mu},
+	\]
+	i.e.\ we will use semicolons (;) to group small degree information per big degree.
 \end{definition}
 
 \subsection{Understanding Equijets}
@@ -4739,6 +4745,25 @@ Thus, the action of $\loch \circ \Sin(\mu)$ on polarized degrees is to first rew
 \begin{corollary}
 	For any $\mu : \vec a \to \vec b$, we have $\cohfget^\Sin \circ \Sin(\mu) \circ \cohcodisc^\Sin = \mu$. \qed
 \end{corollary}
+\begin{proposition}
+	$\cohfget^\Sin : \Id \to \Sin$ and $\sharp^\Sin : \Sin \to \Sin$ are not natural transformations.
+\end{proposition}
+\begin{proof}
+	If $\cohfget^\Sin$ were natural, then so would $\sharp^\Sin = \cohcodisc^\Sin \cohfget^\Sin$ be.
+	Thus, it suffices to disprove the latter.
+	
+	Consider the modality $\mu = \reshlist{\nonpol_\eqtydeg}{\mixpol_0} : [\ypolar] \to [\ypolar]$.
+	Then $\Sin(\mu) = \reshlist{\nonpol_\eqtydeg}{\nwpathpol_0, \nwpathpol_0; \nwnonpol_1}$.
+	Meanwhile, $\sharp^\Sin : \Sin([\ypolar]) \to \Sin([\ypolar])$ is given by $\sharp^\Sin = \reshlist{\nonpol_\eqtydeg}{\nwmixpol_0, \nwpospol_0; \nonpol_\top}$.
+	Composing these, we get
+	\[
+		\sharp^\Sin \circ \Sin(\mu) = \reshlist{\nonpol_\eqtydeg}{\nwpathpol_0, \nwpathpol_0; \nonpol_\top},
+	\]
+	but
+	\[
+		\Sin(\mu) \circ \sharp^\Sin = \reshlist{\nonpol_\eqtydeg}{\nwmixpol_0, \nwmixpol_0; \nonpol_\top}. \qedhere
+	\]
+\end{proof}
 
 %\subsubsection{Dextrification}
 %By \cref{thm:poresh-adjoint}, right adjoints cannot mention $\isopol_i$ for symmetric degrees $i$, and must preserve $\eqtydeg$.
