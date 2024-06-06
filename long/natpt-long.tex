@@ -4472,14 +4472,14 @@ The diagonals compose to $\cohcodisc_0 = \reshlist{\isopol_0}{\nonpol_\top} : [\
 So each of the sides has semantics on jet topic sets, but we currently do not know whether the diagram still commutes there.
 We cannot invoke the composition law of any pseudofunctor involved here, because the composition operands all require a different pseudofunctor.
 
-\subsection{Sinistrification} \label{sec:poresh-jtset:sinistrification}
+\subsection{Sinistrification} \label{sec:poresh-jtset:sin}
 %\todoi{Maybe skip dextrification, since it seems to work differently for the two criteria for having a left adjoint. We use sinistrification to give them an additional right adjoint so that we can interpret them on jet topes and internalize them.}
 %\todoi{Argue that we want to preserve at least commutation of modalities that actually can be internalized, i.e. those that have a single left adjoint. Their locks internalize functors that have a single right adjoint.}
 For this reason, not unlike our usage of jet setoids in \cref{sec:poresh-jetset}, we will take a detour via alternative categories that are equivalent to the categories of jet topic sets but where our semantics do not act on adjoint triples as in \cref{thm:poresh-jtset:triple}, but rather on adjoint pairs (\cref{sec:poresh-jtset:pair-sin}).
 That is:
 \begin{itemize}
-	\item $\jtset\withrr$ and $\jtset\withlr$ will get a common generalization $\jtset\withr$ with domain $\poreshcat\withr$,
-	\item $\jtset\withlr$ and $\jtset\withll$ will get a common generalization $\jtset\withl$ with domain $\poreshcat\withl$.
+	\item $\jtsetsym\withrr$ and $\jtsetsym\withlr$ will get a common generalization $\jtsetsym\withr$ with domain $\poreshcat\withr$,
+	\item $\jtsetsym\withlr$ and $\jtsetsym\withll$ will get a common generalization $\jtsetsym\withl$ with domain $\poreshcat\withl$.
 \end{itemize}
 In fact, we could aim for a single semantics generalizing all three, but:
 \begin{itemize}
@@ -4523,9 +4523,9 @@ This operation makes use of \cref{def:pb} and its \emph{big degree} notation.
 \end{definition}
 When we let $\cohfget^\Sin$ act on a jet set, its effect is to forget the inserted formal relations.
 \begin{proposition} \label{thm:poresh-sin:cohesion}
-	The polarized reshuffle $\cohfget^\Sin$ is part of an adjoint triple%
-	\footnote{We do not actually have any use for $\cohdisc^\Sin$.}
-	$\cohdisc^\Sin \dashv \cohfget^\Sin \dashv \cohcodisc^\Sin$ where $\cohdisc^\Sin, \cohcodisc^\Sin : \vec a \to \Sin(\vec a)$ are defined by
+	The polarized reshuffle $\cohfget^\Sin$ is part of an adjoint triple
+	$\cohdisc^\Sin \dashv \cohfget^\Sin \dashv \cohcodisc^\Sin$ where $\cohdisc^\Sin, \cohcodisc^\Sin : \vec a \to \Sin(\vec a)$ are defined by%
+	\footnote{We do not realy care about $\cohdisc^\Sin$ beyond its existence.}
 	\[
 		\left\{ \begin{array}{r l l l}
 			\eqtydeg \cdot \cohdisc^\Sin &:=& \nonpol_\eqtydeg \\
@@ -4635,7 +4635,7 @@ The action of $\loch \divleft \sharp^\Sin$ is the same, but on input that was al
 		& (\text{\cref{thm:poresh-sin:div-poresh}})&. &\qedhere
 	\end{align*}
 \end{proof}
-\begin{definition}
+\begin{definition} \label{def:sin}
 	We define a strict 2-functor $\Sin : \poreshcat \to \poreshcat\withr$ called \textbf{sinistrification}, which sends:
 	\begin{itemize}
 		\item an object $\vec a$ to $\Sin(\vec a) := \maskop{[\vec a, \npolar]}{\maskpj}{\maske}$ (\cref{def:poresh-sin:obj}),
@@ -4894,6 +4894,35 @@ Thus, the action of $\loch \circ \Sin(\mu)$ on polarized degrees is to first rew
 %\end{corollary}
 
 \subsection{Adjoint Pair Semantics on Sinistrified Modal Jet Topic Setoids} \label{sec:poresh-jtset:pair-sin}
+Composing sinistrification (\cref{sec:poresh-jtset:sin}) with \ref{thm:poresh-jtset:triple}, we get
+\begin{align*}
+	&\poreshcat\withr \xrightarrow{\Sin} \poreshcat\withrr \xrightarrow{\jtsetsym\withrr} \Cat\withrr, \\
+	&\poreshcat\withl \xrightarrow{\Sin} \poreshcat\withlr \xrightarrow{\jtsetsym\withlr} \Cat\withlr.
+\end{align*}
+An adjunction $\mu \dashv \rho$ with $\mu : \vec a \to \vec b$ will be sent to an adjunction $\jtsetsym\withrr(\Sin(\mu)) = \Sin(\mu)_! \dashv \jtsetsym\withlr(\Sin(\rho)) = \Sin(\mu)^*$, with $\Sin(\mu)_! : \jtset{\Sin(\vec a)} \to \jtset{\Sin(\vec b)}$.\footnote{Here, we use the abbreviation $\nu$ for $\jettope{\nu}$.}
+
+Now, for all $\vec a$, we would like to take full subcategories of $\jtset{\Sin(\vec a)}$ on those presheaves whose formal equijet and `true' relations coincide with the actual ones.
+These would be exactly fixpoints of the semantics of $\sharp^\Sin$, as $\sharp^\Sin$ redefines the formal relations as the actual ones.
+However, since $\sharp^\Sin$ is not in general part of an adjoint triple, \cref{thm:poresh-jtset:triple} does not directly provide a semantics on jet topic sets.
+Fortunately, we can reassemble it from its parts, but then we have to reprove some of its properties:
+\begin{proposition}
+	The functor
+	\[
+		\sharpsinjtset := \jtsetsym\withll(\cohcodisc^\Sin) \circ \jtsetsym\withlr(\cohfget^\Sin) : \jtset{\Sin(\vec a)} \to \jtset{\Sin(\vec a)}
+	\]
+	is an idempotent monad.
+\end{proposition}
+\begin{proof}
+	By \cref{thm:poresh-jtset:triple}, we have $\jtsetsym\withlr(\cohfget^\Sin) = \fpsh{(\cohdisc^\Sin)} \dashv \jtsetsym\withll(\cohcodisc^\Sin) = \rpsh{(\cohdisc^\Sin)}$.
+	So as a composite of two adjoints, $\sharpsinjtset$ is certainly a monad.
+	It remains to be proven that the co-unit of the corresponding comonad $\fpsh{(\cohdisc^\Sin)} \circ \rpsh{(\cohdisc^\Sin)}$ is invertible,
+	or equivalently that the unit of its left adjoint monad $\fpsh{(\cohdisc^\Sin)} \circ \lpsh{(\cohdisc^\Sin)}$ is invertible,
+	which by a well-known fact about adjoint functors \cite[v141, prop.\ 3.4]{nlab:adjoint-functor} is equivalent to $\lpsh{(\cohdisc^\Sin)}$ being fully faithful.
+	This is in turn equivalent to $\cohdisc^\Sin : \jettope{\vec a} \to \jettope{\Sin(\vec a)}$ being fully faithful (see e.g.\ \cite[v4, thm.\ 2.3.4]{transpension-techreport}).
+	Since $\jettope{\vec x}$ is a full subcategory of $\jetset{\vec x}$,
+	it is sufficient for $\cohdisc^\Sin : \jetset{\vec a} \to \jetset{\Sin(\vec a)}$ to be fully faithful.
+	This is equivalent to invertibility of the unit of the monad $\cohfget^\Sin \cohdisc^\Sin : \jetset{\vec a} \to \jetset{\vec a}$, which follows from pseudofunctoriality of $\jetsetsym : \poreshcat \to \Cat$ and the fact that the polarized reshuffle $\cohfget^\Sin \cohdisc^\Sin : \vec a \to \vec a$ is the identity (we do not need to consider equality of 2-cells in the 2-poset $\poreshcat$).
+\end{proof}
 
 \subsection{Adjoint Pair Semantics on Jet Topic Sets} \label{sec:poresh-jtset:pair}
 
