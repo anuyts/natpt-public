@@ -4445,12 +4445,14 @@ Taking these two requirements together, by \cref{thm:poresh-adjoint}, we get exa
 	The middle operation amounts to a strict 2-functor $\Cat\coop \to \Cat$, so the other operations amount to pseudofunctors $\Cat \to \Cat$.
 	We compose these operations with the pseudofunctorial semantics of polarized reshuffles on jet topes (\cref{thm:poresh-jettope}), and finally use the fact that $\poreshcat\withll \cong (\poreshcat\withlr)\coop \cong \poreshcat\withrr$, with each isomorphism sending a polarized reshuffle to its left adjoint.
 \end{proof}
-This is a fairly good result: any polarized reshuffle that is part of a chain of at least three adjoints, now has semantics on jet topic sets.
+
+\subsection{No Adjoint Pair Semantics on Jet Topic Sets} \label{sec:poresh-jtset:nogo}
+\Cref{thm:poresh-jtset:triple} is a fairly good result: any polarized reshuffle that is part of a chain of at least three adjoints, now has semantics on jet topic sets.
 Moreover, if we have a chain of four adjoints $\kappa \dashv \mu \dashv \rho \dashv \tau$, then by uniqueness of the adjoint, we find that $\jtsetsym\withlr(\mu) \cong \jtsetsym\withrr(\mu)$ and similar for $\rho$.
 So the 3 pseudofunctors essentially agree on the intersection of their domains.
 
 However, we can have commutative diagrams in $\poreshcat$ each of whose sides has semantics in jet topic sets, but where the composites of the sides do not have such semantics, so that commutativity is not necessarily preserved.
-Consider, for example, the following diagram with functors from \cref{ex:cohesion}:
+Consider, for example, the following diagram with polarized reshuffles from \cref{ex:cohesion}:
 \[
 	\xymatrix{
 		[\ypolar]
@@ -4466,12 +4468,100 @@ Consider, for example, the following diagram with functors from \cref{ex:cohesio
 		[\ypolar]
 	}
 \]
-The horizontal sides are in $\poreshcat\withrr$: $\cohpi_0 \dashv \cohdisc_0 \dashv \cohfget_0$.
-The vertical sides are in $\poreshcat\withll$: $\cohdisc_i \dashv \cohfget_i \dashv \cohcodisc_i$.
-The diagonals compose to $\cohcodisc_0 = \reshlist{\isopol_0}{\nonpol_\top} : [\ypolar, \ypolar]$, which by \cref{thm:poresh-adjoint} has neither a left, nor a right adjoint.
+The horizontal sides are in $\poreshcat\withrr$, since $\cohpi_0 \dashv \cohdisc_0 \dashv \cohfget_0$.
+The vertical sides are in $\poreshcat\withll$, since $\cohdisc_i \dashv \cohfget_i \dashv \cohcodisc_i$.
+The diagonals compose to $\reshlist{\isopol_0}{\nonpol_\top} : [\ypolar] \to [\ypolar]$, which by \cref{thm:poresh-adjoint} has neither a left, nor a right adjoint.
 So each of the sides has semantics on jet topic sets, but we currently do not know whether the diagram still commutes there.
-We cannot invoke the composition law of any pseudofunctor involved here, because the composition operands all require a different pseudofunctor.
+We cannot invoke the composition law of any pseudofunctor provided by \cref{thm:poresh-jtset:triple}, because the composition operands all require a different pseudofunctor.
 
+Unfortunately, we have the following \textbf{no-go theorem}:
+\begin{theorem} \label{thm:poresh-jtset:nogo}
+	The following, equivalent\footnote{Assuming an adjoint can be picked if one exists.}, objects \textbf{do not exist}:
+	\begin{itemize}
+		\item A pseudofunctor $\jtsetsym\withr : \poreshcat\withr \to \Cat\withr$ that extends both $\jtsetsym\withrr$ and $\jtsetsym\withlr$ up to natural isomorphism,
+		\item A pseudofunctor $\jtsetsym\withl : \poreshcat\withl \to \Cat\withl$ that extends both $\jtsetsym\withlr$ and $\jtsetsym\withll$ up to natural isomorphism.
+	\end{itemize}
+\end{theorem}
+\begin{proof}
+	Assume the former exists, and consider the polarized reshuffles
+	\[
+		\cohfget_0 = \reshlist{\nonpol_\eqtydeg}{\pospol_1} : [\ypolar, \ypolar] \to [\ypolar], \qquad
+		\cohdisc_1 = \reshlist{\nonpol_\eqtydeg}{\pospol_0, \isopol_1} : [\ypolar] \to [\ypolar, \ypolar]
+	\]
+	from \cref{ex:cohesion}, which compose to $\cohfget_0 \cohdisc_1 = \reshlist{\nonpol_\eqtydeg}{\isopol_0} : [\ypolar] \to [\ypolar]$.
+	This latter reshuffle is easily computed to be idempotent, i.e.\ $\reshlist{\nonpol_\eqtydeg}{\isopol_0}^2 = \reshlist{\nonpol_\eqtydeg}{\isopol_0}$.
+	Then by pseudofunctoriality, we expect a natural isomorphism $\jtsetsym\withr(\cohfget_0 \cohdisc_1)^2 \cong \jtsetsym\withr(\cohfget_0 \cohdisc_1)$, but we will disprove this.
+	
+	By pseudofunctoriality, we know that
+	\[
+		\jtsetsym\withr(\cohfget_0 \cohdisc_1)
+		\cong \jtsetsym\withr(\cohfget_0) \circ \jtsetsym\withr(\cohdisc_1)
+		\cong \jtsetsym\withlr(\cohfget_0) \circ \jtsetsym\withrr(\cohdisc_1)
+		= \fpsh{(\cohdisc_0)} \circ \lpsh{(\cohdisc_1)},
+	\]
+	where $\cohdisc_0 = \reshlist{\nonpol_\eqtydeg}{\nonpol_\eqtydeg, \pospol_0} : [\ypolar] \to [\ypolar, \ypolar]$.
+	Consider the jet topic set $\yoneda \rival{\jetsym_0} \in \jtset{[\ypolar]}$, which is the Yoneda-embedding of the jet tope $\rival{\jetsym_0} \in \jettope{[\ypolar]}$.
+	We compute the sets of 0-jets of its images under either the above functor or its square:\todo{Specify presheaf and (co)end notations somewhere.}
+	\begin{align*}
+		&\quad\mathrel{\phantom{=}}\quad
+		\DSub{\rival{\jetsym_0}}{\fpsh{(\cohdisc_0)} \lpsh{(\cohdisc_1)} \yoneda \rival{\jetsym_0}} \\
+		&\quad=\quad \DSub{\cohdisc_0 \rival{\jetsym_0}}{\lpsh{(\cohdisc_1)} \yoneda \rival{\jetsym_0}} \\
+		&\quad\cong\quad \DSub{\cohdisc_0 \rival{\jetsym_0}}{\yoneda \cohdisc_1 \rival{\jetsym_0}}
+		& \text{($\lpsh F \circ \yoneda \cong \yoneda \circ F$)} \\
+		&\quad=\quad \DSub{\rival{\jetsym_0 \oriof \cohfget_0}}{\yoneda \rival{\jetsym_0 \oriof \cohfget_1}}
+		& \text{(\cref{thm:poresh-jetsetoid-intervals})} \\
+		&\quad=\quad \DSub{\rival{\jetsym_1}}{\yoneda \rival{\jetsym_0}} \\
+		&\quad=\quad \rival{\jetsym_1} \to \rival{\jetsym_0}.
+	\end{align*}
+	Note that, after applying the reshuffles to the jet topes, we obtain jet topes in $\jettope{[\ypolar, \ypolar]}$.
+	Since any two nodes in $\rival{\jetsym_0}$ are connected by a $1$-equijet, any function $\accol{0, 1} \to \accol{0, 1}$ between the carriers is a jet set (hence jet tope) morphism.
+	
+	On the other hand, we have
+	\begin{align*}
+		&\quad\mathrel{\phantom{=}}\quad
+		\DSub{\rival{\jetsym_0}}{\fpsh{(\cohdisc_0)} \lpsh{(\cohdisc_1)} \fpsh{(\cohdisc_0)} \lpsh{(\cohdisc_1)} \yoneda \rival{\jetsym_0}} \\
+		&\quad\cong\quad \DSub{\rival{\jetsym_1}}{\lpsh{(\cohdisc_1)} \fpsh{(\cohdisc_0)} \yoneda \rival{\jetsym_0}}
+		& \text{(by similar reasoning as above)} \\
+		&\quad=\quad
+		\exists X^{{}\in \jettope{[\ypolar]}}.(\rival{\jetsym_1} \to \cohdisc_1 X) \times (\DSub{X}{\fpsh{(\cohdisc_0)} \yoneda \rival{\jetsym_0}})
+		& \text{(construction of left Kan extension)} \\
+		&\quad=\quad
+		\exists X^{{}\in \jettope{[\ypolar]}}.(\rival{\jetsym_1} \to \cohdisc_1 X) \times (\cohdisc_0 X \to \rival{\jetsym_0}).
+	\end{align*}
+	Now a $1$-jet in $\cohdisc_1 X = \reshlist{\nonpol_\eqtydeg}{\pospol_0, \isopol_0} X$ is a $1$-infrajet in $X$. Such an infrajet either points forwards, in which case $f : \rival{\jetsym_1} \to \cohdisc_1 X$ factors over some $\rival{\jetsym_1} \to \cohdisc_1 \rival{\jetsym_0}$, or it points backwards, in which case it factors over $\rival{\jetsym_1} \to \cohdisc_1 \rival{\tejsym_0}$.
+	If it factors over both, since $X$ is a jet tope, by $0$-antisymmetry, it factors over $\rival{\jetsym_1} \to \cohdisc_1 \top$.
+	Thus, the result of the computation above is the following pushout
+	\begin{align*}
+		\ldots &\quad\cong\quad
+		(\cohdisc_0 \rival{\jetsym_0} \to \rival{\jetsym_0}) \uplus_{(\cohdisc_0 \top \to \rival{\jetsym_0})} (\cohdisc_0 \rival{\tejsym_0} \to \rival{\jetsym_0}) \\
+		&\quad=\quad (\rival{\jetsym_1} \to \rival{\jetsym_0}) \uplus_{(\top \to \rival{\jetsym_0})} (\rival{\tejsym_1} \to \rival{\jetsym_0})
+		& \text{(\cref{thm:poresh-jetsetoid-intervals})} \\
+		&\quad=\quad (\accol{0,1} \to \accol{0, 1}) \uplus_{\accol{0, 1}} (\accol{0,1} \to \accol{0, 1})
+	\end{align*}
+	so all non-constant functions between the carriers now occur twice!
+	The intuitive reason is in fact simple: a $0$-jet in $\jtsetsym\withr(\reshlist{\nonpol_\eqtydeg}{\isopol_0}) \Gamma$ should be a $0$-jet in $\Gamma$ pointing either way, i.e.\ unless the jet is constant, we make a choice in which direction it will point, and then we pick a jet in that direction.
+	But then when we apply this operation twice, a $0$-jet in $\jtsetsym\withr(\reshlist{\nonpol_\eqtydeg}{\isopol_0}) \jtsetsym\withr(\reshlist{\nonpol_\eqtydeg}{\isopol_0}) \Gamma$  should be a $0$-jet in $\Gamma$ pointing \emph{either either} way, i.e.\ unless the jet is constant, we choose two bits of which one decides in which direction it will point, and then we pick a jet in that direction.
+	Note the choice of an unused bit.
+	
+	Now assume $\jtsetsym\withl$ exists.
+	The right adjoint to $\cohfget_0 \cohdisc_1$ is $\cohfget_1 \cohcodisc_0 = \reshlist{\nonpol_\eqtydeg}{\mixpol_0}$, which is necessarily also idempotent.
+	By similar reasoning as above, we will have
+	\[
+		\jtsetsym\withl(\cohfget_1 \cohcodisc_0) = \fpsh{(\cohdisc_1)} \circ \rpsh{(\cohdisc_0)},
+	\]
+	which is right adjoint to $\fpsh{(\cohdisc_0)} \circ \lpsh{(\cohdisc_1)}$ and therefore also non-idempotent.
+%	and therefore, the right adjoint to $\jtsetsym\withr(\cohfget_0 \cohdisc_1)$ will be $\jtsetsym\withl(\cohfget_1 \cohcodisc_0)$.
+%	Since the former is not idempotent, neither is the latter.
+\end{proof}
+
+\subsection{Conclusion}
+In conclusion, if we intend to model Naturality Pretype Theory in jet topic sets, then we will confine ourselves to using $\poreshcat\withlr$ as our mode theory.
+This means that our internal modalities will be indexed by polarized reshuffles which have a left and a right adjoint, i.e.\ satisfy \cref{eq:poresh-withl-crit1,eq:poresh-withl-crit2,eq:poresh-withr-crit1,eq:poresh-withr-crit2}.
+It is almost certainly possible to drop \cref{eq:poresh-withr-crit1} so as to include modalities for irrelevance and shape-irrelevance \cite{reldtt}, but we leave this to potential future work.
+
+Thus, the \emph{locks} in our MTT instance will then correspond to polarized reshuffles in $\poreshcat\withrr$, i.e.\ those satisfying \cref{eq:poresh-withr-crit1,eq:poresh-withr-crit2,eq:poresh-withrr-crit1,eq:poresh-withrr-crit2}; where the future work hinted-at above might allow dropping \cref{eq:poresh-withrr-crit1}.
+
+\wip{
 \subsection{Sinistrification} \label{sec:poresh-jtset:sin}
 %\todoi{Maybe skip dextrification, since it seems to work differently for the two criteria for having a left adjoint. We use sinistrification to give them an additional right adjoint so that we can interpret them on jet topes and internalize them.}
 %\todoi{Argue that we want to preserve at least commutation of modalities that actually can be internalized, i.e. those that have a single left adjoint. Their locks internalize functors that have a single right adjoint.}
@@ -4925,21 +5015,26 @@ Fortunately, we can reassemble it from its parts, but then we have to reprove so
 \end{proof}
 
 \subsection{Adjoint Pair Semantics on Jet Topic Sets} \label{sec:poresh-jtset:pair}
+}
 
 \section{Semantics on Jet Cubes and Jet Cubical Sets} \label{sec:poresh-jetcube-jcset}
 
 \subsection{Semantics on Jet Cubes} \label{sec:poresh-jetcube}
 
 \subsection{Adjoint Triple Semantics on Jet Cubical Sets} \label{sec:poresh-jcset:triple}
+
+\subsection{No Adjoint Pair Semantics on Jet Cubical Sets} \label{sec:poresh-jcset:nogo}
 \todoi{No go theorem}
+
+\subsection{Conclusion}
 
 %\subsection{Mask Enhancement} \label{sec:poresh-jcset:enhancement}
 %\todoi{Sinistrification or dextrification?}
 %\todoi{Endofunctor on $\poreshcat$}
 
-\subsection{Adjoint Pair Semantics on Sinistrified Modal Jet Cubical Sets} \label{sec:poresh-jcset:pair-sin}
-
-\subsection{Adjoint Pair Semantics on Jet Cubical Sets} \label{sec:poresh-jcset:pair}
+%\subsection{Adjoint Pair Semantics on Sinistrified Modal Jet Cubical Sets} \label{sec:poresh-jcset:pair-sin}
+%
+%\subsection{Adjoint Pair Semantics on Jet Cubical Sets} \label{sec:poresh-jcset:pair}
 
 \chapter{Transpension}
 \todoi{Does Tw : sSet $\to$ sSet have a transp type? (Yes if it's Tw$_!$)}
