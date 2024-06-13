@@ -2610,7 +2610,7 @@ The shared reader may object that Pinyo and Kraus define the morphisms of $\twis
 		\item Since \ruleref{inv:fwd} and \ruleref{inv:bck} are mutually inverse, they can together be freely inserted everywhere. Hence, we can replace the rule \ruleref{src:fwd} with [\ruleref{src:fwd} after \ruleref{inv:bck}].
 		\item \ruleref{inv:fwd} and \ruleref{inv:bck} can be pushed up through any of the remaining rules except \ruleref{prism:fwd} and \ruleref{prism:bck}. Thus, we only involute right before using a variable.
 		All other rules (still read bottom-up) do not turn an $\orif$-codomain into an $\orifbe$-codomain, i.e.\ they do not introduce opposite jets.
-		Thus, we can assume the codomain is a forward jet cube until we encounter $\lnot \dm i$.
+		Thus, we can assume the codomain is an $\orif$-jet-cube until we encounter $\lnot \dm i$.
 		\item This means that until we encounter $\lnot \dm i$, we only need the rules \ruleref{terminal}, [\ruleref{src:fwd} after \ruleref{inv:bck}], \ruleref{tgt:fwd} and \ruleref{prism:fwd}.
 		These do not turn an $\orif$-codomain into an $\orifbe$-codomain. Thus, until we encounter $\lnot \dm i$, we can assume the domain is an $\orif$-jet-cube.
 		\item If both domain and codomain are forward, we cannot encounter $\lnot \dm i$.
@@ -5017,11 +5017,63 @@ Fortunately, we can reassemble it from its parts, but then we have to reprove so
 \end{proof}
 
 \subsection{Adjoint Pair Semantics on Jet Topic Sets} \label{sec:poresh-jtset:pair}
-}
+} %endwip
 
 \section{Semantics on Jet Cubes and Jet Cubical Sets} \label{sec:poresh-jetcube-jcset}
+\todoi{Short intro}
 
 \subsection{Semantics on Jet Cubes} \label{sec:poresh-jetcube}
+In this section, we want to construct a 2-functor that sends polarized reshuffles $\mu : \vec a \to \vec b$ to functors $\jetcube{\orifb}{\affine}{M}{\vec a} \to \jetcube{\orifb}{\affine}{M}{\vec b}$, with $M \in \accol{\bipointedsym, \booleanalg}$, thus giving our mode theory of polarized reshuffles a semantics on $\orifb$-jet-cubes.
+Recall that these are equivalent to $\orif$-jet-cubes (\cref{thm:backward-jets-equivalent}).
+
+Since jet cubes are jet topes (\cref{thm:jet-cubes-are-topes}), the reasoning at the start of \cref{sec:poresh-jettope} applies here as well, so that we will only consider modalities $\mu$ that have a right adjoint $\mu \dashv \rho$.
+Since jet cubes are realized as jet sets by repeated application of twisted prism functors to the terminal jet set (\cref{def:jep}), we can deduce the action of $\mu$ on jet cubes from its action on twisted prisms, which is given by \cref{thm:poresh-jetsetoid-prism-commut}.
+We see that the outcome may be either: again a twisted prism, or a separated/cartesian product with $\rival{\edgesym_\eqtydeg}$ (i.e.\ the terminal jet set), $\rival{\equijet_j}$ or $\rival{\edgesym_\top}$ (i.e.\ a discrete jet set with two elements).
+We have to rule out $\rival{\equijet_j}$ and $\rival{\edgesym_\top}$, since these cannot be realized by jet cubes, but we can support $\rival{\edgesym_\eqtydeg}$ since $\loch \times \rival{\edgesym_\eqtydeg} \cong \Id$.
+If we look at what this entails for $\rho$, we see that $\rho$ cannot mention $\mixpol_j$ for directed $j$, nor $\nonpol_\top$, i.e.\ (by \cref{thm:poresh-adjoint}) $\rho$ has to have a right adjoint.
+
+\todoi{Use jet cuboids;}
+\begin{definition}
+	We define a pseudofunctor $\jetcube{\orifb}{\affine}{M}{\loch} : \poreshcat\withrr \to \Cat$ which sends:
+	\begin{itemize}
+		\item an object $\vec a$ to $\jetcube{\orifb}{\affine}{M}{\vec a}$,
+		\item a morphism $\mu : \vec a \to \vec b$ with right adjoint $\mu \dashv \rho$ to a functor $\jetcube{\orifb}{\affine}{M}{\mu}$ (also just denoted $\mu$) which:
+		\begin{itemize}
+			\item sends $()$ to $\mu () := ()$,
+			\item has an action on other cubes that can be looked up in the following table:%
+			\footnote{Note that if $b_j = \npolar$, then the results for $\nonpol_j$ are consistent.}%
+			\footnote{Note that if $i \cdot \rho \in \accol{\mixpol_j, \isopol_j}$, then by \cref{eq:poresh-withl-crit2,eq:poresh-withr-crit2}, $b_j = \npolar$.}
+			\[
+				\begin{array}{c || c | c | c}
+					i \cdot \rho 
+					& \nonpol_\eqtydeg 
+					& \pospol_j
+					& \negpol_j 
+					\\ \hline
+					\mu(W, \dm i : \rival{\jetsym_i})
+					& \mu W
+					& (\mu W, \dm i : \rival{\jetsym_j})
+					& (\Op_j \mu W, \dm i : \rival{\tejsym_j})
+					\\
+					\mu(W, \dm i : \rival{\tejsym_i})
+					& \mu W
+					& (\mu W, \dm i : \rival{\tejsym_j})
+					& (\Op_j\mu X, \dm i : \rival{\jetsym_j})
+				\end{array}
+			\]
+			\item in general, satisfies $\JEP(\mu W) \cong \mu \JEP(W)$,\footnote{Notice that, at this point, naturality cannot yet be considered.}
+			\item has an action on jet cube morphisms defined as follows. Recall that a jet cube morphism $\vfi : V \to W$ is a cube morphism $\erasejc \vfi : \erasejc V \to \erasejc W$ whose endpoint model $\EP(\erasejc \vfi) = U(\JEP(\vfi))$ is in fact a morphism of jet sets $\JEP(\vfi) : \JEP(V) \to \JEP(W)$ (\cref{def:jet-cube-cat}).
+			\begin{itemize}
+				\item We define $\dm j \psub{\erasejc{\mu(\vfi)}} := \dm j \psub{\erasejc{\vfi}}$. \todoi{This is well-defined}
+				\item It is the case that
+				\[
+					\EP(\erasejc{\mu(\vfi)}) : \EP(\erasejc{\mu V}) = U(\JEP(\mu V)) \to U(\JEP(\mu W)) = \EP(\erasejc{\mu W})
+				\]
+				is in fact a morphism of jet sets
+			\end{itemize}
+		\end{itemize}
+	\end{itemize}
+\end{definition}
 
 \subsection{Adjoint Triple Semantics on Jet Cubical Sets} \label{sec:poresh-jcset:triple}
 
