@@ -413,7 +413,7 @@ We introduce a family of cube categories with one flavour of dimension. Fix a mo
 \end{example}
 
 \subsubsection{Cartesian Cubes}
-\begin{definition}
+\begin{definition} \label{def:cube}
 	We construct the \textbf{(named) category of cartesian $M$-cubes} $\cubecat^\cartes_M$ (and $\namedcubecat^\cartes_M$ resp.) stepwise:
 	\begin{itemize}
 		\item The Kleisli category $\Kleisli(M)$ of $M$ has objects $\inKleisli{X}$ where $X$ is a set, and its morphisms $\inKleisli f : \inKleisli X \to \inKleisli Y$ are functions $f : X \to MY$.
@@ -4121,6 +4121,12 @@ In words, \cref{eq:poresh-withrr-crit2} says that:
 \end{proof}
 
 \section{Semantics on Jet Sets and Jet Setoids} \label{sec:poresh-jetset}
+\begin{notation} \label{not:enriched}
+	Let $\catV$ be a monoidal category.
+	We write $\catV \Cat$ for the category of $\catV$-enriched categories.
+	
+	Let $F : \catV \to \catW$ be a monoidal functor. Then we write $F_1 : \catV \Cat \to \catW \Cat$ for the functor that applies $F$ Hom-wise.
+\end{notation}
 \begin{definition} \label{def:setoid}
 	A \textbf{setoid} is a set equipped with an equivalence relation $\eqtysym$.
 	A \textbf{setoid morphism} is a function between setoids respecting $\eqtysym$.
@@ -4129,10 +4135,18 @@ In words, \cref{eq:poresh-withrr-crit2} says that:
 	A setoid is called \textbf{discrete} if the equivalence relation is the equality relation.
 	
 	$\Setoid$ can be regarded as a $\Setoid$-enriched category by considering setoid morphisms equivalent if they are pointwise equivalent.
-	$\Set$ can be regarded as discrete-$\Setoid$-enriched by considering functions equivalent if they are equal.
 \end{definition}
+\begin{definition}
+	We have an adjoint triple $\setoidquot \dashv \setoiddisc \dashv \setoidfget$ between the (ordinary) category of setoids and $\Set$:
+	\begin{itemize}
+		\item $\setoidquot : \Setoid \to \Set$ quotients out the equivalence relation,
+		\item $\setoiddisc : \Set \to \Setoid$ equips a set with a discrete equivalence relation (i.e.\ the equality relation),
+		\item $\setoidfget : \Setoid \to \Set$ forgets the equivalence relation.
+	\end{itemize}
+\end{definition}
+We can now use $\setoidfget_1 : \Setoid\Cat \to \Cat$ to disambiguate between the setoid-enriched category of setoids $\Setoid$ and the ordinary category of setoids $\setoidfget_1 \Setoid$.
 \begin{corollary} \label{thm:setoid-equiv-set}
-	The quotient functor $\setoidquot : \Setoid \to \Set$ and the discrete functor $\setoiddisc : \Set \to \Setoid$ form an equivalence of $\Setoid$-enriched categories (where $\setoiddisc \setoidquot$ is only naturally \emph{equivalent}, not naturally isomorphic, to the identity functor). \qed
+	The \emph{setoid-enriched} quotient functor $\setoidquot : \Setoid \to \setoiddisc_1 \Set$ and the discrete functor $\setoiddisc : \setoiddisc_1 \Set \to \Setoid$ form an equivalence of $\Setoid$-enriched categories (where $\setoiddisc \setoidquot$ is only naturally \emph{equivalent}, not naturally isomorphic, to the identity functor). \qed
 \end{corollary}
 \begin{definition} \label{def:jetsetoid}
 	We define the category $\jetsetoid{\vec a}$ of \textbf{$\vec a$-jet-setoids} as the following strict pullback:
@@ -4160,7 +4174,7 @@ In words, \cref{eq:poresh-withrr-crit2} says that:
 	We turn $\jetsetoid{\vec a}$ into a $\Setoid$-enriched category by declaring morphisms equivalent if the underlying setoid morphisms are equivalent.
 \end{definition}
 \begin{corollary} \label{thm:jetsetoid-equiv-jetset}
-	The functors $\setoidquot$ and $\setoiddisc$ and the equivalence from \cref{thm:setoid-equiv-set} carry over to an equivalence of setoid-enriched categories $\jetsetoid{\vec a} \simeq \jetset{\vec a}$. \qed
+	The functors $\setoidquot$ and $\setoiddisc$ and the equivalence from \cref{thm:setoid-equiv-set} carry over to an equivalence of setoid-enriched categories $\jetsetoid{\vec a} \simeq \setoiddisc_1 \jetset{\vec a}$. \qed
 \end{corollary}
 \begin{definition}
 	\label{def:poresh-jetsetoid}
@@ -5022,7 +5036,7 @@ Fortunately, we can reassemble it from its parts, but then we have to reprove so
 \section{Semantics on Jet Cubes and Jet Cubical Sets} \label{sec:poresh-jetcube-jcset}
 \todoi{Short intro}
 
-\subsection{Semantics on Jet Cubes} \label{sec:poresh-jetcube}
+\subsection{Semantics on Jet Cubes and Jet Cuboids} \label{sec:poresh-jetcube}
 In this section, we want to construct a 2-functor that sends polarized reshuffles $\mu : \vec a \to \vec b$ to functors $\jetcube{\orifb}{\affine}{M}{\vec a} \to \jetcube{\orifb}{\affine}{M}{\vec b}$, with $M \in \accol{\bipointedsym, \booleanalg}$, thus giving our mode theory of polarized reshuffles a semantics on $\orifb$-jet-cubes.
 Recall that these are equivalent to $\orif$-jet-cubes (\cref{thm:backward-jets-equivalent}).
 
@@ -5031,6 +5045,119 @@ Since jet cubes are realized as jet sets by repeated application of twisted pris
 We see that the outcome may be either: again a twisted prism, or a separated/cartesian product with $\rival{\edgesym_\eqtydeg}$ (i.e.\ the terminal jet set), $\rival{\equijet_j}$ or $\rival{\edgesym_\top}$ (i.e.\ a discrete jet set with two elements).
 We have to rule out $\rival{\equijet_j}$ and $\rival{\edgesym_\top}$, since these cannot be realized by jet cubes, but we can support $\rival{\edgesym_\eqtydeg}$ since $\loch \times \rival{\edgesym_\eqtydeg} \cong \Id$.
 If we look at what this entails for $\rho$, we see that $\rho$ cannot mention $\mixpol_j$ for directed $j$, nor $\nonpol_\top$, i.e.\ (by \cref{thm:poresh-adjoint}) $\rho$ has to have a right adjoint.
+
+Analogous to what we did in \cref{sec:poresh-jetset}, we will first work on a variant of jet cubes, called jet cuboids%
+\footnote{The -oid is in the sense of setoid here.}
+$V$, which can have variables typed with the `equality interval' $\rival{\edgesym_\eqtydeg}$, and whose jet endpoint model $\JEP(V)$ is not a jet set but a jet setoid.
+This allows us to work in a strictly 2-functorial setting longer.
+
+\subsubsection{Cuboids and Jet Cuboids}
+\label{sec:cuboid}
+\label{sec:jetcuboid}
+\begin{definition}
+	\label{def:cuboid}
+	\label{def:cuboid-ep}
+	Given a monad $M$ and $\mycubex \in \accol{\cartes, \affine}$, we define the \textbf{setoid-enriched category of cuboids $\cuboidcat^\mycubex_M$}, with strict 2-functors $\setoidfget : \setoidfget_1\cuboidcat^\mycubex_M \to \cubecat^\mycubex_M$ and $\setoidquot : \setoidquot_1\cuboidcat^\mycubex_M \to \cubecat^\mycubex_M$ as the category:
+	\begin{itemize}
+		\item whose objects are lists of elements of $\accol{\IX, \rival{\edgesym_\eqtydeg}}$, denoted in the style $(\dm i_0 : \IX, \ldots, \dm i_{n-1} : \rival{\edgesym_\eqtydeg})$ where the $\dm i_k$ are interpreted as de Bruijn indices, and where
+		\begin{align*}
+			\setoidfget() &= (), &
+			\setoidfget (W, \dm i : \IX) &= (\setoidfget W, \dm i : \IX), &
+			\setoidfget (W, \dm i : \rival{\edgesym_\eqtydeg}) &= (\setoidfget W, \dm i : \IX),
+			\\
+			\setoidquot () &= (), &
+			\setoidquot (W, \dm i : \IX) &= (\setoidquot W, \dm i : \IX), &
+			\setoidquot (W, \dm i : \rival{\edgesym_\eqtydeg}) &= \setoidquot W.
+		\end{align*}
+		\item whose morphisms $\vfi : V \to W$ are morphisms $\setoidfget \vfi : \setoidfget V \to \setoidfget W$ such that if $\dm j$ has type $\rival{\edgesym_\eqtydeg}$ in $W$, then $\dm j \psub \vfi$ only mentions variables $\dm i$ in $V$ that also have type $\rival{\edgesym_\eqtydeg}$.
+		The morphism $\setoidquot \vfi$ is defined the obvious way.
+		\item where morphisms $\vfi, \chi : V \to W$ are considered equivalent if $\setoidquot \vfi = \setoidquot \chi$.
+	\end{itemize}
+	A setoid-enriched functor $\EP : \cuboidcat^\mycubex_M \to \Setoid$ is defined by:
+	\begin{align*}
+		\EP() &= (), &
+		\EP(W, \dm i : \IX) &= \EP(W) \times \accol{0, 1}, &
+		\EP(W, \dm i : \rival{\edgesym_\eqtydeg}) &= \EP(W) \times \accol{0 \edge_\eqtydeg 1}.
+	\end{align*}
+	We have a natural transformation $\EP \circ \setoidquot \cong \setoidquot \circ \EP$ of functors $\setoidquot_1 \cuboidcat^\mycubex_M \to \Set$.
+\end{definition}
+\begin{definition}
+	\label{def:jet-cuboid}
+	Let $\vec a$ be a mask and $\myorix$ an orientation kit.
+	We define the set of \textbf{$(\myorix, \vec{a})$-jet-cuboids} as the set of lists of elements of $\set{P_i}{P \in \myorix, i \in \Degeq(\vec a)}$,
+	where we identify all $P_i = Q_i =: {\edge}_i$ ($P, Q \in \myorix$) if $a_i = \npolar$.
+	We denote jet cuboids as
+	$(\dm i_0 : \rival{(P_0)_{i_0}}, \ldots, \dm i_{n-1} : \rival{(P_{n-1})_{i_{n-1}}})$,
+	thinking of the names $\dm{i}_k$ as De Bruijn indices.
+	
+	For any $(\myorix, \vec a)$-jet-cuboid $W$, we define $\setoidquot W$ as the $(\myorix, \vec a)$-jet-\emph{cube} obtained by removing all variables of type $\rival{\edgesym_\eqtydeg}$.
+\end{definition}
+\begin{definition} \label{def:jet-cuboid-jep}
+	For any $(\myorix, \vec a)$-jet-cuboid $W$, we define the $\vec a$-jet-setoid $\JEP(W)$ as in \cref{def:jep} with the additional equation
+	\[
+		\JEP(W, \dm i : \rival{\edgesym_\eqtydeg}) = \JEP(W) \times \rival{\edgesym_\eqtydeg} = \JEP(W) * \rival{\edgesym_\eqtydeg}.
+	\]
+	Clearly, we have $\JEP(\setoidquot W) \cong \setoidquot(\JEP(W))$.
+\end{definition}
+\begin{definition} \label{def:jet-cuboid-erasure}
+	For any $(\myorix, \vec a)$-jet-cuboid $W$, we define the jet cuboid $\erasejc{W}$ as in \cref{def:jet-cube-erasure} with the additional equation
+	\[
+		\erasejc{(W, \dm i : \rival{\edgesym_\eqtydeg})} = (\erasejc W, \dm i : \rival{\edgesym_\eqtydeg}).
+	\]
+	Clearly, we have $\erasejc{\setoidquot W} = \setoidquot{\erasejc W}$.
+\end{definition}
+\begin{corollary} \label{thm:jet-cuboid-pullback}
+	For any $(\myorix, \vec a)$-jet-cuboid $W$, we have $U(\JEP(W)) = \EP(\erasejc W)$.
+	In other words, \cref{thm:jet-cube-pullback} remains valid if we replace cubes with cuboids and jet cubes with jet cuboids.
+	
+	Moreover, the isomorphisms in \cref{def:cuboid-ep} and \cref{def:jet-cuboid-jep} are compatible along $U : \jetset{\vec a} \to \Set$ and $\erasejc \loch$.
+\end{corollary}
+\begin{definition} \label{def:jet-cuboid-cat}
+	Let $\vec a$ be a mask, $\myorix \in \orikit$, $\mycubex \in \accol{\affine, \cartes}$ and $M$ a monad on $\Set$.
+	We define
+	the setoid-enriched category $\jetcuboid{\myorix}{\mycubex}{M}{\vec a}$ of \textbf{$(\myorix, \vec a)$-jet-$M$-cuboids}
+	as the full subcategory of $\cuboidcat^\mycubex_M \times_\Set \jetset{\vec a}$ on $(\myorix, \vec a)$-jet-cuboids, as justified by \cref{thm:jet-cuboid-pullback}.
+	The functions $\JEP$ and $\erasejc{\loch}$ are correspondingly extended to setoid-enriched functors.
+\end{definition}
+\begin{corollary}
+	In the following cube-shaped diagram, the side squares commute strictly while the top and bottom squares commute up to compatible natural isomorphisms:
+	\[
+		\xymatrix{
+			\jetcuboid{\myorix}{\mycubex}{M}{\vec a}
+				\ar[rr]^(.3)\JEP
+				\ar[dd]_(.3){\erasejc{\loch}}
+				\ar[rd]_{\setoidquot}
+			&&
+			\jetsetoid{\vec a}
+				\ar[dd]_(.3){U}
+				\ar[rd]_{\setoidquot}
+			\\
+			&
+			\jetcube{\myorix}{\mycubex}{M}{\vec a}
+				\ar[rr]^(.3)\JEP
+				\ar[dd]_(.3){\erasejc{\loch}}
+			&&
+			\jetset{\vec a}
+				\ar[dd]_(.3){U}
+			\\
+			\cuboidcat^\mycubex_M
+				\ar[rr]^(.3)\EP
+				\ar[rd]_{\setoidquot}
+			&&
+			\Setoid
+				\ar[rd]_{\setoidquot}
+			\\
+			&
+			\cubecat^\mycubex_M
+				\ar[rr]^(.3)\EP
+			&&
+			\Set.
+		}
+	\]
+\end{corollary}
+
+\subsubsection{Semantics on Jet Cuboids} \label{sec:poresh-jetcuboid}
+\subsubsection{Semantics on Jet Cubes} \label{sec:poresh-jetcube:sub}
 
 \todoi{Use jet cuboids;}
 \begin{definition}
