@@ -5157,17 +5157,14 @@ This allows us to work in a strictly 2-functorial setting longer.
 \end{corollary}
 
 \subsubsection{Semantics on Jet Cuboids} \label{sec:poresh-jetcuboid}
-\subsubsection{Semantics on Jet Cubes} \label{sec:poresh-jetcube:sub}
-
-\todoi{Use jet cuboids;}
 \begin{definition}
-	We define a pseudofunctor $\jetcube{\orifb}{\affine}{M}{\loch} : \poreshcat\withrr \to \Cat$ which sends:
+	We define a strict 2-functor $\jetcuboid{\orifb}{\affine}{M}{\loch} : \poreshcat\withrr \to \Cat$ which sends:
 	\begin{itemize}
-		\item an object $\vec a$ to $\jetcube{\orifb}{\affine}{M}{\vec a}$,
-		\item a morphism $\mu : \vec a \to \vec b$ with right adjoint $\mu \dashv \rho$ to a functor $\jetcube{\orifb}{\affine}{M}{\mu}$ (also just denoted $\mu$) which:
+		\item an object $\vec a$ to $\jetcuboid{\orifb}{\affine}{M}{\vec a}$,
+		\item a morphism $\mu : \vec a \to \vec b$ with right adjoint $\mu \dashv \rho$ to a functor $\jetcuboid{\orifb}{\affine}{M}{\mu}$ (also just denoted $\mu$) which:
 		\begin{itemize}
 			\item sends $()$ to $\mu () := ()$,
-			\item has an action on other cubes that can be looked up in the following table:%
+			\item has an action on other cuboids that can be looked up in the following table:%
 			\footnote{Note that if $b_j = \npolar$, then the results for $\nonpol_j$ are consistent.}%
 			\footnote{Note that if $i \cdot \rho \in \accol{\mixpol_j, \isopol_j}$, then by \cref{eq:poresh-withl-crit2,eq:poresh-withr-crit2}, $b_j = \npolar$.}
 			\[
@@ -5178,29 +5175,37 @@ This allows us to work in a strictly 2-functorial setting longer.
 					& \negpol_j 
 					\\ \hline
 					\mu(W, \dm i : \rival{\jetsym_i})
-					& \mu W
+					& (\mu W, \dm i : \rival{\edgesym_\eqtydeg})
 					& (\mu W, \dm i : \rival{\jetsym_j})
 					& (\Op_j \mu W, \dm i : \rival{\tejsym_j})
 					\\
 					\mu(W, \dm i : \rival{\tejsym_i})
-					& \mu W
+					& (\mu W, \dm i : \rival{\edgesym_\eqtydeg})
 					& (\mu W, \dm i : \rival{\tejsym_j})
 					& (\Op_j\mu X, \dm i : \rival{\jetsym_j})
 				\end{array}
 			\]
-			\item in general, satisfies $\JEP(\mu W) \cong \mu \JEP(W)$,\footnote{Notice that, at this point, naturality cannot yet be considered.}
-			\item has an action on jet cube morphisms defined as follows. Recall that a jet cube morphism $\vfi : V \to W$ is a cube morphism $\erasejc \vfi : \erasejc V \to \erasejc W$ whose endpoint model $\EP(\erasejc \vfi) = U(\JEP(\vfi))$ is in fact a morphism of jet sets $\JEP(\vfi) : \JEP(V) \to \JEP(W)$ (\cref{def:jet-cube-cat}).
+			\item thus satisfies $\JEP(\mu W) = \mu \JEP(W)$ by \cref{thm:poresh-jetsetoid-prism-commut},
+			\item has an action on jet cuboid morphisms defined as follows. Recall that a jet cuboid morphism $\vfi : V \to W$ is a cuboid morphism $\erasejc \vfi : \erasejc V \to \erasejc W$ whose endpoint model $\EP(\erasejc \vfi) = U(\JEP(\vfi))$ is in fact a morphism of jet sets $\JEP(\vfi) : \JEP(V) \to \JEP(W)$ (\cref{def:jet-cuboid-cat}).
 			\begin{itemize}
-				\item We define $\dm j \psub{\erasejc{\mu(\vfi)}} := \dm j \psub{\erasejc{\vfi}}$. \todoi{This is well-defined}
+				\item We define $\dm j \psub{\erasejc{\mu(\vfi)}} := \dm j \psub{\erasejc{\vfi}}$.
 				\item It is the case that
 				\[
 					\EP(\erasejc{\mu(\vfi)}) : \EP(\erasejc{\mu V}) = U(\JEP(\mu V)) \to U(\JEP(\mu W)) = \EP(\erasejc{\mu W})
 				\]
-				is in fact a morphism of jet sets
+				is in fact a morphism of jet setoids; indeed it is the morphism $\mu(\JEP(\vfi))$, as can be trivially proven by induction on $W$ of $\vfi$.
 			\end{itemize}
+			\item If $\mu \leq \nu$, then we have to give a morphism $\ket{\mu \leq \nu} : \mu W \to \nu W$, naturally w.r.t. $W$.
+			We define $\erasejc{\ket{\mu \leq \nu}}$ ny $\dm i \psub{\erasejc{\ket{\mu \leq \nu}}} = \dm i$, which is a valid morphism of cuboids exactly because we know that $\mu \leq \nu$.
+			This is clearly natural on cubes, therefore on sets, and therefore on jet setoids.
+			Its endpoint model ($\EP$) is a jet setoid morphism, again because $\mu \leq \nu$.
 		\end{itemize}
 	\end{itemize}
 \end{definition}
+
+\subsubsection{Semantics on Jet Cubes} \label{sec:poresh-jetcube:sub}
+\todoi{Use $\setoidquot$}
+\todoi{Also allow dropping the backward morphisms.}
 
 \subsection{Adjoint Triple Semantics on Jet Cubical Sets} \label{sec:poresh-jcset:triple}
 
