@@ -703,7 +703,7 @@ Note that a $\vec b$-jet-cube is uniquely in the image of $\Usymcube_i$ if it do
 We will ultimately only be interested in $(\orif, \vec a)$-jet-cubes, but in \cref{sec:jetcubes:calculus}, we define an inductive predicate to determine whether a cube morphism $\vfi : \erasejc V \to \erasejc W$ is in fact a jet cube morphism $V \to W$, and this predicate's inference rules make use of $(\orifbe, \vec a)$-jet-cubes in their premises.
 The orientation kits $\orife$ and $\orifb$ are only introduced for explanatory purposes: we can easily relate jet cubes with and without $\tej$ (\cref{thm:backward-jets-equivalent}), and later on\todo{Refer} we will be able to relate jet cubes with and without $\equijet$ by inserting additional symmetric degrees.
 \begin{proposition} \label{thm:backward-jets-equivalent}
-	Let $(\myorix, \myorix') \in \accol{(\orif, \orifb), (\orife, \orifbe)}$.
+	Let $(\myorix, \myorix') \in \accol{(\orif, \orifb), (\orife, \orifbe)}$ and $M \in \accol{\bipointedsym, \booleanalg}$.
 	Then the inclusion
 	\[
 		\jetcube{\myorix}{\mycubex}{M}{\vec a} \hookrightarrow \jetcube{\myorix'}{\mycubex}{M}{\vec a},
@@ -5280,12 +5280,45 @@ This allows us to work in a strictly 2-functorial setting longer.
 			\item \ldots
 		\end{itemize}
 		
-		\item By \cref{thm:backward-jets-equivalent}, we obtain pseudofunctors $\jetcube{\orif}{\affine}{M}{\loch} : \poreshcat\withrr \to \Cat$ and \\
-		$\jetcuboid{\orif}{\affine}{M}{\loch} : \poreshcat\withrr \to \Setoid\Cat$.
+		\item By \cref{thm:backward-jets-equivalent}, if $M \in \accol{\bipointedsym, \booleanalg}$, we obtain pseudofunctors
+		\begin{align*}
+			\jetcube{\orif}{\affine}{M}{\loch} &: \poreshcat\withrr \to \Cat, \\
+			\jetcuboid{\orif}{\affine}{M}{\loch} &: \poreshcat\withrr \to \Setoid\Cat.
+		\end{align*}
 	\end{enumerate}
 \end{definition}
 
 \subsection{Adjoint Triple Semantics on Jet Cubical Sets} \label{sec:poresh-jcset:triple}
+\begin{definition}
+	The category of \textbf{$(\omega, \vec a)$-jet-cubical sets} is the presheaf category $\jcset{\omega}{\mycubex}{M}{\vec a} := \Psh(\jetcube{\omega}{\mycubex}{M}{\vec a})$.
+\end{definition}
+\begin{theorem} \label{thm:poresh-jcset:triple}
+	Let $\omega \in \accol{\orif, \orifb}$ and, if $\omega = \orif$ then $M \in \accol{\bipointedsym, \booleanalg}$.
+	We have the following pseudofunctors:
+	\begin{itemize}
+		\item $\jcset{\omega}{\affine}{M}{\loch}\withrr : \poreshcat\withrr \to \Cat\withrr$,
+		\item $\jcset{\omega}{\affine}{M}{\loch}\withlr : \poreshcat\withlr \to \Cat\withlr$,
+		\item $\jcset{\omega}{\affine}{M}{\loch}\withll : \poreshcat\withll \to \Cat\withll$,
+	\end{itemize}
+	to the 2-category of categories, functors with a specified number of left/right adjoints (\cref{not:poresh-with}), and natural transformations, where:
+\todoi{Adapt}
+	\begin{itemize}
+		\item each functor sends an object $\vec a$ to $\Psh(\jetcube{\omega}{\affine}{M}{\vec a})$,
+		\item a triple of polarized reshuffles $\mu \dashv \rho \dashv \tau$ is sent by the respective functors to
+		\[
+			\jcset{\omega}{\affine}{M}{\mu}\withrr = \lpsh \mu
+			\quad\dashv\quad
+			\jcset{\omega}{\affine}{M}{\rho}\withlr = \fpsh \mu
+			\quad\dashv\quad
+			\jcset{\omega}{\affine}{M}{\tau}\withll = \rpsh \mu,
+		\]
+		of which $\fpsh \mu$ is a strict CwF morphism \cite{dybjer-cwf} and $\rpsh \mu$ is a weak CwF morphism \cite[def.\ 2.1.1]{reldtt-techreport}\cite[def.\ 3.2.5]{nuyts-phd} w.r.t.\ the standard CwF structure on a presheaf category \cite[ch.\ 4]{Hofmann97}\cite[\S 4.1]{nuyts-phd}.
+		\item 2-cells are also respected.
+	\end{itemize}
+\end{theorem}
+\begin{proof}
+	By the exact same reasoning as in the proof of \cref{thm:poresh-jtset:triple}.
+\end{proof}
 
 \subsection{No Adjoint Pair Semantics on Jet Cubical Sets} \label{sec:poresh-jcset:nogo}
 \todoi{No go theorem}
