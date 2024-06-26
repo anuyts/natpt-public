@@ -711,7 +711,7 @@ The orientation kits $\orife$ and $\orifb$ are only introduced for explanatory p
 	which is fully faithful by definition, is also split essentially surjective and therefore an equivalence.
 \end{proposition}
 \begin{proof}
-	One proves, by induction on the length of the jet cube, that any jet cube is equivalent to the jet cube in which every occurrence of $\rival{\tej_i}$ is replaced with $\rival{\jet_i}$.
+	One proves, by induction on the length of the jet cube, that any jet cube is isomorphic to the jet cube in which every occurrence of $\rival{\tej_i}$ is replaced with $\rival{\jet_i}$.
 \end{proof}
 \begin{proposition} \label{thm:lift-to-jet-cubes}
 	The following functors on $\vec a$-jet-sets lift over $\JEP$ to functors on $(\myorix, \vec a)$-jet-cubes under the following conditions:
@@ -4207,7 +4207,7 @@ We can now use $\setoidfget_1 : \Setoid\Cat \to \Cat$ to disambiguate between th
 			\item \ldots
 		\end{itemize}
 		
-		\item Additionally, if we consider only modalities $\mu$ which have a left adjoint and for which, by \cref{thm:poresh-adjoint}, $\eqtysym \oriof \mu = \eqtysym$, then we directly get a strict 2-functor $\jetsetsym \noquot : \poreshcat \noquot \to \Cat$, equivalent to the pseudofunctor above:
+		\item Additionally, if we consider only modalities $\mu$ satisfying \cref{eq:poresh-withl-crit1} (i.e.\ those for which $\eqtydeg \cdot \mu = \nonpol_\eqtydeg$) and denote the restricted 2-poset as $\poreshcat \noquot$, then we directly get a strict 2-functor $\jetsetsym \noquot : \poreshcat \noquot \to \Cat$, equivalent to the pseudofunctor above:
 		\begin{itemize}
 			\item Sending an object $\vec a$ to $\jetset{\vec a}$,
 			\item Sending a morphism $\mu : \vec a \to \vec b$ to $\jetsetl{\mu} : \jetset{\vec a} \to \jetset{\vec b}$ where $\jetsetl{\mu}$ (more briefly denoted as $\mu$) sends a jet set $X$ to the jet set $\mu X$ whose
@@ -5166,17 +5166,17 @@ This allows us to work in a strictly 2-functorial setting longer.
 \begin{corollary} \label{thm:cuboid-cohesion}
 	$\setoiddisc : \cubecat^\mycubex_M \to \setoidfget_1 \cuboidcat^\mycubex_M$ is right adjoint to $\setoidquot : \setoidfget_1 \cuboidcat^\mycubex_M \to \cubecat^\mycubex_M$. \qed
 \end{corollary}
-\begin{corollary} \label{thm:cuboid-cohesion}
+\begin{corollary} \label{thm:cuboid-equiv-cube}
 	$\setoiddisc : \setoiddisc_1 \cubecat^\mycubex_M \to \cuboidcat^\mycubex_M$ and $\setoidquot : \cuboidcat^\mycubex_M \to \setoiddisc_1 \cubecat^\mycubex_M$ form an equivalence of setoid-enriched categories, where $\setoiddisc \setoidquot$ is naturally \emph{equivalent} but not naturally isomorphic to the identity. \qed
 \end{corollary}
-\begin{definition} \label{def:jet-cuboid-cohesion}
+\begin{definition} \label{def:jetcuboid-cohesion}
 	We define a setoid-enriched functor $\setoiddisc : \setoiddisc_1 \jetcube{\myorix}{\mycubex}{M}{\vec a} \to \jetcuboid{\myorix}{\mycubex}{M}{\vec a}$ which sends a jet cube $W = (\dm i_0 : \rival{(P_0)_{i_0}}, \ldots, \dm i_{n-1} : \rival{(P_{n-1})_{i_{n-1}}})$ to the jet cuboid $\setoiddisc W = (\dm i_0 : \rival{(P_0)_{i_0}}, \ldots, \dm i_{n-1} : \rival{(P_{n-1})_{i_{n-1}}})$ of the same notation, and has an obvious action on morphisms.
 \end{definition}
-\begin{corollary} \label{thm:jet-cuboid-cohesion}
+\begin{corollary} \label{thm:jetcuboid-cohesion}
 	$\setoiddisc : \jetcube{\myorix}{\mycubex}{M}{\vec a} \to \setoidfget_1 \jetcuboid{\myorix}{\mycubex}{M}{\vec a}$ is right adjoint to \\
 	$\setoidquot : \setoidfget_1 \jetcuboid{\myorix}{\mycubex}{M}{\vec a} \to \jetcube{\myorix}{\mycubex}{M}{\vec a}$. \qed
 \end{corollary}
-\begin{corollary} \label{thm:jet-cuboid-cohesion}
+\begin{corollary} \label{thm:jetcuboid-equiv-jetcube}
 	$\setoiddisc : \setoiddisc_1 \jetcube{\myorix}{\mycubex}{M}{\vec a} \to \jetcuboid{\myorix}{\mycubex}{M}{\vec a}$ and $\setoidquot : \jetcuboid{\myorix}{\mycubex}{M}{\vec a} \to \setoiddisc_1 \jetcube{\myorix}{\mycubex}{M}{\vec a}$ form an equivalence of setoid-enriched categories, where $\setoiddisc \setoidquot$ is naturally \emph{equivalent} but not naturally isomorphic to the identity. \qed
 \end{corollary}
 \begin{corollary}
@@ -5217,56 +5217,73 @@ This allows us to work in a strictly 2-functorial setting longer.
 	where the arrows in the upper left square parallel to the page are setoid-enriched functors, the arrows in the lower right square are ordinary functors, and the arrows labelled $\setoiddisc$ can be regarded as setoid-enriched functors from $\setoiddisc_1$ of the domain or, equivalently by \cref{def:setoid-cohesion}, as ordinary functors to $\setoidfget_1$ of the codomain. \qed
 \end{corollary}
 
-\subsubsection{Semantics on Jet Cuboids} \label{sec:poresh-jetcuboid}
+\subsubsection{Semantics on Jet Cuboids and Jet Cubes}
+\label{sec:poresh-jetcuboid}
+\label{sec:poresh-jetcube:sub}
 \begin{definition}
-	We define a strict 2-functor $\jetcuboid{\orifb}{\affine}{M}{\loch} : \poreshcat\withrr \to \Cat$ which sends:
-	\begin{itemize}
-		\item an object $\vec a$ to $\jetcuboid{\orifb}{\affine}{M}{\vec a}$,
-		\item a morphism $\mu : \vec a \to \vec b$ with right adjoint $\mu \dashv \rho$ to a functor $\jetcuboid{\orifb}{\affine}{M}{\mu}$ (also just denoted $\mu$) which:
+	\begin{enumerate}
+		\item We define a strict 2-functor $\jetcuboid{\orifb}{\affine}{M}{\loch} : \poreshcat\withrr \to \Setoid\Cat$ which sends:
 		\begin{itemize}
-			\item sends $()$ to $\mu () := ()$,
-			\item has an action on other cuboids that can be looked up in the following table:%
-			\footnote{Note that if $b_j = \npolar$, then the results for $\nonpol_j$ are consistent.}%
-			\footnote{Note that if $i \cdot \rho \in \accol{\mixpol_j, \isopol_j}$, then by \cref{eq:poresh-withl-crit2,eq:poresh-withr-crit2}, $b_j = \npolar$.}
-			\[
-				\begin{array}{c || c | c | c}
-					i \cdot \rho 
-					& \nonpol_\eqtydeg 
-					& \pospol_j
-					& \negpol_j 
-					\\ \hline
-					\mu(W, \dm i : \rival{\jetsym_i})
-					& (\mu W, \dm i : \rival{\edgesym_\eqtydeg})
-					& (\mu W, \dm i : \rival{\jetsym_j})
-					& (\Op_j \mu W, \dm i : \rival{\tejsym_j})
-					\\
-					\mu(W, \dm i : \rival{\tejsym_i})
-					& (\mu W, \dm i : \rival{\edgesym_\eqtydeg})
-					& (\mu W, \dm i : \rival{\tejsym_j})
-					& (\Op_j\mu X, \dm i : \rival{\jetsym_j})
-				\end{array}
-			\]
-			\item thus satisfies $\JEP(\mu W) = \mu \JEP(W)$ by \cref{thm:poresh-jetsetoid-prism-commut},
-			\item has an action on jet cuboid morphisms defined as follows. Recall that a jet cuboid morphism $\vfi : V \to W$ is a cuboid morphism $\erasejc \vfi : \erasejc V \to \erasejc W$ whose endpoint model $\EP(\erasejc \vfi) = U(\JEP(\vfi))$ is in fact a morphism of jet sets $\JEP(\vfi) : \JEP(V) \to \JEP(W)$ (\cref{def:jet-cuboid-cat}).
+			\item an object $\vec a$ to $\jetcuboid{\orifb}{\affine}{M}{\vec a}$,
+			\item a morphism $\mu : \vec a \to \vec b$ with right adjoint $\mu \dashv \rho$ to a functor $\jetcuboid{\orifb}{\affine}{M}{\mu}$ (also just denoted $\mu$) which:
 			\begin{itemize}
-				\item We define $\dm j \psub{\erasejc{\mu(\vfi)}} := \dm j \psub{\erasejc{\vfi}}$.
-				\item It is the case that
+				\item sends $()$ to $\mu () := ()$,
+				\item has an action on other cuboids that can be looked up in the following table:%
+				\footnote{Note that if $b_j = \npolar$, then the results for $\nonpol_j$ are consistent.}%
+				\footnote{Note that if $i \cdot \rho \in \accol{\mixpol_j, \isopol_j}$, then by \cref{eq:poresh-withl-crit2,eq:poresh-withr-crit2}, $b_j = \npolar$.}
 				\[
-					\EP(\erasejc{\mu(\vfi)}) : \EP(\erasejc{\mu V}) = U(\JEP(\mu V)) \to U(\JEP(\mu W)) = \EP(\erasejc{\mu W})
+					\begin{array}{c || c | c | c}
+						i \cdot \rho 
+						& \nonpol_\eqtydeg 
+						& \pospol_j
+						& \negpol_j 
+						\\ \hline
+						\mu(W, \dm i : \rival{\jetsym_i})
+						& (\mu W, \dm i : \rival{\edgesym_\eqtydeg})
+						& (\mu W, \dm i : \rival{\jetsym_j})
+						& (\Op_j \mu W, \dm i : \rival{\tejsym_j})
+						\\
+						\mu(W, \dm i : \rival{\tejsym_i})
+						& (\mu W, \dm i : \rival{\edgesym_\eqtydeg})
+						& (\mu W, \dm i : \rival{\tejsym_j})
+						& (\Op_j\mu X, \dm i : \rival{\jetsym_j})
+					\end{array}
 				\]
-				is in fact a morphism of jet setoids; indeed it is the morphism $\mu(\JEP(\vfi))$, as can be trivially proven by induction on $W$ of $\vfi$.
+				\item thus satisfies $\JEP(\mu W) = \mu \JEP(W)$ by \cref{thm:poresh-jetsetoid-prism-commut},
+				\item has an action on jet cuboid morphisms defined as follows. Recall that a jet cuboid morphism $\vfi : V \to W$ is a cuboid morphism $\erasejc \vfi : \erasejc V \to \erasejc W$ whose endpoint model $\EP(\erasejc \vfi) = U(\JEP(\vfi))$ is in fact a morphism of jet sets $\JEP(\vfi) : \JEP(V) \to \JEP(W)$ (\cref{def:jet-cuboid-cat}).
+				\begin{itemize}
+					\item We define $\dm j \psub{\erasejc{\mu(\vfi)}} := \dm j \psub{\erasejc{\vfi}}$.
+					\item It is the case that
+					\[
+						\EP(\erasejc{\mu(\vfi)}) : \EP(\erasejc{\mu V}) = U(\JEP(\mu V)) \to U(\JEP(\mu W)) = \EP(\erasejc{\mu W})
+					\]
+					is in fact a morphism of jet setoids; indeed it is the morphism $\mu(\JEP(\vfi))$, as can be trivially proven by induction on $W$ of $\vfi$.
+				\end{itemize}
+				\item If $\mu \leq \nu$, then we have to give a morphism $\ket{\mu \leq \nu} : \mu W \to \nu W$, naturally w.r.t. $W$.
+				We define $\erasejc{\ket{\mu \leq \nu}}$ ny $\dm i \psub{\erasejc{\ket{\mu \leq \nu}}} = \dm i$, which is a valid morphism of cuboids exactly because we know that $\mu \leq \nu$.
+				This is clearly natural on cubes, therefore on sets, and therefore on jet setoids.
+				Its endpoint model ($\EP$) is a jet setoid morphism, again because $\mu \leq \nu$.
 			\end{itemize}
-			\item If $\mu \leq \nu$, then we have to give a morphism $\ket{\mu \leq \nu} : \mu W \to \nu W$, naturally w.r.t. $W$.
-			We define $\erasejc{\ket{\mu \leq \nu}}$ ny $\dm i \psub{\erasejc{\ket{\mu \leq \nu}}} = \dm i$, which is a valid morphism of cuboids exactly because we know that $\mu \leq \nu$.
-			This is clearly natural on cubes, therefore on sets, and therefore on jet setoids.
-			Its endpoint model ($\EP$) is a jet setoid morphism, again because $\mu \leq \nu$.
 		\end{itemize}
-	\end{itemize}
+		
+		\item By \cref{thm:setoid-equiv-set,thm:jetsetoid-equiv-jetset,thm:jetcuboid-equiv-jetcube,thm:cuboid-equiv-cube}, we obtain a pseudofunctor $\jetcube{\orifb}{\affine}{M}{\loch} : \poreshcat\withrr \to \Cat$:
+		\begin{itemize}
+			\item Sending an object $\vec a$ to $\jetcube{\orifb}{\affine}{M}{\vec a}$,
+			\item Sending a morphism $\mu : \vec a \to \vec b$ to $\jetcube{\orifb}{\affine}{M}{\mu} = \setoidquot \circ \jetcuboid{\orifb}{\affine}{M}{\mu} \circ \setoiddisc : \jetcube{\orifb}{\affine}{M}{\vec a} \to \jetcube{\orifb}{\affine}{M}{\vec b}$,
+			\item \ldots
+		\end{itemize}
+		
+		\item Additionally, if we consider only modalities $\mu$ satisfying \cref{eq:poresh-withl-crit1} (i.e.\ those for which $\eqtydeg \cdot \mu = \nonpol_\eqtydeg$) and denote the restricted 2-poset as $\poreshcat \noquotwithrr$, then we directly get a strict 2-functor $\jetcube{\orifb}{\affine}{M}{\loch}\noquot : \poreshcat \noquotwithrr \to \Cat$, equivalent to the pseudofunctor above:
+		\begin{itemize}
+			\item Sending an object $\vec a$ to $\jetcube{\orifb}{\affine}{M}{\vec a}$,
+			\item Sending a morphism $\mu : \vec a \to \vec b$ to $\jetcube{\orifb}{\affine}{M}{\mu}\noquot$ which acts on cubes the same way $\jetcuboid{\orifb}{\affine}{M}{\mu}$ acts on cuboids.
+			\item \ldots
+		\end{itemize}
+		
+		\item By \cref{thm:backward-jets-equivalent}, we obtain pseudofunctors $\jetcube{\orif}{\affine}{M}{\loch} : \poreshcat\withrr \to \Cat$ and \\
+		$\jetcuboid{\orif}{\affine}{M}{\loch} : \poreshcat\withrr \to \Setoid\Cat$.
+	\end{enumerate}
 \end{definition}
-
-\subsubsection{Semantics on Jet Cubes} \label{sec:poresh-jetcube:sub}
-\todoi{Use $\setoidquot$}
-\todoi{Also allow dropping the backward morphisms.}
 
 \subsection{Adjoint Triple Semantics on Jet Cubical Sets} \label{sec:poresh-jcset:triple}
 
