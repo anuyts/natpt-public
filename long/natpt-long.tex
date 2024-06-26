@@ -5294,7 +5294,17 @@ As in \cref{sec:poresh-jtset:nogo}, we have a no-go theorem:
 \subsection{Conclusion} \label{sec:poresh-jcset:conclusion}
 We draw the same conclusion as in \cref{sec:poresh-jtset:conclusion}.
 
-\chapter{Paths and Bridges}
+\chapter{Paths and Bridges} \label{ch:pb}
+In \cref{ch:modes}, we decided to consider all anpolarity masks as possible modes.
+However, it is unclear why we would be interested in types equipped with an arbitrary sequence of directed and undirected degrees.
+
+In this chapter, we start from the na\"ive viewpoint that, in practice, we will only be interested in anpolarity masks of the form $[\ypolar]^n$, i.e. modes where all degrees are directed.
+We will then argue that this situation in itself is undesirable and even unworkable, and fix the matter by inserting symmetric degrees into a given mask.
+
+\todoi{Update this intro when chapter is finished}
+
+
+
 \todoi{$\reshlist{\nonpol_\eqtydeg}{\mixpol_0} : [\ypolar] \to [\ypolar]$ is not part of a chain of 3 and therefore unincludable. This is a strong argument for bridges and paths.}
 
 \section{Rods, Paths and Bridges} \label{sec:pb}
@@ -5373,8 +5383,39 @@ The mask operations serve three goals:
 	i.e.\ we will use semicolons (;) to group small degree information per big degree.
 \end{definition}
 
-\subsection{Understanding Equijets}
+\section{Understanding Equijets}
 \todoi{This is way easier if you have modalities}
+
+\section{Intended Meaning of Big and Small Degrees}
+\todoi{
+\begin{itemize}
+	\item Big degree 1 is where the magic happens.
+	\item Big degree 0 should be discrete for closed types, and encodes the `graph' of big degree 1 stuff. Discreteness at closed types guarantees that the reflexive:
+	\begin{itemize}
+		\item 1-path is the identity isomorphism
+		\item 1-jet is the identity morphism
+		\item 1-bridge is the \textbf{strict} equality relation
+	\end{itemize}
+	at any type.
+	\item Universe gets discrete big degree 0 by moving all other stuff one slot.
+	\item Higher degrees get their meaning of pro-something automatically.
+	\item Mixed-polar operations:
+	\begin{itemize}
+		\item Will ask a path in order to produce a jet.
+		\item Can still produce a bridge if you give them a bridge.
+	\end{itemize}
+	This is an argument to have both bridges and paths.
+	\item Isopolar functions probably don't occur much: we have naturality instead.
+	\item You can leave out bridges. Then there is no strict equality relation (at least not along bridges; we do have strict equality along functions and bijections), but mixed-variant functions can still preserve suc-paths.
+	\begin{itemize}
+		\item If you leave out bridges, then data types which only have big degree 0, have no heterogeneous equality along bridges, only along morphisms and isos, so you've lost parametricity.
+	\end{itemize}
+	\item You cannot leave out both bridges and paths, because then there is no mixed-variance.
+	\item You can leave out paths but not bridges. Then there is strict equality, but no HoTT.
+	\item Its never really HoTT, because an iso in the universe is up to strict equality.
+	\item Alternatively, you can let big degree 0 correspond to 1-paths entirely (and probably not have bridges).
+\end{itemize}
+}
 
 \chapter{Transpension}
 \todoi{Does Tw : sSet $\to$ sSet have a transp type? (Yes if it's Tw$_!$)}
