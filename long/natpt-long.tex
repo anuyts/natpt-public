@@ -4307,8 +4307,8 @@ One advantage of these notations is that we can put presheaf cells in diagrams; 
 \subsection{End and Co-ends} \label{sec:notations:end}
 We use existential quantifiers over objects of a category to denote ends and co-ends, i.e. if $F : \catC\op \times \catC \to \Set$, then its co-end is denoted $\exists X.F(X, X)$ and its end is denoted $\forall X.F(X, X)$.
 
-\section{Semantics on Jet Topes and Jet Topic Sets} \label{sec:poresh-jettope-jtset}
-In this section, we investigate how polarized reshuffles act on jet topes and on presheaves over these, which we call jet topic sets.
+\section{Semantics on Jet Topes and Jet-Topic Sets} \label{sec:poresh-jettope-jtset}
+In this section, we investigate how polarized reshuffles act on jet topes and on presheaves over these, which we call jet-topic sets.
 
 \subsection{Semantics on Jet Topes} \label{sec:poresh-jettope}
 In this section, we want to construct a 2-functor that sends polarized reshuffles $\mu : \vec a \to \vec b$ to functors $\jettope{\vec a} \to \jettope{\vec b}$, thus giving our mode theory of polarized reshuffles a semantics on jet topes.
@@ -4384,9 +4384,9 @@ Taking these two requirements together, by \cref{thm:poresh-adjoint}, we get exa
 	\end{enumerate}
 \end{proof}
 
-\subsection{Adjoint Triple Semantics on Jet Topic Sets} \label{sec:poresh-jtset:triple}
+\subsection{Adjoint Triple Semantics on Jet-Topic Sets} \label{sec:poresh-jtset:triple}
 \begin{definition}
-	The category of \textbf{$\vec a$-jet topic sets} is the presheaf category $\jtset{\vec a} := \Psh(\jettope{\vec a})$.
+	The category of \textbf{$\vec a$-jet-topic sets} is the presheaf category $\jtset{\vec a} := \Psh(\jettope{\vec a})$.
 \end{definition}
 \begin{theorem} \label{thm:poresh-jtset:triple}
 	We have the following pseudofunctors:
@@ -4418,12 +4418,12 @@ Taking these two requirements together, by \cref{thm:poresh-adjoint}, we get exa
 	We compose these operations with the pseudofunctorial semantics of polarized reshuffles on jet topes (\cref{thm:poresh-jettope}), and finally use the fact that $\poreshcat\withll \cong (\poreshcat\withlr)\coop \cong \poreshcat\withrr$, with each isomorphism sending a polarized reshuffle to its left adjoint.
 \end{proof}
 
-\subsection{No Adjoint Pair Semantics on Jet Topic Sets} \label{sec:poresh-jtset:nogo}
-\Cref{thm:poresh-jtset:triple} is a fairly good result: any polarized reshuffle that is part of a chain of at least three adjoints, now has semantics on jet topic sets.
+\subsection{No Adjoint Pair Semantics on Jet-Topic Sets} \label{sec:poresh-jtset:nogo}
+\Cref{thm:poresh-jtset:triple} is a fairly good result: any polarized reshuffle that is part of a chain of at least three adjoints, now has semantics on jet-topic sets.
 Moreover, if we have a chain of four adjoints $\kappa \dashv \mu \dashv \rho \dashv \tau$, then by uniqueness of the adjoint, we find that $\jtsetsym\withlr(\mu) \cong \jtsetsym\withrr(\mu)$ and similar for $\rho$.
 So the 3 pseudofunctors essentially agree on the intersection of their domains.
 
-However, we can have commutative diagrams in $\poreshcat$ each of whose sides has semantics in jet topic sets, but where the composites of the sides do not have such semantics, so that commutativity is not necessarily preserved.
+However, we can have commutative diagrams in $\poreshcat$ each of whose sides has semantics in jet-topic sets, but where the composites of the sides do not have such semantics, so that commutativity is not necessarily preserved.
 Consider, for example, the following diagram with polarized reshuffles from \cref{ex:cohesion}:
 \[
 	\xymatrix{
@@ -4443,7 +4443,7 @@ Consider, for example, the following diagram with polarized reshuffles from \cre
 The horizontal sides are in $\poreshcat\withrr$, since $\cohpi_0 \dashv \cohdisc_0 \dashv \cohfget_0$.
 The vertical sides are in $\poreshcat\withll$, since $\cohdisc_i \dashv \cohfget_i \dashv \cohcodisc_i$.
 The diagonals compose to $\reshlist{\isopol_0}{\nonpol_\top} : [\ypolar] \to [\ypolar]$, which by \cref{thm:poresh-adjoint} has neither a left, nor a right adjoint.
-So each of the sides has semantics on jet topic sets, but we currently do not know whether the diagram still commutes there.
+So each of the sides has semantics on jet-topic sets, but we currently do not know whether the diagram still commutes there.
 We cannot invoke the composition law of any pseudofunctor provided by \cref{thm:poresh-jtset:triple}, because the composition operands all require a different pseudofunctor.
 
 Unfortunately, we have the following \textbf{no-go theorem}:
@@ -4472,7 +4472,7 @@ Unfortunately, we have the following \textbf{no-go theorem}:
 		= \fpsh{(\cohdisc_0)} \circ \lpsh{(\cohdisc_1)},
 	\]
 	where $\cohdisc_0 = \reshlist{\nonpol_\eqtydeg}{\nonpol_\eqtydeg, \pospol_0} : [\ypolar] \to [\ypolar, \ypolar]$.
-	Consider the jet topic set $\yoneda \rival{\jetsym_0} \in \jtset{[\ypolar]}$, which is the Yoneda-embedding of the jet tope $\rival{\jetsym_0} \in \jettope{[\ypolar]}$.
+	Consider the jet-topic set $\yoneda \rival{\jetsym_0} \in \jtset{[\ypolar]}$, which is the Yoneda-embedding of the jet tope $\rival{\jetsym_0} \in \jettope{[\ypolar]}$.
 	We compute the sets of 0-jets of its images under either the above functor or its square:
 	\begin{align*}
 		&\quad\mathrel{\phantom{=}}\quad
@@ -4528,7 +4528,7 @@ Unfortunately, we have the following \textbf{no-go theorem}:
 \end{proof}
 
 \subsection{Conclusion} \label{sec:poresh-jtset:conclusion}
-In conclusion, if we intend to model Naturality Pretype Theory in jet topic sets, then we will confine ourselves to using $\poreshcat\withlr$ as our mode theory.
+In conclusion, if we intend to model Naturality Pretype Theory in jet-topic sets, then we will confine ourselves to using $\poreshcat\withlr$ as our mode theory.
 This means that our internal modalities will be indexed by polarized reshuffles which have a left and a right adjoint, i.e.\ satisfy \cref{eq:poresh-withl-crit1,eq:poresh-withl-crit2,eq:poresh-withr-crit1,eq:poresh-withr-crit2}.
 It is almost certainly possible to drop \cref{eq:poresh-withr-crit1} so as to include modalities for irrelevance and shape-irrelevance \cite{reldtt}, but we leave this to potential future work.
 
@@ -4538,7 +4538,7 @@ Thus, the \emph{locks} in our MTT instance will then correspond to polarized res
 \subsection{Sinistrification} \label{sec:poresh-jtset:sin}
 %\todoi{Maybe skip dextrification, since it seems to work differently for the two criteria for having a left adjoint. We use sinistrification to give them an additional right adjoint so that we can interpret them on jet topes and internalize them.}
 %\todoi{Argue that we want to preserve at least commutation of modalities that actually can be internalized, i.e. those that have a single left adjoint. Their locks internalize functors that have a single right adjoint.}
-For this reason, not unlike our usage of jet setoids in \cref{sec:poresh-jetset}, we will take a detour via alternative categories that are equivalent to the categories of jet topic sets but where our semantics do not act on adjoint triples as in \cref{thm:poresh-jtset:triple}, but rather on adjoint pairs (\cref{sec:poresh-jtset:pair-sin}).
+For this reason, not unlike our usage of jet setoids in \cref{sec:poresh-jetset}, we will take a detour via alternative categories that are equivalent to the categories of jet-topic sets but where our semantics do not act on adjoint triples as in \cref{thm:poresh-jtset:triple}, but rather on adjoint pairs (\cref{sec:poresh-jtset:pair-sin}).
 That is:
 \begin{itemize}
 	\item $\jtsetsym\withrr$ and $\jtsetsym\withlr$ will get a common generalization $\jtsetsym\withr$ with domain $\poreshcat\withr$,
@@ -4546,7 +4546,7 @@ That is:
 \end{itemize}
 In fact, we could aim for a single semantics generalizing all three, but:
 \begin{itemize}
-	\item we will see that it does not work for jet cubical sets \todo{Refer to no-go theorem},
+	\item we will see that it does not work for jet-cubical sets \todo{Refer to no-go theorem},
 	\item it is unnecessary: the general modal system MTT \cite{mtt-journal} that we wish to instantiate, itself has a syntax $\locknovar \mu$ for left adjoint functors, which can be applied to contexts, and another syntax $\Modifynovar \mu \loch$ for (weak) dependent right adjoints (DRAs, \cite{dra}), which can be applied to types.
 	These will be modelled by pairs of a left adjoint and an (in our case proper) DRA.
 	Equations between functors that are neither left nor right adjoint, but may arise as a composite of left and right adjoints, are not of interest to MTT, so we take no interest in dealing with these in the model.
@@ -4560,8 +4560,8 @@ We call this \textbf{sinistrification}.%
 %To get a handle on equality, we will resort to setoid-valued presheaves.
 \footnote{Shulman \cite{matt} introduces a construction called \emph{co-dextrification} (Lat.\ \emph{dexter}: `right') which adds left adjoints to existing morphisms in a certain 2-category in such a way that the result satisfies a co-free property. He should perhaps have called it \emph{co-free dextrification}, so that the free construction could be called \emph{free dextrification} and the word \emph{dextrification} per se would be available when no universal property is proven. We mean the word sinistrification (Lat.\ \emph{sinister}: `left') in this latter sense: we do not prove any universal property. As such, we cannot speak of \emph{the} sinistrification but are instead presenting \emph{some} particular sinistrification that we choose to work with.}
 
-We will then take the full subcategory of jet topic sets for the `sinistrified' mask, on those presheaves where formal and actual equijets actually coincide (\cref{sec:poresh-jtset:pair-sin}), and whose formal `true' relation is actually true.
-This category will be equivalent to the original category of jet topic sets for the original mask (\cref{sec:poresh-jtset:pair}).
+We will then take the full subcategory of jet-topic sets for the `sinistrified' mask, on those presheaves where formal and actual equijets actually coincide (\cref{sec:poresh-jtset:pair-sin}), and whose formal `true' relation is actually true.
+This category will be equivalent to the original category of jet-topic sets for the original mask (\cref{sec:poresh-jtset:pair}).
 
 %Ambidextrification is done in two steps: sinistrification (making all reshuffles left adjoint) and dextrification (making them right adjoint).
 
@@ -4956,7 +4956,7 @@ Thus, the action of $\loch \circ \Sin(\mu)$ on polarized degrees is to first rew
 %	\end{align*}
 %\end{corollary}
 
-\subsection{Adjoint Pair Semantics on Sinistrified Modal Jet Topic Setoids} \label{sec:poresh-jtset:pair-sin}
+\subsection{Adjoint Pair Semantics on Sinistrified Modal Jet-Topic Setoids} \label{sec:poresh-jtset:pair-sin}
 Composing sinistrification (\cref{sec:poresh-jtset:sin}) with \ref{thm:poresh-jtset:triple}, we get
 \begin{align*}
 	&\poreshcat\withr \xrightarrow{\Sin} \poreshcat\withrr \xrightarrow{\jtsetsym\withrr} \Cat\withrr, \\
@@ -4966,7 +4966,7 @@ An adjunction $\mu \dashv \rho$ with $\mu : \vec a \to \vec b$ will be sent to a
 
 Now, for all $\vec a$, we would like to take full subcategories of $\jtset{\Sin(\vec a)}$ on those presheaves whose formal equijet and `true' relations coincide with the actual ones.
 These would be exactly fixpoints of the semantics of $\sharp^\Sin$, as $\sharp^\Sin$ redefines the formal relations as the actual ones.
-However, since $\sharp^\Sin$ is not in general part of an adjoint triple, \cref{thm:poresh-jtset:triple} does not directly provide a semantics on jet topic sets.
+However, since $\sharp^\Sin$ is not in general part of an adjoint triple, \cref{thm:poresh-jtset:triple} does not directly provide a semantics on jet-topic sets.
 Fortunately, we can reassemble it from its parts, but then we have to reprove some of its properties:
 \begin{proposition}
 	The functor
@@ -4987,11 +4987,11 @@ Fortunately, we can reassemble it from its parts, but then we have to reprove so
 	This is equivalent to invertibility of the unit of the monad $\cohfget^\Sin \cohdisc^\Sin : \jetset{\vec a} \to \jetset{\vec a}$, which follows from pseudofunctoriality of $\jetsetsym : \poreshcat \to \Cat$ and the fact that the polarized reshuffle $\cohfget^\Sin \cohdisc^\Sin : \vec a \to \vec a$ is the identity (we do not need to consider equality of 2-cells in the 2-poset $\poreshcat$).
 \end{proof}
 
-\subsection{Adjoint Pair Semantics on Jet Topic Sets} \label{sec:poresh-jtset:pair}
+\subsection{Adjoint Pair Semantics on Jet-Topic Sets} \label{sec:poresh-jtset:pair}
 } %endwip
 
-\section{Semantics on Jet Cubes and Jet Cubical Sets} \label{sec:poresh-jetcube-jcset}
-In this section, we investigate how polarized reshuffles act on jet topes and on presheaves over these, which we call jet topic sets.
+\section{Semantics on Jet Cubes and Jet-Cubical Sets} \label{sec:poresh-jetcube-jcset}
+In this section, we investigate how polarized reshuffles act on jet topes and on presheaves over these, which we call jet-topic sets.
 
 \subsection{Semantics on Jet Cubes and Jet Cuboids} \label{sec:poresh-jetcube}
 In this section, we want to construct a 2-functor that sends polarized reshuffles $\mu : \vec a \to \vec b$ to functors $\jetcube{\orifb}{\affine}{M}{\vec a} \to \jetcube{\orifb}{\affine}{M}{\vec b}$, with $M \in \accol{\bipointedsym, \booleanalg}$, thus giving our mode theory of polarized reshuffles a semantics on $\orifb$-jet-cubes.
@@ -5242,7 +5242,7 @@ This allows us to work in a strictly 2-functorial setting longer.
 	\end{enumerate}
 \end{definition}
 
-\subsection{Adjoint Triple Semantics on Jet Cubical Sets} \label{sec:poresh-jcset:triple}
+\subsection{Adjoint Triple Semantics on Jet-Cubical Sets} \label{sec:poresh-jcset:triple}
 \begin{definition}
 	The category of \textbf{$(\omega, \vec a)$-jet-cubical sets} is the presheaf category $\jcset{\omega}{\mycubex}{M}{\vec a} := \Psh(\jetcube{\omega}{\mycubex}{M}{\vec a})$.
 \end{definition}
@@ -5273,7 +5273,7 @@ This allows us to work in a strictly 2-functorial setting longer.
 	By the exact same reasoning as in the proof of \cref{thm:poresh-jtset:triple}.
 \end{proof}
 
-\subsection{No Adjoint Pair Semantics on Jet Cubical Sets} \label{sec:poresh-jcset:nogo}
+\subsection{No Adjoint Pair Semantics on Jet-Cubical Sets} \label{sec:poresh-jcset:nogo}
 As in \cref{sec:poresh-jtset:nogo}, we have a no-go theorem:
 \begin{theorem} \label{thm:poresh-jcset:nogo}
 	Let $\omega \in \accol{\orif, \orifb}$ and $M \in \accol{\bipointedsym, \booleanalg}$.
@@ -5284,7 +5284,7 @@ As in \cref{sec:poresh-jtset:nogo}, we have a no-go theorem:
 	\end{itemize}
 \end{theorem}
 \begin{proof}
-	The reasoning in the proof of \cref{thm:poresh-jtset:nogo}, still stands for jet cubical sets. Note:
+	The reasoning in the proof of \cref{thm:poresh-jtset:nogo}, still stands for jet-cubical sets. Note:
 	\begin{itemize}
 		\item That the interval jet set $\rival{\jetsym_0}$ needs to be replaced with the 1-dimensional jet cube $(\dm i : \rival{\jetsym_0})$.
 		\item That all jet set morphisms of $\JEP$s of jet cubes, whose domain is 1-dimensional, are in fact jet cube morphisms. \qedhere
