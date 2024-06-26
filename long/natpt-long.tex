@@ -4136,7 +4136,7 @@ In words, \cref{eq:poresh-withrr-crit2} says that:
 	
 	$\Setoid$ can be regarded as a $\Setoid$-enriched category by considering setoid morphisms equivalent if they are pointwise equivalent.
 \end{definition}
-\begin{definition}
+\begin{definition} \label{def:setoid-cohesion}
 	We have an adjoint triple $\setoidquot \dashv \setoiddisc \dashv \setoidfget$ between the (ordinary) category of setoids and $\Set$:
 	\begin{itemize}
 		\item $\setoidquot : \Setoid \to \Set$ quotients out the equivalence relation,
@@ -4146,7 +4146,7 @@ In words, \cref{eq:poresh-withrr-crit2} says that:
 \end{definition}
 We can now use $\setoidfget_1 : \Setoid\Cat \to \Cat$ to disambiguate between the setoid-enriched category of setoids $\Setoid$ and the ordinary category of setoids $\setoidfget_1 \Setoid$.
 \begin{corollary} \label{thm:setoid-equiv-set}
-	The \emph{setoid-enriched} quotient functor $\setoidquot : \Setoid \to \setoiddisc_1 \Set$ and the discrete functor $\setoiddisc : \setoiddisc_1 \Set \to \Setoid$ form an equivalence of $\Setoid$-enriched categories (where $\setoiddisc \setoidquot$ is only naturally \emph{equivalent}, not naturally isomorphic, to the identity functor). \qed
+	The \emph{setoid-enriched} quotient and discrete functor $\setoidquot : \Setoid \to \setoiddisc_1 \Set$ and $\setoiddisc : \setoiddisc_1 \Set \to \Setoid$ form an equivalence of $\Setoid$-enriched categories (where $\setoiddisc \setoidquot$ is only naturally \emph{equivalent}, not naturally isomorphic, to the identity functor). \qed
 \end{corollary}
 \begin{definition} \label{def:jetsetoid}
 	We define the category $\jetsetoid{\vec a}$ of \textbf{$\vec a$-jet-setoids} as the following strict pullback:
@@ -4173,8 +4173,11 @@ We can now use $\setoidfget_1 : \Setoid\Cat \to \Cat$ to disambiguate between th
 	
 	We turn $\jetsetoid{\vec a}$ into a $\Setoid$-enriched category by declaring morphisms equivalent if the underlying setoid morphisms are equivalent.
 \end{definition}
+\begin{corollary} \label{thm:jetsetoid-cohesion}
+	The adjunction $\setoidquot \dashv \setoiddisc$ of categories from \cref{def:setoid-cohesion} carries over to an adjunction $\setoidquot \dashv \setoiddisc$ between $\setoidfget_1 \jetsetoid{\vec a}$ and $\jetset{\vec a}$. \qed
+\end{corollary}
 \begin{corollary} \label{thm:jetsetoid-equiv-jetset}
-	The functors $\setoidquot$ and $\setoiddisc$ and the equivalence from \cref{thm:setoid-equiv-set} carry over to an equivalence of setoid-enriched categories $\jetsetoid{\vec a} \simeq \setoiddisc_1 \jetset{\vec a}$. \qed
+	The equivalence of setoid-enriched categories from \cref{thm:setoid-equiv-set} carries over to an equivalence of setoid-enriched categories $\jetsetoid{\vec a} \simeq \setoiddisc_1 \jetset{\vec a}$. \qed
 \end{corollary}
 \begin{definition}
 	\label{def:poresh-jetsetoid}
@@ -5110,7 +5113,7 @@ This allows us to work in a strictly 2-functorial setting longer.
 	For any $(\myorix, \vec a)$-jet-cuboid $W$, we have $U(\JEP(W)) = \EP(\erasejc W)$.
 	In other words, \cref{thm:jet-cube-pullback} remains valid if we replace cubes with cuboids and jet cubes with jet cuboids.
 	
-	Moreover, the isomorphisms in \cref{def:cuboid-ep} and \cref{def:jet-cuboid-jep} are compatible along $U : \jetset{\vec a} \to \Set$ and $\erasejc \loch$.
+	Moreover, the isomorphisms in \cref{def:cuboid-ep} and \cref{def:jet-cuboid-jep} are compatible along $U : \jetset{\vec a} \to \Set$ and $\erasejc \loch$. \qed
 \end{corollary}
 \begin{definition} \label{def:jet-cuboid-cat}
 	Let $\vec a$ be a mask, $\myorix \in \orikit$, $\mycubex \in \accol{\affine, \cartes}$ and $M$ a monad on $\Set$.
@@ -5154,6 +5157,64 @@ This allows us to work in a strictly 2-functorial setting longer.
 			\Set.
 		}
 	\]
+	By the adjunction $\setoidquot_1 \dashv \setoiddisc_1$ (\cref{def:setoid-cohesion}), we can regard each of the arrows labelled $\setoidquot$ in the diagram above as either starting from $\setoidquot_1$ of the domain (making it an ordinary functor) or arriving at $\setoiddisc_1$ of the codomain (making it a setoid-enriched functor).
+	The arrows in the upper left square parallel to the page are all setoid-enriched functors, while the arrows in the lower right square are all ordinary functors. \qed
+\end{corollary}
+\begin{definition} \label{def:cuboid-cohesion}
+	We define a setoid-enriched functor $\setoiddisc : \setoiddisc_1 \cubecat^\mycubex_M \to \cuboidcat^\mycubex_M$ which sends a cube $W = (\dm i_0 : \IX, \ldots, \dm i_{n-1} : \IX)$ to the cuboid $\setoiddisc W = (\dm i_0 : \IX, \ldots, \dm i_{n-1} : \IX)$ of the same notation, and has an obvious action on morphisms.
+\end{definition}
+\begin{corollary} \label{thm:cuboid-cohesion}
+	$\setoiddisc : \cubecat^\mycubex_M \to \setoidfget_1 \cuboidcat^\mycubex_M$ is right adjoint to $\setoidquot : \setoidfget_1 \cuboidcat^\mycubex_M \to \cubecat^\mycubex_M$. \qed
+\end{corollary}
+\begin{corollary} \label{thm:cuboid-cohesion}
+	$\setoiddisc : \setoiddisc_1 \cubecat^\mycubex_M \to \cuboidcat^\mycubex_M$ and $\setoidquot : \cuboidcat^\mycubex_M \to \setoiddisc_1 \cubecat^\mycubex_M$ form an equivalence of setoid-enriched categories, where $\setoiddisc \setoidquot$ is naturally \emph{equivalent} but not naturally isomorphic to the identity. \qed
+\end{corollary}
+\begin{definition} \label{def:jet-cuboid-cohesion}
+	We define a setoid-enriched functor $\setoiddisc : \setoiddisc_1 \jetcube{\myorix}{\mycubex}{M}{\vec a} \to \jetcuboid{\myorix}{\mycubex}{M}{\vec a}$ which sends a jet cube $W = (\dm i_0 : \rival{(P_0)_{i_0}}, \ldots, \dm i_{n-1} : \rival{(P_{n-1})_{i_{n-1}}})$ to the jet cuboid $\setoiddisc W = (\dm i_0 : \rival{(P_0)_{i_0}}, \ldots, \dm i_{n-1} : \rival{(P_{n-1})_{i_{n-1}}})$ of the same notation, and has an obvious action on morphisms.
+\end{definition}
+\begin{corollary} \label{thm:jet-cuboid-cohesion}
+	$\setoiddisc : \jetcube{\myorix}{\mycubex}{M}{\vec a} \to \setoidfget_1 \jetcuboid{\myorix}{\mycubex}{M}{\vec a}$ is right adjoint to \\
+	$\setoidquot : \setoidfget_1 \jetcuboid{\myorix}{\mycubex}{M}{\vec a} \to \jetcube{\myorix}{\mycubex}{M}{\vec a}$. \qed
+\end{corollary}
+\begin{corollary} \label{thm:jet-cuboid-cohesion}
+	$\setoiddisc : \setoiddisc_1 \jetcube{\myorix}{\mycubex}{M}{\vec a} \to \jetcuboid{\myorix}{\mycubex}{M}{\vec a}$ and $\setoidquot : \jetcuboid{\myorix}{\mycubex}{M}{\vec a} \to \setoiddisc_1 \jetcube{\myorix}{\mycubex}{M}{\vec a}$ form an equivalence of setoid-enriched categories, where $\setoiddisc \setoidquot$ is naturally \emph{equivalent} but not naturally isomorphic to the identity. \qed
+\end{corollary}
+\begin{corollary}
+	There is a strictly commutative diagram
+	\[
+		\xymatrix{
+			\jetcuboid{\myorix}{\mycubex}{M}{\vec a}
+				\ar[rr]^(.3)\JEP
+				\ar[dd]_(.3){\erasejc{\loch}}
+				\ar@{<-}[rd]_{\setoiddisc}
+			&&
+			\jetsetoid{\vec a}
+				\ar[dd]_(.3){U}
+				\ar@{<-}[rd]_{\setoiddisc}
+			\\
+			&
+			\jetcube{\myorix}{\mycubex}{M}{\vec a}
+				\ar[rr]^(.3)\JEP
+				\ar[dd]_(.3){\erasejc{\loch}}
+			&&
+			\jetset{\vec a}
+				\ar[dd]_(.3){U}
+			\\
+			\cuboidcat^\mycubex_M
+				\ar[rr]^(.3)\EP
+				\ar@{<-}[rd]_{\setoiddisc}
+			&&
+			\Setoid
+				\ar@{<-}[rd]_{\setoiddisc}
+			\\
+			&
+			\cubecat^\mycubex_M
+				\ar[rr]^(.3)\EP
+			&&
+			\Set.
+		}
+	\]
+	where the arrows in the upper left square parallel to the page are setoid-enriched functors, the arrows in the lower right square are ordinary functors, and the arrows labelled $\setoiddisc$ can be regarded as setoid-enriched functors from $\setoiddisc_1$ of the domain or, equivalently by \cref{def:setoid-cohesion}, as ordinary functors to $\setoidfget_1$ of the codomain. \qed
 \end{corollary}
 
 \subsubsection{Semantics on Jet Cuboids} \label{sec:poresh-jetcuboid}
