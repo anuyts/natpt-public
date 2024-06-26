@@ -2619,85 +2619,6 @@ The shared reader may object that Pinyo and Kraus define the morphisms of $\twis
 	This means we can always rewrite a derivation tree in the calculus for $\jetcubetri \affine \bipointedsym {[\ypolar]}$ of a morphism in $\jetcubefwd \affine \bipointedsym {[\ypolar]}$ to use only the prescribed rules. 
 \end{proof}
 
-\section{Rods, Paths and Bridges} \label{sec:pb}
-\todoi{Reabolish rods}
-In this section, we define a number of operations on anpolarity masks (\cref{def:anpolarity}) which serve to insert symmetric \emph{bridge} and/or \emph{path} relations for every degree.
-The idea, in the universe of small types, is the following:
-\begin{itemize}
-	\item Rods express strict equality,
-	\item Paths express isomorphism (in the presence of rods or bridges) or equivalence (in absence of rods),
-	\item Jets express homomorphism,
-	\item Bridges express relations.
-\end{itemize}
-Bridges and rods will not occur together, because bridges can be regarded as pro-rods (with `pro-' in the sense of pro-arrow equipments): a bridge between types expresses a relation, which is a notion of heterogeneous strict equality.
-
-The mask operations serve three goals:
-\begin{itemize}
-	\item They are helpful to understand equijets\todo{refer},
-	%\item They are helpful to prove pseudofunctoriality of the semantics of the mode theory\todo{refer},
-	\item They generate the modes that we will likely want to use in practice.
-\end{itemize}
-
-%\subsection{Path/Bridge Transformations}
-\begin{definition} \label{def:pb}
-	Let $\mymaskx \in \accol{\maskj, \maskpj, \maskjb, \maskpjb, \maskrpj}$ and $\mymasky \in \accol{\maske, \maskpb, \maskrp}$, and let $a$ be an anpolarity.
-	We define $\maskop a \mymaskx \mymasky \in \List\,\Anpolarity$ as follows:
-	\[
-		\begin{array}{l c c c l c c}
-			\maskop \ypolar \maskj \mymasky &=& [\ypolar]
-			&\qquad&
-			\maskop \npolar \mymaskx \maske &=& [\npolar]
-			\\
-			\maskop \ypolar \maskpj \mymasky &=& [\npolar, \ypolar]
-			&\qquad&
-			\maskop \npolar \mymaskx \maskpb &=& [\npolar, \npolar]
-			\\
-			\maskop \ypolar \maskjb \mymasky &=& [\ypolar, \npolar]
-			&\qquad&
-			\maskop \npolar \mymaskx \maskrp &=& [\npolar, \npolar]
-			\\
-			\maskop \ypolar \maskpjb \mymasky &=& [\npolar, \ypolar, \npolar]
-			\\
-			\maskop \ypolar \maskrpj \mymasky &=& [\npolar, \npolar, \ypolar]
-		\end{array}
-	\]
-	We extend this operation to anpolarity masks as follows: $\maskop{\vec a}{\mymaskx}{\mymasky}$ is the concatenation (join / monadic multiplication) of the list of lists obtained by applying $\maskop{\loch}{\mymaskx}{\mymasky}$ to every element of $\vec a$.
-	
-	Indexing the resulting mask is complicated, because the length of the resulting mask depends not only on the length of $\vec a$ but also on its contents.
-	In order to stay sane, we will use an indexing system that still refers to the degrees of $\vec a$, which we will call \textbf{big degrees}, whereas the degrees of $\maskop{\vec a}{\mymaskx}{\mymasky}$ will be called \textbf{small degrees}.
-	Concretely, a small degree subscript will be replaced with a big degree subscript combined with a superscript indicating whether we are talking about the rod/path/jet/bridge or edge relation.
-	For example, if $\vec a = [\ypolar, \npolar, \ypolar]$, then the relations of $\maskop{\vec a}{\maskpjb}{\maske}$ will be denoted as:
-	\[
-		\nwpath_0, \quad
-		\nwjet_0, \quad
-		\nwbridge_0, \quad
-		\nwedge_1, \quad
-		\nwpath_2, \quad
-		\nwjet_2, \quad
-		\nwbridge_2,
-	\]
-	rather than
-	\[
-		\edge_0, \quad
-		\jet_1, \quad
-		\edge_2, \quad
-		\edge_3, \quad
-		\edge_4, \quad
-		\jet_5, \quad
-		{\edge_6}.
-	\]
-	When we need a degree in itself, we will write e.g.\ $\pathdeg{0}$.
-	
-	A modality $\mu : \maskop{\vec a}{\maskpjb}{\maske} \to \maskop{\vec a}{\maskpjb}{\maske}$ will be denoted
-	\[
-		\reshlist{\eqtydeg \cdot \mu}{\pathdeg 0 \cdot \mu, \jetdeg 0 \cdot \mu, \bridgedeg 0 \cdot \mu ; \edgedeg 1 \cdot \mu ; \pathdeg 2 \cdot \mu, \jetdeg 2 \cdot \mu, \bridgedeg 2 \cdot \mu},
-	\]
-	i.e.\ we will use semicolons (;) to group small degree information per big degree.
-\end{definition}
-
-\subsection{Understanding Equijets}
-\todoi{This is way easier if you have modalities}
-
 \chapter{Modalities: Polarized Reshuffles} \label{ch:modalities}
 In this chapter, we pin down the Hom-posets of our mode theory.
 \Cref{sec:poresh} defines the 2-poset $\poreshcat$ of polarized reshuffles, which we would like to use as our mode theory. The objects of this 2-poset will then be the modes, and as promised in the previous chapter, these are exactly anpolarity masks.
@@ -4020,7 +3941,7 @@ In words, \cref{eq:poresh-withrr-crit2} says that:
 		\end{itemize}
 	\end{itemize}
 \end{example}
-\begin{example} \label{ex:pjb-paramty}
+\begin{example} \label{ex:pjb-paramty} \todo{Make sure to refer correctly.}
 	We use the notations from \cref{sec:pb}.
 	Let $\vec a = \maskopypolar{[\ypolar, \ypolar]}{\maskpjb} = [\npolar, \ypolar, \npolar, \npolar, \ypolar, \npolar]$ and $\vec b = \maskopypolar{[\ypolar]}{\maskpjb} = [\npolar, \ypolar, \npolar]$.
 	We have the following chain of adjoint reshuffles, now annotated with big degrees, which cannot be extended on either side:
@@ -5375,6 +5296,85 @@ We draw the same conclusion as in \cref{sec:poresh-jtset:conclusion}.
 
 \chapter{Paths and Bridges}
 \todoi{$\reshlist{\nonpol_\eqtydeg}{\mixpol_0} : [\ypolar] \to [\ypolar]$ is not part of a chain of 3 and therefore unincludable. This is a strong argument for bridges and paths.}
+
+\section{Rods, Paths and Bridges} \label{sec:pb}
+\todoi{Reabolish rods}
+In this section, we define a number of operations on anpolarity masks (\cref{def:anpolarity}) which serve to insert symmetric \emph{bridge} and/or \emph{path} relations for every degree.
+The idea, in the universe of small types, is the following:
+\begin{itemize}
+	\item Rods express strict equality,
+	\item Paths express isomorphism (in the presence of rods or bridges) or equivalence (in absence of rods),
+	\item Jets express homomorphism,
+	\item Bridges express relations.
+\end{itemize}
+Bridges and rods will not occur together, because bridges can be regarded as pro-rods (with `pro-' in the sense of pro-arrow equipments): a bridge between types expresses a relation, which is a notion of heterogeneous strict equality.
+
+The mask operations serve three goals:
+\begin{itemize}
+	\item They are helpful to understand equijets\todo{refer},
+	%\item They are helpful to prove pseudofunctoriality of the semantics of the mode theory\todo{refer},
+	\item They generate the modes that we will likely want to use in practice.
+\end{itemize}
+
+%\subsection{Path/Bridge Transformations}
+\begin{definition} \label{def:pb}
+	Let $\mymaskx \in \accol{\maskj, \maskpj, \maskjb, \maskpjb, \maskrpj}$ and $\mymasky \in \accol{\maske, \maskpb, \maskrp}$, and let $a$ be an anpolarity.
+	We define $\maskop a \mymaskx \mymasky \in \List\,\Anpolarity$ as follows:
+	\[
+		\begin{array}{l c c c l c c}
+			\maskop \ypolar \maskj \mymasky &=& [\ypolar]
+			&\qquad&
+			\maskop \npolar \mymaskx \maske &=& [\npolar]
+			\\
+			\maskop \ypolar \maskpj \mymasky &=& [\npolar, \ypolar]
+			&\qquad&
+			\maskop \npolar \mymaskx \maskpb &=& [\npolar, \npolar]
+			\\
+			\maskop \ypolar \maskjb \mymasky &=& [\ypolar, \npolar]
+			&\qquad&
+			\maskop \npolar \mymaskx \maskrp &=& [\npolar, \npolar]
+			\\
+			\maskop \ypolar \maskpjb \mymasky &=& [\npolar, \ypolar, \npolar]
+			\\
+			\maskop \ypolar \maskrpj \mymasky &=& [\npolar, \npolar, \ypolar]
+		\end{array}
+	\]
+	We extend this operation to anpolarity masks as follows: $\maskop{\vec a}{\mymaskx}{\mymasky}$ is the concatenation (join / monadic multiplication) of the list of lists obtained by applying $\maskop{\loch}{\mymaskx}{\mymasky}$ to every element of $\vec a$.
+	
+	Indexing the resulting mask is complicated, because the length of the resulting mask depends not only on the length of $\vec a$ but also on its contents.
+	In order to stay sane, we will use an indexing system that still refers to the degrees of $\vec a$, which we will call \textbf{big degrees}, whereas the degrees of $\maskop{\vec a}{\mymaskx}{\mymasky}$ will be called \textbf{small degrees}.
+	Concretely, a small degree subscript will be replaced with a big degree subscript combined with a superscript indicating whether we are talking about the rod/path/jet/bridge or edge relation.
+	For example, if $\vec a = [\ypolar, \npolar, \ypolar]$, then the relations of $\maskop{\vec a}{\maskpjb}{\maske}$ will be denoted as:
+	\[
+		\nwpath_0, \quad
+		\nwjet_0, \quad
+		\nwbridge_0, \quad
+		\nwedge_1, \quad
+		\nwpath_2, \quad
+		\nwjet_2, \quad
+		\nwbridge_2,
+	\]
+	rather than
+	\[
+		\edge_0, \quad
+		\jet_1, \quad
+		\edge_2, \quad
+		\edge_3, \quad
+		\edge_4, \quad
+		\jet_5, \quad
+		{\edge_6}.
+	\]
+	When we need a degree in itself, we will write e.g.\ $\pathdeg{0}$.
+	
+	A modality $\mu : \maskop{\vec a}{\maskpjb}{\maske} \to \maskop{\vec a}{\maskpjb}{\maske}$ will be denoted
+	\[
+		\reshlist{\eqtydeg \cdot \mu}{\pathdeg 0 \cdot \mu, \jetdeg 0 \cdot \mu, \bridgedeg 0 \cdot \mu ; \edgedeg 1 \cdot \mu ; \pathdeg 2 \cdot \mu, \jetdeg 2 \cdot \mu, \bridgedeg 2 \cdot \mu},
+	\]
+	i.e.\ we will use semicolons (;) to group small degree information per big degree.
+\end{definition}
+
+\subsection{Understanding Equijets}
+\todoi{This is way easier if you have modalities}
 
 \chapter{Transpension}
 \todoi{Does Tw : sSet $\to$ sSet have a transp type? (Yes if it's Tw$_!$)}
