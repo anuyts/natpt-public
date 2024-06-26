@@ -91,6 +91,7 @@
 In this chapter, we establish the object part of the mode theory for naturality pretype theory and its model.
 Modes will be \textbf{anpolarity masks} $\vec a$ (\cref{sec:mask}) which will be modelled in presheaf categories over certain base categories.
 We propose two families of base categories, parametrized by the mask $\vec a$, and both are built using the category $\jetset{\vec a}$ of \textbf{jet sets} over $\vec a$ (\cref{sec:jetset}).
+Jet sets themselves are not suitable as a base category, e.g.\ because they are closed under coproducts, which the Yoneda-embedding will never preserve.
 
 The more complex but better behaved family of base categories are categories of \textbf{jet cubes} $\jetcubefwd \mycubex M {\vec a}$ (\cref{sec:jetcubes}).
 While we can get a grasp on jet cubes by characterizing their morphisms using a calculus (\cref{sec:jetcubes:calculus}), this calculus is relatively complex and its soundness and completeness proofs are even more complex.
@@ -2619,12 +2620,16 @@ The shared reader may object that Pinyo and Kraus define the morphisms of $\twis
 \end{proof}
 
 \chapter{Modalities: Polarized Reshuffles} \label{ch:modalities}
-\todoi{Intro text}
+In this chapter, we pin down the Hom-posets of our mode theory.
+\Cref{sec:poresh} defines the 2-poset $\poreshcat$ of polarized reshuffles, which we would like to use as our mode theory. The objects of this 2-poset will then be the modes, and as promised in the previous chapter, these are exactly anpolarity masks.
+The intuitions behind the definition of $\poreshcat$ are explained at length in \cref{sec:poresh:def}.
+$\poreshcat$ is a polarized version of the category of reshuffles used to define the mode theory of Degrees of Relatedness \cite{reldtt,reldtt-techreport} (\cref{thm:reshcat-poreshcat}).
 
-\section{Intuitions}
-\todoi{Calque from \cite{reldtt-techreport}.}
+In the following sections, we investigate how polarized reshuffles can act on jet sets (\cref{sec:poresh-jetset}), jet topes and presheaves over these  (\cref{sec:poresh-jettope-jtset}), and jet cubes and presheaves over these (\cref{sec:poresh-jetcube-jcset}).
 
-\section{The 2-poset of Polarized Reshuffles} \label{sec:poreshcat}
+For both presheaf categories, we obtain a no-go theorem (\cref{thm:poresh-jtset:nogo,thm:poresh-jcset:nogo}) that tells us that we cannot use \emph{all} of $\poreshcat$ as our mode theory. For this reason, we decide to continue with just $\poreshcat\withlr$, the 2-poset of polarized reshuffles that have both a left and a right adjoint.
+
+\section{The 2-poset of Polarized Reshuffles} \label{sec:poresh}
 
 \subsection{Prerequisites}
 \begin{definition}
@@ -2654,7 +2659,7 @@ The shared reader may object that Pinyo and Kraus define the morphisms of $\twis
 	such that $\circ$ is associative and unital with respect to $\id$.
 \end{definition}
 
-\subsection{Definitions and Properties} \label{sec:poreshcat:def}
+\subsection{Definitions and Properties} \label{sec:poresh:def}
 In this section, we will construct a diagram of 2-posets and poset-valued profunctors between them.
 Viewing poset-valued presheaves $P : \catC\op \to \Poset$ as profunctors to the terminal 2-poset $\top$, the diagram we will construct is the following:
 \[
@@ -2798,7 +2803,7 @@ This is the motivation of the somewhat peculiar relation $\ll$ introduced below,
 	Each constituent poset $\Hom(a, b)$ of $\polcat$ and each constituent poset $\oripsh(a)$ of $\oripsh$ is a lattice.
 	Composition of polarities and their action on orientations both preserve meets and joins in the \emph{left} argument. \qed
 \end{proposition}
-Note that the fact that $\loch \circ \loch$ and $\loch \oriof \loch$ preserve meets and joins in their left argument, is easy to explain from the intuitions in \cref{sec:poreshcat:def}.
+Note that the fact that $\loch \circ \loch$ and $\loch \oriof \loch$ preserve meets and joins in their left argument, is easy to explain from the intuitions in \cref{sec:poresh:def}.
 Indeed, $(P \vee Q) \oriof p$ answers the question: for a $p$-polar single-single degree function $f$, in order to have either $f(x) \mathrel{P} f(y)$ or $f(x) \mathrel{Q} f(y)$, what do I need between $x$ and $y$?
 The answer is: either the weakest precondition $P \oriof p$ of $f(x) \mathrel{P} f(y)$, or the weakest precondition $Q \oriof p$ of $f(x) \mathrel{Q} f(y)$, i.e.\ you need $(P \oriof p) \vee (Q \oriof p)$.
 The argument for meets and for $\loch \circ \loch$ is similar.
@@ -3140,7 +3145,7 @@ Thus, we have retrieved exactly the 2-poset of (ordinary) reshuffles from Degree
 		\item pointwise inequalities.
 	\end{itemize}
 \end{definition}
-\begin{theorem}
+\begin{theorem} \label{thm:reshcat-poreshcat}
 	There is an embedding $I : \reshcat \to \poreshcat$ of the 2-poset of reshuffles $\reshcat$ from \cite[def.\ 6.2.7]{reldtt-techreport} into $\poreshcat$ which
 	\begin{itemize}
 		\item sends the depth $d \geq -1$ to the anpolarity mask $I(d) = [\npolar]^{d+1}$,
@@ -3984,7 +3989,6 @@ In words, \cref{eq:poresh-withrr-crit2} says that:
 %\end{example}
 
 \subsubsection{Additional Results}
-\todoi{Update notation}
 \begin{proposition} \label{thm:poresh-op}
 	Let $\mu : \vec a \to \vec b$ be a polarized reshuffle, $a_i = b_j = \ypolar$, and let $j \cdot \mu \in \accol{\pospol_i, \negpol_i}$.
 	Then $\Op_j \circ \mu = \mu \circ \Op_i$.
@@ -5138,7 +5142,7 @@ This allows us to work in a strictly 2-functorial setting longer.
 	where the arrows in the upper left square parallel to the page are setoid-enriched functors, the arrows in the lower right square are ordinary functors, and the arrows labelled $\setoiddisc$ can be regarded as setoid-enriched functors from $\setoiddisc_1$ of the domain or, equivalently by \cref{def:setoid-cohesion}, as ordinary functors to $\setoidfget_1$ of the codomain. \qed
 \end{corollary}
 
-\subsubsection{Semantics on Jet Cuboids and Jet Cubes}
+\subsubsection{Semantics on Jet Cubes and Jet Cuboids}
 \label{sec:poresh-jetcuboid}
 \label{sec:poresh-jetcube:sub}
 \begin{definition}
