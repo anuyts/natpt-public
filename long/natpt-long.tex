@@ -4021,6 +4021,7 @@ In words, \cref{eq:poresh-withrr-crit2} says that:
 	\end{itemize}
 \end{example}
 \begin{example} \label{ex:pjb-paramty}
+	We use the notations from \cref{sec:pb}.
 	Let $\vec a = \maskopypolar{[\ypolar, \ypolar]}{\maskpjb} = [\npolar, \ypolar, \npolar, \npolar, \ypolar, \npolar]$ and $\vec b = \maskopypolar{[\ypolar]}{\maskpjb} = [\npolar, \ypolar, \npolar]$.
 	We have the following chain of adjoint reshuffles, now annotated with big degrees, which cannot be extended on either side:
 	\begin{align*}
@@ -4043,7 +4044,7 @@ In words, \cref{eq:poresh-withrr-crit2} says that:
 		\reshlist{\nonpol_\eqtydeg}{\nwpathpol_0, \nwmixpol_0, \nwmixpol_0, \nwmixpol_0, \nwpospol_0, \nwbridgepol_0} &: \vec b \to \vec a.
 	\end{align*}
 	The function type with modality $\cohfget_0^{\maskopfont{PJB}}$ will take a limit of a covariant functor, and could be called `covariant naturality'.
-	The modality $\cohcodisc_0^{\maskopfont{PJB}}$ will be used to lift structure inhabiting a covariant functor to $\Type^{\vec b}$, to mode $\vec a$, e.g. to build the category of pointed types. It could be called `covariant structurality'.\todo{Not 100\% sure right now.}
+	The modality $\cohcodisc_0^{\maskopfont{PJB}}$ will be used to lift structure inhabiting a covariant functor to $\Type^{\vec b}$, to mode $\vec a$, e.g. to build the category of pointed types. It could be called `covariant structurality', generalizing the structural modality in Degrees of Relatedness \cite{reldtt}.\todo{Not 100\% sure right now.}
 \end{example}
 %\begin{example}
 %	Let $\vec a = \maskopypolar{[\ypolar, \ypolar]}{\maskrpj} = [\npolar, \npolar, \ypolar, \npolar, \npolar, \ypolar]$ and $\vec b = \maskopypolar{[\ypolar]}{\maskrpj} = [\npolar, \npolar, \ypolar]$.
@@ -5305,7 +5306,6 @@ This allows us to work in a strictly 2-functorial setting longer.
 		\item $\jcset{\omega}{\affine}{M}{\loch}\withll : \poreshcat\withll \to \Cat\withll$,
 	\end{itemize}
 	to the 2-category of categories, functors with a specified number of left/right adjoints (\cref{not:poresh-with}), and natural transformations, where:
-\todoi{Adapt}
 	\begin{itemize}
 		\item each functor sends an object $\vec a$ to $\Psh(\jetcube{\omega}{\affine}{M}{\vec a})$,
 		\item a triple of polarized reshuffles $\mu \dashv \rho \dashv \tau$ is sent by the respective functors to
