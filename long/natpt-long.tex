@@ -2634,7 +2634,7 @@ Bridges and rods will not occur together, because bridges can be regarded as pro
 The mask operations serve three goals:
 \begin{itemize}
 	\item They are helpful to understand equijets\todo{refer},
-	\item They are helpful to prove pseudofunctoriality of the semantics of the mode theory\todo{refer},
+	%\item They are helpful to prove pseudofunctoriality of the semantics of the mode theory\todo{refer},
 	\item They generate the modes that we will likely want to use in practice.
 \end{itemize}
 
@@ -4357,8 +4357,37 @@ Note that a cartesian product with $\rival{\eqtysym}$ or $\rival{\topsym}$ is th
 	\end{description}
 \end{proof}
 
+\section{Semantical Notations} \label{sec:notations}
+
+\subsection{Presheaf Notations} \label{sec:notations:psh}
+We use the presheaf notations from \cite{reldtt-techreport}. Concretely:
+\begin{itemize}
+	\item The application of a presheaf $\Gamma \in \widehat \catW$ to an object $W \in \catW$ is denoted $\DSub W \Gamma$.
+	\item The restriction of $\gamma : \DSub W \Gamma$ by $\vfi : V \to W$ is denoted $\gamma \circ \vfi$ or $\gamma \vfi$.
+	\item The application of a presheaf morphism $\sigma : \Gamma \to \Delta$ to $\gamma : \DSub W \Gamma$ is denoted $\sigma \circ \gamma$ or $\sigma \gamma$.
+	\begin{itemize}
+		\item By naturality of $\sigma$, we have $\sigma \circ (\gamma \circ \vfi) = (\sigma \circ \gamma) \circ \vfi$.
+	\end{itemize}
+	\item If $\Gamma \in \widehat \catW$ and $T \in \Ty(\Gamma)$ (also denoted $\Gamma \sez T \type$), i.e. $T$ is a presheaf over the category of elements $\catW/\Gamma$, then we write the application of $T$ to $(W, \gamma)$ as $(W \Dsez T \dsub \gamma)$ and $t \in (W \Dsez T \dsub \gamma)$ as $W \Dsez t : T \dsub \gamma$.
+	\begin{itemize}
+		\item By definition of type substitution in a presheaf CwF, we have $(W \Dsez T[\sigma] \dsub \gamma) = (W \Dsez T \dsub{\sigma \gamma})$
+	\end{itemize}
+	\item The restriction of $W \Dsez t : T \dsub \gamma$ by $\vfi : (V, \gamma \circ \vfi) \to (W, \gamma)$ is denoted as $W \Dsez t \psub \vfi : T \dsub{\gamma \vfi}$.
+	\item If $t \in \Tm(\Gamma, T)$ (also denoted $\Gamma \sez t : T$), then the application of $t$ to $(W, \gamma)$ is denoted $V \Dsez t \dsub \gamma : T \dsub \gamma$.
+	\begin{itemize}
+		\item The naturality condition for terms is then expressed as $t \dsub \gamma \psub \vfi = t \dsub{\gamma \vfi}$.
+		\item By definition of term substitution in a presheaf CwF, we have $t[\sigma] \dsub \gamma = t \dsub{\sigma \gamma}$.
+	\end{itemize}
+	\item We omit applications of the isomorphisms $(\DSub W \Gamma) \cong (\yoneda W \to \Gamma)$ and $(W \Dsez T \dsub \gamma) \cong (\yoneda W \sez T [\gamma])$.
+	This is not unreasonable: e.g. given $W \Dsez t : T \dsub \gamma$, the term $\yoneda W \sez t' : T[\gamma]$ is defined by $t' \dsub \vfi := t \psub \vfi$.
+\end{itemize}
+One advantage of these notations is that we can put presheaf cells in diagrams; we will use double arrows when doing so.
+
+\subsection{End and Co-ends} \label{sec:notations:end}
+We use existential quantifiers over objects of a category to denote ends and co-ends, i.e. if $F : \catC\op \times \catC \to \Set$, then its co-end is denoted $\exists X.F(X, X)$ and its end is denoted $\forall X.F(X, X)$.
+
 \section{Semantics on Jet Topes and Jet Topic Sets} \label{sec:poresh-jettope-jtset}
-\todoi{Short intro}
+In this section, we investigate how polarized reshuffles act on jet topes and on presheaves over these, which we call jet topic sets.
 
 \subsection{Semantics on Jet Topes} \label{sec:poresh-jettope}
 In this section, we want to construct a 2-functor that sends polarized reshuffles $\mu : \vec a \to \vec b$ to functors $\jettope{\vec a} \to \jettope{\vec b}$, thus giving our mode theory of polarized reshuffles a semantics on jet topes.
@@ -4523,7 +4552,7 @@ Unfortunately, we have the following \textbf{no-go theorem}:
 	\]
 	where $\cohdisc_0 = \reshlist{\nonpol_\eqtydeg}{\nonpol_\eqtydeg, \pospol_0} : [\ypolar] \to [\ypolar, \ypolar]$.
 	Consider the jet topic set $\yoneda \rival{\jetsym_0} \in \jtset{[\ypolar]}$, which is the Yoneda-embedding of the jet tope $\rival{\jetsym_0} \in \jettope{[\ypolar]}$.
-	We compute the sets of 0-jets of its images under either the above functor or its square:\todo{Specify presheaf and (co)end notations somewhere.}
+	We compute the sets of 0-jets of its images under either the above functor or its square:
 	\begin{align*}
 		&\quad\mathrel{\phantom{=}}\quad
 		\DSub{\rival{\jetsym_0}}{\fpsh{(\cohdisc_0)} \lpsh{(\cohdisc_1)} \yoneda \rival{\jetsym_0}} \\
@@ -4550,6 +4579,7 @@ Unfortunately, we have the following \textbf{no-go theorem}:
 		&\quad=\quad
 		\exists X^{{}\in \jettope{[\ypolar]}}.(\rival{\jetsym_1} \to \cohdisc_1 X) \times (\cohdisc_0 X \to \rival{\jetsym_0}).
 	\end{align*}
+	(Note that $\exists$ denotes a co-end (\cref{sec:notations:end}).)
 	Now a $1$-jet in $\cohdisc_1 X = \reshlist{\nonpol_\eqtydeg}{\pospol_0, \isopol_0} X$ is a $1$-infrajet in $X$. Such an infrajet either points forwards, in which case $f : \rival{\jetsym_1} \to \cohdisc_1 X$ factors over some $\rival{\jetsym_1} \to \cohdisc_1 \rival{\jetsym_0}$, or it points backwards, in which case it factors over $\rival{\jetsym_1} \to \cohdisc_1 \rival{\tejsym_0}$.
 	If it factors over both, since $X$ is a jet tope, by $0$-antisymmetry, it factors over $\rival{\jetsym_1} \to \cohdisc_1 \top$.
 	Thus, the result of the computation above is the following pushout
@@ -4582,8 +4612,6 @@ This means that our internal modalities will be indexed by polarized reshuffles 
 It is almost certainly possible to drop \cref{eq:poresh-withr-crit1} so as to include modalities for irrelevance and shape-irrelevance \cite{reldtt}, but we leave this to potential future work.
 
 Thus, the \emph{locks} in our MTT instance will then correspond to polarized reshuffles in $\poreshcat\withrr$, i.e.\ those satisfying \cref{eq:poresh-withr-crit1,eq:poresh-withr-crit2,eq:poresh-withrr-crit1,eq:poresh-withrr-crit2}; where the future work hinted-at above might allow dropping \cref{eq:poresh-withrr-crit1}.
-
-\todoi{$\reshlist{\nonpol_\eqtydeg}{\mixpol_0} : [\ypolar] \to [\ypolar]$ is not part of a chain of 3 and therefore unincludable. This is a strong argument for bridges and paths.}
 
 \wip{
 \subsection{Sinistrification} \label{sec:poresh-jtset:sin}
@@ -5042,7 +5070,7 @@ Fortunately, we can reassemble it from its parts, but then we have to reprove so
 } %endwip
 
 \section{Semantics on Jet Cubes and Jet Cubical Sets} \label{sec:poresh-jetcube-jcset}
-\todoi{Short intro}
+In this section, we investigate how polarized reshuffles act on jet topes and on presheaves over these, which we call jet topic sets.
 
 \subsection{Semantics on Jet Cubes and Jet Cuboids} \label{sec:poresh-jetcube}
 In this section, we want to construct a 2-functor that sends polarized reshuffles $\mu : \vec a \to \vec b$ to functors $\jetcube{\orifb}{\affine}{M}{\vec a} \to \jetcube{\orifb}{\affine}{M}{\vec b}$, with $M \in \accol{\bipointedsym, \booleanalg}$, thus giving our mode theory of polarized reshuffles a semantics on $\orifb$-jet-cubes.
@@ -5344,6 +5372,9 @@ As in \cref{sec:poresh-jtset:nogo}, we have a no-go theorem:
 
 \subsection{Conclusion} \label{sec:poresh-jcset:conclusion}
 We draw the same conclusion as in \cref{sec:poresh-jtset:conclusion}.
+
+\chapter{Paths and Bridges}
+\todoi{$\reshlist{\nonpol_\eqtydeg}{\mixpol_0} : [\ypolar] \to [\ypolar]$ is not part of a chain of 3 and therefore unincludable. This is a strong argument for bridges and paths.}
 
 \chapter{Transpension}
 \todoi{Does Tw : sSet $\to$ sSet have a transp type? (Yes if it's Tw$_!$)}
