@@ -65,7 +65,7 @@
 %\newcommand{\todoi}[1]{}
 %\newcommand{\todo}[1]{}
 
-\newcommand{\thetitle}{Models of Naturality Pretype Theory: \\ Technical Report \\ v0.1.1}
+\newcommand{\thetitle}{Models of Naturality Pretype Theory: \\ Technical Report \\ v0.2}
 \newcommand{\theauthors}{Andreas Nuyts}
 \begin{document}
 	\addtolength{\voffset}{-.5in}
@@ -4503,7 +4503,7 @@ Unfortunately, we have the following \textbf{no-go theorem}:
 	Assume the former exists, and consider the polarized reshuffles
 	\[
 		\cohfget_0 = \reshlist{\nonpol_\eqtydeg}{\pospol_1} : [\ypolar, \ypolar] \to [\ypolar], \qquad
-		\cohdisc_1 = \reshlist{\nonpol_\eqtydeg}{\pospol_0, \isopol_1} : [\ypolar] \to [\ypolar, \ypolar]
+		\cohdisc_1 = \reshlist{\nonpol_\eqtydeg}{\pospol_0, \isopol_0} : [\ypolar] \to [\ypolar, \ypolar]
 	\]
 	from \cref{ex:cohesion}, which compose to $\cohfget_0 \cohdisc_1 = \reshlist{\nonpol_\eqtydeg}{\isopol_0} : [\ypolar] \to [\ypolar]$.
 	This latter reshuffle is easily computed to be idempotent, i.e.\ $\reshlist{\nonpol_\eqtydeg}{\isopol_0}^2 = \reshlist{\nonpol_\eqtydeg}{\isopol_0}$.
@@ -4571,7 +4571,7 @@ Unfortunately, we have the following \textbf{no-go theorem}:
 %	Since the former is not idempotent, neither is the latter.
 \end{proof}
 
-\subsection{Conclusion}
+\subsection{Conclusion} \label{sec:poresh-jtset:conclusion}
 In conclusion, if we intend to model Naturality Pretype Theory in jet topic sets, then we will confine ourselves to using $\poreshcat\withlr$ as our mode theory.
 This means that our internal modalities will be indexed by polarized reshuffles which have a left and a right adjoint, i.e.\ satisfy \cref{eq:poresh-withl-crit1,eq:poresh-withl-crit2,eq:poresh-withr-crit1,eq:poresh-withr-crit2}.
 It is almost certainly possible to drop \cref{eq:poresh-withr-crit1} so as to include modalities for irrelevance and shape-irrelevance \cite{reldtt}, but we leave this to potential future work.
@@ -5321,17 +5321,25 @@ This allows us to work in a strictly 2-functorial setting longer.
 \end{proof}
 
 \subsection{No Adjoint Pair Semantics on Jet Cubical Sets} \label{sec:poresh-jcset:nogo}
-\todoi{No go theorem}
+As in \cref{sec:poresh-jtset:nogo}, we have a no-go theorem:
+\begin{theorem} \label{thm:poresh-jcset:nogo}
+	Let $\omega \in \accol{\orif, \orifb}$ and $M \in \accol{\bipointedsym, \booleanalg}$.
+	The following, equivalent\footnote{Assuming an adjoint can be picked if one exists.}, objects \textbf{do not exist}:
+	\begin{itemize}
+		\item A pseudofunctor $\jcset{\omega}{\affine}{M}{\loch}\withr : \poreshcat\withr \to \Cat\withr$ that extends both $\jcset{\omega}{\affine}{M}{\loch}\withrr$ and $\jcset{\omega}{\affine}{M}{\loch}\withlr$ up to natural isomorphism,
+		\item A pseudofunctor $\jcset{\omega}{\affine}{M}{\loch}\withl : \poreshcat\withl \to \Cat\withl$ that extends both $\jcset{\omega}{\affine}{M}{\loch}\withlr$ and $\jcset{\omega}{\affine}{M}{\loch}\withll$ up to natural isomorphism.
+	\end{itemize}
+\end{theorem}
+\begin{proof}
+	The reasoning in the proof of \cref{thm:poresh-jtset:nogo}, still stands for jet cubical sets. Note:
+	\begin{itemize}
+		\item That the interval jet set $\rival{\jetsym_0}$ needs to be replaced with the 1-dimensional jet cube $(\dm i : \rival{\jetsym_0})$.
+		\item That all jet set morphisms of $\JEP$s of jet cubes, whose domain is 1-dimensional, are in fact jet cube morphisms. \qedhere
+	\end{itemize}
+\end{proof}
 
-\subsection{Conclusion}
-
-%\subsection{Mask Enhancement} \label{sec:poresh-jcset:enhancement}
-%\todoi{Sinistrification or dextrification?}
-%\todoi{Endofunctor on $\poreshcat$}
-
-%\subsection{Adjoint Pair Semantics on Sinistrified Modal Jet Cubical Sets} \label{sec:poresh-jcset:pair-sin}
-%
-%\subsection{Adjoint Pair Semantics on Jet Cubical Sets} \label{sec:poresh-jcset:pair}
+\subsection{Conclusion} \label{sec:poresh-jcset:conclusion}
+We draw the same conclusion as in \cref{sec:poresh-jtset:conclusion}.
 
 \chapter{Transpension}
 \todoi{Does Tw : sSet $\to$ sSet have a transp type? (Yes if it's Tw$_!$)}
