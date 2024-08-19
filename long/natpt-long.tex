@@ -102,7 +102,7 @@ The main purpose of the categories of jet topes is to be workable for most basic
 Upon a first lecture, readers may choose to omit \cref{sec:jetcubes} on jet cubes.
 
 Finally in \cref{sec:pb}, we introduce a number of operations on anpolarity masks which serve to insert bridge and/or path relations for every degree.
-These will be both a technical device and a source of interesting modes in practice.
+These will be both a technical device and a source of interesting modes in practice. \todoi{This paragraph shouldn't be here.}
 
 %\todoi{I momentarily had some doubt about usability of jet topes, but I think it's okay.
 %The calculus and its soundness proof are used mainly for modalities interacting with the interval. But these will not be used intensively in the NatPT paper itself.}
@@ -5399,6 +5399,14 @@ The mask operations serve three goals:
 		\item 1-bridge is the \textbf{strict} equality relation
 	\end{itemize}
 	at any type.
+	\item If you conflate $i$-bridges with $(i+1)$-paths, then
+	\begin{itemize}
+		\item 0-paths in the universe are discrete
+		\item 0-jets in the universe are discrete
+		\item 1-paths in the universe are isomorphisms (the reflexive one the identity)
+		\item 1-jets in the universe are morphisms (the reflexive one the identity)
+		\item 2-paths in the universe are pro-isomorphisms (the reflexive one the 1-path relation, not the equality relation).
+	\end{itemize}
 	\item Universe gets discrete big degree 0 by moving all other stuff one slot.
 	\item Higher degrees get their meaning of pro-something automatically.
 	\item Mixed-polar operations:

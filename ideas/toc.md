@@ -2,15 +2,14 @@
   - Challenge (WriterT stuff)
   - overview
   
-* Things that don't work
-  - C^op x C
-  - mixed-variant id
-  - your discussion with Thorsten in Vienna
-  - Jesper says you should explain this afterwards
+* A quick look at fibrancy (before we ditch it)
+  - it's brittle (cf things that don't work)
+
+* Model-first approach
   
 * Recaps
+  - CwFs (and natural models)
   - presheaves
-  - CwFs
   - presheaf models of TT
   - lifting functors
   - MTT
@@ -20,11 +19,13 @@
   - Degrees of relatedness
   - Tamsamani & Simpson's model
   - Pro-arrows
+  - Twisted cube category
   - Extended Tamsamani & Simpson's model / jet sets
   - Modes are (in)finite lists of * and /\
 
 * Modalities
   - variance
+  - parametricity / reshuffling modalities
   - naturality
   - structurality
   - polarized reshuffling modalities
@@ -57,6 +58,13 @@
     - Probably a section w.r.t. the forall-type of the twisted interval, but that's fine due to natural modality
   - Categorical univalence (Rezk)
   - Relational univalence
+  
+* Things that don't work
+  - C^op x C
+  - mixed-variant id
+  - your discussion with Thorsten in Vienna
+  - *Jesper says you should explain this afterwards*
+  - *I would rather put it here, but make it skippable*
 
 * Related work
   - Kock: http://home.math.au.dk/kock/fib9.pdf
