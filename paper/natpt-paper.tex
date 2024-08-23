@@ -145,7 +145,29 @@
 
 \begin{abstract}
 \noindent 
-Abstract
+In systems with internal parametricity,
+relations propagate through type-level functions and are preserved by term-level functions for free.
+In homotopy type theory (HoTT), we get preservation of equivalences by all functions for free.
+In directed type theory, we get preservation of morphisms by all (covariant) functions for free.
+None of these three properties by itself is satisfactory:
+HoTT and directed type theory are less general in the sense that equivalences and morphisms give rise to a (graph) relation.
+However, parametricity is less powerful in that relations do not carry the computational information of morphisms.
+Finally, directed type theory requires functoriality of the operation we propagate through.
+
+We set out to develop a type system that has all three preservation properties in an interactive manner, so that we can preserve isomorphisms when available, morphisms when functorial, and relations as a last resort.
+We use modalities to keep track of variance of functions as we build them.
+Such a system should provide us with functoriality (\texttt{fmap}), parametricity and naturality proofs for free. I call such a system Naturality Type Theory (NatTT).
+In this first step, I consider Naturality \emph{Pre}type Theory (NatPT):
+I defer all considerations of fibrancy to intuition and future work,
+including in particular the specifics of composition of and transport along morphisms.
+
+By instantiating parametrized systems such as Multimod(e/al) Type Theory (MTT) and the Modal Transpension System (MTraS), we can moreover separate concerns and only worry about the presheaf model at every mode, and the modalities that we can model as adjunctions between these presheaf models, leaving syntactic matters to research on MTT and MTraS.
+The presheaf models are designed to accommodate higher pro-arrow equipments (whose operations are to be specified in future work as part of a fibrancy condition), and can be invented in three ways: (1) as a higher-dimensional version of pro-arrow equipments, (2) as a heterogenization of Tamsamani and Simpson's model of higher category theory, and (3) as a directification of Degrees of Relatedness.
+
+I introduce the 2-poset of polarized reshuffles, a variant of which will serve as the mode theory of NatPT, and build two models of MTT instantiated on this mode theory in presheaves called jet-topic and jet-cubical sets.
+These presheaf categories are equipped with twisted prism endofunctors on which we can instantiate MTraS to obtain an internal twisted interval in NatPT.
+
+Lacking a formal treatment of fibrancy as of yet, I use informal and necessarily somewhat speculative discourse to evaluate the viability of NatPT and its models as a basis for NatTT.
 \end{abstract}
 
 \maketitle
