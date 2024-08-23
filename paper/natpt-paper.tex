@@ -1,0 +1,190 @@
+\documentclass{lmcs} %%% last changed 2014-08-20
+
+%% mandatory lists of keywords 
+%\keywords{dependent type theory, presheaf models, modal type theory, homotopy type theory, parametricity, directed type theory, guarded type theory}
+
+%% read in additional TeX-packages or personal macros here:
+%% e.g. \usepackage{tikz}
+%\usepackage{libertine}
+%\usepackage[libertine]{newtxmath}
+
+%\usepackage[T1]{fontenc}
+%\usepackage{lmodern}
+	% This is to avoid the error:
+	% "! pdfTeX error (font expansion): auto expansion is only possible with scalable fonts."
+                     
+%\usepackage{amsthm}
+\usepackage{hyperref}
+\usepackage{cleveref}
+\usepackage{xypic}
+%%\input{myMacros.tex}
+%% define non-standard environments BEYOND the ones already supplied 
+%% here, for example
+\theoremstyle{plain}\newtheorem{satz}[thm]{Satz} %\crefname{satz}{Satz}{S\"atze}
+%% Do NOT replace the proclamation environments lready provided by
+%% your own.
+
+\allowdisplaybreaks
+
+% --------------------------------------------------
+% Get cleveref to work: https://tex.stackexchange.com/a/354706/43137
+
+\newcommand{\renewtheorem}[1]{%
+  \expandafter\let\csname #1\endcsname\relax
+  \expandafter\let\csname c@#1\endcsname\relax
+  \expandafter\let\csname end#1\endcsname\relax
+  \newtheorem{#1}%
+}
+
+\theoremstyle{plain}
+
+\renewtheorem{thm}{Theorem}[section]
+\renewtheorem{cor}[thm]{Corollary}
+\renewtheorem{lem}[thm]{Lemma}
+\renewtheorem{prop}[thm]{Proposition}
+\renewtheorem{asm}[thm]{Assumption}
+
+% the following environments keep the roman font:
+\theoremstyle{definition}
+
+\renewtheorem{rem}[thm]{Remark}
+\renewtheorem{rems}[thm]{Remarks}
+\renewtheorem{exa}[thm]{Example}
+\renewtheorem{exas}[thm]{Examples}
+\renewtheorem{nota}[thm]{Notation}
+\renewtheorem{defi}[thm]{Definition}
+\renewtheorem{conv}[thm]{Convention}
+\renewtheorem{conj}[thm]{Conjecture}
+\renewtheorem{prob}[thm]{Problem}
+\renewtheorem{oprob}[thm]{Open Problem}
+\renewtheorem{algo}[thm]{Algorithm}
+\renewtheorem{obs}[thm]{Observation}
+\renewtheorem{qu}[thm]{Question}
+\renewtheorem{fact}[thm]{Fact}
+\renewtheorem{pty}[thm]{Property}
+
+% --------------------------------------------------
+
+%\newenvironment{proposition}[1][]{\begin{prop}[#1]}{\end{prop}}
+%\newenvironment{theorem}[1][]{\begin{thm}[#1]}{\end{thm}}
+%\newenvironment{definition}[1][]{\begin{defi}[#1]}{\end{defi}}
+%\newenvironment{example}[1][]{\begin{exa}[#1]}{\end{exa}}
+%\newenvironment{remark}[1][]{\begin{rem}[#1]}{\end{rem}}
+%\newenvironment{notation}[1][]{\begin{nota}[#1]}{\end{nota}}
+%\newenvironment{corollary}[1][]{\begin{cor}[#1]}{\end{cor}}
+\newenvironment{proposition}[0]{\begin{prop}}{\end{prop}}
+\newenvironment{theorem}[0]{\begin{thm}}{\end{thm}}
+\newenvironment{definition}[0]{\begin{defi}}{\end{defi}}
+\newenvironment{example}[0]{\begin{exa}}{\end{exa}}
+\newenvironment{remark}[0]{\begin{rem}}{\end{rem}}
+\newenvironment{notation}[0]{\begin{nota}}{\end{nota}}
+\newenvironment{corollary}[0]{\begin{cor}}{\end{cor}}
+
+\def\eg{{\em e.g.}}
+\def\cf{{\em cf.}}
+
+% ---------------------------------------------------------
+
+\newcommand{\todoi}[1]{\textbf{\textcolor{red}{#1 \qed}}\par\noindent}
+\newcommand{\todo}[1]{\textbf{\textcolor{red}{\footnote{\textcolor{red}{#1}}}}}
+%\newcommand{\domii}[1]{\textbf{\textcolor{green!70!black}{Domi: #1 \qed}}\par\noindent}
+%\newcommand{\domi}[1]{\textbf{\textcolor{green!70!black}{\footnote{\textcolor{green!70!black}{Domi: #1}}}}}
+%\newcommand{\revi}[2]{\textbf{\textcolor{blue}{Rev #1: #2 \qed}}\par\noindent}
+%\newcommand{\rev}[2]{\textbf{\textcolor{blue}{\footnote{\textcolor{blue}{Rev #1: #2}}}}}
+%\newcommand{\okrev}[2]{\textbf{\textcolor{purple}{\footnote{\textcolor{purple}{OK Rev #1: #2}}}}}
+%\newcommand{\oktodo}[1]{\textbf{\textcolor{purple}{\footnote{\textcolor{purple}{#1}}}}}
+%\newcommand{\todoi}[1]{}
+%\newcommand{\todo}[1]{}
+%\newcommand{\domii}[1]{}
+%\newcommand{\domi}[1]{}
+%\newcommand{\revi}[2]{}
+%\newcommand{\rev}[2]{}
+%\newcommand{\okrev}[2]{}
+%\newcommand{\oktodo}[1]{}
+
+% ---------------------------------------------------------
+
+%\usepackage{lmcs-macros}
+
+% ---------------------------------------------------------
+
+%% due to the dependence on amsart.cls, \begin{document} has to occur
+%% BEFORE the title and author information:
+
+\begin{document}
+
+\title[Higher Pro-Arrows: Semantics of Naturality Pretype Theory]{Higher Pro-Arrows: \\ Semantics of Naturality Pretype Theory}
+%\title[Instructions]{Instructions for Authors\\How to prepare papers
+%  for LMCS using \texorpdfstring{\MakeLowercase{\texttt{lmcs.cls}}}{lmcs.cls}\rsuper*\\Version of 
+%  2014-02-01}
+%\titlecomment{{\lsuper*}OPTIONAL comment concerning the title, \eg, 
+%  if a variant or an extended abstract of the paper has appeared elsewhere.}
+
+\author[Andreas Nuyts]{Andreas Nuyts\lmcsorcid{0000-0002-1571-5063}}	%required
+\thanks{Andreas Nuyts holds a Postdoctoral Fellowship from the Research Foundation - Flanders (FWO; 1247922N, 12AB225N). This research is partially funded by the Research Fund KU Leuven.}	%optional
+
+\address{DistriNet, KU Leuven, Belgium}	%required
+\email{andreas.nuyts@kuleuven.be}  %optional
+\urladdr{anuyts.github.io}  %optional
+%\email{name1@email1}  %optional
+
+%\author[C.~Name3]{Carla Name3}	%optional
+%\address{address 3}	%optional
+%\urladdr{name3@url3\quad\rm{(optionally, a web-page can be specified)}}  %optional
+%\thanks{thanks 3, optional.}	%optional
+
+%% etc.
+
+%% required for running head on odd and even pages, use suitable
+%% abbreviations in case of long titles and many authors:
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% the abstract has to PRECEDE the command \maketitle:
+%% be sure not to issue the \maketitle command twice!
+
+\begin{abstract}
+\noindent 
+Abstract
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+a
+
+\section*{Acknowledgements}
+Thank you!!
+
+\appendix
+
+\bibliographystyle{alphaurl}
+\bibliography{../refs/refs.bib}
+
+%\appendix
+%\section{}
+%  Here is a check-list to be completed before submitting the paper to
+%  LMCS:
+%\begin{itemize}[label=$\triangleright$]
+%\item your submission uses the latest version of lmcs.cls
+%\item the text of your submission is contained in a single file,
+%  except for macros and graphics
+%\item your graphics use only one format 
+%\item you have employed the Journal's original proclamation environments,
+%  or suitable extensions thereof 
+%\item you have loaded the hyperref package
+%\item you have \emph{not} loaded the times package
+%\item you have not routinely adjusted vertical spacing manually by issuing
+%  \texttt{\textbackslash vspace} or \texttt{\textbackslash vskip} commands
+%\item you have used the command \texttt{\textbackslash sloppy} only
+%  locally and in emergency cases
+%\item your displayed equations use the
+%  \texttt{\textbackslash[\dots\textbackslash]} construct
+%\item your abstract only contains as few math-expressions as possible and no
+%  references 
+%\end{itemize}
+%
+%  This listing also shows how to override the default bullet $\bullet$
+%  of the \texttt{itemize}-envronment by a different symbol, in this
+%  case \texttt{\textbackslash triangleright}.
+\end{document}
