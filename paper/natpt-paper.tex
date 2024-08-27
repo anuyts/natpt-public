@@ -145,11 +145,13 @@
 
 \begin{abstract}
 \noindent 
-In parametric, directed and homotopy type theory, we get free proofs of preservation of relations, morphisms and equivalences (resp.) for free.
-None of these systems is superior to the other: while relations are strictly more general than morphisms and equivalences, we lose computational content when we only consider (graph) relations.
+In parametric, directed and homotopy type theory, we get preservation of relations, morphisms and equivalences (resp.) for free.
+None of these systems is superior to the other: while relations are strictly more general than morphisms and equivalences, we lose computational content when we only consider relations.
 Meanwhile, preservation of morphisms is subject to the rather strong condition of functoriality.
-We set out to develop a type system that has all three preservation properties in an interactive manner, so that we can preserve isomorphisms when available, morphisms when functorial, and relations as a last resort.
-We use modalities to keep track of variance of functions.
+
+We set out to develop a type system where these three properties interact: functions have a modality/variance annotation that expresses how they act on relations, morphisms and equivalences.
+%that has all three preservation properties in an interactive manner, so that we can preserve isomorphisms when available, morphisms when functorial, and relations as a last resort.
+%We use modalities to keep track of variance of functions.
 Such a system should provide us with functoriality, parametricity and naturality proofs for free.
 I call such a system Naturality Type Theory (NatTT).
 
@@ -158,16 +160,17 @@ I defer all formal considerations of fibrancy to future work,
 including in particular the specifics of composition of and transport along morphisms.
 %
 By instantiating parametrized systems such as Multimod(e/al) Type Theory (MTT) and the Modal Transpension System (MTraS), we can moreover separate concerns and only worry about the semantics, leaving syntactic matters to research on MTT and MTraS.
-I construct an MTT mode theory and presheaf models designed to accommodate higher pro-arrow equipments (to be fully defined in future work), which can be invented in three ways: (1) as a higher-dimensional version of pro-arrow equipments, (2) as a heterogenization of Tamsamani and Simpson's model of higher category theory, and (3) as a directification of Degrees of Relatedness.
+I construct an MTT mode theory with a presheaf model designed to accommodate higher pro-arrow equipments (to be fully defined in future work), which can be invented in three ways: (1) as a higher-dimensional version of pro-arrow equipments, (2) as a heterogenization of Tamsamani and Simpson's model of higher category theory, and (3) as a directification of Degrees of Relatedness.
 A twisted prism functor on the base categories models an internal twisted interval in the sense of MTraS.
 Finally, I discuss how the matter of fibrancy can be addressed in the future.
 \end{abstract}
 
 \maketitle
 
-\todoi{Check if abstract up to date. Also maybe it's too long, but shorten only after it's been fully subsumed in the intro. ``Should not exceed 20 lines''}
+%\todoi{``In general, the length of the abstract should not exceed 20 lines''}
 
-\section{Short Summary}
+\section{Old Abstract}
+\todoi{Remove this section after it's been fully subsumed in the intro}
 In systems with internal parametricity,
 relations propagate through type-level functions and are preserved by term-level functions for free.
 In homotopy type theory (HoTT), we get preservation of equivalences by all functions for free.
@@ -214,11 +217,18 @@ To only scratch the surface of this fact:
 	Optics themselves have identities and can be composed, \textbf{thus forming categories}, but they also have slick parametric encodings called Van Laarhoven optics\todo{Cite VL? Cite Haskell library?} and profunctor optics\todo{Cite some paper? Cite Haskell library?}, correctness of which relies on parametric/natural quantification over \textbf{categories of (pro)functors with extra structure}.
 \end{itemize}
 
-\noindent Beyond library support for category theory, three strains of research seek to provide \emph{language} support for (adaptations of) category theory.
-
-\todoi{An intro to the intro?}
-
 \subsection{Propagation and Preservation for Free}
+Beyond library support for category theory, three strains of research seek to provide \emph{language} support for (adaptations of) category theory.
+
+\subsubsection{Directed Type Theory}
+In Directed Type Theory (DirTT) \cite{2dtt,riehl-shulman-dtt,north-dirhott,dua-simplicial}\todo{Check Gratzer's paper.}, all types $A$ are regarded as categories and typically come equipped natively with an indexed type $\Hom_A(a, b)$ of morphisms from $a : A$ to $b : A$.
+Very na\"ively, we could hope for these morphisms to be preserved by \emph{all} functions, meaning that all functions would be covariant functors.
+However, as anyone who has ever touched category knows, there are many interesting operation that are not a functor at all.
+
+\subsubsection{Parametricity}
+
+\todoi{Old Stuff}
+
 We consider three strains of research that all seek to unburden users of proof assistants: parametricity, homotopy type theory (HoTT), and directed type theory (DirTT).
 
 
