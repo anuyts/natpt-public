@@ -145,12 +145,35 @@
 
 \begin{abstract}
 \noindent 
+In parametric, directed and homotopy type theory, we get free proofs of preservation of relations, morphisms and equivalences (resp.) for free.
+None of these systems is superior to the other: while relations are strictly more general than morphisms and equivalences, we lose computational content when we only consider (graph) relations.
+Meanwhile, preservation of morphisms is subject to the rather strong condition of functoriality.
+We set out to develop a type system that has all three preservation properties in an interactive manner, so that we can preserve isomorphisms when available, morphisms when functorial, and relations as a last resort.
+We use modalities to keep track of variance of functions.
+Such a system should provide us with functoriality, parametricity and naturality proofs for free.
+I call such a system Naturality Type Theory (NatTT).
+
+In this first step, I consider Naturality \emph{Pre}type Theory (NatPT):
+I defer all formal considerations of fibrancy to future work,
+including in particular the specifics of composition of and transport along morphisms.
+%
+By instantiating parametrized systems such as Multimod(e/al) Type Theory (MTT) and the Modal Transpension System (MTraS), we can moreover separate concerns and only worry about the semantics, leaving syntactic matters to research on MTT and MTraS.
+I construct an MTT mode theory and presheaf models designed to accommodate higher pro-arrow equipments (to be fully defined in future work), which can be invented in three ways: (1) as a higher-dimensional version of pro-arrow equipments, (2) as a heterogenization of Tamsamani and Simpson's model of higher category theory, and (3) as a directification of Degrees of Relatedness.
+A twisted prism functor on the base categories models an internal twisted interval in the sense of MTraS.
+Finally, I discuss how the matter of fibrancy can be addressed in the future.
+\end{abstract}
+
+\maketitle
+
+\todoi{Check if abstract up to date. Also maybe it's too long, but shorten only after it's been fully subsumed in the intro. ``Should not exceed 20 lines''}
+
+\section{Short Summary}
 In systems with internal parametricity,
 relations propagate through type-level functions and are preserved by term-level functions for free.
 In homotopy type theory (HoTT), we get preservation of equivalences by all functions for free.
 In directed type theory, we get preservation of morphisms by all (covariant) functions for free.
 None of these three properties by itself is satisfactory:
-HoTT and directed type theory are less general in the sense that equivalences and morphisms give rise to a (graph) relation.
+HoTT and directed type theory are less general in the sense that equivalences and morphisms give rise to a (graph) relation, but not vice versa.
 However, parametricity is less powerful in that relations do not carry the computational information of morphisms.
 Finally, directed type theory requires functoriality of the operation we propagate through.
 
@@ -158,23 +181,55 @@ We set out to develop a type system that has all three preservation properties i
 We use modalities to keep track of variance of functions as we build them.
 Such a system should provide us with functoriality (\texttt{fmap}), parametricity and naturality proofs for free. I call such a system Naturality Type Theory (NatTT).
 In this first step, I consider Naturality \emph{Pre}type Theory (NatPT):
-I defer all considerations of fibrancy to intuition and future work,
+I defer all formal considerations of fibrancy to future work,
 including in particular the specifics of composition of and transport along morphisms.
 
 By instantiating parametrized systems such as Multimod(e/al) Type Theory (MTT) and the Modal Transpension System (MTraS), we can moreover separate concerns and only worry about the presheaf model at every mode, and the modalities that we can model as adjunctions between these presheaf models, leaving syntactic matters to research on MTT and MTraS.
-The presheaf models are designed to accommodate higher pro-arrow equipments (whose operations are to be specified in future work as part of a fibrancy condition), and can be invented in three ways: (1) as a higher-dimensional version of pro-arrow equipments, (2) as a heterogenization of Tamsamani and Simpson's model of higher category theory, and (3) as a directification of Degrees of Relatedness.
+The presheaf models are designed to accommodate higher pro-arrow equipments (some of whose operations are to be specified in future work as part of a fibrancy condition), and can be invented in three ways: (1) as a higher-dimensional version of pro-arrow equipments, (2) as a heterogenization of Tamsamani and Simpson's model of higher category theory, and (3) as a directification of Degrees of Relatedness.
 
 I introduce the 2-poset of polarized reshuffles, a variant of which will serve as the mode theory of NatPT, and build two models of MTT instantiated on this mode theory in presheaves called jet-topic and jet-cubical sets.
-These presheaf categories are equipped with twisted prism endofunctors on which we can instantiate MTraS to obtain an internal twisted interval in NatPT.
+The base categories are equipped with twisted prism endofunctors on which we can instantiate MTraS to obtain an internal twisted interval in NatPT.
 
 Lacking a formal treatment of fibrancy as of yet, I use informal and necessarily somewhat speculative discourse to evaluate the viability of NatPT and its models as a basis for NatTT.
-\end{abstract}
-
-\maketitle
-
-\todoi{Check if abstract up to date. Also maybe it's too long, but shorten only after it's been fully subsumed in the intro.}
 
 \section{Introduction}
+
+\subsection{Category Theory in Functional Programming}
+Several decades of functional programming practice in simply, polymorphically and dependently typed programming languages has made it abundantly clear that there is virtue in identifying algebraic and categorical structures in program designs, as these abstractions enable code reuse by relying on abstract libraries for algebra and category theory.\todo{Cite something?}
+
+While the design of Haskell, its libraries and tutorials can create the impression that $\Type$, the category of types and functions, is the \emph{only} category we should care about, it is by now clear that this is absolutely not the case.
+To only scratch the surface of this fact:
+\begin{itemize}
+	\item Pure functional programming languages tend to use monads\todo{Footnote about algebraic effects?} as a mathematical device for allowing non-purity \cite{moggi-monads}, where specific monads only allow for specific forms of side-effects.
+	\textbf{Monad morphisms} are then effect reinterpretations, explaining the effects allowed by one monad in terms of the effects allowed by another.\todo{Cite?}
+	When monads are being combined using monad transformers\todo{Cite!}, then monad morphisms may arise from \textbf{morphisms of monad transformers}.
+	When monads (or transformers) are indexed by other structures (e.g.\ the writer monad $\Writer\,W = W \times \loch$, which allows programs to log messages, is indexed by a monoid of messages $W$), then monad morphisms arise from \textbf{morphisms between such structures}.
+	
+	\item Inductive data types are now understood as initial algebras $\mu F$ of some polynomial functor (a.k.a.\ container functor) $F$ \cite{containers}, i.e.\ $\mu F$ is the initial object in the \textbf{category of $F$-algebras}.
+	The data needed to define a function by recursion on inductive data exactly constitutes an $F$-algebra $A$, with the motive being the carrier and each constructor clause being an algebraic operation.
+	The function $f : \mu F \to A$ thus defined is the unique algebra morphism from the initial object $\mu F$, while the $\beta$-rules for $\mu F$ exactly ensure that it is indeed an algebra morphism.
+	Dually, codata types are final coalgebras.
+	
+	\item Optics such as lenses and traversals are bidirectional data accessors which can, e.g., read and update fields of record types (lenses) or entries of traversable functors (traversals).\todo{Cite nLab?}
+	Optics themselves have identities and can be composed, \textbf{thus forming categories}, but they also have slick parametric encodings called Van Laarhoven optics\todo{Cite VL? Cite Haskell library?} and profunctor optics\todo{Cite some paper? Cite Haskell library?}, correctness of which relies on parametric/natural quantification over \textbf{categories of (pro)functors with extra structure}.
+\end{itemize}
+
+\noindent Beyond library support for category theory, three strains of research seek to provide \emph{language} support for (adaptations of) category theory.
+
+\todoi{An intro to the intro?}
+
+\subsection{Propagation and Preservation for Free}
+We consider three strains of research that all seek to unburden users of proof assistants: parametricity, homotopy type theory (HoTT), and directed type theory (DirTT).
+
+
+\todoi{Parametricity}
+\todoi{HoTT}
+\todoi{Directed TT}
+\todoi{Everything has a graph: HoTT $<$ DirTT $<$ parametricity}
+\todoi{Computational content: parametricity $<$ HoTT and DirTT}
+\todoi{Functoriality: DirTT $<$ HoTT and parametricity}
+
+\todoi{You don't have to give a literature overview of parametricity here}
 
 \subsection{Motivation}
 
