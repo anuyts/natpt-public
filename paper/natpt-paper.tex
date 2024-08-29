@@ -218,7 +218,8 @@ To only scratch the surface of this fact:
 \end{itemize}
 
 \subsection{Propagation and Preservation for Free}
-Beyond library support for category theory, three strains of research seek to provide \emph{language} support for (adaptations of) category theory.
+Beyond library support for category theory, three strains of research seek to provide \emph{language} support for (adaptations of) category theory:
+directed type theory, parametricity, and homotopy type theory.
 
 \subsubsection{Directed Type Theory}
 In Directed Type Theory (DirTT) \cite{2dtt,riehl-shulman-dtt,north-dirhott,weaver-licata-dua,dua-simplicial}, all types $A$ are regarded as categories and typically come equipped natively with an indexed type $\Hom_A(a, b)$ of morphisms from $a : A$ to $b : A$.
@@ -231,6 +232,14 @@ For this reason, all systems for DirTT hitherto developed (to our knowledge), fe
 	Thus, functions to $\uni{}$ can preserve native morphisms without being functorial in the sense of producing functions.
 	\item Modal annotations on function types, which express whether functions are co- or contravariant, both, or neither. \cite{abel-polarized,2dtt,mathesis,north-dirhott,dua-simplicial}
 \end{itemize}
+\todoi{
+DirTT less advanced. Several reasons. Freedom in design: variance in fibration (Groth opfib, Groth fib, isofib) or in modalities. Causes research to diverge, although we can reconcile in a system that has both.
+Also complications:
+\begin{itemize}
+	\item What is naturality?
+	\item How do we define the Hom-type so that Yoneda is its automatic non-dependent eliminator? Bifibrations, naturality, parametricity. Mention treatment of modal inductive types.
+\end{itemize}
+}
 
 \subsubsection{Parametricity}
 
@@ -253,6 +262,8 @@ We consider three strains of research that all seek to unburden users of proof a
 \subsection{Example Problem in Functional Programming}
 
 \subsection{Overview of the Paper}
+
+\section{What is Naturality?}
 
 \section{A Quick Look at Fibrancy (Before Setting It Aside)}
 \todoi{Related work on internalizing fibrancy}
