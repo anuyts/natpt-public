@@ -221,9 +221,16 @@ To only scratch the surface of this fact:
 Beyond library support for category theory, three strains of research seek to provide \emph{language} support for (adaptations of) category theory.
 
 \subsubsection{Directed Type Theory}
-In Directed Type Theory (DirTT) \cite{2dtt,riehl-shulman-dtt,north-dirhott,dua-simplicial}\todo{Check Gratzer's paper.}, all types $A$ are regarded as categories and typically come equipped natively with an indexed type $\Hom_A(a, b)$ of morphisms from $a : A$ to $b : A$.
+In Directed Type Theory (DirTT) \cite{2dtt,riehl-shulman-dtt,north-dirhott,weaver-licata-dua,dua-simplicial}, all types $A$ are regarded as categories and typically come equipped natively with an indexed type $\Hom_A(a, b)$ of morphisms from $a : A$ to $b : A$.
 Very na\"ively, we could hope for these morphisms to be preserved by \emph{all} functions, meaning that all functions would be covariant functors.
-However, as anyone who has ever touched category knows, there are many interesting operation that are not a functor at all.
+However, as anyone who has ever touched category knows, there are many interesting operations that are not a functor at all.
+For this reason, all systems for DirTT hitherto developed (to our knowledge), feature one or more of the following internal features to escape this unreasonable requirement:
+\begin{itemize}
+	\item Non-\covarfib{}\footnote{Most related work speaks of \emph{covariant} types instead of \covarfib{} types, but we prefer to reserve the word `covariant' for the covariant modality.} type families, i.e. type families $\Gamma, x : A \sez T \type$ where a morphism $\vfi : \Hom_A(a, b)$ does \emph{not} give rise to a transport function $\vfi_* : T[a/x] \to T[b/x]$.
+	\item A non-directed-univalent universe $\uni{}$ of non-\covarfib{} types, where a morphism of types $P : \Hom_{\uni{}}(A, B)$ does not correspond to a function $f : A \to B$ but behaves more like a profunctor or even just a relation between $A$ and $B$ \cite{riehl-shulman-dtt,weaver-licata-dua,dua-simplicial}.
+	Thus, functions to $\uni{}$ can preserve native morphisms without being functorial in the sense of producing functions.
+	\item Modal annotations on function types, which express whether functions are co- or contravariant, both, or neither. \cite{abel-polarized,2dtt,mathesis,north-dirhott,dua-simplicial}
+\end{itemize}
 
 \subsubsection{Parametricity}
 
