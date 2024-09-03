@@ -328,11 +328,18 @@ It seems that the only type-theoretically adequate way to define naturality of a
 In this paper, I take the viewpoint that the correct generalization of naturality to quantifications over arbitrary mixed-variant types \emph{is} parametricity w.r.t.\ graph `relations' of morphisms.
 As such, we will build a system for parametric \emph{and} directed type theory, where all types are natively equipped with notions of relations \emph{and} morphisms, modelled in presheaf categories.
 
+\paragraph{The Hom-type}
 A notable focal point of the difficulties related to naturality is the question of how to correctly type and model the identity morphism $\id: \forall(x : A).\Hom_A(x, x)$.
 In particular, we would like to understand $\Hom_A$ as an inductive type in three ways: (1) $\Hom_A(a, \loch)$ is the initial functor $F : A \to \Type$ such that $F\,a$ is inhabited; (2) $\Hom_A(\loch, b)$ is the initial functor $G : A\op \to \Type$ such that $G\,b$ is inhabited; and (3) $\Hom_A(\loch, \loch)$ is the initial functor $H : A\op \times A \to \Type$ such that the end $\nameforall{end}(x : A).H\,x\,x$ is inhabited.
 
-Lacking any form of natural quantification for non-groupoidal types \todoi{and having coupled variance of types and terms}, North \cite{north-dirhott} defines a $\Hom$-type with an identity morphism $\id : \nameforall{nat}(x : A\core).\Hom_A(x, x)$ that is natural only w.r.t.\ the core of $A$ and eliminates according to properties (1) and (2).
-However, this leaves the $\Hom$-type underspecified: indeed, North models it as the semantic $\Hom$-set, but it can alternatively be modelled as the non-isomorphic functor $\interp{A}\op \times \interp{A} \to \Set : (a, b) \mapsto \nameexists{coend}(z : \interp{A}\core).\Hom_{\interp{A}}(a, z) \times \Hom_{\interp{A}}(z, b)$,
+Lacking any form of natural quantification for non-groupoidal types and having coupled variance of types and terms, North \cite{north-dirhott} defines a $\Hom$-type with an identity morphism $\id : (x : A\core) \to \Hom_A(x, x)$ that is natural only w.r.t.\ the core of $A$ and eliminates according to properties (1) and (2).
+However, this leaves the $\Hom$-type underspecified:
+%indeed, if we extend North's system with $\Sigma$-types, then the type
+%\[
+%	H(a, b) := \Sigma(z : A\core).\Hom_A(a, z) \times \Hom_A(z, b)
+%\]
+%admits the same constructor, eliminators
+indeed, North models it as the semantic $\Hom$-set, but it can alternatively be modelled as the non-isomorphic functor $\interp{A}\op \times \interp{A} \to \Set : (a, b) \mapsto \nameexists{coend}(z : \interp{A}\core).\Hom_{\interp{A}}(a, z) \times \Hom_{\interp{A}}(z, b)$,
 which interprets an internal morphism from $a$ to $b$ as a semantic two-step morphism via an intermediate object $z$ that is also stored up to isomorphism.
 
 \todoi{
