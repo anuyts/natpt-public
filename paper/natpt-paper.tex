@@ -17,6 +17,7 @@
 \usepackage{hyperref}
 \usepackage{cleveref}
 \usepackage{xypic}
+\usepackage{stmaryrd}
 %%\input{myMacros.tex}
 %% define non-standard environments BEYOND the ones already supplied 
 %% here, for example
@@ -261,38 +262,78 @@ In practice, all prior work on directed type theory (as well as the current) has
 and while a directed universe of sets (discrete fibrations/types) is seen in several papers \cite{2dtt,riehl-shulman-dtt,weaver-licata-dua,dua-simplicial},
 the full potential and implications of the richer structure of a universe of finite-dimensional categories (when compared to its elements) have not been explored yet.
 
-This has been particularly limiting in modally annotated systems for 1-dimensional categories, where the literature shows a tendency to couple variance of dependent functions and their codomain in a way that seems detrimental to usability. \todo{Citations} \todo{Decoupling} \todoi{Check this out: \cite{composing-dinatural}!!!! (And Petri\'c)}
+This has been particularly limiting in modally annotated systems for 1-dimensional categories, where the literature shows a tendency to couple variance of dependent functions and their codomain in a way that seems detrimental to usability. \todo{Citations} \todo{Decoupling}
 \todoi{Rant more.}
 
 \paragraph{Naturality}
 Thirdly\todo{Number correctly}, it has been unclear how to deal with the notion of \emph{naturality} in a type system.
-In category theory, it is only defined in specific situations, such as, with increasing generality:\footnote{Note that these concepts are flexible w.r.t.\ the number and variance of arguments, as each of the mentioned categories can again be a product of (opposites of) categories, and moreover every functor has the right to be constant w.r.t.\ one of the arguments.}
+In category theory, naturality is only defined in specific situations, such as, with increasing generality:\footnote{Note that these concepts are flexible w.r.t.\ the number and variance of arguments, as each of the mentioned categories can again be a product of (opposites of) categories, and moreover every functor independently has the right to be constant w.r.t.\ one or more of the arguments.}
 \begin{itemize}
 	\item natural transformations $\nameforall{nat} x . F\,x \to G\,x$ between functors $F, G : \catC \to \catD$ \cite{nat-equiv},
 	\item extranatural transformations $\nameforall{exnat} x, y, z : F\,x\,x\,z \to G\,y\,y\,z$ between functors $F : \cat A \times \cat A\op \times \catC \to \catD$ and $G : \cat B \times \cat B\op \times \catC \to \catD$ \cite{kelly-tensor-extranat},
 	\item dinatural transformations $\nameforall{dinat} x.F\,x\,x \to G\,x\,x$ between functors $F, G : \catC \times \catC\op \to \catD$,
 \end{itemize}
 which can all be defined together as a special case of the end $\nameforall{end} x.T\,x\,x$ of a functor $T : \catC \times \catC\op \to \Set$.
-However, natural transformations are a rather restrictive concept, while extranatural and dinatural transformations do not always compose.\footnote{The type of an extranatural transformation specifies, besides the domain and codomain functors, a string diagram connecting each argument slot of the domain (codomain) functor to either a slot of opposite variance of the domain (codomain) functor or a slot of the same variance of the codomain (domain) functor. Extranatural transformations can be composed insofar as the composition of their string diagrams does not create closed `bubbles' \cite{extranat-compose}. Petri\'{c} provides a similar criterion for dinatural transformations \cite{g-dinat}.}
-This is essentially because, given a morphism $\xi : x \to x'$, dinatural transformations have a different notion of heterogeneous equality in their domain and their codomain: in the domain, elements\footnote{in the internal language sense} of $F\,x\,x$ and $F\,x'\,x'$ are considered equal if they \emph{come from} the same element in $F\,x\,x'$, whereas in the codomain, elements of $G\,x\,x$ and $G\,x'\,x'$ are considered equal if they \emph{yield} the same element in $G\,x'\,x$.
+However, natural transformations are a rather restrictive concept, while extranatural and dinatural transformations do not always compose.\footnote{The type signature of an extranatural transformation specifies, besides the domain and codomain functors, a string diagram connecting each argument slot of the domain (codomain) functor to either a slot of opposite variance of the domain (codomain) functor or a slot of the same variance of the codomain (domain) functor. Extranatural transformations can be composed insofar as the composition of their string diagrams does not create closed `bubbles' \cite{extranat-compose}. Petri\'{c} provides a similar criterion for dinatural transformations \cite{g-dinat}, which McCusker and Santamaria independently reprove using Petri-nets \cite{composing-dinatural}.}
+This is essentially because, given a morphism $\xi : x \to x'$, dinatural transformations have a different notion of heterogeneous equality in their domain and their codomain: in the domain, elements\footnote{in the internal language sense, i.e.\ morphisms to} of $F\,x\,x$ and $F\,x'\,x'$ are considered equal if they \emph{come from} the same element in $F\,x\,x'$, whereas in the codomain, elements of $G\,x\,x$ and $G\,x'\,x'$ are considered equal if they \emph{yield} the same element in $G\,x'\,x$.
 Strong dinatural transformations
 \[
 	\nameforall{s.dinat} F\,x\,x \to G\,x\,x \qquad \text{between functors $F, G : \catC \times \catC\op \to \catD$}
 \]
 address this by considering elements of $F\,x\,x$ and $F\,x'\,x'$ equal if they \emph{yield} the same element in $F\,x'\,x$.
-However, if we nest contravariance a bit deeper, strong dinaturality appears too strong: given a functor $F : \catC \times \catC\op \to \catD$, the function
+However, if we nest contravariance a bit deeper, strong dinaturality too proves inadequate for a general typing discipline: given a functor $F : \catC \times \catC\op \to \catD$, the function
 \[
-	\name{twice} : \forall x . (F\,x\,x \to F\,x\,x) \to (F\,x\,x \to F\,x\,x) : \name{twice}_x\,\vfi = \vfi \circ \vfi
+	\name{twice} : \forall x . (F\,x\,x \to F\,x\,x) \to (F\,x\,x \to F\,x\,x) : \vfi \mapsto \name{twice}_x\,\vfi := \vfi \circ \vfi
 \]
-is \emph{not} strongly dinatural, because the notion of heterogeneous equality used for the domain and the codomain of $\vfi$ is different.\todo{Do we have a counterexample?}
+is \emph{not} strongly dinatural, because the notion of heterogeneous equality used for the domain and the codomain \emph{of the domain} (and of the codomain) is different.
+
+%\begin{example}[Counterexample]
+%	Let $\catC = \accol{0 \to 1}$ be the walking arrow and $\catD = \Set$.
+%	Consider the diagram below, where each diamond is the image of $F$ and the horizontal arrows are the components of $\vfi$:
+%	\[
+%		\xymatrix{
+%			&
+%			\Bool
+%				\ar[rd]_\id
+%				\ar[rrr]_{\lambda \_.\true}
+%			&&&
+%			\Bool
+%				\ar[rd]_\id
+%			\\
+%			\Unit
+%				\ar[ru]_{\lambda \_.\false}
+%				\ar[rd]^{\lambda \_.\false}
+%			&&
+%			\Bool
+%			&
+%			\Unit
+%				\ar[ru]_{\lambda \_.\false}
+%				\ar[rd]^{\lambda \_.\false}
+%			&&
+%			\Bool
+%			\\
+%			&
+%			\Bool
+%				\ar[ru]^\id
+%				\ar[rrr]^{\name{not}}
+%			&&&
+%			\Bool
+%				\ar[ru]^\id
+%		}
+%	\]
+%\end{example}
 
 This problem appears to remain unsolved as of yet.
-It seems that the correct way to define naturality of a (possibly mixed-variant) operation $\forall x.T\,x$, is to define heterogeneous equality for $T$ by induction on its definition, as happens in Reynolds' relational model of parametricity in type theory \cite{reynolds} (\cref{sec:intro:param}), as well as in the general presheaf model of type theory \cite[ch.\ 4]{Hofmann97} (\cref{sec:pshmodel}).
+It seems that the only type-theoretically adequate way to define naturality of a (possibly mixed-variant, possibly deeply-nested contravariant) operation $\forall x.T\,x$, is to define heterogeneous equality for $T$ by induction on the construction of $T$, as happens in Reynolds' relational model of parametricity for type theory \cite{reynolds} (\cref{sec:intro:param}), as well as in the general presheaf model of type theory \cite[ch.\ 4]{Hofmann97} (\cref{sec:pshmodel}).
 In this paper, I take the viewpoint that the correct generalization of naturality to quantifications over arbitrary mixed-variant types \emph{is} parametricity w.r.t.\ graph `relations' of morphisms.
-As such, we will build a system for parametricity \emph{and} directed type theory, with a denotational model in presheaf categories.
+As such, we will build a system for parametric \emph{and} directed type theory, where all types are natively equipped with notions of relations \emph{and} morphisms, modelled in presheaf categories.
 
-A notable focal point of the difficulties related to naturality is the question of how to correctly type and model the identity morphism $\forall(x : A).\Hom_A(x, x)$.
-In particular, we would like to understand $\Hom_A$ as an inductive type in three ways: $\Hom_A(a, \loch)$ is the initial functor $F : A \to \Type$ such that $F\,a$ is inhabited; $\Hom_A(\loch, b)$ is the initial functor $G : A\op \to \Type$ such that $G\,b$ is inhabited; and $\Hom_A(\loch, \loch)$ is the initial functor $H : A\op \times A \to \Type$ such that the end $\nameforall{end}(x : A).H\,x\,x$ is inhabited.
+A notable focal point of the difficulties related to naturality is the question of how to correctly type and model the identity morphism $\id: \forall(x : A).\Hom_A(x, x)$.
+In particular, we would like to understand $\Hom_A$ as an inductive type in three ways: (1) $\Hom_A(a, \loch)$ is the initial functor $F : A \to \Type$ such that $F\,a$ is inhabited; (2) $\Hom_A(\loch, b)$ is the initial functor $G : A\op \to \Type$ such that $G\,b$ is inhabited; and (3) $\Hom_A(\loch, \loch)$ is the initial functor $H : A\op \times A \to \Type$ such that the end $\nameforall{end}(x : A).H\,x\,x$ is inhabited.
+
+Lacking any form of natural quantification for non-groupoidal types \todoi{and having coupled variance of types and terms}, North \cite{north-dirhott} defines a $\Hom$-type with an identity morphism $\id : \nameforall{nat}(x : A\core).\Hom_A(x, x)$ that is natural only w.r.t.\ the core of $A$ and eliminates according to properties (1) and (2).
+However, this leaves the $\Hom$-type underspecified: indeed, North models it as the semantic $\Hom$-set, but it can alternatively be modelled as the non-isomorphic functor $\interp{A}\op \times \interp{A} \to \Set : (a, b) \mapsto \nameexists{coend}(z : \interp{A}\core).\Hom_{\interp{A}}(a, z) \times \Hom_{\interp{A}}(z, b)$,
+which interprets an internal morphism from $a$ to $b$ as a semantic two-step morphism via an intermediate object $z$ that is also stored up to isomorphism.
 
 \todoi{
 DirTT less advanced. Several reasons. Freedom in design: variance in fibration (Groth opfib, Groth fib, isofib) or in modalities. Causes research to diverge, although we can reconcile in a system that has both.
