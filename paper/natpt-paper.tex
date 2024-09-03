@@ -266,20 +266,20 @@ This has been particularly limiting in modally annotated systems for 1-dimension
 
 \paragraph{Naturality}
 Thirdly\todo{Number correctly}, it has been unclear how to deal with the notion of \emph{naturality} in a type system.
-In category theory, it is only defined in specific situations, such as, with increasing generality:\footnote{Note that these concepts are flexible w.r.t. the number and variance of arguments, as each of the mentioned categories can again be a product of (opposites of) categories.}
+In category theory, it is only defined in specific situations, such as, with increasing generality:\footnote{Note that these concepts are flexible w.r.t.\ the number and variance of arguments, as each of the mentioned categories can again be a product of (opposites of) categories, and moreover every functor has the right to be constant w.r.t.\ one of the arguments.}
 \begin{itemize}
-	\item natural transformations $\nameforall{nat} x . F\,x \to G\,x$ between functors $F, G : \catC \to \catD$,
-	\item extranatural transformations $\nameforall{exnat} x, y, z : F\,x\,x\,z \to G\,y\,y\,z$ between functors $F : \cat A \times \cat A\op \times \catC \to \catD$ and $G : \cat B \times \cat B\op \times \catC \to \catD$,
+	\item natural transformations $\nameforall{nat} x . F\,x \to G\,x$ between functors $F, G : \catC \to \catD$ \cite{nat-equiv},
+	\item extranatural transformations $\nameforall{exnat} x, y, z : F\,x\,x\,z \to G\,y\,y\,z$ between functors $F : \cat A \times \cat A\op \times \catC \to \catD$ and $G : \cat B \times \cat B\op \times \catC \to \catD$ \cite{kelly-tensor-extranat},
 	\item dinatural transformations $\nameforall{dinat} x.F\,x\,x \to G\,x\,x$ between functors $F, G : \catC \times \catC\op \to \catD$,
 \end{itemize}
 which can all be defined together as a special case of the end $\nameforall{end} x.T\,x\,x$ of a functor $T : \catC \times \catC\op \to \Set$.
-However, natural transformations are a rather restrictive concept, while extranatural and dinatural transformations do not compose.\footnote{The type of an extranatural transformation specifies, besides the domain and codomain functors, a string diagram connecting each argument slot of the domain (codomain) functor to either a slot of opposite variance of the domain (codomain) functor or a slot of the same variance of the codomain (domain) functor. Extranatural transformations can be composed insofar as the composition of their string diagrams does not create closed `bubbles'.}
-This is essentially because, given a morphism $\xi : x \to x'$, dinatural transformations have a different notion of heterogeneous equality in their domain and their codomain: in the domain, `elements' of $F\,x\,x$ and $F\,x'\,x'$ are considered equal if they \emph{come from} the same `element' in $F\,x\,x'$, whereas in the codomain, `elements' of $G\,x\,x$ and $G\,x'\,x'$ are considered equal if they \emph{yield} the same `element' in $G\,x'\,x$.
+However, natural transformations are a rather restrictive concept, while extranatural and dinatural transformations do not always compose.\footnote{The type of an extranatural transformation specifies, besides the domain and codomain functors, a string diagram connecting each argument slot of the domain (codomain) functor to either a slot of opposite variance of the domain (codomain) functor or a slot of the same variance of the codomain (domain) functor. Extranatural transformations can be composed insofar as the composition of their string diagrams does not create closed `bubbles' \cite{extranat-compose}. Petri\'{c} provides a similar criterion for dinatural transformations \cite{g-dinat}.}
+This is essentially because, given a morphism $\xi : x \to x'$, dinatural transformations have a different notion of heterogeneous equality in their domain and their codomain: in the domain, elements\footnote{in the internal language sense} of $F\,x\,x$ and $F\,x'\,x'$ are considered equal if they \emph{come from} the same element in $F\,x\,x'$, whereas in the codomain, elements of $G\,x\,x$ and $G\,x'\,x'$ are considered equal if they \emph{yield} the same element in $G\,x'\,x$.
 Strong dinatural transformations
 \[
 	\nameforall{s.dinat} F\,x\,x \to G\,x\,x \qquad \text{between functors $F, G : \catC \times \catC\op \to \catD$}
 \]
-address this by considering `elements' of $F\,x\,x$ and $F\,x'\,x'$ equal if they \emph{yield} the same `element' in $F\,x'\,x$.
+address this by considering elements of $F\,x\,x$ and $F\,x'\,x'$ equal if they \emph{yield} the same element in $F\,x'\,x$.
 However, if we nest contravariance a bit deeper, strong dinaturality appears too strong: given a functor $F : \catC \times \catC\op \to \catD$, the function
 \[
 	\name{twice} : \forall x . (F\,x\,x \to F\,x\,x) \to (F\,x\,x \to F\,x\,x) : \name{twice}_x\,\vfi = \vfi \circ \vfi
