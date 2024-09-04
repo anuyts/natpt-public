@@ -17,6 +17,7 @@
 \usepackage{hyperref}
 \usepackage{cleveref}
 \usepackage{xypic}
+\RequirePackage{amssymb}
 \usepackage{stmaryrd}
 %%\input{myMacros.tex}
 %% define non-standard environments BEYOND the ones already supplied 
@@ -225,13 +226,13 @@ directed type theory, parametricity, and homotopy type theory (HoTT).
 \subsubsection{Directed Type Theory}
 In Directed Type Theory (DirTT) \cite{2dtt,riehl-shulman-dtt,north-dirhott,weaver-licata-dua,dua-simplicial}, all types $A$ are regarded as categories and typically come equipped natively with an indexed type $\Hom_A(a, b)$ of morphisms from $a : A$ to $b : A$.
 Very na\"ively, we could hope for these morphisms to be preserved by \emph{all} functions, meaning that all functions would be covariant functors.
-However, as anyone who has ever touched category knows, there are many interesting operations that are not a functor at all.
+However, as anyone who has ever touched category theory knows, there are many interesting operations that are not a functor at all.
 For this reason, all systems for DirTT hitherto developed (to my knowledge), feature one or more of the following internal features to escape this unreasonable requirement:
 \begin{itemize}
 	\item Non-\covarfib{}\footnote{Most related work speaks of \emph{covariant} types instead of \covarfib{} types, but we prefer to reserve the word `covariant' for the covariant modality.} type families, i.e. type families $\Gamma, x : A \sez T \type$ where a morphism $\vfi : \Hom_A(a, b)$ does \emph{not} give rise to a transport function $\vfi_* : T[a/x] \to T[b/x]$.
 	\item A non-directed-univalent universe $\uni{}$ of non-\covarfib{} types, where a morphism of types $P : \Hom_{\uni{}}(A, B)$ does not correspond to a function $f : A \to B$ but behaves more like a profunctor or even just a relation between $A$ and $B$ \cite{riehl-shulman-dtt,weaver-licata-dua,dua-simplicial}.
 	Thus, functions to $\uni{}$ can preserve native morphisms without being functorial in the sense of producing functions.
-	\item Modal annotations on function types, which express whether functions are co- or contravariant, both, or neither. \cite{abel-polarized,2dtt,mathesis,north-dirhott,dua-simplicial}
+	\item Modal annotations on function types, which express whether functions are co- or contravariant, both, or neither \cite{abel-polarized,2dtt,mathesis,north-dirhott,dua-simplicial}.
 \end{itemize}
 
 Progress in DirTT has historically been arduous, so that the subject is currently in a much less advanced state than parametricity and HoTT, for several reasons:
@@ -250,7 +251,7 @@ but most existing work commits to one approach, creating some divergence in the 
 
 \paragraph{Dimension stratification}
 Secondly, I believe that the advancement of directed type theory has suffered from the idea that `in dependent type theory, types are just terms, and universes are just big types'.
-This idea is of course tremendously helpful in sorting out the structure of judgements, contexts and substitutions for dependent type theory, but it is at odds with a central fact in higher category theory, namely that the collection of $(n, r)$-categories is an $(n+1, r+1)$-category.
+This idea is of course tremendously helpful in sorting out the structure of judgements, contexts and substitutions for dependent type theory, but it is at odds with a central fact in higher category theory, namely that the collection (universe) of $(n, r)$-categories is an $(n+1, r+1)$-category.
 We can of course truncate the dimension of this collection so as to contain it in a bigger version of itself, and regard
 \begin{itemize}
 	\item the universe of $(0, 0)$-categories (i.e.\ sets) as a $(0, 0)$-category, thus cleanly modelling type theory with a universe in sets,
@@ -260,9 +261,33 @@ or we can try to study the remarkable fixpoint of $(\infty,\infty)$-categories.
 
 In practice, all prior work on directed type theory (as well as the current) has regarded types as either finite-dimensional categories $(n < \infty)$ or as being directed up to a finite dimension $(r < \infty)$,
 and while a directed universe of sets (discrete fibrations/types) is seen in several papers \cite{2dtt,riehl-shulman-dtt,weaver-licata-dua,dua-simplicial},
-the full potential and implications of the richer structure of a universe of finite-dimensional categories (when compared to its elements) have not been explored yet.
+universes with richer structures than the types they classify do not seem to have been explored yet at higher dimensions.
+%the full potential and implications of the richer structure of a universe of finite-dimensional categories (when compared to its elements) have not been explored yet.
 
-This has been particularly limiting in modally annotated systems for 1-dimensional categories, where the literature shows a tendency to couple variance of dependent functions and their codomain in a way that seems detrimental to usability. \todo{Citations} \todo{Decoupling}
+This has been particularly limiting in modally annotated systems for 1-dimensional categories, where the literature shows a tendency to couple variance of dependent functions and their codomain in a way that seems detrimental to usability.
+For example, Licata and Harper \cite{2dtt} only allow the context $\Gamma, \ctxmodnovar{{\oplus}}{x}{A}$ ($\Gamma$ extended with a covariant variable $x$ of type $A$) to be formed when the type $A$ is a \covarfib{} type w.r.t.\ $\Gamma$ (i.e.\ $\Gamma \sez A \type$), whereas the context $\Gamma, \ctxmodnovar{{\ominus}}{x}{A}$ ($x$ is a contravariant variable) can only be formed when $A$ is a \contravarfib{} type w.r.t.\ $\Gamma$ (i.e.\ $\Gamma\op \sez A \type$).
+Conversely, North \cite{north-dirhott} allows either context only to be formed when $A$ is transportive w.r.t.\ $\Gamma$ (i.e.\ $\Gamma \sez A \type$).
+Both model contexts as categories, types as functors to $\Cat$, and extended contexts as Grothendieck constructions, but the contravariantly extended context is modelled differently:
+\begin{align*}
+	\interp{\Gamma, \ctxmodnovar{{\ominus}}{x}{A}} &= 
+	\paren{ \int_{\interp{\Gamma}\op} \interp{A} }\op & \text{\cite{2dtt}}, \\
+	\interp{\Gamma, \ctxmodnovar{{\ominus}}{x}{A}} &= \int_{\interp{\Gamma}} \Op \circ \interp{A} & \text{\cite{north-dirhott}},
+\end{align*}
+i.e.\ Licata and Harper take the opposite of the total space of $A$, whereas North takes the opposite fibrewise.
+Neumann \todo{Cite HoTT/UF '24 pres} provides a maximally configurable context extension modelled as a Grothendieck construction: his context $\Gamma^u \rhd^v x : A^w$ is parametrized by three bits: ($u$) whether or not we take the opposite of the preceding context, ($v$) whether $A$ is \covarfib{} or \contravarfib{} w.r.t.\ $\Gamma^u$, and ($w$) whether or not we take the opposite of $A$ fibrewise.
+However, the fact remains that once the Grothendieck construction is formed, we have a single category that we can only take the opposite of as a whole, toggling all three bits at once.
+
+I argue that this is an artefact of disregarding the fact that $\Cat$ is more than just a category.
+Indeed, consider the universal directed type family, $X : \Cat \sez X \type$.
+
+\todoi{Old}
+Of course, nothing prevents the creation of a type system that provides both constructions \todo{Cite WIP North? Cite pres Neumann},
+but more importantly, we are missing out on the fact that these have a common generalization.
+
+I argue that the core issue here is that the Grothendieck construction is \emph{not} the obvious $\Sigma$-type for categories.
+
+
+\todo{Citations} \todo{Decoupling} \todo{Grothendieck fibration}
 \todoi{Rant more.}
 
 \paragraph{Naturality}
