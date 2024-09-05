@@ -286,6 +286,39 @@ Still, this leaves us two bits of freedom, whereas after we form the extended co
 Concretely, the objects of the extended context will be pointed categories, and the morphisms will consist of a functor between the categories and a `heterogeneous arrow' along it, and we have to commit to whether we want these heterogeneous arrows to point the same way as the functor, or the opposite way.
 We can call these laxly and oplaxly point-preserving functors.
 
+However, if we were to model contexts as 2-categories and types as 2-functors to $\Cat$, then it becomes clear that the direction of the arrows \emph{within} a fibre of the type $\Gamma \sez T \type$, is coupled to the direction of the 2-cells in $\Gamma$.
+Indeed, the 2-functor $\Op : \Cat\co \to \Cat$ is covariant at level 1, but contravariant at level 2, so the fibrewise opposite type $\Gamma\co \sez T\op \type$ is well-typed only in the 2-opposite context.
+This reveals that the Grothendieck construction forces us to collapse two things that naturally live at different dimensions.
+
+Rather than choosing along which functors we consider heterogeneous arrows, we can acknowledge that they exist along functors pointing both ways, and indeed along \emph{zigzags} in $\Cat$, i.e. chains of functors pointing alternating ways.
+Even more generally, we can consider heterogeneous arrows along profunctors $\catP : \catC \nrightarrow \catD$, i.e.\ functors $\catP : \catC\op \times \catD \to \Set$.
+Since both functors $F : \catC \to \catD$ and $G : \catD \to \catC$ produce profunctors $\Hom_\catD(F\loch, \loch), \Hom_\catD(\loch, G\loch) : \catC \nrightarrow \catD$ and profunctors can be composed using the coend, zigzags too produce profunctors.
+
+This encourages us to regard contexts not just as 2-categories but rather as \emph{categories equipped with pro-arrows}, also more briefly called (pro-arrow) equipments, which are double categories with extra structure.
+In particular, $\Cat$ is an equipment whose arrows are functors, whose pro-arrows are profunctors, and whose squares are heterogeneous natural transformations, or, equivalently, profunctor morphisms.
+We then interpret types $\Gamma \sez T \type$ as equipment functors $\interp T : \interp \Gamma \to \Cat$ and remark that the direction of both homogeneous and heterogeneous \emph{arrows} in $T$ is tied to the direction of pro-arrows in $\Gamma$: indeed, the functor $\Op : \Cat\co \to \Cat$ is covariant on arrows but contravariant on pro-arrows.
+
+A sensible and algebraically relevant semantics for the extended context $\Gamma, \ctxmodnovar \mu x T$ (for a certain modality $\mu$) is now as the pro-arrow equipment of pointed categories, whose:
+\begin{itemize}
+	\item objects are pointed categories,
+	\item morphisms are point-\emph{preserving} functors,
+	\item pro-arrows are pointed profunctors (i.e.\ a pro-arrow $(\catP, \psi) : (\catC, c) \nrightarrow (\catD, d)$ is a profunctors $\catP : \catC \nrightarrow \catD$ with a designated heterogeneous morphism $\psi \in \catP(c, d)$),
+	\item squares are point-preserving profunctor morphisms.
+\end{itemize}
+Each time, things are paired up whose orientation was coupled anyway: the direction of the mapping relation ${\mapsto} : \Obj(\cat C) \times \Obj(\catD) \to Set$ of a functor $F : \catC \to \catD$ is inevitably related to the direction of $F$ itself, while the direction of a heterogeneous arrow $\psi \in \catP(c, d)$ along a profunctor $\catP : \catC \nrightarrow \catD$ is also inevitably related to the direction of the $\catP$.
+The end result is a new equipment in which arrows and pro-arrows can still independently be flipped.
+
+The modality $\mu$ will be the directed version of the \emph{structural} modality in Degrees of Relatedness \cite{reldtt}, by which algebraic structures depend on their structure (e.g.\ pointed categories on their designated point).
+
+We can generalize the above construction to an arbitrary type $\Gamma \sez T \type$, i.e.\ an arbitrary equipment functor $\interp T : \interp \Gamma \to \Cat$, and call this the \textbf{equipment of elements}.
+The Grothendieck construction of a functor $F : \catC \to \Cat$ can be defined in terms of the equipment of elements as follows:
+\begin{enumerate}
+	\item Freely equip $\catC$ with pro-arrows (which is left adjoint to forgetting that $\Cat$ has pro-arrows) obtaining an equipment functor $\bar F : \name{FPro}\,\catC \to \Cat$,
+	\item Take the equipment of elements $\int_{\name{FPro}\,\catC} \bar F$,
+	\item Extract its category of pro-arrows,
+	\item Restrict to those pro-arrows whose underlying pro-arrow in $\name{FPro}\,\catC$ actually arises from an arrow in $\catC$, which can be done by taking a pullback.
+\end{enumerate}
+
 \todoi{2-categorical situation without pro-arrows only adds to the confusion.}
 However, if we were to model contexts as 2-categories and types as 2-functors to $\Cat$, then it becomes clear that the direction of the arrows \emph{within} a fibre of the type $\Gamma \sez T \type$, is coupled to the direction of the 2-cells in $\Gamma$.
 Indeed, the 2-functor $\Op : \Cat\co \to \Cat$ is covariant at level 1, but contravariant at level 2, so the fibrewise opposite type $\Gamma\co \sez T\op \type$ is well-typed only in the 2-opposite context.
