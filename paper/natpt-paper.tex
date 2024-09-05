@@ -319,24 +319,7 @@ The Grothendieck construction of a functor $F : \catC \to \Cat$ can be defined i
 	\item Restrict to those pro-arrows whose underlying pro-arrow in $\name{FPro}\,\catC$ actually arises from an arrow in $\catC$, which can be done by taking a pullback.
 \end{enumerate}
 
-\todoi{2-categorical situation without pro-arrows only adds to the confusion.}
-However, if we were to model contexts as 2-categories and types as 2-functors to $\Cat$, then it becomes clear that the direction of the arrows \emph{within} a fibre of the type $\Gamma \sez T \type$, is coupled to the direction of the 2-cells in $\Gamma$.
-Indeed, the 2-functor $\Op : \Cat\co \to \Cat$ is covariant at level 1, but contravariant at level 2, so the fibrewise opposite type $\Gamma\co \sez T\op \type$ is well-typed only in the 2-opposite context.
-A sensible semantics of an extended context $X : \Cat, \ctxmodnovar{\mu}{x}{X}$ (for a certain modality $\mu$) is the 2-category of pointed categories, point-preserving functors, and identity-at-point natural transformations.
-However it is not clear how we can recover the lax and oplax 2-categories of pointed categories from this construction.
-Indeed, those allowed us to consider heterogeneous arrows \emph{either} along functors pointing the same way, \emph{or} along functors pointing the opposite way, whereas 
-
-\todoi{\cite[p.\ 179]{street-cat-limits} defines a lax 2-category of elements $El$ called the 2-category of elements.}
-
-\todoi{Old}
-Of course, nothing prevents the creation of a type system that provides both constructions \todo{Cite WIP North? Cite pres Neumann},
-but more importantly, we are missing out on the fact that these have a common generalization.
-
-I argue that the core issue here is that the Grothendieck construction is \emph{not} the obvious $\Sigma$-type for categories.
-
-
-\todo{Citations} \todo{Decoupling} \todo{Grothendieck fibration}
-\todoi{Rant more.}
+%\todoi{\cite[p.\ 179]{street-cat-limits} defines a lax 2-category of elements $El$ called the 2-category of elements.}
 
 \paragraph{Naturality}
 Thirdly\todo{Number correctly}, it has been unclear how to deal with the notion of \emph{naturality} in a type system.
