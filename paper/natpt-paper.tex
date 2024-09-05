@@ -265,7 +265,9 @@ universes with richer structures than the types they classify do not seem to hav
 %the full potential and implications of the richer structure of a universe of finite-dimensional categories (when compared to its elements) have not been explored yet.
 
 This has been particularly limiting in modally annotated systems for 1-dimensional categories, where the literature shows a tendency to couple variance of dependent functions and their codomain in a way that seems detrimental to usability.
-For example, Licata and Harper \cite{2dtt} only allow the context $\Gamma, \ctxmodnovar{{\oplus}}{x}{A}$ ($\Gamma$ extended with a covariant variable $x$ of type $A$) to be formed when the type $A$ is a \covarfib{} type w.r.t.\ $\Gamma$ (i.e.\ $\Gamma \sez A \type$), whereas the context $\Gamma, \ctxmodnovar{{\ominus}}{x}{A}$ ($x$ is a contravariant variable) can only be formed when $A$ is a \contravarfib{} type w.r.t.\ $\Gamma$ (i.e.\ $\Gamma\op \sez A \type$).
+For example, Licata and Harper \cite{2dtt} only allow the context $\Gamma, \ctxmodnovar{{\oplus}}{x}{A}$ ($\Gamma$ extended with a covariant variable $x$ of type $A$) to be formed when the type $A$ is a \covarfib{} type w.r.t.\ $\Gamma$ (i.e.\ $\Gamma \sez A \type$), whereas the context $\Gamma, \ctxmodnovar{{\ominus}}{x}{A}$ ($x$ is a contravariant variable) can only be formed when $A$ is \acontravarfib{} type w.r.t.\ $\Gamma$ (i.e.\ $\Gamma\op \sez A \type$).
+The consequence is that we can only form a \covarfib{} function type $\Gamma \sez (\ctxmodnovar{{\ominus}}{x}{A}) \to B \type$ (dependent or not) of \emph{contravariant} functions, since $A$ needs to be \contravarfib{} for the function type to be \covarfib{}, and then we can only have contravariant variables of type $A$.
+
 Conversely, North \cite{north-dirhott} allows either context only to be formed when $A$ is transportive w.r.t.\ $\Gamma$ (i.e.\ $\Gamma \sez A \type$).
 Both model contexts as categories, types as functors to $\Cat$, and extended contexts as Grothendieck constructions, but the contravariantly extended context is modelled differently:
 \begin{align*}
@@ -274,11 +276,24 @@ Both model contexts as categories, types as functors to $\Cat$, and extended con
 	\interp{\Gamma, \ctxmodnovar{{\ominus}}{x}{A}} &= \int_{\interp{\Gamma}} \Op \circ \interp{A} & \text{\cite{north-dirhott}},
 \end{align*}
 i.e.\ Licata and Harper take the opposite of the total space of $A$, whereas North takes the opposite fibrewise.
-Neumann \todo{Cite HoTT/UF '24 pres} provides a maximally configurable context extension modelled as a Grothendieck construction: his context $\Gamma^u \rhd^v x : A^w$ is parametrized by three bits: ($u$) whether or not we take the opposite of the preceding context, ($v$) whether $A$ is \covarfib{} or \contravarfib{} w.r.t.\ $\Gamma^u$, and ($w$) whether or not we take the opposite of $A$ fibrewise.
+Neumann \cite{neumann-modal-sogats} provides the maximally configurable context extension that can be modelled as a Grothendieck construction: his context $\Gamma^u \rhd^v x : A^w$ is parametrized by three bits: ($u$) whether or not we take the opposite of the preceding context, ($v$) whether $A$ is \covarfib{} or \contravarfib{} w.r.t.\ $\Gamma^u$, and ($w$) whether or not we take the opposite of $A$ fibrewise.
 However, the fact remains that once the Grothendieck construction is formed, we have a single category that we can only take the opposite of as a whole, toggling all three bits at once.
 
 I argue that this is an artefact of disregarding the fact that $\Cat$ is more than just a category.
 Indeed, consider the universal directed type family, $X : \Cat \sez X \type$.
+Because we already know what the type family is, the bits $u$ and $v$ in Neumann's context extension are coupled: $X$ is \covarfib{} w.r.t. $\Cat$ and \contravarfib{} w.r.t.\ $\Cat\op$.
+Still, this leaves us two bits of freedom, whereas after we form the extended context, these can only be toggled together by taking the opposite of the entire thing.
+Concretely, the objects of the extended context will be pointed categories, and the morphisms will consist of a functor between the categories and a `heterogeneous arrow' along it, and we have to commit to whether we want these heterogeneous arrows to point the same way as the functor, or the opposite way.
+We can call these laxly and oplaxly point-preserving functors.
+
+\todoi{2-categorical situation without pro-arrows only adds to the confusion.}
+However, if we were to model contexts as 2-categories and types as 2-functors to $\Cat$, then it becomes clear that the direction of the arrows \emph{within} a fibre of the type $\Gamma \sez T \type$, is coupled to the direction of the 2-cells in $\Gamma$.
+Indeed, the 2-functor $\Op : \Cat\co \to \Cat$ is covariant at level 1, but contravariant at level 2, so the fibrewise opposite type $\Gamma\co \sez T\op \type$ is well-typed only in the 2-opposite context.
+A sensible semantics of an extended context $X : \Cat, \ctxmodnovar{\mu}{x}{X}$ (for a certain modality $\mu$) is the 2-category of pointed categories, point-preserving functors, and identity-at-point natural transformations.
+However it is not clear how we can recover the lax and oplax 2-categories of pointed categories from this construction.
+Indeed, those allowed us to consider heterogeneous arrows \emph{either} along functors pointing the same way, \emph{or} along functors pointing the opposite way, whereas 
+
+\todoi{\cite[p.\ 179]{street-cat-limits} defines a lax 2-category of elements $El$ called the 2-category of elements.}
 
 \todoi{Old}
 Of course, nothing prevents the creation of a type system that provides both constructions \todo{Cite WIP North? Cite pres Neumann},
