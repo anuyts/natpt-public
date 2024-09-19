@@ -115,7 +115,7 @@
 
 \begin{document}
 
-\title[Higher Pro-Arrows: From Semantics towards Syntax of Naturality Pretype Theory]{Higher Pro-Arrows: \\ From Semantics towards Syntax \\ of Naturality Pretype Theory}
+\title[Higher Pro-Arrows: From Sem.\ towards Syntax of Naturality Pretype Theory]{Higher Pro-Arrows: \\ From Semantics towards Syntax \\ of Naturality Pretype Theory}
 %\title[Instructions]{Instructions for Authors\\How to prepare papers
 %  for LMCS using \texorpdfstring{\MakeLowercase{\texttt{lmcs.cls}}}{lmcs.cls}\rsuper*\\Version of 
 %  2014-02-01}
@@ -383,6 +383,7 @@ This problem appears to remain unsolved as of yet.
 It seems that the only type-theoretically adequate way to define naturality of a (possibly mixed-variant, possibly deeply-nested contravariant) operation $\forall x.T\,x$, is to define heterogeneous equality for $T$ by induction on the construction of $T$, as happens in Reynolds' relational model of parametricity for type theory \cite{reynolds} (\cref{sec:intro:param}), as well as in the general presheaf model of type theory \cite[ch.\ 4]{Hofmann97} (\cref{sec:pshmodel}).
 In this paper, I take the viewpoint that the correct generalization of naturality to quantifications over arbitrary mixed-variant types \emph{is} parametricity w.r.t.\ graph `relations' of morphisms.
 As such, we will build a system for parametric \emph{and} directed type theory, where all types are natively equipped with notions of relations \emph{and} morphisms, modelled in presheaf categories.
+\todoi{Related work: \cite{vett,laretto-dinaturality}}
 
 \paragraph{The Hom-type}
 A notable focal point of the difficulties related to naturality is the question of how to correctly type and model the identity morphism $\id: \forall(x : A).\Hom_A(x, x)$.
