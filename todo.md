@@ -1,3 +1,4 @@
 - explain equijets using paths
 - rename anpolarity to polarhood (or not)
-- title @ higher str: modalities and intervals for higher equipment pretypes: from semantics towards syntax
+- title: modalities and intervals for higher equipment pretypes: from semantics towards syntax
+- natpt: put anpolarity on arrows & osigns
