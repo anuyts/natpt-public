@@ -108,7 +108,7 @@ These will be both a technical device and a source of interesting modes in pract
 %The calculus and its soundness proof are used mainly for modalities interacting with the interval. But these will not be used intensively in the NatPT paper itself.}
 
 \section{Anpolarity Masks} \label{sec:mask}
-In RelDTT, modes were natural numbers (minus one) expressing the number of available relations.
+In RelDTT \cite{reldtt}, modes were natural numbers (minus one) expressing the number of available relations.
 In NatPT, we will specify for each of these relations whether it is directed or not.
 \begin{definition}
 	\label{def:anpolarity}
@@ -142,6 +142,7 @@ In NatPT, we will specify for each of these relations whether it is directed or 
 	
 	The category of $\vec a$-jet-sets is called $\jetset{\vec a}$.
 \end{definition}
+\todoi{Annotate jet relations with anpolarities for disambiguation?}
 \begin{definition} \label{def:full-jetsethom}
 	A jet set morphism is called \textbf{full} if it reflects all jet relations.
 \end{definition}
@@ -249,6 +250,7 @@ We have $\Op_i \circ \Op_i = \Id$ and if $a_i = \npolar$ then $\Op_i = \Id$.
 	\end{itemize}
 	Either way, they are an idempotent (co)monad and we have $\UFsym_i \dashv \UCsym_i$.
 \end{definition}
+\todoi{Annotate with anpolarity?}
 
 \subsection{Intervals and Prisms}
 \begin{definition} \label{def:interval}
@@ -288,7 +290,7 @@ Note that it would be meaningless to define an $i$-infrajet interval in the same
 	\end{itemize}
 	This defines the \textbf{opposite $i$-twisted-prism functor} $\loch \multip \rival{\jet_i} : \jetset{\vec a} \to \jetset{\vec a}$.
 	
-	If $a_i = \npolar$, then we call this simply the \textbf{$i$-prism functor $\loch \multip \rival{\edge_i}$.}
+	If $a_i = \npolar$, then these coincide and we call them simply the \textbf{$i$-prism functor $\loch \multip \rival{\edge_i}$.}
 \end{definition}
 Note that in both instances, we take the opposite at the source-side of the jet interval by which we multiply. This makes it unclear what a prism functor for the equijet interval $\rival{\equijet_i}$ should look like.
 %\todoi{Should there be a prism functor for $\rival{\equijet_i}$? It would only be well-defined on symmetric jet sets, the category of which is $\jetset{\vec a'}$ where $a'_i = \npolar$, so it is derived from $\loch \multip \rival{\edge_i}$ and the forgetful functor $U^\npolar_i$.}

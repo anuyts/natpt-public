@@ -1,5 +1,5 @@
 - explain equijets using paths
-- rename anpolarity to polarhood/polaritude
+- rename anpolarity to polarmode
 - natpt: put anpolarity on arrows & osigns
 - rename jet set to jet graph
 

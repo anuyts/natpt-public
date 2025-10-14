@@ -189,6 +189,8 @@
 
 % categories
 
+\newcommand{\acube}{{\scalebox{0.5}{\faCube}}}
+
 \newcommand{\Obj}{\mathrm{Obj}}
 \newcommand{\Hom}{{\mathrm{Hom}}}
 \newcommand{\id}{\mathrm{id}}
@@ -197,17 +199,17 @@
 \newcommand{\op}{^{\name{op}}}
 \newcommand{\core}{^{\name{core}}}
 \newcommand{\Op}{{\name{Op}}}
-	\newcommand{\Opcube}{\Op^\boxdot}
+	\newcommand{\Opcube}{\Op^\acube}
 \newcommand{\Fsym}{\name{FSym}} % localization
-	\newcommand{\Fsymcube}{\Fsym^\boxdot}
+	\newcommand{\Fsymcube}{\Fsym^\acube}
 	\newcommand{\Fsymresh}{\name{F}^\npolar}
 \newcommand{\Usym}{\name{USym}} % forgetful
-	\newcommand{\Usymcube}{\Usym^\boxdot}
+	\newcommand{\Usymcube}{\Usym^\acube}
 	\newcommand{\Usymresh}{\name{U}^\npolar}
 \newcommand{\Csym}{\name{CofSym}} % core
 	\newcommand{\Csymresh}{\name{Cof}^\npolar}
 \newcommand{\UFsym}{\name{SymCl}} % localization
-	\newcommand{\UFsymcube}{\UFsym^\boxdot}
+	\newcommand{\UFsymcube}{\UFsym^\acube}
 	\newcommand{\UFsymresh}{\name{Clo}^\npolar}
 \newcommand{\UCsym}{\name{SymInt}} % core
 	\newcommand{\UCsymresh}{\name{Int}^\npolar} % core
@@ -503,8 +505,10 @@
 
 \newcommand{\Anpolarity}{{\mathbb{A}}}
 \newcommand{\orikit}{{\name{OKit}}}
-\newcommand{\ypolar}{{\text{\sagittarius}}}
-\newcommand{\npolar}{{\text{\fullmoon}}}
+\newcommand{\ypolar}{{\scalebox{0.8}{\faChevronCircleRight}}}
+\newcommand{\npolar}{{\scalebox{0.8}{\faDotCircleO}}}
+%\newcommand{\ypolar}{{\text{\sagittarius}}}
+%\newcommand{\npolar}{{\text{\fullmoon}}}
 %\newcommand{\ypolar}{{\pm}}
 %\newcommand{\npolar}{0}
 \newcommand{\lenpol}[1]{\name{len}(#1)}
