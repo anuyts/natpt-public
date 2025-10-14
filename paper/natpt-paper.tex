@@ -1,4 +1,4 @@
-\documentclass[twoLevelNum]{higherStructures} %%% last changed 2014-08-20
+\documentclass[twoLevelNum]{helloWorld} %%% last changed 2014-08-20
 
 %% mandatory lists of keywords 
 %\keywords{dependent type theory, presheaf models, modal type theory, homotopy type theory, parametricity, directed type theory, guarded type theory}
@@ -246,6 +246,8 @@ For this reason, all systems for DirTT hitherto developed (to my knowledge), fea
 	\item Modal annotations on function types, which express whether functions are co- or contravariant, both, or neither \cite{abel-polarized,2dtt,mathesis,north-dirhott,dua-simplicial}.
 \end{itemize}
 
+\todoi{Put the following in a separate section}
+
 Progress in DirTT has historically been arduous, so that the subject is currently in a much less advanced state than parametricity and HoTT, for several reasons:
 
 \paragraph{Variance}
@@ -294,7 +296,7 @@ I argue that this is an artefact of disregarding the fact that $\Cat$ is more th
 Indeed, consider the universal directed type family, $X : \Cat \sez X \type$.
 Because we already know what the type family is, the bits $u$ and $v$ in Neumann's context extension are coupled: $X$ is \covarfib{} w.r.t. $\Cat$ and \contravarfib{} w.r.t.\ $\Cat\op$.
 Still, this leaves us two bits of freedom, whereas after we form the extended context, these can only be toggled together by taking the opposite of the entire thing.
-Concretely, the objects of the extended context will be pointed categories, and the morphisms will consist of a functor between the categories and a `heterogeneous arrow' along it, and we have to commit to whether we want these heterogeneous arrows to point the same way as the functor, or the opposite way.
+Concretely, the objects of the extended context will be pointed categories $(\cat C, c)$, and the morphisms $(F, \vfi)$ will consist of a functor $F : \cat C \to \cat D$ between the categories and a `heterogeneous arrow' $\vfi$ along it, and we have to commit to whether we want these heterogeneous arrows to point the same way as the functor, $\vfi \in \Hom_{\cat D}(Fc, d)$, or the opposite way, $\vfi \in \Hom_{\cat D}(d, Fc)$.
 We can call these laxly and oplaxly point-preserving functors.
 
 However, if we were to model contexts as 2-categories and types as 2-functors to $\Cat$, then it becomes clear that the direction of the arrows \emph{within} a fibre of the type $\Gamma \sez T \type$, is coupled to the direction of the 2-cells in $\Gamma$.
@@ -309,25 +311,25 @@ This encourages us to regard contexts not just as 2-categories but rather as \em
 In particular, $\Cat$ is an equipment whose arrows are functors, whose pro-arrows are profunctors, and whose squares are heterogeneous natural transformations, or, equivalently, profunctor morphisms.
 We then interpret types $\Gamma \sez T \type$ as equipment functors $\interp T : \interp \Gamma \to \Cat$ and remark that the direction of both homogeneous and heterogeneous \emph{arrows} in $T$ is tied to the direction of pro-arrows in $\Gamma$: indeed, the functor $\Op : \Cat\co \to \Cat$ is covariant on arrows but contravariant on pro-arrows.
 
-A sensible and algebraically relevant semantics for the extended context $\Gamma, \ctxmodnovar \mu x T$ (for a certain modality $\mu$) is now as the pro-arrow equipment of pointed categories, whose:
+A sensible and algebraically relevant semantics for the extended context $\Gamma, \ctxmodnovar \mu x T$ (for a certain \emph{specific} modality $\mu$) is now as the pro-arrow equipment of pointed categories, whose:
 \begin{itemize}
 	\item objects are pointed categories,
 	\item morphisms are point-\emph{preserving} functors,
-	\item pro-arrows are pointed profunctors (i.e.\ a pro-arrow $(\catP, \psi) : (\catC, c) \nrightarrow (\catD, d)$ is a profunctors $\catP : \catC \nrightarrow \catD$ with a designated heterogeneous morphism $\psi \in \catP(c, d)$),
+	\item pro-arrows are dependently pointed profunctors (i.e.\ a pro-arrow $(\catP, \psi) : (\catC, c) \nrightarrow (\catD, d)$ is a profunctor $\catP : \catC \nrightarrow \catD$ with a designated heterogeneous morphism $\psi \in \catP(c, d)$),
 	\item squares are point-preserving profunctor morphisms.
 \end{itemize}
-Each time, things are paired up whose orientation was coupled anyway: the direction of the mapping relation ${\mapsto} : \Obj(\cat C) \times \Obj(\catD) \to Set$ of a functor $F : \catC \to \catD$ is inevitably related to the direction of $F$ itself, while the direction of a heterogeneous arrow $\psi \in \catP(c, d)$ along a profunctor $\catP : \catC \nrightarrow \catD$ is also inevitably related to the direction of the $\catP$.
+Each time, things are paired up whose orientation was coupled anyway: the direction of the mapping relation ${\mapsto} : \Obj(\cat C) \times \Obj(\catD) \to \Prop$ of a functor $F : \catC \to \catD$ is inevitably related to the direction of $F$ itself, while the direction of a heterogeneous arrow $\psi \in \catP(c, d)$ along a profunctor $\catP : \catC \nrightarrow \catD$ is also inevitably related to the direction of $\catP$.
 The end result is a new equipment in which arrows and pro-arrows can still independently be flipped.
 
-The modality $\mu$ will be the directed version of the \emph{structural} modality in Degrees of Relatedness \cite{reldtt}, by which algebraic structures depend on their structure (e.g.\ pointed categories on their designated point).
+The modality $\mu$ will be the directed version of the \emph{\textbf{structural}} modality in Degrees of Relatedness \cite{reldtt}, by which algebraic structures depend on their structure (e.g.\ pointed categories on their designated point).
 
 We can generalize the above construction to an arbitrary type $\Gamma \sez T \type$, i.e.\ an arbitrary equipment functor $\interp T : \interp \Gamma \to \Cat$, and call this the \textbf{equipment of elements}.
 The Grothendieck construction of a functor $F : \catC \to \Cat$ can be defined in terms of the equipment of elements as follows:
 \begin{enumerate}
 	\item Freely equip $\catC$ with pro-arrows (which is left adjoint to forgetting that $\Cat$ has pro-arrows) obtaining an equipment functor $\bar F : \name{FPro}\,\catC \to \Cat$,
 	\item Take the equipment of elements $\int_{\name{FPro}\,\catC} \bar F$,
-	\item Extract its category of pro-arrows,
-	\item Restrict to those pro-arrows whose underlying pro-arrow in $\name{FPro}\,\catC$ actually arises from an arrow in $\catC$, which can be done by taking a pullback.
+	\item Extract its category of pro-arrows $\name{Pro}\paren{\int_{\name{FPro}\,\catC} \bar F}$,
+	\item Restrict to those pro-arrows whose underlying pro-arrow in $\name{FPro}\,\catC$ actually arises from an arrow in $\catC$, which can be done by taking a pullback along $\catC \to \name{Pro}(\name{FPro}\,\catC)$.
 \end{enumerate}
 
 %\todoi{\cite[p.\ 179]{street-cat-limits} defines a lax 2-category of elements $El$ called the 2-category of elements.}
@@ -341,18 +343,18 @@ In category theory, naturality is only defined in specific situations, such as, 
 	\item dinatural transformations $\nameforall{dinat} x.F\,x\,x \to G\,x\,x$ between functors $F, G : \catC \times \catC\op \to \catD$,
 \end{itemize}
 which can all be defined together as a special case of the end $\nameforall{end} x.T\,x\,x$ of a functor $T : \catC \times \catC\op \to \Set$.
-However, natural transformations are a rather restrictive concept, while extranatural and dinatural transformations do not always compose.\footnote{The type signature of an extranatural transformation specifies, besides the domain and codomain functors, a string diagram connecting each argument slot of the domain (codomain) functor to either a slot of opposite variance of the domain (codomain) functor or a slot of the same variance of the codomain (domain) functor. Extranatural transformations can be composed insofar as the composition of their string diagrams does not create closed `bubbles' \cite{extranat-compose}. Petri\'{c} provides a similar criterion for dinatural transformations \cite{g-dinat}, which McCusker and Santamaria independently reprove using Petri-nets \cite{composing-dinatural}.}
+However, natural transformations are a rather restrictive concept, while extranatural and dinatural transformations do not always compose.\footnote{The type signature of an extranatural transformation specifies, besides the domain and codomain functors, a string diagram connecting each argument slot of the domain (codomain) functor to either a slot of opposite variance of the same functor or a slot of the same variance of the other functor. Extranatural transformations can be composed insofar as the composition of their string diagrams does not create closed `bubbles' \cite{extranat-compose}. Petri\'{c} provides a similar criterion for dinatural transformations \cite{g-dinat}, which McCusker and Santamaria independently reprove using Petri-nets \cite{composing-dinatural}.}
 This is essentially because, given a morphism $\xi : x \to x'$, dinatural transformations have a different notion of heterogeneous equality in their domain and their codomain: in the domain, elements\footnote{in the internal language sense, i.e.\ morphisms to} of $F\,x\,x$ and $F\,x'\,x'$ are considered equal if they \emph{come from} the same element in $F\,x\,x'$, whereas in the codomain, elements of $G\,x\,x$ and $G\,x'\,x'$ are considered equal if they \emph{yield} the same element in $G\,x'\,x$.
 Strong dinatural transformations
 \[
 	\nameforall{s.dinat} F\,x\,x \to G\,x\,x \qquad \text{between functors $F, G : \catC \times \catC\op \to \catD$}
 \]
 address this by considering elements of $F\,x\,x$ and $F\,x'\,x'$ equal if they \emph{yield} the same element in $F\,x'\,x$.
-However, if we nest contravariance a bit deeper, strong dinaturality too proves inadequate for a general typing discipline: given a functor $F : \catC \times \catC\op \to \catD$, the function
+However, if we nest contravariance a bit deeper, strong dinaturality too proves inadequate for a general typing discipline: given functors $F, G, H : \catC \times \catC\op \to \Set$, the function
 \[
-	\name{twice} : \forall x . (F\,x\,x \to F\,x\,x) \to (F\,x\,x \to F\,x\,x) : \vfi \mapsto \name{twice}_x\,\vfi := \vfi \circ \vfi
+	\name{comp} : \forall x . (G\,x\,x \to H\,x\,x) \times (F\,x\,x \to G\,x\,x) \to (F\,x\,x \to H\,x\,x) : (g, f) \mapsto g \circ f
 \]
-is \emph{not} strongly dinatural, because the notion of heterogeneous equality used for the domain and the codomain \emph{of the domain} (and of the codomain) is different.
+is \emph{not} strongly dinatural w.r.t.\ $x$, because the notion of heterogeneous equality used for the domain of $g$ differs from the one used for the codomain of $f$.
 
 %\begin{example}[Counterexample]
 %	Let $\catC = \accol{0 \to 1}$ be the walking arrow and $\catD = \Set$.
