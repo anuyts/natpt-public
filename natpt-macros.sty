@@ -84,6 +84,15 @@
 \newcommand{\ceil}[1]{\mathopen{}\left\lceil #1 \right\rceil\mathclose{}}
 \newcommand{\floor}[1]{\mathopen{}\left\lfloor #1 \right\rfloor\mathclose{}}
 
+% technical stuff
+
+\newcommand{\famath}[1]{\mathchoice
+	{\scalebox{1.05}{#1}}%
+	{\scalebox{0.75}{#1}}%
+	{\scalebox{0.5}{#1}}%
+	{\scalebox{0.5}{#1}}%
+}
+
 % colors
 
 \newcommand{\red}[1]{\textcolor{red}{#1}}
@@ -189,7 +198,7 @@
 
 % categories
 
-\newcommand{\acube}{{\scalebox{0.5}{\faCube}}}
+\newcommand{\acube}{{\famath{\faCube}}}
 
 \newcommand{\Obj}{\mathrm{Obj}}
 \newcommand{\Hom}{{\mathrm{Hom}}}
@@ -503,10 +512,10 @@
 
 % mode theory
 
-\newcommand{\Anpolarity}{{\mathbb{A}}}
+\newcommand{\Polarmode}{{\mathbb{PM}}}
 \newcommand{\orikit}{{\name{OKit}}}
-\newcommand{\ypolar}{{\scalebox{0.8}{\faChevronCircleRight}}}
-\newcommand{\npolar}{{\scalebox{0.8}{\faDotCircleO}}}
+\newcommand{\ypolar}{{\famath{\faChevronCircleRight}}}
+\newcommand{\npolar}{{\famath{\faDotCircleO}}}
 %\newcommand{\ypolar}{{\text{\sagittarius}}}
 %\newcommand{\npolar}{{\text{\fullmoon}}}
 %\newcommand{\ypolar}{{\pm}}
@@ -517,8 +526,8 @@
 
 \newcommand{\atmode}[1]{\mathrel{@} {#1}}
 
-\newcommand{\openlock}{{\text{\faUnlock}}}
-\newcommand{\locksym}{{\text{\faLock}}}
+\newcommand{\openlock}{{\famath{\faUnlock}}}
+\newcommand{\locksym}{{\famath{\faLock}}}
 
 \newcommand{\ctx}{\,\name{ctx}}
 \newcommand{\type}{\,\name{type}}

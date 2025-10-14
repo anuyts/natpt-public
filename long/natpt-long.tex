@@ -89,7 +89,7 @@
 \chapter{Base Categories and Modes} \label{ch:modes}
 
 In this chapter, we establish the object part of the mode theory for naturality pretype theory and its model.
-Modes will be \textbf{anpolarity masks} $\vec a$ (\cref{sec:mask}) which will be modelled in presheaf categories over certain base categories.
+Modes will be \textbf{polarmode masks} $\vec a$ (\cref{sec:mask}) which will be modelled in presheaf categories over certain base categories.
 We propose two families of base categories, parametrized by the mask $\vec a$, and both are built using the category $\jetset{\vec a}$ of \textbf{jet sets} over $\vec a$ (\cref{sec:jetset}).
 Jet sets themselves are not suitable as a base category, e.g.\ because they are closed under coproducts, which the Yoneda-embedding will never preserve.
 
@@ -101,25 +101,26 @@ The main purpose of the categories of jet topes is to be workable for most basic
 
 Upon a first lecture, readers may choose to omit \cref{sec:jetcubes} on jet cubes.
 
-Finally in \cref{sec:pb}, we introduce a number of operations on anpolarity masks which serve to insert bridge and/or path relations for every degree.
+Finally in \cref{sec:pb}, we introduce a number of operations on polarmode masks which serve to insert bridge and/or path relations for every degree.
 These will be both a technical device and a source of interesting modes in practice. \todoi{This paragraph shouldn't be here.}
 
 %\todoi{I momentarily had some doubt about usability of jet topes, but I think it's okay.
 %The calculus and its soundness proof are used mainly for modalities interacting with the interval. But these will not be used intensively in the NatPT paper itself.}
 
-\section{Anpolarity Masks} \label{sec:mask}
+\section{Polarmode Masks} \label{sec:mask}
 In RelDTT \cite{reldtt}, modes were natural numbers (minus one) expressing the number of available relations.
 In NatPT, we will specify for each of these relations whether it is directed or not.
 \begin{definition}
-	\label{def:anpolarity}
-	\label{def:anpolarity-order}
-	An \textbf{anpolarity}\footnote{`An' is Latin for `whether', as in `Nescio an polare sit,' meaning `I do not know whether it is polar'.} is an element of the set $\Anpolarity := \accol{\ypolar, \npolar}$, where $\ypolar$ stands for polar/directed and $\npolar$ stands for nonpolar/symmetric.
-	We equip $\Anpolarity$ with the partial order $\npolar \sqsubseteq \ypolar$, corresponding to the intuition that symmetric relations are a subset of directed (i.e.\ potentially asymmetric) relations.
+	\label{def:polarmode}
+	\label{def:polarmode-order}
+	A \textbf{polarmode} is an element of the set $\Polarmode := \accol{\ypolar, \npolar}$, where $\ypolar$ stands for polar/directed and $\npolar$ stands for nonpolar/symmetric.
+	We equip $\Polarmode$ with the partial order $\npolar \sqsubseteq \ypolar$, corresponding to the intuition that symmetric relations are a subset of directed (i.e.\ potentially asymmetric) relations.
 	
-	An \textbf{anpolarity mask} or just \textbf{mask} is a list $\vec a \in \List\,\Anpolarity$ of anpolarities. We write $\lenpol{\vec a}$ for its length, and call the numbers $0, \ldots, \lenpol{\vec a} - 1$ \textbf{degrees}.
+	A \textbf{polarmode mask} or just \textbf{mask} is a list $\vec a \in \List\,\Polarmode$ of polarmodes. We write $\lenpol{\vec a}$ for its length,
+	and $\Deg(\vec a) = \accol{0, 1, \ldots, \lenpol{\vec a} - 1}$ for its set of \textbf{degrees}.
 	We define $\sqsubseteq$ on masks of equal length pointwise.
 	
-	Both for anpolarities and for masks of equal length, we denote meets (infima) with $\sqcap$ and joins (suprema) with $\sqcup$.
+	Both for polarmodes and for masks of equal length, we denote meets (infima) with $\sqcap$ and joins (suprema) with $\sqcup$.
 \end{definition}
 
 \section{Jet Sets} \label{sec:jetset}
@@ -129,7 +130,7 @@ In NatPT, we will specify for each of these relations whether it is directed or 
 	\footnote{So these relations are functions $X \to X \to \Prop$ where $\Prop$ is a universe of $h$-propositions \cite{hottbook}. In most applications, these relations will be decidable, but we do not require this.}%
 	) reflexive relations $\jet_i$ where
 	\begin{itemize}
-		\item $0 \leq i < \lenpol{\vec a}$ is called the \textbf{degree},
+		\item $i \in \Deg(\vec a)$ is called the \textbf{degree},
 		\item $\jet_i$ is called the \textbf{$i$-jet relation},
 		\item its opposite $\tej_i$ is called the \textbf{opposite $i$-jet relation},
 	\end{itemize}
@@ -142,7 +143,11 @@ In NatPT, we will specify for each of these relations whether it is directed or 
 	
 	The category of $\vec a$-jet-sets is called $\jetset{\vec a}$.
 \end{definition}
-\todoi{Annotate jet relations with anpolarities for disambiguation?}
+\begin{notation} \label{not:jet-polarmode-annotation}
+	Because the scenarios where $a_i = \npolar$ vs.\ $\ypolar$ can play out rather different, it is important to be aware of whether we are in a situation where $a_i$ is unknown, known to be $\npolar$, or known to be $\ypolar$.
+	For this reason, we will sometimes annotate the jet relation with the relevant polarmode: $\jet_i^{a_i}$.
+	Of course $\jet_i^\npolar$ simplifies to $\edge_i$.
+\end{notation}
 \begin{definition} \label{def:full-jetsethom}
 	A jet set morphism is called \textbf{full} if it reflects all jet relations.
 \end{definition}
@@ -174,30 +179,30 @@ So for mode $[\ypolar, \ypolar, \npolar]$, we get
 \[
 \xymatrix{
 	& 
-	\jet_0
+	\jet_0^\ypolar
 		\ar@{:>}[rd]
 	&&& 
-	\jet_1 
+	\jet_1^\ypolar
 		\ar@{:>}[rd]
 	&&& 
-	\jet_2 
+	\jet_2^\npolar
 		\ar@{<:>}[rd]
 	\\
-	\equijet_0
+	\equijet_0^\ypolar
 		\ar@{:>}[ru]
 		\ar@{:>}[rd]
 	&&
-	\infrajet_0
+	\infrajet_0^\ypolar
 		\ar@{:>}[r]
 	&
-	\equijet_1
+	\equijet_1^\ypolar
 		\ar@{:>}[ru]
 		\ar@{:>}[rd]
 	&&
-	\infrajet_1
+	\infrajet_1^\ypolar
 		\ar@{:>}[r]
 	&
-	\equijet_2
+	\equijet_2^\npolar
 		\ar@{<:>}[ru]
 		\ar@{<:>}[rd]
 	&
@@ -207,16 +212,16 @@ So for mode $[\ypolar, \ypolar, \npolar]$, we get
 		\ar@{<:>}[r]
 		\ar@{<:>}[d]
 	&
-	\infrajet_2.
+	\infrajet_2^\npolar.
 	\\
 	& 
-	\tej_0 
+	\tej_0^\ypolar
 		\ar@{:>}[ru]
 	&&& 
-	\tej_1 
+	\tej_1^\ypolar 
 		\ar@{:>}[ru]
 	&&& 
-	\tej_2 
+	\tej_2^\npolar
 		\ar@{<:>}[ru]
 }
 \]
@@ -229,7 +234,7 @@ So for mode $[\ypolar, \ypolar, \npolar]$, we get
 We have $\Op_i \circ \Op_i = \Id$ and if $a_i = \npolar$ then $\Op_i = \Id$.
 \begin{definition}
 	\label{def:sym-forget}
-	\label{def:anpolarity-order-step}
+	\label{def:polarmode-order-step}
 	Write $\vec a \sqsubset_i \vec b$ if $\lenpol{\vec a} = \lenpol{\vec b}$, $a_j = b_j$ for all $j \neq i$, $a_i = \npolar$ and $b_i = \ypolar$.
 	
 	If $\vec a \sqsubset_i \vec b$, then we write $\Usym_i : \jetset{\vec a} \to \jetset{\vec b}$ for the forgetful functor which forgets the symmetry of $\jet_i$.
@@ -243,29 +248,30 @@ We have $\Op_i \circ \Op_i = \Id$ and if $a_i = \npolar$ then $\Op_i = \Id$.
 	We have $\Fsym_i \circ \Usym_i = \Csym_i \circ \Usym_i = \Id$, so that $\UFsym_i := \Usym_i \circ \Fsym_i$ is an idempotent monad and $\UCsym_i := \Usym_i \circ \Csym_i$ is an idempotent comonad.
 \end{proposition}
 \begin{definition} \label{def:sym-closure-of-sym}
-	We extend the definition of $\UFsym_i$ and $\UCsym_i$ to endofunctors on $\jetset{\vec b}$ where $b_i$ can be \emph{any} anpolarity:
+	We extend the definition of $\UFsym_i$ and $\UCsym_i$ to endofunctors on $\jetset{\vec b}$ where $b_i$ can be \emph{any} polarmode:
 	\begin{itemize}
 		\item If $b_i = \ypolar$ then they are defined as above,
 		\item If $b_i = \npolar$ then they are defined as the identity functor.
 	\end{itemize}
 	Either way, they are an idempotent (co)monad and we have $\UFsym_i \dashv \UCsym_i$.
+	
+	Again, we may annotate these functors with the relevant polarmode: $\UFsym_i^{b_i}$ and $\UCsym_i^{b_i}$.
 \end{definition}
-\todoi{Annotate with anpolarity?}
 
 \subsection{Intervals and Prisms}
 \begin{definition} \label{def:interval}
-	Let $\vec a$ be a mask and $i < \lenpol{\vec a}$.
+	Let $\vec a$ be a mask and $i \in \Deg(\vec a)$.
 	\begin{itemize}
-		\item The \textbf{$i$-jet interval} $\rival{\jet_i}$ is defined as the $\vec a$-jet-set with carrier $\accol{0, 1}$ and relations generated by $0 \jet_i 1$.
-		\item The \textbf{opposite $i$-jet interval} $\rival{\tej_i}$ is defined as the $\vec a$-jet-set with carrier $\accol{0, 1}$ and relations generated by $0 \tej_i 1$.
-		\item The \textbf{$i$-equijet interval} $\rival{\equijet_i}$ is defined as the $\vec a$-jet-set with carrier $\accol{0, 1}$ and relations generated by $0 \equijet_i 1$.
+		\item The \textbf{$i$-jet interval} $\rival{\jet_i}$ is defined as the $\vec a$-jet-set with carrier $\accol{0, 1}$ and relations generated by $0 \jet_i^{a_i} 1$.
+		\item The \textbf{opposite $i$-jet interval} $\rival{\tej_i}$ is defined as the $\vec a$-jet-set with carrier $\accol{0, 1}$ and relations generated by $0 \tej_i^{a_i} 1$.
+		\item The \textbf{$i$-equijet interval} $\rival{\equijet_i}$ is defined as the $\vec a$-jet-set with carrier $\accol{0, 1}$ and relations generated by $0 \equijet_i^{a_i} 1$.
 	\end{itemize}
-	If $a_i = \npolar$ then $\rival{\jet_i} = \rival{\tej_i} = \rival{\equijet_i} =: \rival{\edge_i}$ is called the \textbf{$i$-edge interval}.
+	If $a_i = \npolar$ then $\rival{\jet_i^\npolar} = \rival{\tej_i^\npolar} = \rival{\equijet_i^\npolar} =: \rival{\edge_i}$ is called the \textbf{$i$-edge interval}.
 \end{definition}
 Note that it would be meaningless to define an $i$-infrajet interval in the same way.
 
 \begin{definition} \label{def:prism}
-	Let $\vec a$ be a mask, $i < \lenpol{\vec a}$ and $X \in \Obj(\jetset{\vec a})$.
+	Let $\vec a$ be a mask, $i \in \Deg(\vec a)$ and $X \in \Obj(\jetset{\vec a})$.
 	We define the \textbf{$i$-twisted-prism $X \multip \rival{\jet_i}$} on $X$ as the $\vec a$-jet-set with
 	\begin{itemize}
 		\item carrier $X \times \accol{0, 1}$,
@@ -1232,7 +1238,7 @@ We do not have to bother with an equational theory, as we can simply inherit it 
 			\sez (\vfi, t \opA s / \dm i) : V \to (W, \dm i : \rival{\edge_i})
 		}{$\booleanalg$}
 	\]
-	\caption{Symmetric specializations of the rules in \cref{fig:calculus}. Note that the rules \textsc{conn:prism:}$*$ become a special case of \ruleref{conn:degree-symmetric}. We omit \ruleref{terminal} which specifies no degree, \ruleref{concursor} which specifies two, and \ruleref{symmetrize} which already places constraints on the anpolarity $a_i$.}
+	\caption{Symmetric specializations of the rules in \cref{fig:calculus}. Note that the rules \textsc{conn:prism:}$*$ become a special case of \ruleref{conn:degree-symmetric}. We omit \ruleref{terminal} which specifies no degree, \ruleref{concursor} which specifies two, and \ruleref{symmetrize} which already places constraints on the polarmode $a_i$.}
 	\label{fig:calculus:sym}
 \end{figure}
 \begin{figure}[htb]
@@ -2623,7 +2629,7 @@ The shared reader may object that Pinyo and Kraus define the morphisms of $\twis
 
 \chapter{Modalities: Polarized Reshuffles} \label{ch:modalities}
 In this chapter, we pin down the Hom-posets of our mode theory.
-\Cref{sec:poresh} defines the 2-poset $\poreshcat$ of polarized reshuffles, which we would like to use as our mode theory. The objects of this 2-poset will then be the modes, and as promised in the previous chapter, these are exactly anpolarity masks.
+\Cref{sec:poresh} defines the 2-poset $\poreshcat$ of polarized reshuffles, which we would like to use as our mode theory. The objects of this 2-poset will then be the modes, and as promised in the previous chapter, these are exactly polarmode masks.
 The intuitions behind the definition of $\poreshcat$ are explained at length in \cref{sec:poresh:def}.
 $\poreshcat$ is a polarized version of the category of reshuffles used to define the mode theory of Degrees of Relatedness \cite{reldtt,reldtt-techreport} (\cref{thm:reshcat-poreshcat}).
 
@@ -2678,7 +2684,7 @@ Viewing poset-valued presheaves $P : \catC\op \to \Poset$ as profunctors to the 
 	}
 \]
 The 2-poset $\poreshcat$ will serve as the mode theory of Naturality Pretype Theory.
-Its objects, the modes, will be anpolarity masks.
+Its objects, the modes, will be polarmode masks.
 Its morphisms, the modalities, are called \textbf{polarized reshuffles} and will answer the question: for a $\mu$-modal function $f$, in order to get a $j$-jet $f(x) \jet_j f(y)$, what do I need between $x$ and $y$?
 The answer $P_i$ consists of two parts: the \emph{degree} $i$ at which we need a jet between $x$ and $y$, and the \emph{orientation} $P$ of that jet.
 A polarized reshuffle $\mu \in \Hom_{\poreshcat}(\vec a, \vec b)$ is merely that: a consistent answer to the above question for all degrees $j$ in the codomain mask $\vec b$.
@@ -2687,7 +2693,7 @@ The $Q_j$ will be called an \textbf{oriented degree} for the mask $\vec b$, i.e.
 The operation that answers this question, is the functorial action of the presheaf $\oridegeqtop$.
 
 In order to be able to define $\poreshcat$ in a somewhat concise way, we start by considering what would happen if there were always only a single degree.
-This leads to the 2-poset $\polcat$ whose objects are anpolarities and whose morphisms are polarities, which answer the question: in order to get $f(x) \jet f(y)$, what do I need between $x$ and $y$?
+This leads to the 2-poset $\polcat$ whose objects are polarmodes and whose morphisms are polarities, which answer the question: in order to get $f(x) \jet f(y)$, what do I need between $x$ and $y$?
 There will be 4 polarities $\isopol$, $\pospol$, $\negpol$ and $\mixpol$ which will ask for an equijet, forward jet, backward jet and an infrajet respectively.
 Once we know the answer to that question, we can answer the more general question: for a $p$-polar function $f$, in order to get $f(x) \mathrel{Q} f(y)$, what do I need between $x$ and $y$?
 In other words, there will be an operation combining a polarity $p$ with an orientation $Q$, producing another orientation $P$. This is the functorial action of the presheaf of orientations $\oripsh$.
@@ -2706,7 +2712,7 @@ This is the motivation of the somewhat peculiar relation $\ll$ introduced below,
 \begin{definition} \label{def:polarity-cat}
 	The \textbf{2-poset of polarities} $\polcat$ has
 	\begin{itemize}
-		\item as objects, anpolarities, i.e.\ $\npolar$ and $\ypolar$,
+		\item as objects, polarmodes, i.e.\ $\npolar$ and $\ypolar$,
 		\item as morphisms, \textbf{polarities}:
 		\begin{align*}
 			\Hom(\ypolar, \ypolar) &= \accol{\mixpol, \pospol, \negpol, \isopol}, \\
@@ -2840,7 +2846,7 @@ The argument for meets and for $\loch \circ \loch$ is similar.
 
 \subsubsection{Polarized Degrees}
 \begin{definition}
-	Given an anpolarity mask $\vec a$, we define the following posets of \textbf{degrees}:
+	Given a polarmode mask $\vec a$, we define the following posets of \textbf{degrees}:
 	\begin{itemize}
 		\item $\Deg(\vec a) = \accol{0 \leq 1 \leq \ldots \leq \lenpol{\vec a} - 1}$,
 		\item $\Degeq(\vec a) = \accol{\eqtydeg \leq 0 \leq 1 \leq \ldots \leq \lenpol{\vec a} - 1}$,
@@ -2849,7 +2855,7 @@ The argument for meets and for $\loch \circ \loch$ is similar.
 	We generalize the notation $a_i$ to generalized degrees $i$ by setting $a_\eqtydeg = a_\top = \npolar$.
 \end{definition}
 \begin{definition} \label{def:poldeg}
-	Given an anpolarity mask $\vec a$ and an anpolarity $b$, we define the following posets of \textbf{polarized degrees}:
+	Given a polarmode mask $\vec a$ and a polarmode $b$, we define the following posets of \textbf{polarized degrees}:
 	\begin{itemize}
 		\item $\poldeg(\vec a, b) = \Sigma(i \in \Deg(\vec a)).\Hom_\polcat(a_i, b)$ with dictionary order,
 		\item $\poldegeq(\vec a, b)$ and $\poldegeqtop(\vec a, b)$ similarly.
@@ -2881,7 +2887,7 @@ The argument for meets and for $\loch \circ \loch$ is similar.
 \begin{definition}\label{def:poreshcat}
 	We define the 2-poset $\poreshcat$ of \textbf{polarized reshuffles} as follows:
 	\begin{itemize}
-		\item Objects are anpolarity masks.
+		\item Objects are polarmode masks.
 		\item Morphisms $\mu : \vec a \to \vec b$ are functions
 		\[
 			\loch \cdot \mu : (j : \Degeq(\vec b)) \to \poldegeqtop(\vec a, b_j)
@@ -2898,7 +2904,7 @@ The argument for meets and for $\loch \circ \loch$ is similar.
 		\begin{itemize}
 			\item We extend the domain of $\loch \cdot \mu$ to $\Degeqtop(\vec b)$ by setting $\top \cdot \mu = \dpol \top \nonpol$. \\
 			This maintains the property that $i < j$ implies $i \cdot \mu \ll j \cdot \mu$.
-			\item Given an anpolarity $c$, we lift $\loch \cdot \mu$ to a function
+			\item Given a polarmode $c$, we lift $\loch \cdot \mu$ to a function
 			\begin{equation} \label{eq:poldeg-poresh}
 				\loch \circ \mu : (\dpol j q : \poldegeqtop(\vec b, c)) \to \poldegeqtop(\vec a, c) : \dpol j q \mapsto q \circ (j \cdot \mu).
 			\end{equation}
@@ -3020,7 +3026,7 @@ We do not have the same result for $\poldeg$, and do not bother for $\poldegeq$.
 
 \subsubsection{Oriented Degrees}
 \begin{definition}
-	Given an anpolarity mask $\vec a$, we define the following posets of \textbf{oriented degrees}:
+	Given a polarmode mask $\vec a$, we define the following posets of \textbf{oriented degrees}:
 	\begin{itemize}
 		\item $\orideg(\vec a) = \Sigma(i \in \Deg(\vec a)).\oripsh(a_i)$ with dictionary order,
 		\item $\oridegeq(\vec a)$ and $\oridegeqtop(\vec a)$ similarly.
@@ -3124,9 +3130,9 @@ We do not have the same result for $\poldeg$, and do not bother for $\poldegeq$.
 
 \subsubsection{Discussion and Related Work}
 \paragraph{When Everything is Symmetric}
-If we forget about the existence of the anpolarity $\ypolar$, then $\polcat$ becomes a 2-poset with only a single object $\npolar$ and a single morphism $\nonpol \in \Hom_\polcat(\npolar, \npolar)$.
+If we forget about the existence of the polarmode $\ypolar$, then $\polcat$ becomes a 2-poset with only a single object $\npolar$ and a single morphism $\nonpol \in \Hom_\polcat(\npolar, \npolar)$.
 The presheaf $\oripsh$ is then just a poset $\oripsh(\npolar)$ containing only a single orientation $\edgesym$.
-An anpolarity mask $\vec a$ is always of the form $[\npolar]^n$, i.e.\ it is just a natural number.
+A polarmode mask $\vec a$ is always of the form $[\npolar]^n$, i.e.\ it is just a natural number.
 Furthermore, we have
 \[
 	\poldegeqtop([\npolar]^n, \npolar) \cong \oridegeqtop([\npolar]^n) \cong \Degeqtop([\npolar]^n).
@@ -3150,7 +3156,7 @@ Thus, we have retrieved exactly the 2-poset of (ordinary) reshuffles from Degree
 \begin{theorem} \label{thm:reshcat-poreshcat}
 	There is an embedding $I : \reshcat \to \poreshcat$ of the 2-poset of reshuffles $\reshcat$ from \cite[def.\ 6.2.7]{reldtt-techreport} into $\poreshcat$ which
 	\begin{itemize}
-		\item sends the depth $d \geq -1$ to the anpolarity mask $I(d) = [\npolar]^{d+1}$,
+		\item sends the depth $d \geq -1$ to the polarmode mask $I(d) = [\npolar]^{d+1}$,
 		\item sends the reshuffle $\mu \in \Hom_\reshcat(d, e)$ to the polarized reshuffle $I(\mu) \in \Hom_\poreshcat([\npolar]^{d+1}, [\npolar]^{e+1})$
 		such that $i \cdot I(\mu) = \pdeg{\nonpol}{i \cdot \mu}$.
 	\end{itemize}
@@ -3158,7 +3164,7 @@ Thus, we have retrieved exactly the 2-poset of (ordinary) reshuffles from Degree
 \end{theorem}
 
 \paragraph{When Everything is Directed}
-If we forget about the existence of the anpolarity $\npolar$, then $\polcat$ becomes a 2-poset with a single object $\ypolar$, i.e.\ fully determined by the ordered monoid $\Hom_\polcat(\ypolar, \ypolar) = \accol{\isopol, \pospol, \negpol, \mixpol}$.
+If we forget about the existence of the polarmode $\npolar$, then $\polcat$ becomes a 2-poset with a single object $\ypolar$, i.e.\ fully determined by the ordered monoid $\Hom_\polcat(\ypolar, \ypolar) = \accol{\isopol, \pospol, \negpol, \mixpol}$.
 
 This ordered monoid has a semantics in endofunctors on $\Cat$, sending $\pospol$ to the identity functor, $\negpol$ to taking the opposite, $\isopol$ to taking the localization (which makes all morphisms invertible) and $\mixpol$ to taking the core (which discards all non-invertible morphisms).
 
@@ -3178,7 +3184,7 @@ This leads to the equality $\isopol \circ \mixpol = \mixpol$.
 
 The presheaf of orientations $\oripsh$ is just a single poset $\oripsh(\ypolar) = \accol{\equijetsym, \jetsym, \tejsym, \infrajetsym}$ on which the ordered monoid of polarities has a right action.
 
-An anpolarity mask $\vec a$ is always of the form $[\ypolar]^n$, i.e.\ it is just a natural number.
+A polarmode mask $\vec a$ is always of the form $[\ypolar]^n$, i.e.\ it is just a natural number.
 A polarized/oriented degree $\pdeg p i \in \poldegeqtop([\ypolar]^n, \ypolar)$ or $\odeg P i \in \oridegeqtop([\ypolar]^n)$ is now just a (non-dependent) pair of a degree and a polarity/orientation.
 
 For purposes of illustration, we list all polarized reshuffles in $\Hom_\poreshcat([\ypolar], [\ypolar])$:
@@ -3205,7 +3211,7 @@ where the identity is $\id_{[\ypolar]} = \reshlist{\pdeg \nonpol \eqtydeg}{\pdeg
 %\subsubsection{Old Stuff}
 %\todoi{Old stuff}
 %\begin{definition}\label{def:orisymbol}
-%	Let $a \in \Anpolarity$ be an anpolarity.
+%	Let $a \in \Polarmode$ be a polarmode.
 %	We define the sets of \textbf{$a$-orientations} and \textbf{$a$-polarities} as
 %	\[
 %		\oripshnodegree(a) = \accol{\jetsym, \tejsym, \equijetsym, \infrajetsym},
@@ -3214,7 +3220,7 @@ where the identity is $\id_{[\ypolar]} = \reshlist{\pdeg \nonpol \eqtydeg}{\pdeg
 %	\]
 %	where we identify all elements if $a = \npolar$, i.e.\ $\oripshnodegree(\npolar) = \accol{\edgesym}$ and $\polcatnodegree(\npolar) = \accol{\nonpol}$.
 %	
-%	Let $\vec a$ be an anpolarity mask.
+%	Let $\vec a$ be a polarmode mask.
 %	We define the set of \textbf{$\vec a$-orientations} as
 %	\[
 %		\oripsh(\vec a) = \set{P_i}{P \in \oripshnodegree, 0 \leq i < \lenpol{\vec a}} \cup \accol{\eqtysym, \topsym},
@@ -3263,7 +3269,7 @@ where the identity is $\id_{[\ypolar]} = \reshlist{\pdeg \nonpol \eqtydeg}{\pdeg
 %	We write $P_i \ll Q_j$ if $\infrajetsym \cdot P_i \leq \equijetsym \cdot Q_j$, which is the case if either: $P_i = \eqtysym$, $Q_j = \topsym$, $i < j$ or if $i = j$ and either $P = \equijetsym$ or $Q = \infrajetsym$ (both of which are true if $a_i = \npolar$).
 %\end{definition}
 %\begin{definition}\label{def:poreshcat}
-%	Let $\vec a$ and $\vec b$ be anpolarity masks.
+%	Let $\vec a$ and $\vec b$ be polarmode masks.
 %	A \textbf{polarized reshuffle} $\mu : \vec a \to \vec b$ from $\vec a$ to $\vec b$ is a function
 %	\[
 %		\loch \cdot \mu : \oripshfwd(\vec b) \to \oripsh(\vec a)
@@ -3297,7 +3303,7 @@ where the identity is $\id_{[\ypolar]} = \reshlist{\pdeg \nonpol \eqtydeg}{\pdeg
 %	Finally, if $\mu$ and $\nu$ are both polarized reshuffles from $\vec a$ to $\vec b$, then we say $\mu \leq \nu$ if this inequality holds pointwise, i.e.\ if $P_i \cdot \mu \leq P_i \cdot \nu$ for all $P_i \in \oripshfwd(\vec b)$.
 %	It is easy to see that this property then extends to all $P_i \in \oripsh(\vec b)$.
 %	
-%	We thus define the \textdef{2-poset of polarized reshuffles} $\poreshcat$ whose objects are anpolarity masks, and whose morphisms are polarized reshuffles.
+%	We thus define the \textdef{2-poset of polarized reshuffles} $\poreshcat$ whose objects are polarmode masks, and whose morphisms are polarized reshuffles.
 %\end{definition}
 %\begin{corollary}
 %	The Hom-wise equal sub-2-poset of $\poreshcat$ on masks with only symmetric degrees, is isomorphic to the category $\reshcat$ of (non-polarized) reshuffles from the model of Degrees of Relatedness \cite[def.\ 6.2.7]{reldtt-techreport}\cite{reldtt}, with the mask $[\npolar]^n$ corresponding to the depth $n-1$. \qed
@@ -3316,7 +3322,7 @@ where the identity is $\id_{[\ypolar]} = \reshlist{\pdeg \nonpol \eqtydeg}{\pdeg
 			&\forall P_i \in \oridegeqtop(\vec a), Q_j \in \oridegeqtop(\vec b). P_i \leq Q_j \oriof \lambda \Leftrightarrow P_i \oriof \rho \leq Q_j,
 			\label{eq:poresh-adjoint-crit-orideg}
 			\\
-			&\forall c \in \Anpolarity, p_i \in \poldegeqtop(\vec a, c), q_j \in \poldegeqtop(\vec b, c). p_i \leq q_j \circ \lambda \Leftrightarrow p_i \circ \rho \leq q_j.
+			&\forall c \in \Polarmode, p_i \in \poldegeqtop(\vec a, c), q_j \in \poldegeqtop(\vec b, c). p_i \leq q_j \circ \lambda \Leftrightarrow p_i \circ \rho \leq q_j.
 			\label{eq:poresh-adjoint-crit-poldeg}
 		\end{align}
 		\item By consequence:
@@ -3397,7 +3403,7 @@ where the identity is $\id_{[\ypolar]} = \reshlist{\pdeg \nonpol \eqtydeg}{\pdeg
 		The algorithms are just rephrasings of \cref{eq:poresh-adjoint-crit-orideg,eq:poresh-adjoint-crit-poldeg}, so assuming that a left/right adjoint exists, they are clearly correct.
 		
 		\textbf{Existence of left adjoint.} Assume given a reshuffle $\rho \in \Hom(\vec b, \vec a)$.
-		We would like to define in a first step a function (parametrized by $c \in \Anpolarity$)
+		We would like to define in a first step a function (parametrized by $c \in \Polarmode$)
 		\[
 			\ell_c : \poldegeqtop(\vec b, c) \to \poldegeqtop(\vec a, c) : q_j \mapsto \max \set{p_i \in \poldegeqtop(\vec a, c)}{p_i \circ \rho \leq q_j}.
 		\]
@@ -3478,7 +3484,7 @@ where the identity is $\id_{[\ypolar]} = \reshlist{\pdeg \nonpol \eqtydeg}{\pdeg
 		
 		\textbf{Existence of right adjoint.}
 		Assume given a reshuffle $\lambda \in \Hom(\vec a, \vec b)$.
-		We would like to define in a first step a function (parametrized by $c \in \Anpolarity$)
+		We would like to define in a first step a function (parametrized by $c \in \Polarmode$)
 		\[
 			r_c : \poldegeqtop(\vec a, c) \to \poldegeqtop(\vec b, c) : p_i \mapsto \min \set{q_j \in \poldegeqtop(\vec b, c)}{p_i \leq q_j \circ \lambda}.
 		\]
@@ -3554,7 +3560,7 @@ where the identity is $\id_{[\ypolar]} = \reshlist{\pdeg \nonpol \eqtydeg}{\pdeg
 \end{proof}
 
 \begin{definition} \label{def:suc-degree}
-	Let $\vec a$ be an anpolarity mask and $i \in \Degeqtop(\vec a)$.
+	Let $\vec a$ be a polarmode mask and $i \in \Degeqtop(\vec a)$.
 	\begin{enumerate}
 		\item If $i < \top$, write $\sucdeg(i) := \min \set{i' \in \Degeqtop(\vec a)}{i' > i}$; we call this the \textbf{successor} of $i$.
 		\item If $i > \eqtydeg$, write $\predeg(i) := \max \set{i' \in \Degeqtop(\vec a)}{i' < i}$; we call this the \textbf{predecessor} of $i$.
@@ -3761,7 +3767,7 @@ In words, \cref{eq:poresh-withrr-crit2} says that:
 	Then we have a self-inverse and therefore self-adjoint polarized reshuffle $\Op_i : \vec a \to \vec a$ defined by $i \cdot \Op_i = \negpol_i$ and $j \cdot \Op_i = \pospol_j$ for all $i \neq j \in \Degeq(\vec a)$.
 \end{example}
 \begin{example} \label{ex:poresh-sym}
-	Let $\vec a \sqsubset_i \vec b$ (\cref{def:anpolarity-order-step}).
+	Let $\vec a \sqsubset_i \vec b$ (\cref{def:polarmode-order-step}).
 	Then we have a triple of adjoint polarized reshuffles
 	\[
 		\Fsymresh_i \dashv \Usymresh_i \dashv \Csymresh_i
@@ -3793,7 +3799,7 @@ In words, \cref{eq:poresh-withrr-crit2} says that:
 	\end{align*}
 \end{example}
 \begin{example} \label{ex:cohesion}
-	Let $\vec b$ be obtained from $\vec a$ by deleting the anpolarity with degree $i$.
+	Let $\vec b$ be obtained from $\vec a$ by deleting the polarmode with degree $i$.
 	Let $n := \lenpol{\vec a} = \lenpol{\vec b} + 1$.
 	We define the following polarized reshuffle, which forgets the $i$-jet relation:
 	\[
@@ -4555,7 +4561,7 @@ In fact, we could aim for a single semantics generalizing all three, but:
 \end{itemize}
 %a single strict 2-functorial semantics of our mode theory can be achieved (\cref{sec:poresh-jtset:strict}).
 
-The trick we will use to achieve the above is the following: we will insert additional symmetric degrees into our anpolarity masks, which will serve as degrees for formal equijets, as well as for the `true' relation.
+The trick we will use to achieve the above is the following: we will insert additional symmetric degrees into our polarmode masks, which will serve as degrees for formal equijets, as well as for the `true' relation.
 Then any polarized reshuffle can be re-encoded as one that does not mention $\mixpol_i$ for directed degrees $i$, nor $\nonpol_\top$, i.e.\ as one that has a right adjoint as per \cref{thm:poresh-adjoint}, by mentioning the inserted formal degrees instead.
 We call this \textbf{sinistrification}.%
 %The result is that any polarized reshuffle can be re-encoded as one that has both a left and a right adjoint. We call this \textbf{ambidextrification}.
@@ -5299,10 +5305,10 @@ We draw the same conclusion as in \cref{sec:poresh-jtset:conclusion}.
 \chapter{Paths and Bridges} \label{ch:pb}
 \todoi{Rename big degrees to floors}
 
-In \cref{ch:modes}, we decided to consider all anpolarity masks as possible modes.
+In \cref{ch:modes}, we decided to consider all polarmode masks as possible modes.
 However, it is unclear why we would be interested in types equipped with an arbitrary sequence of directed and undirected degrees.
 
-In this chapter, we start from the na\"ive viewpoint that, in practice, we will only be interested in anpolarity masks of the form $[\ypolar]^n$, i.e. modes where all degrees are directed.
+In this chapter, we start from the na\"ive viewpoint that, in practice, we will only be interested in polarmode masks of the form $[\ypolar]^n$, i.e. modes where all degrees are directed.
 We will then argue that this situation in itself is undesirable and even unworkable, and fix the matter by inserting symmetric degrees into a given mask.
 
 \todoi{Update this intro when chapter is finished}
@@ -5313,7 +5319,7 @@ We will then argue that this situation in itself is undesirable and even unworka
 
 \section{Rods, Paths and Bridges} \label{sec:pb}
 \todoi{Reabolish rods}
-In this section, we define a number of operations on anpolarity masks (\cref{def:anpolarity}) which serve to insert symmetric \emph{bridge} and/or \emph{path} relations for every degree.
+In this section, we define a number of operations on polarmode masks (\cref{def:polarmode}) which serve to insert symmetric \emph{bridge} and/or \emph{path} relations for every degree.
 The idea, in the universe of small types, is the following:
 \begin{itemize}
 	\item Rods express strict equality,
@@ -5332,8 +5338,8 @@ The mask operations serve three goals:
 
 %\subsection{Path/Bridge Transformations}
 \begin{definition} \label{def:pb}
-	Let $\mymaskx \in \accol{\maskj, \maskpj, \maskjb, \maskpjb, \maskrpj}$ and $\mymasky \in \accol{\maske, \maskpb, \maskrp}$, and let $a$ be an anpolarity.
-	We define $\maskop a \mymaskx \mymasky \in \List\,\Anpolarity$ as follows:
+	Let $\mymaskx \in \accol{\maskj, \maskpj, \maskjb, \maskpjb, \maskrpj}$ and $\mymasky \in \accol{\maske, \maskpb, \maskrp}$, and let $a$ be a polarmode.
+	We define $\maskop a \mymaskx \mymasky \in \List\,\Polarmode$ as follows:
 	\[
 		\begin{array}{l c c c l c c}
 			\maskop \ypolar \maskj \mymasky &=& [\ypolar]
@@ -5353,7 +5359,7 @@ The mask operations serve three goals:
 			\maskop \ypolar \maskrpj \mymasky &=& [\npolar, \npolar, \ypolar]
 		\end{array}
 	\]
-	We extend this operation to anpolarity masks as follows: $\maskop{\vec a}{\mymaskx}{\mymasky}$ is the concatenation (join / monadic multiplication) of the list of lists obtained by applying $\maskop{\loch}{\mymaskx}{\mymasky}$ to every element of $\vec a$.
+	We extend this operation to polarmode masks as follows: $\maskop{\vec a}{\mymaskx}{\mymasky}$ is the concatenation (join / monadic multiplication) of the list of lists obtained by applying $\maskop{\loch}{\mymaskx}{\mymasky}$ to every element of $\vec a$.
 	
 	Indexing the resulting mask is complicated, because the length of the resulting mask depends not only on the length of $\vec a$ but also on its contents.
 	In order to stay sane, we will use an indexing system that still refers to the degrees of $\vec a$, which we will call \textbf{big degrees}, whereas the degrees of $\maskop{\vec a}{\mymaskx}{\mymasky}$ will be called \textbf{small degrees}.
@@ -5446,7 +5452,8 @@ The mask operations serve three goals:
 	\item[v0.2] Wrote \cref{ch:modalities}. \\
 		Changed title. \\
 		Renamed jet jewels to jet topes; modified their definition (\cref{def:jet-tope}).
-	\item[v0.3] \ldots
+	\item[v0.3] Renamed anpolarities to polarmodes. \\
+		New notation for both polarmodes.
 \end{description}
 
 \bibliographystyle{alphaurl}
