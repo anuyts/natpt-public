@@ -13,3 +13,6 @@
 - https://arxiv.org/pdf/2503.03153
 - Jem Lord, Easy Param'ty
 - paper Laretto EPN-WG6: https://arxiv.org/pdf/2504.11225
+
+## Questions
+- what's wrong with boolean cubes for HoTT?
