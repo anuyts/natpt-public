@@ -613,6 +613,8 @@ Clearly, the functor $I : \cubecat_\demorgan^\cartes \to \cubecat_\booleanalg^\c
 	Let $\vec a$ be a mask and $\myorix$ an orientation kit.
 	We define the set of \textbf{$(\myorix, \vec{a})$-jet-cubes} as the set of lists of elements of $\set{P_i}{P \in \myorix, 0 \leq i < \lenpol{\vec a}}$,
 	where we identify all $P_i = Q_i =: {\edge}_i$ ($P, Q \in \myorix$) if $a_i = \npolar$.
+	To keep track of this, we also write $P_i\pmr{a_i}$.
+	Moreover, if $a_i = \ypolar$, we demand that the symbols $\jet_i$ and $\tej_i$ do not appear to the left of any symbol $\equijet_i$.
 	We denote jet cubes as
 	$(\dm i_0 : \rival{(P_0)_{i_0}}, \ldots, \dm i_{n-1} : \rival{(P_{n-1})_{i_{n-1}}})$,
 	thinking of the names $\dm{i}_k$ as De Bruijn indices.
@@ -642,6 +644,7 @@ Clearly, the functor $I : \cubecat_\demorgan^\cartes \to \cubecat_\booleanalg^\c
 	Let $\vec a \sqsubset_i \vec b$ and ${\equijet} \in \myorix$. For any $(\myorix, \vec a)$-jet-cube $W$, we define the $(\myorix, \vec b)$-jet-cube $\Usymcube_i W$ by replacing every occurrence of $\edge_i$ with $\equijet_i$.
 \end{definition}
 Note that a $\vec b$-jet-cube is uniquely in the image of $\Usymcube_i$ if it does not feature the symbols $\jet_i$ and $\tej_i$, i.e.\ if all variables are $i$-symmetric.
+In particular, any cube of the form $(W, \dm i : \rival{\equijet_i})$ is uniquely in the image of $\Usymcube_i$.
 \begin{definition} \label{def:jep}
 	For any $(\myorix, \vec a)$-jet-cube $W$, we define the $\vec a$-jet-set $\JEP(W)$ as follows:
 	\[ \begin{array}{l c l l}
