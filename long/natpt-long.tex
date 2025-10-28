@@ -901,7 +901,7 @@ In short then, by \cref{rem:two-monads}:
 \end{remark}
 
 \subsection{A Calculus for Jet Cube Morphisms} \label{sec:jetcubes:calculus}
-In this section, we develop a calculus that inductively generates the morphisms of the category \allowbreak $\jetcubetri{\affine}{M}{\vec a}$ and therefore also those of its full subcategories $\jetcube{\myorix}{\affine}{M}{\vec a}$.
+In this section, we develop a calculus that inductively generates the morphisms of the category \allowbreak $\jetcubetri{\affine}{M}{\vec a}$ and therefore also those of its full subcategories $\jetcube{\myorix}{\affine}{M}{\vec a}$ where $\omega \in \orikit$.
 
 Since the forgetful functor $U : \jetset{\vec a} \to \Set$ is faithful, so is $\erasejc \loch : \jetcube{\myorix}{\affine}{M}{\vec a} \to \cubecat^\affine_M$.
 As such, we can regard `being a morphism of jet cubes' as a proof-irrelevant property of morphisms of cubes, which we will therefore use as preterms.
@@ -909,6 +909,7 @@ Our calculus will therefore feature a single judgement $\sez \vfi : V \to W$ mea
 Soundness (\cref{thm:calculus-sound}) of the calculus will be the property that the judgement's meaning actually holds when the judgement is derivable, whereas completeness (\cref{thm:calculus-complete}) means that the judgement is derivable when its meaning is true.
 We do not have to bother with an equational theory, as we can simply inherit it from $\cubecat_M^\affine$.
 
+\subsubsection{Definition} \label{sec:jetcubes:calculus:def}
 \begin{definition} \label{def:conv-jet-cube-cat}
 	We call a jet cube \textbf{conventional} if each of its dimensions has a degree equal to or lower than the previous one.
 	We write $\convjetcube{\myorix}{\mycubex}{M}{\vec a}$ for the full subcategory of $\jetcube{\myorix}{\mycubex}{M}{\vec a}$ on conventional cubes.
@@ -930,52 +931,52 @@ We do not have to bother with an equational theory, as we can simply inherit it 
 		\inferencel{src:fwd}{
 			\sez \vfi : V \to \Opcube_i(W)
 		}{
-			\sez (\vfi, 0/\dm i) : V \to (W, \dm i : \rival{\jet_i})
+			\sez (\vfi, 0/\dm i) : V \to (W, \dm i : \rival{\jet_i\pmr{a_i}})
 		}{}
 		\qquad
 		\inferencel{src:bck}{
 			\sez \vfi : V \to \Opcube_i(W)
 		}{
-			\sez (\vfi, 1/\dm i) : V \to (W, \dm i : \rival{\tej_i})
+			\sez (\vfi, 1/\dm i) : V \to (W, \dm i : \rival{\tej_i\pmr{a_i}})
 		}{}
 	\]
 	\[
 		\inferencel{tgt:fwd}{
 			\sez \vfi : V \to W
 		}{
-			\sez (\vfi, 1/\dm i) : V \to (W, \dm i : \rival{\jet_i})
+			\sez (\vfi, 1/\dm i) : V \to (W, \dm i : \rival{\jet_i\pmr{a_i}})
 		}{}
 		\qquad
 		\inferencel{tgt:bck}{
 			\sez \vfi : V \to W
 		}{
-			\sez (\vfi, 0/\dm i) : V \to (W, \dm i : \rival{\tej_i})
+			\sez (\vfi, 0/\dm i) : V \to (W, \dm i : \rival{\tej_i\pmr{a_i}})
 		}{}
 	\]
 	\[
 		\inferencel{inv:fwd}{
-			\sez (\vfi, t/\dm i) : V \to (W, \dm i : \rival{\tej_i})
+			\sez (\vfi, t/\dm i) : V \to (W, \dm i : \rival{\tej_i\pmr{a_i}})
 		}{
-			\sez (\vfi, \lnot t/\dm i) : V \to (W, \dm i : \rival{\jet_i})
+			\sez (\vfi, \lnot t/\dm i) : V \to (W, \dm i : \rival{\jet_i\pmr{a_i}})
 		}{}
 		\qquad
 		\inferencel{inv:bck}{
-			\sez (\vfi, t/\dm i) : V \to (W, \dm i : \rival{\jet_i})
+			\sez (\vfi, t/\dm i) : V \to (W, \dm i : \rival{\jet_i\pmr{a_i}})
 		}{
-			\sez (\vfi, \lnot t/\dm i) : V \to (W, \dm i : \rival{\tej_i})
+			\sez (\vfi, \lnot t/\dm i) : V \to (W, \dm i : \rival{\tej_i\pmr{a_i}})
 		}{}
 	\]
 	\[
 		\inferencel{prism:fwd}{
 			\sez \vfi : V \to W
 		}{
-			\sez (\vfi, \dm i / \dm i) : (V, \dm i : \rival{\jet_i}) \to (W, \dm i : \rival{\jet_i})
+			\sez (\vfi, \dm i / \dm i) : (V, \dm i : \rival{\jet_i\pmr{a_i}}) \to (W, \dm i : \rival{\jet_i\pmr{a_i}})
 		}{}
 		\qquad
 		\inferencel{prism:bck}{
 			\sez \vfi : V \to W
 		}{
-			\sez (\vfi, \dm i / \dm i) : (V, \dm i : \rival{\tej_i}) \to (W, \dm i : \rival{\tej_i})
+			\sez (\vfi, \dm i / \dm i) : (V, \dm i : \rival{\tej_i\pmr{a_i}}) \to (W, \dm i : \rival{\tej_i\pmr{a_i}})
 		}{}
 	\]
 %	\[
@@ -987,9 +988,10 @@ We do not have to bother with an equational theory, as we can simply inherit it 
 %	\]
 	\[
 		\inferencel{symmetrize}{
-			\sez \vfi : \Fsymcube_i V \to W
+			\sez_{\vec a} \vfi : \Fsymcube_i V \to W
+			\qquad \vec a \sqsubset_i \vec b
 		}{
-			\sez \vfi : V \to \Usymcube_i W
+			\sez_{\vec b} \vfi : V \to \Usymcube_i W
 		}{}
 	\]
 	\[
@@ -997,7 +999,7 @@ We do not have to bother with an equational theory, as we can simply inherit it 
 			\sez \vfi : \UFsymcube_i(V) \to W \qquad
 			R \in \accol{\jet, \tej, \equijet}
 		}{
-			\sez (\vfi, \dm i / \novar) : (V, \dm i : \rival{R_i}) \to W
+			\sez (\vfi, \dm i / \novar) : (V, \dm i : \rival{R_i\pmr{a_i}}) \to W
 		}{}
 %		\qquad
 %		\inferencel{wkn:bck}{
@@ -1007,9 +1009,9 @@ We do not have to bother with an equational theory, as we can simply inherit it 
 %		}{}
 		\qquad
 		\inferencel{exchange}{
-			\sez \vfi : (V, \dm j : \rival{\equijet_i}, U_1, \dm i : \rival{\equijet_i}, U_2) \to W
+			\sez \vfi : (V, \dm j : \rival{\equijet_i\pmr{a_i}}, U_1, \dm i : \rival{\equijet_i\pmr{a_i}}, U_2) \to W
 		}{
-			\sez \vfi : (V, \dm i : \rival{\equijet_i}, U_1, \dm j : \rival{\equijet_i}, U_2) \to W
+			\sez \vfi : (V, \dm i : \rival{\equijet_i\pmr{a_i}}, U_1, \dm j : \rival{\equijet_i\pmr{a_i}}, U_2) \to W
 		}{}
 	\]
 	\[
@@ -1022,7 +1024,7 @@ We do not have to bother with an equational theory, as we can simply inherit it 
 			\\
 			\sez \vfi : \UFsymcube_i(\UFsymcube_j U, V) \to W
 		}{
-			\sez (\vfi, \dm j / \dm i) : (U, \dm j : \rival{P_j}, V) \to (W, \dm i : \rival{Q_i})
+			\sez (\vfi, \dm j / \dm i) : (U, \dm j : \rival{P_j\pmr{a_j}}, V) \to (W, \dm i : \rival{Q_i\pmr{a_i}})
 		}{}
 %		\inferencel{concursor:fwd}{
 %			P \in \left\{
@@ -1113,44 +1115,44 @@ We do not have to bother with an equational theory, as we can simply inherit it 
 		\inferencel{conn:prism:src-neutral}{
 			(Q, \opA) \in \mathemph{\accol{(\jet, \vee), (\tej, \wedge)}} \\
 			\sez \vfi : \UFsymcube_i V \to W \\
-			\sez (\vfi, t / \dm i) : \mathemph{\Opcube_i V} \to (W, \dm i : \rival{Q_i})
+			\sez (\vfi, t / \dm i) : \mathemph{\Opcube_i V} \to (W, \dm i : \rival{Q_i\pmr{a_i}})
 		}{
-			\sez (\vfi, t \opA \dm i / \dm i) : (V, \dm i : \rival{Q_i}) \to (W, \dm i : \rival{Q_i})
+			\sez (\vfi, t \opA \dm i / \dm i) : (V, \dm i : \rival{Q_i\pmr{a_i}}) \to (W, \dm i : \rival{Q_i\pmr{a_i}})
 		}{$\booleanalg$}
-		\qquad
+		\quad
 		\inferencel{conn:prism:tgt-neutral}{
 			(Q, \opA) \in \mathemph{\accol{(\jet, \wedge), (\tej, \vee)}} \\
 			\sez \vfi : \UFsymcube_i V \to W \\
-			\sez (\vfi, t / \dm i) : \mathemph{V} \to (W, \dm i : \rival{Q_i})
+			\sez (\vfi, t / \dm i) : \mathemph{V} \to (W, \dm i : \rival{Q_i\pmr{a_i}})
 		}{
-			\sez (\vfi, t \opA \dm i / \dm i) : (V, \dm i : \rival{Q_i}) \to (W, \dm i : \rival{Q_i})
+			\sez (\vfi, t \opA \dm i / \dm i) : (V, \dm i : \rival{Q_i\pmr{a_i}}) \to (W, \dm i : \rival{Q_i\pmr{a_i}})
 		}{$\booleanalg$}
 	\]
 	\[
 		\inferencel{conn:prism-inv:src-neutral}{
 			(Q, \opA, P) \in \mathemph{\accol{(\jet, \vee, \tej), (\tej, \wedge, \jet)}} \\
 			\sez \vfi : \UFsymcube_i V \to W \\
-			\sez (\vfi, t / \dm i) : \mathemph{\Opcube_i V} \to (W, \dm i : \rival{Q_i})
+			\sez (\vfi, t / \dm i) : \mathemph{\Opcube_i V} \to (W, \dm i : \rival{Q_i\pmr{a_i}})
 		}{
-			\sez (\vfi, t \opA \mathemphB{\lnot \dm i} / \dm i) : (V, \dm i : \mathemphB{\rival{P_i}}) \to (W, \dm i : \rival{Q_i})
+			\sez (\vfi, t \opA \mathemphB{\lnot \dm i} / \dm i) : (V, \dm i : \mathemphB{\rival{P_i\pmr{a_i}}}) \to (W, \dm i : \rival{Q_i\pmr{a_i}})
 		}{$\booleanalg$}
-		\qquad
+		\quad
 		\inferencel{conn:prism-inv:tgt-neutral}{
 			(Q, \opA, P) \in \mathemph{\accol{(\jet, \wedge, \tej), (\tej, \vee, \jet)}} \\
 			\sez \vfi : \UFsymcube_i V \to W \\
-			\sez (\vfi, t / \dm i) : \mathemph{V} \to (W, \dm i : \rival{Q_i})
+			\sez (\vfi, t / \dm i) : \mathemph{V} \to (W, \dm i : \rival{Q_i\pmr{a_i}})
 		}{
-			\sez (\vfi, t \opA \mathemphB{\lnot \dm i} / \dm i) : (V, \dm i : \mathemphB{\rival{P_i}}) \to (W, \dm i : \rival{Q_i})
+			\sez (\vfi, t \opA \mathemphB{\lnot \dm i} / \dm i) : (V, \dm i : \mathemphB{\rival{P_i\pmr{a_i}}}) \to (W, \dm i : \rival{Q_i\pmr{a_i}})
 		}{$\booleanalg$}
 	\]
 	\[
 		\inferencel{conn:degree-symmetric}{
 			Q \in \accol{\jet, \tej} \qquad
 			\opA \in \accol{{\vee}, {\wedge}} \\
-			\sez (\vfi, s / \dm i) : \UFsymcube_i V \to (W, \dm i : \rival{Q_i}) \\
-			\sez (\vfi, t / \dm i) : V \to (W, \dm i : \rival{Q_i})
+			\sez (\vfi, s / \dm i) : \UFsymcube_i V \to (W, \dm i : \rival{Q_i\pmr{a_i}}) \\
+			\sez (\vfi, t / \dm i) : V \to (W, \dm i : \rival{Q_i\pmr{a_i}})
 		}{
-			\sez (\vfi, t \opA s / \dm i) : V \to (W, \dm i : \rival{Q_i})
+			\sez (\vfi, t \opA s / \dm i) : V \to (W, \dm i : \rival{Q_i\pmr{a_i}})
 		}{$\booleanalg$}
 	\]
 %	\[
@@ -1260,22 +1262,22 @@ We do not have to bother with an equational theory, as we can simply inherit it 
 			(Q, c) \in \mathemph{\accol{(\jet, 0), (\tej, 1)}} \\
 			\sez \vfi : V \to \mathemph{\Opcube_i(W)}
 		}{
-			\sez (\vfi, c/\dm i) : V \to (W, \dm i : \rival{Q_i})
+			\sez (\vfi, c/\dm i) : V \to (W, \dm i : \rival{Q_i\pmr{a_i}})
 		}{}
 		\qquad
 		\inferencel{tgt}{
 			(Q, c) \in \mathemph{\accol{(\jet, 1), (\tej, 0)}} \\
 			\sez \vfi : V \to \mathemph{W}
 		}{
-			\sez (\vfi, c/\dm i) : V \to (W, \dm i : \rival{Q_i})
+			\sez (\vfi, c/\dm i) : V \to (W, \dm i : \rival{Q_i\pmr{a_i}})
 		}{}
 	\]
 	\[
 		\inferencel{inv}{
 			\accol{P, Q} = \accol{\jet, \tej} \\
-			\sez (\vfi, t/\dm i) : V \to (W, \dm i : \rival{P_i})
+			\sez (\vfi, t/\dm i) : V \to (W, \dm i : \rival{P_i\pmr{a_i}})
 		}{
-			\sez (\vfi, \lnot t/\dm i) : V \to (W, \dm i : \rival{Q_i})
+			\sez (\vfi, \lnot t/\dm i) : V \to (W, \dm i : \rival{Q_i\pmr{a_i}})
 		}{}
 		\qquad
 		\inferencel{prism}{
@@ -1283,7 +1285,7 @@ We do not have to bother with an equational theory, as we can simply inherit it 
 			\qquad
 			Q \in \accol{\jet, \tej}
 		}{
-			\sez (\vfi, \dm i / \dm i) : (V, \dm i : \rival{Q_i}) \to (W, \dm i : \rival{Q_i})
+			\sez (\vfi, \dm i / \dm i) : (V, \dm i : \rival{Q_i\pmr{a_i}}) \to (W, \dm i : \rival{Q_i\pmr{a_i}})
 		}{}
 	\]
 	\caption{Unified versions of the specialized forward/backward rules in \cref{fig:calculus}.}
@@ -1307,12 +1309,12 @@ We can apply an involution to the last variable, provided that we turn around it
 
 We can apply the (opposite) $i$-twisted prism functor to a morphism (\ruleref{prism:fwd}, \ruleref{prism:bck}).
 
-If the last dimension of our target cube is of the form $\dm i : \rival{\equijet_i}$, then we know that our cube is in the image of $\Usymcube_i$, and we can proceed using the adjunction $\Fsymcube_i \dashv \Usymcube_i$ (\ruleref{symmetrize}).
+If the last dimension of our target cube is of the form $\dm i : \rival{\equijet_i}$,\footnote{or more generally if all variables of degree $i$ have type $\rival{\equijet_i}$} then we know that our cube is in the image of $\Usymcube_i$, and we can proceed using the adjunction $\Fsymcube_i \dashv \Usymcube_i$ (\ruleref{symmetrize}).
 This turns our last dimension into $\dm i : \rival{\edge_i}$ which is a special case of both $\dm i : \rival{\jet_i}$ and $\dm i : \rival{\tej_i}$, so we can proceed by using the \textsc{fwd} and \textsc{bck} rules of the calculus.
 
 We can weaken w.r.t.\ the last dimension (\ruleref{wkn}) of the source cube, but some caution is required. At the source-side of the last dimension, we find $\Opcube_i(V)$, whereas at the target-side we have $V$.
 Thus, $\vfi$ needs to be a morphism of jet cubes from $\Opcube_i(V) \to W$ as well as from $V \to W$.
-This can be achieved by asking that $\vfi$ starts from $\UFsymcube_i(V)$, which can be thought of as a join of $\Opcube_i(V)$ and $V$. In the case of an equijet dimension, $\UFsymcube_i(V) = V = \Opcube_i(V)$.
+This can be achieved by asking that $\vfi$ starts from $\UFsymcube_i(V)$, which can be thought of as a join of $\Opcube_i(V)$ and $V$. In the case we weaken over an equijet dimension, $\UFsymcube_i(V) = V = \Opcube_i(V)$.
 
 We can exchange variables of the same symmetric degree $i$ (\ruleref{exchange}).
 Note that conventionality implies that all variables in $U_1$ are also of type $\rival{\equijet_i}$.
@@ -1343,7 +1345,7 @@ Now let us look at what happens when we set $\dm i$ and $\dm j$ to $0$ or to $1$
 			\ar[u]_{(1/\dm i)}
 	}
 \]
-So $\vfi$ needs to be both a morphism of jet cubes from $(U, V)$ to $W$ and from $(\Opcube_j(U), V)$ to $\Opcube_i(W)$ or equivalently from $\Opcube_i(\Opcube_j(U), V)$ to $W$. This can be achieved by asking that $\vfi$ starts from \allowbreak $\UFsym_i(\UFsym_j(U), V)$, which can be thought of as a join of $(U, V)$ and $\Opcube_i(\Opcube_j(U), V)$.
+So $\vfi$ needs to be both a morphism of jet cubes from $(U, V)$ to $W$ and from $(\Opcube_j(U), V)$ to $\Opcube_i(W)$ or equivalently from $\Opcube_i(\Opcube_j(U), V)$ to $W$. This can be achieved by asking that $\vfi$ starts from \allowbreak $\UFsymcube_i(\UFsymcube_j(U), V)$, which can be thought of as a join of $(U, V)$ and $\Opcube_i(\Opcube_j(U), V)$.
 
 The last five rules involve connections (conjunction and disjunction) and only apply if $M = \booleanalg$, as $\bipointedsym$ does not provide these operations.
 Due to the twisted nature of the twisted prism functor, it turns out that we can substitute the last variable of the target cube only with a connection of which one operand (say the right one) is either (the negation of) the last variable of the source cube, or an expression depending only on $i$-symmetric variables.%
@@ -1352,7 +1354,8 @@ Due to the twisted nature of the twisted prism functor, it turns out that we can
 In either case, it turns out that whether the last term reduces to $0$ or $1$ on any end point of the source cube, is sufficiently irregular that $i$-directed terms in the remainder of $\vfi$ can only depend on $i$-symmetric variables.
 The promotion of all variables of degree $i$ to equijet variables in the context of $\vfi$ in at least one of the premises, precludes their usage in $i$-directed terms.
 
-In the latter case, we can use \ruleref{conn:degree-symmetric}, where $s$ is also checked in the symmetrized context.
+In the latter case, we can use \ruleref{conn:degree-symmetric}.
+%, where $s$ is also checked in the symmetrized context.\todoi{It is not, is that ok?}
 
 In the former case, we get to apply a rule that combines a connection, possibly an inversion, and the \ruleref{prism} rules.
 The main point worth remarking upon is that the behaviour of $t$ only matters when the other operand reduces to the neutral element of the connection at hand.
@@ -1525,7 +1528,7 @@ It is worth pointing out that if $a_i = \npolar$, then \ruleref{conn:degree-symm
 		Write $f = \EP(\vfi)$ and $g = \EP(\vfi, t \vee \dm i / \dm i)$ and $h = \EP(\vfi, t / \dm i)$.
 		
 		Pick a non-reflexive jet $(\vec v, u) \jet_j (\vec v', u')$ in $\JEP(V, \dm i : \rival{\jet_i})$.
-		Let $\dm k$ be the variable where both hands defer.
+		Let $\dm k$ be the variable where both hands differ.
 		There are two possibilities:
 		\begin{itemize}
 			\item If $\dm k = \dm i$, then $j = i$, $\vec v = \vec v'$, $u = 0$ and $u' = 1$.
@@ -1580,7 +1583,7 @@ It is worth pointing out that if $a_i = \npolar$, then \ruleref{conn:degree-symm
 			\item If $\vfi$ or $s$ depends on $\dm k$, then we have $t \psub{\vec v} = t \psub{\vec v'} =: t_0$.
 			\begin{itemize}
 				\item If $j \neq i$, then we have $\vec v \jet_j \vec v'$ in $\JEP(\UFsymcube_i V)$, whence $(f(\vec v), s\psub{\vec v}) = g(\vec v) \jet_j g(\vec v') = (f(\vec v'), s\psub{\vec v'})$ in $\JEP(W, \dm i : \rival{Q_i})$.
-				Taking a connection with $t_0$ does not influence the direction of the arrows to the left of $\dm i$, nor of the arrows at $\dm i$.
+				Taking a connection with $t_0$ does not influence the direction of the $j$-jets to the left of $\dm i$, nor of the $j$-jets at $\dm i$.
 				Hence we get $d(\vec v) = (f(\vec v), s\psub{\vec v} \opA t_0) \jet_j (f(\vec v'), s\psub{\vec v'} \opA t_0) = d(\vec v')$.
 				
 				\item If $j = i$, then we have $\vec v \equijet_i \vec v'$ in $\JEP(\UFsymcube_i V)$, whence $(f(\vec v), s\psub{\vec v}) = g(\vec v) \equijet_i g(\vec v') = (f(\vec v'), s\psub{\vec v'})$ in $\JEP(W, \dm i : \rival{Q_i})$.
@@ -1662,6 +1665,8 @@ but for the cases involving connections (conjunctions and disjunctions), we need
 
 \paragraph{Boolean reduction}
 In this section, we establish a normal form for affine boolean terms.
+
+\todoi{Idempotence: remove multi.}
 \begin{definition} \label{def:bool:reduction}
 	Boolean \textbf{terms} $t \in \booleanalg(X)$ are equivalence classes $t = [e]$ of boolean \textbf{expressions} $e \in \booleanexpr(X)$, which are defined as abstract syntax trees made up of $0$, $1$, $\vee$, $\wedge$, $\lnot$ and elements of $X$. Thanks to commutativity and associativity, we regard $\vee$ and $\wedge$ as having a \emph{multiset} of operands with at least two elements. The other operations have the usual arities.
 	
