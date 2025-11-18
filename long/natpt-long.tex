@@ -1666,15 +1666,14 @@ but for the cases involving connections (conjunctions and disjunctions), we need
 \paragraph{Boolean reduction}
 In this section, we establish a normal form for affine boolean terms.
 
-\todoi{Idempotence: remove multi.}
 \begin{definition} \label{def:bool:reduction}
-	Boolean \textbf{terms} $t \in \booleanalg(X)$ are equivalence classes $t = [e]$ of boolean \textbf{expressions} $e \in \booleanexpr(X)$, which are defined as abstract syntax trees made up of $0$, $1$, $\vee$, $\wedge$, $\lnot$ and elements of $X$. Thanks to commutativity and associativity, we regard $\vee$ and $\wedge$ as having a \emph{multiset} of operands with at least two elements. The other operations have the usual arities.
+	Boolean \textbf{terms} $t \in \booleanalg(X)$ are equivalence classes $t = [e]$ of boolean \textbf{expressions} $e \in \booleanexpr(X)$, which are defined as abstract syntax trees made up of $0$, $1$, $\vee$, $\wedge$, $\lnot$ and elements of $X$. Thanks to commutativity and associativity,\footnote{We do not consider idempotence as we are interested in affine boolean expressions.} we regard $\vee$ and $\wedge$ as having a \emph{multiset} of operands with at least two elements. The other operations have the usual arities.
 	
 	We define a reduction algorithm that reduces an expression $e$ to $e'$ such that $[e] = [e']$:
 	\begin{itemize}
 		\item push all negations down to the leaves of the syntax tree,
-    		\item eliminate negations of constants,
     		\item eliminate double negations,
+    		\item eliminate negations of constants,
     		\item eliminate conjunctions/disjunctions with constants,
     		\item remove parentheses of nested conjunctions / nested disjunctions.
 	\end{itemize}
@@ -1688,8 +1687,12 @@ In this section, we establish a normal form for affine boolean terms.
 %	\end{itemize}
 %	We can also non-deterministically apply these algorithms to a term by first picking a representant and then reducing the representant.
 \end{definition}
+Clearly then, a normal boolean expression either \emph{is} a constant, or does not contain any constants.
 \begin{definition} \label{def:bool:pruning}
-	Let $d$ and $e$ be normal expressions. We say that $d$ is a \textbf{pruning} of $e$ if any of the following conditions hold (inductively):
+	Let $d$ and $e$ be normal expressions. We say that $d$ is a \textbf{pruning} of $e$ if $d$ can be obtained from $e$ by repeatedly removing leaves (though not the last one) and renormalizing.
+\end{definition}
+\begin{proposition}
+	Let $d$ and $e$ be normal expressions. Then $d$ is a \textbf{pruning} of $e$ if and only if any of the following conditions hold (inductively):
 	\begin{itemize}
 		\item $d$ is a literal occurring in $e$,
 		\item $e$ has a subexpression $e'$ which has the same root label ${\opA} \in \accol{{\vee}, {\wedge}}$ as $d$ and such that there exists a partition of the multiset of operands of $d$, i.e.
@@ -1700,7 +1703,7 @@ In this section, we establish a normal form for affine boolean terms.
 		\]
 		such that every $D_i$ is a pruning of a root operand in $e'$, and moreover a single operand of $e'$ cannot be used more often than its multiplicity in the multiset of root operands of $e'$.
 	\end{itemize}
-\end{definition}
+\end{proposition}
 \begin{proposition} \label{thm:bool:assign-pruning}
 	Let $e$ be a normal expression with variables in $X$ and let $\sigma$ be a bit-assignment $\sigma : Y \to \accol{0, 1}$ of the variables in $Y \subseteq X$.
 	Let $e[\sigma]$ reduce to $d$. Then $d$ is either a constant or a pruning of $e$.
@@ -1710,7 +1713,7 @@ In this section, we establish a normal form for affine boolean terms.
 	If $e$ is a conjunction or disjunction, then this follows from the induction hypothesis for the immediate children of $e$.
 \end{proof}
 \begin{lemma} \label{thm:boolexp-to-const-assignment}
-	For every $t \in \booleanalg^\#(X)$ and $c \in \accol{0, 1}$, there exists a bit assignment $\sigma : X \to \accol{0, 1}$ such that $t[\sigma] = c$.
+	For every non-constant $t \in \booleanalg^\#(X)$ and $c \in \accol{0, 1}$, there exists a bit assignment $\sigma : X \to \accol{0, 1}$ such that $t[\sigma] = c$.
 \end{lemma}
 \begin{proof}
 	Pick an affine representant $e \in [t]$ and assume it is normal (reduce if it is not).
@@ -1727,7 +1730,7 @@ In this section, we establish a normal form for affine boolean terms.
 	Combining all assignments yields the required result.
 \end{proof}
 \begin{corollary} \label{thm:boolexp-to-var-assignment}
-	For every normal affine expression $e \in \booleanexpr^\#(X)$ that has a leaf $\tilde y \in \accol{y,\lnot y}$ where $y \in X$, there exists a bit assignment $\sigma : X \setminus \accol y \to \accol{0, 1}$ such that $t[\sigma] = \tilde x$. \qed
+	For every normal affine expression $e \in \booleanexpr^\#(X)$ that has a leaf $\tilde y \in \accol{y,\lnot y}$ where $y \in X$, there exists a bit assignment $\sigma : X \setminus \accol y \to \accol{0, 1}$ such that $t[\sigma] = \tilde y$. \qed
 \end{corollary}
 \begin{corollary} \label{thm:bool:term-dependencies}
 	If $e$ is a normal affine expression $e \in \booleanexpr^\#(X)$ depending on $y$, then every expression representing $[e]$ depends on $y$.
@@ -1738,6 +1741,9 @@ In this section, we establish a normal form for affine boolean terms.
 		\item Some normal affine representant of $t$ depends on $y$. \qed
 	\end{itemize}
 \end{corollary}
+\begin{proof}
+	From \cref{thm:boolexp-to-var-assignment}, $[e]$ cannot have a representant that does not mention $y$.
+\end{proof}
 \begin{definition} \label{def:bool:in-connection}
 	If $e$ is a normal affine expression $e \in \booleanexpr^\#(X)$ depending on $x, y \in X$, then we say that $x$ and $y$ are \textbf{in $\opA$-connection} (where $\opA \in \accol{{\vee}, {\wedge}}$; concretely, we call this \textbf{in disjunction/conjunction}) \textbf{in $e$} if the closest common parent node of (the negation of) $x$ and (the negation of) $y$ is labelled with $\opA$.
 	We also write this as $\getconn e x y = {\opA}$.
@@ -1748,13 +1754,10 @@ In this section, we establish a normal form for affine boolean terms.
 	Then $x$ and $y$ are in $\opA$-connection in $d$ if and only if they are in $\opA$-connection in $e$.
 \end{lemma}
 \begin{proof}
-	Take the closest common ancestor of $x$ and $y$ in $d$.
-	Proving that $d$ is a pruning of $e$ involves, at some point, that the operands of $d$ mentioning $x$ and $y$ are separated.
-	At that point, a corresponding node in $e$ was chosen with the same label; call $e'$ the subtree rooted there.
-	The immediate subtrees of $d'$ mentioning $x$ and $y$ are prunings of different immediate subtrees of $e'$, so that the root node of $e'$ is also the closest common ancestor of $x$ and $y$ in $e$.
+	This property is preserved in every pruning step.
 \end{proof}
 \begin{lemma} \label{thm:bool:twovar-normalization}
-	An affine boolean expression $t \in \booleanalg^\#(X)$ mentioning exactly two variables $x$ and $y$, has only a single normal representant, which is of the form $\tilde x \opA \tilde y$ with $\tilde x$ and $\tilde y$ literals mentioning $x$ and $y$, and $\opA \in \accol{{\vee}, {\wedge}}$.
+	An affine boolean term $t \in \booleanalg^\#(X)$ mentioning exactly two variables $x$ and $y$, has only a single normal representant, which is of the form $\tilde x \opA \tilde y$ with $\tilde x$ and $\tilde y$ literals mentioning $x$ and $y$, and $\opA \in \accol{{\vee}, {\wedge}}$.
 \end{lemma}
 \begin{proof}
 	Since every node has at least two children and there are exactly two leaves, there is exactly one node. This constrains the form of the normal representant.
@@ -1796,7 +1799,7 @@ In this section, we establish a normal form for affine boolean terms.
 \begin{lemma} \label{thm:bool:char-root-node}
 	Let $X_1, X_2, \ldots, X_n \subseteq Z$ be disjoint and $n > 1$.
 	Let $e \in \booleanexpr^\#(Z)$ be a normal affine expression depending on all and only on variables in $X = \bigcup_i X_i$.
-	Let $\accol{{\opA}, {\opB}} \in \accol{{\vee}, {\wedge}}$.
+	Let $\accol{{\opA}, {\opB}} = \accol{{\vee}, {\wedge}}$.
 	The following conditions are equivalent:
 	\begin{itemize}
 		\item both of the following conditions hold:
@@ -1804,7 +1807,8 @@ In this section, we establish a normal form for affine boolean terms.
 			\item $\getconn e x y = \opA$ for all $x \in X_i$, $y \in X_j$, $i \neq j$,
 			\item each $X_i$ is $\opB$-connected meaning that no further partition of $X_i$ is possible maintaining the property above,
 		\end{itemize}
-		\item $e$ is of the form $e = d_1 \opA d_2 \opA \ldots \opA d_n$ with each $d_i$ depending on all and only on variables in $X_i$, and being either a leaf or a tree with root node labelled with $\opB$.
+		\item $e$ is of the form $e = d_1 \opA d_2 \opA \ldots \opA d_n$ with each $d_i$ depending on all and only on variables in $X_i$.%
+		\footnote{By consequence of normality of $e$, every $d_i$ is either a leaf or a tree with root node labelled with $\opB$.}
 	\end{itemize}
 \end{lemma}
 \begin{proof}
@@ -1825,7 +1829,7 @@ In this section, we establish a normal form for affine boolean terms.
 	Let $e, e' \in \booleanexpr^\#(X)$ be normal affine boolean expressions mentioning the same literals and such that $\getconn e \loch \loch = \getconn{e'} \loch \loch$.
 	We prove that $e = e'$ by induction on $e$.
 	If $e$ is a constant or a literal, the result is immediate.
-	Otherwise, $e$ is of the form $e = d_1 \opA d_2 \opA \ldots \opA d_n$, where $\accol{{\opA}, {\opB}} \in \accol{{\vee}, {\wedge}}$.
+	Otherwise, $e$ is of the form $e = d_1 \opA d_2 \opA \ldots \opA d_n$, where $\accol{{\opA}, {\opB}} = \accol{{\vee}, {\wedge}}$.
 	Then \cref{thm:bool:char-root-node} partitions $X$ in $\opB$-connected components.
 	Then by the other implication of \cref{thm:bool:char-root-node}, $e'$ is of the form $e' = d_1' \opA d_2' \opA \ldots \opA d_n'$, where $d_i$ and $d_i'$ have the same dependencies $X_i$.
 	Thus, they must also depend on the same set of literals.
