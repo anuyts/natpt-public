@@ -1,4 +1,5 @@
-- may have forgotten a lot of JEPs
+- may have forgotten a lot of JEPs, search for "in $" or "a jet"
+- assignment -> bit-assignment
 
 - explain equijets using paths
 - rename anpolarity to polarmode
