@@ -1691,7 +1691,7 @@ Clearly then, a normal boolean expression either \emph{is} a constant, or does n
 \begin{definition} \label{def:bool:pruning}
 	Let $d$ and $e$ be normal expressions. We say that $d$ is a \textbf{pruning} of $e$ if $d$ can be obtained from $e$ by repeatedly removing leaves (though not the last one) and renormalizing.
 \end{definition}
-\begin{proposition}
+\begin{proposition}[Characterization of prunings] \label{thm:bool:pruning-char}
 	Let $d$ and $e$ be normal expressions. Then $d$ is a \textbf{pruning} of $e$ if and only if any of the following conditions hold (inductively):
 	\begin{itemize}
 		\item $d$ is a literal occurring in $e$,
@@ -1701,10 +1701,10 @@ Clearly then, a normal boolean expression either \emph{is} a constant, or does n
 			\quad \text{where} \quad
 			D_i = d_{i1} \opA \ldots \opA d_{ik_i}
 		\]
-		such that every $D_i$ is a pruning of a root operand in $e'$, and moreover a single operand of $e'$ cannot be used more often than its multiplicity in the multiset of root operands of $e'$.
+		such that every $D_i$ is a pruning of a root operand in $e'$, and moreover a single operand of $e'$ cannot be used more often than its multiplicity in the multiset of root operands of $e'$. \qed
 	\end{itemize}
 \end{proposition}
-\begin{proposition} \label{thm:bool:assign-pruning}
+\begin{proposition}[Partial assignments reduce to prunings] \label{thm:bool:assign-pruning}
 	Let $e$ be a normal expression with variables in $X$ and let $\sigma$ be a bit-assignment $\sigma : Y \to \accol{0, 1}$ of the variables in $Y \subseteq X$.
 	Let $e[\sigma]$ reduce to $d$. Then $d$ is either a constant or a pruning of $e$.
 \end{proposition}
@@ -1712,14 +1712,14 @@ Clearly then, a normal boolean expression either \emph{is} a constant, or does n
 	By induction on $e$. If $e$ is a constant or a literal, this is immediate.
 	If $e$ is a conjunction or disjunction, then this follows from the induction hypothesis for the immediate children of $e$.
 \end{proof}
-\begin{lemma} \label{thm:boolexp-to-const-assignment}
+\begin{lemma}[Full assignment for every outcome] \label{thm:boolexp-to-const-assignment}
 	For every non-constant $t \in \booleanalg^\#(X)$ and $c \in \accol{0, 1}$, there exists a bit assignment $\sigma : X \to \accol{0, 1}$ such that $t[\sigma] = c$.
 \end{lemma}
 \begin{proof}
 	Pick an affine representant $e \in [t]$ and assume it is normal (reduce if it is not).
 	Then we can prove this by induction on the height of $e$.
 \end{proof}
-\begin{lemma} \label{thm:boolexp-to-pruning-assignment}
+\begin{lemma}[Partial assignment without discard] \label{thm:boolexp-to-pruning-assignment}
 	For every normal affine expression $e \in \booleanexpr^\#(X)$ mentioning all and only the variables in $Z \subseteq X$, and for every $Y \subseteq X$, there exists a bit assignment $\sigma : X \setminus Y \to \accol{0, 1}$ such that $e[\sigma]$ reduces to a (necessarily normal affine) expression $d$ which mentions all and only the variables in $Y \cap Z$.
 \end{lemma}
 \begin{proof}
@@ -1729,26 +1729,27 @@ Clearly then, a normal boolean expression either \emph{is} a constant, or does n
 	For immediate subtrees not mentioning variables in $Y$, we use \cref{thm:boolexp-to-const-assignment} to find an assigment that reduces this subtree to the neutral element $\neutralA$ of $\opA$.
 	Combining all assignments yields the required result.
 \end{proof}
-\begin{corollary} \label{thm:boolexp-to-var-assignment}
-	For every normal affine expression $e \in \booleanexpr^\#(X)$ that has a leaf $\tilde y \in \accol{y,\lnot y}$ where $y \in X$, there exists a bit assignment $\sigma : X \setminus \accol y \to \accol{0, 1}$ such that $t[\sigma] = \tilde y$. \qed
+\begin{corollary}[All-but-one assignment for each leaf] \label{thm:boolexp-to-var-assignment}
+	For every normal affine expression $e \in \booleanexpr^\#(X)$ that has a leaf $\tilde y \in \accol{y,\lnot y}$ where $y \in X$, there exists a bit assignment $\sigma : X \setminus \accol y \to \accol{0, 1}$ such that $[e[\sigma]] = [e][\sigma] = [\tilde y]$. \qed
 \end{corollary}
-\begin{corollary} \label{thm:bool:term-dependencies}
+\begin{definitioncorollary} \label{thm:bool:term-dependencies}
 	If $e$ is a normal affine expression $e \in \booleanexpr^\#(X)$ depending on $y$, then every expression representing $[e]$ depends on $y$.
 	We say that \textbf{an affine term $t \in \booleanalg^\#(X)$ depends on $y \in X$} if the following equivalent conditions hold:
-	\begin{itemize}
+	\begin{enumerate}
 		\item All representants of $t$ depend on $y$.
 		\item All normal affine representants of $t$ depend on $y$.
-		\item Some normal affine representant of $t$ depends on $y$. \qed
-	\end{itemize}
-\end{corollary}
-\begin{proof}
+		\item Some normal affine representant of $t$ depends on $y$.
+	\end{enumerate}
+\end{definitioncorollary}
+\begin{proof}[Proof of equivalence]
+	Each condition clearly implies the next one. To get from the third to the first:
 	From \cref{thm:boolexp-to-var-assignment}, $[e]$ cannot have a representant that does not mention $y$.
 \end{proof}
 \begin{definition} \label{def:bool:in-connection}
 	If $e$ is a normal affine expression $e \in \booleanexpr^\#(X)$ depending on $x, y \in X$, then we say that $x$ and $y$ are \textbf{in $\opA$-connection} (where $\opA \in \accol{{\vee}, {\wedge}}$; concretely, we call this \textbf{in disjunction/conjunction}) \textbf{in $e$} if the closest common parent node of (the negation of) $x$ and (the negation of) $y$ is labelled with $\opA$.
 	We also write this as $\getconn e x y = {\opA}$.
 \end{definition}
-\begin{lemma} \label{thm:bool:pruning-in-connection}
+\begin{lemma}[Prunings preserve connecting symbol] \label{thm:bool:pruning-in-connection}
 	Let $d, e \in \booleanexpr^\#(X)$ be normal affine expressions and $d$ a pruning of $e$.
 	Let $d$ (hence $e$) depend on $x, y \in X$.
 	Then $x$ and $y$ are in $\opA$-connection in $d$ if and only if they are in $\opA$-connection in $e$.
@@ -1756,14 +1757,14 @@ Clearly then, a normal boolean expression either \emph{is} a constant, or does n
 \begin{proof}
 	This property is preserved in every pruning step.
 \end{proof}
-\begin{lemma} \label{thm:bool:twovar-normalization}
+\begin{lemma}[Canonical forms for 2-variables] \label{thm:bool:twovar-normalization}
 	An affine boolean term $t \in \booleanalg^\#(X)$ mentioning exactly two variables $x$ and $y$, has only a single normal representant, which is of the form $\tilde x \opA \tilde y$ with $\tilde x$ and $\tilde y$ literals mentioning $x$ and $y$, and $\opA \in \accol{{\vee}, {\wedge}}$.
 \end{lemma}
 \begin{proof}
 	Since every node has at least two children and there are exactly two leaves, there is exactly one node. This constrains the form of the normal representant.
 	Next, each one of these forms produces a different truth table and the truth table is a property of $t$, so there can be only one normal representant.
 \end{proof}
-\begin{lemma} \label{thm:bool:term-in-connection}
+\begin{definitionlemma} \label{thm:bool:term-in-connection}
 	Let $t \in \booleanalg^\#(X)$ depend on $x, y \in X$, and let $\opA \in \accol{{\vee}, {\wedge}}$. The following conditions are equivalent:
 	\begin{itemize}
 		\item $x$ and $y$ are in $\opA$-connection in some normal affine representant of $t$,
@@ -1771,14 +1772,14 @@ Clearly then, a normal boolean expression either \emph{is} a constant, or does n
 		\item $x$ and $y$ are \textbf{in $\opA$-connection in $t$} (definition).
 	\end{itemize}
 	We also write this as $\getconn t x y = {\opA}$.
-\end{lemma}
+\end{definitionlemma}
 \begin{proof}
 	Let $e$ and $e'$ be normal affine representants of $t$ and let $x$ and $y$ be in $\opA$-connection in $e$.
 	Pick an assignment $\sigma$ such that $e[\sigma]$ reduces to $d$ which depends exactly on $\accol{x, y}$.
 	By \cref{thm:bool:twovar-normalization}, $d$ is then the unique normal affine representant of $t[\sigma]$, so that $e'[\sigma]$ also reduces to $d$.
-	Then $d$ is a pruning of both $e$ and $e'$, so by \cref{thm:bool:pruning-in-connection}, $x$ and $y$ are in $\opA$-connection in $e'$.
+	Then by \cref{thm:bool:assign-pruning}, $d$ is a pruning of both $e$ and $e'$, so by \cref{thm:bool:pruning-in-connection}, $x$ and $y$ are in $\opA$-connection in $e'$.
 \end{proof}
-\begin{lemma} \label{thm:bool:char-siblings} (Not used.)
+\begin{lemma}[Characterization of immediate siblings (not used)] \label{thm:bool:char-siblings}
 	Let $e \in \booleanexpr^\#(X)$ be a normal affine expression depending on $x$ and $y$ where $x \neq y$.
 	The following conditions are equivalent:
 	\begin{itemize}
@@ -1796,8 +1797,8 @@ Clearly then, a normal boolean expression either \emph{is} a constant, or does n
 	\]
 	violating the assumption.
 \end{proof}
-\begin{lemma} \label{thm:bool:char-root-node}
-	Let $X_1, X_2, \ldots, X_n \subseteq Z$ be disjoint and $n > 1$.
+\begin{lemma}[Root-based partitioning] \label{thm:bool:char-root-node}
+	Let $X_1, X_2, \ldots, X_n \subseteq Z$ be non-empty and disjoint and $n > 1$.
 	Let $e \in \booleanexpr^\#(Z)$ be a normal affine expression depending on all and only on variables in $X = \bigcup_i X_i$.
 	Let $\accol{{\opA}, {\opB}} = \accol{{\vee}, {\wedge}}$.
 	The following conditions are equivalent:
@@ -1818,17 +1819,17 @@ Clearly then, a normal boolean expression either \emph{is} a constant, or does n
 	\begin{itemize}
 		\item $e$ is of the form $e = d_1 \opA d_2 \opA \ldots \opA d_m$ but the dependencies are not as expected.
 		Then we get a different partition of $X$ by the upward implication which we already proved.
-		But then we can intersect both partitions, yielding a finer one, which is in contradiction with the assumption that further partitioning was not possible.
+		But then we can intersect both partitions, yielding a new partition which is strictly finer than at least one of the original ones, which is in contradiction with the assumption that further partitioning was not possible.
 		\item $e$ is of the form $e = d_1 \opB d_2 \opB \ldots \opB d_m$. Then $X$ is $\opB$-connected meaning that $n = 1$, violating the assumptions. \qedhere
 	\end{itemize}
 \end{proof}
-\begin{lemma} \label{thm:bool:normal-from-graph}
+\begin{lemma}[Connection graph determines normal expression] \label{thm:bool:normal-from-graph}
 	A non-constant normal affine boolean expression $e \in \booleanexpr^\#(X)$ is fully determined by the set of literals it mentions and $\getconn e \loch \loch$.
 \end{lemma}
 \begin{proof}
-	Let $e, e' \in \booleanexpr^\#(X)$ be normal affine boolean expressions mentioning the same literals and such that $\getconn e \loch \loch = \getconn{e'} \loch \loch$.
+	Let $e, e' \in \booleanexpr^\#(X)$ be non-constant normal affine boolean expressions mentioning the same literals and such that $\getconn e \loch \loch = \getconn{e'} \loch \loch$.
 	We prove that $e = e'$ by induction on $e$.
-	If $e$ is a constant or a literal, the result is immediate.
+	If $e$ is a literal, the result is immediate.
 	Otherwise, $e$ is of the form $e = d_1 \opA d_2 \opA \ldots \opA d_n$, where $\accol{{\opA}, {\opB}} = \accol{{\vee}, {\wedge}}$.
 	Then \cref{thm:bool:char-root-node} partitions $X$ in $\opB$-connected components.
 	Then by the other implication of \cref{thm:bool:char-root-node}, $e'$ is of the form $e' = d_1' \opA d_2' \opA \ldots \opA d_n'$, where $d_i$ and $d_i'$ have the same dependencies $X_i$.
@@ -1836,7 +1837,7 @@ Clearly then, a normal boolean expression either \emph{is} a constant, or does n
 	Since $d_i$ is a pruning of $e$ and $d_i'$ is a pruning of $e'$, we have $\getconn{d_i} \loch \loch = \getconn e \loch \loch = \getconn{e'} \loch \loch = \getconn{d_i'} \loch \loch$ when considered on pairs of distinct variables in $X_i$.
 	From the induction hypothesis, we conclude that $d_i = d_i'$, for all $i$, and hence $e = e'$.
 \end{proof}
-\begin{theorem} \label{thm:bool:normalization}
+\begin{theorem}[Completeness of affine boolean normalization] \label{thm:bool:normalization}
 	Every affine boolean term $t \in \booleanalg^\#(Z)$ has exactly one normal affine representant.
 \end{theorem}
 \begin{proof}
