@@ -614,7 +614,7 @@ Clearly, the functor $I : \cubecat_\demorgan^\cartes \to \cubecat_\booleanalg^\c
 	We define the set of \textbf{$(\myorix, \vec{a})$-jet-cubes} as the set of lists of elements of $\set{P_i}{P \in \myorix, 0 \leq i < \lenpol{\vec a}}$,
 	where we identify all $P_i = Q_i =: {\edge}_i$ ($P, Q \in \myorix$) if $a_i = \npolar$.
 	To keep track of this, we also write $P_i\pmr{a_i}$.
-	Moreover, if $a_i = \ypolar$, we demand that the symbols $\jet_i$ and $\tej_i$ do not appear to the left of any symbol $\equijet_i$.
+	Moreover, if $a_i = \ypolar$, we demand that the symbols $\jet_i\pmr{\ypolar}$ and $\tej_i\pmr{\ypolar}$ do not appear to the left of any symbol $\equijet_i\pmr{\ypolar}$.
 	We denote jet cubes as
 	$(\dm i_0 : \rival{(P_0)_{i_0}}, \ldots, \dm i_{n-1} : \rival{(P_{n-1})_{i_{n-1}}})$,
 	thinking of the names $\dm{i}_k$ as De Bruijn indices.
@@ -640,7 +640,7 @@ Clearly, the functor $I : \cubecat_\demorgan^\cartes \to \cubecat_\booleanalg^\c
 		\item $a_i = \npolar$.
 	\end{itemize}
 	Otherwise, it is called \textbf{$i$-directed}.
-	Thus, if $\dm i$ is $i$-directed, then $a_i = \ypolar$ and $\dm i : \rival{\jet_i}$ or $\dm i : \rival{\tej_i}$.
+	Thus, if $\dm i$ is $i$-directed, then $a_i = \ypolar$ and either $\dm i : \rival{\jet_i\pmr{\ypolar}}$ or $\dm i : \rival{\tej_i\pmr{\ypolar}}$.
 \end{definition}
 \begin{definition} \label{def:sym-forget-cube}
 	Let $\vec a \sqsubset_i \vec b$ and ${\equijet} \in \myorix$. For any $(\myorix, \vec a)$-jet-cube $W$, we define the $(\myorix, \vec b)$-jet-cube $\Usymcube_i W$ by replacing every occurrence of $\edge_i$ with $\equijet_i$.
@@ -1351,7 +1351,7 @@ The last five rules involve connections (conjunction and disjunction) and only a
 Due to the twisted nature of the twisted prism functor, it turns out that we can substitute the last variable of the target cube only with a connection of which one operand (say the right one) is either (the negation of) the last variable of the source cube, or an expression depending only on $i$-symmetric variables.%
 \footnote{This is formalized in \cref{thm:char-jet-cube-to-line}.}
 
-In either case, it turns out that whether the last term reduces to $0$ or $1$ on any end point of the source cube, is sufficiently irregular that $i$-directed terms in the remainder of $\vfi$ can only depend on $i$-symmetric variables.
+In either case, it turns out that whether the last term reduces to $0$ or $1$ on any end point of the source cube, is sufficiently irregular that $i$-directed terms in the remainder of $\vfi$ can only depend on $i$-symmetric variables.\footnote{This is formalized in \cref{thm:left-of-connection}.}
 The promotion of all variables of degree $i$ to equijet variables in the context of $\vfi$ in at least one of the premises, precludes their usage in $i$-directed terms.
 
 In the latter case, we can use \ruleref{conn:degree-symmetric}.
@@ -1848,23 +1848,25 @@ Clearly then, a normal boolean expression either \emph{is} a constant, or does n
 	Thus, by \cref{thm:bool:normal-from-graph}, we conclude that $e = e'$.
 \end{proof}
 
+As of yet, when we say that a variable appears in an affine boolean term, or in a cube morphism $\vfi$ which is a list of affine boolean terms, we mean that the term (or one of the terms) \emph{depends} on it as per \cref{thm:bool:term-dependencies}.
+
 \paragraph{Understanding jet cube morphisms}
-\begin{lemma} \label{thm:left-of-concursor}
+\begin{lemma}[Variable not used at its own degree] \label{thm:left-of-concursor}
 	In $\jetcubetri \affine M {\vec a}$ with $M \in \accol{\bipointedsym, \booleanalg}$,
 	%assuming \cref{conv:sort-cubes},
 	the following holds:
-	If a cube morphism $\vfi$ is a jet cube morphism $V = (V_0, \dm j : \rival{P_j}, V_1) \to W = (W_0, \dm i : \rival{Q_i}, W_1)$ with $P, Q \in \accol{\jet, \tej, \equijet}$ and $j > i$,
+	If a cube morphism $\vfi$ is a jet cube morphism $V = (V_0, \dm j : \rival{P_j\pmr{a_j}}, V_1) \to W$ with $P \in \accol{\jet, \tej, \equijet}$,
 	and if either of the following conditions hold:
 	\begin{itemize}
-		\item $\dm j$ appears in $\dm i \psub \vfi$,
-		\item $\dm j$ does not appear in $\vfi$ at all,
+		\item $\dm j$ does not appear in $\vfi$,
+		\item $\dm j$ appears in $\dm i \psub \vfi$ where $W = (W_0, \dm i : \rival{Q_i\pmr{a_i}}, W_1)$ with $Q \in \accol{\jet, \tej, \equijet}$ and $j > i$,
 	\end{itemize}
 	then $\vfi$ is also a jet cube morphism
-	$\tilde V := (\UFsymcube_j(V_0), \dm j : \rival{\equijet_j}, V_1) \to W$.
+	$\tilde V := (\UFsymcube_j(V_0), \dm j : \rival{\equijet_j\pmr{a_j}}, V_1) \to W$.
 \end{lemma}
 We remark that this lemma is vacuous if $a_i = \npolar$ or $P = {\equijet}$.
 
-In words, the lemma says: When a variable of the domain of a jet cube morphism is used at a lower degree in the codomain, or not at all, then that variable and all variables of the same degree to its left can be promoted to equijet variables.
+In words, the lemma says: When a variable of the domain of a jet cube morphism is not used at its own degree (therefore it is either used at a lower degree or not at all), then that variable and all variables of the same degree to its left can be promoted to equijet variables.
 
 %In practice, we will only use this lemma for $M = \booleanalg$.
 \begin{proof}
@@ -1896,7 +1898,7 @@ In words, the lemma says: When a variable of the domain of a jet cube morphism i
 	Thus, $\rho$ is both a jet cube morphism $(\Opcube_j V_0, V_1) \to W'$ and $(V_0, V_1) \to W'$, hence it is a jet cube morphism $(\UFsymcube_j V_0, V_1) \to W'$.
 	
 	We now show that $\vfi$ is a jet cube morphism $\tilde V \to W$, i.e.\ that $f := \EP(\vfi)$ is a jet set morphism $\JEP(\tilde V) \to \JEP(W)$.
-	Pick a non-reflexive jet $\vec v = (\vec v_0, u, \vec v_1) \jet_k \vec v' = (\vec v_0', u', \vec v_1')$ in $\tilde V$; we show that $f(\vec v) \jet_k f(\vec v')$.
+	Pick a non-reflexive jet $\vec v = (\vec v_0, u, \vec v_1) \jet_k \vec v' = (\vec v_0', u', \vec v_1')$ in $\tilde V$; we show that $f(\vec v) \jet_k\pmr{a_k} f(\vec v')$.
 	If $k \neq j$, then $\vec v \jet_k \vec v'$ is also a jet in $V$ and therefore preserved by $f$.
 	Thus, we can assume that $k = j$.
 	%If $\vec v = \vec v'$, then preservation is trivial, so we assume $\vec v \neq \vec v'$.
@@ -1904,13 +1906,13 @@ In words, the lemma says: When a variable of the domain of a jet cube morphism i
 	There are three possibilities
 	\begin{description}
 		\item[\framebox{$\dm k \in V_0$}]
-		In this case, we have $\vec v_0 \infrajet_j \vec v_0'$ in $V_0$, $u = u'$, $\vec v_1 = \vec v_1'$, $\vec v \infrajet_j \vec v'$ in $V$ and $f(\vec v) \infrajet_j f(\vec v')$ in $W$.
-		If $\vfi$ does not depend on $\dm k$, then $f(\vec v) = f(\vec v')$ and therefore $f(\vec v) \jet_j f(\vec v')$.
+		In this case, we have $\vec v_0 \infrajet_j\pmr{a_j} \vec v_0'$ in $V_0$, $u = u'$, $\vec v_1 = \vec v_1'$, $\vec v \infrajet_j\pmr{a_j} \vec v'$ in $V$ and $f(\vec v) \infrajet_j\pmr{a_j} f(\vec v')$ in $W$.
+		If $\vfi$ does not depend on $\dm k$, then $f(\vec v) = f(\vec v')$ and therefore $f(\vec v) \jet_j\pmr{a_j} f(\vec v')$.
 		So we assume that $\vfi$ depends on $\dm k$; let $\dm l$ be the variable such that $\dm l \psub \vfi$ depends on $\dm k$.
 		\begin{itemize}
 			\item If $\dm l$ is of degree $\ell \leq i < j$, then $f(\vec v) \infrajet_j f(\vec v')$ is only possible if $f(\vec v) \infrajet_\ell f(\vec v')$ which implies $f(\vec v) \equijet_j f(\vec v')$.
-			\item If $\dm l$ is of degree $\ell > i$, then we have $\EP(\rho)(\vec v_0, \vec v_1) \overset{\neq}{\equijet}_j \EP(\rho)(\vec v_0', \vec v_1)$ because $\rho$ is a jet cube morphism $(\UFsymcube_j V_0, V_1) \to W'$.
-			Since $\EP(\rho) = \EP(\pi) \circ \EP(\vfi) \circ \EP(c/\dm j)$ for any $c \in \accol{0, 1}$ and the components forgotten by $\EP(\pi)$ are identical,
+			\item If $\dm l$ is of degree $\ell > i$, then it is part of $W'$. We then have $\EP(\rho)(\vec v_0, \vec v_1) \overset{\neq}{\equijet}_j \EP(\rho)(\vec v_0', \vec v_1)$ because $\rho$ is a jet cube morphism $(\UFsymcube_j V_0, V_1) \to W'$.
+			Since $\EP(\rho) = \EP(\pi) \circ \EP(\vfi) \circ \EP(u/\dm j)$ and the components forgotten by $\EP(\pi)$ are identical,
 			%and include any dependency on $\dm j$,
 			we have $f(\vec v) \equijet_j f(\vec v')$.
 		\end{itemize}
@@ -1921,8 +1923,8 @@ In words, the lemma says: When a variable of the domain of a jet cube morphism i
 		\item[\framebox{$\dm k \in V_1$}] Then $\vec v \jet_j \vec v'$ holds in $V$ and is therefore preserved by $f = \EP(\vfi)$. \qedhere
 	\end{description}
 \end{proof}
-\begin{lemma} \label{thm:char-twisted-cube-to-line}
-	In $\jetcubetri \mycubex \booleanalg {\vec a}$ with $\mycubex \in \accol{\affine, \cartes}$, let $V$ be a jet cube with only $i$-directed variables called (from left to right) $\dm j_1, \ldots, \dm j_n$, and consider $\vfi : V \to (\dm i : \rival{P_i})$ with $P \in \accol{\jet, \tej}$.
+\begin{lemma}[Characterization of same-degree directed affine boolean jet cube terms] \label{thm:char-twisted-cube-to-line}
+	In $\jetcubetri \mycubex \booleanalg {\vec a}$ with $\mycubex \in \accol{\affine, \cartes}$ and $a_i = \ypolar$, let $V$ be a jet cube with only $i$-directed variables called (from left to right) $\dm j_1, \ldots, \dm j_n$, and consider $\vfi : V \to (\dm i : \rival{P_i\pmr{\ypolar}})$ with $P \in \accol{\jet, \tej}$.
 	Then $\dm i \psub{\vfi}$ is either a constant or of the (obviously affine) form
 	\[
 		\dm i \psub{\vfi} = (\ldots((\lnot^{p_1} \dm j_1 \opA_1 \lnot^{p_2} \dm j_2) \opA_2 \lnot^{p_3} \dm j_3) \ldots) \opA_{n-1} \lnot^{p_n} \dm j_n
@@ -1938,15 +1940,18 @@ We will only use this lemma when $\mycubex = \affine$.
 	We prove this by induction on $n$.
 	% (and we don't have to worry about calling the induction hypothesis only on affine morphisms).
 	If $n = 0$ then $\dm i \psub \vfi$ is necessarily a constant.
-	Assume $n > 0$, implying that $a_i = \ypolar$.
+	Assume $n > 0$.
+	%, implying that $a_i = \ypolar$.
 	The jet set $\JEP(V)$ has $2^n$ elements and a unique Hamiltonian path of $i$-jets.
-	The function $f := \JEP(\vfi)$ sends this Hamiltonian path to a path in $\JEP(\dm i : \rival{\jet_i}) = \accol{0 \jet_i 1}$.
+	The function $f := \JEP(\vfi)$ sends this Hamiltonian path to a path in $\JEP(\dm i : \rival{\jet_i}) = \accol{0 \jet_i\pmr{\ypolar} 1}$.
 	Thus, $f$ is entirely determined by the step in the Hamiltonian path where the image of $f$ flips from $0$ to $1$.
-	Write $\dm j_k'$ to mean $\dm j_k$ if $\dm j_k : \rival{\jet_i}$ and to mean $\lnot \dm j_k$ if $\dm j_k : \rival{\tej_i}$.
+	Write $\dm j_k'$ to mean $\dm j_k$ if $\dm j_k : \rival{\jet_i\pmr{\ypolar}}$ and to mean $\lnot \dm j_k$ if $\dm j_k : \rival{\tej_i\pmr{\ypolar}}$.
 	There are 5 possible scenarios:
 	\begin{itemize}
-		\item The entire path is sent to $0$. Then $\dm i \psub \vfi = 1 = \_ \opK 0$.
-		\item The entire path is sent to $1$. Then $\dm i \psub \vfi = 1 = \_ \opK 1$.
+		\item The entire path is sent to $0$. Then $\dm i \psub \vfi = 0$.
+		%$ = \_ \opK 0$.
+		\item The entire path is sent to $1$. Then $\dm i \psub \vfi = 1$.
+		%$ = \_ \opK 1$.
 		\item The first half of the path is sent to $0$, the second half is sent to $1$. Then $\dm i \psub \vfi = \dm j_n' = \_ \opK \dm j_n'$.
 		\item The output of $f$ flips somewhere in the first half of the path.
 		Then $\dm i \psub \vfi = s \vee \dm j_n'$ for some boolean expression $s$ depending on $\dm j_1, \ldots, \dm j_{n-1}$.
@@ -1984,8 +1989,8 @@ We will only use this lemma when $\mycubex = \affine$.
 		By the induction hypothesis, $s$ is of the prescribed form, and therefore so is $\dm i \psub \vfi$. \qedhere
 	\end{itemize}
 \end{proof}
-\begin{lemma} \label{thm:char-jet-cube-to-line}
-	In $\jetcubetri \affine \booleanalg {\vec a}$ where $a_i = \ypolar$, consider $\vfi : V \to (\dm i : \rival{P_i})$ with $P \in \accol{\jet, \tej}$.
+\begin{lemma}[Characterization of directed affine boolean jet cube terms] \label{thm:char-jet-cube-to-line}
+	In $\jetcubetri \affine \booleanalg {\vec a}$ where $a_i = \ypolar$, consider $\vfi : V \to (\dm i : \rival{P_i\pmr{\ypolar}})$ with $P \in \accol{\jet, \tej}$.
 	Write $\dm j_1, \ldots, \dm j_n$ for the $i$-directed variables of $V$.
 	Then $\vfi$ does not depend on variables of degree lower (stronger) than $i$, nor on $i$-equijet variables of $V$.
 	Moreover, $\dm i \psub{\vfi}$ is of the form
@@ -1993,11 +1998,12 @@ We will only use this lemma when $\mycubex = \affine$.
 		\dm i \psub{\vfi} = h_n(h_{n-1}(\ldots h_3(h_2(h_1(\lnot^{p_1} \dm j_1) \opA_1 \lnot^{p_2} \dm j_2) \opA_2 \lnot^{p_3} \dm j_3) \ldots ) \opA_{n-1} \lnot^{p_n} \dm j_n)
 	\]
 	with $p_k \in \accol{0, 1}$ and $\opA_k \in \accol{{\vee}, {\wedge}, {\opK}}$ where we define $x \opK y := y$, and every $h_k$ is a composition of functions of the form $\loch \opB t$ with $t$ any affine boolean expression mentioning only $i$-symmetric variables and ${\opB} \in \accol{{\vee}, {\wedge}, {\opK}}$.
+	(If $n = 0$, we regard any term $t$ as being of the above form.)
 \end{lemma}
 \begin{proof}
 	We assume $P = {\jet}$, the proof for $P = {\tej}$ is analogous.
 
-	First of all, the $i$-equijet relation as well as all $\ell$-jet relations for $\ell < i$ are reflexive in $\JEP(\dm i : \rival{\jet_i}) = \accol{0 \jet_i 1}$, so that $\JEP(\vfi)$ must be constant on $i$-equijet- or $\ell$-jet-connected components, implying that $\vfi$ cannot depend on those variables.
+	First of all, the $i$-equijet relation as well as all $\ell$-jet relations for $\ell < i$ are discrete (coincide with the equality relation) in $\JEP(\dm i : \rival{\jet_i}) = \accol{0 \jet_i 1}$, so that $\JEP(\vfi)$ must be constant on $i$-equijet- or $\ell$-jet-connected components, implying that $\vfi$ cannot depend on those variables.
 	Then $\vfi$ factors over the map $\chi : V \to W$ that weakens over all those variables.
 	($\JEP(\chi)$ is the map that quotients out the $i$-equijet relation and therefore also the $\ell$-jet relations for $\ell < i$.)
 	Thus, without loss of generality, we can assume that $V = W$ contains no variables of degree lower than $i$, and no $i$-equijet variables.
@@ -2005,8 +2011,8 @@ We will only use this lemma when $\mycubex = \affine$.
 	
 	Write $U$ for the $i$-directed part of $V$ and note that any assignment of bits to all $i$-symmetric variables yields a jet cube morphism $\sigma : U \to V$ whose composite with $\vfi$ necessarily satisfies \cref{thm:char-twisted-cube-to-line}.
 	By \cref{thm:boolexp-to-pruning-assignment}, there exists a particular assignment $\sigma_0 : U \to V$ such that $\dm i \psub{\vfi \circ \sigma_0}$ depends on all $i$-directed variables that $\dm i \psub \vfi$ depends on.
-	The form of \cref{thm:char-twisted-cube-to-line} then dictates that $\dm i \psub \vfi$ depends on a final segment of the $i$-directed variables in $V$.
-	Then $\vfi$ factors over the map $\chi : V \to W$ that weakens over the initial segment of $i$-directed variables that $\vfi$ does not depend on, and again, without loss of generality, we assume that $V = W$, i.e.\ that $\vfi$ uses \emph{all} $i$-directed variables in $V$.
+	The form of \cref{thm:char-twisted-cube-to-line} then dictates that $\dm i \psub \vfi$ depends on a final segment of the $i$-directed variables in $V$ (since the outermost usage of $\opK$ cuts off an initial segment).
+	Then $\vfi$ factors over the map $\psi : V \to X$ that weakens over the initial segment of $i$-directed variables that $\vfi$ does not depend on, and again, without loss of generality, we assume that $V = W$, i.e.\ that $\vfi$ uses \emph{all} $i$-directed variables in $V$.
 	
 	The fact that $\dm i \psub{\vfi \circ \sigma_0}$ satisfies \cref{thm:char-twisted-cube-to-line} and is a pruning of $\dm i \psub{\vfi}$ (by \cref{thm:bool:assign-pruning}), severely constrains the possible forms that $\dm i \psub{\vfi}$ may take.
 	However, \cref{thm:char-twisted-cube-to-line} does not require that conjunction and disjunction appear in alternation, and thus, a priori, by associativity, parentheses could be moved around before unpruning.
@@ -2016,7 +2022,7 @@ We will only use this lemma when $\mycubex = \affine$.
 	
 	Let $e$ be the unique normal affine representant of $\dm i \psub \vfi$ (\cref{thm:bool:normalization}).
 	We proceed by induction on $e$.
-	If $e$ is a constant or $i$-symmetric literal, then it is of the required form.
+	If $e$ does not mention any $i$-directed variables, then it is of the required form.
 	If it is an $i$-directed literal, then it is the only one it depends on, hence $\lnot^{p_n} \dm j_n'$ with $n=1$, and thus of the required form.
 	
 	If $e$ is of the form $e = d_1 \opA \ldots \opA d_m$, then we need to prove that either $\lnot^{p_n} \dm j_n$ is a direct operand of $e$, or all $i$-directed variables occur in the same direct operand of $e$.
@@ -2025,6 +2031,15 @@ We will only use this lemma when $\mycubex = \affine$.
 	There is an assignment $\sigma_1$ of the $i$-symmetric dependencies of $d_1$ that reduces all $c_{i > 2}$ to the absorbing element $\absorbZ$ of $\opZ$, and thus reduces $d_1$ to $\absorbZ = \neutralA$, the neutral element of $\opA$.
 	For $i > 2$, there is an assignment $\sigma_i$ of the $i$-symmetric dependencies of $d_i$ that preserves all $i$-directed dependencies.
 	We combine all these assignments to a single assignment $\sigma : U \to V$. Then $e[\sigma]$ reduces to a normal expression that depends on $\dm j_k$ but not $\dm j_n$, which is then a representant of $\dm i \psub{\vfi \circ \sigma}$, which we know must satisfy \cref{thm:char-twisted-cube-to-line} and thus cannot depend on $\dm j_k$ without also depending on $\dm j_n$.
+	
+	So we are indeed in one of the two scenarios of interest:
+	\begin{itemize}
+		\item If all $i$-directed variables appear in the same operand, say $d_1$, then by \cref{thm:boolexp-to-const-assignment} there is an assignment $\tau$ of all the dependencies of $d_2, \ldots, d_m$ which reduces them all to $\neutralA$, the neutral element of $\opA$.
+		By soundness of our calculus, there is a jet cube $V'$ (consisting of all the non-assigned variables of $V$ at the same degrees) such that $\sigma : V' \to V$ is a jet cube morphism, and we have $\dm i \psub{\vfi \circ \tau} = [d_1]$.
+		Then by the induction hypothesis, $d_1$ must be of the required form, and therefore so is $e$.
+		\item If $\lnot^{p_n} \dm j_n$ is a direct operand of $e = e' \opA \lnot^{p_n} \dm j_n$, then by soundness of our calculus, there is a jet cube $V'$ (consisting of all the variables of $V$ but $\dm j$ at the same degrees) such that $(\lnot^{p_n} \neutralA / \dm j_n) : V' \to V$ is a jet cube morphism, and we have $\dm i \psub{\vfi \circ (\lnot^{p_n}\neutralA / \dm j_n)} = [e']$.
+		Then by the induction hypothesis, $e'$ must be of the required form w.r.t.\ $\dm j_1, \ldots, \dm j_n$, and therefore so is $e$. \qedhere
+	\end{itemize}
 %	
 %	\todoi{Old version}
 %	
@@ -2083,9 +2098,9 @@ We will only use this lemma when $\mycubex = \affine$.
 %		By the inner induction hypothesis, $t$ is of the required form, and therefore so is $e$. \qedhere
 %	\end{itemize}
 \end{proof}
-\begin{lemma} \label{thm:left-of-connection}
+\begin{lemma}[Connections are wild] \label{thm:left-of-connection}
 	In $\convjetcubetri \affine \booleanalg {\vec a}$, let $\hat \vfi : V \to W$ be a jet cube morphism and write $\vfi = \erasejc{\hat \vfi}$.
-	Let $W = (W_0, \dm i : \rival{Q_i})$ with $Q \in \accol{\jet, \tej}$ and $a_i = \ypolar$.
+	Let $W = (W_0, \dm i : \rival{Q_i\pmr{\ypolar}})$ with $Q \in \accol{\jet, \tej}$ and $a_i = \ypolar$.
 	Let $e$ be the normal affine representant of $\dm i \psub \vfi$ and let $\dm j_1, \ldots, \dm j_n$ ($n \geq 0$) be all the variables of degree $i$ that $e$ depends on, and $\dm k_1, \ldots, \dm k_m$ ($m \geq 0$) all the other variables that $e$ depends on.
 	Assume $m+n \geq 2$, so that $e$ necessarily contains a conjunction or disjunction.
 	By \cref{thm:char-jet-cube-to-line}, we know that $\dm j_1, \ldots, \dm j_n$ are the \emph{last} $n$ variables of degree $i$ in $V$.
@@ -2093,7 +2108,7 @@ We will only use this lemma when $\mycubex = \affine$.
 	Write $V = (V_0, \dm j_1 : \rival{P^1_i}, \ldots, \dm j_n : \rival{P^n_i}, V_1)$ so that (even if $n = 0$) all variables in $V_0$ have degree at least (at the strongest) $i$ and all variables in $V_1$ have degree strictly less (stronger) than $i$.
 	Here, each $P^1, \ldots, P^n \in \accol{\jet, \tej}$.%
 	\footnote{We could in principle allow $\equijet$ but it is easy to see that $\vfi$ being a jet cube morphism (equivalently, $\EP(\vfi)$ being a jet set) implies $P^1, \ldots, P^n \in \accol{\jet, \tej}$.}
-	Define $\tilde V = (\UFsymcube_i V_0, \dm j_1 : \rival{P^1_i}, \ldots, \dm j_n : \rival{P^n_i}, V_n)$, i.e.\ every variable of degree $i$ to the left of $\dm j_1$ gets promoted to an equijet variable.
+	Define $\tilde V = (\UFsymcube_i V_0, \dm j_1 : \rival{P^1_i}, \ldots, \dm j_n : \rival{P^n_i}, V_1)$, i.e.\ every variable of degree $i$ to the left of $\dm j_1$ gets promoted to an equijet variable.
 	Then $\vfi$ is a jet cube morphism $\tilde V \to W$.
 \end{lemma}
 %The lemma allows $P^1, \ldots, P^n \in \accol{\jet, \tej, \equijet}$, but it is easy to see that $\vfi$ being a jet cube morphism (equivalently, $\EP(\vfi)$ being a jet set) implies $P^1, \ldots, P^n \in \accol{\jet, \tej}$.
@@ -2126,19 +2141,19 @@ In words, this lemma says that if the last variable $\dm i$ of $W$ is substitute
 	Commutativity of the diagram and the fact that $\JEP(c/\dm i)$ is a full jet set morphism, imply that $\chi$, too, is a jet cube morphism.
 	
 	We now show that $\vfi$ is a jet cube morphsim $\tilde V \to W$.
-	Let $\vec v \jet_k \vec v'$ in $\tilde V$.
-	We prove that $f(\vec v) \jet_k f(\vec v')$ where $f = \EP(\vfi)$.
+	Let $\vec v \jet_k\pmr{a_k} \vec v'$ in $\tilde V$.
+	We prove that $f(\vec v) \jet_k\pmr{a_k} f(\vec v')$ where $f = \EP(\vfi)$.
 	If $\vec v = \vec v'$ then this is trivial, so let $\dm l$ be the variable where they differ.
-	If $k \neq i$ or $\dm l \not\in V_0$ then we have $\vec v \jet_k \vec v'$ in $V$ so this is preserved by $f$.
+	If $k \neq i$ or $\dm l \not\in V_0$ then we have $\vec v \jet_k\pmr{a_k} \vec v'$ in $V$ so this is preserved by $f$.
 	
-	Assume $k = i$ and $\dm l \in V_0$, which implies that $\dm l$ is not a dependency of $e$.
+	Thus, it sufficies to assume that $k = i$ and $\dm l \in V_0$, which implies that $\dm l$ is not a dependency of $e$.
 	This implies that $e \psub{\vec v} = e \psub{\vec v'} =: c$, or differently put $\dm i \psub{f(\vec v)} = \dm i \psub{f(\vec v')} = c$.
-	We have $\vec v \infrajet_i \vec v'$ in $V$, say $\vec v \mathrel{S}_i \vec v'$ where $S \in \accol{\jet, \tej}$.
-	This is preserved by $f$, so $f(\vec v) \mathrel{S}_i f(\vec v')$.
-	Because $(c/\dm i)$ is a full jet set morphism, writing $p = \EP(\dm i / \novar)$, we can conclude that $p(f(\vec v)) \mathrel{S}_i p(f(\vec v'))$ in $(\Opcube_i)^{1-c}(W_0)$.
+	We have $\vec v \infrajet_i\pmr{\ypolar} \vec v'$ in $V$, say $\vec v \mathrel{S}_i\pmr{\ypolar} \vec v'$ where $S \in \accol{\jet, \tej}$.
+	This is preserved by $f$, so $f(\vec v) \mathrel{S}_i\pmr{\ypolar} f(\vec v')$.
+	Because $(c/\dm i)$ is a full jet set morphism, writing $p = \EP(\dm i / \novar)$, we can conclude that $p(f(\vec v)) \mathrel{S}_i\pmr{\ypolar} p(f(\vec v'))$ in $(\Opcube_i)^{1-c}(W_0)$.\footnote{Or $(\Opcube_i)^{c}(W_0)$ if $Q = \tejsym$; for simplicity we assume $Q = \jetsym$.}
 	
-	Let $\vec u$ and $\vec u'$ be bit-assignments to the variables in $U$ obtained by projecting out all bits assigned to the dependencies of $e$ in the vectors $\vec v$ and $\vec v'$, and let $\vec \zeta$ and $\vec \kappa$ be the bits thus forgotten (which are the same for $\vec v$ and $\vec v'$).
-	Thus, $\vec v = \EP(\vec \zeta/\vec{\dm j}, \vec \kappa/\vec{\dm k})(\vec u)$ and similar for $\vec v'$.
+	Let $\vec u$ and $\vec u'$ be the restriction of $\vec v$ and $\vec v'$ to the variables in $U$, let $\vec \zeta$ be the (common) restriction of $\vec v$ and $\vec v'$ to the variables $\vec{\dm j}$, and $\vec \kappa$ be the (common) restriction of $\vec v$ and $\vec v'$ to the variables $\vec{\dm k}$.
+	Thus, $\vec v = \EP(\vec \zeta/\vec{\dm j}, \vec \kappa/\vec{\dm k})(\vec u)$ and $\vec v' = \EP(\vec \zeta/\vec{\dm j}, \vec \kappa/\vec{\dm k})(\vec u')$.
 	Writing $g = \EP(\chi)$, this implies that $p(f(\vec v)) = g(\vec u)$ and $p(f(\vec v')) = g(\vec u')$.
 	Thus, we have $g(\vec u) \mathrel S_i g(\vec u')$ in $(\Opcube_i)^{1-c}(W_0)$.
 	
@@ -2152,33 +2167,49 @@ In words, this lemma says that if the last variable $\dm i$ of $W$ is substitute
 	
 	On the other hand, looking at the direction of the jet between $\vec u$ and $\vec u'$ in $U_{(\vec \kappa, \vec \zeta)}$, we see that this flips with the $\dm j_1 \veebar \ldots \veebar \dm j_n$, the exclusive disjunction of all dependencies of $e$ of degree $i$, which all appear to the right of $\dm l$.
 	Now if $m+n \geq 2$, then it is impossible that the affine boolean expression $e \in \booleanalg^\#(\accol{\dm k_1, \ldots, \dm k_m, \dm j_1, \ldots, \dm j_n})$ which is in a reduced state and therefore truly depends on each of the mentioned variables, yields the exact same (or opposite) truth table as $\dm j_1 \veebar \ldots \veebar \dm j_n$.
+	Indeed, these truth tables can only align if $m = 0$ and $n \leq 1$.
 	
 	Thus, fixing $\vec u$ and $\vec u'$ and varying $(\vec \kappa, \vec \zeta)$, we see that there are assignments $(\vec \kappa, \vec \zeta)$ for which the jets between $\vec u$ and $\vec u'$ in $U_{(\vec \kappa, \vec \zeta)}$ on one hand, and between $g(\vec u)$ and $g(\vec u')$ in $(\Opcube_i)^{1-c}(W_0)$ are aligned, and others for which they are opposed.
 	Pick an assignment $(\vec \kappa', \vec \zeta')$ for which they are opposed.
 	We also know that $\chi$ is a jet cube morphism for any assignment $(\vec \kappa, \vec \zeta)$, and in particular for $(\vec \kappa', \vec \zeta')$.
-	Thus, $\chi$ provides us the jet pointing the other way, and we can conclude that $g(\vec u) \equijet_i g(\vec u')$.
-	Composing with $\EP(c/\dm i)$ for our original $c$ yields $f(\vec v) \equijet_i f(\vec v')$.
+	Thus, $\chi$ provides us the jet pointing the other way, and we can conclude that $g(\vec u) \equijet_i\pmr{\ypolar} g(\vec u')$.
+	Composing with $\EP(c/\dm i)$ for our original $c$ yields $f(\vec v) \equijet_i\pmr{\ypolar} f(\vec v')$.
 \end{proof}
 \begin{corollary} \label{thm:weaken-connection}
 	In $\jetcubetri \affine \booleanalg {\vec a}$, let $\hat \vfi : V \to W$ be a jet cube morphism and write $\vfi = \erasejc{\hat \vfi}$.
-	Let $W = (W_0, \dm i : \rival{Q_i})$ with $Q \in \accol{\jet, \tej}$ and $a_i = \ypolar$.
+	Let $W = (W_0, \dm i : \rival{Q_i\pmr{\ypolar}})$ with $Q \in \accol{\jet, \tej}$ and $a_i = \ypolar$.
 	Let $e$ be the reduction of $\dm i \psub \vfi$ and assume $e$ depends on at least two variables.
 	Then $(\novar/\dm i) \circ \vfi$ is a jet cube morphism $\UFsymcube_i V \to W_0$.
 \end{corollary}
 \begin{proof}
 	We know from \cref{thm:left-of-connection} that $\vfi$ is a jet cube morphism $\tilde V \to W$.
-	We first show that $(\novar / \dm i) \circ \vfi$ is a jet cube morphism $\tilde V \to W_0$.
 	Write $f = \EP(\vfi)$ and $p = \EP(\novar / \dm i)$.
-	Pick a non-reflexive jet $\vec v \jet_j \vec v'$ in $\tilde{V}$.
-	We show that $p(f(\vec v)) \jet_j p(f(\vec v'))$ in $W_0$.
-	We know that $f(\vec v) \jet_j f(\vec v')$ in $W$.
-	If $j \neq i$, it follows that $p(f(\vec v)) \jet_j p(f(\vec v'))$ in $W_0$.
-	If $j = i$, it follows that $p(f(\vec v)) \infrajet_i p(f(\vec v'))$ in $W_0$.
-	But because $(\novar/\dm i) \circ \vfi$ only depends on $i$-symmetric variables in $\tilde{V}$, we can conclude that $p(f(\vec v)) \equijet_i p(f(\vec v'))$.
-	%Hence we also have the other arrow.
-	
-	We conclude that $(\novar/\dm i) \circ \vfi$ is a jet cube morphism $\tilde V \to W$.
-	Since it only depends on $i$-symmetric variables, there is no harm in promoting the ignored variables of degree $i$ to equijet variables, and that is all that $\UFsymcube_i V$ does.
+	We show that $(\novar/\dm i) \circ \vfi$ is a jet cube morphism $\UFsymcube_i V \to W_0$.
+	Take a jet $v \jet_j\pmr{a_j} v'$ in $\JEP(\UFsymcube_i V)$.
+	We prove that $p(f(v)) \jet_j\pmr{a_j} p(f(v'))$ in $\JEP(W_0)$.
+	If $v = v'$, then this is trivial, so let $\dm k$ be the variable where they differ.
+	If $j \neq i$, then we have $v \jet_j\pmr{a_j} v'$ in $V$ as well as $\tilde V$ and the result follows because $\vfi : V \to W$ is a jet cube morphism, so we assume that $j = i$.
+	Then $v \equijet_i\pmr{\ypolar} v'$ in $\JEP(\UFsymcube_i V)$, since we are in an $i$-symmetrically closed cube.
+	If $\vfi$ does not depend on $\dm k$, then $f(v) = f(v')$ so the result still holds by reflexivity.
+	Let $\dm l$ be the variable such that $\dm l \psub{\vfi}$ depends on $\dm k$.
+	If $\dm l = \dm i$, then after forgetting $\dm i$ have $p(f(v)) = p(f(v'))$, so the result still holds by reflexivity.
+	If $\dm l \neq \dm i$, then $\dm k$ is not a dependency of $\dm i$ and so it has the same `type' in $\tilde V$ and in $\UFsymcube_i V$.
+	Then we have $v \equijet_i\pmr{\ypolar} v'$ in $\JEP(\tilde V)$ and hence $f(v) \equijet_i\pmr{\ypolar} f(v')$ in $\JEP(W)$ and $p(f(v)) \equijet_i\pmr{\ypolar} p(f(v'))$ because $p$ preserves $i$-equijets.
+%	
+%	\todoi{Old stuff}
+%	
+%	We first show that $(\novar / \dm i) \circ \vfi$ is a jet cube morphism $\tilde V \to W_0$.
+%	Write $f = \EP(\vfi)$ and $p = \EP(\novar / \dm i)$.
+%	Pick a non-reflexive jet $\vec v \jet_j\pmr{a_j} \vec v'$ in $\tilde{V}$.
+%	We show that $p(f(\vec v)) \jet_j\pmr{a_j} p(f(\vec v'))$ in $W_0$.
+%	We know that $f(\vec v) \jet_j\pmr{a_j} f(\vec v')$ in $W$.
+%	If $j \neq i$, it follows that $p(f(\vec v)) \jet_j\pmr{a_j} p(f(\vec v'))$ in $W_0$.
+%	If $j = i$, it follows that $p(f(\vec v)) \infrajet_i\pmr{\ypolar} p(f(\vec v'))$ in $W_0$.
+%	But because $(\novar/\dm i) \circ \vfi$ only depends on $i$-symmetric variables in $\tilde{V}$, we can conclude that $p(f(\vec v)) \equijet_i p(f(\vec v'))$.
+%	%Hence we also have the other arrow.
+%	
+%	We conclude that $(\novar/\dm i) \circ \vfi$ is a jet cube morphism $\tilde V \to W$.
+%	Since it only depends on $i$-symmetric variables, there is no harm in promoting the ignored variables of degree $i$ to equijet variables, and that is all that $\UFsymcube_i V$ does.
 \end{proof}
 
 \subsubsection{Completeness} \label{sec:jetcubes:calculus:completeness}

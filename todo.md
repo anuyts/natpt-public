@@ -1,3 +1,5 @@
+- may have forgotten a lot of JEPs
+
 - explain equijets using paths
 - rename anpolarity to polarmode
 - natpt: put anpolarity on arrows & osigns
