@@ -1,9 +1,9 @@
 - may have forgotten a lot of JEPs, search for "in $" or "a jet"
 - assignment -> bit-assignment
 
-- explain equijets using paths
-- rename anpolarity to polarmode
-- natpt: put anpolarity on arrows & osigns
+- explain equijets using paths (i.e. inserted degrees)
+- [x] rename anpolarity to polarmode
+- [x] put anpolarity on arrows & osigns
 - rename jet set to jet graph
 
 - title (current is best):
@@ -19,3 +19,4 @@
 
 ## Questions
 - what's wrong with boolean cubes for HoTT?
+    nothing
