@@ -2543,6 +2543,43 @@ The results in this section are not really used, but the purpose, especially of 
 Thus, $\bigsqcup_i \vec \delta^i = \vec{\ypolar}$, and more generally $\vec a = \bigsqcup_i (\vec \delta^i \sqcap \vec a)$.
 \begin{theorem}[SSS-factorization] \label{thm:sssfactorization}
 	Let $\vec a$ be a mask of length $\ell$.
+	For any jet cube morphism $\hat \vfi : V \to W$ in $\convjetcubetri \affine M {\vec a}$, define jet cubes as follows:
+	\begin{itemize}
+		\item $W_i$ for a directed degree $i$ is a cube of mask $\delta^i$ and consists of all $i$-directed variables of $W$, in order.
+		\item $V_i$ for a directed degree $i$ is a cube of mask $\delta^i$ and consists of all variables occurring in the composite cube morphism $\erasejc{V} \xrightarrow{\vfi} \erasejc{W} \xrightarrow{\pi} \erasejc{W_i}$ where $\dm i \psub \pi := \dm i$.
+		They are listed in the same order in which they occur in $V$.
+		Variables of a degree $j \neq i$ are retyped in $V_i$ with type $\rival{\edge_j\pmr{\npolar}}$.
+		\item $W_\npolar$ is a cube of mask $\vec \npolar$ and consists of all non-directed variables of $W$, i.e.\ all variables which in $W$ have type $\rival{\equijet_i\pmr{\ypolar}}$ or $\rival{\edge_i\pmr{\npolar}}$ for some $i \in \Deg(\vec a)$.
+		They are listed in the same order in which they occur in $W$.
+		They are retyped in $W_\npolar$ with type $\rival{\edgesym_i\pmr{\npolar}}$.
+		\item $V_\npolar$ is a cube of mask $\vec \npolar$ and consists of all variables of $V$ not yet included in some $V_i$, i.e. variables either occurring in the composite cube morphism $\erasejc{V} \xrightarrow{\vfi} \erasejc{W} \xrightarrow{\pi} \erasejc{W_\npolar}$ or not occurring in $\vfi$ at all.
+		They are listed in the same order in which they occur in $V$.
+		They are retyped in $V_\npolar$ with type $\rival{\edgesym_i\pmr{\npolar}}$.
+	\end{itemize}
+	Then there are jet cube morphisms $\vfi_i : V_i \to W_i$ and $\vfi_\npolar : V_\npolar \to W_\npolar$ and jet cube morphisms $\rho_0$ and $\rho_1$ that erase to cube renamings\footnote{Cube renamings: Morphisms in $\Kleisli(M)\op$ that come from $\Set$, i.e.\ are not effectful in the sense that they do not use the constants and operators provided by $M$.}, such that $\vfi$ factorizes as:
+	\[
+		\xymatrix{
+			V
+				\ar[rr]^{\rho_0}_\cong
+			&& V_\npolar \sss \paren{\bigsss_i V_i}
+				\ar[rr]^{\bigsss_i \vfi_i}
+			&& W_\npolar \sss \paren{\bigsss_i W_i}
+				\ar[rr]^{\rho_1}_\cong
+			&& W,
+		}
+	\]
+	where $\bigsss$ denotes a semisymmetric separated product.
+\end{theorem}
+\begin{proof}
+	As cube morphisms, the renamings $\rho_0$ and $\rho_1$ are just defined by $\dm i \psub{\rho_0} := \dm i$ and $\dm i \psub{\rho_1} := \dm i$.
+	Since $W$ is conventional, we actually have $W_\npolar \sss \paren{\bigsss_i W_i} = W$ so that $\rho_1$ is in fact the identity morphism and therefore a jet cube morphism.
+	\todoi{$\rho_0$.}
+	\todoi{Complete proof.}
+\end{proof}
+
+\todoi{Old version}
+\begin{theorem}[SSS-factorization] \label{thm:sssfactorization}
+	Let $\vec a$ be a mask of length $\ell$.
 	For any jet cube morphism $\hat \vfi : V \to W$ in $\convjetcubetri \affine M {\vec a}$, define jet cubes $(V_i)_{0 \leq i < \ell}$ and $(W_i)_{0 \leq i < \ell}$ of mask $\vec a \sqcap \vec \delta^i$ by
 	\begin{itemize}
 		\item $W_i$ consists of all variables of $W$ of degree $i$, with their original typing,
