@@ -2594,58 +2594,6 @@ Thus, $\bigsqcup_i \vec \delta^i = \vec{\ypolar}$, and more generally $\vec a = 
 	Then $\vfi_\npolar = \pi \circ \vfi \circ \sigma : V_\npolar \to W_\npolar$ is a jet cube morphism.
 \end{proof}
 
-\todoi{Old version}
-\begin{theorem}[SSS-factorization] \label{thm:sssfactorization}
-	Let $\vec a$ be a mask of length $\ell$.
-	For any jet cube morphism $\hat \vfi : V \to W$ in $\convjetcubetri \affine M {\vec a}$, define jet cubes $(V_i)_{0 \leq i < \ell}$ and $(W_i)_{0 \leq i < \ell}$ of mask $\vec a \sqcap \vec \delta^i$ by
-	\begin{itemize}
-		\item $W_i$ consists of all variables of $W$ of degree $i$, with their original typing,
-		\item $V_i$ as the jet cube consisting of all variables $\dm j$ of $V$ such that there is a variable $\dm i \in W_i$ such that $\dm i \psub \vfi$ depends on $\dm j$. Variables of degree $i$ are kept with their original typing, unless a variable of the same degree to their right has been used at a lower (stronger) degree or is not used at all, in which case they are retyped as $\rival{\equijet_i}$. Variables of higher (weaker) degree $j>i$ are retyped as $\rival{\edge_j}$. Variables of lower degree cannot occur.
-	\end{itemize}
-	Then there are jet cube morphisms $\vfi_i : V_i \to W_i$ and jet cube morphisms $\rho_0$ and $\rho_1$ that erase to cube renamings\footnote{Cube renamings: Morphisms in $\Kleisli(M)\op$ that come from $\Set$, i.e.\ are not effectful in the sense that they do not use the constants and operators provided by $M$.}, such that $\vfi$ factorizes as:
-	\[
-		\xymatrix{
-			V
-				\ar[rr]^{\rho_0}
-			&& {\bigsss_i V_i}
-				\ar[rr]^{\bigsss_i \vfi_i}
-			&& {\bigsss_i W_i}
-				\ar[rr]^{\rho_1}_\cong
-			&& W,
-		}
-	\]
-	where $\bigsss$ denotes a semisymmetric separated product.
-\end{theorem}
-\begin{proof}
-	%Assume $V$ and $W$ adhere to \cref{conv:sort-cubes}.
-
-	It is immediately clear that $\bigsss_i W_i \cong W$ by an isomorphism $\rho_1$ that erases to a renaming.\footnote{In fact $\rho_1$ is the identity because we are working with conventional cubes.}
-	
-	We then define $\rho_0$ as the cube morphism that discards all variables unused by $\vfi$, and $\vfi_i$ as the cube morphism such that $\dm i \psub{\vfi_i \circ \rho_0} = \dm i \psub{\vfi}$ for every variable $\dm i$ in $W_i$.
-	It is then immediately clear that $\vfi = \rho_1 \circ \paren{\bigsss_i \vfi_i} \circ \rho_0$.
-	What remains to be proven is that $\rho_0$ and $\vfi_i$ are jet cube morphisms.
-	
-	In the case of $\rho_0$, this is only non-trivial if $a_i = \ypolar$.
-	From \cref{thm:char-jet-cube-to-line} and the completeness of our calculus we know that the union of the dependencies of all $\dm i \psub \vfi$ for all directed variables $\dm i$ of $W_i$, will be a final segment of the $i$-directed variables of $V$.
-	Hence, an initial segment of the $i$-directed variables in $V$, together with all symmetric variables of degree $i$ in $V$, will be either not used or used at a lower degree $j < i$, or used in $\dm i \psub \vfi$ for some variable $\dm i : \rival{\equijetsym_i\pmr{\ypolar}}$.
-	In all of these cases, they will either be absent from $\bigsss_i V_i$ or have type $\rival{\equijetsym_i\pmr{\ypolar}}$.
-	Thus we can form $\rho_0$ as the composite of two jet cube morphisms: the first one erases to the identity morphism and just promotes an initial segment of the $i$-directed variables to symmetric ones, while the second one subsequently discards some of the (now or already) symmetric variables.
-	The latter is possible by the rule \ruleref{wkn}, which leaves the source cube unaffected under the described circumstances.
-	
-	%this is relatively trivial: we are promoting an initial segment of the variables of every degree to equijet variables of the same degree, and then projecting away some of these.
-	
-	In the case of $\vfi_i$, this follows essentially from \cref{thm:left-of-concursor}.
-%	
-%	By \cref{thm:left-of-concursor}, any variable that is either unused, or used at a strictly lower (stronger) degree, or to the left of such a variable of the same degree, can be promoted to an equijet variable, and $\vfi$ will still be a jet cube morphism.
-%	The result of these promotions, and of discarding unused variables, is exactly (up to renaming isomorphism) $\bigsss_i V_i$.
-%	As only an initial segment of the variables of any given degree gets promoted to equijet variables, the renaming $\rho_0 : V \to \bigsss_i V_i$ is a jet cube morphism.
-%	
-%	For $\vfi_i$, first note that the weakening morphism $\pi_i$ is a jet cube morphism $W \to \Usymcube_{\vec a \sqcap \vec \delta^i \sqsubseteq \vec a} W_i$, and hence so is $\pi_i \circ \vfi$.
-%	By transposition, we see that $\pi_i \circ \vfi$ is also a jet cube morphism $\Fsymcube_{\vec a \sqcap \vec \delta^i \sqsubseteq \vec a} V \to W_i$.
-%	As a cube morphism, $\pi_i \circ \vfi$ factors over the weakening morphism $\xi_i : \erasejc V \to \erasejc{V_i}$ as $\pi_i \circ \vfi = \vfi_i \circ \xi_i$.
-%	Now $\xi_i$ only projects out symmetric variables therefore is a jet cube morphism $\Fsymcube_{\vec a \sqcap \vec \delta^i \sqsubseteq \vec a} V \to V_i$. Moreover, $\JEP(\xi_i)$ is jet-surjective (\cref{def:jet-surjective}), so we conclude that $\vfi_i$ too must be a jet cube morphism.
-\end{proof}
-
 \subsection{Comparison to the Literature} \label{sec:jetcubes:comparison}
 \subsubsection{Point category}
 \begin{proposition}
