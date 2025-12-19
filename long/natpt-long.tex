@@ -2537,6 +2537,7 @@ The results in this section are not really used, but the purpose, especially of 
 	To prove this, we need to be able to commute variables of $V$ and $W$ of a degree $i$ such that $a_i = b_i = \npolar$.
 	This is possible by \cref{thm:commute-symmetric}.
 \end{proof}
+We can thus make sense of the notation $\bigsss_i W_i$ for a multi-operand SSS-product.
 \begin{definition}
 	Given a fixed length $\ell$, which we assume clear from the context, and a degree $0 \leq i < \ell$, we define the \textbf{punch mask} $\vec \delta^i$ by $\vec \delta^i_j = \npolar$ if $i \neq j$ and $\vec \delta^i_i = \ypolar$.
 \end{definition}
@@ -2547,6 +2548,7 @@ Thus, $\bigsqcup_i \vec \delta^i = \vec{\ypolar}$, and more generally $\vec a = 
 	\begin{itemize}
 		\item $W_i$ for a directed degree $i$ is a cube of mask $\delta^i$ and consists of all $i$-directed variables of $W$, in order.
 		\item $V_i$ for a directed degree $i$ is a cube of mask $\delta^i$ and consists of all variables occurring in the composite cube morphism $\erasejc{V} \xrightarrow{\vfi} \erasejc{W} \xrightarrow{\pi} \erasejc{W_i}$ where $\dm i \psub \pi := \dm i$.
+		These are the dependencies of the expressions that $\vfi$ substitutes for the variables in $W_i$.
 		They are listed in the same order in which they occur in $V$.
 		Variables of a degree $j \neq i$ are retyped in $V_i$ with type $\rival{\edge_j\pmr{\npolar}}$.
 		\item $W_\npolar$ is a cube of mask $\vec \npolar$ and consists of all non-directed variables of $W$, i.e.\ all variables which in $W$ have type $\rival{\equijet_i\pmr{\ypolar}}$ or $\rival{\edge_i\pmr{\npolar}}$ for some $i \in \Deg(\vec a)$.
@@ -2562,7 +2564,7 @@ Thus, $\bigsqcup_i \vec \delta^i = \vec{\ypolar}$, and more generally $\vec a = 
 			V
 				\ar[rr]^{\rho_0}_\cong
 			&& V_\npolar \sss \paren{\bigsss_i V_i}
-				\ar[rr]^{\bigsss_i \vfi_i}
+				\ar[rr]^{\vfi_\npolar \sss \paren{\bigsss_i \vfi_i}}
 			&& W_\npolar \sss \paren{\bigsss_i W_i}
 				\ar[rr]^{\rho_1}_\cong
 			&& W,
@@ -2572,9 +2574,24 @@ Thus, $\bigsqcup_i \vec \delta^i = \vec{\ypolar}$, and more generally $\vec a = 
 \end{theorem}
 \begin{proof}
 	As cube morphisms, the renamings $\rho_0$ and $\rho_1$ are just defined by $\dm i \psub{\rho_0} := \dm i$ and $\dm i \psub{\rho_1} := \dm i$.
+	The cube morphism $\vfi_i$ is defined by $\dm i \psub{\vfi_i} = \dm i \psub{\vfi}$, and $\vfi_\npolar$ by $\dm i \psub{\vfi_\npolar} = \dm i \psub{\vfi}$.
+	Then it is clear that the entire thing composes to $\vfi$.
+	
 	Since $W$ is conventional, we actually have $W_\npolar \sss \paren{\bigsss_i W_i} = W$ so that $\rho_1$ is in fact the identity morphism and therefore a jet cube morphism.
-	\todoi{$\rho_0$.}
-	\todoi{Complete proof.}
+	
+	For $\rho_1$, observe that the variables in $V_\npolar \sss \paren{\bigsss_i V_i}$ are again typed the same way as in $V$, and the only point in which they can differ, is in the swapping of symmetric variables of the same degree.
+	Then $\rho_1$ is a jet cube morphism by \cref{thm:commute-symmetric}.
+	
+	
+	To see that $\vfi_i$ is a jet cube morphism: the composite $V \xrightarrow{\vfi} W \xrightarrow{\pi} \Usymcube_{\vec \delta^i \sqsubseteq \vec a} W_i$ is an $\vec a$-jet-cube morphism since $\pi$ is.
+	Applying $\Fsymcube_{\vec \delta^i \sqsubseteq \vec a}$, we obtain $\pi \circ \vfi$ as a $\vec \delta^i$-jet-cube morphism $\Fsymcube_{\vec \delta^i \sqsubseteq \vec a} V \to W_i$.
+	Now since $V_i$ consists of a final segment of the variables of degree $i$ in $V$ (as a indirect consequence of \cref{thm:char-jet-cube-to-line} and the completeness of our calculus), any bit-assignment $\sigma$ of the variables in $V \setminus V_i$ amounts to a jet cube morphism $\sigma : V_i \to \Fsymcube_{\vec \delta^i \sqsubseteq \vec a} V$.
+	Then $\vfi_i = \pi \circ \vfi \circ \sigma : V_i \to W_i$ is a jet cube morphism.
+	
+	To see that $\vfi_\npolar$ is a jet cube morphism: the composite $V \xrightarrow{\vfi} W \xrightarrow{\pi} \Usymcube_{\vec \npolar \sqsubseteq \vec a} W_\npolar$ is an $\vec a$-jet-cube morphism since $\pi$ is.
+	Applying $\Fsymcube_{\vec \npolar \sqsubseteq \vec a}$, we obtain $\pi \circ \vfi$ as a $\vec \npolar$-jet-cube morphism $\Fsymcube_{\vec \npolar \sqsubseteq \vec a} V \to W_\npolar$.
+	Any bit-assignment $\sigma$ of the variables in $V \setminus V_\npolar$ amounts to a jet cube morphism $\sigma : V_\npolar \to \Fsymcube_{\vec \npolar \sqsubseteq \vec a} V$.
+	Then $\vfi_\npolar = \pi \circ \vfi \circ \sigma : V_\npolar \to W_\npolar$ is a jet cube morphism.
 \end{proof}
 
 \todoi{Old version}
