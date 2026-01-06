@@ -3256,6 +3256,10 @@ We do not have the same result for $\poldeg$, and do not bother for $\poldegeq$.
 	which preserves identity and composition (\cref{thm:orideg-functor-laws}).
 	We can now observe that the action in \cref{eq:ori-poldeg} is natural in $\vec a$ (\cref{thm:ori-poldeg-natural}).
 \end{definition}
+\begin{notation} \label{not:polarmode-reminder-orideg}
+	If $P_i \in \oridegeqtop(\vec a)$ (or one of its subsets), then we write $P_i\pmr{a_i}$ for $(p \pmr{a_i})_i$, i.e.\ the polarmode reminder concerns the orientation, not the oriented degree as a whole.
+	The latter will be denoted $(P_i) \pmr{\vec a}$ instead.
+\end{notation}
 \begin{proposition} \label{thm:ori-poldeg-extranatural}
 	The action in \cref{eq:ori-poldeg} is extranatural in $b$.
 \end{proposition}
@@ -3526,36 +3530,43 @@ where the identity is $\id_{[\ypolar]} = \reshlist{\pdeg \nonpol \eqtydeg}{\pdeg
 \begin{theorem}\label{thm:poresh-adjoint}
 	\begin{enumerate}
 		\item A pair of polarized reshuffles $\lambda \in \Hom(\vec a, \vec b)$ and $\rho \in \Hom(\vec b, \vec a)$ is adjoint ($\lambda \dashv \rho$) if and only if the following equivalent conditions are satisfied:
-		\begin{align}
-			&\forall P_i \in \oridegeqtop(\vec a), Q_j \in \oridegeqtop(\vec b). P_i \leq Q_j \oriof \lambda \Leftrightarrow P_i \oriof \rho \leq Q_j,
-			\label{eq:poresh-adjoint-crit-orideg}
-			\\
-			&\forall c \in \Polarmode, p_i \in \poldegeqtop(\vec a, c), q_j \in \poldegeqtop(\vec b, c). p_i \leq q_j \circ \lambda \Leftrightarrow p_i \circ \rho \leq q_j.
-			\label{eq:poresh-adjoint-crit-poldeg}
-		\end{align}
+		\begin{itemize}
+			\item We have $\loch \oriof \rho \dashv \loch \oriof \lambda : \oridegeqtop(\vec b) \to \oridegeqtop(\vec a)$:
+			\begin{align}
+				&\forall P_i \in \oridegeqtop(\vec a), Q_j \in \oridegeqtop(\vec b). \nn \\
+				&\qquad (P_i)\pmr{\vec a} \leq (Q_j)\pmr{\vec b} \oriof \lambda \pmrhom{\vec a}{\vec b} \Leftrightarrow (P_i)\pmr{\vec a} \oriof \rho\pmrhom{\vec b}{\vec a} \leq (Q_j)\pmr{\vec b},
+				\label{eq:poresh-adjoint-crit-orideg}
+			\end{align}
+			\item For either polarmode $c$, we have $\loch \circ \rho \dashv \loch \circ \lambda : \poldegeqtop(\vec b, c) \to \poldegeqtop(\vec a, c)$:
+			\begin{align}
+				&\forall c \in \Polarmode, p_i \in \poldegeqtop(\vec a, c), q_j \in \poldegeqtop(\vec b, c). \nn \\
+				&\qquad (p_i)\pmrhom{\vec a}{c} \leq (q_j)\pmrhom{\vec b}{c} \circ \lambda\pmrhom{\vec a}{\vec b} \Leftrightarrow (p_i)\pmrhom{\vec a}{c} \circ \rho\pmrhom{\vec b}{\vec a} \leq (q_j)\pmrhom{\vec b}{c}.
+				\label{eq:poresh-adjoint-crit-poldeg}
+			\end{align}
+		\end{itemize}
 		\item By consequence:
 		\begin{itemize}
-			\item A reshuffle $\rho$ has a left adjoint $\lambda$ if and only if
+			\item A reshuffle $\rho\pmrhom{\vec b}{\vec a}$ has a left adjoint $\lambda\pmrhom{\vec a}{\vec b}$ if and only if
 			\begin{align}
-				&\eqtydeg \cdot \rho = \nonpol_\eqtydeg, \text{and} \label{eq:poresh-withl-crit1} \\
-				&\text{for all } i \in \Degeq(\vec a) \text{ with } i \cdot \rho = \isopol_j \text{, we have } b_j = \npolar \text{ (so $i \cdot \rho = \nonpol_j$)}. \label{eq:poresh-withl-crit2}
+				&\eqtydeg \cdot \rho = \nonpol_\eqtydeg \pmrnn, \text{and} \label{eq:poresh-withl-crit1} \\
+				&\text{for all } i \in \Degeq(\vec a) \text{ with } i \cdot \rho = \isopol_j\pmrhom{b_j}{a_i} \text{, we have } b_j = \npolar \text{ (so $i \cdot \rho = \nonpol_j\pmrhom{\npolar}{a_i}$)}. \label{eq:poresh-withl-crit2}
 				%&\text{for all } \jetsym_i \in \oripshfwd(\vec a) \text{ with } a_i = \ypolar \text{, we have } \jetsym_i \cdot \rho \neq \infrajetsym_j. \label{eq:poresh-withl-crit2}
 			\end{align}
 			In this case,
 			\begin{itemize}
 				\item for any $Q_j \in \oridegeqtop(\vec b)$, we find $Q_j \oriof \lambda$ as the greatest oriented degree $P_i \in \oridegeqtop(\vec a)$ such that $P_i \oriof \rho \leq Q_j$;
-				\item for any $q_j \in \poldegeqtop(\vec b, c)$, we find $q_j \circ \lambda$ as the greatest polarized degree $p_i \in \poldegeqtop(\vec a, c)$ such that $p_i \circ \rho \leq q_j$.\footnote{Recall from \cref{thm:deg-vs-poldeg-poresh} that $j \cdot \lambda = \pospol_j \circ \lambda$.}
+				\item for any $q_j \in \poldegeqtop(\vec b, c)$, we find $q_j \circ \lambda$ as the greatest polarized degree $p_i \in \poldegeqtop(\vec a, c)$ such that $p_i \circ \rho \leq q_j$. This allows us to compute $\lambda$ via $j \cdot \lambda = \pospol_j \circ \lambda$ (\cref{thm:deg-vs-poldeg-poresh}).
 			\end{itemize}
 			
 			\item A reshuffle $\lambda$ has a right adjoint $\rho$ if and only if
 			\begin{align}
-				&\text{for all } j \in \Degeq(\vec b), \text{we have } j \cdot \lambda < \nonpol_\top, \text{and} \label{eq:poresh-withr-crit1} \\
-				&\text{for all } j \in \Degeq(\vec b) \text{ with } j \cdot \lambda = \mixpol_i \text{, we have } a_i = \npolar \text{ (so $j \cdot \lambda = \nonpol_i$)}. \label{eq:poresh-withr-crit2}
+				&\text{for all } j \in \Degeq(\vec b), \text{we have } j \cdot \lambda < \nonpol_\top \pmrhom{\npolar}{b_j}, \text{and} \label{eq:poresh-withr-crit1} \\
+				&\text{for all } j \in \Degeq(\vec b) \text{ with } j \cdot \lambda = \mixpol_i\pmrhom{a_i}{b_j} \text{, we have } a_i = \npolar \text{ (so $j \cdot \lambda = \nonpol_i\pmrhom{\npolar}{b_j}$)}. \label{eq:poresh-withr-crit2}
 			\end{align}
 			In this case,
 			\begin{itemize}
 				\item for any $P_i \in \oridegeqtop(\vec a)$, we find $P_i \oriof \rho$ as the least oriented degree $Q_j \in \oridegeqtop(\vec b)$ such that $P_i \leq Q_j \oriof \lambda$;
-				\item for any $p_i \in \poldegeqtop(\vec a, c)$, we find $p_i \circ \rho$ as the least polarized degree $q_j \in \poldegeqtop(\vec b, c)$ such that $p_i \leq q_j \circ \lambda$.
+				\item for any $p_i \in \poldegeqtop(\vec a, c)$, we find $p_i \circ \rho$ as the least polarized degree $q_j \in \poldegeqtop(\vec b, c)$ such that $p_i \leq q_j \circ \lambda$. This allows us to compute $\rho$ via $i \cdot \rho = \pospol_i \circ \rho$ (\cref{thm:deg-vs-poldeg-poresh}).
 			\end{itemize}
 		\end{itemize}
 	\end{enumerate}
@@ -3617,7 +3628,7 @@ where the identity is $\id_{[\ypolar]} = \reshlist{\pdeg \nonpol \eqtydeg}{\pdeg
 		\]
 		A left adjoint $\lambda \dashv \rho$ exists if and only if this function is definable and is the action of some polarized reshuffle on polarized degrees.
 		%
-		However, $\ell_c$ is only defined if the set of which we take the maximum\footnote{Which differs from the join in that it needs to be one of the operands.}, is non-empty\footnote{In which case there is indeed a maximum, since the set is closed under joins, since $\loch \oriof \rho$ respects joins (\cref{thm:poldeg-poresh-lattice}).}.
+		However, $\ell_c$ is only defined if the set of which we take the maximum\footnote{Which differs from the join in that it needs to be one of the operands.}, is non-empty\footnote{In which case there is indeed a maximum, since the set is closed under joins, since $\loch \circ \rho$ respects joins (\cref{thm:poldeg-poresh-lattice}).}.
 		As such, existence of a left adjoint requires that
 		\[
 			\forall q_j \in \poldegeqtop(\vec b, c). \exists p_i \in \poldegeqtop(\vec a, c).p_i \circ \rho \leq q_j.
@@ -3629,11 +3640,11 @@ where the identity is $\id_{[\ypolar]} = \reshlist{\pdeg \nonpol \eqtydeg}{\pdeg
 		We define a polarized reshuffle $\lambda \in \Hom(\vec a, \vec b)$ by $j \cdot \lambda = \ell_{b_j}(\pospol_j) \in \poldegeqtop(\vec a, b_j)$.
 		We have to show that $\ell$ is the action of $\lambda$ if and only if \cref{eq:poresh-withl-crit2} holds.
 		\begin{itemize}
-			\item To prove `only if', assume that \cref{eq:poresh-withl-crit2} does not hold (which is decidable). Then there exists some $i \in \Degeq(\vec a)$ such that $i \cdot \rho = \isopol_j \in \poldegeqtop(\vec b, a_i)$ with $b_j = \ypolar$.
+			\item To prove `only if', assume that \cref{eq:poresh-withl-crit2} does not hold (which is decidable). Then there exists some $i \in \Degeq(\vec a)$ such that $i \cdot \rho\pmrhom{\vec b}{\vec a} = \isopol_j\pmrhom{b_j}{a_i} \in \poldegeqtop(\vec b, a_i)$ with $b_j = \ypolar$.
 			
-			This implies that $\isopol_i \circ \rho = \isopol_j \in \poldegeqtop(\vec b, \ypolar)$ and hence, by the adjunction $\loch \circ \rho \dashv \ell$, that $\isopol_i \leq \ell_{\ypolar}(\isopol_j)$.
+			This implies that $(\isopol_i)\pmrhom{\vec a}{\ypolar} \circ \rho\pmrhom{\vec b}{\vec a} = \isopol_j\pmryy \in \poldegeqtop(\vec b, \ypolar)$ and hence, by the adjunction $\loch \circ \rho \dashv \ell$, that $\isopol_i \leq \ell_{\ypolar}(\isopol_j)$.
 			
-			On the other hand, we have that $\mixpol_i \circ \rho = \isopol_j \not\leq \pospol_j \in \poldegeqtop(\vec b, \ypolar)$ and hence, by the adjunction $\loch \circ \rho \dashv \ell$, that $\mixpol_i \not\leq \ell_\ypolar(\pospol_j) = j \cdot \lambda \in \poldegeqtop(\vec a, \ypolar)$.
+			On the other hand, we have that $(\mixpol_i)\pmrhom{\vec a}{\ypolar} \circ \rho\pmrhom{\vec b}{\vec a} = \isopol_j\pmryy \not\leq \pospol_j\pmryy \in \poldegeqtop(\vec b, \ypolar)$ and hence, by the adjunction $\loch \circ \rho \dashv \ell$, that $\mixpol_i \not\leq \ell_\ypolar(\pospol_j) = j \cdot \lambda \in \poldegeqtop(\vec a, \ypolar)$.
 			This is only possible if $\getdeg(j \cdot \lambda) < i$.
 			But this degree is preserved by the action of $\isopol$.
 			
@@ -3644,7 +3655,7 @@ where the identity is $\id_{[\ypolar]} = \reshlist{\pdeg \nonpol \eqtydeg}{\pdeg
 			so that $\ell$ cannot be the action of $\lambda$.
 			
 			\item To prove `if', assume that \cref{eq:poresh-withl-crit2} holds. We prove that $\ell_c$ is the action of $\lambda$.
-			It is sufficient to prove this for $c = \ypolar$, since there is just one composition table for polarities (\cref{fig:polarity-orientation}) and no additional equalities are introduced if the codomain $c$ becomes $\npolar$.
+			\todoi{It is sufficient to prove this for $c = \ypolar$, since there is just one composition table for polarities (\cref{fig:polarity-orientation}) and no additional equalities are introduced if the codomain $c$ becomes $\npolar$.}
 			It is clear from the definition of $\ell$ that $\ell(\nonpol_\top) = \nonpol_\top$, and for all other degrees we have $\ell(\pospol_j) = \pospol_j \circ \lambda$ by definition of $\lambda$ and \cref{thm:deg-vs-poldeg-poresh}.
 %			For degrees $j$ where $b_j = \npolar$, this is enough, as all polarized degrees are then equal to $\nonpol_j = \pospol_j$.
 %			For other degrees $j$, we have furthermore
