@@ -3526,6 +3526,47 @@ where the identity is $\id_{[\ypolar]} = \reshlist{\pdeg \nonpol \eqtydeg}{\pdeg
 	Sometimes, we need to consider only reshuffles that have at least a certain number of left/right adjoints. The 2-posets that contain only those reshuffles (with the same order relation) will be denoted as $\poreshcat\withllr$, where the number of white bullets on the left/right is the minimal number of left/right adjoints.
 \end{notation}
 
+\subsubsection{Adjunctions of Polarities}
+\begin{theorem} \label{thm:pol-adjunctions}
+	We give an exhaustive list of adjunctions of polarities:
+	\[
+		\begin{array}{l c l c l c l c l c l c l c l}
+			\pospol \pmryy &\dashv& \pospol \pmryy
+			\\
+			\negpol \pmryy &\dashv& \negpol \pmryy
+			\\
+			\isopol \pmryy &\dashv& \mixpol \pmryy
+			&\qquad\qquad&
+			\isopol \pmryn &\dashv& \nonpol \pmrny
+			&\qquad\qquad&
+			\nonpol \pmrny &\dashv& \mixpol \pmryn
+			&\qquad\qquad&
+			\nonpol \pmrnn &\dashv& \nonpol \pmrnn
+			\\
+			 &\not\dashv& \isopol \pmryy
+			&\qquad\qquad&
+			&&
+			&\qquad\qquad&
+			 &\not\dashv& \isopol \pmryn
+			\\
+			\mixpol \pmryy &\not\dashv&
+			&\qquad\qquad&
+			\mixpol \pmryn &\not\dashv&
+		\end{array}
+	\]
+\end{theorem}
+\begin{proof}
+	The (co-)unit inequalities for the listed adjunctions, can be straightforwardly checked.
+	We prove the non-adjunctions:
+	\begin{description}
+		\item[\framebox{$\not\dashv \isopol \pmryy$}] Co-unit fails: There is no $\ell \pmryy$ such that $\isopol \pmryy = \ell \pmryy \circ \isopol \pmryy \leq \pospol \pmryy$.
+		\item[\framebox{$\mixpol \pmryy \not\dashv$}] Unit fails: There is no $r \pmryy$ such that $\pospol \pmryy \leq r \pmryy \circ \mixpol \pmryy = \mixpol \pmryy$.
+		\item[\framebox{$\not\dashv \isopol \pmryn$}] Co-unit fails: $\isopol \pmryy = \nonpol \pmrny \circ \isopol \pmryn \not\leq \pospol \pmryy$.
+		\item[\framebox{$\mixpol \pmryn \not\dashv$}] Unit fails: $\pospol \pmryy \not\leq \nonpol \pmrny \circ \mixpol \pmryn = \mixpol \pmryy$.
+	\end{description}
+	Since every polarity can be looked up in this table both on the left and on the right of a non-adjunction, our list is exhaustive.
+\end{proof}
+
 \subsubsection{Characterization}
 \begin{theorem}\label{thm:poresh-adjoint}
 	\begin{enumerate}
@@ -3544,13 +3585,15 @@ where the identity is $\id_{[\ypolar]} = \reshlist{\pdeg \nonpol \eqtydeg}{\pdeg
 				\label{eq:poresh-adjoint-crit-poldeg}
 			\end{align}
 		\end{itemize}
-		\item By consequence:
+		\item By (non-trivial) consequence:
 		\begin{itemize}
 			\item A reshuffle $\rho\pmrhom{\vec b}{\vec a}$ has a left adjoint $\lambda\pmrhom{\vec a}{\vec b}$ if and only if
 			\begin{align}
 				&\eqtydeg \cdot \rho = \nonpol_\eqtydeg \pmrnn, \text{and} \label{eq:poresh-withl-crit1} \\
-				&\text{for all } i \in \Degeq(\vec a) \text{ with } i \cdot \rho = \isopol_j\pmrhom{b_j}{a_i} \text{, we have } b_j = \npolar \text{ (so $i \cdot \rho = \nonpol_j\pmrhom{\npolar}{a_i}$)}. \label{eq:poresh-withl-crit2}
-				%&\text{for all } \jetsym_i \in \oripshfwd(\vec a) \text{ with } a_i = \ypolar \text{, we have } \jetsym_i \cdot \rho \neq \infrajetsym_j. \label{eq:poresh-withl-crit2}
+				&\text{for all } i \in \Degeq(\vec a) \text{ with } i \cdot \rho = q_j\pmrhom{b_j}{a_i}, \text{the polarity $q$ has a left adjoint.}
+				%&\text{for all } i \in \Degeq(\vec a) \text{ with } i \cdot \rho = \isopol_j\pmrhom{b_j}{a_i} \text{, we have } b_j = \npolar \text{ (so $i \cdot \rho = \nonpol_j\pmrhom{\npolar}{a_i}$)}.
+				%&\text{for all } \jetsym_i \in \oripshfwd(\vec a) \text{ with } a_i = \ypolar \text{, we have } \jetsym_i \cdot \rho \neq \infrajetsym_j.
+				\label{eq:poresh-withl-crit2}
 			\end{align}
 			In this case,
 			\begin{itemize}
@@ -3561,7 +3604,9 @@ where the identity is $\id_{[\ypolar]} = \reshlist{\pdeg \nonpol \eqtydeg}{\pdeg
 			\item A reshuffle $\lambda$ has a right adjoint $\rho$ if and only if
 			\begin{align}
 				&\text{for all } j \in \Degeq(\vec b), \text{we have } j \cdot \lambda < \nonpol_\top \pmrhom{\npolar}{b_j}, \text{and} \label{eq:poresh-withr-crit1} \\
-				&\text{for all } j \in \Degeq(\vec b) \text{ with } j \cdot \lambda = \mixpol_i\pmrhom{a_i}{b_j} \text{, we have } a_i = \npolar \text{ (so $j \cdot \lambda = \nonpol_i\pmrhom{\npolar}{b_j}$)}. \label{eq:poresh-withr-crit2}
+				&\text{for all } j \in \Degeq(\vec b) \text{ with } j \cdot \lambda = p_i \pmrhom{a_i}{b_j}, \text{the polarity $p$ has a right adjoint}.
+				%&\text{for all } j \in \Degeq(\vec b) \text{ with } j \cdot \lambda = \mixpol_i\pmrhom{a_i}{b_j} \text{, we have } a_i = \npolar \text{ (so $j \cdot \lambda = \nonpol_i\pmrhom{\npolar}{b_j}$)}.
+				\label{eq:poresh-withr-crit2}
 			\end{align}
 			In this case,
 			\begin{itemize}
@@ -3636,11 +3681,17 @@ where the identity is $\id_{[\ypolar]} = \reshlist{\pdeg \nonpol \eqtydeg}{\pdeg
 		Without loss of generality, we can instantiate both $p_i$ and $q_j$ with the minimal element $\nonpol_\eqtydeg$, so existence of a left adjoint requires that $\eqtydeg \cdot \rho = \nonpol_\eqtydeg \circ \rho = \nonpol_\eqtydeg$ (\cref{eq:poresh-withl-crit1}).
 		
 		We now assume that this is the case, so that $\ell_c$ is defined.
-		It is then, by construction, right adjoint to $\loch \circ \rho$.
-		We define a polarized reshuffle $\lambda \in \Hom(\vec a, \vec b)$ by $j \cdot \lambda = \ell_{b_j}(\pospol_j) \in \poldegeqtop(\vec a, b_j)$.
+		It is then, by construction, right adjoint to $\loch \circ \rho$:
+		\begin{equation}
+			\loch \circ \rho \qquad \dashv \qquad \ell_c \quad : \quad \poldegeqtop(\vec b, c) \to \poldegeqtop(\vec a, c).
+		\end{equation}
+		We define a polarized reshuffle $\lambda \in \Hom(\vec a, \vec b)$ by
+		\begin{equation}
+			j \cdot \lambda = \ell_{b_j}(\pospol_j) \in \poldegeqtop(\vec a, b_j).
+		\end{equation}
 		We have to show that $\ell$ is the action of $\lambda$ if and only if \cref{eq:poresh-withl-crit2} holds.
 		\begin{itemize}
-			\item To prove `only if', assume that \cref{eq:poresh-withl-crit2} does not hold (which is decidable). Then there exists some $i \in \Degeq(\vec a)$ such that $i \cdot \rho\pmrhom{\vec b}{\vec a} = \isopol_j\pmrhom{b_j}{a_i} \in \poldegeqtop(\vec b, a_i)$ with $b_j = \ypolar$.
+			\item To prove `only if', assume that \cref{eq:poresh-withl-crit2} does not hold (which is decidable). Then from \cref{thm:pol-adjunctions}, we know we can find some $i \in \Degeq(\vec a)$ such that $i \cdot \rho\pmrhom{\vec b}{\vec a} = \isopol_j\pmrhom{b_j}{a_i} \in \poldegeqtop(\vec b, a_i)$ with $b_j = \ypolar$.
 			
 			This implies that $(\isopol_i)\pmrhom{\vec a}{\ypolar} \circ \rho\pmrhom{\vec b}{\vec a} = \isopol_j\pmryy \in \poldegeqtop(\vec b, \ypolar)$ and hence, by the adjunction $\loch \circ \rho \dashv \ell$, that $\isopol_i \leq \ell_{\ypolar}(\isopol_j)$.
 			
@@ -3654,7 +3705,56 @@ where the identity is $\id_{[\ypolar]} = \reshlist{\pdeg \nonpol \eqtydeg}{\pdeg
 			\]
 			so that $\ell$ cannot be the action of $\lambda$.
 			
-			\item To prove `if', assume that \cref{eq:poresh-withl-crit2} holds. We prove that $\ell_c$ is the action of $\lambda$.
+			\item To prove `if', assume that \cref{eq:poresh-withl-crit2} holds. We prove that $\lambda \dashv \rho$. This immediately implies that $\loch \circ \rho \dashv \loch \circ \lambda$ and since we already know that $\loch \circ \rho \dashv \ell$, by uniqueness of the adjoint, we find that $\ell = \loch \circ \lambda$.
+			
+			\begin{itemize}
+				\item We first prove the co-unit inequality $\lambda \pmrhom{\vec a}{\vec b} \circ \rho \pmrhom{\vec b}{\vec a} \leq \id_{\vec b}$:
+				\begin{align*}
+					j \cdot (\lambda \pmrhom{\vec a}{\vec b} \circ \rho \pmrhom{\vec b}{\vec a})
+					&= (j \cdot \lambda)\pmrhom{\vec a}{b_j} \circ \rho \pmrhom{\vec b}{\vec a}
+					& \text{(def.\ of comp.\ in $\poreshcat$)}
+					\\
+					&= \ell_{b_j}(\pospol_j\pmrhom{b_j}{b_j})\pmrhom{\vec a}{b_j} \circ \rho \pmrhom{\vec b}{\vec a}
+					& \text{(def.\ of $\lambda$)}
+					\\
+					&\leq \pospol_j\pmrhom{b_j}{b_j}
+					& \text{(co-unit of $\loch \circ \rho \dashv \ell$)}
+					\\
+					&= j \cdot \id_{\vec b}.
+				\end{align*}
+				
+				\item Next, we prove the unit inequality $\id_{\vec a} \leq \rho \pmrhom{\vec b}{\vec a} \circ \lambda \pmrhom{\vec a}{\vec b}$.
+				To this end, we need to prove that for all $i \in \Degeq(\vec a)$, we have $(\pospol_i)\pmrhom{\vec a}{a_i} \leq (i \cdot \rho) \circ \lambda \pmrhom{\vec a}{\vec b}$.
+				Using \cref{thm:deg-vs-poldeg-poresh}, we rewrite the right hand side as $((\pospol_i)\pmrhom{\vec a}{a_i} \circ \rho \pmrhom{\vec b}{\vec a}) \circ \lambda \pmrhom{\vec a}{\vec b}$.
+				It then suffices to prove the more general inequality
+				\begin{equation}
+					\forall c \in \Polarmode, p_i \in \poldegeqtop(\vec a, c). \qquad
+					(p_i)\pmrhom{\vec a}{c} \leq ((p_i)\pmrhom{\vec a}{c} \circ \rho \pmrhom{\vec b}{\vec a}) \circ \lambda \pmrhom{\vec a}{\vec b}.
+				\end{equation}
+				It is a general fact about adjunctions $L \dashv R$ that there is a 1-1 correspondence between natural transformations $FR \to G$ and natural transformations $F \to GL$.
+				Applying this to $\loch \circ \rho \dashv \ell_c$, where we restrict one category to the image of $\loch \circ \rho$, we may equivalently prove \todoi{You need to be more careful here, in order to guarantee that $q$ has a left adjoint.}
+				\begin{equation}
+					\forall c \in \Polarmode, q_j \in \Image(\loch \circ \rho) \subseteq \poldegeqtop(\vec b, c). \qquad
+					\ell_c(q_j)\pmrhom{\vec a}{c} \leq (q_j)\pmrhom{\vec b}{c} \circ \lambda \pmrhom{\vec a}{\vec b}.
+				\end{equation}
+				The right hand side expands to $(q_j)\pmrhom{\vec b}{c} \circ \lambda \pmrhom{\vec a}{\vec b} = q\pmrhom{b_j}{c} \circ \ell_{b_j}(\pospol_j)\pmrhom{\vec a}{b_j}$ by \cref{eq:poldeg-poresh} and the definition of $\lambda$.
+				
+				By unfolding the definition of $\ell$ and noting that $q_j \circ \loch$ is monotonically increasing and therefore maximum-preserving, we need to prove, for each $c$ and $q_j$ as above:
+				\begin{align*}
+					&\forall p_i \in \poldegeqtop(\vec a, c) \text{ with $(p_i)\pmrhom{\vec a}{c} \circ \rho\pmrhom{\vec b}{\vec a} \leq (q_j)\pmrhom{\vec b}{c}$} .\\
+					&\exists \hat p_{\hat i} \in \poldegeqtop(\vec a, b_j) \text{ with $(\hat p_{\hat i})\pmrhom{\vec a}{b_j} \circ \rho\pmrhom{\vec b}{\vec a} \leq (\pospol_j)\pmrhom{\vec b}{b_j}$ } .\\
+					&(p_i)\pmrhom{\vec a}{c} \leq q\pmrhom{b_j}{c} \circ (\hat p_{\hat i})\pmrhom{\vec a}{b_j}.
+				\end{align*}
+				
+				We set $\hat i = i$ and proceed by case distinction on $b_j$ and $q\pmrhom{b_j}{c}$.
+				\begin{description}
+					\item[\framebox{$p\pmrhom{a_i}{c} = \nonpol\pmrhom{\npolar}{c}$}]
+				\end{description}
+			\end{itemize}
+			
+			\item \todoi{Old}
+			
+			To prove `if', assume that \cref{eq:poresh-withl-crit2} holds. We prove that $\ell_c$ is the action of $\lambda$.
 			
 			It is sufficient to prove this for $c = \ypolar$.
 			Indeed, we can reduce the case where $c = \npolar$ to the other case.
