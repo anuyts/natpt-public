@@ -194,6 +194,13 @@
 \newcommand{\remindershade}[1]{\textcolor{green!50!black}{#1}}
 %\newcommand{\remindershade}[1]{\textcolor{white!40!black}{#1}}
 	\newcommand{\pmr}[1]{^{\remindershade{#1}}}
+		\newcommand{\pmry}{\pmr{\ypolar}}
+		\newcommand{\pmrn}{\pmr{\npolar}}
+	\newcommand{\pmrhom}[2]{^{\remindershade{#1,#2}}}
+		\newcommand{\pmryy}{\pmrhom{\ypolar}{\ypolar}}
+		\newcommand{\pmrny}{\pmrhom{\npolar}{\ypolar}}
+		\newcommand{\pmryn}{\pmrhom{\ypolar}{\npolar}}
+		\newcommand{\pmrnn}{\pmrhom{\npolar}{\npolar}}
 
 \newcommand{\opshade}[1]{\textcolor{lipicsBulletGray}{#1}}
 
