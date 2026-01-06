@@ -3655,24 +3655,33 @@ where the identity is $\id_{[\ypolar]} = \reshlist{\pdeg \nonpol \eqtydeg}{\pdeg
 			so that $\ell$ cannot be the action of $\lambda$.
 			
 			\item To prove `if', assume that \cref{eq:poresh-withl-crit2} holds. We prove that $\ell_c$ is the action of $\lambda$.
-			\todoi{It is sufficient to prove this for $c = \ypolar$, since there is just one composition table for polarities (\cref{fig:polarity-orientation}) and no additional equalities are introduced if the codomain $c$ becomes $\npolar$.}
-			It is clear from the definition of $\ell$ that $\ell(\nonpol_\top) = \nonpol_\top$, and for all other degrees we have $\ell(\pospol_j) = \pospol_j \circ \lambda$ by definition of $\lambda$ and \cref{thm:deg-vs-poldeg-poresh}.
+			
+			It is sufficient to prove this for $c = \ypolar$.
+			Indeed, we can reduce the case where $c = \npolar$ to the other case.
+			For all masks $\vec x$, the action $\pospol \pmrny \circ \loch : \poldegeqtop(\vec x, \npolar) \to \poldegeqtop(\vec x, \ypolar)$ is injective and monotonically increasing (and therefore maximum-preserving).
+			We have $\pospol \pmrny \circ \ell_\npolar((q_j)\pmrhom{\vec b}{\npolar}) = \ell_\ypolar(\pospol \pmrny \circ (q_j)\pmrhom{\vec b}{\npolar})$:
+			
+			
+			%since there is just one composition table for polarities (\cref{fig:polarity-orientation}) and no additional equalities are introduced if the codomain $c$ becomes $\npolar$.
+			
+			It is clear from the definition of $\ell$ that $\ell_c(\nonpol_\top\pmrhom{\npolar}{c}) = \nonpol_\top\pmrhom{\npolar}{c}$, and for all other degrees we have $\ell_c(\pospol_j\pmrhom{b_j}{c}) = \pospol_j\pmrhom{b_j}{c} \circ \lambda\pmrhom{\vec a}{\vec b}$ by definition of $\lambda$ and \cref{thm:deg-vs-poldeg-poresh}.
+			The remaining cases are $\ell_c(\negpol_j\pmrhom{b_j}{c})$ with $b_j = c = \ypolar$, $\ell_c(\mixpol_j\pmrhom{b_j}{c})$ with $b_j = \ypolar$, and $\ell_c(\isopol\pmrhom{b_j}{c})$ with $b_j = \ypolar$.
 %			For degrees $j$ where $b_j = \npolar$, this is enough, as all polarized degrees are then equal to $\nonpol_j = \pospol_j$.
 %			For other degrees $j$, we have furthermore
 			\begin{align*}
-				\negpol_j \circ \lambda
-				&= \negpol \circ (j \cdot \lambda)
-				= \negpol \circ \ell(\pospol_j) \\
+				(\negpol_j)\pmrhom{\vec b}{\ypolar} \circ \lambda\pmrhom{\vec a}{\vec b}
+				&= \negpol\pmrhom{b_j}{\ypolar} \circ (j \cdot \lambda)\pmrhom{\vec a}{b_j}
+				= \negpol\pmrhom{b_j}{\ypolar} \circ \ell_{b_j}(\pospol_j\pmrhom{b_j}{b_j})\pmrhom{\vec a}{b_j} \\
 				& \qquad \qquad \text{(Definition of $\lambda$)} \\
-				&= \negpol \circ \max \set{p_i \in \poldegeqtop(\vec a, b_j)}{p_i \circ \rho \leq \pospol_j} \\
+				&= \negpol\pmrhom{b_j}{\ypolar} \circ \max \set{p_i \in \poldegeqtop(\vec a, b_j)}{(p_i)\pmrhom{\vec a}{b_j} \circ \rho\pmrhom{\vec b}{\vec a} \leq (\pospol_j)\pmrhom{\vec b}{b_j}} \\
 				& \qquad \qquad \text{(Definition of $\ell$)} \\
-				&= \max \set{\negpol \circ p_i}{p_i \in \poldegeqtop(\vec a, b_j) \text{ with } p_i \circ \rho \leq \pospol_j} \\
+				&= \max \set{\negpol\pmrhom{b_j}{\ypolar} \circ (p_i)\pmrhom{\vec a}{b_j}}{p_i \in \poldegeqtop(\vec a, b_j) \text{ with } (p_i)\pmrhom{\vec a}{b_j} \circ \rho\pmrhom{\vec b}{\vec a} \leq (\pospol_j)\pmrhom{\vec b}{b_j}} \\
 				& \qquad \qquad \text{($\negpol \circ \loch : \poldegeqtop(\vec a, b_j) \to \poldegeqtop(\vec a, \ypolar)$ preserves $\leq$.)} \\
-				&= \max \set{p'_i \in \poldegeqtop(\vec a, \ypolar)}{\negpol \circ p'_i \circ \rho \leq \pospol_j} \\
-				& \qquad \qquad \text{(By taking $p'_i := \negpol \circ p_i$)} \\
-				&= \max \set{p'_i \in \poldegeqtop(\vec a, \ypolar)}{p'_i \circ \rho \leq \negpol_j} \\
-				& \qquad \qquad \text{(Involution $\tejsym \cdot \loch$ preserves and reflects $\leq$.)} \\
-				&= \ell(\negpol_j), \\
+				&= \max \set{p'_i \in \poldegeqtop(\vec a, \ypolar)}{\negpol\pmrhom{\ypolar}{b_j} \circ (p'_i)\pmrhom{\vec a}{\ypolar} \circ \rho\pmrhom{\vec b}{\vec a} \leq (\pospol_j)\pmrhom{\vec b}{b_j}} \\
+				& \qquad \qquad \text{(By taking $(p'_i)\pmrhom{\vec a}{\ypolar} := \negpol\pmrhom{b_j}{\ypolar} \circ (p_i)\pmrhom{\vec a}{b_j}$; recall that $b_j = \ypolar$ too)} \\
+				&= \max \set{p'_i \in \poldegeqtop(\vec a, \ypolar)}{(p'_i)\pmrhom{\vec a}{\ypolar} \circ \rho\pmrhom{\vec b}{\vec a} \leq \negpol_j\pmrhom{\vec b}{\ypolar}} \\
+				& \qquad \qquad \text{(Involution $\negpol\pmrhom{b_j}{\ypolar} \circ \loch$ preserves and reflects $\leq$.)} \\
+				&= \ell_\ypolar(\negpol_j) = \ell_c(\negpol_j), \\
 				% ------------------------
 				\mixpol_j \circ \lambda
 				&= (\pospol_j \circ \lambda) \wedge (\negpol_j \circ \lambda) \\
