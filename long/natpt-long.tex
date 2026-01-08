@@ -3762,8 +3762,11 @@ We need an auxiliary categorical fact:
 		\end{equation}
 		We define a polarized reshuffle $\lambda \in \Hom(\vec a, \vec b)$ by
 		\begin{equation}
-			j \cdot \lambda = \ell_{b_j}(\pospol_j) \in \poldegeqtop(\vec a, b_j).
+			j \cdot \lambda := \ell_{b_j}(\pospol_j) \in \poldegeqtop(\vec a, b_j) \qquad \text{for all $j \in \Degeq(\vec b)$}.
 		\end{equation}
+		Note that the above equation even extends to the case where $j = \top$: on one hand, $\top \cdot \lambda = \top$ by definition of $\top \cdot \loch$.
+		On the other hand, it is not hard to check that $\ell_c(\nonpol_\top) = \nonpol_\top$.
+		
 		We have to show that $\ell$ is the action of $\lambda$ if and only if \cref{eq:poresh-withl-crit2} holds.
 		\begin{itemize}
 			\item To prove `only if', assume that \cref{eq:poresh-withl-crit2} does not hold (which is decidable). Then from \cref{thm:pol-adjunctions}, we know we can find some $i \in \Degeq(\vec a)$ such that $i \cdot \rho\pmrhom{\vec b}{\vec a} = \isopol_j\pmrhom{b_j}{a_i} \in \poldegeqtop(\vec b, a_i)$ with $b_j = \ypolar$.
@@ -3799,7 +3802,7 @@ We need an auxiliary categorical fact:
 				\end{align*}
 				
 				\item Next, we prove the unit inequality $\id_{\vec a} \leq \rho \pmrhom{\vec b}{\vec a} \circ \lambda \pmrhom{\vec a}{\vec b}$.
-				To this end, we need to prove that for all $I \in \Degeq(\vec a)$, we have $(\pospol_I)\pmrhom{\vec a}{a_I} \leq (I \cdot \rho) \circ \lambda \pmrhom{\vec a}{\vec b}$.
+				To this end, we need to prove that for all $I \in \Degeq(\vec a)$, we have $(\pospol_I)\pmrhom{\vec a}{a_I} \leq (I \cdot \rho)\pmrhom{\vec b}{a_I} \circ \lambda \pmrhom{\vec a}{\vec b}$.
 				Using \cref{thm:deg-vs-poldeg-poresh}, this becomes:
 				\[
 					\forall I \in \Degeq(\vec a). \qquad
@@ -3823,7 +3826,7 @@ We need an auxiliary categorical fact:
 				\]
 				The right hand side expands to $(q_j)\pmrhom{\vec b}{c} \circ \lambda \pmrhom{\vec a}{\vec b} = q\pmrhom{b_j}{c} \circ (j \cdot \lambda)\pmrhom{\vec a}{b_j} = q\pmrhom{b_j}{c} \circ \ell_{b_j}(\pospol_j)\pmrhom{\vec a}{b_j}$ by \cref{eq:poldeg-poresh} and the definition of $\lambda$.
 				
-				By unfolding the definition of $\ell$ and noting that $q_j \circ \loch$ is monotonically increasing and therefore maximum-preserving, we need to prove, for each $c$ and $q_j$ as above:
+				By unfolding the definition of $\ell$ and noting that $q \circ \loch$ is monotonically increasing and therefore maximum-preserving, we need to prove:
 				\begin{align*}
 					&\forall p_i \in \poldegeqtop(\vec a, c) \text{ with $(p_i)\pmrhom{\vec a}{c} \circ \rho\pmrhom{\vec b}{\vec a} \leq (q_j)\pmrhom{\vec b}{c}$} .\\
 					&\exists \hat p_{\hat i} \in \poldegeqtop(\vec a, b_j) \text{ with $(\hat p_{\hat i})\pmrhom{\vec a}{b_j} \circ \rho\pmrhom{\vec b}{\vec a} \leq (\pospol_j)\pmrhom{\vec b}{b_j}$ } .\\
@@ -3831,7 +3834,7 @@ We need an auxiliary categorical fact:
 				\end{align*}
 				
 				Because of \cref{eq:poresh-withl-crit2}, $q\pmrhom{b_j}{c}$ has a left adjoint $d\pmrhom{c}{b_j} \dashv q\pmrhom{b_j}{c}$.
-				We set $\hat i = i$ and $\hat p \pmrhom{a_i}{b_j} = d\pmrhom{c}{b_j} \circ p d\pmrhom{a_i}{c}$.
+				We set $\hat i = i$ and $\hat p \pmrhom{a_i}{b_j} = d\pmrhom{c}{b_j} \circ p\pmrhom{a_i}{c}$.
 				Then the first required inequality
 				\[
 					(\hat p_{\hat i})\pmrhom{\vec a}{b_j} \circ \rho\pmrhom{\vec b}{\vec a} = d\pmrhom{c}{b_j} \circ (p_i)\pmrhom{\vec a}{c} \circ \rho\pmrhom{\vec b}{\vec a} \leq (\pospol_j)\pmrhom{\vec b}{b_j}
@@ -3868,9 +3871,12 @@ We need an auxiliary categorical fact:
 			r_c \qquad \dashv \qquad \loch \circ \lambda \quad : \quad  \poldegeqtop(\vec b, c) \to \poldegeqtop(\vec a, c).
 		\end{equation}
 		We define a polarized reshuffle $\rho \in \Hom(\vec b, \vec a)$ by
-		\begin{equation}
-			i \cdot \rho = r_{a_i}(\pospol_i) \in \poldegeqtop(\vec b, a_i).
+		\begin{equation} \label{eq:poresh-adjoint:def-rho}
+			i \cdot \rho := r_{a_i}(\pospol_i) \in \poldegeqtop(\vec b, a_i)
+			\quad \text{for all $i \in \Degeq(\vec a)$}.
 		\end{equation}
+		Note that the above equality may not always hold for $i = \top$.
+		
 		We have to show that $r$ is the action of $\rho$ if and only if \cref{eq:poresh-withr-crit1,eq:poresh-withr-crit2} hold.
 		\begin{itemize}
 			\item Assume that \cref{eq:poresh-withr-crit1} does not hold (which is decidable).
@@ -3897,8 +3903,11 @@ We need an auxiliary categorical fact:
 			
 			\item To prove `if', assume that \cref{eq:poresh-withr-crit1,eq:poresh-withr-crit2} hold.
 			We prove that $\lambda \dashv \rho$. This immediately implies that $\loch \circ \rho \dashv \loch \circ \lambda$ and since we already know that $r \dashv \loch \circ \lambda$, by uniqueness of the adjoint, we find that $r = \loch \circ \rho$.
+			
+			The fact that \cref{eq:poresh-withr-crit1} holds, implies that $r_c(\nonpol_\top) = \nonpol_\top$, so that the defining \cref{eq:poresh-adjoint:def-rho} of $i \cdot \rho$ even extends to the case where $i = \top$.
 			\begin{itemize}
-				\item We first prove the unit inequality $\id_{\vec a} \leq \rho \pmrhom{\vec b}{\vec a} \circ \lambda \pmrhom{\vec a}{\vec b}$:
+				\item We first prove the unit inequality $\id_{\vec a} \leq \rho \pmrhom{\vec b}{\vec a} \circ \lambda \pmrhom{\vec a}{\vec b}$.
+				Let $i \in \Degeq(\vec a)$.
 				\begin{align*}
 					i \cdot \id_{\vec a}
 					&= \pospol_i \pmrhom{a_i}{a_i} \\
@@ -3909,55 +3918,64 @@ We need an auxiliary categorical fact:
 					&= i \cdot (\rho \pmrhom{\vec b}{\vec a} \circ \lambda \pmrhom{\vec a}{\vec b})
 					& \text{(def.\ of comp.\ in $\poreshcat$).}
 				\end{align*}
-			
-				\todoi{Cheat sheet}
-				\item Next, we prove the unit inequality $\id_{\vec a} \leq \rho \pmrhom{\vec b}{\vec a} \circ \lambda \pmrhom{\vec a}{\vec b}$.
-				To this end, we need to prove that for all $I \in \Degeq(\vec a)$, we have $(\pospol_I)\pmrhom{\vec a}{a_I} \leq (I \cdot \rho) \circ \lambda \pmrhom{\vec a}{\vec b}$.
+				
+				\item Next, we prove the co-unit inequality $\lambda \pmrhom{\vec a}{\vec b} \circ \rho \pmrhom{\vec b}{\vec a} \leq \id_{\vec b}$.
+				To this end, we need to prove that for all $J \in \Degeq(\vec b)$, we have $(J \cdot \lambda)\pmrhom{\vec a}{b_J} \circ \rho \pmrhom{\vec b}{\vec a} \leq (\pospol_J)\pmrhom{\vec b}{b_J}$.
 				Using \cref{thm:deg-vs-poldeg-poresh}, this becomes:
 				\[
-					\forall I \in \Degeq(\vec a). \qquad
-					(\pospol_I)\pmrhom{\vec a}{a_I}
-					\leq
-					((\pospol_I)\pmrhom{\vec a}{a_I} \circ \rho \pmrhom{\vec b}{\vec a}) \circ \lambda \pmrhom{\vec a}{\vec b}.
+					\forall J \in \Degeq(\vec b). \qquad
+					((\pospol_J)\pmrhom{\vec b}{b_J} \circ \lambda\pmrhom{\vec a}{\vec b}) \circ \rho \pmrhom{\vec b}{\vec a} \leq (\pospol_J)\pmrhom{\vec b}{b_J}.
 				\]
-				By the unit of $\loch \circ \rho \dashv \ell$, it is sufficient to prove:
+				By the co-unit of $r \dashv \loch \circ \lambda$, it is sufficient to prove:
 				\[
-					\forall I \in \Degeq(\vec a). \qquad
-					\ell_{a_I}((\pospol_I)\pmrhom{\vec a}{a_I} \circ \rho \pmrhom{\vec b}{\vec a})
+					\forall J \in \Degeq(\vec b). \qquad
+					((\pospol_J)\pmrhom{\vec b}{b_J} \circ \lambda\pmrhom{\vec a}{\vec b}) \circ \rho \pmrhom{\vec b}{\vec a}
 					\leq
-					((\pospol_I)\pmrhom{\vec a}{a_I} \circ \rho \pmrhom{\vec b}{\vec a}) \circ \lambda \pmrhom{\vec a}{\vec b}.
+					r_{b_J}((\pospol_J)\pmrhom{\vec b}{b_J} \circ \lambda\pmrhom{\vec a}{\vec b}).
 				\]
-				Now fix $I$, write $c = a_I$ and $(q_j)\pmrhom{\vec b}{c} := I \cdot \rho\pmrhom{\vec b}{\vec a} = (\pospol_I)\pmrhom{\vec a}{a_I} \circ \rho \pmrhom{\vec b}{\vec a}$.
+				Now fix $J$, write $c = b_J$ and $(p_i)\pmrhom{\vec a}{c} := J \cdot \lambda\pmrhom{\vec a}{\vec b} = (\pospol_J)\pmrhom{\vec b}{b_J} \circ \lambda\pmrhom{\vec a}{\vec b}$.
 				We need to prove:
 				\[
-					\ell_{c}(q_j)\pmrhom{\vec a}{c}
+					(p_i)\pmrhom{\vec a}{c} \circ \rho \pmrhom{\vec b}{\vec a}
+					\leq
+					r_{c}(p_i)\pmrhom{\vec b}{c}.
+				\]
+				The left hand side expands to $(p_i)\pmrhom{\vec a}{c} \circ \rho \pmrhom{\vec b}{\vec a} = p\pmrhom{a_i}{c} \circ (i \cdot \rho) \pmrhom{\vec b}{a_i} = p\pmrhom{a_i}{c} \circ r_{a_i}(\pospol_i)\pmrhom{\vec b}{a_i}$ by \cref{eq:poldeg-poresh} and the definition of $\rho$.\footnote{This is where we crucially use the fact that \cref{eq:poresh-withr-crit1} holds, by applying \cref{eq:poresh-adjoint:def-rho} even when $i = \top$.}
+				So we need to prove:
+				\[
+					p\pmrhom{a_i}{c} \circ r_{a_i}(\pospol_i)\pmrhom{\vec b}{a_i}
+					\leq
+					r_{c}(p_i)\pmrhom{\vec b}{c}.
+				\]
+				
+				By unfolding the definition of $r$ and noting that $p \circ \loch$ is monotonically increasing and therefore minimum-preserving, we need to prove:
+				\begin{align*}
+					&\forall q_j \in \poldegeqtop(\vec b, c) \text{ with } (p_i)\pmrhom{\vec a}{c} \leq (q_j)\pmrhom{\vec b}{c} \circ \lambda \pmrhom{\vec a}{\vec b} .\\
+					&\exists \hat q_{\hat j} \in \poldegeqtop(\vec b, a_i) \text{ with } (\pospol_i)\pmrhom{\vec a}{a_i} \leq (\hat q_{\hat j})\pmrhom{\vec b}{a_i} \circ \lambda \pmrhom{\vec a}{\vec b} .\\
+					& p\pmrhom{a_i}{c} \circ (\hat q_{\hat j})\pmrhom{\vec b}{a_i} \leq (q_j)\pmrhom{\vec b}{c}.
+				\end{align*}
+				
+				Because of \cref{eq:poresh-withr-crit2}, $p\pmrhom{a_i}{c}$ has a right adjoint $p\pmrhom{a_i}{c} \dashv e\pmrhom{c}{a_i}$.
+				We set $\hat j = j$ and $\hat q\pmrhom{b_j}{a_i} = e\pmrhom{c}{a_i} \circ q\pmrhom{b_j}{c}$.
+				Then the first required inequality
+				\[
+					(\pospol_i)\pmrhom{\vec a}{a_i}
+					\leq
+					(\hat q_{\hat j})\pmrhom{\vec b}{a_i} \circ \lambda \pmrhom{\vec a}{\vec b}
+					=
+					e\pmrhom{c}{a_i} \circ (q_j)\pmrhom{\vec b}{c} \circ \lambda \pmrhom{\vec a}{\vec b}
+				\]
+				follows by the adjunction $p \dashv e$ from the given inequality
+				\[
+					(p_i)\pmrhom{\vec a}{c} = p\pmrhom{a_i}{c} \circ (\pospol_i)\pmrhom{\vec a}{a_i}
 					\leq
 					(q_j)\pmrhom{\vec b}{c} \circ \lambda \pmrhom{\vec a}{\vec b}.
 				\]
-				The right hand side expands to $(q_j)\pmrhom{\vec b}{c} \circ \lambda \pmrhom{\vec a}{\vec b} = q\pmrhom{b_j}{c} \circ (j \cdot \lambda)\pmrhom{\vec a}{b_j} = q\pmrhom{b_j}{c} \circ \ell_{b_j}(\pospol_j)\pmrhom{\vec a}{b_j}$ by \cref{eq:poldeg-poresh} and the definition of $\lambda$.
-				
-				By unfolding the definition of $\ell$ and noting that $q_j \circ \loch$ is monotonically increasing and therefore maximum-preserving, we need to prove, for each $c$ and $q_j$ as above:
-				\begin{align*}
-					&\forall p_i \in \poldegeqtop(\vec a, c) \text{ with $(p_i)\pmrhom{\vec a}{c} \circ \rho\pmrhom{\vec b}{\vec a} \leq (q_j)\pmrhom{\vec b}{c}$} .\\
-					&\exists \hat p_{\hat i} \in \poldegeqtop(\vec a, b_j) \text{ with $(\hat p_{\hat i})\pmrhom{\vec a}{b_j} \circ \rho\pmrhom{\vec b}{\vec a} \leq (\pospol_j)\pmrhom{\vec b}{b_j}$ } .\\
-					&(p_i)\pmrhom{\vec a}{c} \leq q\pmrhom{b_j}{c} \circ (\hat p_{\hat i})\pmrhom{\vec a}{b_j}.
-				\end{align*}
-				
-				Because of \cref{eq:poresh-withl-crit2}, $q\pmrhom{b_j}{c}$ has a left adjoint $d\pmrhom{c}{b_j} \dashv q\pmrhom{b_j}{c}$.
-				We set $\hat i = i$ and $\hat p \pmrhom{a_i}{b_j} = d\pmrhom{c}{b_j} \circ p d\pmrhom{a_i}{c}$.
-				Then the first required inequality
-				\[
-					(\hat p_{\hat i})\pmrhom{\vec a}{b_j} \circ \rho\pmrhom{\vec b}{\vec a} = d\pmrhom{c}{b_j} \circ (p_i)\pmrhom{\vec a}{c} \circ \rho\pmrhom{\vec b}{\vec a} \leq (\pospol_j)\pmrhom{\vec b}{b_j}
-				\]
-				follows by the adjunction $d \dashv q$ from the given inequality
-				\[
-					(p_i)\pmrhom{\vec a}{c} \circ \rho\pmrhom{\vec b}{\vec a} \leq q\pmrhom{b_j}{c} \circ (\pospol_j)\pmrhom{\vec b}{b_j} = (q_j)\pmrhom{\vec b}{c}.
-				\]
 				The second required inequality
 				\[
-					(p_i)\pmrhom{\vec a}{c} \leq q\pmrhom{b_j}{c} \circ (\hat p_{\hat i})\pmrhom{\vec a}{b_j} = q\pmrhom{b_j}{c} \circ d\pmrhom{c}{b_j} \circ (p_i)\pmrhom{\vec a}{c}
+					p\pmrhom{a_i}{c} \circ (\hat q_{\hat j})\pmrhom{\vec b}{a_i} = p\pmrhom{a_i}{c} \circ e\pmrhom{c}{a_i} \circ (q_j)\pmrhom{\vec b}{c} \leq (q_j)\pmrhom{\vec b}{c}
 				\]
-				follows immediately from the unit $\pospol\pmrhom{b_j}{b_j} \leq q\pmrhom{b_j}{c} \circ d\pmrhom{c}{b_j}$.
+				follows immediately from the co-unit $p\pmrhom{a_i}{c} \circ e\pmrhom{c}{a_i} \leq \pospol\pmrhom{a_i}{a_i}$.
 			\end{itemize}
 			
 			\todoi{Old}
