@@ -3568,6 +3568,79 @@ where the identity is $\id_{[\ypolar]} = \reshlist{\pdeg \nonpol \eqtydeg}{\pdeg
 \end{proof}
 
 \subsubsection{Characterization}
+We need an auxiliary categorical fact:
+\begin{lemma}\label{thm:cat:restricted-adjoint-precomposition}
+	Given adjoint functors $L \dashv R$
+	\[
+		\xymatrix{
+			\catI
+				\ar@{^{(}->}[r]
+			&
+			\catC
+				\ar@/^{1em}/[rr]^{L}
+				\ar@{}[rr]|{\bot}
+				\ar@/_{1em}/[rd]_{F}
+			&& \catD
+				\ar@/^{1em}/[ll]^{R}
+				\ar@/^{1em}/[ld]^{G}
+			&
+			\catJ
+				\ar@{_{(}->}[l]
+			\\
+			&& \catE
+		}
+	\]
+	between categories $\catC$ and $\catD$ and full subcategories $\catI \subseteq \catC$ and $\catJ \subseteq \catD$ such that the image of $L|_\catI$ lands in $\catJ$. Assume functors $F : \catC \to \catE$ and $G : \catD \to \catE$ (the triangle depicted above is not required to commute).
+	Then:
+	\begin{enumerate}
+		\item If $L\cat I \subseteq \catJ$, then every natural transformation $\delta : FR|_\catJ \to G|_\catJ$ gives rise to a natural transformation $\gamma : F|_\catI \to GL|_\catI$.
+		\item If $R\catJ \subseteq \catI$, then every natural transformation $\gamma : F|_\catI \to GL|_\catI$ gives rise to a natural transformation $\delta : FR|_\catJ \to G|_\catJ$.
+		\item If both are true, so that $L|_\catI \dashv R|_\catJ$, then the above operations are inverse.
+	\end{enumerate}
+\end{lemma}
+\begin{proof}
+	\begin{enumerate}
+		\item Let $L\cat I \subseteq \catJ$ and $\delta : FR|_\catJ \to G|_\catJ$. Then we have
+		\[
+			\xymatrix{
+				F|_\catI
+					\ar[r]^{F\eta|_\catI}
+				& FRL|_\catI
+					\ar[r]^{\delta L|_\catI}
+				& GL|_\catI.
+			}
+		\]
+		\item Let $R\catJ \subseteq \catI$ and $\gamma : F|_\catI \to GL|_\catI$. Then we have
+		\[
+			\xymatrix{
+				FR|_\catJ
+					\ar[r]^{\gamma R|_\catJ}
+				& GLR|_\catJ
+					\ar[r]^{G\eps|_\catJ}
+				& G|_\catJ.
+			}
+		\]
+		\item Write $(\bar L, \bar R, \bar \eta, \bar \eps)$ for the restricted adjunction. On one hand, we have
+		\[
+			\delta
+			\mapsto \delta \bar L \circ F \bar \eta
+			\mapsto G \bar \eps \circ (\delta \bar L \circ F \bar \eta) \bar R
+			= G \bar \eps \circ \delta \bar L \bar R \circ F \bar \eta \bar R
+			= \delta \circ F\bar R \bar \eps \circ F \bar \eta \bar R
+			= \delta.
+		\]
+		On the other hand, we have
+		\[
+			\gamma
+			\mapsto G \bar \eps \circ \gamma \bar R
+			\mapsto (G \bar \eps \circ \gamma \bar R) \bar L \circ F \bar \eta
+			= G \bar \eps \bar L \circ \gamma \bar R \bar L \circ F \bar \eta
+			= G \bar \eps \bar L \circ G \bar L \bar \eta \circ \gamma = \gamma.
+			\qedhere
+		\]
+	\end{enumerate}
+\end{proof}
+
 \begin{theorem}\label{thm:poresh-adjoint}
 	\begin{enumerate}
 		\item A pair of polarized reshuffles $\lambda \in \Hom(\vec a, \vec b)$ and $\rho \in \Hom(\vec b, \vec a)$ is adjoint ($\lambda \dashv \rho$) if and only if the following equivalent conditions are satisfied:
@@ -3725,6 +3798,14 @@ where the identity is $\id_{[\ypolar]} = \reshlist{\pdeg \nonpol \eqtydeg}{\pdeg
 				
 				\item Next, we prove the unit inequality $\id_{\vec a} \leq \rho \pmrhom{\vec b}{\vec a} \circ \lambda \pmrhom{\vec a}{\vec b}$.
 				To this end, we need to prove that for all $i \in \Degeq(\vec a)$, we have $(\pospol_i)\pmrhom{\vec a}{a_i} \leq (i \cdot \rho) \circ \lambda \pmrhom{\vec a}{\vec b}$.
+				Using \cref{thm:deg-vs-poldeg-poresh}, this becomes
+				\[
+					\forall i \in \Degeq(\vec a). \qquad (\pospol_i)\pmrhom{\vec a}{a_i} \leq ((\pospol_i)\pmrhom{\vec a}{a_i} \circ \rho \pmrhom{\vec b}{\vec a}) \circ \lambda \pmrhom{\vec a}{\vec b}
+				\]
+				Let $\posdegeq(\vec a, c)$ be the full subposet of $\poldegeqtop(\vec a, c)$ on objects of the form $(\pospol_i)\pmrhom{\vec a}{c}$.
+				
+				
+				\todoi{Old}
 				Using \cref{thm:deg-vs-poldeg-poresh}, we rewrite the right hand side as $((\pospol_i)\pmrhom{\vec a}{a_i} \circ \rho \pmrhom{\vec b}{\vec a}) \circ \lambda \pmrhom{\vec a}{\vec b}$.
 				It then suffices to prove the more general inequality
 				\begin{equation}
@@ -3946,6 +4027,7 @@ In words, \cref{eq:poresh-withll-crit2} says that:
 		\text{for all } i \in \Degeq(\vec a) \text{ with } i \cdot \rho = \isopol_j \text{, we have } b_j = \npolar \text{ (so $i \cdot \rho = \nonpol_j$)}.
 	\end{align*}
 	We can rewrite the condition as $\isopol_j \leq i \cdot \rho$ \textbf{AND} $\isopol_j \geq i \cdot \rho$.
+	\todoi{Shortcut the reasoning below with $\isopol \dashv \mixpol$.}
 	We have
 	\begin{align*}
 		&\quad\mathrel{\phantom{\Leftrightarrow}}\quad
