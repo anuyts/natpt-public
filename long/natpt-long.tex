@@ -3975,44 +3975,8 @@ We need an auxiliary categorical fact:
 				\[
 					p\pmrhom{a_i}{c} \circ (\hat q_{\hat j})\pmrhom{\vec b}{a_i} = p\pmrhom{a_i}{c} \circ e\pmrhom{c}{a_i} \circ (q_j)\pmrhom{\vec b}{c} \leq (q_j)\pmrhom{\vec b}{c}
 				\]
-				follows immediately from the co-unit $p\pmrhom{a_i}{c} \circ e\pmrhom{c}{a_i} \leq \pospol\pmrhom{a_i}{a_i}$.
+				follows immediately from the co-unit $p\pmrhom{a_i}{c} \circ e\pmrhom{c}{a_i} \leq \pospol\pmrhom{a_i}{a_i}$. \qedhere
 			\end{itemize}
-			
-			\todoi{Old}
-			\item To prove `if', assume that \cref{eq:poresh-withr-crit1,eq:poresh-withr-crit2} hold.
-			We prove that $r_c$ is the action of $\rho$.
-			Again, it is sufficient to prove this for $c = \ypolar$.
-			From \cref{eq:poresh-withr-crit1} and the definition of $r$, it follows that $r(\nonpol_\top) = \nonpol_\top$.
-			For all other degrees we have $r(\pospol_i) = \pospol_i \circ \rho$ by definition of $\rho$ and \cref{thm:deg-vs-poldeg-poresh}.
-			Furthermore, entirely dually (w.r.t.\ $\leq$) to our earlier calculations, we have
-			\begin{align*}
-				\negpol_i \circ \rho &= r_\ypolar(\negpol_i) \\
-				&\qquad \qquad \text{(Analogous to dual situation.)} \\
-				% ----------------
-				\isopol_i \circ \rho
-				&= (\pospol_i \circ \rho) \vee (\negpol_i \circ \rho) \\
-				&\qquad \qquad \text{(By \cref{thm:poldeg-poresh-lattice})} \\
-				&= r_\ypolar(\pospol_i) \vee r_\ypolar(\negpol_i) \\
-				&\qquad \qquad \text{(By previous results)} \\
-				&= r_\ypolar(\pospol_i \vee \negpol_i) = r_\ypolar(\isopol_i) \\
-				&\qquad \qquad \text{(Left adjoints preserve joins),} \\
-				% ----------------
-				\mixpol_i \circ \rho
-				&= (\pospol_i \circ \rho) \wedge (\negpol_i \circ \rho) \\
-				&\qquad \qquad \text{(By \cref{thm:poldeg-poresh-lattice})} \\
-				&= r_\ypolar(\pospol_i) \wedge r_\ypolar(\negpol_i) \\
-				&\qquad \qquad \text{(By previous results)} \\
-				&= \min \set{q_j \in \poldegeqtop(\vec b, \ypolar)}{\pospol_i \leq q_j \circ \lambda} \wedge \min \set{q_j \in \poldegeqtop(\vec b, \ypolar)}{\negpol_i \leq q_j \circ \lambda} \\
-				&= \bigwedge \set{q_j \in \poldegeqtop(\vec b, \ypolar)}{\pospol_i \leq q_j \circ \lambda} \wedge \bigwedge \set{q_j \in \poldegeqtop(\vec b, \ypolar)}{\negpol_i \leq q_j \circ \lambda} \\
-				&\qquad \qquad \text{(The minima exist, so they are equal to the meets (infima).)} \\
-				&= \bigwedge \set{q_j \in \poldegeqtop(\vec b, \ypolar)}{\pospol_i \leq q_j \circ \lambda} \cup \set{q_j \in \poldegeqtop(\vec b, \ypolar)}{\negpol_i \leq q_j \circ \lambda} \\
-				&\qquad \qquad \text{(Associativity.)} \\
-				&= \bigwedge \set{q_j \in \poldegeqtop(\vec b, \ypolar)}{\pospol_i \leq q_j \circ \lambda \text{ or } \negpol_i \leq q_j} \\
-				&= \bigwedge \set{q_j \in \poldegeqtop(\vec b, \ypolar)}{\mixpol_i \leq q_j} \\
-				&\qquad \qquad \text{(Using \cref{eq:poresh-withr-crit2}.)} \\
-				&= r_\ypolar(\mixpol_i). \\
-				&\qquad \qquad \text{(Definition and existence of $r$.)} &\qedhere
-			\end{align*}
 		\end{itemize}
 	\end{enumerate}
 \end{proof}
