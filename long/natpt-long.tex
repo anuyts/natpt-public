@@ -4137,7 +4137,7 @@ In words, \cref{eq:poresh-withrr-crit2} says that:
 	\begin{itemize}
 		\item of the form $\isopol_j$ at a symmetric degree $i \in \Degeq(\vec a)$;
 		\item or of the form $\pospol_j$ or $\negpol_j$ at an arbitrary degree $i \in \Degeq(\vec a)$;
-		\item it already could not be of the form $\mixpol_j$ as per \cref{eq:poresh-withr-crit2};
+		\item it already could not be of the form $\mixpol_j$ as per \cref{eq:poresh-withr-crit2}, as $\mixpol$ does not have a right adjoint;
 	\end{itemize}
 	\item If a degree $j \in \Degeq(\vec b)$ is never mentioned, then the first mention of degree greater than $j$ is at a symmetric degree $i \in \Degeq(\vec a)$.
 \end{itemize}
@@ -4158,6 +4158,7 @@ In words, \cref{eq:poresh-withrr-crit2} says that:
 		\mixpol_{\predeg(\top)} < \predeg(\top) \cdot \kappa
 		&\text{(Case distinction)} &.
 	\end{align*}
+	\todoi{This last step is weird, I think we can instead land at $\getdeg(\predeg(\top) \cdot \kappa) = \predeg(\top)$.}
 	
 	Recall \cref{eq:poresh-withr-crit2}:
 	\[
@@ -4183,6 +4184,7 @@ In words, \cref{eq:poresh-withrr-crit2} says that:
 		\\ &\quad\Leftrightarrow\quad
 		\isopol_j \leq i \cdot \kappa
 	\end{align*}
+	\todoi{Use $\isopol \dashv \mixpol$ instead.}
 	and
 	\begin{align*}
 		&\quad\mathrel{\phantom{\Leftrightarrow}}\quad
