@@ -3568,6 +3568,7 @@ where the identity is $\id_{[\ypolar]} = \reshlist{\pdeg \nonpol \eqtydeg}{\pdeg
 \end{proof}
 
 \subsubsection{Characterization}
+\dontuse{
 We need an auxiliary categorical fact:
 \begin{lemma}\label{thm:cat:restricted-adjoint-precomposition}
 	Given adjoint functors $L \dashv R$
@@ -3640,6 +3641,7 @@ We need an auxiliary categorical fact:
 		\]
 	\end{enumerate}
 \end{proof}
+}
 
 \begin{theorem}\label{thm:poresh-adjoint}
 	\begin{enumerate}
@@ -3797,28 +3799,29 @@ We need an auxiliary categorical fact:
 				\end{align*}
 				
 				\item Next, we prove the unit inequality $\id_{\vec a} \leq \rho \pmrhom{\vec b}{\vec a} \circ \lambda \pmrhom{\vec a}{\vec b}$.
-				To this end, we need to prove that for all $i \in \Degeq(\vec a)$, we have $(\pospol_i)\pmrhom{\vec a}{a_i} \leq (i \cdot \rho) \circ \lambda \pmrhom{\vec a}{\vec b}$.
-				Using \cref{thm:deg-vs-poldeg-poresh}, this becomes
+				To this end, we need to prove that for all $I \in \Degeq(\vec a)$, we have $(\pospol_I)\pmrhom{\vec a}{a_I} \leq (I \cdot \rho) \circ \lambda \pmrhom{\vec a}{\vec b}$.
+				Using \cref{thm:deg-vs-poldeg-poresh}, this becomes:
 				\[
-					\forall i \in \Degeq(\vec a). \qquad (\pospol_i)\pmrhom{\vec a}{a_i} \leq ((\pospol_i)\pmrhom{\vec a}{a_i} \circ \rho \pmrhom{\vec b}{\vec a}) \circ \lambda \pmrhom{\vec a}{\vec b}
+					\forall I \in \Degeq(\vec a). \qquad
+					(\pospol_I)\pmrhom{\vec a}{a_I}
+					\leq
+					((\pospol_I)\pmrhom{\vec a}{a_I} \circ \rho \pmrhom{\vec b}{\vec a}) \circ \lambda \pmrhom{\vec a}{\vec b}.
 				\]
-				Let $\posdegeq(\vec a, c)$ be the full subposet of $\poldegeqtop(\vec a, c)$ on objects of the form $(\pospol_i)\pmrhom{\vec a}{c}$.
-				
-				
-				\todoi{Old}
-				Using \cref{thm:deg-vs-poldeg-poresh}, we rewrite the right hand side as $((\pospol_i)\pmrhom{\vec a}{a_i} \circ \rho \pmrhom{\vec b}{\vec a}) \circ \lambda \pmrhom{\vec a}{\vec b}$.
-				It then suffices to prove the more general inequality
-				\begin{equation}
-					\forall c \in \Polarmode, p_i \in \poldegeqtop(\vec a, c). \qquad
-					(p_i)\pmrhom{\vec a}{c} \leq ((p_i)\pmrhom{\vec a}{c} \circ \rho \pmrhom{\vec b}{\vec a}) \circ \lambda \pmrhom{\vec a}{\vec b}.
-				\end{equation}
-				It is a general fact about adjunctions $L \dashv R$ that there is a 1-1 correspondence between natural transformations $FR \to G$ and natural transformations $F \to GL$.
-				Applying this to $\loch \circ \rho \dashv \ell_c$, where we restrict one category to the image of $\loch \circ \rho$, we may equivalently prove \todoi{You need to be more careful here, in order to guarantee that $q$ has a left adjoint.}
-				\begin{equation}
-					\forall c \in \Polarmode, q_j \in \Image(\loch \circ \rho) \subseteq \poldegeqtop(\vec b, c). \qquad
-					\ell_c(q_j)\pmrhom{\vec a}{c} \leq (q_j)\pmrhom{\vec b}{c} \circ \lambda \pmrhom{\vec a}{\vec b}.
-				\end{equation}
-				The right hand side expands to $(q_j)\pmrhom{\vec b}{c} \circ \lambda \pmrhom{\vec a}{\vec b} = q\pmrhom{b_j}{c} \circ \ell_{b_j}(\pospol_j)\pmrhom{\vec a}{b_j}$ by \cref{eq:poldeg-poresh} and the definition of $\lambda$.
+				By the unit of $\loch \circ \rho \dashv \ell$, it is sufficient to prove:
+				\[
+					\forall I \in \Degeq(\vec a). \qquad
+					\ell_{a_I}((\pospol_I)\pmrhom{\vec a}{a_I} \circ \rho \pmrhom{\vec b}{\vec a})
+					\leq
+					((\pospol_I)\pmrhom{\vec a}{a_I} \circ \rho \pmrhom{\vec b}{\vec a}) \circ \lambda \pmrhom{\vec a}{\vec b}.
+				\]
+				Now fix $I$, write $c = a_I$ and $(q_j)\pmrhom{\vec b}{c} := I \cdot \rho\pmrhom{\vec b}{\vec a} = (\pospol_I)\pmrhom{\vec a}{a_I} \circ \rho \pmrhom{\vec b}{\vec a}$.
+				We need to prove:
+				\[
+					\ell_{c}(q_j)\pmrhom{\vec a}{c}
+					\leq
+					(q_j)\pmrhom{\vec b}{c} \circ \lambda \pmrhom{\vec a}{\vec b}.
+				\]
+				The right hand side expands to $(q_j)\pmrhom{\vec b}{c} \circ \lambda \pmrhom{\vec a}{\vec b} = q\pmrhom{b_j}{c} \circ (j \cdot \lambda)\pmrhom{\vec a}{b_j} = q\pmrhom{b_j}{c} \circ \ell_{b_j}(\pospol_j)\pmrhom{\vec a}{b_j}$ by \cref{eq:poldeg-poresh} and the definition of $\lambda$.
 				
 				By unfolding the definition of $\ell$ and noting that $q_j \circ \loch$ is monotonically increasing and therefore maximum-preserving, we need to prove, for each $c$ and $q_j$ as above:
 				\begin{align*}
@@ -3827,11 +3830,21 @@ We need an auxiliary categorical fact:
 					&(p_i)\pmrhom{\vec a}{c} \leq q\pmrhom{b_j}{c} \circ (\hat p_{\hat i})\pmrhom{\vec a}{b_j}.
 				\end{align*}
 				
-				We set $\hat i = i$ and proceed by case distinction on $b_j$ and $q\pmrhom{b_j}{c}$.
-				\begin{description}
-					\item[\framebox{$p\pmrhom{a_i}{c} = \nonpol\pmrhom{\npolar}{c}$}]
-				\end{description}
-			\end{itemize}
+				Because of \cref{eq:poresh-withl-crit2}, $q\pmrhom{b_j}{c}$ has a left adjoint $d\pmrhom{c}{b_j} \dashv q\pmrhom{b_j}{c}$.
+				We set $\hat i = i$ and $\hat p \pmrhom{a_i}{b_j} = d\pmrhom{c}{b_j} \circ p d\pmrhom{a_i}{c}$.
+				Then the first required inequality
+				\[
+					(\hat p_{\hat i})\pmrhom{\vec a}{b_j} \circ \rho\pmrhom{\vec b}{\vec a} = d\pmrhom{c}{b_j} \circ (p_i)\pmrhom{\vec a}{c} \circ \rho\pmrhom{\vec b}{\vec a} \leq (\pospol_j)\pmrhom{\vec b}{b_j}
+				\]
+				follows by the adjunction $d \dashv q$ from the given inequality
+				\[
+					(p_i)\pmrhom{\vec a}{c} \circ \rho\pmrhom{\vec b}{\vec a} \leq q\pmrhom{b_j}{c} \circ (\pospol_j)\pmrhom{\vec b}{b_j} = (q_j)\pmrhom{\vec b}{c}.
+				\]
+				The second required inequality
+				\[
+					(p_i)\pmrhom{\vec a}{c} \leq q\pmrhom{b_j}{c} \circ (\hat p_{\hat i})\pmrhom{\vec a}{b_j} = q\pmrhom{b_j}{c} \circ d\pmrhom{c}{b_j} \circ (p_i)\pmrhom{\vec a}{c}
+				\]
+				follows immediately from the unit $\pospol\pmrhom{b_j}{b_j} \leq q\pmrhom{b_j}{c} \circ d\pmrhom{c}{b_j}$.
 			
 			\item \todoi{Old}
 			
