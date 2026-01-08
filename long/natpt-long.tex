@@ -3863,21 +3863,29 @@ We need an auxiliary categorical fact:
 		Without loss of generality, we can instantiate both $p_i$ and $q_j$ with the maximal element $\nonpol_\top$, in which case the resulting requirement $\nonpol_\top \leq \nonpol_\top \cdot \lambda$ is true by definition of the action of a polarized reshuffle.
 		
 		We conclude that $r$ is always defined.
-		It is then, by construction, left adjoint to $\loch \circ \lambda$.
-		We define a polarized reshuffle $\rho \in \Hom(\vec b, \vec a)$ by $i \cdot \rho = r_{a_i}(\pospol_i) \in \poldegeqtop(\vec b, a_i)$.
+		It is then, by construction, left adjoint to $\loch \circ \lambda$:
+		\begin{equation}
+			r_c \qquad \dashv \qquad \loch \circ \lambda \quad : \quad  \poldegeqtop(\vec b, c) \to \poldegeqtop(\vec a, c).
+		\end{equation}
+		We define a polarized reshuffle $\rho \in \Hom(\vec b, \vec a)$ by
+		\begin{equation}
+			i \cdot \rho = r_{a_i}(\pospol_i) \in \poldegeqtop(\vec b, a_i).
+		\end{equation}
 		We have to show that $r$ is the action of $\rho$ if and only if \cref{eq:poresh-withr-crit1,eq:poresh-withr-crit2} hold.
 		\begin{itemize}
 			\item Assume that \cref{eq:poresh-withr-crit1} does not hold (which is decidable).
 			Then there exists some $j \in \Degeq(\vec b)$ such that $\pospol_j \circ \lambda = j \cdot \lambda = \nonpol_\top \in \poldegeqtop(\vec a, b_j)$.
-			Then by the adjunction $r \dashv \loch \circ \lambda$, we get
-			$r_{b_j}(\nonpol_\top) \leq \pospol_j \neq \nonpol_\top = \nonpol_\top \circ \rho \in \poldegeqtop(\vec b, b_j)$, implying that $r$ cannot be the action of $\rho$.
+			Then by the adjunction $r \dashv \loch \circ \lambda$, we can transpose $(\nonpol_\top)\pmrhom{\vec a}{b_j} \leq (\pospol_j)\pmrhom{\vec b}{b_j} \circ \lambda\pmrhom{\vec a}{\vec b}$ to obtain
+			$r_{b_j}(\nonpol_\top)\pmrhom{\vec b}{b_j} \leq (\pospol_j)\pmrhom{\vec b}{b_j} < (\nonpol_\top)\pmrhom{\vec b}{b_j} = (\nonpol_\top)\pmrhom{\vec a}{b_j} \circ \rho\pmrhom{\vec b}{\vec a} \in \poldegeqtop(\vec b, b_j)$, implying that $r$ cannot be the action of $\rho$.
 			
 			\item Assume that \cref{eq:poresh-withr-crit2} does not hold (which is decidable).
-			Then there exists some $j \in \Degeq(\vec b)$ such that $j \cdot \lambda = \mixpol_i \in \poldegeqtop(\vec a, b_j)$ with $a_i = \ypolar$.
+			Then from \cref{thm:pol-adjunctions}, we know we can find some $j \in \Degeq(\vec b)$ such that $j \cdot \lambda = \mixpol_i \in \poldegeqtop(\vec a, b_j)$ with $a_i = \ypolar$.
 			
-			This implies that $\mixpol_j \circ \lambda = \mixpol_i \in \poldegeqtop(\vec a, \ypolar)$ and hence, by the adjunction $r \dashv \loch \circ \lambda$, that $r_\ypolar(\mixpol_i) \leq \mixpol_j \in \poldegeqtop(\vec b, \ypolar)$.
+			This implies that $(\mixpol_j)\pmrhom{\vec b}{\ypolar} \circ \lambda\pmrhom{\vec a}{\vec b} = \mixpol_i\pmryy \in \poldegeqtop(\vec a, \ypolar)$.
+			Then by the adjunction $r \dashv \loch \circ \lambda$, we can transpose $(\mixpol_i)\pmrhom{\vec a}{\ypolar} \leq (\mixpol_j)\pmrhom{\vec b}{\ypolar} \circ \lambda\pmrhom{\vec a}{\vec b}$ to obtain
+			$r_\ypolar(\mixpol_i)\pmrhom{\vec b}{\ypolar} \leq (\mixpol_j)\pmrhom{\vec b}{\ypolar}$.
 			
-			This also implies that $\isopol_j \circ \lambda = \mixpol_i \not \geq \pospol_i \in \poldegeqtop(\vec a, \ypolar)$ and hence, by the adjunction $r \dashv \loch \circ \lambda$, that $i \cdot \rho = r_\ypolar(\pospol_i) \not\leq \isopol_j \in \poldegeqtop(\vec b, \ypolar)$.
+			On the other hand, we have that $(\mixpol_j)\pmrhom{\vec b}{\ypolar} \circ \lambda\pmrhom{\vec a}{\vec b} = (\mixpol_i)\pmrhom{\vec a}{\ypolar} \not \geq (\pospol_i)\pmrhom{\vec a}{\ypolar} \in \poldegeqtop(\vec a, \ypolar)$ and hence, by the adjunction $r \dashv \loch \circ \lambda$, that $i \cdot \rho = r_\ypolar(\pospol_i)\pmrhom{\vec b}{\ypolar} \not\leq (\mixpol_j)\pmrhom{\vec b}{\ypolar} \in \poldegeqtop(\vec b, \ypolar)$.
 			This is only possible if $\getdeg(i \cdot \rho) > j$.
 			But this degree is preserved by the action of $\mixpol$.
 			
@@ -3887,6 +3895,72 @@ We need an auxiliary categorical fact:
 			\]
 			so that $r$ cannot be the action of $\rho$.
 			
+			\item To prove `if', assume that \cref{eq:poresh-withr-crit1,eq:poresh-withr-crit2} hold.
+			We prove that $\lambda \dashv \rho$. This immediately implies that $\loch \circ \rho \dashv \loch \circ \lambda$ and since we already know that $r \dashv \loch \circ \lambda$, by uniqueness of the adjoint, we find that $r = \loch \circ \rho$.
+			\begin{itemize}
+				\item We first prove the unit inequality $\id_{\vec a} \leq \rho \pmrhom{\vec b}{\vec a} \circ \lambda \pmrhom{\vec a}{\vec b}$:
+				\begin{align*}
+					i \cdot \id_{\vec a}
+					&= \pospol_i \pmrhom{a_i}{a_i} \\
+					&\leq r_{a_i}(\pospol_i \pmrhom{a_i}{a_i})\pmrhom{\vec b}{a_i} \circ \lambda \pmrhom{\vec a}{\vec b}
+					& \text{(unit of $r \dashv \loch \circ \lambda$)} \\
+					&= (i \cdot \rho)\pmrhom{\vec b}{a_i} \circ \lambda \pmrhom{\vec a}{\vec b}
+					& \text{(def.\ of $\rho$)} \\
+					&= i \cdot (\rho \pmrhom{\vec b}{\vec a} \circ \lambda \pmrhom{\vec a}{\vec b})
+					& \text{(def.\ of comp.\ in $\poreshcat$).}
+				\end{align*}
+			
+				\todoi{Cheat sheet}
+				\item Next, we prove the unit inequality $\id_{\vec a} \leq \rho \pmrhom{\vec b}{\vec a} \circ \lambda \pmrhom{\vec a}{\vec b}$.
+				To this end, we need to prove that for all $I \in \Degeq(\vec a)$, we have $(\pospol_I)\pmrhom{\vec a}{a_I} \leq (I \cdot \rho) \circ \lambda \pmrhom{\vec a}{\vec b}$.
+				Using \cref{thm:deg-vs-poldeg-poresh}, this becomes:
+				\[
+					\forall I \in \Degeq(\vec a). \qquad
+					(\pospol_I)\pmrhom{\vec a}{a_I}
+					\leq
+					((\pospol_I)\pmrhom{\vec a}{a_I} \circ \rho \pmrhom{\vec b}{\vec a}) \circ \lambda \pmrhom{\vec a}{\vec b}.
+				\]
+				By the unit of $\loch \circ \rho \dashv \ell$, it is sufficient to prove:
+				\[
+					\forall I \in \Degeq(\vec a). \qquad
+					\ell_{a_I}((\pospol_I)\pmrhom{\vec a}{a_I} \circ \rho \pmrhom{\vec b}{\vec a})
+					\leq
+					((\pospol_I)\pmrhom{\vec a}{a_I} \circ \rho \pmrhom{\vec b}{\vec a}) \circ \lambda \pmrhom{\vec a}{\vec b}.
+				\]
+				Now fix $I$, write $c = a_I$ and $(q_j)\pmrhom{\vec b}{c} := I \cdot \rho\pmrhom{\vec b}{\vec a} = (\pospol_I)\pmrhom{\vec a}{a_I} \circ \rho \pmrhom{\vec b}{\vec a}$.
+				We need to prove:
+				\[
+					\ell_{c}(q_j)\pmrhom{\vec a}{c}
+					\leq
+					(q_j)\pmrhom{\vec b}{c} \circ \lambda \pmrhom{\vec a}{\vec b}.
+				\]
+				The right hand side expands to $(q_j)\pmrhom{\vec b}{c} \circ \lambda \pmrhom{\vec a}{\vec b} = q\pmrhom{b_j}{c} \circ (j \cdot \lambda)\pmrhom{\vec a}{b_j} = q\pmrhom{b_j}{c} \circ \ell_{b_j}(\pospol_j)\pmrhom{\vec a}{b_j}$ by \cref{eq:poldeg-poresh} and the definition of $\lambda$.
+				
+				By unfolding the definition of $\ell$ and noting that $q_j \circ \loch$ is monotonically increasing and therefore maximum-preserving, we need to prove, for each $c$ and $q_j$ as above:
+				\begin{align*}
+					&\forall p_i \in \poldegeqtop(\vec a, c) \text{ with $(p_i)\pmrhom{\vec a}{c} \circ \rho\pmrhom{\vec b}{\vec a} \leq (q_j)\pmrhom{\vec b}{c}$} .\\
+					&\exists \hat p_{\hat i} \in \poldegeqtop(\vec a, b_j) \text{ with $(\hat p_{\hat i})\pmrhom{\vec a}{b_j} \circ \rho\pmrhom{\vec b}{\vec a} \leq (\pospol_j)\pmrhom{\vec b}{b_j}$ } .\\
+					&(p_i)\pmrhom{\vec a}{c} \leq q\pmrhom{b_j}{c} \circ (\hat p_{\hat i})\pmrhom{\vec a}{b_j}.
+				\end{align*}
+				
+				Because of \cref{eq:poresh-withl-crit2}, $q\pmrhom{b_j}{c}$ has a left adjoint $d\pmrhom{c}{b_j} \dashv q\pmrhom{b_j}{c}$.
+				We set $\hat i = i$ and $\hat p \pmrhom{a_i}{b_j} = d\pmrhom{c}{b_j} \circ p d\pmrhom{a_i}{c}$.
+				Then the first required inequality
+				\[
+					(\hat p_{\hat i})\pmrhom{\vec a}{b_j} \circ \rho\pmrhom{\vec b}{\vec a} = d\pmrhom{c}{b_j} \circ (p_i)\pmrhom{\vec a}{c} \circ \rho\pmrhom{\vec b}{\vec a} \leq (\pospol_j)\pmrhom{\vec b}{b_j}
+				\]
+				follows by the adjunction $d \dashv q$ from the given inequality
+				\[
+					(p_i)\pmrhom{\vec a}{c} \circ \rho\pmrhom{\vec b}{\vec a} \leq q\pmrhom{b_j}{c} \circ (\pospol_j)\pmrhom{\vec b}{b_j} = (q_j)\pmrhom{\vec b}{c}.
+				\]
+				The second required inequality
+				\[
+					(p_i)\pmrhom{\vec a}{c} \leq q\pmrhom{b_j}{c} \circ (\hat p_{\hat i})\pmrhom{\vec a}{b_j} = q\pmrhom{b_j}{c} \circ d\pmrhom{c}{b_j} \circ (p_i)\pmrhom{\vec a}{c}
+				\]
+				follows immediately from the unit $\pospol\pmrhom{b_j}{b_j} \leq q\pmrhom{b_j}{c} \circ d\pmrhom{c}{b_j}$.
+			\end{itemize}
+			
+			\todoi{Old}
 			\item To prove `if', assume that \cref{eq:poresh-withr-crit1,eq:poresh-withr-crit2} hold.
 			We prove that $r_c$ is the action of $\rho$.
 			Again, it is sufficient to prove this for $c = \ypolar$.
