@@ -3982,10 +3982,11 @@ We need an auxiliary categorical fact:
 \end{proof}
 
 \begin{definition} \label{def:suc-degree}
-	Let $\vec a$ be a polarmode mask and $i \in \Degeqtop(\vec a)$.
+	If $\vec a$ is a polarmode mask, then $\Degeqtop(\vec a)$ is a finite linear order.
 	\begin{enumerate}
-		\item If $i < \top$, write $\sucdeg(i) := \min \set{i' \in \Degeqtop(\vec a)}{i' > i}$; we call this the \textbf{successor} of $i$.
-		\item If $i > \eqtydeg$, write $\predeg(i) := \max \set{i' \in \Degeqtop(\vec a)}{i' < i}$; we call this the \textbf{predecessor} of $i$.
+		\item If $i < \top$, write $\sucdeg(i)$ for the successor of $i$. This is the minimum of all greater elements.
+		\item If $i > \eqtydeg$, write $\predeg(i)$ for the predecessor of $i$.
+		This is the maximum of all lesser elements.
 	\end{enumerate}
 \end{definition}
 
@@ -4002,9 +4003,9 @@ In words, \cref{eq:poresh-withll-crit2} says that:
 	\item The last mention of a symmetric degree $i \in \Degeq(\vec a)$ by $\tau$ is at a symmetric degree $j \in \Degeq(\vec b)$;
 	\item The last mention of a directed degree $i \in \Degeq(\vec a)$ (hence $i \neq \eqtydeg$) is either:
 	\begin{itemize}
-		\item of the form $\mixpol_i$ at a symmetric degree $j \in \Degeq(\vec b)$;
-		\item or of the form $\pospol_i$ or $\negpol_i$ at an arbitrary degree $j \in \Degeq(\vec b)$;
-		\item it already could not be of the form $\isopol_i$ as per \cref{eq:poresh-withl-crit2};
+		\item of the form $\mixpol_i\pmryn$ at a symmetric degree $j \in \Degeq(\vec b)$;
+		\item or of the form $\pospol_i\pmryy$ or $\negpol_i\pmryy$ at an arbitrary degree $j \in \Degeq(\vec b)$;
+		\item it already could not be of the form $\isopol_i\pmrhom{\ypolar}{b_j}$ as per \cref{eq:poresh-withl-crit2}, as $\isopol\pmrhom{\ypolar}{b_j}$ does not have a left adjoint;
 	\end{itemize}
 	\item If a degree $i \in \Degeq(\vec a)$ is never mentioned, then the last mention of a degree less than $i$ is at a symmetric degree $j \in \Degeq(\vec b)$.
 \end{itemize}
@@ -4014,81 +4015,104 @@ In words, \cref{eq:poresh-withll-crit2} says that:
 	Starting from \cref{eq:poresh-withl-crit1}, we have
 	\begin{align*}
 		&\quad\mathrel{\phantom{\Leftrightarrow}}\quad
-		\eqtydeg \cdot \rho = \nonpol_\eqtydeg \\
+		(\eqtydeg \cdot \rho)\pmrhom{\vec b}{\npolar} =
+		(\nonpol_\eqtydeg)\pmrhom{\vec b}{\npolar} \\
 		&\quad\Leftrightarrow\quad
-		\eqtydeg \cdot \rho < \mixpol_{\sucdeg(\eqtydeg)} \\
+		(\nonpol_\eqtydeg)\pmrhom{\vec a}{\npolar} \circ \rho\pmrhom{\vec b}{\vec a} =
+		(\nonpol_\eqtydeg)\pmrhom{\vec b}{\npolar}
+		& \text{(By \cref{thm:deg-vs-poldeg-poresh}.)} \\
 		&\quad\Leftrightarrow\quad
-		\eqtydeg \cdot \rho < \pospol_{\sucdeg(\eqtydeg)}
+		(\nonpol_\eqtydeg)\pmrhom{\vec a}{\ypolar} \circ \rho\pmrhom{\vec b}{\vec a} =
+		(\nonpol_\eqtydeg)\pmrhom{\vec b}{\ypolar}
+		& \text{(The poset inclusion $\poldegeq(\vec b, \npolar) \subseteq \poldegeq(\vec b, \ypolar)$ is full.)} \\
+		&\quad\Leftrightarrow\quad
+		(\nonpol_\eqtydeg)\pmrhom{\vec a}{\ypolar} \circ \rho\pmrhom{\vec b}{\vec a} <
+		(\mixpol_{\sucdeg(\eqtydeg)})\pmrhom{\vec b}{\ypolar} \\
+		&\quad\Leftrightarrow\quad
+		(\nonpol_\eqtydeg)\pmrhom{\vec a}{\ypolar} \circ \rho\pmrhom{\vec b}{\vec a} <
+		(\pospol_{\sucdeg(\eqtydeg)})\pmrhom{\vec b}{\ypolar}
 		& \text{(Case distinction on $b_{\sucdeg(\eqtydeg)}$; $\rho$ satisfies \cref{eq:poresh-withr-crit2})} \\
 		&\quad\Leftrightarrow\quad
-		\nonpol_\eqtydeg \circ \rho \not\geq \pospol_{\sucdeg(\eqtydeg)}
-		& \text{(By \cref{thm:deg-vs-poldeg-poresh}. Sym.\ pol.\ degrees are always comparable)} \\
+		(\nonpol_\eqtydeg)\pmrhom{\vec a}{\ypolar} \circ \rho\pmrhom{\vec b}{\vec a} \not\geq
+		(\pospol_{\sucdeg(\eqtydeg)})\pmrhom{\vec b}{\ypolar}
+		& \text{(Sym.\ pol.\ degrees are comparable to everything)} \\
 		&\quad\Leftrightarrow\quad
-		\nonpol_\eqtydeg \not\geq \pospol_{\sucdeg(\eqtydeg)} \circ \tau
+		(\nonpol_\eqtydeg)\pmrhom{\vec a}{\ypolar} \not\geq
+		(\pospol_{\sucdeg(\eqtydeg)})\pmrhom{\vec b}{\ypolar} \circ \tau\pmrhom{\vec a}{\vec b}
 		& \text{($\loch \circ \tau \dashv \loch \circ \rho$)} \\
 		&\quad\Leftrightarrow\quad
-		\nonpol_\eqtydeg < {\sucdeg(\eqtydeg)} \cdot \tau
-		& \text{(By \cref{thm:deg-vs-poldeg-poresh}. Sym.\ pol.\ degrees are always comparable)} \\
+		(\nonpol_\eqtydeg)\pmrhom{\vec a}{\ypolar} <
+		(\pospol_{\sucdeg(\eqtydeg)})\pmrhom{\vec b}{\ypolar} \circ \tau\pmrhom{\vec a}{\vec b}
+		& \text{(Sym.\ pol.\ degrees are comparable to everything)} \\
 		&\quad\Leftrightarrow\quad
-		\eqtydeg < \getdeg({\sucdeg(\eqtydeg)} \cdot \tau).
+		\eqtydeg <
+		\getdeg \paren{  (\pospol_{\sucdeg(\eqtydeg)})\pmrhom{\vec b}{\ypolar} \circ \tau\pmrhom{\vec a}{\vec b}  } = \getdeg({\sucdeg(\eqtydeg)} \cdot \tau).\hspace{-10em}
 	\end{align*}
 	%Now either $\lenpol{\vec b} = 0$ and $m = \top$, in which case $\getdeg(m \cdot \tau) = \top$ and the given equation is trivally satisfied; or $\lenpol{\vec b} > 0$ and $m = 0$.
 	This gives \cref{eq:poresh-withll-crit1}.
 	
-	Recall \cref{eq:poresh-withl-crit2}:
+	Using \cref{thm:pol-adjunctions}, we can rewrite \cref{eq:poresh-withl-crit2} as:
 	\begin{align*}
-		\text{for all } i \in \Degeq(\vec a) \text{ with } i \cdot \rho = \isopol_j \text{, we have } b_j = \npolar \text{ (so $i \cdot \rho = \nonpol_j$)}.
+%		\text{for all } i \in \Degeq(\vec a) \text{ with } (i \cdot \rho) = q_j\pmrhom{b_j}{a_i}, \text{the polarity $q$ has a left adjoint.}
+		\text{for all } i \in \Degeq(\vec a) \text{ with } (i \cdot \rho)\pmrhom{\vec b}{a_i} = \isopol_j\pmrhom{b_j}{a_i} \text{, we have } b_j = \npolar \text{ (so $(i \cdot \rho)\pmrhom{\vec b}{a_i} = \nonpol_j\pmrhom{\npolar}{a_i}$)}.
 	\end{align*}
-	We can rewrite the condition as $\isopol_j \leq i \cdot \rho$ \textbf{AND} $\isopol_j \geq i \cdot \rho$.
-	\todoi{Shortcut the reasoning below with $\isopol \dashv \mixpol$.}
+	Since $\rho$ satisfies \cref{eq:poresh-withr-crit1}, we know that $j \neq \top$ and can regard $j$ as ranging over $\Degeq(\vec b)$.
+	
+	We can rewrite the condition $(i \cdot \rho)\pmrhom{\vec b}{a_i} = \isopol_j\pmrhom{b_j}{a_i}$ as $\isopol_j \leq (i \cdot \rho)\pmrhom{\vec b}{a_i}$ \textbf{AND} $\isopol_j \geq (i \cdot \rho)\pmrhom{\vec b}{a_i}$.
+	%\todoi{Shortcut the reasoning below with $\isopol \dashv \mixpol$.}
 	We have
 	\begin{align*}
 		&\quad\mathrel{\phantom{\Leftrightarrow}}\quad
-		\isopol_j \leq i \cdot \rho
+		(\isopol_j)\pmrhom{\vec b}{a_i}
+		\leq (i \cdot \rho)\pmrhom{\vec b}{a_i}
+		= (\pospol_i)\pmrhom{\vec a}{a_i} \circ \rho\pmrhom{\vec b}{\vec a}
+		& \text{(\cref{thm:deg-vs-poldeg-poresh})}
 		\\ &\quad\Leftrightarrow\quad
-		\isopol_j \circ \tau \leq \pospol_i
-		& \text{($\loch \circ \tau \dashv \loch \circ \rho$; \cref{thm:deg-vs-poldeg-poresh})}
-%		\\ &\quad\Leftrightarrow\quad
-%		\isopol \circ (j \cdot \tau) \leq \pospol_i
-%		& \text{(\cref{eq:poldeg-poresh})}
-%		\\ &\quad\Leftrightarrow\quad
-%		\isopol_{\getdeg(j \cdot \tau)} \leq \pospol_i
-%		& \text{(Case distinction on $a_{\getdeg(j \cdot \tau)}$; $\tau$ satisfies \cref{eq:poresh-withr-crit2})}
-%		\\ &\quad\Leftrightarrow\quad
-%		\getdeg(j \cdot \tau) < i \text{ or} \\
-%		&\quad\mathrel{\phantom{\Leftrightarrow}}\quad
-%		\getdeg(j \cdot \tau) = i \text{ with } a_i = \npolar,
+		(\isopol_j)\pmrhom{\vec b}{a_i} \circ \tau\pmrhom{\vec a}{\vec b}
+		\leq (\pospol_i)\pmrhom{\vec a}{a_i}
+		& \text{($\loch \circ \tau \dashv \loch \circ \rho$)}
 		\\ &\quad\Leftrightarrow\quad
-		(\pospol_j \circ \tau) \vee (\negpol_j \circ \tau) \leq \pospol_i
-		& \text{(\Cref{thm:poldeg-poresh-lattice})}
+		\isopol\pmrhom{b_j}{a_i} \circ (j \cdot \tau)\pmrhom{\vec a}{b_j}
+		\leq (\pospol_i)\pmrhom{\vec a}{a_i}
 		\\ &\quad\Leftrightarrow\quad
-		\pospol_j \circ \tau \leq \pospol_i \text{ and }
-		\negpol_j \circ \tau \leq \pospol_i
+		(j \cdot \tau)\pmrhom{\vec a}{b_j}
+		\leq \mixpol\pmrhom{a_i}{b_j} \circ (\pospol_i)\pmrhom{\vec a}{a_i}
+		& \text{($\isopol\pmrhom{b_j}{a_i} \dashv \mixpol\pmrhom{a_i}{b_j}$)}
 		\\ &\quad\Leftrightarrow\quad
-		\pospol_j \circ \tau \leq \pospol_i \text{ and }
-		\pospol_j \circ \tau \leq \negpol_i
-		& \text{(Apply $\negpol \circ \loch$ to both sides)}
-		\\ &\quad\Leftrightarrow\quad
-		j \cdot \tau \leq \mixpol_i
+		(j \cdot \tau)\pmrhom{\vec a}{b_j}
+		= (\mixpol_i)\pmrhom{\vec a}{b_j}.
 	\end{align*}
 	and
 	\begin{align*}
 		&\quad\mathrel{\phantom{\Leftrightarrow}}\quad
-		\isopol_j \geq i \cdot \rho
+		(\isopol_j)\pmrhom{\vec b}{a_i}
+		\geq (i \cdot \rho)\pmrhom{\vec b}{a_i}
+		= (\pospol_i)\pmrhom{\vec a}{a_i} \circ \rho\pmrhom{\vec b}{\vec a}
+		\hspace{-10em}
+		& \text{(By \cref{thm:deg-vs-poldeg-poresh}.)}
 		\\ &\quad\Leftrightarrow\quad
-		\mixpol_{\sucdeg(j)} > i \cdot \rho
+		(\isopol_j)\pmrhom{\vec b}{\ypolar}
+		\geq (\pospol_i)\pmrhom{\vec a}{\ypolar} \circ \rho\pmrhom{\vec b}{\vec a}
+		& \text{The poset inclusion $\poldegeq(\vec b, \npolar) \subseteq \poldegeq(\vec b, \ypolar)$ is full.}
+		\\ &\quad\Leftrightarrow\quad
+		(\mixpol_{\sucdeg(j)})\pmrhom{\vec b}{\ypolar}
+		> (\pospol_i)\pmrhom{\vec a}{\ypolar} \circ \rho\pmrhom{\vec b}{\vec a}
 		%& \paren{\text{Let ${\sucdeg(j)} = \min \set{j' \in \Degeqtop(\vec b)}{j' > j}$}}
 		\\ &\quad\Leftrightarrow\quad
-		\mixpol_{\sucdeg(j)} \not\leq \pospol_i \circ \rho
-		& \text{(By \cref{thm:deg-vs-poldeg-poresh}. Sym.\ pol.\ degrees are always comparable)}
+		(\mixpol_{\sucdeg(j)})\pmrhom{\vec b}{\ypolar}
+		\not\leq (\pospol_i)\pmrhom{\vec a}{\ypolar} \circ \rho\pmrhom{\vec b}{\vec a}
+		& \text{(Sym.\ pol.\ degrees are comparable to everything)}
 		\\ &\quad\Leftrightarrow\quad
-		\mixpol_{\sucdeg(j)} \circ \tau \not\leq \pospol_i
+		(\mixpol_{\sucdeg(j)})\pmrhom{\vec b}{\ypolar} \circ \tau\pmrhom{\vec a}{\vec b}
+		\not\leq (\pospol_i)\pmrhom{\vec a}{\ypolar}
 		& \text{($\loch \circ \tau \dashv \loch \circ \rho$)}
 		\\ &\quad\Leftrightarrow\quad
-		\mixpol \circ ({\sucdeg(j)} \cdot \tau) > \pospol_i
-		& \text{(By \cref{eq:poldeg-poresh}. Sym.\ pol.\ degrees are always comparable)}
+		(\mixpol_{\sucdeg(j)})\pmrhom{\vec b}{\ypolar} \circ \tau\pmrhom{\vec a}{\vec b}
+		> (\pospol_i)\pmrhom{\vec a}{\ypolar}
+		& \text{(By \cref{eq:poldeg-poresh}. Sym.\ pol.\ degrees are comparable to everything)}
 		\\ &\quad\Leftrightarrow\quad
-		\mixpol_{\getdeg({\sucdeg(j)} \cdot \tau)} > \pospol_i
+		(\mixpol_{\getdeg({\sucdeg(j)} \cdot \tau)})\pmrhom{\vec a}{\ypolar}
+		> (\pospol_i)\pmrhom{\vec a}{\ypolar}
 		& \text{(Case distinction on $a_{\getdeg({\sucdeg(j)} \cdot \tau)}$; $\tau$ satisfies \cref{eq:poresh-withl-crit2})}
 		\\ &\quad\Leftrightarrow\quad
 		\getdeg({\sucdeg(j)} \cdot \tau) > i
