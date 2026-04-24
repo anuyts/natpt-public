@@ -1,10 +1,11 @@
 - may have forgotten a lot of JEPs, search for "in $" or "a jet"
 - assignment -> bit-assignment
+- abolish topes in favor of cartesian boolean cubes?
 
 - explain equijets using paths (i.e. inserted degrees)
 - [x] rename anpolarity to polarmode
 - [x] put anpolarity on arrows & osigns
-- rename jet set to jet graph
+- [ ] rename jet set to jet graph
 
 - title (current is best):
   - modalities and intervals for higher equipment pretypes: from semantics towards syntax
