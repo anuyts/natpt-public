@@ -2807,11 +2807,11 @@ In other words, there will be an operation combining a polarity $p$ with an orie
 Finally, a \textbf{polarized degree} $p_i$ can be regarded as a modality for a function $f : A \to B$ from a domain $A$ with multiple degrees, to a codomain $B$ with only a single degree. It answers the question: for a $p_i$-modal function $f$, in order to get $f(x) \jet f(y)$, what do I need between $x$ and $y$?
 The answer consists of a degree $i$ at which a jet is needed in $A$, and a polarity telling us which way the jet should point.
 This multi-single-degree function $f$ can be composed at the domain side with multi-multi-degree functions, and at the codomain side with single-single-degree functions, which explains why $\poldegeqtop$ is a profunctor.
-Finally, we can generalize the above question: for a $p_i$-modal function $f$, in order to get $f(x) \mathrel{Q} f(y)$, what do I need between $x$ and $y$? Thus, we get an operation that takes an orientation $Q$ and a polarized degree $p_i$ and answers with a polarized degree $P_i$; this is the filler of the triangular diagram.
+Finally, we can generalize the above question: for a $p_i$-modal function $f$, in order to get $f(x) \mathrel{Q} f(y)$, what do I need between $x$ and $y$? Thus, we get an operation that takes an orientation $Q$ and a polarized degree $p_i$ and answers with a polarized orientation $P_i$; this is the filler of the triangular diagram.
 Naturality and extranaturality of this operation simply express that it is consistent with how multi-single-degree functions compose on either side.
 
 For functions with multiple degrees in the codomain, we know that $f(x) \jet_i f(y)$ will imply $f(x) \equijet_{i+1} f(y)$.
-Hence, for a modality $\mu$ to be consistent, we will require that $\jetsym_i \circ \mu \leq \equijetsym_{i+1} \circ \mu$.
+Hence, for a modality $\mu$ to be consistent, we will require that $\jetsym_i \oriof \mu \leq \equijetsym_{i+1} \oriof \mu$.
 Since the only informational content of $\mu$ is parametrized by a \emph{degree} $i$, we will require that $i \cdot \mu \ll (i+1) \cdot \mu$.
 This is the motivation of the somewhat peculiar relation $\ll$ introduced below, which is always transitive, and is reflexive on symmetric objects and antireflexive on non-symmetric objects.
 
@@ -3050,7 +3050,7 @@ Using \cref{thm:oripsh-yoneda}, we extend the definition of symmetry from polari
 
 \subsubsection{Polarized Degrees}
 \begin{definition}
-	Given a polarmode mask $\vec a$, we define the following posets of \textbf{degrees}:
+	Given a polarmode mask $\vec a$, we define the following posets of \textbf{(generalized) degrees}:
 	\begin{itemize}
 		\item $\Deg(\vec a) = \accol{0 \leq 1 \leq \ldots \leq \lenpol{\vec a} - 1}$,
 		\item $\Degeq(\vec a) = \accol{\eqtydeg \leq 0 \leq 1 \leq \ldots \leq \lenpol{\vec a} - 1}$,
