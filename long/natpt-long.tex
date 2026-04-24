@@ -3653,7 +3653,7 @@ We need an auxiliary categorical fact:
 				&\qquad (P_i)\pmr{\vec a} \leq (Q_j)\pmr{\vec b} \oriof \lambda \pmrhom{\vec a}{\vec b} \Leftrightarrow (P_i)\pmr{\vec a} \oriof \rho\pmrhom{\vec b}{\vec a} \leq (Q_j)\pmr{\vec b},
 				\label{eq:poresh-adjoint-crit-orideg}
 			\end{align}
-			\item For either polarmode $c$, we have $\loch \circ \rho \dashv \loch \circ \lambda : \poldegeqtop(\vec b, c) \to \poldegeqtop(\vec a, c)$:
+			\item For each polarmode $c$, we have $\loch \circ \rho \dashv \loch \circ \lambda : \poldegeqtop(\vec b, c) \to \poldegeqtop(\vec a, c)$:
 			\begin{align}
 				&\forall c \in \Polarmode, p_i \in \poldegeqtop(\vec a, c), q_j \in \poldegeqtop(\vec b, c). \nn \\
 				&\qquad (p_i)\pmrhom{\vec a}{c} \leq (q_j)\pmrhom{\vec b}{c} \circ \lambda\pmrhom{\vec a}{\vec b} \Leftrightarrow (p_i)\pmrhom{\vec a}{c} \circ \rho\pmrhom{\vec b}{\vec a} \leq (q_j)\pmrhom{\vec b}{c}.
@@ -3981,8 +3981,9 @@ We need an auxiliary categorical fact:
 	\end{enumerate}
 \end{proof}
 
+\subsubsection{Existence of a Second Adjoint}
 \begin{definition} \label{def:suc-degree}
-	If $\vec a$ is a polarmode mask, then $\Degeqtop(\vec a)$ is a finite linear order.
+	If $\vec a$ is a polarmode mask, then $\Degeqtop(\vec a)$ is a finite linear order with at least two elements.
 	\begin{enumerate}
 		\item If $i < \top$, write $\sucdeg(i)$ for the successor of $i$. This is the minimum of all greater elements.
 		\item If $i > \eqtydeg$, write $\predeg(i)$ for the predecessor of $i$.
@@ -4080,7 +4081,7 @@ In words, \cref{eq:poresh-withll-crit2} says that:
 		& \text{($\isopol\pmrhom{b_j}{a_i} \dashv \mixpol\pmrhom{a_i}{b_j}$)}
 		\\ &\quad\Leftrightarrow\quad
 		(j \cdot \tau)\pmrhom{\vec a}{b_j}
-		= (\mixpol_i)\pmrhom{\vec a}{b_j}.
+		\leq (\mixpol_i)\pmrhom{\vec a}{b_j}.
 	\end{align*}
 	and
 	\begin{align*}
@@ -4109,7 +4110,7 @@ In words, \cref{eq:poresh-withll-crit2} says that:
 		\\ &\quad\Leftrightarrow\quad
 		(\mixpol_{\sucdeg(j)})\pmrhom{\vec b}{\ypolar} \circ \tau\pmrhom{\vec a}{\vec b}
 		> (\pospol_i)\pmrhom{\vec a}{\ypolar}
-		& \text{(By \cref{eq:poldeg-poresh}. Sym.\ pol.\ degrees are comparable to everything)}
+		& \text{(Sym.\ pol.\ degrees are comparable to everything)}
 		\\ &\quad\Leftrightarrow\quad
 		(\mixpol_{\getdeg({\sucdeg(j)} \cdot \tau)})\pmrhom{\vec a}{\ypolar}
 		> (\pospol_i)\pmrhom{\vec a}{\ypolar}
@@ -4174,47 +4175,44 @@ In words, \cref{eq:poresh-withrr-crit2} says that:
 	
 	Using \cref{thm:pol-adjunctions}, we can rewrite \cref{eq:poresh-withr-crit2} as:
 	\[
-		\text{for all } j \in \Degeq(\vec b) \text{ with } j \cdot \lambda = \mixpol_i \text{, we have } a_i = \npolar \text{ (so $j \cdot \lambda = \nonpol_i$)}.
+		\text{for all } j \in \Degeq(\vec b) \text{ with } (j \cdot \lambda)\pmrhom{\vec a}{b_j} = \mixpol_i\pmrhom{a_i}{b_j} \text{, we have } a_i = \npolar \text{ (so $(j \cdot \lambda)\pmrhom{\vec a}{b_j} = \nonpol_i\pmrhom{\npolar}{b_j}$)}.
 	\]
-	We can rewrite the condition as $j \cdot \lambda \leq \mixpol_i$ \textbf{AND} $\mixpol_i \leq j \cdot \lambda$. We have
+	Since $\lambda$ satisfies \cref{eq:poresh-withr-crit1}, we know that $i \neq \top$. Moreover, the case where $i = \eqtydeg$ is trivial, as $a_\eqtydeg = \npolar$ by definition. Hence, we can regard $i$ as ranging over $\Deg(\vec a)$.
+	
+	We can rewrite the condition as $(j \cdot \lambda)\pmrhom{\vec a}{b_j} \leq \mixpol_i$ \textbf{AND} $(j \cdot \lambda)\pmrhom{\vec a}{b_j} \geq \mixpol_i$. We have
 	\begin{align*}
 		&\quad\mathrel{\phantom{\Leftrightarrow}}\quad
-		j \cdot \lambda \leq \mixpol_i
+		(\pospol_j)\pmrhom{\vec b}{b_j} \circ \lambda\pmrhom{\vec a}{\vec b} = (j \cdot \lambda)\pmrhom{\vec a}{b_j} \leq (\mixpol_i)\pmrhom{\vec a}{b_j}
+		& \text{(\cref{thm:deg-vs-poldeg-poresh})}
 		\\ &\quad\Leftrightarrow\quad
-		\pospol_j \leq \mixpol_i \circ \kappa
-		& \text{($\loch\circ  \lambda \dashv \loch \circ \kappa$; \cref{thm:deg-vs-poldeg-poresh})}
+		(\pospol_j)\pmrhom{\vec b}{b_j} \leq (\mixpol_i)\pmrhom{\vec a}{b_j} \circ \kappa\pmrhom{\vec b}{\vec a}
+		& \text{($\loch\circ  \lambda \dashv \loch \circ \kappa$)}
 		\\ &\quad\Leftrightarrow\quad
-		\pospol_j \leq (\pospol_i \circ \kappa) \wedge (\negpol_i \circ \kappa)
-		& \text{(\cref{thm:poldeg-poresh-lattice})}
+		(\pospol_j)\pmrhom{\vec b}{b_j} \leq \mixpol\pmrhom{a_i}{b_j} \circ (i \cdot \kappa)\pmrhom{\vec b}{a_i}
 		\\ &\quad\Leftrightarrow\quad
-		\pospol_j \leq \pospol_i \circ \kappa \text{ and }
-		\pospol_j \leq \negpol_i \circ \kappa
+		\isopol\pmrhom{b_j}{a_i} \circ (\pospol_j)\pmrhom{\vec b}{b_j} \leq (i \cdot \kappa)\pmrhom{\vec b}{a_i}
+		& \text{($\isopol\pmrhom{b_j}{a_i} \dashv \mixpol\pmrhom{a_i}{b_j}$)}
 		\\ &\quad\Leftrightarrow\quad
-		\pospol_j \leq \pospol_i \circ \kappa \text{ and }
-		\negpol_j \leq \pospol_i \circ \kappa
-		& \text{(Apply $\negpol \circ \loch$ to both sides)}
-		\\ &\quad\Leftrightarrow\quad
-		\isopol_j \leq i \cdot \kappa
+		(\isopol_j)\pmrhom{\vec b}{a_i} \leq (i \cdot \kappa)\pmrhom{\vec b}{a_i}
 	\end{align*}
-	\todoi{Use $\isopol \dashv \mixpol$ instead.}
 	and
 	\begin{align*}
 		&\quad\mathrel{\phantom{\Leftrightarrow}}\quad
-		j \cdot \lambda \geq \mixpol_i
+		(\pospol_j)\pmrhom{\vec b}{b_j} \circ \lambda\pmrhom{\vec a}{\vec b} = (j \cdot \lambda)\pmrhom{\vec a}{b_j} \geq (\mixpol_i)\pmrhom{\vec a}{b_j}
+		& \text{(\cref{thm:deg-vs-poldeg-poresh})}
 		\\ &\quad\Leftrightarrow\quad
-		j \cdot \lambda > \isopol_{\predeg(i)}
-		&\text{(WLOG, $i > \eqtydeg$, since $a_\eqtydeg = \npolar$ regardless)}
+		(\pospol_j)\pmrhom{\vec b}{b_j} \circ \lambda\pmrhom{\vec a}{\vec b} > (\isopol_{\predeg(i)})\pmrhom{\vec a}{b_j}
 		\\ &\quad\Leftrightarrow\quad
-		\pospol_j \circ \lambda \not\leq \isopol_{\predeg(i)}
-		& \text{(By \cref{thm:deg-vs-poldeg-poresh}. Sym.\ pol.\ degrees are always comparable)}
+		(\pospol_j)\pmrhom{\vec b}{b_j} \circ \lambda\pmrhom{\vec a}{\vec b} \not\leq (\isopol_{\predeg(i)})\pmrhom{\vec a}{b_j}
+		& \text{(Sym.\ pol.\ degrees are comparable to everything)}
 		\\ &\quad\Leftrightarrow\quad
-		\pospol_j \not\leq \isopol_{\predeg(i)} \circ \kappa
+		(\pospol_j)\pmrhom{\vec b}{b_j} \not\leq (\isopol_{\predeg(i)})\pmrhom{\vec a}{b_j} \circ \kappa\pmrhom{\vec b}{\vec a}
 		& \text{($\loch\circ  \lambda \dashv \loch \circ \kappa$)}
 		\\ &\quad\Leftrightarrow\quad
-		\pospol_j > \isopol \circ (\predeg(i) \cdot \kappa)
-		& \text{(By \cref{eq:poldeg-poresh}. Sym.\ pol.\ degrees are always comparable)}
+		(\pospol_j)\pmrhom{\vec b}{b_j} > (\isopol_{\predeg(i)})\pmrhom{\vec a}{b_j} \circ \kappa\pmrhom{\vec b}{\vec a}
+		& \text{(Sym.\ pol.\ degrees are always comparable)}
 		\\ &\quad\Leftrightarrow\quad
-		\pospol_j > \isopol_{\getdeg(\predeg(i) \cdot \kappa)}
+		(\pospol_j)\pmrhom{\vec b}{b_j} > (\isopol_{\getdeg(\predeg(i) \cdot \kappa)})\pmrhom{\vec b}{b_j}
 		& \text{(Case distinction on $b_{\getdeg(\predeg(i) \cdot \kappa)}$; $\kappa$ satisfies \cref{eq:poresh-withr-crit2})}
 		\\ &\quad\Leftrightarrow\quad
 		j > \getdeg(\predeg(i) \cdot \kappa).
