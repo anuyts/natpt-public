@@ -4320,39 +4320,41 @@ In words, \cref{eq:poresh-withrr-crit2} says that:
 		\end{itemize}
 		\item If $i = n-1$, then $\cohfget_{n-1}$ has a right adjoint $\cohfget_{n-1} \dashv \cohcodisc_{n-1}$ with
 		\begin{align*}
-			\cohfget_{n-1} &= \reshlist{\nonpol_\eqtydeg}{\pospol_0, \ldots, \pospol_{n-2}} &: \vec a \to \vec b, \\
+			\cohfget_{n-1} &= \reshlist{\nonpol_\eqtydeg\pmrhom{\npolar}{\npolar}}{\pospol_0\pmrhom{a_0}{b_0}, \ldots, \pospol_{n-2}\pmrhom{a_{n-2}}{b_{n-2}}} &: \vec a \to \vec b, \\
 			\dashv
-			\cohcodisc_{n-1} &= \reshlist{\nonpol_\eqtydeg}{\pospol_0, \ldots, \pospol_{n-2}, \nonpol_\top} &: \vec b \to \vec a,
+			\cohcodisc_{n-1} &= \reshlist{\nonpol_\eqtydeg\pmrhom{\npolar}{\npolar}}{\pospol_0\pmrhom{b_0}{a_0}, \ldots, \pospol_{n-2}\pmrhom{b_{n-2}}{a_{n-2}}, \nonpol_\top\pmrhom{\npolar}{a_{n-1}}} &: \vec b \to \vec a,
 		\end{align*}
 		and there are no further right adjoints.
 		We have $\cohfget_{n-1} \cohcodisc_{n-1} = \id_{\vec b}$.
 		We get an idempotent monad
 		\[
-			\sharp_{n-1} = \cohcodisc_{n-1} \cohfget_{n-1} = \reshlist{\nonpol_\eqtydeg}{\pospol_0, \ldots, \pospol_{n-2}, \nonpol_\top} : \vec a \to \vec a.
+			\sharp_{n-1} = \cohcodisc_{n-1} \cohfget_{n-1} = \reshlist{\nonpol_\eqtydeg\pmrhom{\npolar}{\npolar}}{\pospol_0\pmrhom{a_0}{a_0}, \ldots, \pospol_{n-2}\pmrhom{a_{n-2}}{a_{n-2}}, \nonpol_\top\pmrhom{\npolar}{a_{n-1}}} : \vec a \to \vec a.
 		\]
 		\item If $i < n-1$, then $\cohfget_i$ has a right adjoint $\cohfget_i \dashv \cohcodisc_i$ with
 		\[
-			\cohcodisc_i = \reshlist{\nonpol_\eqtydeg}{\pospol_0, \ldots, \pospol_{i-1}, \mixpol_{i}, \pospol_{i}, \ldots, \pospol_{n-2}} : \vec b \to \vec a.
+			\cohcodisc_i = \reshlist{\nonpol_\eqtydeg\pmrhom{\npolar}{\npolar}}{\pospol_0\pmrhom{b_0}{a_0}, \ldots, \pospol_{i-1}\pmrhom{b_{i-1}}{a_{i-1}}, \mixpol_{i}\pmrhom{b_i}{a_i}, \pospol_{i}\pmrhom{b_i}{a_{i+1}}, \ldots, \pospol_{n-2}\pmrhom{b_{n-2}}{a_{n-1}}} : \vec b \to \vec a.
 		\]
 		We have $\cohfget_i \cohcodisc_i = \id_{\vec b}$. We get an idempotent monad
 		\[
-			\sharp_i = \cohcodisc_i \cohfget_i = \reshlist{\nonpol_\eqtydeg}{\pospol_0, \ldots, \pospol_{i-1}, \mixpol_{i+1}, \pospol_{i+1}, \ldots, \pospol_{n-1}} : \vec a \to \vec a.
+			\sharp_i = \cohcodisc_i \cohfget_i = \reshlist{\nonpol_\eqtydeg\pmrhom{\npolar}{\npolar}}{\pospol_0\pmrhom{a_0}{a_0}, \ldots, \pospol_{i-1}\pmrhom{a_{i-1}}{a_{i-1}}, \mixpol_{i+1}\pmrhom{a_{i+1}}{a_i}, \pospol_{i+1}\pmrhom{a_{i+1}}{a_{i+1}}, \ldots, \pospol_{n-1}\pmrhom{b_{n-1}}{a_{n-1}}} : \vec a \to \vec a.
 		\]
 		\begin{itemize}
 			\item If $a_{i+1} = b_i = \ypolar$, then there are no further right adjoints.
 			\item If $a_{i+1} = b_i = \npolar$, then we have $\cohfget_i \dashv \cohcodisc_i \dashv \cohcopi_i$ with
 			\begin{align*}
-				\cohfget_i &= \reshlist{\nonpol_\eqtydeg}{\pospol_0, \ldots, \pospol_{i-1}, \nonpol_{i+1}, \pospol_{i+2}, \ldots, \pospol_{n-1}} &: \vec a \to \vec b, \\
+				\cohfget_i &= \reshlist{\nonpol_\eqtydeg\pmrhom{\npolar}{\npolar}}{\pospol_0\pmrhom{a_0}{b_0}, \ldots, \pospol_{i-1}\pmrhom{a_{i-1}}{b_{i-1}}, \nonpol_{i+1}\pmrhom{\npolar}{\npolar}, \pospol_{i+2}\pmrhom{a_{i+2}}{b_{i+1}}, \ldots, \pospol_{n-1}\pmrhom{a_{n-1}}{b_{n-2}}} &: \vec a \to \vec b, \\
 				\dashv
-				\cohcodisc_i &= \reshlist{\nonpol_\eqtydeg}{\pospol_0, \ldots, \pospol_{i-1}, \nonpol_{i}, \nonpol_{i}, \pospol_{i+1}, \ldots, \pospol_{n-2}} &: \vec b \to \vec a, \\
+				\cohcodisc_i &= \reshlist{\nonpol_\eqtydeg\pmrhom{\npolar}{\npolar}}{\pospol_0\pmrhom{b_0}{a_0}, \ldots, \pospol_{i-1}\pmrhom{b_{i-1}}{a_{i-1}}, \nonpol_{i}\pmrhom{\npolar}{a_i}, \nonpol_{i}\pmrhom{\npolar}{\npolar}, \pospol_{i+1}\pmrhom{b_{i+1}}{a_{i+2}}, \ldots, \pospol_{n-2}\pmrhom{b_{n-2}}{a_{n-1}}} &: \vec b \to \vec a, \\
 				\dashv
-				\cohcopi_i &= \reshlist{\nonpol_\eqtydeg}{\pospol_0, \ldots, \pospol_{i-1}, \mixpol_i, \pospol_{i+2}, \ldots, \pospol_{n-1}} &: \vec a \to \vec b.
+				\cohcopi_i &= \reshlist{\nonpol_\eqtydeg\pmrhom{\npolar}{\npolar}}{\pospol_0\pmrhom{a_0}{b_0}, \ldots, \pospol_{i-1}\pmrhom{a_{i-1}}{b_{i-1}}, \mixpol_i\pmrhom{a_i}{\npolar}, \pospol_{i+2}\pmrhom{a_{i+2}}{b_{i+1}}, \ldots, \pospol_{n-1}\pmrhom{a_{n-1}}{b_{n-2}}} &: \vec a \to \vec b.
 			\end{align*}
 			We have $\cohfget_i \cohcodisc_i = \cohcopi_i \cohcodisc_i = \id_{\vec b}$. We get adjoint idempotent (co)monads
 			\begin{align*}
-				\sharp_i = \cohcodisc_i \cohfget_i &= \reshlist{\nonpol_\eqtydeg}{\pospol_0, \ldots, \pospol_{i-1}, \nonpol_{i+1}, \nonpol_{i+1}, \pospol_{i+2}, \ldots, \pospol_{n-1}} &: \vec a \to \vec a, \\
+				{}\hspace{-3em}
+				\sharp_i = \cohcodisc_i \cohfget_i &= \reshlist{\nonpol_\eqtydeg\pmrhom{\npolar}{\npolar}}{\pospol_0\pmrhom{a_0}{a_0}, \ldots, \pospol_{i-1}\pmrhom{a_{i-1}}{a_{i-1}}, \nonpol_{i+1}\pmrhom{\npolar}{a_i}, \nonpol_{i+1}\pmrhom{\npolar}{\npolar}, \pospol_{i+2}\pmrhom{a_{i+2}}{a_{i+2}}, \ldots, \pospol_{n-1}\pmrhom{a_{n-1}}{a_{n-1}}} &: \vec a \to \vec a, \\
+				{}\hspace{-3em}
 				\dashv
-				\coshp_i = \cohcodisc_i \cohcopi_i &= \reshlist{\nonpol_\eqtydeg}{\pospol_0, \ldots, \pospol_{i-1}, \mixpol_{i}, \mixpol_{i}, \pospol_{i+2}, \ldots, \pospol_{n-1}} &: \vec a \to \vec a.
+				\coshp_i = \cohcodisc_i \cohcopi_i &= \reshlist{\nonpol_\eqtydeg\pmrhom{\npolar}{\npolar}}{\pospol_0\pmrhom{a_0}{a_0}, \ldots, \pospol_{i-1}\pmrhom{a_{i-1}}{a_{i-1}}, \mixpol_{i}\pmrhom{a_i}{a_i}, \mixpol_{i}\pmrhom{a_i}{\npolar}, \pospol_{i+2}\pmrhom{a_{i+2}}{a_{i+2}}, \ldots, \pospol_{n-1}\pmrhom{a_{n-1}}{a_{n-1}}} &: \vec a \to \vec a.
 			\end{align*}
 			\begin{itemize}
 				\item If $a_i = \ypolar$, then there are no further right adjoints.
