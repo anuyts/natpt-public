@@ -4547,10 +4547,33 @@ In words, \cref{eq:poresh-withrr-crit2} says that:
 \end{proof}
 
 \section{Semantics on Jet Sets} \label{sec:poresh-jetset}
+\begin{definition} \label{def:cat-enriched-graph}
+	A \textbf{category-enriched graph} $\catG$ consists of:
+	\begin{itemize}
+		\item a set of objects $\Obj(\catG)$,
+		\item for every two objects $x, y \in \Obj(\catG)$, a category of edges $\Edg(x, y)$.
+	\end{itemize}
+	We call $\catG$ \textbf{reflexive} if it is furthermore equipped with:
+	\begin{itemize}
+		\item for every object $x$, a reflexive edge $\id_x \in \Edg(x, x)$.
+	\end{itemize}
+	
+	\noindent A \textbf{category enriched graph morphism} $F : \catG \to \catH$ consists of:
+	\begin{itemize}
+		\item an action on objects $F : \Obj(\catG) \to \Obj(\catH)$,
+		\item for every two objects $x, y \in \Obj(\catG)$, a functor on edges $F : \Edg_\catG(x, y) \to \Edg_\catH(Fx, Fy)$.
+	\end{itemize}
+	We call $F$:
+	\begin{itemize}
+		\item \textbf{reflexive} if $F\,\id_x = \id_{Fx}$,
+		\item \textbf{pseudoreflexive} if $F\,\id_x \cong \id_{Fx}$.
+	\end{itemize}
+\end{definition}
+
 \begin{definition}
 	\label{def:poresh-jetset}
 	\begin{enumerate}
-		\item We define a pseudofunctor (strict under the strict quotienting \cref{ax:bishop}) $\jetsetsym : \poreshcat \to \Set\Cat$ from the 2-category of polarized reshuffles $\Cat$:
+		\item We define a pseudoreflexive category-enriched graph morphism (reflexive under the strict quotienting \cref{ax:bishop}) $\jetsetsym : \poreshcat \to \Cat$ from the 2-category of polarized reshuffles $\Cat$:
 		\begin{itemize}
 			\item Sending an object $\vec a$ to $\jetset{\vec a}$.
 			\item Sending a morphism $\mu : \vec a \to \vec b$ to $\jetset{\mu} : \jetset{\vec a} \to \jetset{\vec b}$ where $\jetset{\mu}$ (more briefly denoted as $\mu$) sends a jet set $X$ to the jet set $\mu X$ whose
@@ -4568,7 +4591,7 @@ In words, \cref{eq:poresh-withrr-crit2} says that:
 			\item Sending a unique proof of inequality $\mu \leq \nu : \vec a \to \vec b$ to an obvious natural transformation $\ket{\mu \leq \nu} : \mu \to \nu : \jetset{\vec a} \to \jetset{\vec b}$ whose underlying function sends $[x]_\mu$ to $[x]_\nu$, which is necessarily a larger equivalence class.
 		\end{itemize}
 		
-		\item If we consider only modalities $\mu$ satisfying \cref{eq:poresh-withl-crit1} (i.e.\ those for which $\eqtydeg \cdot \mu = \nonpol_\eqtydeg$) and denote the restricted 2-poset as $\poreshcat \noquot$, then we directly get a strict 2-functor $\jetsetsym \noquot : \poreshcat \noquot \to \Cat$ by the same construction as above, but without the necessity to quotient. (Under the strict quotienting \cref{ax:bishop}, it is equal to a restriction of the strict 2-functor above.)
+		\item If we consider only modalities $\mu$ satisfying \cref{eq:poresh-withl-crit1} (i.e.\ those for which $\eqtydeg \cdot \mu = \nonpol_\eqtydeg$) and denote the restricted 2-poset as $\poreshcat \noquot$, then we directly get a strict 2-functor $\jetsetsym \noquot : \poreshcat \noquot \to \Cat$ by the same construction as above, but without the necessity to quotient. (Under the strict quotienting \cref{ax:bishop}, it is equal to a restriction of the graph morphism above.)
 	\end{enumerate}
 \end{definition}
 %\begin{corollary} \label{thm:poresh-jetsetoid:bind}
@@ -4578,6 +4601,97 @@ In words, \cref{eq:poresh-withrr-crit2} says that:
 %	
 %	If $\mu$ has a left adjoint and $X \in \jetset{\vec a}$, then for an arbitrary $Q_j \in \oripsh(\vec b)$, the relation $Q_j$ on $\mu X$ is given by  $Q_j \oriof \mu$. \qed
 %\end{corollary}
+\begin{proposition}
+	$\jetsetsym : \poreshcat \to \Cat$ does not preserve composition.
+\end{proposition}
+\begin{proof}
+	Consider the following two mappings of the same jet set $X \in \jetset{[\npolar, \ypolar]}$:
+	\begin{align*}
+		\xymatrix{
+			& {[\npolar, \ypolar]} &
+			&&& %-----------
+			& {[\npolar, \npolar]} &
+			&&& %-----------
+			{[\npolar]}
+			\\ % ==================================
+			a
+				\ar@/^/@{-}[rr]_(.7){0}
+				\ar[dd]_(.7){1}
+			&& b
+				\ar@{<-}[dd]_(.7){1}
+			&&& %-----------
+			a
+				\ar@/^/@{-}[rr]_(.7){0}
+			&& b
+			&&& %-----------
+			{[a]}
+			\\ % ==================================
+			&&& {}
+				\ar@{|->}[r]^{\reshlist{\nonpol_\eqtydeg\pmrnn}{\nonpol_0\pmrnn, \mixpol_1\pmryn}}
+			& {}
+			&&&& {}
+				\ar@{|->}[r]^{\reshlist{\nonpol_0\pmrnn}{\nonpol_1\pmrnn}}
+			& {}
+			\\ % ==================================
+			c
+				\ar@/^/@{-}[rr]_(.7){0}
+			&& d
+			&&& %-----------
+			c
+				\ar@/^/@{-}[rr]_(.7){0}
+			&& d
+			&&& %-----------
+			{[c]}
+		}
+	\end{align*}
+	\begin{align*}
+		\xymatrix{
+			& {[\npolar, \ypolar]} &
+			&&& %-----------
+			{[\ypolar]}
+			&&& %-----------
+			{[\npolar]}
+			\\ % ==================================
+			a
+				\ar@/^/@{-}[rr]_(.7){0}
+				\ar[dd]_(.7){1}
+			&& b
+				\ar@{<-}[dd]_(.7){1}
+			&&& %-----------
+			{[a]}
+				\ar@{<->}[dd]_(.7){0}
+			&&& %-----------
+			{[a]}
+				\ar@{-}@/^/[dd]_(.7){0}
+			\\ % ==================================
+			&&& {}
+				\ar@{|->}[r]^{\reshlist{\nonpol_0\pmrnn}{\pospol_1\pmryy}}
+			& {}
+			&& {}
+				\ar@{|->}[r]^{\reshlist{\nonpol_\eqtydeg\pmrnn}{\mixpol_0\pmryn}}
+			& {}
+			\\ % ==================================
+			c
+				\ar@/^/@{-}[rr]_(.7){0}
+			&& d
+			&&& %-----------
+			{[c]}
+			&&& %-----------
+			{[c]}
+		}
+	\end{align*}
+	So we see that
+	\[
+		\reshlist{\nonpol_0\pmrnn}{\nonpol_1\pmrnn}\,\paren{\reshlist{\nonpol_\eqtydeg\pmrnn}{\nonpol_0\pmrnn, \mixpol_1\pmryn}\,X} \neq \reshlist{\nonpol_\eqtydeg\pmrnn}{\mixpol_0\pmryn}\,\paren{\reshlist{\nonpol_0\pmrnn}{\pospol_1\pmryy}\,X}
+	\]
+	despite the fact that
+	\[
+		\reshlist{\nonpol_0\pmrnn}{\nonpol_1\pmrnn} \circ \reshlist{\nonpol_\eqtydeg\pmrnn}{\nonpol_0\pmrnn, \mixpol_1\pmryn}
+		= \reshlist{\nonpol_0\pmrnn}{\mixpol_1\pmryn}
+		= \reshlist{\nonpol_\eqtydeg\pmrnn}{\mixpol_0\pmryn} \circ \reshlist{\nonpol_0\pmrnn}{\pospol_1\pmryy} : [\npolar, \ypolar] \to [\npolar].
+	\]
+	In fact, if we directly apply the composite $\reshlist{\nonpol_0\pmrnn}{\mixpol_1\pmryn}$ to $X$, given the precise definition above, we obtain the jet set where $[a] \not\edge_0 [c]$.
+\end{proof}
 \begin{example} \label{ex:poresh-op-jetset}
 	The functor $\Op_i$ from \cref{def:op} arises from the reshuffle in \cref{ex:poresh-op} as $\jetsetl{\Op_i}$.
 \end{example}
