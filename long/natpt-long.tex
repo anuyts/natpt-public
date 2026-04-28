@@ -22,6 +22,7 @@
 %\RequirePackage{xfrac}
 \RequirePackage{soul}
 	\sethlcolor{lightgray}
+\usepackage{multirow}
 	
 \usepackage{enumitem}
 	\setlist{noitemsep}
@@ -4601,6 +4602,8 @@ In words, \cref{eq:poresh-withrr-crit2} says that:
 %	
 %	If $\mu$ has a left adjoint and $X \in \jetset{\vec a}$, then for an arbitrary $Q_j \in \oripsh(\vec b)$, the relation $Q_j$ on $\mu X$ is given by  $Q_j \oriof \mu$. \qed
 %\end{corollary}
+
+As \cref{def:cat-enriched-graph} already foreboded, we have to make an abhorrent constatation, which however will resolve itself when we specialize to jet cubes\todo{Right?}:
 \begin{proposition}
 	$\jetsetsym : \poreshcat \to \Cat$ does not preserve composition.
 \end{proposition}
@@ -4704,26 +4707,92 @@ In words, \cref{eq:poresh-withrr-crit2} says that:
 		\jetsetl{\UFsymresh_i} \dashv \jetsetl{\UCsymresh_i}.
 	\]
 \end{example}
+\begin{proposition} \label{thm:poresh-jetset-nonexact}
+	A functor of the form $\jetset{\mu} : \jetset{\vec a} \to \jetset{\vec b}$ for some $\mu : \vec a \to \vec b$ does not necessarily preserve finite limits, nor finite colimits.	
+\end{proposition}
+\begin{proof}
+	The modality $\reshlist{\nonpol_\eqtydeg\pmrnn}{\mixpol_0\pmryn} : [\ypolar] \to [\npolar]$ disrespects the following pushout diagram:
+	\[
+		\xymatrix{
+			\accol{0 \quad 1}
+				\ar[rr]
+				\ar[dd]
+				\ar@{}[rrdd]|(.8){\mbox{$\ulcorner$}}
+			&& \rival{\jetsym_0}
+				\ar[dd]
+			&&& %----------------------
+			\accol{0 \quad 1}
+				\ar[rr]
+				\ar[dd]
+				%\ar@{}[rrdd]|(.8){\mbox{$\ulcorner$}}
+			&& \accol{0 \quad 1}
+				\ar[dd]
+			\\ %============================================
+			&&& {} \ar@{|->}[r]
+			& {}
+			\\ %============================================
+			\rival{\tejsym_0}
+				\ar[rr]
+			&& \rival{\equijetsym_0}
+			%	\xyulcorner
+			&&& %----------------------
+			\accol{0 \quad 1}
+				\ar[rr]
+			&& \rival{\edgesym_0}.
+		}
+	\]
+	The modality $\reshlist{\nonpol_\eqtydeg\pmrnn}{\isopol_0\pmryn} : [\ypolar] \to [\npolar]$ disrespects the following pullback diagram:
+	\[
+		\xymatrix{
+			\accol{0 \quad 1}
+				\ar[rr]
+				\ar[dd]
+				\ar@{}[rrdd]|(.2){\mbox{$\lrcorner$}}
+			&& \rival{\jetsym_0}
+				\ar[dd]
+			&&& %----------------------
+			\accol{0 \quad 1}
+				\ar[rr]
+				\ar[dd]
+			&& \rival{\edgesym_0}
+				\ar[dd]
+			\\ %============================================
+			&&& {} \ar@{|->}[r]
+			& {}
+			\\ %============================================
+			\rival{\tejsym_0}
+				\ar[rr]
+			&& \rival{\equijetsym_0}
+			%	\xyulcorner
+			&&& %----------------------
+			\rival{\edgesym_0}
+				\ar[rr]
+			&& \rival{\edgesym_0}.
+		}
+	\]
+\end{proof}
 
 \subsection{Intervals and Prisms}
-\begin{definition} \label{def:jetset-eqty}
-	We define $\rival{\edgesym_\eqtydeg}$ as the singleton jet set.
-	
-	Under the strict quotienting \cref{ax:bishop}, it is relevant to specify that we take the singleton $\accol{0, 1}/\edgesym_\top$, a quotient by the total relation.
+\begin{definition} \label{def:interval-eqty} \label{def:interval-top}
+	We define $\rival{\edgesym_\eqtydeg}$ as the singleton jet set $\accol{0, 1}/\edgesym_\top$ (a quotient by the total relation)\footnote{The choice of singleton is especially relevant under the strict quotienting \cref{ax:bishop}.}, and $\rival{\topsym}$ as the discrete jet set $\accol{0 \quad 1}$.
 \end{definition}
 \begin{proposition} \label{thm:poresh-jetset-intervals}
 	Let $\mu : \vec a \to \vec b$ be a polarized reshuffle with right adjoint $\mu \dashv \rho$, and $i \in \Deg(\vec a)$. Then we have%
-	\footnote{By virtue of \cref{thm:poresh-adjoint}, all right hand sides are defined since $P_i \oriof \rho \neq \infrajetsym_j$ for $b_j = \ypolar$, and $P_i \oriof \rho \neq \edgesym_\top$.}
+	\footnote{By virtue of \cref{thm:poresh-adjoint}, all right hand sides are defined since $i \cdot \rho \neq \isopol_j$ whence $P_i \oriof \rho \neq \infrajetsym_j$ for $b_j = \ypolar$.}
 	\begin{equation}
-		\jetset{\mu} \rival{\jetsym_i} \cong \rival{\jetsym_i \oriof \rho}, \quad
-		\jetset{\mu} \rival{\tejsym_i} \cong \rival{\tejsym_i \oriof \rho}, \quad
-		\jetset{\mu} \rival{\equijetsym_i} \cong \rival{\equijetsym_i \oriof \rho}.
+		\begin{array}{c c c}
+			\jetset{\mu} \rival{\jetsym_i\pmry} \cong \rival{\jetsym_i \oriof \rho},
+			& \jetset{\mu} \rival{\tejsym_i\pmry} \cong \rival{\tejsym_i \oriof \rho},
+			& \jetset{\mu} \rival{\equijetsym_i\pmry} \cong \rival{\equijetsym_i \oriof \rho},
+			\\[1em]
+			& \jetset{\mu} \rival{\edgesym_i\pmrn} \cong \rival{\edgesym_i \oriof \rho}.
+		\end{array}
 		\label{eq:poresh-jetset-intervals}
 	\end{equation}
 	Under the strict quotienting \cref{ax:bishop}, these isomorphisms are equalities.
 \end{proposition}
 \begin{proof}
-	Let $P \in \accol{\jetsym, \tejsym, \equijetsym}$.
+	Let $P \in \accol{\jetsym\pmr{a_i}, \tejsym\pmr{a_i}, \equijetsym\pmr{a_i}}$.
 	We prove that $\mu \rival{P_i} \cong \rival{P_i \oriof \rho}$.
 	
 	\begin{enumerate}
@@ -4753,67 +4822,59 @@ In words, \cref{eq:poresh-withrr-crit2} says that:
 		\]
 		so neither $\mu \rival{P_i}$ nor $\rival{P_i \oriof \rho}$ is a singleton.
 		Then we can conclude that the jet relations in $\mu \rival{P_i}$ are generated by the fact that $[0]_\mu \mathrel{(P_i \oriof \rho)} [1]_\mu$, i.e. $\mu \rival{P_i} \cong \rival{P_i \oriof \rho}$.
+		In the special case where $P_i \oriof \rho = \topsym$, we find that $[0]_\mu$ and $[1]_\mu$ are unrelated, as in $\rival{\topsym}$.
 		
 		\item Next, assume that $\edgesym_\eqtydeg \oriof \mu \geq P_i$, so that $\mu \rival{P_i}$ is a singleton.
 		By the reasoning above, this is equivalent to $P_i \oriof \rho \leq \edgesym_\eqtydeg$, hence $P_i \oriof \rho = \edgesym_\eqtydeg$, so that $ \rival{P_i \oriof \rho}$ is also a singleton.
 		Then these singletons are isomorphic. \qedhere
 	\end{enumerate}
 \end{proof}
-\begin{lemma} \label{thm:poresh-jetset-cocontinuous}
-	Let $\mu : \vec a \to \vec b$ be a polarized reshuffle.
-	Then $\jetset{\mu}$ preserves colimits.
-\end{lemma}
-\todoi{This is FALSE: the colimit of $\accol{0 \jet_i 1} \supseteq \accol{0 \quad 1} \subseteq \accol{0 \tej_i 1}$ is $\accol{0 \equijet_i 1}$, and so is not preserved by $\mixpol_i$.}
-\begin{proof}
-	Take a diagram $D : \cat S \to \jetsetoid{\vec a}$.
-	We prove that
-	\[
-		\theta : \mu \colim D \cong \colim (\mu \circ D).
-	\]
-	\Cref{thm:jetset:colim} tells us how to construct each side of the isomorphism.
-	For elements of the carrier, we use a pair notation, i.e. $\iota_s(d) = \angles{s, d}$.
-	
-	The morphism to the left exists by the universal property of the colimit,
-	with $\theta\inv \circ \iota^{\mu D}_s = \mu \iota^D_s : \mu\,D\,s \to \mu \colim D$.
-	For the carrier, this means $\theta\inv\angles{s, [d]_\mu} = [\angles{s, d}]_\mu$.
-	We need to show that $\theta$ is invertible.
-	
-	
-	\todoi{Old proof}
-	\begin{itemize}
-		\item The functor $\jetsetoid{\mu}$ does not modify the carrier, and the carrier of a colimit of jet setoids is the colimit of the carriers.
-		Write $\iota_s$ for the functions $D(s) \to \colim D$.
-		\item One checks that, on both sides, elements $x$ and $y$ are equivalent if and only if there exist $x = x_0, x_1, x_2, \ldots, x_n = y$ such that for each $0 \leq i < n$, there exists an $s \in \Obj(\cat S)$ and $u, v \in D(s)$ such that $x_i = \iota_s(u)$ and $x_{i+1} = \iota_s(v)$ and $u \mathrel{(\eqtysym \oriof \mu)} v$.
-		\item One checks that, on both sides, $x \jet_i y$ holds in $\mu \colim D$ if and only if there exist an $s \in \Obj(\cat S)$, $x \eqty^{\mu \colim D} \iota_s(x')$ and $y \eqty^{\mu \colim D} \iota_s(y')$ such that $x' \mathrel{(\jetsym_i \cdot \mu)} y'$ in $D(s)$. \qedhere
-	\end{itemize}
-\end{proof}
 \begin{proposition} \label{thm:poresh-jetsetoid-prism-commut}
-	Let $\mu : \vec a \to \vec b$ be a polarized reshuffle with right adjoint $\mu \dashv \rho$.
-	Then the action of $\jetsetoid{\mu}$ on prisms can be looked up in the following table:%
-	\footnote{Note that if $b_j = \npolar$, then the results for $\nonpol_j$ are consistent.}%
+	Let $\mu : \vec a \to \vec b$ be a polarized reshuffle with right adjoint $\mu \dashv \rho$, and $i \in \Deg(\vec a)$.
+	Then the action of $\jetset{\mu}$ on prisms can be looked up, up to isomorphism\footnote{On the nose under the strict quotienting \cref{ax:bishop}.}, in the following table, where $j = \getdeg(i \cdot \rho)$:%
 	\footnote{Note that if $i \cdot \rho = \isopol_j$, then by \cref{eq:poresh-withl-crit2}, $b_j = \npolar$.}
 	\[
-		\begin{array}{c || c | c | c | c | c}
-			i \cdot \rho 
-			& \nonpol_\eqtydeg 
-			& \mixpol_j
-			& \pospol_j
-			& \negpol_j 
-			& \nonpol_\top 
+		\begin{array}{c | l || c | c || c}
+			& a_i\,{\rightarrow} & \multicolumn{2}{c ||}{\ypolar} & \npolar \\ \hline
+			{b_j}\,{\downarrow}
+			& {i \cdot \rho}\,{\downarrow}
+			& \mu(X \multip \rival{\jetsym_i\pmry})
+			& \mu(X \multip \rival{\tejsym_i\pmry})
+			& \mu(X \multip \rival{\edgesym_i\pmrn})
+			\\ \hline \hline
+			\npolar
+			& \nonpol_\eqtydeg\pmrhom{\npolar}{a_i}
+			& (\mu X) \times \rival{\eqtysym\pmrn}
+			& (\mu X) \times \rival{\eqtysym\pmrn}
+			& (\mu X) \times \rival{\eqtysym\pmrn}
 			\\ \hline
-			\mu(X \multip \rival{\jetsym_i})
-			& (\mu X) \times \rival{\eqtysym}
-			& (\mu X) * \rival{\equijetsym_j}
-			& (\mu X) \multip \rival{\jetsym_j}
-			& (\Op_j\mu X) \multip \rival{\tejsym_j}
-			& (\mu X) \times \rival{\topsym}
+			\multirow{3}{*}{$\ypolar$}
+			& \mixpol_j\pmrhom{\ypolar}{a_i}
+			& (\mu X) * \rival{\equijetsym_j\pmry}
+			& (\mu X) * \rival{\equijetsym_j\pmry}
+			& (\mu X) * \rival{\equijetsym_j\pmry}
 			\\
-			\mu(X \multip \rival{\tejsym_i})
-			& (\mu X) \times \rival{\eqtysym}
-			& (\mu X) * \rival{\equijetsym_j}
-			& (\mu X) \multip \rival{\tejsym_j}
-			& (\Op_j\mu X) \multip \rival{\jetsym_j}
-			& (\mu X) \times \rival{\topsym}
+			& \pospol_j\pmrhom{\ypolar}{\ypolar}
+			& (\mu X) \multip \rival{\jetsym_j\pmry}
+			& (\mu X) \multip \rival{\tejsym_j\pmry}
+			&
+			\\
+			& \negpol_j\pmrhom{\ypolar}{\ypolar}
+			& (\Op_j\mu X) \multip \rival{\tejsym_j\pmry}
+			& (\Op_j\mu X) \multip \rival{\jetsym_j\pmry}
+			&
+			\\ \hline
+			\npolar
+			& \nonpol_j\pmrhom{\npolar}{a_i}
+			& (\mu X) \multip \rival{\edgesym_j\pmrn}
+			& (\mu X) \multip \rival{\edgesym_j\pmrn}
+			& (\mu X) \multip \rival{\edgesym_j\pmrn}
+			\\ \hline
+			\npolar
+			& \nonpol_\top\pmrhom{\npolar}{a_i}
+			& (\mu X) \times \rival{\topsym\pmrn}
+			& (\mu X) \times \rival{\topsym\pmrn}
+			& (\mu X) \times \rival{\topsym\pmrn}
 		\end{array}
 	\]
 \end{proposition}
