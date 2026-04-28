@@ -26,6 +26,17 @@
 	
 \usepackage{enumitem}
 	\setlist{noitemsep}
+	\setlistdepth{9}
+		\setlist[itemize,1]{label=$\bullet$}
+		\setlist[itemize,2]{label=$\bullet$}
+		\setlist[itemize,3]{label=$\bullet$}
+		\setlist[itemize,4]{label=$\bullet$}
+		\setlist[itemize,5]{label=$\bullet$}
+		\setlist[itemize,6]{label=$\bullet$}
+		\setlist[itemize,7]{label=$\bullet$}
+		\setlist[itemize,8]{label=$\bullet$}
+		\setlist[itemize,9]{label=$\bullet$}
+	\renewlist{itemize}{itemize}{9}
 
 %\usepackage{bm}
 \usepackage[all,cmtip]{xy}
@@ -4914,22 +4925,22 @@ Note also that, while the nature of the `product' varies, the second component i
 			Conversely, take $x, y \in X$ such that $[x]_\mu = [y]_\mu$.
 			Then by the above reasoning in reverse, we deduce that $[(x, w)]_\mu = [(y, w)]_\mu$.
 		\end{itemize}
-		We now show that this isomorphism respects the $j$-jet relations in both directions, for $j \in \Deg(\vec b)$.
-		Let $\jetsym_j \oriof \mu =: R'_{k'}$.
+		We now show that this isomorphism respects the $\ell$-jet relations in both directions, for $\ell \in \Deg(\vec b)$.
+		Let $\jetsym_\ell \oriof \mu =: R'_{k'}$.
 		Since $R'_{k'} \gg R_k \geq P_i$, we know that either $R'$ is symmetric, or $k' > i$.
 		Either way, we have $x \mathrel{R'_{k'}} y \Leftrightarrow (x, 0) \mathrel{R'_{k'}} (y, 0) \Leftrightarrow (x, 0) \mathrel{R'_{k'}} (y, 0)$ in $X \multip \rival{P_i}$.
 		Moreover, recall that since $\mu$ has a left adjoint, we have $R'_{k'} < \topsym$.
 		\begin{itemize}
 			\item[\framebox{$\to$}]
-			Take a non-reflexive jet $[(x, u)]_\mu \jet_j [(y, v)]_\mu$ in $\mu(X \multip \rival{P_i})$.
+			Take a non-reflexive jet $[(x, u)]_\mu \jet_\ell [(y, v)]_\mu$ in $\mu(X \multip \rival{P_i})$.
 			Then there exist representants, \WLOG{} $(x, u)$ and $(y, v)$, such that $(x, u) \mathrel{R'_{k'}} (y, v)$.
 			Then either $x = y$ or $u = v$. Since the original jet was non-reflexive, $x \neq y$, so $u = v$.
-			Then this is equivalent to $x \mathrel{R'_{k'}} y$, implying $[x]_\mu \jet_j [y]_\mu$.
+			Then this is equivalent to $x \mathrel{R'_{k'}} y$, implying $[x]_\mu \jet_\ell [y]_\mu$.
 			
 			\item[\framebox{$\leftarrow$}]
-			Take a non-reflexive jet $[x]_\mu \jet_j [y]_\mu$ in $\mu X$.
+			Take a non-reflexive jet $[x]_\mu \jet_\ell [y]_\mu$ in $\mu X$.
 			Then there exist representants, \WLOG{} $x$ and $y$, such that $x \mathrel{R'_{k'}} y$.
-			This is equivalent to $(x, 0) \mathrel{R'_{k'}} (y, 0)$, implying $[(x, 0)]_\mu \jet_j [(y, 0)]_\mu$.
+			This is equivalent to $(x, 0) \mathrel{R'_{k'}} (y, 0)$, implying $[(x, 0)]_\mu \jet_\ell [(y, 0)]_\mu$.
 		\end{itemize}
 		
 		\item Next assume that $R_k := \edgesym_\eqtydeg \oriof \mu < P_i$.
@@ -4954,24 +4965,106 @@ Note also that, while the nature of the `product' varies, the second component i
 			Conversely, let $[x]_\mu = [y]_\mu$ in $\mu X$, and $u \in \accol{0, 1}$.
 			By the above reasoning in reverse, show that $[(x, u)]_\mu = [(y, u)]_\mu$.	
 		\end{itemize}
-		We now show that this isomorphism respects the $j$-jet relations in both directions, for $j \in \Deg(\vec b)$.
-		Let $\jetsym_j \oriof \mu =: R'_{k'}$.
+		We now show that this isomorphism respects the $\ell$-jet relations in both directions, for $\ell \in \Deg(\vec b)$.
+		Let $\jetsym_\ell \oriof \mu =: R'_{k'}$.
 		\begin{itemize}
 			\item[\framebox{$\to$}]
-			Take a non-reflexive jet $[(x, u)]_\mu \jet_j [(y, v)]_\mu$ in $\mu(X \multip \rival{P_i})$.
+			Take a non-reflexive jet $[(x, u)]_\mu \jet_\ell\pmr{b_\ell} [(y, v)]_\mu$ in $\mu(X \multip \rival{P_i})$.
 			Then there exist representants, \WLOG{} $(x, u)$ and $(y, v)$, such that $(x, u) \mathrel{R'_{k'}} (y, v)$.
 			Then either $x = y$ or $u = v$.
 			\begin{itemize}
 				\item If $x = y$ and $u \neq v$, then we have $(x, u) \mathrel{R'_{k'}} (x, v)$.
 				Let $P' = P$ if $(u, v) = (0, 1)$ and $P' = P \oriof \negpol$ if $(u, v) = (1, 0)$.
-				We have that $P'_i \leq R'_{k'} = \jetsym_j \oriof \mu$, or equivalently (since $\loch \oriof \rho \dashv \loch \oriof \mu$) that $P'_i \oriof \rho \leq \jetsym_j$.
-				This implies that $u \jet_j v$ in $\rival{P_i \oriof \rho}$, so that $([x]_\mu, u) \jet_j ([x]_\mu, v)$ in $Y$.
+				We have that $P'_i \leq R'_{k'} = \jetsym_\ell \oriof \mu$, or equivalently (since $\loch \oriof \rho \dashv \loch \oriof \mu$) that $P'_i \oriof \rho \leq \jetsym_\ell$.
+				This implies that $u \jet_\ell v$ in $\rival{P_i \oriof \rho}$, so that $([x]_\mu, u) \jet_\ell ([x]_\mu, v)$ in $Y$.
 				
 				\item If $x \neq y$ and $u = v$, then we have $(x, u) \mathrel{R'_{k'}} (y, u)$.
 				Let $w = 1$ if $P = \jetsym$ and $w = 0$ if $P = \tejsym$.
-				We distinguish three cases, bearing in mind \cref{thm:poresh-adjoint-directed}:
+				We consider four landmark propositions, between which we will navigate:
+				\begin{itemize}
+					\item[\textbf{(A)}] $(x, u) \mathrel{R'_{k'}} (y, u)$ in $X \multip \rival{P_i}$.
+					\item[\textbf{(B)}] $x \mathrel{R'_{k'}} y$ in $X$, implying $[x]_\mu \jet_\ell [y]_\mu$ in $\mu X$. Additionally, either $k' \neq i$ or $u = w$.
+					\item[\textbf{(C)}] $y \mathrel{R'_{k'}} x$ in $X$, implying $[y]_\mu \jet_\ell [x]_\mu$ in $\mu X$. Additionally, $k' = 1$ and $u \neq w$.
+					\item[\textbf{(D)}] $([x]_\mu, u) \jet_\ell ([y]_\mu, u)$ in $Y$.
+				\end{itemize}
+				We are currently at (A).
 				\begin{description}
-					\item[\framebox{$a_i = b_j = \ypolar$ and $i \cdot \rho = \pospol_j\pmryy$ or equivalently $j \cdot \mu = \pospol_i\pmryy$}]
+					\item[From (A) to either (B) or (C)]
+					We prove that we can go from (A) to either (B) or (C).
+					We make a case distinction on $k'$:
+					\begin{itemize}
+						\item[\framebox{$k' \neq i$}] In this case, (A) directly implies (B), as the twisted prism functor $\loch \multip \rival{P_i}$ does not interfere with $R'_{k'}$.
+						\item[\framebox{$k' = i$}] We make a case distinction on $u$:
+						\begin{itemize}
+							\item[\framebox{$u = w$}] In this case, (A) directly implies (B), as the twisted prism functor does not flip $i$-jets at its target side.
+							\item[\framebox{$u \neq w$}] In this case, (A) directly implies (C), as the twisted prism functor flips $i$-jets at its source side.
+						\end{itemize}
+					\end{itemize}
+					
+					\item[From (B) to (D)]
+					We now show that we can go from (B) to (D).
+					We make a case distinction on $\ell$:
+					\begin{itemize}
+						\item[\framebox{$\ell \neq j$}] Then (B) directly implies (D), as the \emph{potential} usage of a twisted prism functor at level $j$ does not interfere at level $\ell$.
+						\item[\framebox{$\ell = j$}] We make a case distinction on $b_j$:
+						\begin{itemize}
+							\item[\framebox{$b_j = \npolar$}] Then (B) directly implies (D), as no twisted prism functor is involved in constructing $Y$.
+							\item[\framebox{$b_j = \ypolar$}] We make a case distinction on $(i \cdot \rho)\pmrhom{\vec b}{a_i}$:
+							\begin{itemize}
+								\item[\framebox{$i \cdot \rho = \mixpol_j\pmrhom{\ypolar}{a_i}$}] Then (B) directly implies (D), as no twisted prism functor is involved in constructing $Y$.
+								\item[\framebox{$i \cdot \rho = \pospol_j\pmryy$}]
+								In this case, by \cref{thm:poresh-adjoint-directed}, we also have $R'_{k'} = j \cdot \mu = \pospol_i\pmryy$ and in particular $k' = i$, so that we can deduce from (B) that $u = w$.
+								Then we can conclude (D), since we are at the target side of the twisted prism functor, where it does not flip $j$-jets.
+								\item[\framebox{$i \cdot \rho = \negpol_j\pmryy$}]
+								In this case, by \cref{thm:poresh-adjoint-directed}, we also have $R'_{k'} = j \cdot \mu = \negpol_i\pmryy$ and in particular $k' = i$, so that we can deduce from (B) that $u = w$.
+								Then we can conclude (D), since we are at the \emph{source} side of the twisted prism functor, where it \emph{does} flip $j$-jets, but $\Op_j$ flips them again.
+							\end{itemize}
+						\end{itemize}
+					\end{itemize}
+					\item[From (C) to (D)] We now show that we can go from (C) to (D).
+					We make a case distinction on $a_i$:
+					\begin{itemize}
+						\item[\framebox{$a_i = \npolar$}] Then $R'_{k'} = R'_i$ is a symmetric relation, so (C) implies also that $x \mathrel{R_i} y$ in $X$ such that $[x]_\mu \jet_\ell [y]_\mu$ and indeed $[x]_\mu \equijet_\ell [y]_\mu$.
+						Then we will have $([x]_\mu, u) \equijet_\ell ([y]_\mu, u)$ and in particular (D).
+						
+						\item[\framebox{$a_i = \ypolar$}] We make a case distinction on $\ell \cdot \mu$, which necessarily has degree $i$:
+						\begin{itemize}
+							\item[\framebox{$\ell \cdot \mu = \mixpol_i\pmrhom{\ypolar}{b_\ell}$}]
+							In this case $R_i = \equijet_i$, a symmetric relation, so that we can conclude (D) by similar reasoning as in the previous point.
+							
+							\item[\framebox{$\ell \cdot \mu = \pospol_i\pmryy$}]
+							Then by \cref{thm:poresh-adjoint-directed}, we also have $i \cdot \rho = \pospol_\ell$, implying that $\ell = j$.
+							From (C), we get that $[y]_\mu \jet_j [x]_\mu$ in $\mu X$, and that $u \neq w$, i.e.\ that we are at the source side of the twisted prism functor.
+							Thus, we conclude that $([x]_\mu, u) \jet_j ([y]_\mu, u)$ in $Y$.
+							
+							\item[\framebox{$\ell \cdot \mu = \negpol_i\pmryy$}]
+							Then by \cref{thm:poresh-adjoint-directed}, we also have $i \cdot \rho = \negpol_\ell$, implying that $\ell = j$.
+							From (C), we get that $[y]_\mu \jet_j [x]_\mu$ in $\mu X$ and hence $[x]_\mu \jet_j [y]_\mu$ in $\Op_j \mu X$, and that $u \neq w$, i.e.\ that we are at the \emph{target} side of the flipped twisted prism functor.
+							Thus, we conclude that $([x]_\mu, u) \jet_j ([y]_\mu, u)$ in $Y$.
+						\end{itemize}
+					\end{itemize}
+				\end{description}
+				
+				\todoi{Old stuff}
+				
+				
+				
+				\begin{itemize}
+					\item[\framebox{$k' \neq i$}] Then we have $x \mathrel{R'_{k'}} y$ in $X$, hence $[x]_\mu \jet_\ell\pmr{b_\ell} [y]_\mu$ in $\mu X$.
+				\end{itemize}
+				
+				
+				
+				
+				
+				Let $w = 1$ if $P = \jetsym$ and $w = 0$ if $P = \tejsym$.
+				
+				
+				
+				\todoi{Further case distinguish}
+				We distinguish several cases, bearing in mind \cref{thm:poresh-adjoint-directed}:
+				\begin{description}
+					\item[\framebox{$k' = i$, $a_i = b_j = \ypolar$ and $j \cdot \mu = \pospol_i\pmryy$ or equivalently $i \cdot \rho = \pospol_j\pmryy$}]
 					Then $R'_{k'} = \jetsym_j\pmry \oriof \mu = \jetsym_i\pmry$, so we have $(x, u) \jet_i (y, u)$ in $X \multip \rival{P_i}$, i.e.\ $x \jet_i y$ in $X$ if $u = w$ and $y \jet_i x$ in $X$ if $u \neq w$.
 					Then in $\mu X$, we have $[x]_\mu \jet_j [y]_\mu$ if $u = w$ and $[y]_\mu \jet_j [x]_\mu$ if $u \neq w$.
 					
