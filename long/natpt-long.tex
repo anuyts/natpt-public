@@ -4829,7 +4829,7 @@ As \cref{def:cat-enriched-graph} already foreboded, we have to make an abhorrent
 		Then these singletons are isomorphic. \qedhere
 	\end{enumerate}
 \end{proof}
-\begin{proposition} \label{thm:poresh-jetsetoid-prism-commut}
+\begin{proposition} \label{thm:poresh-jetset-prism-commut}
 	Let $\mu : \vec a \to \vec b$ be a polarized reshuffle with right adjoint $\mu \dashv \rho$, and $i \in \Deg(\vec a)$.
 	Then the action of $\jetset{\mu}$ on prisms can be looked up, up to isomorphism\footnote{On the nose under the strict quotienting \cref{ax:bishop}.}, in the following table, where $j = \getdeg(i \cdot \rho)$:%
 	\footnote{Note that if $i \cdot \rho = \isopol_j$, then by \cref{eq:poresh-withl-crit2}, $b_j = \npolar$.}
@@ -4878,7 +4878,124 @@ As \cref{def:cat-enriched-graph} already foreboded, we have to make an abhorrent
 		\end{array}
 	\]
 \end{proposition}
-Note that a cartesian product with $\rival{\eqtysym}$ or $\rival{\topsym}$ is the same as a separated product, since neither jet setoid has any jets between non-equivalent elements.
+Note that a cartesian product with $\rival{\eqtysym}$ or $\rival{\topsym}$ is the same as a separated product, since neither jet setoid has any non-reflexive jets.
+Note also that, while the nature of the `product' varies, the second component is always $\rival{\jetsym_i\pmr{a_i} \oriof \rho\pmrhom{\vec b}{\vec a}}$.
+\begin{proof}
+	Let $P \in \accol{\jetsym\pmr{a_i}, \tejsym\pmr{a_i}}$, and $X \in \jetset{\vec a}$.
+	We prove that $\mu(X \multip \rival{P_i}) \in \jetset{\vec b}$ is isomorphic to the prescribed jet set.
+	Write $\eqtysym \oriof \mu =: R_k \in \oridegeq(\vec a)$.
+	\begin{enumerate}
+		\item First, assume that $R_k = \edgesym_\eqtydeg \oriof \mu \geq P_i$, so that $r \mathrel{P_i} s$ implies $[r]_\mu = [s]_\mu$ and in particular, for any $x \in X$, we have $[(x, 0)]_\mu = [(x, 1)]_\mu$ in $\mu(X \multip \rival{P_i})$.
+		
+		By the same reasoning as in the proof of \cref{thm:poresh-jetset-intervals}, the assumption is equivalent to $P_i \oriof \rho \leq \edgesym_\eqtydeg$, hence $i \cdot \rho = \nonpol_\eqtydeg$.
+		It thus remains to show that $\mu(X \multip \rival{P_i})$ is isomorphic to $(\mu X) \times \rival{\eqtysym\pmrn}$ or, equivalently, simply to $\mu X$.
+		
+		We show that the functions that map $[x]_\mu \mapsto [(x, 0)]_\mu = [(x, 1)]_\mu$ and conversely, $[(x, u)]_\mu \mapsto [x]_\mu$ are both well defined and thus evidently constitute an isomorphism of the carriers.
+		\begin{itemize}
+			\item[\framebox{$\to$}]
+			Take $(x, u)$ and $(y, v)$ in $X \multip \rival{P_i}$ such that $[(x, u)]_\mu = [(y, v)]_\mu$.
+			Then $(x, u) \mathrel{(R_k)^*} (y, v)$ in $X \multip \rival{P_i}$, i.e.\ there is a chain
+			\[
+				(x, u) = (x_0, u_0) \mathrel{R_k} (x_1, u_1) \mathrel{R_k} \ldots \mathrel{R_k} (x_{n-1}, u_{n-1}) \mathrel{R_k} (x_n, u_n) = (y, v).
+			\]
+			Since $R_k$ is a symmetric relation, from the definition of the prism functors, it is easy to deduce
+			\[
+				(x, w) = (x_0, w) \mathrel{R_k} (x_1, w) \mathrel{R_k} \ldots \mathrel{R_k} (x_{n-1}, w) \mathrel{R_k} (x_n, w) = (y, w).
+			\]
+			for an arbitrary fixed $w \in \accol{0, 1}$.
+			In particular, we can let $w$ be $1$ if $P = \jetsym$ and $0$ if $P = \tejsym$.
+			Then the above is equivalent to
+			\[
+				x = x_0 \mathrel{R_k} x_1 \mathrel{R_k} \ldots \mathrel{R_k} x_{n-1} \mathrel{R_k} x_n = y.
+			\]
+			in $X$, so that $x \mathrel{(R_k)^*} y$ and $[x]_\mu = [y]_\mu$.
+			
+			\item[\framebox{$\leftarrow$}]
+			Conversely, take $x, y \in X$ such that $[x]_\mu = [y]_\mu$.
+			Then by the above reasoning in reverse, we deduce that $[(x, w)]_\mu = [(y, w)]_\mu$.
+		\end{itemize}
+		We now show that this isomorphism respects the $j$-jet relations in both directions, for $j \in \Deg(\vec b)$.
+		Let $\jetsym_j \oriof \mu =: R'_{k'}$.
+		Since $R'_{k'} \gg R_k \geq P_i$, we know that either $R'$ is symmetric, or $k' > i$.
+		Either way, we have $x \mathrel{R'_{k'}} y \Leftrightarrow (x, 0) \mathrel{R'_{k'}} (y, 0) \Leftrightarrow (x, 0) \mathrel{R'_{k'}} (y, 0)$ in $X \multip \rival{P_i}$.
+		Moreover, recall that since $\mu$ has a left adjoint, we have $R'_{k'} < \topsym$.
+		\begin{itemize}
+			\item[\framebox{$\to$}]
+			Take a non-reflexive jet $[(x, u)]_\mu \jet_j [(y, v)]_\mu$ in $\mu(X \multip \rival{P_i})$.
+			Then there exist representants, \WLOG{} $(x, u)$ and $(y, v)$, such that $(x, u) \mathrel{R'_{k'}} (y, v)$.
+			Then either $x = y$ or $u = v$. Since the original jet was non-reflexive, $x \neq y$, so $u = v$.
+			Then this is equivalent to $x \mathrel{R'_{k'}} y$, implying $[x]_\mu \jet_j [y]_\mu$.
+			
+			\item[\framebox{$\leftarrow$}]
+			Take a non-reflexive jet $[x]_\mu \jet_j [y]_\mu$ in $\mu X$.
+			Then there exist representants, \WLOG{} $x$ and $y$, such that $x \mathrel{R'_{k'}} y$.
+			This is equivalent to $(x, 0) \mathrel{R'_{k'}} (y, 0)$, implying $[(x, 0)]_\mu \jet_j [(y, 0)]_\mu$.
+		\end{itemize}
+		
+		\item Next assume that $R_k := \edgesym_\eqtydeg \oriof \mu < P_i$.
+		Then we have $[(x, 0)]_\mu \neq [(y, 1)]_\mu$ in $\mu(X \multip \rival{P_i})$ for all $x, y \in X$, since $R_k$ can never relate pairs with a different second component.
+		
+		Write $Y \in \jetset{\vec b}$ for the jet set prescribed by the table.
+		We show that there is an isomorphism
+		\[
+			\mu(X \multip \rival{P_i}) \cong Y : [(x, u)]_\mu \mapsfrom \mapsto ([x]_\mu, u).
+		\]
+		We first show that each constituent function is well defined, so that together they evidently constitute an isomorphism of the carriers.
+		\begin{itemize}
+			\item[\framebox{$\to$}]
+			Let $[(x, u)]_\mu = [(y, v)]_\mu$ in $\mu(X \multip \rival{P_i})$.
+			We already established that in that case, $u = v$.
+			We prove that $[x]_\mu = [y]_\mu$ in $\mu X$.
+			We have $(x, u) \mathrel{(R_k)^*} (y, u)$ in $X \multip \rival{P_i}$.
+			The entire chain of $R_k$-steps must consist of pairs of the form $(x_i, u)$ for the same $u$.
+			Since $R_k$ is a symmetric relation, it is then straightforward to conclude that we also have $x \mathrel{(R_k)^*} y$, which implies $[x]_\mu = [y]_\mu$.
+			
+			\item[\framebox{$\leftarrow$}]
+			Conversely, let $[x]_\mu = [y]_\mu$ in $\mu X$, and $u \in \accol{0, 1}$.
+			By the above reasoning in reverse, show that $[(x, u)]_\mu = [(y, u)]_\mu$.	
+		\end{itemize}
+		We now show that this isomorphism respects the $j$-jet relations in both directions, for $j \in \Deg(\vec b)$.
+		Let $\jetsym_j \oriof \mu =: R'_{k'}$.
+		\begin{itemize}
+			\item[\framebox{$\to$}]
+			Take a non-reflexive jet $[(x, u)]_\mu \jet_j [(y, v)]_\mu$ in $\mu(X \multip \rival{P_i})$.
+			Then there exist representants, \WLOG{} $(x, u)$ and $(y, v)$, such that $(x, u) \mathrel{R'_{k'}} (y, v)$.
+			Then either $x = y$ or $u = v$.
+			\begin{itemize}
+				\item If $x = y$ and $u \neq v$, then we have $(x, u) \mathrel{R'_{k'}} (x, v)$.
+				Let $P' = P$ if $(u, v) = (0, 1)$ and $P' = P \oriof \negpol$ if $(u, v) = (1, 0)$.
+				We have that $P'_i \leq R'_{k'} = \jetsym_j \oriof \mu$, or equivalently (since $\loch \oriof \rho \dashv \loch \oriof \mu$) that $P'_i \oriof \rho \leq \jetsym_j$.
+				This implies that $u \jet_j v$ in $\rival{P_i \oriof \rho}$, so that $([x]_\mu, u) \jet_j ([x]_\mu, v)$ in $Y$.
+				
+				\item If $x \neq y$ and $u = v$, then we have $(x, u) \mathrel{R'_{k'}} (y, u)$.
+				Let $w = 1$ if $P = \jetsym$ and $w = 0$ if $P = \tejsym$.
+				We distinguish three cases, bearing in mind \cref{thm:poresh-adjoint-directed}:
+				\begin{description}
+					\item[\framebox{$a_i = b_j = \ypolar$ and $i \cdot \rho = \pospol_j\pmryy$ or equivalently $j \cdot \mu = \pospol_i\pmryy$}]
+					Then $R'_{k'} = \jetsym_j\pmry \oriof \mu = \jetsym_i\pmry$, so we have $(x, u) \jet_i (y, u)$ in $X \multip \rival{P_i}$, i.e.\ $x \jet_i y$ in $X$ if $u = w$ and $y \jet_i x$ in $X$ if $u \neq w$.
+					Then in $\mu X$, we have $[x]_\mu \jet_j [y]_\mu$ if $u = w$ and $[y]_\mu \jet_j [x]_\mu$ if $u \neq w$.
+					
+					Furthermore, $P_i\pmry \oriof \rho\pmrhom{\vec b}{\vec a} = P\pmry \oriof (i \cdot \rho)\pmrhom{\vec b}{\ypolar} = P_j\pmry$, so that $Y = (\mu X) \multip \rival{P_j\pmry}$.
+					Then we finally find $([x]_\mu, u) \jet_i ([y]_\mu, u)$.
+					
+					\item[\framebox{$a_i = b_j = \ypolar$ and $i \cdot \rho = \negpol_j\pmryy$ or equivalently $j \cdot \mu = \negpol_i\pmryy$}]
+					Then $R'_{k'} = \jetsym_j\pmry \oriof \mu = \tejsym_i\pmry$, so we have $(x, u) \tej_i (y, u)$ in $X \multip \rival{P_i}$, i.e.\ $x \tej_i y$ in $X$ if $u = w$ and $y \tej_i x$ in $X$ if $u \neq w$.
+					Then in $\mu X$, we have $[x]_\mu \jet_j [y]_\mu$ if $u = w$ and $[y]_\mu \jet_j [x]_\mu$ if $u \neq w$.
+					
+					Furthermore, $P_i\pmry \oriof \rho\pmrhom{\vec b}{\vec a} = P\pmry \oriof (i \cdot \rho)\pmrhom{\vec b}{\ypolar} = (P \oriof \negpol)_j\pmry$, so that $Y = (\Op_j \mu X) \multip \rival{(P \oriof \negpol)_j\pmry}$.
+					We have $[x]_\mu \tej_j [y]_\mu$ in $\mu X$ if $u = w$ and $[y]_\mu \tej_j [x]_\mu$ in $\Op_j \mu X$ if $u \neq w$.
+					In $\Op_j \mu X$, we have $[x]_\mu \tej_i [y]_\mu$ if $u = w$ and $[y]_\mu \tej_i [x]_\mu$ if $u \neq w$.
+					Then in $(\Op_j \mu X) \multip \rival{(P \oriof \negpol)_j\pmry}$, we finally find $([y]_\mu, u) \tej_i ([x]_\mu, u)$, i.e.\ $([x]_\mu, u) \jet_i ([y]_\mu, u)$.
+				\end{description}
+				\todoi{Am I mixing up $j$ in the theorem and in the proof?}
+			\end{itemize}
+			
+		\end{itemize}
+	\end{enumerate}
+		\todoi{Finish the proof}
+\end{proof}
+
+\todoi{Old proof}
 \begin{proof}
 	We mainly prove the upper row of the table
 	For the lower row, we use that $X \multip \rival{\tejsym_i} = \Op_i(X \multip \rival{\jetsym_i})$ so the result can be derived from the upper row if we can rewrite $\mu \circ \Op_i$.
