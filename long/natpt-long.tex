@@ -359,7 +359,7 @@ We refer to the front matter of this chapter for our motivation for introducing 
 \begin{definition}
 	\label{def:jet-connected}
 	\label{def:jet-sublinear}
-	In a jet set $X$, write $\jet_i^*$ for the transitive closure of the $\jet_i$, and similarly $\infrajet_i^*$ for the transitive closure of $\infrajet_i$.
+	In a jet set $X$, write $\jet_i^*$ for the transitive closure of the $\jet_i$, and similarly $\infrajet_i^*$ for the transitive closure of $\infrajet_i$, which is the symmetric transitive closure of $\jet_i$.
 	\begin{itemize}
 		\item We say that $x$ and $y$ are \textbf{$i$-connected} if $x \infrajet_i^* y$, and correspondingly define \textbf{$i$-connected components}.
 		We say that $X$ is \textbf{$i$-connected} if any two elements are $i$-connected.
@@ -391,18 +391,18 @@ On the other hand, $i$-antisymmetry at a symmetric degree $i$ would completely d
 	The \textbf{category of jet topes} $\jettope{\vec a}$ is defined as the full subcategory of $\jetset{\vec a}$ on jet topes.
 \end{definition}
 The conceptual reason for asking $i$-antisymmetry is to exclude the equijet interval $\rival{\equijetsym_i}$, so that the only jet tope intervals at directed degrees are $\rival{\jetsym_i}$ and $\rival{\tejsym_i}$.
-Having an $i$-equijet interval object in the base category, will cause presheaves to contain `formal' $i$-equijets as an additional symmetric relation, stricter than the $i$-jet relation, which we wish to avoid.
+Having an $i$-equijet interval object in the base category, will cause presheaves to contain `formal' $i$-equijets as an additional symmetric relation, stricter than the symmetric interior of the $i$-jet relation, which we wish to avoid.
 \begin{proposition} \label{thm:lift-to-jet-topes}
 	Jet topes are closed under the functors $\Op_i$, $\Fsym_i$,
 	%$\Usym_i$, $\Csym_{i \neq n-1}$, $\UFsym_i$, $\UCsym_{i \neq n-1}$,
-	$\loch \multip \rival{\jet_i}$ and $\loch \multip \rival{\tej_i}$.
+	$\loch \multip \rival{\jet_i\pmry}$, $\loch \multip \rival{\tej_i\pmry}$ and $\loch \multip \rival{\edge_i\pmrn}$.
 \end{proposition}
 \begin{proof}
 	Clearly, each of these functors preserves finiteness and non-emptiness.
 	
 	Moreover, by existence of $0 \leq i < n$, we conclude that $n > 0$, so our jet tope needs to be $(n-1)$-connected rather than a subsingleton.
 	
-	We prove the other properties in the definition of a jet tope:
+	We prove properties 2-5 in the definition of a jet tope:
 	\begin{description}
 		\item[\framebox{$\Op_i$}] Trivial.
 		\item[\framebox{$\Fsym_i$}] This functor (defined in \cref{def:sym-free}) clearly preserves $(n-1)$-connectedness even if $i = n-1$.
@@ -413,7 +413,7 @@ Having an $i$-equijet interval object in the base category, will cause presheave
 %		\item[$\Csym_{i \neq n-1}$] Since $i \neq n-1$, this functor preserves $(n-1)$-connectedness. Meanwhile, $j$-acyclicity is unaffected for $j \neq i$ and vacuous for $i$ which is symmetric in the codomain of $\Csym_i$.
 %		\item[$\UFsym_i$] Since $\UFsym_i = \Usym_i \circ \Fsym_i$.
 %		\item[$\UCsym_{i \neq n-1}$] Since $\UCsym_i = \Usym_i \circ \Csym_i$.
-		\item[\framebox{$\loch \multip \rival{\jet_i}$}] To see $(n-1)$-connectedness, note that:
+		\item[\framebox{$\loch \multip \rival{\jet_i\pmry}$}] To see $(n-1)$-connectedness, note that:
 		\begin{itemize}
 			\item All objects of the form $(x, 0)$ are $(n-1)$-connected,
 			\item All objects of the form $(x, 1)$ are $(n-1)$-connected,
@@ -437,7 +437,8 @@ Having an $i$-equijet interval object in the base category, will cause presheave
 			
 			For $i$-antisymmetry, $(x, u) \equijet_i (y, v)$ implies $u = v$, so this is also inherited from $i$-antisymme\-try of $X$.
 		\end{description}
-		\item[\framebox{$\loch \multip \rival{\tej_i}$}] By an analogous argument. \qedhere
+		\item[\framebox{$\loch \multip \rival{\tej_i\pmry}$}] By an analogous argument.
+		\item[\framebox{$\loch \multip \rival{\edge_i\pmrn}$}] By an analogous argument. \qedhere
 	\end{description}
 \end{proof}
 
@@ -3054,18 +3055,20 @@ Note that the fact that $\loch \circ \loch$ and $\loch \oriof \loch$ preserve me
 Indeed, $(P \vee Q) \oriof p$ answers the question: for a $p$-polar single-single degree function $f$, in order to have either $f(x) \mathrel{P} f(y)$ or $f(x) \mathrel{Q} f(y)$, what do I need between $x$ and $y$?
 The answer is: either the weakest precondition $P \oriof p$ of $f(x) \mathrel{P} f(y)$, or the weakest precondition $Q \oriof p$ of $f(x) \mathrel{Q} f(y)$, i.e.\ you need $(P \oriof p) \vee (Q \oriof p)$.
 The argument for meets and for $\loch \circ \loch$ is similar.
-\begin{definition}
+\begin{definition} \label{def:precede-polarity}
 	We call a polarity $p : a \to b$ \textbf{symmetric} if $\tejsym \pmr b \oriof p = \jetsym \pmr b \oriof p$, which is the case if $a = \npolar$ or $b = \npolar$ or $p \in \accol{\isopol \pmrhom a b, \mixpol \pmrhom a b}$.
 	
-	For $p, q : a \to b$, we write $p \ll q$ if one of the following, equivalent conditions is satisfied:
+	For $p : a \to b$ and $q : a \to c$,\footnote{Note that for any anpolarities $a$ and $b$, $\Hom(a, b)$ is a full subposet of $\Hom(a, \ypolar)$.} we write $p \ll q$ (``$p$ can precede $q$'' / ``$q$ can succeed $p$'') if one of the following, equivalent conditions is satisfied:
 	\begin{enumerate}
-		\item $\jetsym \oriof p \leq \jetsym \oriof q$ and $\jetsym \oriof p \leq \tejsym \oriof q$,
-		\item $\jetsym \oriof p \leq \jetsym \oriof q$ and $\tejsym \oriof p \leq \jetsym \oriof q$,
-		\item $\jetsym \oriof p \leq \equijetsym \oriof q$,
-		\item $\infrajetsym \oriof p \leq \jetsym \oriof q$,
-		\item $\infrajetsym \oriof p \leq \equijetsym \oriof q$,
-		\item $p \leq q$ and at least either of them is symmetric.
+		\item $\jetsym\pmr{b} \oriof p \leq \jetsym\pmr{c} \oriof q$ and $\jetsym \oriof p \leq \tejsym \oriof q$,
+		\item $\jetsym\pmr{b} \oriof p \leq \jetsym\pmr{c} \oriof q$ and $\tejsym \oriof p \leq \jetsym \oriof q$,
+		\item $\jetsym\pmr{b} \oriof p \leq \equijetsym\pmr{c} \oriof q$,
+		\item $\infrajetsym\pmr{b} \oriof p \leq \jetsym\pmr{c} \oriof q$,
+		\item $\infrajetsym\pmr{b} \oriof p \leq \equijetsym\pmr{c} \oriof q$,
+		\item $p \leq q$ in $\Hom_\polcat(a, \ypolar)$ and at least either of them is symmetric,
+		\item $p = \mixpol\pmrhom{a}{b}$ or $q = \isopol\pmrhom{a}{c}$.
 	\end{enumerate}
+	Note that all these conditions are vacuously satisfied if $a = \npolar$.
 \end{definition}
 \begin{proof}[Proof of equivalence]
 	\begin{description}
@@ -3073,8 +3076,9 @@ The argument for meets and for $\loch \circ \loch$ is similar.
 		\item[$1 \Leftrightarrow 3$] By the universal property of the meet, and the fact that $\loch \oriof q$ preserves meets.
 		\item[$2 \Leftrightarrow 4$] By the universal property of the join, and the fact that $\loch \oriof p$ preserves joins.
 		\item[$1 \wedge 2 \Leftrightarrow 5$] By similar reasoning as the two previous points.
-		\item[$1 \Rightarrow 6$] Condition 1 implies $p \leq q$ because $\jetsym \oriof \loch$ is an isomorphism of posets. If $p \leq q$ but neither is symmetric, then $p = q \in \accol{\pospol \pmryy \neq \negpol \pmryy}$, contradicting 1.
-		\item[$6 \Rightarrow 1 \vee 2$] We can immediately prove either 1 or 2 depending on whether $p$ or $q$ is symmetric. \qedhere
+		\item[$1 \Rightarrow 6$] (This proof assumes $a = \ypolar$; otherwise both premise and conclusion are vacuous.) Condition 1 implies $p \leq q$ because $\jetsym^x \oriof \loch : \Hom_\polcat(\ypolar, x) \to \oripsh(\ypolar)$ is a full poset injection. If $p \leq q$ but neither is symmetric, then $p = q \in \accol{\pospol \pmryy \neq \negpol \pmryy}$, contradicting 1.
+		\item[$6 \Rightarrow 7$] If $p$ is symmetric, then either $p = \mixpol$ (done) or $p = \isopol \leq q$ so that $q = \isopol$ (done). If $q$ is symmetric, then either $q = \isopol$ (done) or $q = \mixpol \geq p$ so that $p = \mixpol$ (done).
+		\item[$7 \Rightarrow 1 \wedge \ldots \wedge 5$] If $p = \mixpol$, all the left hand sides of all the listed inequalities are $\equijet$, the minimal element. If $q = \isopol$, then all the right hand sides are $\infrajet$, the maximal element. \qedhere
 	\end{description}
 \end{proof}
 
@@ -5146,9 +5150,9 @@ Note also that, while the nature of the `product' varies, the second component f
 	\end{enumerate}
 \end{proof}
 
-\section{Semantical Notations} \label{sec:notations}
-
-\subsection{Presheaf Notations} \label{sec:notations:psh}
+\section{Presheaf Notations}
+\label{sec:notations}
+\label{sec:notations:psh}
 We use the presheaf notations from \cite{reldtt-techreport}. Concretely:
 \begin{itemize}
 	\item The application of a presheaf $\Gamma \in \widehat \catW$ to an object $W \in \catW$ is denoted $\DSub W \Gamma$.
@@ -5172,12 +5176,11 @@ We use the presheaf notations from \cite{reldtt-techreport}. Concretely:
 \end{itemize}
 One advantage of these notations is that we can put presheaf cells in diagrams; we will use double arrows when doing so.
 
-\subsection{End and Co-ends} \label{sec:notations:end}
-We use existential quantifiers over objects of a category to denote ends and co-ends, i.e. if $F : \catC\op \times \catC \to \Set$, then its co-end is denoted $\exists X.F(X, X)$ and its end is denoted $\forall X.F(X, X)$.
-\todoi{It's only used in one place, so its feasible to put end/coend on top still.}
+%\subsection{End and Co-ends} \label{sec:notations:end}
+%We use existential quantifiers over objects of a category to denote ends and co-ends, i.e. if $F : \catC\op \times \catC \to \Set$, then its co-end is denoted $\exists X.F(X, X)$ and its end is denoted $\forall X.F(X, X)$.
+%\todoi{It's only used in one place, so its feasible to put end/coend on top still.}
 
 \section{Semantics on Jet Topes and Jet-Topic Sets} \label{sec:poresh-jettope-jtset}
-\todoi{Remove jet topes}
 In this section, we investigate how polarized reshuffles act on jet topes and on presheaves over these, which we call jet-topic sets.
 
 \subsection{Semantics on Jet Topes} \label{sec:poresh-jettope}
@@ -5197,7 +5200,7 @@ Taking these two requirements together, by \cref{thm:poresh-adjoint}, we get exa
 
 \begin{theorem} \label{thm:poresh-jettope}
 	Let $\mu \in \Hom_\poreshcat(\vec a, \vec b)$ have a right adjoint $\mu \dashv \rho$.
-	Then the functor $\mu : \jetset{\vec a} \to \jetset{\vec b}$ sends jet topes to jet topes if and only if $\rho$ has a further right adjoint $\mu \dashv \rho \dashv \tau$.
+	Then the functor $\mu : \jetset{\vec a} \to \jetset{\vec b}$ sends jet topes to jet topes if and only if $\rho$ has a further right adjoint $\mu\pmrhom{\vec a}{\vec b} \dashv \rho\pmrhom{\vec b}{\vec a} \dashv \tau\pmrhom{\vec a}{\vec b}$.
 	
 	By consequence, there is a pseudofunctor $\jettopesym : \poreshcat\withrr \to \Cat$ sending
 	\begin{itemize}
@@ -5212,47 +5215,89 @@ Taking these two requirements together, by \cref{thm:poresh-adjoint}, we get exa
 	Assume that $\rho$ does not have a right adjoint.
 	\begin{itemize}
 		\item Either $\rho$ violates \cref{eq:poresh-withr-crit1}, i.e. $\predeg(\top) \cdot \rho = \nonpol_\top$.
-		Then by \cref{thm:poresh-jetsetoid-intervals}, $\mu \rival{\jetsym_{\predeg(\top)}} = \rival{\edgesym_\top}$, where $\rival{\jetsym_{\predeg(\top)}}$ is a jet tope but $\rival{\edgesym_\top}$ is not, as it is not $(n-1)$-connected (if $n > 0$) or not a subsingleton (if $n = 0$).
+		Then by \cref{thm:poresh-jetset-intervals}, $\mu \rival{\jetsym_{\predeg(\top)}} = \rival{\edgesym_\top}$, where $\rival{\jetsym_{\predeg(\top)}}$ is a jet tope but $\rival{\edgesym_\top}$ is not, as it is not $(n-1)$-connected (if $n > 0$) or not a subsingleton (if $n = 0$).
 		\item Or $\rho : \vec b \to \vec a$ violates \cref{eq:poresh-withr-crit2}, i.e.\ there is some $i \in \Degeq(\vec a)$ with $i \cdot \rho = \mixpol_j$ and $b_j = \ypolar$.
-		Then by \cref{thm:poresh-jetsetoid-intervals}, $\mu \rival{\jetsym_i} = \rival{\equijetsym_j}$, where $\rival{\jetsym_i}$ is a jet tope but $\rival{\equijetsym_j}$ is not, as it is not $j$-antisymmetric.
+		Then by \cref{thm:poresh-jetset-intervals}, $\mu \rival{\jetsym_i} = \rival{\equijetsym_j}$, where $\rival{\jetsym_i}$ is a jet tope but $\rival{\equijetsym_j}$ is not, as it is not $j$-antisymmetric.
 	\end{itemize}
 	
 	Now we prove the `if' direction.
 	Assume that $\rho$ does have a further right adjoint $\mu \dashv \rho \dashv \tau$ and take a jet tope $X$.
 	We prove that $\mu X$ is a jet tope (\cref{def:jet-tope}).
-	Informed by the construction in \cref{def:poresh-jetset}, we will regard both $X$ and $\mu X$ as jet \emph{setoids}.
 	\begin{enumerate}
-		\item Clearly, $\setoidquot(\mu X)$ is finite, as $\setoidquot(X)$ was finite.
+		\item Clearly, $\mu X$ is finite and non-empty, as $X$ was finite and non-empty.
 		
-		\item To see that $\mu X$ is $\predeg(\top)$-connected (i.e.\ $(n-1)$-connected if $n > 0$, or $\eqtydeg$-connected if $n = 0$), note that $x \jet_{\predeg(\top)} y$ in $\mu X$ if and only if $x \infrajet_{\eqtydeg \cdot \mu}^* x' \jet_{\predeg(\top) \cdot \mu} y' \infrajet_{\eqtydeg \cdot \mu}^* y$, and in particular if $x \jet_{\predeg(\top) \cdot \mu} y$.
-		Now $\predeg(\top) \cdot \mu > \mixpol_{\predeg(\top)}$ by \cref{eq:poresh-withrr-crit1}.
-		So $\infrajetsym_{\predeg(\top)} \oriof \mu = \infrajetsym_{\predeg(\top)}$.
-		Thus, since $\infrajetsym_{\predeg(\top)}^*$ is always true in $X$, we conclude that $\infrajetsym_{\predeg(\top)}^*$ is always true in $\mu X$.
+		\item To see that $\mu X$ is $\predeg(\top)$-connected (i.e.\ $(n-1)$-connected if $n > 0$, or $\eqtydeg$-connected if $n = 0$), take $[x]_\mu, [y]_\mu \in \mu X$.
+		We prove that $[x]_\mu \infrajet_{\predeg(\top)}^* [y]_\mu$ in $\mu X$.
+		It is sufficient to prove that $x \mathrel{(\isopol_{\predeg(\top)} \oriof \mu)^*} y$ in $X$.
+		Since $X$ is $\predeg(\top)$-connected, this is the case as soon as $\infrajetsym_{\predeg(\top)} \leq \infrajetsym_{\predeg(\top)} \oriof \mu$, or equivalently (since $\loch \oriof \rho \dashv \loch \oriof \mu$) if $\infrajetsym_{\predeg(\top)} \oriof \rho \leq \infrajetsym_{\predeg(\top)}$.
+		This follows from \cref{eq:poresh-withr-crit1} as $\rho$ has a right adjoint.
 		
-		\item We show that $\mu X$ is $j$-orientable for every $j \in \Deg(\vec b)$. Let $x \infrajet_j^* y$ in $\mu X$.
-		Then
-		\[
-			x \mathrel{((\edgesym_\eqtydeg \oriof \mu)^* \otimes (\infrajetsym_j \oriof \mu) \otimes (\edgesym_\eqtydeg \oriof \mu)^*)^*} y
-		\]
-		in $X$.
-		Now $\eqtydeg < j$ so $\eqtydeg \cdot \mu \ll j \cdot \mu$, so $\edgesym_\eqtydeg \oriof \mu \leq \equijetsym_j \oriof \mu \leq \infrajetsym_j \oriof \mu$, so we can conclude more simply that $x \mathrel{(\infrajetsym_j \oriof \mu)^*} y$.
-		By case analysis on $\getpol(j \cdot \mu)$, where the symmetric cases are trivial, and using that $X$ is $\getdeg(j \cdot \mu)$-orientable, we can conclude that $x (\jet_j \oriof \mu)^* y$ or $x (\tej_j \oriof \mu)^* y$ in $X$, and therefore that $x \jet_j^* y$ or $x \tej_j^* y$ in $\mu X$.
+		\item We show that $\mu X$ is $j$-orientable for every $j \in \Deg(\vec b)$. Let $[x]_\mu \infrajet_j^* [y]_\mu$ in $\mu X$.
+		Then by \cref{thm:poresh-jetset-trcl-from-trcl}, we have $x \mathrel{(\infrajetsym_j \oriof \mu)^*} y$ in $X$ irrespective of the choice of representants.
+		If $j \cdot \mu$ is a symmetric relation, then this is equivalent to $x \mathrel{(\jetsym_j \oriof \mu)^*} y$; otherwise $x \mathrel{(\jetsym_j \oriof \mu)^*} y$ follows from $\getdeg(j \cdot \mu)$-orientability.
+		Either way, we conclude that $[x]_\mu \jet_j^* [y]_\mu$ in $\mu X$.
 		
 		\item We show that $\mu X$ is $j$-acyclic for every $j \in \Deg(\vec b)$ by similar reasoning.
 		
 		\item Assume that $b_j = \ypolar$.
-		We show that $\mu X$ is $j$-antisymmetric, i.e. that $x \equijet_j^{\mu X} y$ implies $x \infrajet_{\predeg(j)}^{\mu X} y$.
+		We show that $\mu X$ is $j$-antisymmetric, i.e. that $[x]_\mu \equijet_j\pmry [y]_\mu$ implies $[x]_\mu \infrajet_{\predeg(j)}\pmr{b_{\predeg(j)}} [y]_\mu$.
+		From the premise we deduce that there are representants, \WLOG{} $x$ and $y$, such that $x \mathrel{(\equijetsym_j\pmry \oriof \mu)} y$.
+		It is then sufficient to prove $x \mathrel{(\infrajetsym_{\predeg(j)}\pmr{b_{\predeg(j)}} \oriof \mu)} y$
+		
 		Let $p'_{i'} = \predeg(j) \cdot \mu$ and $p_i = j \cdot \mu$.
 		We case split on how $i'$ compares to $i$
 		\begin{description}
-			\item[$i' = i$] Then without relying on $X$ being a jet tope, we can prove $j$-antisymmetry by case distinction on $p'$ and $p$.
-			\item[$i' = \predeg(i)$] Then by \cref{eq:poresh-withrr-crit2,eq:poresh-withr-crit2}, we find that $p \in \accol{\pospol, \negpol}$. By \cref{eq:poresh-withr-crit2}, $p' \in \accol{\pospol, \negpol, \isopol}$.
+			\item[$i' = i$] Then we have $p' \ll p$, which by \cref{def:precede-polarity} implies that either $p' = \mixpol\pmrhom{a_i}{b_{\predeg(j)}}$ or $p = \isopol\pmrhom{a_i}{\ypolar}$.
+			\begin{itemize}
+				\item If $a_i = \npolar$, then we have $p = p' = \nonpol\pmrny$.
+				Then we have
+				\[
+					\equijetsym_j\pmry \oriof \mu = \equijetsym\pmry \oriof \nonpol_i\pmrny = \edgesym_i\pmrn, \qquad
+					\infrajetsym_{\predeg(j)}\pmr{b_{\predeg(j)}} \oriof \mu = \infrajetsym\pmr{b_{\predeg(j)}} \oriof \nonpol_i\pmrhom{\npolar}{b_{\predeg(j)}} = \edgesym_i\pmrn,
+				\]
+				which completes the proof.
+				
+				\item If $a_i = \ypolar$, then by \cref{eq:poresh-withr-crit1} for $\mu$, we know that $p' \neq \mixpol\pmrhom{\ypolar}{b_{\predeg(j)}}$.
+				Hence, $p = \isopol\pmryy$.
+				Then we have
+				\[
+					\equijetsym_j\pmry \oriof \mu = \equijetsym\pmry \oriof \isopol\pmryy = \infrajetsym\pmry, \qquad
+					\infrajetsym_{\predeg(j)}\pmr{b_{\predeg(j)}} \oriof \mu = \infrajetsym\pmr{b_{\predeg(j)}} \oriof {p'_i}\pmrhom{\ypolar}{b_{\predeg(j)}} = \infrajetsym\pmry,
+				\]
+				because $p' \neq \mixpol$. This concludes the proof.
+			\end{itemize}
+			
+			
+			\item[$i' = \predeg(i)$]
+			\todoi{Old proof} Then by \cref{eq:poresh-withrr-crit2,eq:poresh-withr-crit2}, we find that $p \in \accol{\pospol, \negpol}$. By \cref{eq:poresh-withr-crit2}, $p' \in \accol{\pospol, \negpol, \isopol}$.
 			Thus, we see that $\infrajetsym_{\predeg(j)} \oriof \mu = \infrajetsym_{\predeg(i)}$ and $\equijetsym_j \oriof \mu = \equijetsym_i$.
 			Then we can invoke $i$-antisymmetry of $X$.
 			\item[$i' < \predeg(i)$] Then we have $\getdeg(\predeg(j) \cdot \mu) < \predeg(i)$ and $j \cdot \mu \geq \isopol_{\predeg(i)}$, so by \cref{eq:poresh-withrr-crit2}, this is impossible as $b_j = \ypolar$. \qedhere
 		\end{description}
 	\end{enumerate}
 \end{proof}
+\begin{lemma} \label{thm:poresh-jetset-equality-eq-from-trcl}
+	Let $\mu \in \Hom_\poreshcat(\vec a, \vec b)$ and $X \in \jetset{\vec a}$.
+	Then for all $x, y \in X$ and $Q_j \in \oridegeqtop(\vec b)$, if $[x]_\mu = [y]_\mu$, then $x \mathrel{(Q_j \oriof \mu)^*} y$.
+\end{lemma}
+\begin{proof}
+	From $[x]_\mu = [y]_\mu$, we conclude that $x \mathrel{(\eqtysym \oriof \mu)^*} y$, and $\eqtysym \leq Q_j$.
+\end{proof}
+\begin{lemma} \label{thm:poresh-jetset-rel-from-trcl}
+	Let $\mu \in \Hom_\poreshcat(\vec a, \vec b)$ and $X \in \jetset{\vec a}$.
+	Then for all $x, y \in X$ and $Q_j \in \oridegeqtop(\vec b)$, if $[x]_\mu \mathrel{Q_j} [y]_\mu$, then $x \mathrel{(Q_j \oriof \mu)^*} y$.
+\end{lemma}
+\begin{proof}
+	By definition of $\mu X$, there will be representants $x'$ and $y'$ such that $x' \mathrel{(Q_j \oriof \mu)} y'$.
+	Then by the previous lemma, we have
+	\[
+		x \mathrel{(Q_j \oriof \mu)^*} x' \mathrel{(Q_j \oriof \mu)} y' \mathrel{(Q_j \oriof \mu)^*} y. \qedhere
+	\]
+\end{proof}
+\begin{corollary} \label{thm:poresh-jetset-trcl-from-trcl}
+	Let $\mu \in \Hom_\poreshcat(\vec a, \vec b)$ and $X \in \jetset{\vec a}$.
+	Then for all $x, y \in X$ and $Q_j \in \oridegeqtop(\vec b)$, if $[x]_\mu \mathrel{Q_j^*} [y]_\mu$, then $x \mathrel{(Q_j \oriof \mu)^*} y$. \qed
+\end{corollary}
 
 \subsection{Adjoint Triple Semantics on Jet-Topic Sets} \label{sec:poresh-jtset:triple}
 \begin{definition}
@@ -5365,12 +5410,11 @@ Unfortunately, we have the following \textbf{no-go theorem}:
 		&\quad\cong\quad \DSub{\rival{\jetsym_1}}{\lpsh{(\cohdisc_1)} \fpsh{(\cohdisc_0)} \yoneda \rival{\jetsym_0}}
 		& \text{(by similar reasoning as above)} \\
 		&\quad=\quad
-		\exists X^{{}\in \jettope{[\ypolar]}}.(\rival{\jetsym_1} \to \cohdisc_1 X) \times (\DSub{X}{\fpsh{(\cohdisc_0)} \yoneda \rival{\jetsym_0}})
+		\existscoend X^{{}\in \jettope{[\ypolar]}}.(\rival{\jetsym_1} \to \cohdisc_1 X) \times (\DSub{X}{\fpsh{(\cohdisc_0)} \yoneda \rival{\jetsym_0}})
 		& \text{(construction of left Kan extension)} \\
 		&\quad=\quad
-		\exists X^{{}\in \jettope{[\ypolar]}}.(\rival{\jetsym_1} \to \cohdisc_1 X) \times (\cohdisc_0 X \to \rival{\jetsym_0}).
+		\existscoend X^{{}\in \jettope{[\ypolar]}}.(\rival{\jetsym_1} \to \cohdisc_1 X) \times (\cohdisc_0 X \to \rival{\jetsym_0}).
 	\end{align*}
-	(Note that $\exists$ denotes a co-end (\cref{sec:notations:end}).)
 	Now a $1$-jet in $\cohdisc_1 X = \reshlist{\nonpol_\eqtydeg}{\pospol_0, \isopol_0} X$ is a $1$-infrajet in $X$. Such an infrajet either points forwards, in which case $f : \rival{\jetsym_1} \to \cohdisc_1 X$ factors over some $\rival{\jetsym_1} \to \cohdisc_1 \rival{\jetsym_0}$, or it points backwards, in which case it factors over $\rival{\jetsym_1} \to \cohdisc_1 \rival{\tejsym_0}$.
 	If it factors over both, since $X$ is a jet tope, by $0$-antisymmetry, it factors over $\rival{\jetsym_1} \to \cohdisc_1 \top$.
 	Thus, the result of the computation above is the following pushout
