@@ -4037,7 +4037,7 @@ We need an auxiliary categorical fact:
 	Then $\rho$ has a further left adjoint $\lambda \dashv \rho \dashv \tau$ if and only if
 	\begin{align}
 		&\text{$\getdeg(\sucdeg(\eqtydeg) \cdot \tau) > \eqtydeg$, and} \label{eq:poresh-withll-crit1} \\
-		&\text{$\forall j \in \Degeq(\vec b), i \in \Degeq(\vec a)$, if $j \cdot \tau \leq \mixpol_i$ and $\getdeg(\sucdeg(j) \cdot \tau) > i$ then $b_j = \npolar$.} \label{eq:poresh-withll-crit2}
+		&\text{$\forall j \in \Degeq(\vec b), i \in \Degeq(\vec a)$, if $(j \cdot \tau)\pmrhom{\vec a}{b_j} \leq \mixpol_i\pmrhom{a_i}{b_j}$ and $\getdeg(\sucdeg(j) \cdot \tau) > i$ then $b_j = \npolar$.} \label{eq:poresh-withll-crit2}
 	\end{align}
 \end{theorem}
 In words, \cref{eq:poresh-withll-crit2} says that:
@@ -4169,7 +4169,7 @@ In words, \cref{eq:poresh-withll-crit2} says that:
 	Then $\lambda$ has a further right adjoint $\kappa \dashv \lambda \dashv \rho$ if and only if
 	\begin{align}
 		&\getdeg(\predeg(\top) \cdot \kappa) = \predeg(\top) \label{eq:poresh-withrr-crit1} \\
-		&\text{$\forall j \in \Degeq(\vec b), i \in \Deg(\vec a)$, if $\getdeg(\predeg(i) \cdot \kappa) < j$ and $i \cdot \kappa \geq \isopol_j$ then $a_i = \npolar$.} \label{eq:poresh-withrr-crit2}
+		&\text{$\forall j \in \Degeq(\vec b), i \in \Deg(\vec a)$, if $\getdeg(\predeg(i) \cdot \kappa) < j$ and $(i \cdot \kappa)\pmrhom{\vec b}{a_i} \geq \isopol_j\pmrhom{b_j}{a_i}$ then $a_i = \npolar$.} \label{eq:poresh-withrr-crit2}
 	\end{align}
 \end{theorem}
 In words, \cref{eq:poresh-withrr-crit2} says that:
@@ -5245,34 +5245,95 @@ Taking these two requirements together, by \cref{thm:poresh-adjoint}, we get exa
 		It is then sufficient to prove $x \mathrel{(\infrajetsym_{\predeg(j)}\pmr{b_{\predeg(j)}} \oriof \mu)} y$
 		
 		Let $p'_{i'} = \predeg(j) \cdot \mu$ and $p_i = j \cdot \mu$.
-		We case split on how $i'$ compares to $i$
+		We make a case distinction on how $i'$ compares to $i$:
 		\begin{description}
-			\item[$i' = i$] Then we have $p' \ll p$, which by \cref{def:precede-polarity} implies that either $p' = \mixpol\pmrhom{a_i}{b_{\predeg(j)}}$ or $p = \isopol\pmrhom{a_i}{\ypolar}$.
+			\item[\framebox{$i' = i$}] Then we have $p' \ll p$, which by \cref{def:precede-polarity} implies that either $p' = \mixpol\pmrhom{a_i}{b_{\predeg(j)}}$ or $p = \isopol\pmrhom{a_i}{\ypolar}$.
 			\begin{itemize}
 				\item If $a_i = \npolar$, then we have $p = p' = \nonpol\pmrny$.
 				Then we have
 				\[
-					\equijetsym_j\pmry \oriof \mu = \equijetsym\pmry \oriof \nonpol_i\pmrny = \edgesym_i\pmrn, \qquad
-					\infrajetsym_{\predeg(j)}\pmr{b_{\predeg(j)}} \oriof \mu = \infrajetsym\pmr{b_{\predeg(j)}} \oriof \nonpol_i\pmrhom{\npolar}{b_{\predeg(j)}} = \edgesym_i\pmrn,
+					\begin{array}{r c c c c c c}
+						(\equijetsym_j)\pmr{\vec b} \oriof \mu\pmrhom{\vec a}{\vec b}
+						&=& \equijetsym\pmry \oriof (j \cdot \mu)\pmrhom{\vec a}{\ypolar}
+						&=& \equijetsym\pmry \oriof \nonpol_i\pmrny
+						&=& \edgesym_i\pmrn,
+						\\
+						(\infrajetsym_{\predeg(j)})\pmr{\vec b} \oriof \mu\pmrhom{\vec a}{\vec b}
+						&=& \infrajetsym\pmr{b_{\predeg(j)}} \oriof (\predeg(j) \cdot \mu)\pmrhom{\vec a}{b_{\predeg(j)}}
+						&=& \infrajetsym\pmr{b_{\predeg(j)}} \oriof \nonpol_i\pmrhom{\npolar}{b_{\predeg(j)}}
+						&=& \edgesym_i\pmrn,
+					\end{array}
 				\]
-				which completes the proof.
+				so that what we know is identical to what remained to be proven.
 				
 				\item If $a_i = \ypolar$, then by \cref{eq:poresh-withr-crit1} for $\mu$, we know that $p' \neq \mixpol\pmrhom{\ypolar}{b_{\predeg(j)}}$.
 				Hence, $p = \isopol\pmryy$.
 				Then we have
 				\[
-					\equijetsym_j\pmry \oriof \mu = \equijetsym\pmry \oriof \isopol\pmryy = \infrajetsym\pmry, \qquad
-					\infrajetsym_{\predeg(j)}\pmr{b_{\predeg(j)}} \oriof \mu = \infrajetsym\pmr{b_{\predeg(j)}} \oriof {p'_i}\pmrhom{\ypolar}{b_{\predeg(j)}} = \infrajetsym\pmry,
+					\begin{array}{r c c c c c c}
+						(\equijetsym_j)\pmr{\vec b} \oriof \mu\pmrhom{\vec a}{\vec b}
+						&=& \equijetsym\pmry \oriof (j \cdot \mu)\pmrhom{\vec a}{\ypolar}
+						&=& \equijetsym\pmry \oriof \isopol_i\pmryy
+						&=& \infrajetsym_i\pmry,
+						\\
+						(\infrajetsym_{\predeg(j)})\pmr{\vec b} \oriof \mu\pmrhom{\vec a}{\vec b}
+						&=& \infrajetsym\pmr{b_{\predeg(j)}} \oriof (\predeg(j) \cdot \mu)\pmrhom{\vec a}{b_{\predeg(j)}}
+						&=& \infrajetsym\pmr{b_{\predeg(j)}} \oriof (p')_i\pmrhom{\ypolar}{b_{\predeg(j)}}
+						&\overset{p' \neq \mixpol}{=}& \infrajetsym_i\pmry,
+					\end{array}
 				\]
-				because $p' \neq \mixpol$. This concludes the proof.
+				because $p' \neq \mixpol$.
+				Then what we know is identical to what remained to be proven.
 			\end{itemize}
 			
+			\item[\framebox{$i' = \predeg(i)$}]
+			We show that $a_i = \ypolar$ and $\equijetsym_j\pmry \oriof \mu = \equijetsym_i\pmr{a_i}$.
+			To this end, we invoke \cref{eq:poresh-withrr-crit2} for $\mu$:
+			\begin{itemize}
+				\item $i' := \getdeg(\predeg(j) \cdot \mu) < i$,
+				\item $b_j \neq \npolar$,
+			\end{itemize}
+			therefore, $p_i\pmrhom{a_i}{b_j} := (j \cdot \mu)\pmrhom{\vec a}{b_j} \not\geq \isopol_i\pmrhom{a_i}{b_j}$, i.e.\ $p\pmrhom{a_i}{b_j} \neq \isopol\pmrhom{a_i}{b_j}$.
+			This is only possible if $a_i = \ypolar$.
 			
-			\item[$i' = \predeg(i)$]
-			\todoi{Old proof} Then by \cref{eq:poresh-withrr-crit2,eq:poresh-withr-crit2}, we find that $p \in \accol{\pospol, \negpol}$. By \cref{eq:poresh-withr-crit2}, $p' \in \accol{\pospol, \negpol, \isopol}$.
-			Thus, we see that $\infrajetsym_{\predeg(j)} \oriof \mu = \infrajetsym_{\predeg(i)}$ and $\equijetsym_j \oriof \mu = \equijetsym_i$.
-			Then we can invoke $i$-antisymmetry of $X$.
-			\item[$i' < \predeg(i)$] Then we have $\getdeg(\predeg(j) \cdot \mu) < \predeg(i)$ and $j \cdot \mu \geq \isopol_{\predeg(i)}$, so by \cref{eq:poresh-withrr-crit2}, this is impossible as $b_j = \ypolar$. \qedhere
+			Then we have
+			\[
+				(\equijetsym_j)\pmr{\vec b} \oriof \mu\pmrhom{\vec a}{\vec b}
+				= \equijetsym\pmry \oriof (j \cdot \mu)\pmrhom{\vec a}{\ypolar}
+				= \equijetsym\pmry \oriof p_i\pmryy
+				\overset{p \neq \isopol}{=} \equijetsym_i\pmry.
+			\]
+			
+			Next, we show that $\infrajetsym_{\predeg(j)}\pmr{b_{\predeg(j)}} \oriof \mu = \infrajetsym_{\predeg(i)}\pmr{a_{\predeg(i)}}$:
+			\begin{description}
+				\item[\framebox{$a_{\predeg(i)} = \npolar$}] We have
+				\[
+					(\infrajetsym_{\predeg(j)})\pmr{\vec b} \oriof \mu\pmrhom{\vec a}{\vec b}
+					= \infrajetsym\pmr{b_{\predeg(j)}} \oriof (\predeg(j) \cdot \mu)\pmrhom{\vec a}{b_{\predeg(j)}}
+					= \infrajetsym\pmr{b_{\predeg(j)}} \oriof \nonpol_{\predeg(i)}\pmrhom{\npolar}{b_{\predeg(j)}}
+					= \edgesym_{\predeg(i)}\pmr{\npolar}.
+				\]
+				\item[\framebox{$a_{\predeg(i)} = \ypolar$}]
+				Then by \cref{eq:poresh-withr-crit2} for $\mu$, we have $(p')\pmrhom{\ypolar}{b_{\predeg(j)}} \neq \mixpol\pmrhom{\ypolar}{b_{\predeg(j)}}$.
+				Then we have
+				\[
+					(\infrajetsym_{\predeg(j)})\pmr{\vec b} \oriof \mu\pmrhom{\vec a}{\vec b}
+					= \infrajetsym\pmr{b_{\predeg(j)}} \oriof (\predeg(j) \cdot \mu)\pmrhom{\vec a}{b_{\predeg(j)}}
+					= \infrajetsym\pmr{b_{\predeg(j)}} \oriof (p')_{\predeg(i)}\pmrhom{\ypolar}{b_{\predeg(j)}}
+					= \infrajetsym_{\predeg(i)}\pmry.
+				\]
+			\end{description}
+			
+			Now we can invoke $i$-antisymmetry of $X$.
+			
+			\item[\framebox{$i' < \predeg(i)$}]
+			This is impossible.
+			To see this, we invoke \cref{eq:poresh-withrr-crit2} for $\mu$:
+			\begin{itemize}
+				\item $i' := \getdeg(\predeg(j) \cdot \mu) < i$,
+				\item $p_i\pmrhom{a_i}{b_j} := (j \cdot \mu)\pmrhom{\vec a}{b_j} \geq \isopol_{\predeg(i)}\pmrhom{b_j}{a_{\predeg(i)}}$,
+				\item $b_j \neq \npolar$. \qedhere
+			\end{itemize}
 		\end{description}
 	\end{enumerate}
 \end{proof}
