@@ -5465,7 +5465,7 @@ We cannot invoke the composition law of any pseudofunctor provided by \cref{thm:
 
 Unfortunately, we have the following \textbf{no-go theorem}:
 \begin{theorem} \label{thm:poresh-jtset:nogo}
-	The following, equivalent\footnote{Assuming an adjoint can be picked if one exists.}, objects \textbf{do not exist}:
+	The following, equivalent\footnote{Assuming an adjoint functor can be picked if one exists.}, objects \textbf{do not exist}:
 	\begin{itemize}
 		\item A pseudofunctor $\jtsetsym\withr : \poreshcat\withr \to \Cat\withr$ that extends both $\jtsetsym\withrr$ and $\jtsetsym\withlr$ up to natural isomorphism,
 		\item A pseudofunctor $\jtsetsym\withl : \poreshcat\withl \to \Cat\withl$ that extends both $\jtsetsym\withlr$ and $\jtsetsym\withll$ up to natural isomorphism.
@@ -5498,7 +5498,7 @@ Unfortunately, we have the following \textbf{no-go theorem}:
 		&\quad\cong\quad \DSub{\cohdisc_0 \rival{\jetsym_0}}{\yoneda \cohdisc_1 \rival{\jetsym_0}}
 		& \text{($\lpsh F \circ \yoneda \cong \yoneda \circ F$)} \\
 		&\quad=\quad \DSub{\rival{\jetsym_0 \oriof \cohfget_0}}{\yoneda \rival{\jetsym_0 \oriof \cohfget_1}}
-		& \text{(\cref{thm:poresh-jetsetoid-intervals})} \\
+		& \text{(\cref{thm:poresh-jetset-intervals})} \\
 		&\quad=\quad \DSub{\rival{\jetsym_1}}{\yoneda \rival{\jetsym_0}} \\
 		&\quad=\quad \rival{\jetsym_1} \to \rival{\jetsym_0}.
 	\end{align*}
@@ -5520,11 +5520,12 @@ Unfortunately, we have the following \textbf{no-go theorem}:
 	Now a $1$-jet in $\cohdisc_1 X = \reshlist{\nonpol_\eqtydeg}{\pospol_0, \isopol_0} X$ is a $1$-infrajet in $X$. Such an infrajet either points forwards, in which case $f : \rival{\jetsym_1} \to \cohdisc_1 X$ factors over some $\rival{\jetsym_1} \to \cohdisc_1 \rival{\jetsym_0}$, or it points backwards, in which case it factors over $\rival{\jetsym_1} \to \cohdisc_1 \rival{\tejsym_0}$.
 	If it factors over both, since $X$ is a jet tope, by $0$-antisymmetry, it factors over $\rival{\jetsym_1} \to \cohdisc_1 \top$.
 	Thus, the result of the computation above is the following pushout
+	\todoi{Explain better why this pushout is correct: the comma category created by the thing the coend quantifies over, maps onto the walking (co)span.}
 	\begin{align*}
 		\ldots &\quad\cong\quad
 		(\cohdisc_0 \rival{\jetsym_0} \to \rival{\jetsym_0}) \uplus_{(\cohdisc_0 \top \to \rival{\jetsym_0})} (\cohdisc_0 \rival{\tejsym_0} \to \rival{\jetsym_0}) \\
 		&\quad=\quad (\rival{\jetsym_1} \to \rival{\jetsym_0}) \uplus_{(\top \to \rival{\jetsym_0})} (\rival{\tejsym_1} \to \rival{\jetsym_0})
-		& \text{(\cref{thm:poresh-jetsetoid-intervals})} \\
+		& \text{(\cref{thm:poresh-jetset-intervals})} \\
 		&\quad\cong\quad (\accol{0,1} \to \accol{0, 1}) \uplus_{\accol{0, 1}} (\accol{0,1} \to \accol{0, 1})
 	\end{align*}
 	so all non-constant functions between the carriers now occur twice!
@@ -5536,9 +5537,11 @@ Unfortunately, we have the following \textbf{no-go theorem}:
 	The right adjoint to $\cohfget_0 \cohdisc_1$ is $\cohfget_1 \cohcodisc_0 = \reshlist{\nonpol_\eqtydeg}{\mixpol_0}$, which is necessarily also idempotent.
 	By similar reasoning as above, we will have
 	\[
-		\jtsetsym\withl(\cohfget_1 \cohcodisc_0) = \fpsh{(\cohdisc_1)} \circ \rpsh{(\cohdisc_0)},
+		\jtsetsym\withl(\cohfget_1 \cohcodisc_0) \cong \fpsh{(\cohdisc_1)} \circ \rpsh{(\cohdisc_0)},
 	\]
 	which is right adjoint to $\fpsh{(\cohdisc_0)} \circ \lpsh{(\cohdisc_1)}$ and therefore also non-idempotent.
+	The intuitive reason is that a $0$-jet $\rival{\jetsym_0} \Rightarrow \jtsetsym\withl(\cohfget_1 \cohcodisc_0)\,X$ will consist of a pair of $0$-jets between the same nodes in $X$: one forward and one backward.
+	Then a $0$-jet $\rival{\jetsym_0} \Rightarrow \jtsetsym\withl(\cohfget_1 \cohcodisc_0)^2\,X$ will consist of a quadruple of $0$-jets between the same nodes in $X$: one forward, one backward, another one backward and another one forward.
 %	and therefore, the right adjoint to $\jtsetsym\withr(\cohfget_0 \cohdisc_1)$ will be $\jtsetsym\withl(\cohfget_1 \cohcodisc_0)$.
 %	Since the former is not idempotent, neither is the latter.
 \end{proof}
