@@ -4607,9 +4607,34 @@ In words, \cref{eq:poresh-withrr-crit2} says that:
 			\item Sending a unique proof of inequality $\mu \leq \nu : \vec a \to \vec b$ to an obvious natural transformation $\ket{\mu \leq \nu} : \mu \to \nu : \jetset{\vec a} \to \jetset{\vec b}$ whose underlying function sends $[x]_\mu$ to $[x]_\nu$, which is necessarily a larger equivalence class.
 		\end{itemize}
 		
-		\item If we consider only modalities $\mu$ satisfying \cref{eq:poresh-withl-crit1} (i.e.\ those for which $\eqtydeg \cdot \mu = \nonpol_\eqtydeg$) and denote the restricted 2-poset as $\poreshcat \noquot$, then we directly get a strict 2-functor $\jetsetsym \noquot : \poreshcat \noquot \to \Cat$ by the same construction as above, but without the necessity to quotient. (Under the strict quotienting \cref{ax:bishop}, it is equal to a restriction of the graph morphism above.)
+		\item If we consider only modalities $\mu$ satisfying \cref{eq:poresh-withl-crit1} (i.e.\ those for which $\eqtydeg \cdot \mu = \nonpol_\eqtydeg$) and denote the restricted 2-poset (with the same order relation) as $\poreshcat \noquot$, then we directly get a strict 2-functor $\jetsetsym \noquot : \poreshcat \noquot \to \Cat$ by the same construction as above, but without the necessity to quotient. (Under the strict quotienting \cref{ax:bishop}, it is equal to a restriction of the graph morphism above.)
 	\end{enumerate}
 \end{definition}
+\begin{proof}[Proof of strict 2-functoriality of $\jetsetsym \noquot$]
+	The functorial action of $\jetsetsym\noquot(\mu)$ on $X$ only affects the jet relations of $X$.
+	Let $\vec a \xrightarrow{\mu} \vec b \xrightarrow{\nu} \vec c$ and $X \in \jetset{\vec a}$.
+	We have
+	\[
+		\begin{array}{ccc c ccc c ccc}
+			x \mathrel{(\jetsym_i)}\pmr{\vec a} y &\in& \id_{\vec a} X
+			&\Leftrightarrow&&&&&
+			x \mathrel{(\jetsym_i \oriof \id_{\vec a})}\pmr{\vec a} y &\in& X,
+			\\
+			x \mathrel{(\jetsym_k)}\pmr{\vec c} y &\in& \nu(\mu X)
+			&\Leftrightarrow&
+			x \mathrel{(\jetsym_k \oriof \nu)}\pmr{\vec b} y &\in& \mu X
+			&\Leftrightarrow&
+			x \mathrel{((\jetsym_k \oriof \nu) \oriof \mu)}\pmr{\vec a} y &\in& X,
+			\\
+			x \mathrel{(\jetsym_k)}\pmr{\vec c} y &\in& (\nu \circ \mu) X
+			&\Leftrightarrow&&&&&
+			x \mathrel{(\jetsym_k \oriof (\nu \circ \mu))}\pmr{\vec a} y &\in& X.
+		\end{array}
+	\]
+	so by functoriality of $\oridegeqtop$, we see that identity and composition are respected on the nose.
+	
+	The action of $\jetsetsym \noquot : \poreshcat \noquot \to \Cat$ on inequalities (2-cells) always produces the identity function on objects, and therefore respects all operations on 2-cells.
+\end{proof}
 %\begin{corollary} \label{thm:poresh-jetsetoid:bind}
 %	Let $\mu : \vec a \to \vec b$ and $X \in \jetsetoid{\vec a}$.
 %	For an arbitrary $Q_j \in \oridegeqtop(\vec b)$, the relation $Q_j$ on $\mu X$ is given by $(\eqtysym \oriof \mu)^* \otimes (Q_j \oriof \mu) \otimes (\eqtysym \oriof \mu)^*$.
@@ -4618,7 +4643,23 @@ In words, \cref{eq:poresh-withrr-crit2} says that:
 %	If $\mu$ has a left adjoint and $X \in \jetset{\vec a}$, then for an arbitrary $Q_j \in \oripsh(\vec b)$, the relation $Q_j$ on $\mu X$ is given by  $Q_j \oriof \mu$. \qed
 %\end{corollary}
 
-As \cref{def:cat-enriched-graph} already foreboded, we have to make an abhorrent constatation, which however will resolve itself when we specialize to jet cubes\todo{Right?}:
+\begin{corollary} \label{thm:poresh-jetset-with-adjoint}
+	We have:
+	\begin{enumerate}
+		\item A strict 2-functor $\jetsetsym\withr : \poreshcat\withr \to \Cat$ that restricts $\jetsetsym\noquot$ and therefore essentially restricts $\jetsetsym$,
+		\item A pseudofunctor $\jetsetsym\withl : \poreshcat\withl \to \Cat$ that restricts $\jetsetsym$.
+	\end{enumerate}
+\end{corollary}
+\begin{proof}
+	\begin{enumerate}
+		\item Obviously, we can restrict $\jetsetsym\noquot : \poreshcat\noquot \to \Cat$ along the 2-poset inclusion $\poreshcat\withr \subseteq \poreshcat\noquot$, producing another strict 2-functor.
+		\item Obviously, we can restrict $\jetsetsym : \poreshcat \to \Cat$ along $\poreshcat\withl \subseteq \poreshcat$.
+		Now if $\lambda \dashv \rho$ in $\poreshcat$, then $\jetsetsym\withr(\lambda) \cong \jetsetsym(\lambda) \dashv \jetsetsym(\rho) = \jetsetsym\withl(\rho)$.
+		Then pseudofunctoriality of $\jetsetsym\withl$ follows from strict 2-functoriality of $\jetsetsym\withr$ and uniqueness of the adjoint. \qedhere
+	\end{enumerate}
+\end{proof}
+
+As \cref{def:cat-enriched-graph} already foreboded, we have to make an abhorrent constatation for the most general operation $\jetsetsym : \poreshcat \to \Cat$, which however becomes irrelevant when we restrict to jet topes and jet cubes:
 \begin{proposition}
 	$\jetsetsym : \poreshcat \to \Cat$ does not preserve composition.
 \end{proposition}
