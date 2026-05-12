@@ -113,8 +113,212 @@ We express the following axiom, which we will \emph{not} assume by default, and 
 	\end{enumerate}
 \end{axiom}
 
-\chapter{Base Categories and Modes} \label{ch:modes}
+\chapter{Prerequisites} \label{ch:prereq}
 
+\section{2-Categories}
+\subsection{Definitions}
+\begin{definition}
+	A \textdef{2-category}, \textdef{category-enriched category} or \textdef{(2, 2)-category} $\cat C$ consists of:
+	\begin{itemize}
+		\item A set of objects $\Obj(\cat C)$,
+		\item For each $x, y \in \Obj(\cat C)$, a \emph{category} of morphisms $\Hom(x, y)$,
+		\item For each $x \in \Obj(\cat C)$, an identity morphism $\id_x \in \Obj(\Hom(x, x))$,
+		\item For each $x, y, z \in \Obj(\cat C)$, a \emph{functor} $\circ : \Hom(y, z) \times \Hom(x, y) \to \Hom(x, z)$,
+	\end{itemize}
+	such that $\circ$ is associative and unital with respect to $\id$.
+	
+	We write $\catC\op$ for the category with the same objects and such that $\Hom_{\catC\op}(x, y) = \Hom_\catC(y, x)$.
+	
+	We write $\catC\co$ for the category with the same objects and such that $\Hom_{\catC\co}(x, y) = \Hom_{\catC}(x, y)\op$.
+	
+	We write $\catC\coop = (\catC\co)\op$.
+\end{definition}
+\begin{definition}
+	A \textdef{2-poset}, \textdef{poset-enriched category} or \textdef{Hom-wise gaunt/skeletal (1, 2)-category} $\cat C$ consists of:
+	\begin{itemize}
+		\item A set of objects $\Obj(\cat C)$,
+		\item For each $x, y \in \Obj(\cat C)$, a \emph{poset} of morphisms $\Hom(x, y)$,
+		\item For each $x \in \Obj(\cat C)$, an identity morphism $\id_x \in \Hom(x, x)$,
+		\item For each $x, y, z \in \Obj(\cat C)$, a \emph{monotonically increasing} map $\circ : \Hom(y, z) \times \Hom(x, y) \to \Hom(x, z)$,
+	\end{itemize}
+	such that $\circ$ is associative and unital with respect to $\id$.
+\end{definition}
+
+\subsection{On Adjoints}
+\begin{definition}
+	Let $\catC$ be a 2-category.
+	Morphisms $\lambda : \Hom_\catC(y, x)$ and $\rho : \Hom_\catC(x, y)$ are \textbf{adjoint} ($\lambda \dashv \rho$) if and only if they are equipped with a \textbf{unit} 2-cell $\eta : \id_y \to \rho \lambda$ and a \textbf{co-unit} 2-cell $\eps : \lambda \rho \to \id_x$ such that
+	\[
+		(\eps \star \lambda) \circ (\lambda \star \eta) = \id_\lambda, \qquad
+		(\rho \star \eps) \circ (\eta \star \rho) = \id_\rho.
+	\]
+\end{definition}
+In the 2-category $\Cat$, this corresponds to the usual notion of adjoint functors.
+
+\begin{corollary}
+	2-functors and pseudofunctors preserve adjunctions.
+\end{corollary}
+\begin{proposition}
+	Let $\catC$ be a 2-category, $\lambda \in \Hom_\catC(y, x)$ and $\rho \in \Hom_\catC(x, y)$. The following adjunctions are equivalent, where we denote morphisms in $\catC\op$ and 2-cells in $\catC\co$ with a bar:
+	\[
+		\begin{array}{l | c c c l | c c r c r | c c r c l}
+			\text{in cat.}
+			& \multicolumn{4}{c |}{\text{adjunction}}
+			& \multicolumn{5}{c |}{\text{unit}}
+			& \multicolumn{5}{c}{\text{co-unit}}
+			\\ \hline
+			\catC
+			& \lambda &\dashv& \rho &: x \to y
+			& \eta &:& \id_y &\to& \rho \lambda
+			& \eps &:& \lambda \rho &\to& \id_x
+			\\
+			\catC\op
+			& \overline \rho &\dashv& \overline \lambda &: x \to y
+			& \eta &:& \id_y &\to& \overline \lambda \overline \rho = \overline{\rho \lambda}
+			& \eps &:& \overline \rho \overline \lambda = \overline{\lambda \rho} &\to& \id_x
+			\\
+			\catC\co
+			& \rho &\dashv& \lambda &: y \to x
+			& \overline \eps &:& \id_x &\to& \lambda \rho
+			& \overline \eta &:& \rho \lambda &\to& \id_y
+			\\
+			\catC\coop
+			& \overline \lambda &\dashv& \overline \rho &: y \to x
+			& \overline \eps &:& \id_x &\to& \overline \rho \overline \lambda = \overline{\lambda \rho}
+			& \overline \eta &:& \overline \lambda \overline \rho = \overline{\rho \lambda} &\to& \id_y.
+		\end{array}
+	\]
+	This also indicates how 2-functors and pseudofunctors of different variance affect adjunctions. \qed
+\end{proposition}
+\begin{corollary} \label{thm:adjunctions-under-op}
+	In a 2-category $\catC$, assume we have an adjunction
+	\[
+		\lambda : \Hom_\catC(y, x)
+		\qquad \dashv \qquad
+		\rho : \Hom_\catC(x, y).
+	\]
+	\begin{enumerate}
+		\item For a 2-functor $P : \catC\op \to \Cat$, i.e.\ a $\Cat$-valued presheaf, we get:
+		\[
+			P(\rho) : P(x) \to P(y)
+			\qquad \dashv \qquad
+			P(\lambda) : P(y) \to P(x)
+		\]
+		with unit $P(\eta)$ and co-unit $P(\eps)$.
+		
+		\item In particular, if $z \in \Obj(\catC)$, this is true for the representable presheaf $\Hom_\catC(\loch, z) : \catC\op \to \Cat$:
+		\[
+			(\loch \circ \rho) : \Hom_\catC(y, z) \to \Hom_\catC(x, z)
+			\qquad \dashv \qquad
+			(\loch \circ \lambda) : \Hom_\catC(x, z) \to \Hom_\catC(y, z)
+		\]
+		with unit $(\loch \star \eta)$ and co-unit $(\loch \star \eps)$.
+		
+		As an adjunction in $\Cat$, it can be characterized as a natural isomorphism of $\Hom$-sets, in this case sets of 2-cells:
+		\[
+			\Hom_{\Hom_\catC(x, z)}(\vfi \circ \rho, \chi) \cong
+			\Hom_{\Hom_\catC(y, z)}(\vfi, \chi \circ \lambda),
+		\]
+		naturally in $\vfi : \Hom_\catC(y, z)$ and $\chi : \Hom_\catC(x, z)$.
+		
+		\item In particular, if $\catC = \Cat$ and $L \dashv R : \cat X \to \cat Y$, we get a 1-to-1-correspondence of natural transformations:
+		\[
+			FR \to G \qquad \text{and} \qquad F \to GL,
+		\]
+		naturally in $F : \cat Y \to \cat Z$ and $G : \cat X \to \cat Z$.
+		\qed
+	\end{enumerate}
+\end{corollary}
+
+\section{Reindexing Limits and Colimits}
+\begin{proposition} \label{thm:reindex-lim}
+	Assume an adjunction $L \dashv R : \catC \to \catD$, and a functor $F : \catC \to \catE$. Then we have:
+	\[
+		\lim_{c \in \catC} Fc \cong \lim_{d \in \catD} FLd,
+	\]
+	if either limit exists.
+\end{proposition}
+\begin{proof}
+	We show that they have the same inward morphisms and therefore satisfy the same universal property.
+	Write $K_e : \catD \to \catE$ for the constant functor on $e$.
+	We have a chain of isomorphisms, natural in $e \in \Obj(\catE)$:
+	\begin{align*}
+		&{} \mathrel{\phantom{\quad\cong\quad}}
+		\Hom_\catE(e, \lim_{c \in \catC} Fc)
+		\\ &{} \quad\cong\quad
+		\forallend c \in \catC . \Hom_\catE(e, Fc)
+		& \text{(universal prop.)}
+		\\ &{} \quad=\quad
+		\forallend c \in \catC . \Hom_\catE(K_e Rc, Fc)
+		\\ &{} \quad\cong\quad
+		\forallend d \in \catD . \Hom_\catE(K_e d, FLd)
+		& \text{(\cref{thm:adjunctions-under-op})}
+		\\ &{} \quad=\quad
+		\forallend d \in \catD . \Hom_\catE(e, FLd)
+		\\ &{} \quad\cong\quad
+		\Hom_\catE(e, \lim_{d \in \catD} FLd). &\text{(universal prop.) } \qedhere
+	\end{align*}
+\end{proof}
+\begin{proposition} \label{thm:reindex-lim}\label{thm:reindex-colim}
+	Assume an adjunction $L \dashv R : \catC \to \catD$, and a functor $G : \catD \to \catE$. Then we have:
+	\[
+		\colim_{d \in \catC} Gd \cong \colim_{c \in \catC} GRd,
+	\]
+	if either colimit exists.
+\end{proposition}
+\begin{proof}
+	We show that they have the same outward morphisms and therefore satisfy the same universal property.
+	Write $K_e : \catC \to \catE$ for the constant functor on $e$.
+	We have a chain of isomorphisms, natural in $e \in \Obj(\catE)$:
+	\begin{align*}
+		&{} \mathrel{\phantom{\quad\cong\quad}}
+		\Hom_\catE(\colim_{d \in \catD} Gd, e)
+		\\ &{} \quad\cong\quad
+		\forallend d \in \catD . \Hom_\catE(Gd, e)
+		& \text{(universal prop.)}
+		\\ &{} \quad=\quad
+		\forallend d \in \catD . \Hom_\catE(Gd, K_e Ld)
+		\\ &{} \quad\cong\quad
+		\forallend c \in \catC . \Hom_\catE(GRc, K_e c)
+		& \text{(\cref{thm:adjunctions-under-op})}
+		\\ &{} \quad=\quad
+		\forallend c \in \catC . \Hom_\catE(GRc, e)
+		\\ &{} \quad\cong\quad
+		\Hom_\catE(\colim_{c \in \catC} GRc, e). &\text{(universal prop.) } \qedhere
+	\end{align*}
+\end{proof}
+
+\section{Presheaf Notations}
+\label{sec:notations}
+\label{sec:notations:psh}
+We use the presheaf notations from \cite{reldtt-techreport}. Concretely:
+\begin{itemize}
+	\item The application of a presheaf $\Gamma \in \widehat \catW$ to an object $W \in \catW$ is denoted $\DSub W \Gamma$.
+	\item The restriction of $\gamma : \DSub W \Gamma$ by $\vfi : V \to W$ is denoted $\gamma \circ \vfi$ or $\gamma \vfi$.
+	\item The application of a presheaf morphism $\sigma : \Gamma \to \Delta$ to $\gamma : \DSub W \Gamma$ is denoted $\sigma \circ \gamma$ or $\sigma \gamma$.
+	\begin{itemize}
+		\item By naturality of $\sigma$, we have $\sigma \circ (\gamma \circ \vfi) = (\sigma \circ \gamma) \circ \vfi$.
+	\end{itemize}
+	\item If $\Gamma \in \widehat \catW$ and $T \in \Ty(\Gamma)$ (also denoted $\Gamma \sez T \type$), i.e. $T$ is a presheaf over the category of elements $\catW/\Gamma$, then we write the application of $T$ to $(W, \gamma)$ as $(W \Dsez T \dsub \gamma)$ and $t \in (W \Dsez T \dsub \gamma)$ as $W \Dsez t : T \dsub \gamma$.
+	\begin{itemize}
+		\item By definition of type substitution in a presheaf CwF, we have $(W \Dsez T[\sigma] \dsub \gamma) = (W \Dsez T \dsub{\sigma \gamma})$
+	\end{itemize}
+	\item The restriction of $W \Dsez t : T \dsub \gamma$ by $\vfi : (V, \gamma \circ \vfi) \to (W, \gamma)$ is denoted as $W \Dsez t \psub \vfi : T \dsub{\gamma \vfi}$.
+	\item If $t \in \Tm(\Gamma, T)$ (also denoted $\Gamma \sez t : T$), then the application of $t$ to $(W, \gamma)$ is denoted $V \Dsez t \dsub \gamma : T \dsub \gamma$.
+	\begin{itemize}
+		\item The naturality condition for terms is then expressed as $t \dsub \gamma \psub \vfi = t \dsub{\gamma \vfi}$.
+		\item By definition of term substitution in a presheaf CwF, we have $t[\sigma] \dsub \gamma = t \dsub{\sigma \gamma}$.
+	\end{itemize}
+	\item We omit applications of the isomorphisms $(\DSub W \Gamma) \cong (\yoneda W \to \Gamma)$ and $(W \Dsez T \dsub \gamma) \cong (\yoneda W \sez T [\gamma])$.
+	This is not unreasonable: e.g. given $W \Dsez t : T \dsub \gamma$, the term $\yoneda W \sez t' : T[\gamma]$ is defined by $t' \dsub \vfi := t \psub \vfi$.
+\end{itemize}
+One advantage of these notations is that we can put presheaf cells in diagrams; we will use double arrows when doing so.
+
+%\subsection{End and Co-ends} \label{sec:notations:end}
+%We use existential quantifiers over objects of a category to denote ends and co-ends, i.e. if $F : \catC\op \times \catC \to \Set$, then its co-end is denoted $\exists X.F(X, X)$ and its end is denoted $\forall X.F(X, X)$.
+%\todoi{It's only used in one place, so its feasible to put end/coend on top still.}
+
+\chapter{Base Categories and Modes} \label{ch:modes}
 In this chapter, we establish the object part of the mode theory for naturality pretype theory and its model.
 Modes will be \textbf{polarmode masks} $\vec a$ (\cref{sec:mask}) which will be modelled in presheaf categories over certain base categories.
 We propose two families of base categories, parametrized by the mask $\vec a$, and both are built using the category $\jetset{\vec a}$ of \textbf{jet sets} over $\vec a$ (\cref{sec:jetset}).
@@ -153,9 +357,7 @@ In NatPT, we will specify for each of these relations whether it is directed or 
 \section{Jet Sets} \label{sec:jetset}
 \subsection{Definitions} \label{sec:jetset:def}
 \begin{definition} \label{def:jetset}
-	Let $\vec a$ be a mask. An \textbf{$\vec a$-jet-set} is a set $X$ equipped with $\lenpol{\vec a}$ (proof-irrelevant%
-	\footnote{So these relations are functions $X \to X \to \Prop$ where $\Prop$ is a universe of $h$-propositions \cite{hottbook}. In most applications, these relations will be decidable, but we do not require this.}%
-	) reflexive relations $\jet_i$ where
+	Let $\vec a$ be a mask. An \textbf{$\vec a$-jet-set} is a set $X$ equipped with $\lenpol{\vec a}$ (decidable, proof-irrelevant) reflexive relations $\jet_i$ where
 	\begin{itemize}
 		\item $i \in \Deg(\vec a)$ is called the \textbf{degree},
 		\item $\jet_i$ is called the \textbf{$i$-jet relation},
@@ -2784,34 +2986,6 @@ For both presheaf categories, we obtain a no-go theorem (\cref{thm:poresh-jtset:
 
 \section{The 2-poset of Polarized Reshuffles} \label{sec:poresh}
 
-\subsection{Prerequisites}
-\begin{definition}
-	A \textdef{2-category}, \textdef{category-enriched category} or \textdef{(2, 2)-category} $\cat C$ consists of:
-	\begin{itemize}
-		\item A set of objects $\Obj(\cat C)$,
-		\item For each $x, y \in \Obj(\cat C)$, a \emph{category} of morphisms $\Hom(x, y)$,
-		\item For each $x \in \Obj(\cat C)$, an identity morphism $\id_x \in \Obj(\Hom(x, x))$,
-		\item For each $x, y, z \in \Obj(\cat C)$, a \emph{functor} $\circ : \Hom(y, z) \times \Hom(x, y) \to \Hom(x, z)$,
-	\end{itemize}
-	such that $\circ$ is associative and unital with respect to $\id$.
-	
-	We write $\catC\op$ for the category with the same objects and such that $\Hom_{\catC\op}(x, y) = \Hom_\catC(y, x)$.
-	
-	We write $\catC\co$ for the category with the same objects and such that $\Hom_{\catC\co}(x, y) = \Hom_{\catC}(x, y)\op$.
-	
-	We write $\catC\coop = (\catC\co)\op$.
-\end{definition}
-\begin{definition}
-	A \textdef{2-poset}, \textdef{poset-enriched category} or \textdef{Hom-wise gaunt/skeletal (1, 2)-category} $\cat C$ consists of:
-	\begin{itemize}
-		\item A set of objects $\Obj(\cat C)$,
-		\item For each $x, y \in \Obj(\cat C)$, a \emph{poset} of morphisms $\Hom(x, y)$,
-		\item For each $x \in \Obj(\cat C)$, an identity morphism $\id_x \in \Hom(x, x)$,
-		\item For each $x, y, z \in \Obj(\cat C)$, a \emph{monotonically increasing} map $\circ : \Hom(y, z) \times \Hom(x, y) \to \Hom(x, z)$,
-	\end{itemize}
-	such that $\circ$ is associative and unital with respect to $\id$.
-\end{definition}
-
 \subsection{Definitions and Properties} \label{sec:poresh:def}
 In this section, we will construct a diagram of 2-posets and poset-valued profunctors between them.
 Viewing poset-valued presheaves $P : \catC\op \to \Poset$ on a 2-poset $\catC$ as profunctors to the terminal 2-poset $\top$, the diagram we will construct is the following:
@@ -5191,35 +5365,7 @@ Note also that, while the nature of the `product' varies, the second component f
 	\end{enumerate}
 \end{proof}
 
-\section{Presheaf Notations}
-\label{sec:notations}
-\label{sec:notations:psh}
-We use the presheaf notations from \cite{reldtt-techreport}. Concretely:
-\begin{itemize}
-	\item The application of a presheaf $\Gamma \in \widehat \catW$ to an object $W \in \catW$ is denoted $\DSub W \Gamma$.
-	\item The restriction of $\gamma : \DSub W \Gamma$ by $\vfi : V \to W$ is denoted $\gamma \circ \vfi$ or $\gamma \vfi$.
-	\item The application of a presheaf morphism $\sigma : \Gamma \to \Delta$ to $\gamma : \DSub W \Gamma$ is denoted $\sigma \circ \gamma$ or $\sigma \gamma$.
-	\begin{itemize}
-		\item By naturality of $\sigma$, we have $\sigma \circ (\gamma \circ \vfi) = (\sigma \circ \gamma) \circ \vfi$.
-	\end{itemize}
-	\item If $\Gamma \in \widehat \catW$ and $T \in \Ty(\Gamma)$ (also denoted $\Gamma \sez T \type$), i.e. $T$ is a presheaf over the category of elements $\catW/\Gamma$, then we write the application of $T$ to $(W, \gamma)$ as $(W \Dsez T \dsub \gamma)$ and $t \in (W \Dsez T \dsub \gamma)$ as $W \Dsez t : T \dsub \gamma$.
-	\begin{itemize}
-		\item By definition of type substitution in a presheaf CwF, we have $(W \Dsez T[\sigma] \dsub \gamma) = (W \Dsez T \dsub{\sigma \gamma})$
-	\end{itemize}
-	\item The restriction of $W \Dsez t : T \dsub \gamma$ by $\vfi : (V, \gamma \circ \vfi) \to (W, \gamma)$ is denoted as $W \Dsez t \psub \vfi : T \dsub{\gamma \vfi}$.
-	\item If $t \in \Tm(\Gamma, T)$ (also denoted $\Gamma \sez t : T$), then the application of $t$ to $(W, \gamma)$ is denoted $V \Dsez t \dsub \gamma : T \dsub \gamma$.
-	\begin{itemize}
-		\item The naturality condition for terms is then expressed as $t \dsub \gamma \psub \vfi = t \dsub{\gamma \vfi}$.
-		\item By definition of term substitution in a presheaf CwF, we have $t[\sigma] \dsub \gamma = t \dsub{\sigma \gamma}$.
-	\end{itemize}
-	\item We omit applications of the isomorphisms $(\DSub W \Gamma) \cong (\yoneda W \to \Gamma)$ and $(W \Dsez T \dsub \gamma) \cong (\yoneda W \sez T [\gamma])$.
-	This is not unreasonable: e.g. given $W \Dsez t : T \dsub \gamma$, the term $\yoneda W \sez t' : T[\gamma]$ is defined by $t' \dsub \vfi := t \psub \vfi$.
-\end{itemize}
-One advantage of these notations is that we can put presheaf cells in diagrams; we will use double arrows when doing so.
 
-%\subsection{End and Co-ends} \label{sec:notations:end}
-%We use existential quantifiers over objects of a category to denote ends and co-ends, i.e. if $F : \catC\op \times \catC \to \Set$, then its co-end is denoted $\exists X.F(X, X)$ and its end is denoted $\forall X.F(X, X)$.
-%\todoi{It's only used in one place, so its feasible to put end/coend on top still.}
 
 \section{Semantics on Jet Topes and Jet-Topic Sets} \label{sec:poresh-jettope-jtset}
 In this section, we investigate how polarized reshuffles act on jet topes and on presheaves over these, which we call jet-topic sets.
@@ -5515,14 +5661,60 @@ Unfortunately, we have the following \textbf{no-go theorem}:
 		\existscoend X^{{}\in \jettope{[\ypolar]}}.(\rival{\jetsym_1} \to \cohdisc_1 X) \times (\DSub{X}{\fpsh{(\cohdisc_0)} \yoneda \rival{\jetsym_0}})
 		& \text{(construction of left Kan extension)} \\
 		&\quad=\quad
-		\existscoend X^{{}\in \jettope{[\ypolar]}}.(\rival{\jetsym_1} \to \cohdisc_1 X) \times (\cohdisc_0 X \to \rival{\jetsym_0}).
+		\existscoend X^{{}\in \jettope{[\ypolar]}}.(\rival{\jetsym_1} \to \cohdisc_1 X) \times (\cohdisc_0 X \to \rival{\jetsym_0}) \\
+		&\quad\cong\quad
+		\colim_{(X, \vfi) \in \int_{X \in \jettope{[\ypolar]}} (\rival{\jetsym_1} \to \cohdisc_1 X)}
+		(\cohdisc_0 X \to \rival{\jetsym_0})
 	\end{align*}
-	Now a $1$-jet in $\cohdisc_1 X = \reshlist{\nonpol_\eqtydeg}{\pospol_0, \isopol_0} X$ is a $1$-infrajet in $X$. Such an infrajet either points forwards, in which case $f : \rival{\jetsym_1} \to \cohdisc_1 X$ factors over some $\rival{\jetsym_1} \to \cohdisc_1 \rival{\jetsym_0}$, or it points backwards, in which case it factors over $\rival{\jetsym_1} \to \cohdisc_1 \rival{\tejsym_0}$.
-	If it factors over both, since $X$ is a jet tope, by $0$-antisymmetry, it factors over $\rival{\jetsym_1} \to \cohdisc_1 \top$.
-	Thus, the result of the computation above is the following pushout
-	\todoi{Explain better why this pushout is correct: the comma category created by the thing the coend quantifies over, maps onto the walking (co)span.}
+	We will now use \cref{thm:reindex-colim} to simplify this colimit.
+	Write $\catC$ for the category over which it ranges.
+	
+	A $1$-jet in $\cohdisc_1 X = \reshlist{\nonpol_\eqtydeg}{\pospol_0, \isopol_0} X$ is a $0$-infrajet in $X$.
+	We thus obtain a cospan in $\catC$, where we denote jet tope morphisms by their carrier:
+	\[
+		(\rival{\jetsym_0}, \id_{\accol{0, 1}}) \to (\top, \_) \leftarrow (\rival{\tejsym_0}, \id_{\accol{0, 1}}).
+	\]
+	This amounts to a functor $I : \walkingcospan \to \catC$ from the walking cospan $\walkingcospan = \accol{\walkingcospanL \to \walkingcospanM \leftarrow \walkingcospanR}$.
+	We construct a right adjoint $I \dashv R : \catC \to \walkingcospan$:
+	\[
+		R : \paren{
+			\int_{X \in \jettope{[\ypolar]}} (\rival{\jetsym_1} \to \cohdisc_1 X)
+			} \to \walkingcospan : (X, \vfi) \mapsto 
+		\left\{
+			\begin{array}{l l}
+				\walkingcospanM & \text{if $\vfi : \rival{\equijetsym_0} \to X$, and otherwise:} \\
+				\walkingcospanL & \text{if $\vfi : \rival{\jetsym_0} \to X$}, \\
+				\walkingcospanR & \text{if $\vfi : \rival{\tejsym_0} \to X$}.
+			\end{array}
+		\right.
+	\]
+	This is easily checked to have an action on morphisms.
+	Note that by $0$-antisymmetry of $X$, we can only get $R(X, \vfi) = \walkingcospanM$ if $\vfi$ is constant.
+	It is immediately clear that $RI = \Id_\walkingcospan$.
+	We construct the co-unit $\eps : IR \to \Id_\catC$ as follows:
+	\[
+		\eps_{(X, \vfi)} =
+		\left\{
+			\begin{array}{l c l l}
+				() \mapsto \vfi(0) = \vfi(1) &:& (\top, \_) \to (X, \vfi)
+				& \text{if $R(X, \vfi) = \walkingcospanM$,} \\
+				\vfi &:& (\rival{\jetsym_0}, \id_{\accol{0, 1}}) \to (X, \vfi)
+				& \text{if $R(X, \vfi) = \walkingcospanL$}, \\
+				\vfi &:& (\rival{\tejsym_0}, \id_{\accol{0, 1}}) \to (X, \vfi)
+				& \text{if $R(X, \vfi) = \walkingcospanR$}.
+			\end{array}
+		\right.
+	\]
+	The triangle identity at $\walkingcospan$ is trivial, whereas the one at $\catC$ requires that $\eps_{Ix} = \id_{Ix}$, which is the case.
+	
+	We have established $I \dashv R$ and therefore $R\op \dashv I\op$, so that by \cref{thm:reindex-colim}, we can reindex along $I\op$. Write $\hat I x$ for the first component of $I x$.
 	\begin{align*}
-		\ldots &\quad\cong\quad
+		&\quad\mathrel{\phantom{=}}\quad
+		\colim_{(X, \vfi) \in \int_{X \in \jettope{[\ypolar]}} (\rival{\jetsym_1} \to \cohdisc_1 X)}
+		(\cohdisc_0 X \to \rival{\jetsym_0}) \\
+		&\quad\cong\quad
+		\colim_{x \in \walkingcospan} (\cohdisc_0 \hat I x \to \rival{\jetsym_0}) \\
+		&\quad=\quad
 		(\cohdisc_0 \rival{\jetsym_0} \to \rival{\jetsym_0}) \uplus_{(\cohdisc_0 \top \to \rival{\jetsym_0})} (\cohdisc_0 \rival{\tejsym_0} \to \rival{\jetsym_0}) \\
 		&\quad=\quad (\rival{\jetsym_1} \to \rival{\jetsym_0}) \uplus_{(\top \to \rival{\jetsym_0})} (\rival{\tejsym_1} \to \rival{\jetsym_0})
 		& \text{(\cref{thm:poresh-jetset-intervals})} \\
@@ -6010,7 +6202,7 @@ Fortunately, we can reassemble it from its parts, but then we have to reprove so
 } %endwip
 
 \section{Semantics on Jet Cubes and Jet-Cubical Sets} \label{sec:poresh-jetcube-jcset}
-In this section, we investigate how polarized reshuffles act on jet topes and on presheaves over these, which we call jet-topic sets.
+In this section, we investigate how polarized reshuffles act on jet cubes and on presheaves over these, which we call jet-cubical sets.
 
 \subsection{Semantics on Jet Cubes and Jet Cuboids} \label{sec:poresh-jetcube}
 In this section, we want to construct a 2-functor that sends polarized reshuffles $\mu : \vec a \to \vec b$ to functors $\jetcube{\orifb}{\affine}{M}{\vec a} \to \jetcube{\orifb}{\affine}{M}{\vec b}$, with $M \in \accol{\bipointedsym, \booleanalg}$, thus giving our mode theory of polarized reshuffles a semantics on $\orifb$-jet-cubes.
