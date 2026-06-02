@@ -321,13 +321,13 @@ One advantage of these notations is that we can put presheaf cells in diagrams; 
 \chapter{Base Categories and Modes} \label{ch:modes}
 In this chapter, we establish the object part of the mode theory for naturality pretype theory and its model.
 Modes will be \textbf{polarmode masks} $\vec a$ (\cref{sec:mask}) which will be modelled in presheaf categories over certain base categories.
-We propose two families of base categories, parametrized by the mask $\vec a$, and both are built using the category $\jetset{\vec a}$ of \textbf{jet sets} over $\vec a$ (\cref{sec:jetset}).
+We propose two families of base categories, parametrized by the mask $\vec a$, and both are built using the category $\jetgph{\vec a}$ of \textbf{jet sets} over $\vec a$ (\cref{sec:jetgph}).
 Jet sets themselves are not suitable as a base category, e.g.\ because they are closed under coproducts, which the Yoneda-embedding will never preserve.
 
 The more complex but better behaved family of base categories are categories of \textbf{jet cubes} $\jetcubefwd \mycubex M {\vec a}$ (\cref{sec:jetcubes}).
 While we can get a grasp on jet cubes by characterizing their morphisms using a calculus (\cref{sec:jetcubes:calculus}), this calculus is relatively complex and its soundness and completeness proofs are even more complex.
 
-For these reasons, we alternatively propose to use categories of \textbf{jet topes} $\jettope{\vec a}$ (\cref{sec:jettope}). These are full subcategories of $\jetset{\vec a}$ on objects that satisfy certain somewhat arbitrary well-behavedness criteria.
+For these reasons, we alternatively propose to use categories of \textbf{jet topes} $\jettope{\vec a}$ (\cref{sec:jettope}). These are full subcategories of $\jetgph{\vec a}$ on objects that satisfy certain somewhat arbitrary well-behavedness criteria.
 The main purpose of the categories of jet topes is to be workable for most basic purposes without being as complex as the categories of jet cubes.
 
 Upon a first lecture, readers may choose to omit \cref{sec:jetcubes} on jet cubes.
@@ -354,9 +354,9 @@ In NatPT, we will specify for each of these relations whether it is directed or 
 	Both for polarmodes and for masks of equal length, we denote meets (infima) with $\sqcap$ and joins (suprema) with $\sqcup$.
 \end{definition}
 
-\section{Jet Sets} \label{sec:jetset}
-\subsection{Definitions} \label{sec:jetset:def}
-\begin{definition} \label{def:jetset}
+\section{Jet Sets} \label{sec:jetgph}
+\subsection{Definitions} \label{sec:jetgph:def}
+\begin{definition} \label{def:jetgph}
 	Let $\vec a$ be a mask. An \textbf{$\vec a$-jet-set} is a set $X$ equipped with $\lenpol{\vec a}$ (decidable, proof-irrelevant) reflexive relations $\jet_i$ where
 	\begin{itemize}
 		\item $i \in \Deg(\vec a)$ is called the \textbf{degree},
@@ -370,7 +370,7 @@ In NatPT, we will specify for each of these relations whether it is directed or 
 	\end{itemize}
 	A \textbf{morphism} of $\vec a$-jet-sets is a function that preserves all the jet and edge relations.
 	
-	The category of $\vec a$-jet-sets is called $\jetset{\vec a}$.
+	The category of $\vec a$-jet-sets is called $\jetgph{\vec a}$.
 \end{definition}
 \begin{notation}[Polarmode reminders] \label{not:polarmode-reminder}
 	Because the scenarios where $a_i = \npolar$ vs.\ $\ypolar$ can play out rather different, it is important to be aware of whether we are in a situation where $a_i$ is unknown, known to be $\npolar$, or known to be $\ypolar$.
@@ -379,17 +379,17 @@ In NatPT, we will specify for each of these relations whether it is directed or 
 	
 	We will use similar reminder annotations on many other symbols.
 \end{notation}
-\begin{definition} \label{def:full-jetsethom}
+\begin{definition} \label{def:full-jetgphhom}
 	A jet set morphism is called \textbf{full} if it reflects all jet relations.
 \end{definition}
 \begin{definition} \label{def:jet-surjective}
 	A jet set morphism $f : X \to Y$ is called \textbf{jet-surjective} if it is surjective as a function, and moreover for any $\vec y \jet_j \vec y'$ in $Y$, there exist $\vec x \jet_j \vec x'$ in $X$ such that $f(\vec x) = \vec y$ and $f(\vec x') = \vec y'$. 
 \end{definition}
-\begin{definition} \label{def:transitive-jetset}
+\begin{definition} \label{def:transitive-jetgph}
 	A jet set is called \textbf{transitive} if each of the $i$-jet relations is transitive (i.e. a pre-order and, if $i = \npolar$, an equivalence relation).
 \end{definition}
 The following proposition will not really be used directly, but is a nice encouragement:
-\begin{proposition} \label{thm:jetset-equipment}
+\begin{proposition} \label{thm:jetgph-equipment}
 	Let $X$ be a transitive $\vec a$-jet-set and $0 \leq i < j < \lenpol{\vec a}$.
 	Then the double category whose objects are elements of $X$, morphisms are (unique) proofs of $x \jet_i y$, pro-arrows are (unique) proofs of $x \jet_{j} y$ and squares are elements of the unit type, is a pro-arrow equipment \cite{nlab:proarrow,proarrow1,proarrow2}.
 	%\todo{Refer to dedicated section instead.}
@@ -458,9 +458,9 @@ So for mode $[\ypolar, \ypolar, \npolar]$, we get
 \]
 
 \begin{definition} \label{def:op}
-	Let $\vec a$ be a mask, $i < \lenpol{\vec a}$ and $X \in \Obj(\jetset{\vec a})$.
+	Let $\vec a$ be a mask, $i < \lenpol{\vec a}$ and $X \in \Obj(\jetgph{\vec a})$.
 	We define the \textbf{$i$-opposite $\Op_i(X)$ of $X$} as the jet set with the same carrier and relations as $X$ except that the $i$-jet relation is reversed: $x \jet_i^{\Op_i(X)} y$ if and only if $x \tej_i^X y$.
-	This defines a functor $\Op_i(X) : \jetset{\vec a} \to \jetset{\vec a}$.
+	This defines a functor $\Op_i(X) : \jetgph{\vec a} \to \jetgph{\vec a}$.
 	
 	We will also write $\Op_i\pmr{a_i}$.
 \end{definition}
@@ -470,7 +470,7 @@ We have $\Op_i \circ \Op_i = \Id$ and if $a_i = \npolar$ then $\Op_i\pmr\npolar 
 	\label{def:polarmode-order-step}
 	Write $\vec a \sqsubset_i \vec b$ if $\lenpol{\vec a} = \lenpol{\vec b}$, $a_j = b_j$ for all $j \neq i$, $a_i = \npolar$ and $b_i = \ypolar$.
 	
-	If $\vec a \sqsubset_i \vec b$, then we write $\Usym_i : \jetset{\vec a} \to \jetset{\vec b}$ for the forgetful functor which forgets the symmetry of $\jet_i$.
+	If $\vec a \sqsubset_i \vec b$, then we write $\Usym_i : \jetgph{\vec a} \to \jetgph{\vec b}$ for the forgetful functor which forgets the symmetry of $\jet_i$.
 \end{definition}
 \begin{proposition} \label{def:sym-free} \label{def:sym-cofree}
 	The forgetful functor $\Usym_i$ is part of an adjoint triple $\Fsym_i \dashv \Usym_i \dashv \Csym_i$ where $\Fsym_i$ and $\Csym_i$ take a $\vec b$-jet-set $X$ to a $\vec a$-jet-set of the same carrier with the same $j$-jet relations for $j \neq i$ but where
@@ -481,7 +481,7 @@ We have $\Op_i \circ \Op_i = \Id$ and if $a_i = \npolar$ then $\Op_i\pmr\npolar 
 	We have $\Fsym_i \circ \Usym_i = \Csym_i \circ \Usym_i = \Id$, so that $\UFsym_i := \Usym_i \circ \Fsym_i$ is an idempotent monad and $\UCsym_i := \Usym_i \circ \Csym_i$ is an idempotent comonad.
 \end{proposition}
 \begin{definition} \label{def:sym-closure-of-sym}
-	We extend the definition of $\UFsym_i$ and $\UCsym_i$ to endofunctors on $\jetset{\vec b}$ where $b_i$ can be \emph{any} polarmode:
+	We extend the definition of $\UFsym_i$ and $\UCsym_i$ to endofunctors on $\jetgph{\vec b}$ where $b_i$ can be \emph{any} polarmode:
 	\begin{itemize}
 		\item If $b_i = \ypolar$ then they are defined as above,
 		\item If $b_i = \npolar$ then they are defined as the identity functor.
@@ -504,7 +504,7 @@ We have $\Op_i \circ \Op_i = \Id$ and if $a_i = \npolar$ then $\Op_i\pmr\npolar 
 Note that it would be meaningless to define an $i$-infrajet interval in the same way.
 
 \begin{definition} \label{def:prism}
-	Let $\vec a$ be a mask, $i \in \Deg(\vec a)$ and $X \in \Obj(\jetset{\vec a})$.
+	Let $\vec a$ be a mask, $i \in \Deg(\vec a)$ and $X \in \Obj(\jetgph{\vec a})$.
 	We define the \textbf{$i$-twisted-prism $X \multip \rival{\jet_i}$} on $X$ as the $\vec a$-jet-set with
 	\begin{itemize}
 		\item carrier $X \times \accol{0, 1}$,
@@ -515,7 +515,7 @@ Note that it would be meaningless to define an $i$-infrajet interval in the same
 			\item $(x, 0) \jet_i\pmr{a_i} (x, 1)$ for all $x \in X$.
 		\end{itemize}
 	\end{itemize}
-	This defines the \textbf{$i$-twisted-prism functor} $\loch \multip \rival{\jet_i\pmr{a_i}} : \jetset{\vec a} \to \jetset{\vec a}$.
+	This defines the \textbf{$i$-twisted-prism functor} $\loch \multip \rival{\jet_i\pmr{a_i}} : \jetgph{\vec a} \to \jetgph{\vec a}$.
 	
 	We define the \textbf{opposite $i$-twisted-prism $X \multip \rival{\tej_i}$} on $X$ as the jet set of mask $\vec a$ with
 	\begin{itemize}
@@ -527,12 +527,12 @@ Note that it would be meaningless to define an $i$-infrajet interval in the same
 			\item $(x, 0) \tej_i\pmr{a_i} (x, 1)$ for all $x \in X$.
 		\end{itemize}
 	\end{itemize}
-	This defines the \textbf{opposite $i$-twisted-prism functor} $\loch \multip \rival{\tej_i\pmr{a_i}} : \jetset{\vec a} \to \jetset{\vec a}$.
+	This defines the \textbf{opposite $i$-twisted-prism functor} $\loch \multip \rival{\tej_i\pmr{a_i}} : \jetgph{\vec a} \to \jetgph{\vec a}$.
 	
 	If $a_i = \npolar$, then these coincide and we call them simply the \textbf{$i$-prism functor $\loch \multip \rival{\edge_i}$.}
 \end{definition}
 Note that in both instances, we take the opposite at the source-side of the jet interval by which we multiply. This makes it unclear what a prism functor for the equijet interval $\rival{\equijet_i\pmr\ypolar}$ should look like.
-%\todoi{Should there be a prism functor for $\rival{\equijet_i}$? It would only be well-defined on symmetric jet sets, the category of which is $\jetset{\vec a'}$ where $a'_i = \npolar$, so it is derived from $\loch \multip \rival{\edge_i}$ and the forgetful functor $U^\npolar_i$.}
+%\todoi{Should there be a prism functor for $\rival{\equijet_i}$? It would only be well-defined on symmetric jet sets, the category of which is $\jetgph{\vec a'}$ where $a'_i = \npolar$, so it is derived from $\loch \multip \rival{\edge_i}$ and the forgetful functor $U^\npolar_i$.}
 \begin{corollary} \label{thm:twisted-prism-op}
 	We have $\loch \multip \rival{\tej_i\pmr{a_i}} = \Op_i\pmr{a_i}(\loch \multip \rival{\jet_i\pmr{a_i}})$. \qed
 \end{corollary}
@@ -545,9 +545,9 @@ Note that in both instances, we take the opposite at the source-side of the jet 
 The functor $\loch \multip \rival{\edge_i}$ commutes with itself, i.e. $(x, v, w) \mapsto (x, w, v)$ is a natural automorphism of $\loch \multip \rival{\edge_i} \multip \rival{\edge_i}$. \qed
 \end{corollary}
 
-\subsection{Categorical Properties} \label{sec:jetset:cat}
-\begin{proposition} \label{thm:jetset:colim}
-	Let $D : \cat S \to \jetset{\vec a}$ be a diagram.
+\subsection{Categorical Properties} \label{sec:jetgph:cat}
+\begin{proposition} \label{thm:jetgph:colim}
+	Let $D : \cat S \to \jetgph{\vec a}$ be a diagram.
 	Then the colimit $\colim D$ is constructed as follows:
 	\begin{itemize}
 		\item Its carrier is the colimit of the carriers.
@@ -590,7 +590,7 @@ On the other hand, $i$-antisymmetry at a symmetric degree $i$ would completely d
 		\item $i$-antisymmetric for every \emph{directed} degree $i$.
 		%\item for every $0 \leq i < n$, the relation $\jet_i^*$ is a total pre-order on any connected component of $X$, i.e. if $x \infrajet_i^* y$, then $x \jet_i^* y$ or $x \tej_i^* y$. We call this property \textbf{$i$-orientability}.
 	\end{enumerate}
-	The \textbf{category of jet topes} $\jettope{\vec a}$ is defined as the full subcategory of $\jetset{\vec a}$ on jet topes.
+	The \textbf{category of jet topes} $\jettope{\vec a}$ is defined as the full subcategory of $\jetgph{\vec a}$ on jet topes.
 \end{definition}
 The conceptual reason for asking $i$-antisymmetry is to exclude the equijet interval $\rival{\equijetsym_i}$, so that the only jet tope intervals at directed degrees are $\rival{\jetsym_i}$ and $\rival{\tejsym_i}$.
 Having an $i$-equijet interval object in the base category, will cause presheaves to contain `formal' $i$-equijets as an additional symmetric relation, stricter than the symmetric interior of the $i$-jet relation, which we wish to avoid.
@@ -930,12 +930,12 @@ In particular, any cube of the form $(W, \dm i : \rival{\equijet_i})$ is uniquel
 					\ar@{.>}[rd]
 				\\
 				&
-				\cubecat^\mycubex_M \times_\Set \jetset{\vec a}
+				\cubecat^\mycubex_M \times_\Set \jetgph{\vec a}
 					\ar@{.>}[rr]
 					\ar@{.>}[d]
 					\xydrcorner
 				&&
-				\jetset{\vec a}
+				\jetgph{\vec a}
 					\ar[d]^U
 				\\
 				&
@@ -953,14 +953,14 @@ In particular, any cube of the form $(W, \dm i : \rival{\equijet_i})$ is uniquel
 	Let $\vec a$ be a mask, $\myorix \in \orikit$, $\mycubex \in \accol{\affine, \cartes}$ and $M$ a monad on $\Set$.
 	We define
 	the category $\jetcube{\myorix}{\mycubex}{M}{\vec a}$ of \textbf{$(\myorix, \vec a)$-jet-$M$-cubes}
-	as the full subcategory of $\cubecat^\mycubex_M \times_\Set \jetset{\vec a}$ on $(\myorix, \vec a)$-jet-cubes, as justified by \cref{thm:jet-cube-pullback}.
+	as the full subcategory of $\cubecat^\mycubex_M \times_\Set \jetgph{\vec a}$ on $(\myorix, \vec a)$-jet-cubes, as justified by \cref{thm:jet-cube-pullback}.
 	The functions $\JEP$ and $\erasejc{\loch}$ are correspondingly extended to functors.
 \end{definition}
 \begin{corollary} \label{thm:jet-cubes-are-topes}
-	For $\myorix \in \accol{\orif, \orifb}$, the functor $\JEP : \jetcube{\myorix}{\mycubex}{M}{\vec a} \to \jetset{\vec a}$ factors over the inclusion $\jettope{\vec a} \hookrightarrow \jetset{\vec a}$.
+	For $\myorix \in \accol{\orif, \orifb}$, the functor $\JEP : \jetcube{\myorix}{\mycubex}{M}{\vec a} \to \jetgph{\vec a}$ factors over the inclusion $\jettope{\vec a} \hookrightarrow \jetgph{\vec a}$.
 \end{corollary}
 \begin{proof}
-	By induction on the dimension and using \cref{thm:lift-to-jet-topes}, it is clear that for any jet cube $W$, the jet set $\JEP(W)$ is a jet tope, which factors the action on objects. The action on morphisms factors because $\jettope{\vec a}$ is a full subcategory of $\jetset{\vec a}$.
+	By induction on the dimension and using \cref{thm:lift-to-jet-topes}, it is clear that for any jet cube $W$, the jet set $\JEP(W)$ is a jet tope, which factors the action on objects. The action on morphisms factors because $\jettope{\vec a}$ is a full subcategory of $\jetgph{\vec a}$.
 \end{proof}
 We will ultimately only be interested in $(\orif, \vec a)$-jet-cubes, but in \cref{sec:jetcubes:calculus}, we define an inductive predicate to determine whether a cube morphism $\vfi : \erasejc V \to \erasejc W$ is in fact a jet cube morphism $V \to W$, and this predicate's inference rules make use of $(\orifbe, \vec a)$-jet-cubes in their premises.
 The orientation kits $\orife$ and $\orifb$ are only introduced for explanatory purposes: we can easily relate jet cubes with and without $\tej$ (\cref{thm:backward-jets-equivalent}), and later on\todo{Refer} we will be able to relate jet cubes with and without $\equijet$ by inserting additional symmetric degrees.
@@ -994,19 +994,19 @@ The orientation kits $\orife$ and $\orifb$ are only introduced for explanatory p
 	We have $\Fsymcube_i \dashv \Usymcube_i$ and thus an idempotent monad $\UFsymcube_i := \Usymcube_i \circ \Fsymcube_i$, whose definition we extend to masks $\vec b$ where $b_i = \npolar$ as in \cref{def:sym-closure-of-sym}.
 \end{proposition}
 \begin{proof}
-	The functors $\Fsym_i$, $\Op_i$ and $\Usym_i$ have no effect on the carrier, so they certainly lift to $\cubecat_M^\mycubex$, hence to the pullback $\cubecat_M^\mycubex \times_\Set \jetset{\vec a}$.
+	The functors $\Fsym_i$, $\Op_i$ and $\Usym_i$ have no effect on the carrier, so they certainly lift to $\cubecat_M^\mycubex$, hence to the pullback $\cubecat_M^\mycubex \times_\Set \jetgph{\vec a}$.
 	\begin{itemize}
 		\item $\Fsym_i$ lifts to jet cubes by replacing every occurrence of $\jet_i$, $\tej_i$ or $\equijet_i$ with $\edge_i$.
 		\item $\Op_i$ lifts to jet cubes if ${\tej} \in \myorix$ by reversing the \emph{last} occurrence of either $\jet_i$ or $\tej_i$ (\cref{thm:twisted-prism-op}), if present.
 		\item $\Usym_i$ lifts to jet cubes as the operation $\Usymcube_i$ already introduced in \cref{def:sym-forget-cube}.
 	\end{itemize}
 	To prove $\Fsymcube \dashv \Usymcube$, we need to build unit and co-unit natural transformations.
-	Since the categories of jet cubes are fully faithful subcategories of the pullback $\cubecat_M^\mycubex \times_\Set \jetset{\vec a}$, it suffices to build them there.
-	They were already established in $\jetset{\vec a}$ by \cref{def:sym-free,def:sym-cofree}.
+	Since the categories of jet cubes are fully faithful subcategories of the pullback $\cubecat_M^\mycubex \times_\Set \jetgph{\vec a}$, it suffices to build them there.
+	They were already established in $\jetgph{\vec a}$ by \cref{def:sym-free,def:sym-cofree}.
 	As they reduce to the identity unit and co-unit of $\Id \dashv \Id$ for the carriers, they trivially lift to $\cubecat_M^\mycubex$.
 	
 	The various prism functors multiply the carrier with $\accol{0, 1}$ and thus lift over $\EP$ to the affine/cartesian cube category by multiplying with $(\dm i : \IX)$.
-	Hence, they also lift to the pullback $\cubecat_M^\mycubex \times_\Set \jetset{\vec a}$.
+	Hence, they also lift to the pullback $\cubecat_M^\mycubex \times_\Set \jetgph{\vec a}$.
 	Each of them lifts to jet cubes by appending the symbol concerned (if available).
 \end{proof}
 %\begin{definition} \label{def:prism-cube}
@@ -1034,8 +1034,8 @@ The orientation kits $\orife$ and $\orifb$ are only introduced for explanatory p
 	In other words, the natural transformation given in \cref{thm:commute-diff-degree} lifts to jet cubes when the associated functors lift.
 \end{proposition}
 \begin{proof}
-	Since the categories of jet cubes are fully faithful subcategories of the pullback $\cubecat_M^\mycubex \times_\Set \jetset{\vec a}$, it suffices to prove the natural isomorphism there.
-	The isomorphism was already established in $\jetset{\vec a}$ by \cref{thm:commute-diff-degree}, and the effect on the carrier is either nothing (when at most one prism functor is involved) or swapping components (when both functors are prism functors).
+	Since the categories of jet cubes are fully faithful subcategories of the pullback $\cubecat_M^\mycubex \times_\Set \jetgph{\vec a}$, it suffices to prove the natural isomorphism there.
+	The isomorphism was already established in $\jetgph{\vec a}$ by \cref{thm:commute-diff-degree}, and the effect on the carrier is either nothing (when at most one prism functor is involved) or swapping components (when both functors are prism functors).
 	These isomorphisms lift to $\cubecat_M^\mycubex$.
 \end{proof}
 \begin{proposition} \label{thm:cube-commute-symmetric}
@@ -1043,7 +1043,7 @@ The orientation kits $\orife$ and $\orifb$ are only introduced for explanatory p
 \end{proposition}
 \begin{proof}
 	Analogous to the proof of \cref{thm:cube-commute-diff-degree}.
-	The isomorphism was already established in $\jetset{\vec a}$ by \cref{thm:commute-symmetric}, and the effect on the carrier is swapping components, which lifts to $\cubecat_M^\mycubex$.
+	The isomorphism was already established in $\jetgph{\vec a}$ by \cref{thm:commute-symmetric}, and the effect on the carrier is swapping components, which lifts to $\cubecat_M^\mycubex$.
 \end{proof}
 \begin{remark} \label{rem:two-monads}
 	As of this point we will only be interested in the monads $\bipointedsym$ and $\booleanalg$ because:
@@ -1143,7 +1143,7 @@ In short then, by \cref{rem:two-monads}:
 \subsection{A Calculus for Jet Cube Morphisms} \label{sec:jetcubes:calculus}
 In this section, we develop a calculus that inductively generates the morphisms of the category \allowbreak $\jetcubetri{\affine}{M}{\vec a}$ and therefore also those of its full subcategories $\jetcube{\myorix}{\affine}{M}{\vec a}$ where $\omega \in \orikit$.
 
-Since the forgetful functor $U : \jetset{\vec a} \to \Set$ is faithful, so is $\erasejc \loch : \jetcube{\myorix}{\affine}{M}{\vec a} \to \cubecat^\affine_M$.
+Since the forgetful functor $U : \jetgph{\vec a} \to \Set$ is faithful, so is $\erasejc \loch : \jetcube{\myorix}{\affine}{M}{\vec a} \to \cubecat^\affine_M$.
 As such, we can regard `being a morphism of jet cubes' as a proof-irrelevant property of morphisms of cubes, which we will therefore use as preterms.
 Our calculus will therefore feature a single judgement $\sez \vfi : V \to W$ meaning that the morphism $\vfi : \erasejc V \to \erasejc W$ is in fact a morphism of jet cubes.
 Soundness (\cref{thm:calculus-sound}) of the calculus will be the property that the judgement's meaning actually holds when the judgement is derivable, whereas completeness (\cref{thm:calculus-complete}) means that the judgement is derivable when its meaning is true.
@@ -1560,7 +1560,7 @@ We can exchange variables of the same symmetric degree $i$ (\ruleref{exchange}).
 Note that conventionality implies that all variables in $U_1$ are also of type $\rival{\equijet_i}$.
 
 We can substitute the last variable with a variable of a weaker (higher) degree in either direction (or of equijet dimension).
-Inspired by \cref{thm:jetset-equipment}, we choose to use terminology from pro-arrow equipments and refer to this action as creating a companion when the direction of the arrow remains the same ($P = Q$), and a conjoint when it reverses ($\accol{P, Q} = \accol{\jet, \tej}$); we introduce the term \textbf{concursor} (\ruleref{concursor}) as the common generalization of companions, conjoints, and their symmetric counterpart \textbf{equiconcursors} ($P = {\equijet}$).
+Inspired by \cref{thm:jetgph-equipment}, we choose to use terminology from pro-arrow equipments and refer to this action as creating a companion when the direction of the arrow remains the same ($P = Q$), and a conjoint when it reverses ($\accol{P, Q} = \accol{\jet, \tej}$); we introduce the term \textbf{concursor} (\ruleref{concursor}) as the common generalization of companions, conjoints, and their symmetric counterpart \textbf{equiconcursors} ($P = {\equijet}$).
 Some measures of caution need to be taken however, which we consider in the case of forward companions ($P = Q = {\jet}$), where we wish to derive $(\vfi, \dm j / \dm i) : (U, \dm j : \rival{\jet_j}, V) \to (W, \dm i : \rival{\jet_i})$.
 First of all, we need to enforce affineness and make sure that $\vfi$ does not use the variable $\dm j$, so we will have $\vfi : (\erasejc{U}, \erasejc{V}) \to \erasejc{W}$.
 Now let us look at what happens when we set $\dm i$ and $\dm j$ to $0$ or to $1$:
@@ -2507,7 +2507,7 @@ In words, this lemma says that if the last variable $\dm i$ of $W$ is substitute
 					\ar[u]_{(1/\dm i)}
 			}
 		\]
-		We know that the black arrows are all jet cube morphisms, and the vertical arrows all yield full jet set morphisms (\cref{def:full-jetsethom}).
+		We know that the black arrows are all jet cube morphisms, and the vertical arrows all yield full jet set morphisms (\cref{def:full-jetgphhom}).
 		This implies that the dashed arrows also lift to jet set morphisms, i.e.\ are jet cube morphisms.
 		Then $\chi$ is both a jet cube morphism $(V_0, V_1) \to U$ and $\Opcube_i(\Opcube_j(V_0), V_1) \to U$.
 		\begin{itemize}
@@ -2724,7 +2724,7 @@ The results in this section are not really used, but the purpose, especially of 
 \begin{definition} \label{def:separated-product}
 	We define the \textbf{separated product} functor
 	\[
-		\loch * \loch : \jetset{\vec a} \times \jetset{\vec a} \to \jetset{\vec a}
+		\loch * \loch : \jetgph{\vec a} \times \jetgph{\vec a} \to \jetgph{\vec a}
 	\]
 	by letting $X * Y$ be the jet set with carrier $UX \times UY$ such that $(x, y) \jet_j (x', y')$ if either
 	\begin{itemize}
@@ -2755,16 +2755,16 @@ The results in this section are not really used, but the purpose, especially of 
 			\end{align*}
 		\end{corollary}
 		\begin{corollary}
-			In $\jetset{\vec a \sqcup \vec b}$, we have
+			In $\jetgph{\vec a \sqcup \vec b}$, we have
 			\[
 				\JEP(V \sss W) \cong \Usym_{\vec a \sqsubseteq \vec a \sqcup \vec b}(V) * \Usym_{\vec b \sqsubseteq \vec a \sqcup \vec b}(W),
 			\]
-			where $\Usym_{\vec x \sqsubseteq \vec y} : \jetset{\vec x} \to \jetset{\vec y}$ is the forgetful functor, forgetting symmetry at the degrees where $x_i = \npolar \neq y_i = \ypolar$.
+			where $\Usym_{\vec x \sqsubseteq \vec y} : \jetgph{\vec x} \to \jetgph{\vec y}$ is the forgetful functor, forgetting symmetry at the degrees where $x_i = \npolar \neq y_i = \ypolar$.
 		\end{corollary}
 		\item Recalling \cref{def:jet-cube-cat}, the action of morphisms is established as follows:
 		\begin{itemize}
 			\item At the level of $\cubecat_M^\mycubex$, by relying on functoriality of the separated/cartesian product,
-			\item At the level of $\jetset{\vec a \sqcup \vec b}$, by relying on functoriality of the separated product,
+			\item At the level of $\jetgph{\vec a \sqcup \vec b}$, by relying on functoriality of the separated product,
 			\item At the level of $\Set$, both of these approaches reduce to functoriality of the cartesian product.
 		\end{itemize}
 	\end{itemize}
@@ -2853,7 +2853,7 @@ I am unsure whether the category of affine symmetric cubes $\cubecat_\bipointeds
 	The orientation kit $\omega$ does not matter as all degrees are symmetric.
 	The latter two categories are isomorphic by \cref{thm:affine-automatic}.
 	It is clear that $\erasejc{\loch} : \jetcube{\myorix}{\affine}{\bipointedsym}{[\npolar]} \to \cubecat_\bipointedsym^\affine$ is bijective on objects.
-	It is faithful, because $U : \jetset{[\npolar]} \to \Set$ is faithful.
+	It is faithful, because $U : \jetgph{[\npolar]} \to \Set$ is faithful.
 	It is full, because any morphism can be derived in the calculus (\cref{fig:calculus}), as can be shown by induction on the length of the codomain.
 \end{proof}
 
@@ -2920,7 +2920,7 @@ The categories $\dcubeopt \cartes \bipointed n$ appear in the model of Degrees o
 
 \subsubsection{Comparison to Pinyo and Kraus's Twisted Cube Category}
 In this section, we relate jet cubes to Pinyo and Kraus's twisted cubes \cite{pinyo-twisted} when $\vec a = [\ypolar]$.
-$\jetset{[\ypolar]}$ is the category of proof-irrelevant reflexive graphs.
+$\jetgph{[\ypolar]}$ is the category of proof-irrelevant reflexive graphs.
 Pinyo and Kraus use potentially-non-reflexive proof-irrelevant graphs, but since $\top$ is reflexive and the twisted prism functor \cite[def.\ 4]{pinyo-twisted} restricts to reflexive graphs, all twisted cubes are reflexive graphs anyway.
 
 Two twisted cube categories appear (up to isomorphism) in \cite{pinyo-twisted}, and we show that we can recover both.
@@ -2980,7 +2980,7 @@ In this chapter, we pin down the Hom-posets of our mode theory.
 The intuitions behind the definition of $\poreshcat$ are explained at length in \cref{sec:poresh:def}.
 $\poreshcat$ is a polarized version of the category of reshuffles used to define the mode theory of Degrees of Relatedness \cite{reldtt,reldtt-techreport} (\cref{thm:reshcat-poreshcat}).
 
-In the following sections, we investigate how polarized reshuffles can act on jet sets (\cref{sec:poresh-jetset}), jet topes and presheaves over these  (\cref{sec:poresh-jettope-jtset}), and jet cubes and presheaves over these (\cref{sec:poresh-jetcube-jcset}).
+In the following sections, we investigate how polarized reshuffles can act on jet sets (\cref{sec:poresh-jetgph}), jet topes and presheaves over these  (\cref{sec:poresh-jettope-jtset}), and jet cubes and presheaves over these (\cref{sec:poresh-jetcube-jcset}).
 
 For both presheaf categories, we obtain a no-go theorem (\cref{thm:poresh-jtset:nogo,thm:poresh-jcset:nogo}) that tells us that we cannot use \emph{all} of $\poreshcat$ as our mode theory. For this reason, we decide to continue with just $\poreshcat\withlr$, the 2-poset of polarized reshuffles that have both a left and a right adjoint.
 
@@ -4736,7 +4736,7 @@ In words, \cref{eq:poresh-withrr-crit2} says that:
 	Then $\isopol_i \circ \rho > \pospol_j$ rules out $\mixpol_j$, so we conclude that $i \cdot \rho = \pospol_j$.
 \end{proof}
 
-\section{Semantics on Jet Sets} \label{sec:poresh-jetset}
+\section{Semantics on Jet Sets} \label{sec:poresh-jetgph}
 \begin{definition} \label{def:cat-enriched-graph}
 	A \textbf{category-enriched graph} $\catG$ consists of:
 	\begin{itemize}
@@ -4761,12 +4761,12 @@ In words, \cref{eq:poresh-withrr-crit2} says that:
 \end{definition}
 
 \begin{definition}
-	\label{def:poresh-jetset}
+	\label{def:poresh-jetgph}
 	\begin{enumerate}
-		\item We define a pseudoreflexive category-enriched graph morphism (reflexive under the strict quotienting \cref{ax:bishop}) $\jetsetsym : \poreshcat \to \Cat$ from the 2-category of polarized reshuffles $\Cat$:
+		\item We define a pseudoreflexive category-enriched graph morphism (reflexive under the strict quotienting \cref{ax:bishop}) $\jetgphsym : \poreshcat \to \Cat$ from the 2-category of polarized reshuffles $\Cat$:
 		\begin{itemize}
-			\item Sending an object $\vec a$ to $\jetset{\vec a}$.
-			\item Sending a morphism $\mu : \vec a \to \vec b$ to $\jetset{\mu} : \jetset{\vec a} \to \jetset{\vec b}$ where $\jetset{\mu}$ (more briefly denoted as $\mu$) sends a jet set $X$ to the jet set $\mu X$ whose
+			\item Sending an object $\vec a$ to $\jetgph{\vec a}$.
+			\item Sending a morphism $\mu : \vec a \to \vec b$ to $\jetgph{\mu} : \jetgph{\vec a} \to \jetgph{\vec b}$ where $\jetgph{\mu}$ (more briefly denoted as $\mu$) sends a jet set $X$ to the jet set $\mu X$ whose
 			\begin{itemize}
 				\item carrier is the carrier of $X$, quotiented by the transitive closure of $\eqtysym \oriof \mu$ on $X$, denoted $X/\mu$ for short, with $[\loch]_\mu : X \to X/\mu$,
 				%quotiented out by the transitive closure of $\eqtysym \cdot \mu$ in case $\eqtysym \cdot \mu \neq \eqtysym$,
@@ -4777,16 +4777,16 @@ In words, \cref{eq:poresh-withrr-crit2} says that:
 				i.e. $\hat x \jet_i^{\mu X} \hat y$ holds if and only if $\hat x$ and $\hat y$ have representants $x$ and $y$ related by $\jetsym_i \oriof \mu$ in $X$.
 				This is in turn equivalent to saying that all representants of $\hat x$ and $\hat y$ are related by $(\eqtysym \cdot \mu)^* \otimes (\jetsym_i \cdot \mu) \otimes (\eqtysym \cdot \mu)^*$ in $X$, where $\otimes$ is composition of relations via existential quantification.
 			\end{itemize}
-			$\jetset{\mu}$ is easily seen to have a functorial action on jet set morphisms which preserves identity and composition.
-			\item Sending a unique proof of inequality $\mu \leq \nu : \vec a \to \vec b$ to an obvious natural transformation $\ket{\mu \leq \nu} : \mu \to \nu : \jetset{\vec a} \to \jetset{\vec b}$ whose underlying function sends $[x]_\mu$ to $[x]_\nu$, which is necessarily a larger equivalence class.
+			$\jetgph{\mu}$ is easily seen to have a functorial action on jet set morphisms which preserves identity and composition.
+			\item Sending a unique proof of inequality $\mu \leq \nu : \vec a \to \vec b$ to an obvious natural transformation $\ket{\mu \leq \nu} : \mu \to \nu : \jetgph{\vec a} \to \jetgph{\vec b}$ whose underlying function sends $[x]_\mu$ to $[x]_\nu$, which is necessarily a larger equivalence class.
 		\end{itemize}
 		
-		\item If we consider only modalities $\mu$ satisfying \cref{eq:poresh-withl-crit1} (i.e.\ those for which $\eqtydeg \cdot \mu = \nonpol_\eqtydeg$) and denote the restricted 2-poset (with the same order relation) as $\poreshcat \noquot$, then we directly get a strict 2-functor $\jetsetsym \noquot : \poreshcat \noquot \to \Cat$ by the same construction as above, but without the necessity to quotient. (Under the strict quotienting \cref{ax:bishop}, it is equal to a restriction of the graph morphism above.)
+		\item If we consider only modalities $\mu$ satisfying \cref{eq:poresh-withl-crit1} (i.e.\ those for which $\eqtydeg \cdot \mu = \nonpol_\eqtydeg$) and denote the restricted 2-poset (with the same order relation) as $\poreshcat \noquot$, then we directly get a strict 2-functor $\jetgphsym \noquot : \poreshcat \noquot \to \Cat$ by the same construction as above, but without the necessity to quotient. (Under the strict quotienting \cref{ax:bishop}, it is equal to a restriction of the graph morphism above.)
 	\end{enumerate}
 \end{definition}
-\begin{proof}[Proof of strict 2-functoriality of $\jetsetsym \noquot$]
-	The functorial action of $\jetsetsym\noquot(\mu)$ on $X$ only affects the jet relations of $X$.
-	Let $\vec a \xrightarrow{\mu} \vec b \xrightarrow{\nu} \vec c$ and $X \in \jetset{\vec a}$.
+\begin{proof}[Proof of strict 2-functoriality of $\jetgphsym \noquot$]
+	The functorial action of $\jetgphsym\noquot(\mu)$ on $X$ only affects the jet relations of $X$.
+	Let $\vec a \xrightarrow{\mu} \vec b \xrightarrow{\nu} \vec c$ and $X \in \jetgph{\vec a}$.
 	We have
 	\[
 		\begin{array}{ccc c ccc c ccc}
@@ -4807,38 +4807,38 @@ In words, \cref{eq:poresh-withrr-crit2} says that:
 	\]
 	so by functoriality of $\oridegeqtop$, we see that identity and composition are respected on the nose.
 	
-	The action of $\jetsetsym \noquot : \poreshcat \noquot \to \Cat$ on inequalities (2-cells) always produces the identity function on objects, and therefore respects all operations on 2-cells.
+	The action of $\jetgphsym \noquot : \poreshcat \noquot \to \Cat$ on inequalities (2-cells) always produces the identity function on objects, and therefore respects all operations on 2-cells.
 \end{proof}
-%\begin{corollary} \label{thm:poresh-jetsetoid:bind}
-%	Let $\mu : \vec a \to \vec b$ and $X \in \jetsetoid{\vec a}$.
+%\begin{corollary} \label{thm:poresh-jetgphoid:bind}
+%	Let $\mu : \vec a \to \vec b$ and $X \in \jetgphoid{\vec a}$.
 %	For an arbitrary $Q_j \in \oridegeqtop(\vec b)$, the relation $Q_j$ on $\mu X$ is given by $(\eqtysym \oriof \mu)^* \otimes (Q_j \oriof \mu) \otimes (\eqtysym \oriof \mu)^*$.
 %	Here, $\topsym$ is interpreted as `true'.
 %	
-%	If $\mu$ has a left adjoint and $X \in \jetset{\vec a}$, then for an arbitrary $Q_j \in \oripsh(\vec b)$, the relation $Q_j$ on $\mu X$ is given by  $Q_j \oriof \mu$. \qed
+%	If $\mu$ has a left adjoint and $X \in \jetgph{\vec a}$, then for an arbitrary $Q_j \in \oripsh(\vec b)$, the relation $Q_j$ on $\mu X$ is given by  $Q_j \oriof \mu$. \qed
 %\end{corollary}
 
-\begin{corollary} \label{thm:poresh-jetset-with-adjoint}
+\begin{corollary} \label{thm:poresh-jetgph-with-adjoint}
 	We have:
 	\begin{enumerate}
-		\item A strict 2-functor $\jetsetsym\withr : \poreshcat\withr \to \Cat$ that restricts $\jetsetsym\noquot$ and therefore essentially restricts $\jetsetsym$,
-		\item A pseudofunctor $\jetsetsym\withl : \poreshcat\withl \to \Cat$ that restricts $\jetsetsym$.
+		\item A strict 2-functor $\jetgphsym\withr : \poreshcat\withr \to \Cat$ that restricts $\jetgphsym\noquot$ and therefore essentially restricts $\jetgphsym$,
+		\item A pseudofunctor $\jetgphsym\withl : \poreshcat\withl \to \Cat$ that restricts $\jetgphsym$.
 	\end{enumerate}
 \end{corollary}
 \begin{proof}
 	\begin{enumerate}
-		\item Obviously, we can restrict $\jetsetsym\noquot : \poreshcat\noquot \to \Cat$ along the 2-poset inclusion $\poreshcat\withr \subseteq \poreshcat\noquot$, producing another strict 2-functor.
-		\item Obviously, we can restrict $\jetsetsym : \poreshcat \to \Cat$ along $\poreshcat\withl \subseteq \poreshcat$.
-		Now if $\lambda \dashv \rho$ in $\poreshcat$, then $\jetsetsym\withr(\lambda) \cong \jetsetsym(\lambda) \dashv \jetsetsym(\rho) = \jetsetsym\withl(\rho)$.
-		Then pseudofunctoriality of $\jetsetsym\withl$ follows from strict 2-functoriality of $\jetsetsym\withr$ and uniqueness of the adjoint. \qedhere
+		\item Obviously, we can restrict $\jetgphsym\noquot : \poreshcat\noquot \to \Cat$ along the 2-poset inclusion $\poreshcat\withr \subseteq \poreshcat\noquot$, producing another strict 2-functor.
+		\item Obviously, we can restrict $\jetgphsym : \poreshcat \to \Cat$ along $\poreshcat\withl \subseteq \poreshcat$.
+		Now if $\lambda \dashv \rho$ in $\poreshcat$, then $\jetgphsym\withr(\lambda) \cong \jetgphsym(\lambda) \dashv \jetgphsym(\rho) = \jetgphsym\withl(\rho)$.
+		Then pseudofunctoriality of $\jetgphsym\withl$ follows from strict 2-functoriality of $\jetgphsym\withr$ and uniqueness of the adjoint. \qedhere
 	\end{enumerate}
 \end{proof}
 
-As \cref{def:cat-enriched-graph} already foreboded, we have to make an abhorrent constatation for the most general operation $\jetsetsym : \poreshcat \to \Cat$, which however becomes irrelevant when we restrict to jet topes and jet cubes:
+As \cref{def:cat-enriched-graph} already foreboded, we have to make an abhorrent constatation for the most general operation $\jetgphsym : \poreshcat \to \Cat$, which however becomes irrelevant when we restrict to jet topes and jet cubes:
 \begin{proposition}
-	$\jetsetsym : \poreshcat \to \Cat$ does not preserve composition.
+	$\jetgphsym : \poreshcat \to \Cat$ does not preserve composition.
 \end{proposition}
 \begin{proof}
-	Consider the following two mappings of the same jet set $X \in \jetset{[\npolar, \ypolar]}$:
+	Consider the following two mappings of the same jet set $X \in \jetgph{[\npolar, \ypolar]}$:
 	\begin{align*}
 		\xymatrix{
 			& {[\npolar, \ypolar]} &
@@ -4925,20 +4925,20 @@ As \cref{def:cat-enriched-graph} already foreboded, we have to make an abhorrent
 	\]
 	In fact, if we directly apply the composite $\reshlist{\nonpol_0\pmrnn}{\mixpol_1\pmryn}$ to $X$, given the precise definition above, we obtain the jet set where $[a] \not\edge_0 [c]$.
 \end{proof}
-\begin{example} \label{ex:poresh-op-jetset}
-	The functor $\Op_i$ from \cref{def:op} arises from the reshuffle in \cref{ex:poresh-op} as $\jetsetl{\Op_i}$.
+\begin{example} \label{ex:poresh-op-jetgph}
+	The functor $\Op_i$ from \cref{def:op} arises from the reshuffle in \cref{ex:poresh-op} as $\jetgphl{\Op_i}$.
 \end{example}
-\begin{example} \label{ex:poresh-sym-jetset}
+\begin{example} \label{ex:poresh-sym-jetgph}
 	The functors $\Fsym_i \dashv \Usym_i \dashv \Csym_i$ and $\UFsym_i \dashv \UCsym_i$ from \cref{def:sym-forget,def:sym-free,def:sym-cofree} arise from the reshuffles in \cref{ex:poresh-sym} as
 	\[
-		\jetsetl{\Fsymresh_i} \dashv \jetsetl{\Usymresh_i} \dashv \jetsetl{\Csymresh_i},
+		\jetgphl{\Fsymresh_i} \dashv \jetgphl{\Usymresh_i} \dashv \jetgphl{\Csymresh_i},
 	\]
 	\[
-		\jetsetl{\UFsymresh_i} \dashv \jetsetl{\UCsymresh_i}.
+		\jetgphl{\UFsymresh_i} \dashv \jetgphl{\UCsymresh_i}.
 	\]
 \end{example}
-\begin{proposition} \label{thm:poresh-jetset-nonexact}
-	A functor of the form $\jetset{\mu} : \jetset{\vec a} \to \jetset{\vec b}$ for some $\mu : \vec a \to \vec b$ does not necessarily preserve finite limits, nor finite colimits.	
+\begin{proposition} \label{thm:poresh-jetgph-nonexact}
+	A functor of the form $\jetgph{\mu} : \jetgph{\vec a} \to \jetgph{\vec b}$ for some $\mu : \vec a \to \vec b$ does not necessarily preserve finite limits, nor finite colimits.	
 \end{proposition}
 \begin{proof}
 	The modality $\reshlist{\nonpol_\eqtydeg\pmrnn}{\mixpol_0\pmryn} : [\ypolar] \to [\npolar]$ disrespects the following pushout diagram:
@@ -5006,18 +5006,18 @@ As \cref{def:cat-enriched-graph} already foreboded, we have to make an abhorrent
 \begin{definition} \label{def:interval-eqty} \label{def:interval-top}
 	We define $\rival{\edgesym_\eqtydeg}$ as the singleton jet set $\accol{0, 1}/\edgesym_\top$ (a quotient by the total relation)\footnote{The choice of singleton is especially relevant under the strict quotienting \cref{ax:bishop}.}, and $\rival{\topsym}$ as the discrete jet set $\accol{0 \quad 1}$.
 \end{definition}
-\begin{proposition} \label{thm:poresh-jetset-intervals}
+\begin{proposition} \label{thm:poresh-jetgph-intervals}
 	Let $\mu : \vec a \to \vec b$ be a polarized reshuffle with right adjoint $\mu \dashv \rho$, and $i \in \Deg(\vec a)$. Then we have%
 	\footnote{By virtue of \cref{thm:poresh-adjoint}, all right hand sides are defined since $i \cdot \rho \neq \isopol_j$ whence $P_i \oriof \rho \neq \infrajetsym_j$ for $b_j = \ypolar$.}
 	\begin{equation}
 		\begin{array}{c c c}
-			\jetset{\mu} \rival{\jetsym_i\pmry} \cong \rival{\jetsym_i \oriof \rho},
-			& \jetset{\mu} \rival{\tejsym_i\pmry} \cong \rival{\tejsym_i \oriof \rho},
-			& \jetset{\mu} \rival{\equijetsym_i\pmry} \cong \rival{\equijetsym_i \oriof \rho},
+			\jetgph{\mu} \rival{\jetsym_i\pmry} \cong \rival{\jetsym_i \oriof \rho},
+			& \jetgph{\mu} \rival{\tejsym_i\pmry} \cong \rival{\tejsym_i \oriof \rho},
+			& \jetgph{\mu} \rival{\equijetsym_i\pmry} \cong \rival{\equijetsym_i \oriof \rho},
 			\\[1em]
-			& \jetset{\mu} \rival{\edgesym_i\pmrn} \cong \rival{\edgesym_i \oriof \rho}.
+			& \jetgph{\mu} \rival{\edgesym_i\pmrn} \cong \rival{\edgesym_i \oriof \rho}.
 		\end{array}
-		\label{eq:poresh-jetset-intervals}
+		\label{eq:poresh-jetgph-intervals}
 	\end{equation}
 	Under the strict quotienting \cref{ax:bishop}, these isomorphisms are equalities.
 \end{proposition}
@@ -5059,9 +5059,9 @@ As \cref{def:cat-enriched-graph} already foreboded, we have to make an abhorrent
 		Then these singletons are isomorphic. \qedhere
 	\end{enumerate}
 \end{proof}
-\begin{proposition} \label{thm:poresh-jetset-prism-commut}
+\begin{proposition} \label{thm:poresh-jetgph-prism-commut}
 	Let $\mu : \vec a \to \vec b$ be a polarized reshuffle with right adjoint $\mu \dashv \rho$, and $i \in \Deg(\vec a)$.
-	Then the action of $\jetset{\mu}$ on prisms can be looked up, up to isomorphism\footnote{On the nose under the strict quotienting \cref{ax:bishop}.}, in the following table, where $j = \getdeg(i \cdot \rho)$:%
+	Then the action of $\jetgph{\mu}$ on prisms can be looked up, up to isomorphism\footnote{On the nose under the strict quotienting \cref{ax:bishop}.}, in the following table, where $j = \getdeg(i \cdot \rho)$:%
 	\footnote{Note that if $i \cdot \rho = \isopol_j$, then by \cref{eq:poresh-withl-crit2}, $b_j = \npolar$.}
 	\[
 		\begin{array}{c | l || c | c || c}
@@ -5111,13 +5111,13 @@ As \cref{def:cat-enriched-graph} already foreboded, we have to make an abhorrent
 Note that a cartesian product with $\rival{\eqtysym}$ or $\rival{\topsym}$ is the same as a separated product, since neither jet set has any non-reflexive jets.
 Note also that, while the nature of the `product' varies, the second component for $\mu(X \multip \rival{P_i})$ is always $\rival{P_i\pmr{a_i} \oriof \rho\pmrhom{\vec b}{\vec a}}$.
 \begin{proof}
-	Let $P \in \accol{\jetsym\pmr{a_i}, \tejsym\pmr{a_i}}$, and $X \in \jetset{\vec a}$.
-	We prove that $\mu(X \multip \rival{P_i}) \in \jetset{\vec b}$ is isomorphic to the prescribed jet set.
+	Let $P \in \accol{\jetsym\pmr{a_i}, \tejsym\pmr{a_i}}$, and $X \in \jetgph{\vec a}$.
+	We prove that $\mu(X \multip \rival{P_i}) \in \jetgph{\vec b}$ is isomorphic to the prescribed jet set.
 	Write $\eqtysym \oriof \mu =: R_k \in \oridegeq(\vec a)$.
 	\begin{enumerate}
 		\item First, assume that $R_k = \edgesym_\eqtydeg \oriof \mu \geq P_i$, so that $r \mathrel{P_i} s$ implies $[r]_\mu = [s]_\mu$ and in particular, for any $x \in X$, we have $[(x, 0)]_\mu = [(x, 1)]_\mu$ in $\mu(X \multip \rival{P_i})$.
 		
-		By the same reasoning as in the proof of \cref{thm:poresh-jetset-intervals}, the assumption is equivalent to $P_i \oriof \rho \leq \edgesym_\eqtydeg$, hence $i \cdot \rho = \nonpol_\eqtydeg$.
+		By the same reasoning as in the proof of \cref{thm:poresh-jetgph-intervals}, the assumption is equivalent to $P_i \oriof \rho \leq \edgesym_\eqtydeg$, hence $i \cdot \rho = \nonpol_\eqtydeg$.
 		It thus remains to show that $\mu(X \multip \rival{P_i})$ is isomorphic to $(\mu X) \times \rival{\eqtysym\pmrn}$ or, equivalently, simply to $\mu X$.
 		
 		We show that the functions that map $[x]_\mu \mapsto [(x, 0)]_\mu = [(x, 1)]_\mu$ and conversely, $[(x, u)]_\mu \mapsto [x]_\mu$ are both well defined and thus evidently constitute an isomorphism of the carriers.
@@ -5165,7 +5165,7 @@ Note also that, while the nature of the `product' varies, the second component f
 		\item Next assume that $R_k := \edgesym_\eqtydeg \oriof \mu < P_i$.
 		Then we have $[(x, 0)]_\mu \neq [(y, 1)]_\mu$ in $\mu(X \multip \rival{P_i})$ for all $x, y \in X$, since $R_k$ can never relate pairs with a different second component.
 		
-		Write $Y \in \jetset{\vec b}$ for the jet set prescribed by the table.
+		Write $Y \in \jetgph{\vec b}$ for the jet set prescribed by the table.
 		We show that there is an isomorphism
 		\[
 			\mu(X \multip \rival{P_i}) \cong Y : [(x, u)]_\mu \mapsfrom \mapsto ([x]_\mu, u).
@@ -5387,13 +5387,13 @@ Taking these two requirements together, by \cref{thm:poresh-adjoint}, we get exa
 
 \begin{theorem} \label{thm:poresh-jettope}
 	Let $\mu \in \Hom_\poreshcat(\vec a, \vec b)$ have a right adjoint $\mu \dashv \rho$.
-	Then the functor $\mu : \jetset{\vec a} \to \jetset{\vec b}$ sends jet topes to jet topes if and only if $\rho$ has a further right adjoint $\mu\pmrhom{\vec a}{\vec b} \dashv \rho\pmrhom{\vec b}{\vec a} \dashv \tau\pmrhom{\vec a}{\vec b}$.
+	Then the functor $\mu : \jetgph{\vec a} \to \jetgph{\vec b}$ sends jet topes to jet topes if and only if $\rho$ has a further right adjoint $\mu\pmrhom{\vec a}{\vec b} \dashv \rho\pmrhom{\vec b}{\vec a} \dashv \tau\pmrhom{\vec a}{\vec b}$.
 	
 	By consequence, there is a pseudofunctor $\jettopesym : \poreshcat\withrr \to \Cat$ sending
 	\begin{itemize}
 		\item an object $\vec a$ to $\jettope{\vec a}$,
-		\item a morphism $\mu : \vec a \to \vec b$ to the restriction of $\jetsetsym\withr(\mu) : \jetset{\vec a} \to \jetset{\vec b}$ to $\jettope{\vec a}$,
-		\item a 2-cell $\alpha : \mu \leq \nu : \vec a \to \vec b$ to the restriction of $\jetsetsym\withr(\alpha)$ to $\jettope{\vec a}$.
+		\item a morphism $\mu : \vec a \to \vec b$ to the restriction of $\jetgphsym\withr(\mu) : \jetgph{\vec a} \to \jetgph{\vec b}$ to $\jettope{\vec a}$,
+		\item a 2-cell $\alpha : \mu \leq \nu : \vec a \to \vec b$ to the restriction of $\jetgphsym\withr(\alpha)$ to $\jettope{\vec a}$.
 	\end{itemize}
 \end{theorem}
 \begin{proof}
@@ -5402,9 +5402,9 @@ Taking these two requirements together, by \cref{thm:poresh-adjoint}, we get exa
 	Assume that $\rho$ does not have a right adjoint.
 	\begin{itemize}
 		\item Either $\rho$ violates \cref{eq:poresh-withr-crit1}, i.e. $\predeg(\top) \cdot \rho = \nonpol_\top$.
-		Then by \cref{thm:poresh-jetset-intervals}, $\mu \rival{\jetsym_{\predeg(\top)}} = \rival{\edgesym_\top}$, where $\rival{\jetsym_{\predeg(\top)}}$ is a jet tope but $\rival{\edgesym_\top}$ is not, as it is not $(n-1)$-connected (if $n > 0$) or not a subsingleton (if $n = 0$).
+		Then by \cref{thm:poresh-jetgph-intervals}, $\mu \rival{\jetsym_{\predeg(\top)}} = \rival{\edgesym_\top}$, where $\rival{\jetsym_{\predeg(\top)}}$ is a jet tope but $\rival{\edgesym_\top}$ is not, as it is not $(n-1)$-connected (if $n > 0$) or not a subsingleton (if $n = 0$).
 		\item Or $\rho : \vec b \to \vec a$ violates \cref{eq:poresh-withr-crit2}, i.e.\ there is some $i \in \Degeq(\vec a)$ with $i \cdot \rho = \mixpol_j$ and $b_j = \ypolar$.
-		Then by \cref{thm:poresh-jetset-intervals}, $\mu \rival{\jetsym_i} = \rival{\equijetsym_j}$, where $\rival{\jetsym_i}$ is a jet tope but $\rival{\equijetsym_j}$ is not, as it is not $j$-antisymmetric.
+		Then by \cref{thm:poresh-jetgph-intervals}, $\mu \rival{\jetsym_i} = \rival{\equijetsym_j}$, where $\rival{\jetsym_i}$ is a jet tope but $\rival{\equijetsym_j}$ is not, as it is not $j$-antisymmetric.
 	\end{itemize}
 	
 	Now we prove the `if' direction.
@@ -5420,7 +5420,7 @@ Taking these two requirements together, by \cref{thm:poresh-adjoint}, we get exa
 		This follows from \cref{eq:poresh-withr-crit1} as $\rho$ has a right adjoint.
 		
 		\item We show that $\mu X$ is $j$-orientable for every $j \in \Deg(\vec b)$. Let $[x]_\mu \infrajet_j^* [y]_\mu$ in $\mu X$.
-		Then by \cref{thm:poresh-jetset-trcl-from-trcl}, we have $x \mathrel{(\infrajetsym_j \oriof \mu)^*} y$ in $X$ irrespective of the choice of representants.
+		Then by \cref{thm:poresh-jetgph-trcl-from-trcl}, we have $x \mathrel{(\infrajetsym_j \oriof \mu)^*} y$ in $X$ irrespective of the choice of representants.
 		If $j \cdot \mu$ is a symmetric relation, then this is equivalent to $x \mathrel{(\jetsym_j \oriof \mu)^*} y$; otherwise $x \mathrel{(\jetsym_j \oriof \mu)^*} y$ follows from $\getdeg(j \cdot \mu)$-orientability.
 		Either way, we conclude that $[x]_\mu \jet_j^* [y]_\mu$ in $\mu X$.
 		
@@ -5524,15 +5524,15 @@ Taking these two requirements together, by \cref{thm:poresh-adjoint}, we get exa
 		\end{description}
 	\end{enumerate}
 \end{proof}
-\begin{lemma} \label{thm:poresh-jetset-equality-eq-from-trcl}
-	Let $\mu \in \Hom_\poreshcat(\vec a, \vec b)$ and $X \in \jetset{\vec a}$.
+\begin{lemma} \label{thm:poresh-jetgph-equality-eq-from-trcl}
+	Let $\mu \in \Hom_\poreshcat(\vec a, \vec b)$ and $X \in \jetgph{\vec a}$.
 	Then for all $x, y \in X$ and $Q_j \in \oridegeqtop(\vec b)$, if $[x]_\mu = [y]_\mu$, then $x \mathrel{(Q_j \oriof \mu)^*} y$.
 \end{lemma}
 \begin{proof}
 	From $[x]_\mu = [y]_\mu$, we conclude that $x \mathrel{(\eqtysym \oriof \mu)^*} y$, and $\eqtysym \leq Q_j$.
 \end{proof}
-\begin{lemma} \label{thm:poresh-jetset-rel-from-trcl}
-	Let $\mu \in \Hom_\poreshcat(\vec a, \vec b)$ and $X \in \jetset{\vec a}$.
+\begin{lemma} \label{thm:poresh-jetgph-rel-from-trcl}
+	Let $\mu \in \Hom_\poreshcat(\vec a, \vec b)$ and $X \in \jetgph{\vec a}$.
 	Then for all $x, y \in X$ and $Q_j \in \oridegeqtop(\vec b)$, if $[x]_\mu \mathrel{Q_j} [y]_\mu$, then $x \mathrel{(Q_j \oriof \mu)^*} y$.
 \end{lemma}
 \begin{proof}
@@ -5542,8 +5542,8 @@ Taking these two requirements together, by \cref{thm:poresh-adjoint}, we get exa
 		x \mathrel{(Q_j \oriof \mu)^*} x' \mathrel{(Q_j \oriof \mu)} y' \mathrel{(Q_j \oriof \mu)^*} y. \qedhere
 	\]
 \end{proof}
-\begin{corollary} \label{thm:poresh-jetset-trcl-from-trcl}
-	Let $\mu \in \Hom_\poreshcat(\vec a, \vec b)$ and $X \in \jetset{\vec a}$.
+\begin{corollary} \label{thm:poresh-jetgph-trcl-from-trcl}
+	Let $\mu \in \Hom_\poreshcat(\vec a, \vec b)$ and $X \in \jetgph{\vec a}$.
 	Then for all $x, y \in X$ and $Q_j \in \oridegeqtop(\vec b)$, if $[x]_\mu \mathrel{Q_j^*} [y]_\mu$, then $x \mathrel{(Q_j \oriof \mu)^*} y$. \qed
 \end{corollary}
 
@@ -5644,7 +5644,7 @@ Unfortunately, we have the following \textbf{no-go theorem}:
 		&\quad\cong\quad \DSub{\cohdisc_0 \rival{\jetsym_0}}{\yoneda \cohdisc_1 \rival{\jetsym_0}}
 		& \text{($\lpsh F \circ \yoneda \cong \yoneda \circ F$)} \\
 		&\quad=\quad \DSub{\rival{\jetsym_0 \oriof \cohfget_0}}{\yoneda \rival{\jetsym_0 \oriof \cohfget_1}}
-		& \text{(\cref{thm:poresh-jetset-intervals})} \\
+		& \text{(\cref{thm:poresh-jetgph-intervals})} \\
 		&\quad=\quad \DSub{\rival{\jetsym_1}}{\yoneda \rival{\jetsym_0}} \\
 		&\quad=\quad \rival{\jetsym_1} \to \rival{\jetsym_0}.
 	\end{align*}
@@ -5717,7 +5717,7 @@ Unfortunately, we have the following \textbf{no-go theorem}:
 		&\quad=\quad
 		(\cohdisc_0 \rival{\jetsym_0} \to \rival{\jetsym_0}) \uplus_{(\cohdisc_0 \top \to \rival{\jetsym_0})} (\cohdisc_0 \rival{\tejsym_0} \to \rival{\jetsym_0}) \\
 		&\quad=\quad (\rival{\jetsym_1} \to \rival{\jetsym_0}) \uplus_{(\top \to \rival{\jetsym_0})} (\rival{\tejsym_1} \to \rival{\jetsym_0})
-		& \text{(\cref{thm:poresh-jetset-intervals})} \\
+		& \text{(\cref{thm:poresh-jetgph-intervals})} \\
 		&\quad\cong\quad (\accol{0,1} \to \accol{0, 1}) \uplus_{\accol{0, 1}} (\accol{0,1} \to \accol{0, 1})
 	\end{align*}
 	so all non-constant functions between the carriers now occur twice!
@@ -5749,7 +5749,7 @@ Thus, the \emph{locks} in our MTT instance will then correspond to polarized res
 \subsection{Sinistrification} \label{sec:poresh-jtset:sin}
 %\todoi{Maybe skip dextrification, since it seems to work differently for the two criteria for having a left adjoint. We use sinistrification to give them an additional right adjoint so that we can interpret them on jet topes and internalize them.}
 %\todoi{Argue that we want to preserve at least commutation of modalities that actually can be internalized, i.e. those that have a single left adjoint. Their locks internalize functors that have a single right adjoint.}
-For this reason, not unlike our usage of jet setoids in \cref{sec:poresh-jetset}, we will take a detour via alternative categories that are equivalent to the categories of jet-topic sets but where our semantics do not act on adjoint triples as in \cref{thm:poresh-jtset:triple}, but rather on adjoint pairs (\cref{sec:poresh-jtset:pair-sin}).
+For this reason, not unlike our usage of jet setoids in \cref{sec:poresh-jetgph}, we will take a detour via alternative categories that are equivalent to the categories of jet-topic sets but where our semantics do not act on adjoint triples as in \cref{thm:poresh-jtset:triple}, but rather on adjoint pairs (\cref{sec:poresh-jtset:pair-sin}).
 That is:
 \begin{itemize}
 	\item $\jtsetsym\withrr$ and $\jtsetsym\withlr$ will get a common generalization $\jtsetsym\withr$ with domain $\poreshcat\withr$,
@@ -6193,9 +6193,9 @@ Fortunately, we can reassemble it from its parts, but then we have to reprove so
 	or equivalently that the unit of its left adjoint monad $\fpsh{(\cohdisc^\Sin)} \circ \lpsh{(\cohdisc^\Sin)}$ is invertible,
 	which by a well-known fact about adjoint functors \cite[v141, prop.\ 3.4]{nlab:adjoint-functor} is equivalent to $\lpsh{(\cohdisc^\Sin)}$ being fully faithful.
 	This is in turn equivalent to $\cohdisc^\Sin : \jettope{\vec a} \to \jettope{\Sin(\vec a)}$ being fully faithful (see e.g.\ \cite[v4, thm.\ 2.3.4]{transpension-techreport}).
-	Since $\jettope{\vec x}$ is a full subcategory of $\jetset{\vec x}$,
-	it is sufficient for $\cohdisc^\Sin : \jetset{\vec a} \to \jetset{\Sin(\vec a)}$ to be fully faithful.
-	This is equivalent to invertibility of the unit of the monad $\cohfget^\Sin \cohdisc^\Sin : \jetset{\vec a} \to \jetset{\vec a}$, which follows from pseudofunctoriality of $\jetsetsym : \poreshcat \to \Cat$ and the fact that the polarized reshuffle $\cohfget^\Sin \cohdisc^\Sin : \vec a \to \vec a$ is the identity (we do not need to consider equality of 2-cells in the 2-poset $\poreshcat$).
+	Since $\jettope{\vec x}$ is a full subcategory of $\jetgph{\vec x}$,
+	it is sufficient for $\cohdisc^\Sin : \jetgph{\vec a} \to \jetgph{\Sin(\vec a)}$ to be fully faithful.
+	This is equivalent to invertibility of the unit of the monad $\cohfget^\Sin \cohdisc^\Sin : \jetgph{\vec a} \to \jetgph{\vec a}$, which follows from pseudofunctoriality of $\jetgphsym : \poreshcat \to \Cat$ and the fact that the polarized reshuffle $\cohfget^\Sin \cohdisc^\Sin : \vec a \to \vec a$ is the identity (we do not need to consider equality of 2-cells in the 2-poset $\poreshcat$).
 \end{proof}
 
 \subsection{Adjoint Pair Semantics on Jet-Topic Sets} \label{sec:poresh-jtset:pair}
@@ -6209,12 +6209,12 @@ In this section, we want to construct a 2-functor that sends polarized reshuffle
 Recall that these are equivalent to $\orif$-jet-cubes (\cref{thm:backward-jets-equivalent}).
 
 Since jet cubes are jet topes (\cref{thm:jet-cubes-are-topes}), the reasoning at the start of \cref{sec:poresh-jettope} applies here as well, so that we will only consider modalities $\mu$ that have a right adjoint $\mu \dashv \rho$.
-Since jet cubes are realized as jet sets by repeated application of twisted prism functors to the terminal jet set (\cref{def:jep}), we can deduce the action of $\mu$ on jet cubes from its action on twisted prisms, which is given by \cref{thm:poresh-jetset-prism-commut}.
+Since jet cubes are realized as jet sets by repeated application of twisted prism functors to the terminal jet set (\cref{def:jep}), we can deduce the action of $\mu$ on jet cubes from its action on twisted prisms, which is given by \cref{thm:poresh-jetgph-prism-commut}.
 We see that the outcome may be either: again a twisted prism, or a separated/cartesian product with $\rival{\edgesym_\eqtydeg}$ (i.e.\ the terminal jet set), $\rival{\equijet_j}$ or $\rival{\edgesym_\top}$ (i.e.\ a discrete jet set with two elements).
 We have to rule out $\rival{\equijet_j}$ and $\rival{\edgesym_\top}$, since these cannot be realized by jet cubes, but we can support $\rival{\edgesym_\eqtydeg}$ since $\loch \times \rival{\edgesym_\eqtydeg} \cong \Id$.
 If we look at what this entails for $\rho$, we see that $\rho$ cannot mention $\mixpol_j$ for directed $j$, nor $\nonpol_\top$, i.e.\ (by \cref{thm:poresh-adjoint}) $\rho$ has to have a right adjoint.
 
-%Analogous to what we did in \cref{sec:poresh-jetset}, we will first work on a variant of jet cubes, called jet cuboids%
+%Analogous to what we did in \cref{sec:poresh-jetgph}, we will first work on a variant of jet cubes, called jet cuboids%
 %\footnote{The -oid is in the sense of setoid here.}
 %$V$, which can have variables typed with the `equality interval' $\rival{\edgesym_\eqtydeg}$, and whose jet endpoint model $\JEP(V)$ is not a jet set but a jet setoid.
 %This allows us to work in a strictly 2-functorial setting longer.
@@ -6278,13 +6278,13 @@ If we look at what this entails for $\rho$, we see that $\rho$ cannot mention $\
 %	For any $(\myorix, \vec a)$-jet-cuboid $W$, we have $U(\JEP(W)) = \EP(\erasejc W)$.
 %	In other words, \cref{thm:jet-cube-pullback} remains valid if we replace cubes with cuboids and jet cubes with jet cuboids.
 %	
-%	Moreover, the isomorphisms in \cref{def:cuboid-ep} and \cref{def:jet-cuboid-jep} are compatible along $U : \jetset{\vec a} \to \Set$ and $\erasejc \loch$. \qed
+%	Moreover, the isomorphisms in \cref{def:cuboid-ep} and \cref{def:jet-cuboid-jep} are compatible along $U : \jetgph{\vec a} \to \Set$ and $\erasejc \loch$. \qed
 %\end{corollary}
 %\begin{definition} \label{def:jet-cuboid-cat}
 %	Let $\vec a$ be a mask, $\myorix \in \orikit$, $\mycubex \in \accol{\affine, \cartes}$ and $M$ a monad on $\Set$.
 %	We define
 %	the setoid-enriched category $\jetcuboid{\myorix}{\mycubex}{M}{\vec a}$ of \textbf{$(\myorix, \vec a)$-jet-$M$-cuboids}
-%	as the full subcategory of $\cuboidcat^\mycubex_M \times_\Set \jetset{\vec a}$ on $(\myorix, \vec a)$-jet-cuboids, as justified by \cref{thm:jet-cuboid-pullback}.
+%	as the full subcategory of $\cuboidcat^\mycubex_M \times_\Set \jetgph{\vec a}$ on $(\myorix, \vec a)$-jet-cuboids, as justified by \cref{thm:jet-cuboid-pullback}.
 %	The functions $\JEP$ and $\erasejc{\loch}$ are correspondingly extended to setoid-enriched functors.
 %\end{definition}
 %\begin{corollary}
@@ -6296,7 +6296,7 @@ If we look at what this entails for $\rho$, we see that $\rho$ cannot mention $\
 %				\ar[dd]_(.3){\erasejc{\loch}}
 %				\ar[rd]_{\setoidquot}
 %			&&
-%			\jetsetoid{\vec a}
+%			\jetgphoid{\vec a}
 %				\ar[dd]_(.3){U}
 %				\ar[rd]_{\setoidquot}
 %			\\
@@ -6305,7 +6305,7 @@ If we look at what this entails for $\rho$, we see that $\rho$ cannot mention $\
 %				\ar[rr]^(.3)\JEP
 %				\ar[dd]_(.3){\erasejc{\loch}}
 %			&&
-%			\jetset{\vec a}
+%			\jetgph{\vec a}
 %				\ar[dd]_(.3){U}
 %			\\
 %			\cuboidcat^\mycubex_M
@@ -6353,7 +6353,7 @@ If we look at what this entails for $\rho$, we see that $\rho$ cannot mention $\
 %				\ar[dd]_(.3){\erasejc{\loch}}
 %				\ar@{<-}[rd]_{\setoiddisc}
 %			&&
-%			\jetsetoid{\vec a}
+%			\jetgphoid{\vec a}
 %				\ar[dd]_(.3){U}
 %				\ar@{<-}[rd]_{\setoiddisc}
 %			\\
@@ -6362,7 +6362,7 @@ If we look at what this entails for $\rho$, we see that $\rho$ cannot mention $\
 %				\ar[rr]^(.3)\JEP
 %				\ar[dd]_(.3){\erasejc{\loch}}
 %			&&
-%			\jetset{\vec a}
+%			\jetgph{\vec a}
 %				\ar[dd]_(.3){U}
 %			\\
 %			\cuboidcat^\mycubex_M
@@ -6393,7 +6393,7 @@ If we look at what this entails for $\rho$, we see that $\rho$ cannot mention $\
 		\item a morphism $\mu : \vec a \to \vec b$ with right adjoint $\mu \dashv \rho$ to a functor $\jetcube{\orifb}{\affine}{M}{\mu}$ (also just denoted $\mu$) which:
 		\begin{itemize}
 			\item sends $()$ to $\mu () := ()$,
-			\item has an action on other cubes that can be looked up in the following table\footnote{to be compared with the table in \cref{thm:poresh-jetset-prism-commut}.}, where $j = \getdeg(i \cdot \rho)$:%
+			\item has an action on other cubes that can be looked up in the following table\footnote{to be compared with the table in \cref{thm:poresh-jetgph-prism-commut}.}, where $j = \getdeg(i \cdot \rho)$:%
 			\footnote{Note that if $i \cdot \rho = \isopol_j$, then by \cref{eq:poresh-withl-crit2}, $b_j = \npolar$.}
 			\[
 				\begin{array}{c | l || c | c || c}
@@ -6428,7 +6428,7 @@ If we look at what this entails for $\rho$, we see that $\rho$ cannot mention $\
 					& (\mu W, \dm i : \rival{\edgesym_j\pmrn})
 				\end{array}
 			\]
-			\item thus satisfies $\JEP(\mu W) \cong \mu \JEP(W)$ by \cref{thm:poresh-jetset-prism-commut},
+			\item thus satisfies $\JEP(\mu W) \cong \mu \JEP(W)$ by \cref{thm:poresh-jetgph-prism-commut},
 			\item has an action on jet cube morphisms defined as follows. Recall that a jet cube morphism $\vfi : V \to W$ is a cube morphism $\erasejc \vfi : \erasejc V \to \erasejc W$ whose endpoint model $\EP(\erasejc \vfi) = U(\JEP(\vfi))$ is in fact a morphism of jet sets $\JEP(\vfi) : \JEP(V) \to \JEP(W)$ (\cref{def:jet-cube-cat}).
 			\begin{itemize}
 				\item We define $\dm j \psub{\erasejc{\mu(\vfi)}} := \dm j \psub{\erasejc{\vfi}}$.\footnote{Although dimension variables should in principle be desugared to De Bruijn indices before being formally meaningful, here we abuse the name-based representation to avoid headaches about dimension variables of type $\rival{P_i\pmry}$ being discarded when $i \cdot \rho = \nonpol_\eqtydeg\pmrhom{\npolar}{a_i}$.}
@@ -6469,7 +6469,7 @@ If we look at what this entails for $\rho$, we see that $\rho$ cannot mention $\
 				\item This makes $\EP(\erasejc{\ket{\mu \leq \nu}})$ a jet set morphism, precisely because $\mu \leq \nu$, thus defining $\JEP(\ket{\mu \leq \nu})$ and completing also the definition of $\ket{\mu \leq \nu}$.
 			\end{itemize}
 			
-			This definition is clearly natural on cubes, therefore on sets, and therefore (by faithfulness of $U : \jetset{\vec a} \to \Set$) also on jet sets. By conclusion, it is natural in $\jetcube{\orifb}{\affine}{M}{\vec a}$.
+			This definition is clearly natural on cubes, therefore on sets, and therefore (by faithfulness of $U : \jetgph{\vec a} \to \Set$) also on jet sets. By conclusion, it is natural in $\jetcube{\orifb}{\affine}{M}{\vec a}$.
 		\end{itemize}
 	\end{itemize}
 \end{definition}
