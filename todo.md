@@ -5,7 +5,7 @@
 - explain equijets using paths (i.e. inserted degrees)
 - [x] rename anpolarity to polarmode
 - [x] put anpolarity on arrows & osigns
-- [ ] rename jet set to jet graph
+- [x] rename jet set to jet graph
 
 - title (current is best):
   - modalities and intervals for higher equipment pretypes: from semantics towards syntax
