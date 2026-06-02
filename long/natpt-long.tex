@@ -6486,7 +6486,7 @@ If we look at what this entails for $\rho$, we see that $\rho$ cannot mention $\
 	The category of \textbf{$(\omega, \vec a)$-jet-cubical sets} is the presheaf category $\jcset{\omega}{\mycubex}{M}{\vec a} := \Psh(\jetcube{\omega}{\mycubex}{M}{\vec a})$.
 \end{definition}
 \begin{theorem} \label{thm:poresh-jcset:triple}
-	Let $\omega \in \accol{\orif, \orifb}$ and, if $\omega = \orif$ then $M \in \accol{\bipointedsym, \booleanalg}$.
+	Let $\omega \in \accol{\orif, \orifb}$ and $M \in \accol{\bipointedsym, \booleanalg}$.
 	We have the following pseudofunctors:
 	\begin{itemize}
 		\item $\jcset{\omega}{\affine}{M}{\loch}\withrr : \poreshcat\withrr \to \Cat\withrr$,
@@ -6507,9 +6507,11 @@ If we look at what this entails for $\rho$, we see that $\rho$ cannot mention $\
 		of which $\fpsh \mu$ is a strict CwF morphism \cite{dybjer-cwf} and $\rpsh \mu$ is a weak CwF morphism \cite[def.\ 2.1.1]{reldtt-techreport}\cite[def.\ 3.2.5]{nuyts-phd} w.r.t.\ the standard CwF structure on a presheaf category \cite[ch.\ 4]{Hofmann97}\cite[\S 4.1]{nuyts-phd}.
 		\item 2-cells are also respected.
 	\end{itemize}
+	Moreover $\jcset{\orifb}{\affine}{M}{\loch}\withlr$ is in fact a strict 2-functor.
 \end{theorem}
 \begin{proof}
 	By the exact same reasoning as in the proof of \cref{thm:poresh-jtset:triple}.
+	The strict 2-functoriality of $\jcset{\omega}{\affine}{M}{\loch}\withlr$ follows from the strict 2-functoriality of $\jetcube{\omega}{\affine}{M}{\loch}\withrr$
 \end{proof}
 
 \subsection{No Adjoint Pair Semantics on Jet-Cubical Sets} \label{sec:poresh-jcset:nogo}
