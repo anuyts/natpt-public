@@ -6207,6 +6207,8 @@ In this section, we investigate how polarized reshuffles act on jet cubes and on
 \subsection{Semantics on Jet Cubes} \label{sec:poresh-jetcube}
 In this section, we want to construct a 2-functor that sends polarized reshuffles $\mu : \vec a \to \vec b$ to functors $\jetcube{\orifb}{\affine}{M}{\vec a} \to \jetcube{\orifb}{\affine}{M}{\vec b}$, with $M \in \accol{\bipointedsym, \booleanalg}$, thus giving our mode theory of polarized reshuffles a semantics on $\orifb$-jet-cubes.
 Recall that these are equivalent to $\orif$-jet-cubes (\cref{thm:backward-jets-equivalent}).
+We do not want to allow equijets, because if the cubes in the base category have equijet dimensions, then these will give rise to a special sort of edges in the presheaf category which is distinct from, and stronger than, having jets pointing both ways.
+If we want such a thing, we can always insert a symmetric degree in the polarmode mask.
 
 Since jet cubes are jet topes (\cref{thm:jet-cubes-are-topes}), the reasoning at the start of \cref{sec:poresh-jettope} applies here as well, so that we will only consider modalities $\mu$ that have a right adjoint $\mu \dashv \rho$.
 Since jet cubes are realized as jet graphs by repeated application of twisted prism functors to the terminal jet graph (\cref{def:jep}), we can deduce the action of $\mu$ on jet cubes from its action on twisted prisms, which is given by \cref{thm:poresh-jetgph-prism-commut}.
