@@ -5623,7 +5623,7 @@ Unfortunately, we have the following \textbf{no-go theorem}:
 		\cohfget_0 = \reshlist{\nonpol_\eqtydeg}{\pospol_1} : [\ypolar, \ypolar] \to [\ypolar], \qquad
 		\cohdisc_1 = \reshlist{\nonpol_\eqtydeg}{\pospol_0, \isopol_0} : [\ypolar] \to [\ypolar, \ypolar]
 	\]
-	from \cref{ex:cohesion}, which compose to $\cohfget_0 \cohdisc_1 = \reshlist{\nonpol_\eqtydeg}{\isopol_0} : [\ypolar] \to [\ypolar]$.
+	from \cref{ex:cohesion} (which, as explained there, have a right adjoint), which compose to $\cohfget_0 \cohdisc_1 = \reshlist{\nonpol_\eqtydeg}{\isopol_0} : [\ypolar] \to [\ypolar]$.
 	This latter reshuffle is easily computed to be idempotent, i.e.\ $\reshlist{\nonpol_\eqtydeg}{\isopol_0}^2 = \reshlist{\nonpol_\eqtydeg}{\isopol_0}$.
 	Then by pseudofunctoriality, we expect a natural isomorphism $\jtsetsym\withr(\cohfget_0 \cohdisc_1)^2 \cong \jtsetsym\withr(\cohfget_0 \cohdisc_1)$, but we will disprove this.
 	
@@ -5663,7 +5663,7 @@ Unfortunately, we have the following \textbf{no-go theorem}:
 		&\quad=\quad
 		\existscoend X^{{}\in \jettope{[\ypolar]}}.(\rival{\jetsym_1} \to \cohdisc_1 X) \times (\cohdisc_0 X \to \rival{\jetsym_0}) \\
 		&\quad\cong\quad
-		\colim_{(X, \vfi) \in \int_{X \in \jettope{[\ypolar]}} (\rival{\jetsym_1} \to \cohdisc_1 X)}
+		\colim_{(X, f) \in \int_{X \in \jettope{[\ypolar]}} (\rival{\jetsym_1} \to \cohdisc_1 X)}
 		(\cohdisc_0 X \to \rival{\jetsym_0})
 	\end{align*}
 	We will now use \cref{thm:reindex-colim} to simplify this colimit.
@@ -5679,29 +5679,29 @@ Unfortunately, we have the following \textbf{no-go theorem}:
 	\[
 		R : \paren{
 			\int_{X \in \jettope{[\ypolar]}} (\rival{\jetsym_1} \to \cohdisc_1 X)
-			} \to \walkingcospan : (X, \vfi) \mapsto 
+			} \to \walkingcospan : (X, f) \mapsto 
 		\left\{
 			\begin{array}{l l}
-				\walkingcospanM & \text{if $\vfi : \rival{\equijetsym_0} \to X$, and otherwise:} \\
-				\walkingcospanL & \text{if $\vfi : \rival{\jetsym_0} \to X$}, \\
-				\walkingcospanR & \text{if $\vfi : \rival{\tejsym_0} \to X$}.
+				\walkingcospanM & \text{if $f : \rival{\equijetsym_0} \to X$, and otherwise:} \\
+				\walkingcospanL & \text{if $f : \rival{\jetsym_0} \to X$}, \\
+				\walkingcospanR & \text{if $f : \rival{\tejsym_0} \to X$}.
 			\end{array}
 		\right.
 	\]
 	This is easily checked to have an action on morphisms.
-	Note that by $0$-antisymmetry of $X$, we can only get $R(X, \vfi) = \walkingcospanM$ if $\vfi$ is constant.
+	Note that by $0$-antisymmetry of $X$, we can only get $R(X, f) = \walkingcospanM$ if $f$ is constant.
 	It is immediately clear that $RI = \Id_\walkingcospan$.
 	We construct the co-unit $\eps : IR \to \Id_\catC$ as follows:
 	\[
-		\eps_{(X, \vfi)} =
+		\eps_{(X, f)} =
 		\left\{
 			\begin{array}{l c l l}
-				() \mapsto \vfi(0) = \vfi(1) &:& (\top, \_) \to (X, \vfi)
-				& \text{if $R(X, \vfi) = \walkingcospanM$,} \\
-				\vfi &:& (\rival{\jetsym_0}, \id_{\accol{0, 1}}) \to (X, \vfi)
-				& \text{if $R(X, \vfi) = \walkingcospanL$}, \\
-				\vfi &:& (\rival{\tejsym_0}, \id_{\accol{0, 1}}) \to (X, \vfi)
-				& \text{if $R(X, \vfi) = \walkingcospanR$}.
+				() \mapsto f(0) = f(1) &:& (\top, \_) \to (X, f)
+				& \text{if $R(X, f) = \walkingcospanM$,} \\
+				f &:& (\rival{\jetsym_0}, \id_{\accol{0, 1}}) \to (X, f)
+				& \text{if $R(X, f) = \walkingcospanL$}, \\
+				f &:& (\rival{\tejsym_0}, \id_{\accol{0, 1}}) \to (X, f)
+				& \text{if $R(X, f) = \walkingcospanR$}.
 			\end{array}
 		\right.
 	\]
@@ -5710,7 +5710,7 @@ Unfortunately, we have the following \textbf{no-go theorem}:
 	We have established $I \dashv R$ and therefore $R\op \dashv I\op$, so that by \cref{thm:reindex-colim}, we can reindex along $I\op$. Write $\hat I x$ for the first component of $I x$.
 	\begin{align*}
 		&\quad\mathrel{\phantom{=}}\quad
-		\colim_{(X, \vfi) \in \int_{X \in \jettope{[\ypolar]}} (\rival{\jetsym_1} \to \cohdisc_1 X)}
+		\colim_{(X, f) \in \int_{X \in \jettope{[\ypolar]}} (\rival{\jetsym_1} \to \cohdisc_1 X)}
 		(\cohdisc_0 X \to \rival{\jetsym_0}) \\
 		&\quad\cong\quad
 		\colim_{x \in \walkingcospan} (\cohdisc_0 \hat I x \to \rival{\jetsym_0}) \\
